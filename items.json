@@ -1,0 +1,73 @@
+[
+  {
+    "name": "Tunic of Night",
+    "slug": "tunic-of-night",
+    "image": "images/items/tunic-of-night.png",
+    "type": "Armor",
+    "magic": true,
+    "slot": "Chest",
+    "ac": 8,
+    "stats": { "AGI": 1, "DEX": 2, "HP": 7 },
+    "weight": 3.0,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Inlaid Black Pearl Copper Ring",
+    "slug": "inlaid-black-pearl-copper-ring",
+    "image": "images/items/inlaid-black-pearl-copper-ring.png",
+    "type": "Jewelry",
+    "magic": false,
+    "slot": "Finger",
+    "ac": null,
+    "stats": { "AGI": 1, "DEX": 1 },
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Inlaid Cat's Eye Agate Copper Ring",
+    "slug": "inlaid-cats-eye-agate-copper-ring",
+    "image": "images/items/inlaid-cats-eye-agate-copper-ring.png",
+    "type": "Jewelry",
+    "magic": false,
+    "slot": "Finger",
+    "ac": null,
+    "stats": { "INT": 1, "CHA": 1 },
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Grandmaster's Dark Leather Hood",
+    "slug": "grandmasters-dark-leather-hood",
+    "image": "images/items/grandmasters-dark-leather-hood.png",
+    "type": "Armor",
+    "magic": true,
+    "slot": "Head",
+    "ac": 6,
+    "stats": { "STR": 3, "STA": 1 },
+    "weight": 0.5,
+    "size": "Small",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Steel Longsword",
+    "slug": "steel-longsword",
+    "image": "images/items/steel-longsword.png",
+    "type": "Weapon",
+    "magic": false,
+    "slot": "Primary / Secondary",
+    "damage": 15,
+    "delay": 36,
+    "skill": "Slashing",
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB", "WIZ"],
+    "race": ["ALL"]
+  }
+]

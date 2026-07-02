@@ -66,6 +66,23 @@ are `pages.json` (the page list) and the individual `.md` files in `pages/`.
 - **If you ever want other players to submit info directly** (instead of you collecting
   it), the simplest add-on is a Google Form or a GitHub "Issues" template that feeds into
   your update workflow — not something this starter site needs to include from day one.
-test
-test
-test
+
+---
+
+## Part 3: The Item Database page
+
+Unlike normal pages, the **Item Database** isn't a `.md` file — it's a searchable,
+filterable, sortable table built from `items.json` (in the project root). You'll still
+never need to touch `index.html`, `style.css`, or `script.js` to use it.
+
+To add a new item:
+
+1. Add an object for it to `items.json` — copy an existing entry as a template and change
+   the values. Weapons use `damage` / `delay` (the site calculates the damage-to-delay
+   ratio automatically); armor and jewelry use `ac` and `stats` instead.
+2. Drop its screenshot into `images/items/`, named to match the `image` path you put in
+   that entry (e.g. `images/items/tunic-of-night.png`).
+
+The search box, and the type/slot/class filters on the page, are all built automatically
+from whatever is in `items.json` — you don't need to update anything else when you add an
+item or a new class. Hovering an item's name on the page shows its screenshot.

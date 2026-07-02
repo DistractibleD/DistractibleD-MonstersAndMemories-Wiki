@@ -5,6 +5,7 @@
    ============================================ */
 
 let allPages = [];
+let itemsData = null; // cached contents of items.json, loaded on first visit to the Item Database page
 
 async function init() {
   const res = await fetch('pages.json');
@@ -62,12 +63,17 @@ function buildSidebar(pages) {
 async function loadPage(file) {
   const contentInner = document.getElementById('content-inner');
   contentInner.innerHTML = '<p>Loading...</p>';
+  const page = allPages.find(p => p.file === file);
 
   try {
-    const res = await fetch('pages/' + file);
-    if (!res.ok) throw new Error('Page not found');
-    const markdown = await res.text();
-    contentInner.innerHTML = marked.parse(markdown);
+    if (page && page.type === 'items') {
+      await renderItemsPage(contentInner);
+    } else {
+      const res = await fetch('pages/' + file);
+      if (!res.ok) throw new Error('Page not found');
+      const markdown = await res.text();
+      contentInner.innerHTML = marked.parse(markdown);
+    }
   } catch (err) {
     contentInner.innerHTML = '<h1>Page not found</h1><p>That page could not be loaded.</p>';
   }
@@ -88,6 +94,221 @@ function onSearch(e) {
   }
   const filtered = allPages.filter(p => p.title.toLowerCase().includes(query));
   buildSidebar(filtered);
+}
+
+/* ============================================
+   Item Database
+   Data lives in items.json. To add a new item,
+   add an object to that file — no code changes
+   needed. Stats/slots/classes/types shown in the
+   filter dropdowns are read straight from the data.
+   ============================================ */
+
+const ITEM_STAT_ORDER = ['STR', 'STA', 'AGI', 'DEX', 'WIS', 'INT', 'CHA', 'HP'];
+
+function itemRatio(item) {
+  if (item.damage == null || !item.delay) return null;
+  return item.damage / item.delay;
+}
+
+function formatStats(item) {
+  const parts = ITEM_STAT_ORDER
+    .filter(stat => item.stats && item.stats[stat])
+    .map(stat => `${stat} +${item.stats[stat]}`);
+  return parts.length ? parts.join(', ') : '—';
+}
+
+function formatList(values) {
+  if (!values || !values.length) return '—';
+  if (values.includes('ALL')) return 'All';
+  return values.join(', ');
+}
+
+function itemSearchHaystack(item) {
+  const ratio = itemRatio(item);
+  return [
+    item.name,
+    item.type,
+    item.slot,
+    item.skill,
+    formatStats(item),
+    formatList(item.classes),
+    formatList(item.race),
+    item.ac != null ? `AC ${item.ac}` : '',
+    item.damage != null ? `DMG ${item.damage}` : '',
+    item.delay != null ? `DELAY ${item.delay}` : '',
+    ratio != null ? `RATIO ${ratio.toFixed(2)}` : '',
+    item.magic ? 'MAGIC' : ''
+  ].join(' ').toLowerCase();
+}
+
+async function renderItemsPage(container) {
+  if (!itemsData) {
+    const res = await fetch('items.json');
+    if (!res.ok) throw new Error('Could not load items.json');
+    itemsData = await res.json();
+  }
+
+  const slots = [...new Set(itemsData.map(i => i.slot))].sort();
+  const types = [...new Set(itemsData.map(i => i.type))].sort();
+  const classes = [...new Set(itemsData.flatMap(i => i.classes).filter(c => c !== 'ALL'))].sort();
+
+  container.innerHTML = `
+    <h1>Item Database</h1>
+    <p>Browse, search, filter, and sort every item on the wiki. Hover an item's name to see a screenshot.</p>
+    <div class="items-toolbar">
+      <input type="search" id="items-search" class="items-search" placeholder="Search name, stat, class..." autocomplete="off">
+      <select id="items-filter-type" class="items-select">
+        <option value="">All types</option>
+        ${types.map(t => `<option value="${t}">${t}</option>`).join('')}
+      </select>
+      <select id="items-filter-slot" class="items-select">
+        <option value="">All slots</option>
+        ${slots.map(s => `<option value="${s}">${s}</option>`).join('')}
+      </select>
+      <select id="items-filter-class" class="items-select">
+        <option value="">All classes</option>
+        ${classes.map(c => `<option value="${c}">${c}</option>`).join('')}
+      </select>
+      <select id="items-sort" class="items-select">
+        <option value="name-asc">Name (A-Z)</option>
+        <option value="name-desc">Name (Z-A)</option>
+        <option value="ac-desc">AC (High-Low)</option>
+        <option value="ratio-desc">Ratio (High-Low)</option>
+        <option value="ratio-asc">Ratio (Low-High)</option>
+      </select>
+    </div>
+    <p class="items-count" id="items-count"></p>
+    <div class="items-table-wrap">
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Slot</th>
+            <th>AC</th>
+            <th>Stats</th>
+            <th>Dmg / Delay / Ratio</th>
+            <th>Weight / Size</th>
+            <th>Classes</th>
+            <th>Race</th>
+          </tr>
+        </thead>
+        <tbody id="items-tbody"></tbody>
+      </table>
+    </div>
+  `;
+
+  setupItemTooltip(container.querySelector('#items-tbody'));
+
+  const searchBox = container.querySelector('#items-search');
+  const typeFilter = container.querySelector('#items-filter-type');
+  const slotFilter = container.querySelector('#items-filter-slot');
+  const classFilter = container.querySelector('#items-filter-class');
+  const sortSelect = container.querySelector('#items-sort');
+
+  function update() {
+    const query = searchBox.value.toLowerCase().trim();
+    const type = typeFilter.value;
+    const slot = slotFilter.value;
+    const cls = classFilter.value;
+
+    let filtered = itemsData.filter(item => {
+      if (type && item.type !== type) return false;
+      if (slot && item.slot !== slot) return false;
+      if (cls && !item.classes.includes('ALL') && !item.classes.includes(cls)) return false;
+      if (query && !itemSearchHaystack(item).includes(query)) return false;
+      return true;
+    });
+
+    const [sortKey, sortDir] = sortSelect.value.split('-');
+    filtered.sort((a, b) => {
+      let av, bv;
+      if (sortKey === 'name') { av = a.name.toLowerCase(); bv = b.name.toLowerCase(); }
+      else if (sortKey === 'ac') { av = a.ac ?? -Infinity; bv = b.ac ?? -Infinity; }
+      else { av = itemRatio(a) ?? -Infinity; bv = itemRatio(b) ?? -Infinity; }
+      if (av < bv) return sortDir === 'asc' ? -1 : 1;
+      if (av > bv) return sortDir === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+    renderItemRows(container.querySelector('#items-tbody'), filtered);
+    container.querySelector('#items-count').textContent =
+      `Showing ${filtered.length} of ${itemsData.length} items`;
+  }
+
+  [searchBox].forEach(el => el.addEventListener('input', update));
+  [typeFilter, slotFilter, classFilter, sortSelect].forEach(el => el.addEventListener('change', update));
+
+  update();
+}
+
+function renderItemRows(tbody, items) {
+  if (!items.length) {
+    tbody.innerHTML = '<tr><td colspan="9" class="items-empty">No items match your filters.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = items.map(item => {
+    const ratio = itemRatio(item);
+    const dmgCell = item.damage != null
+      ? `${item.damage} / ${item.delay} = ${ratio.toFixed(2)}`
+      : '—';
+
+    return `
+      <tr>
+        <td>
+          <span class="item-name-hover" data-img="${item.image}" data-alt="${item.name}">${item.magic ? '<span class="badge-magic">MAGIC</span> ' : ''}${item.name}</span>
+        </td>
+        <td>${item.type}</td>
+        <td>${item.slot}</td>
+        <td>${item.ac != null ? item.ac : '—'}</td>
+        <td>${formatStats(item)}</td>
+        <td>${dmgCell}</td>
+        <td>${item.weight} / ${item.size}</td>
+        <td>${formatList(item.classes)}</td>
+        <td>${formatList(item.race)}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// A single floating preview image, shared by every row, positioned in the
+// viewport on hover so it's never clipped by the table's scroll container.
+function setupItemTooltip(tbody) {
+  let tooltip = document.getElementById('item-tooltip');
+  if (!tooltip) {
+    tooltip = document.createElement('img');
+    tooltip.id = 'item-tooltip';
+    document.body.appendChild(tooltip);
+  }
+
+  tbody.addEventListener('mouseover', e => {
+    const span = e.target.closest('.item-name-hover');
+    if (!span) return;
+    const rect = span.getBoundingClientRect();
+    tooltip.src = span.dataset.img;
+    tooltip.alt = span.dataset.alt;
+    tooltip.style.display = 'block';
+
+    const left = Math.min(rect.left, window.innerWidth - 296);
+    const spaceBelow = window.innerHeight - rect.bottom;
+    if (spaceBelow < 220 && rect.top > spaceBelow) {
+      tooltip.style.top = '';
+      tooltip.style.bottom = (window.innerHeight - rect.top + 8) + 'px';
+    } else {
+      tooltip.style.bottom = '';
+      tooltip.style.top = (rect.bottom + 8) + 'px';
+    }
+    tooltip.style.left = Math.max(left, 8) + 'px';
+  });
+
+  tbody.addEventListener('mouseout', e => {
+    const span = e.target.closest('.item-name-hover');
+    if (!span) return;
+    if (span.contains(e.relatedTarget)) return;
+    tooltip.style.display = 'none';
+  });
 }
 
 init();
