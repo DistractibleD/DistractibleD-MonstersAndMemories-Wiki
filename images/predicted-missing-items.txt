@@ -4,35 +4,48 @@ Predicted missing items
 Built by looking for name patterns already in items.json (material/adjective
 + item type) and finding gaps in the set. This is inference from names/slots
 we already have on file, not a guess at stats — no screenshots were opened
-for this (per the inbox-only rule), so treat these as "things to watch for
-in the inbox," not confirmed items.
+for this beyond what came through the inbox, so treat these as "things to
+watch for in the inbox," not confirmed items.
+
+Last updated: 2026-07-02, after processing a batch of 8 new items + 1
+duplicate (which added a 12th Corroded Bronze weapon, 3 more Tattered Wool
+pieces, and revealed "Tattered Hide" as its own material tier separate from
+Rawhide).
 
 HIGH CONFIDENCE — weapon material tiers
 ----------------------------------------
-Corroded Bronze has a full 11-weapon set: Axe, Battle Axe, Dagger, Great
-Scythe, Greatsword, Longsword, Maul, Scimitar, Scythe, Shortsword, Trident.
+Corroded Bronze has a 12-weapon set (Long Spear was confirmed this batch,
+added to the template): Axe, Battle Axe, Dagger, Great Scythe, Greatsword,
+Long Spear, Longsword, Maul, Scimitar, Scythe, Shortsword, Trident.
 
-Copper only has 1 of those 11 (Copper Maul). Steel only has 1 (Steel
+Copper only has 1 of those 12 (Copper Maul). Steel only has 1 (Steel
 Longsword). Since one material tier has the complete set, the other two
-tiers were very likely sold/dropped with the same 11 weapon types. Probable
+tiers were very likely sold/dropped with the same 12 weapon types. Probable
 missing items:
 
-  Copper:  Axe, Battle Axe, Dagger, Great Scythe, Greatsword, Longsword,
-           Scimitar, Scythe, Shortsword, Trident
-  Steel:   Axe, Battle Axe, Dagger, Great Scythe, Greatsword, Maul,
-           Scimitar, Scythe, Shortsword, Trident
+  Copper:  Axe, Battle Axe, Dagger, Great Scythe, Greatsword, Long Spear,
+           Longsword, Scimitar, Scythe, Shortsword, Trident
+  Steel:   Axe, Battle Axe, Dagger, Great Scythe, Greatsword, Long Spear,
+           Maul, Scimitar, Scythe, Shortsword, Trident
 
 MEDIUM CONFIDENCE — armor slot gaps within a material line
 -------------------------------------------------------------
-Rawhide (all Armor) currently covers: Waist, Feet, Wrist, Hands, Neck,
-Face, Shirt — 7 of the common armor slots. Head and Chest are the two
-common slots with no Rawhide piece yet, which stands out since almost
-every other slot is filled. Watch for a Rawhide Head piece and a Rawhide
-Chest piece.
+Three separate "starter tier" armor lines exist (Rawhide, Tattered Wool,
+Tattered Hide) — confirmed distinct because Tattered Hide Mask/Gorget have
+different AC than Rawhide Mask/Gorget despite matching slot/weight/class,
+so these are not naming inconsistencies for the same items.
 
-Tattered Wool (all Armor) only covers Head, Hands, Shirt — much sparser
-than Rawhide's 7 slots despite looking like a parallel starter-tier line.
-Feet/Waist/Wrist/Neck/Face pieces may exist and just haven't come in yet.
+  Rawhide (7 slots):        Waist, Feet, Wrist, Hands, Neck, Face, Shirt
+  Tattered Wool (6 slots):  Head, Shoulders, Chest, Wrist, Hands, Shirt
+  Tattered Hide (4 slots):  Head, Face, Neck, Shirt
+
+Cross-referencing the three, the slots most likely to have a missing piece
+in each line (i.e. covered by at least one other line but not this one):
+  - Rawhide is missing:       Head, Chest, Shoulders
+  - Tattered Wool is missing: Waist, Feet, Neck, Face
+  - Tattered Hide is missing: Waist, Feet, Wrist, Hands, Shoulders, Chest
+    (only 4 confirmed pieces so far, so this is the least certain of the
+    three — could just mean fewer of this tier have been screenshotted yet)
 
 Corroded Bronze also has two 2-piece armor sub-lines that may not be
 complete: "Plate" (Boots/Feet, Collar/Neck) and "Chain" (Gloves/Hands,
@@ -50,9 +63,14 @@ LOW CONFIDENCE — noted, not enumerated
   large enough that listing them out would be guessing rather than
   inferring — just flag new Ring/Earring screenshots as likely part of this
   family rather than assuming a specific missing combo.
-- "Fine Wood" material items (Worn Fine Wood Bow, Worn Fine Wood Buckler,
-  Cracked Fine Wood Staff) — only 2-3 items, not enough to see a template
-  yet. Worth re-checking this list once a few more show up.
+- "Fine Wood" items now number 4: Worn Fine Wood Bow, Worn Fine Wood
+  Buckler, Worn Fine Wood Great Staff, and Cracked Fine Wood Staff. Notice
+  everything so far is "Worn" except the (non-great) Staff, which is
+  "Cracked" — this might mean each Fine Wood item type comes in a
+  Worn/Cracked condition pair rather than being one fixed adjective per
+  type. Not enough data to predict specific missing pieces yet (e.g.
+  whether a "Cracked Fine Wood Bow" or "Worn Fine Wood Staff" exists), but
+  worth watching for either adjective on future Fine Wood items.
 
 This file should be revisited whenever a batch of inbox items is processed —
 cross the item off here if it turns out to match, or add newly-discovered
