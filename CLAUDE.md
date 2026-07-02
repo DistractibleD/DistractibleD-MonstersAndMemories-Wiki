@@ -31,6 +31,33 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
 Filters (type/slot/class) and search are all derived from `items.json` at runtime — no
 other file needs to change when items are added.
 
+### New items come in via `images/inbox/`
+
+The user drops new item screenshots into `images/inbox/` (may appear as `images/Inbox` on
+disk — Windows paths are case-insensitive, don't create a second folder for it). This is
+the *only* place to look for new/unprocessed items — do not re-scan `images/items/` or
+re-read existing entries in `items.json` looking for new work; that wastes tokens on files
+that haven't changed.
+
+Workflow when asked to process new items (or "check the inbox"):
+
+1. List `images/inbox/` — each file there is one unprocessed item screenshot.
+2. For each one: read the image, extract its name and stats.
+3. Check whether that item's slug (or name) already exists in `items.json` — this is a
+   cheap text check against the existing entries, not the same as re-scanning every image
+   in `images/items/`, and it's required every time to catch duplicates.
+   - **Not a duplicate:** add an entry to `items.json`. Rename the file to the item's
+     slug — lower case, spaces and punctuation replaced with dashes (e.g. "Tunic of Night"
+     → `tunic-of-night.png`) — and move (don't copy) it into `images/items/` under that
+     name. Use the same slug for the `image` field in the entry.
+   - **Duplicate of an existing item:** do not touch `items.json`. Move the file into
+     `images/duplicates/` instead, named `<slug>-duplicate.png` (append `-2`, `-3`, etc.
+     if more than one duplicate of the same item shows up) so the user can identify which
+     item it's a duplicate of at a glance and review it.
+4. Once a file has been moved out (to either `images/items/` or `images/duplicates/`),
+   `images/inbox/` should no longer contain it — an empty inbox means everything is
+   processed.
+
 ## Known CSS gotcha
 
 `.content-inner img` (in `style.css`) sets `display: block` on every image rendered inside
