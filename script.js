@@ -6,6 +6,7 @@
 
 let allPages = [];
 let itemsData = null; // cached contents of items.json, loaded on first visit to the Item Database page
+let mapsData = null; // cached contents of maps.json, loaded on first visit to the Maps page
 
 async function init() {
   const res = await fetch('pages.json');
@@ -65,9 +66,15 @@ async function loadPage(file) {
   contentInner.innerHTML = '<p>Loading...</p>';
   const page = allPages.find(p => p.file === file);
 
+  // Data-driven pages (Item Database, Maps) use the full content width instead
+  // of the narrower reading width used for prose pages.
+  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps')));
+
   try {
     if (page && page.type === 'items') {
       await renderItemsPage(contentInner);
+    } else if (page && page.type === 'maps') {
+      await renderMapsPage(contentInner);
     } else {
       const res = await fetch('pages/' + file);
       if (!res.ok) throw new Error('Page not found');
@@ -104,7 +111,7 @@ function onSearch(e) {
    filter dropdowns are read straight from the data.
    ============================================ */
 
-const ITEM_STAT_ORDER = ['STR', 'STA', 'AGI', 'DEX', 'WIS', 'INT', 'CHA', 'HP'];
+const ITEM_STAT_ORDER = ['STR', 'STA', 'AGI', 'DEX', 'WIS', 'INT', 'CHA', 'HP', 'MANA'];
 const ITEM_RESIST_ORDER = ['FIRE', 'COLD', 'MAGIC', 'POISON', 'DISEASE', 'CORRUPTION'];
 
 function itemRatio(item) {
@@ -191,6 +198,17 @@ async function renderItemsPage(container) {
     <p class="items-count" id="items-count"></p>
     <div class="items-table-wrap">
       <table class="items-table">
+        <colgroup>
+          <col class="col-name">
+          <col class="col-type">
+          <col class="col-slot">
+          <col class="col-ac">
+          <col class="col-stats">
+          <col class="col-dmg">
+          <col class="col-weight">
+          <col class="col-classes">
+          <col class="col-race">
+        </colgroup>
         <thead>
           <tr>
             <th>Name</th>
@@ -262,7 +280,7 @@ function renderItemRows(tbody, items) {
   tbody.innerHTML = items.map(item => {
     const ratio = itemRatio(item);
     const dmgCell = item.damage != null
-      ? `${item.damage} / ${item.delay} = ${ratio.toFixed(2)}`
+      ? `${item.damage} / ${item.delay}${ratio != null ? ` = ${ratio.toFixed(2)}` : ''}`
       : '—';
 
     return `
@@ -319,6 +337,137 @@ function setupItemTooltip(tbody) {
     if (span.contains(e.relatedTarget)) return;
     tooltip.style.display = 'none';
   });
+}
+
+/* ============================================
+   Maps
+   Data lives in maps.json (array of {name, slug, image}).
+   To add a map, add an entry there and drop the full-size
+   image in images/Maps/ — no code changes needed.
+   ============================================ */
+
+async function renderMapsPage(container) {
+  if (!mapsData) {
+    const res = await fetch('maps.json');
+    if (!res.ok) throw new Error('Could not load maps.json');
+    mapsData = await res.json();
+  }
+
+  const sorted = [...mapsData].sort((a, b) => a.name.localeCompare(b.name));
+
+  if (!sorted.length) {
+    container.innerHTML = '<h1>Maps</h1><p>No maps yet.</p>';
+    return;
+  }
+
+  container.innerHTML = `
+    <h1>Maps</h1>
+    <p>Click a map to view it full size. Scroll to zoom, click and drag to pan.</p>
+    <div class="maps-grid">
+      ${sorted.map(m => `
+        <div class="map-card" data-img="${m.image}" data-name="${m.name}">
+          <img class="map-card-thumb" src="${m.image}" alt="${m.name}" loading="lazy">
+          <div class="map-card-name">${m.name}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  container.querySelectorAll('.map-card').forEach(card => {
+    card.addEventListener('click', () => openMapViewer(card.dataset.img, card.dataset.name));
+  });
+}
+
+// Full-size map viewer with scroll-to-zoom and click-and-drag panning.
+// A single overlay is created once and reused for every map.
+let mapViewerScale = 1;
+let mapViewerX = 0;
+let mapViewerY = 0;
+let mapViewerDragging = false;
+let mapViewerMoved = false;
+let mapViewerStartX = 0;
+let mapViewerStartY = 0;
+
+function applyMapViewerTransform() {
+  const img = document.getElementById('map-viewer-img');
+  img.style.transform = `translate(${mapViewerX}px, ${mapViewerY}px) scale(${mapViewerScale})`;
+}
+
+function setupMapViewer() {
+  if (document.getElementById('map-viewer')) return;
+
+  const viewer = document.createElement('div');
+  viewer.id = 'map-viewer';
+  viewer.innerHTML = `
+    <button id="map-viewer-close" aria-label="Close">&times;</button>
+    <img id="map-viewer-img" alt="">
+    <div id="map-viewer-hint">Scroll to zoom &middot; drag to pan</div>
+  `;
+  document.body.appendChild(viewer);
+
+  const img = viewer.querySelector('#map-viewer-img');
+
+  viewer.addEventListener('wheel', e => {
+    e.preventDefault();
+    const factor = e.deltaY < 0 ? 1.15 : 1 / 1.15;
+    mapViewerScale = Math.min(6, Math.max(0.5, mapViewerScale * factor));
+    applyMapViewerTransform();
+  }, { passive: false });
+
+  img.addEventListener('mousedown', e => {
+    e.preventDefault();
+    mapViewerDragging = true;
+    mapViewerMoved = false;
+    mapViewerStartX = e.clientX - mapViewerX;
+    mapViewerStartY = e.clientY - mapViewerY;
+    img.classList.add('dragging');
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!mapViewerDragging) return;
+    mapViewerMoved = true;
+    mapViewerX = e.clientX - mapViewerStartX;
+    mapViewerY = e.clientY - mapViewerStartY;
+    applyMapViewerTransform();
+  });
+
+  window.addEventListener('mouseup', () => {
+    mapViewerDragging = false;
+    img.classList.remove('dragging');
+  });
+
+  // Click outside the image closes the viewer, but not right after a drag.
+  viewer.addEventListener('click', e => {
+    if (mapViewerMoved) { mapViewerMoved = false; return; }
+    if (e.target === viewer) closeMapViewer();
+  });
+
+  viewer.querySelector('#map-viewer-close').addEventListener('click', closeMapViewer);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMapViewer();
+  });
+}
+
+function openMapViewer(src, name) {
+  setupMapViewer();
+  const viewer = document.getElementById('map-viewer');
+  const img = document.getElementById('map-viewer-img');
+  img.src = src;
+  img.alt = name;
+  mapViewerScale = 1;
+  mapViewerX = 0;
+  mapViewerY = 0;
+  applyMapViewerTransform();
+  viewer.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMapViewer() {
+  const viewer = document.getElementById('map-viewer');
+  if (!viewer) return;
+  viewer.classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 init();

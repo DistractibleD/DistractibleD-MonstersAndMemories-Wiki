@@ -33,19 +33,40 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
 Filters (type/slot/class) and search are all derived from `items.json` at runtime — no
 other file needs to change when items are added.
 
-### New items come in via `images/inbox/`
+## Adding a map to the Maps page
 
-The user drops new item screenshots into `images/inbox/` (may appear as `images/Inbox` on
+The Maps page (`pages.json` entry with `"type": "maps"`) works the same way as the Item
+Database: a manifest file, not hand-written HTML. Maps are listed alphabetically as
+clickable thumbnails; clicking one opens the full-size image in a viewer with scroll-to-
+zoom and click-and-drag panning (see `renderMapsPage`, `setupMapViewer` in `script.js`).
+
+1. Add an object to `maps.json`: `{ "name": ..., "slug": ..., "image": "images/Maps/<slug>.png" }`.
+2. Drop the full-size map image in `images/Maps/`, filename matching the `image` field.
+
+### New items/maps come in via `images/inbox/`
+
+The user drops new screenshots into `images/inbox/` (may appear as `images/Inbox` on
 disk — Windows paths are case-insensitive, don't create a second folder for it). This is
-the *only* place to look for new/unprocessed items — do not re-scan `images/items/` or
-re-read existing entries in `items.json` looking for new work; that wastes tokens on files
-that haven't changed.
+the *only* place to look for new/unprocessed content — do not re-scan `images/items/` or
+re-read existing entries in `items.json`/`maps.json` looking for new work; that wastes
+tokens on files that haven't changed. Files are usually named with a random ID (from a
+screenshot tool), not the item/map name — the filename is not meaningful, always read the
+image itself.
 
 Workflow when asked to process new items (or "check the inbox"):
 
-1. List `images/inbox/` — each file there is one unprocessed item screenshot.
-2. For each one: read the image, extract its name and stats.
-3. Check whether that item's slug (or name) already exists in `items.json` — this is a
+1. List `images/inbox/` — each file there is one unprocessed screenshot.
+2. For each one: read the image and figure out whether it's an **item** (the stat-card
+   popup style used elsewhere in this doc) or a **map** (a game map/zone image, no stat
+   card) — then follow the matching path below.
+3. Once a file has been moved out (to `images/items/`, `images/Maps/`, or
+   `images/duplicates/`), `images/inbox/` should no longer contain it — an empty inbox
+   means everything is processed.
+
+**Items:**
+
+1. Extract the item's name and stats.
+2. Check whether that item's slug (or name) already exists in `items.json` — this is a
    cheap text check against the existing entries, not the same as re-scanning every image
    in `images/items/`, and it's required every time to catch duplicates.
    - **Not a duplicate:** add an entry to `items.json`. Rename the file to the item's
@@ -56,9 +77,15 @@ Workflow when asked to process new items (or "check the inbox"):
      `images/duplicates/` instead, named `<slug>-duplicate.png` (append `-2`, `-3`, etc.
      if more than one duplicate of the same item shows up) so the user can identify which
      item it's a duplicate of at a glance and review it.
-4. Once a file has been moved out (to either `images/items/` or `images/duplicates/`),
-   `images/inbox/` should no longer contain it — an empty inbox means everything is
-   processed.
+
+**Maps:**
+
+1. Extract the map's name.
+2. Check whether that map's slug (or name) already exists in `maps.json`.
+   - **Not a duplicate:** add an entry to `maps.json`. Rename the file to the map's slug
+     and move it into `images/Maps/`, matching the `image` field.
+   - **Duplicate of an existing map:** move the file into `images/duplicates/`, named
+     `<slug>-duplicate.png` (append `-2`, `-3`, etc. as needed), same as items.
 
 ## Known CSS gotcha
 
@@ -68,6 +95,21 @@ specificity `(0,1,0)` and will lose to it silently. If a new img-related style i
 Item Database (or a future feature) doesn't seem to apply, check this first — either raise
 specificity (`.content-inner .my-class`) or, more robustly, control visibility via inline
 styles set from JS rather than relying on a CSS class toggle.
+
+## Layout width
+
+`.layout`/`.header-inner` cap at 1600px so the site doesn't stretch edge-to-edge on huge
+monitors, but still uses most of the screen on normal ones. `.content-inner` is capped at
+~820px for prose pages (readable line length), but data-driven pages (Item Database, Maps)
+get a `content-wide` class toggled from `loadPage()` in `script.js` that removes the cap —
+add that class (or extend the same `page.type` check) for any future full-width page
+rather than raising the prose cap.
+
+The Item Database table uses `table-layout: fixed` with an explicit `<colgroup>` (percentage
+widths, set in `renderItemsPage`) and no `white-space: nowrap`, so long cells (Classes,
+Stats) wrap onto multiple lines instead of forcing horizontal scroll. If you add a column,
+add a proportional `<col>` for it rather than letting the browser auto-size columns —
+auto-sizing is what caused the original horizontal-scroll problem.
 
 ## Local preview
 
