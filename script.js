@@ -155,7 +155,9 @@ function itemSearchHaystack(item) {
     item.damage != null ? `DMG ${item.damage}` : '',
     item.delay != null ? `DELAY ${item.delay}` : '',
     ratio != null ? `RATIO ${ratio.toFixed(2)}` : '',
-    (item.tags || []).join(' ')
+    (item.tags || []).join(' '),
+    item.description || '',
+    item.effect || ''
   ].join(' ').toLowerCase();
 }
 
@@ -287,6 +289,10 @@ async function renderItemsPage(container) {
   update();
 }
 
+function escapeAttr(str) {
+  return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 function renderItemRows(tbody, items) {
   if (!items.length) {
     tbody.innerHTML = '<tr><td colspan="9" class="items-empty">No items match your filters.</td></tr>';
@@ -298,11 +304,13 @@ function renderItemRows(tbody, items) {
     const dmgCell = item.damage != null
       ? `${item.damage} / ${item.delay}${ratio != null ? ` = ${ratio.toFixed(2)}` : ''}`
       : '—';
+    const flavorText = [item.effect, item.description].filter(Boolean).join('\n\n');
+    const titleAttr = flavorText ? ` title="${escapeAttr(flavorText)}"` : '';
 
     return `
       <tr>
         <td>
-          <span class="item-name-hover" data-img="${item.image}" data-alt="${item.name}">${(item.tags || []).map(t => `<span class="badge-tag">${t}</span> `).join('')}${item.name}</span>
+          <span class="item-name-hover" data-img="${item.image}" data-alt="${item.name}"${titleAttr}>${(item.tags || []).map(t => `<span class="badge-tag">${t}</span> `).join('')}${item.name}</span>
         </td>
         <td>${item.type}</td>
         <td>${formatSlot(item)}</td>

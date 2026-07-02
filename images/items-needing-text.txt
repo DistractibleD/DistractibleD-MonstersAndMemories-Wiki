@@ -21,5 +21,25 @@ Update (2026-07-02, inbox batch of 22 screenshots):
 
 Everything else in that batch (20 new items) showed a complete card.
 
+Update (2026-07-02, inbox batch of 7 screenshots):
+
+- Stained Black Iron Dagger (images/items/stained-black-iron-dagger.jpg) —
+  the screenshot cuts off mid-word on the last visible class ("SHM SPB
+  WIZ" is only half-visible) and "Race: ALL" is entirely out of frame.
+  The user supplied the missing text directly in chat, so items.json has
+  the full class list (14 classes) and race, but the saved screenshot
+  itself still visually ends before that text — if this item's data ever
+  needs re-verifying from the image alone, the image won't show the last
+  line.
+- The Measure Stick (images/items/the-measure-stick.jpg) — this item
+  arrived as two separate screenshots (top half + bottom half of the same
+  card, filenames Measure-1.png/Measure-2.png). Only the top half
+  (Measure-1) was kept as the item's screenshot; the bottom half's text
+  (Effect line, description, Weight/Class/Race) was merged into the
+  items.json entry and the second screenshot was discarded since there's
+  no mechanism for a second image per item.
+
+Everything else in that batch (5 items) showed a complete card.
+
 This file will be updated the next time new items are processed from the
 inbox, in case a future screenshot does turn out to be cut off.
