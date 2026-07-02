@@ -390,9 +390,13 @@ function setupItemTooltip(tbody) {
 
 /* ============================================
    Maps
-   Data lives in maps.json (array of {name, slug, image}).
-   To add a map, add an entry there and drop the full-size
-   image in images/Maps/ — no code changes needed.
+   Data lives in maps.json (array of {name, slug, image, thumbnail}).
+   "image" is the full-size map opened in the zoom/pan viewer;
+   "thumbnail" is a small pre-generated JPEG shown in the grid so the
+   page doesn't have to download every full-size map just to list them
+   (source maps can be tens of MB each). To add a map, add an entry,
+   drop the full-size image in images/Maps/, and generate a thumbnail
+   (see CLAUDE.md) — no code changes needed.
    ============================================ */
 
 async function renderMapsPage(container) {
@@ -415,7 +419,7 @@ async function renderMapsPage(container) {
     <div class="maps-grid">
       ${sorted.map(m => `
         <div class="map-card" data-img="${m.image}" data-name="${m.name}">
-          <img class="map-card-thumb" src="${m.image}" alt="${m.name}" loading="lazy">
+          <img class="map-card-thumb" src="${m.thumbnail || m.image}" alt="${m.name}" loading="lazy">
           <div class="map-card-name">${m.name}</div>
         </div>
       `).join('')}

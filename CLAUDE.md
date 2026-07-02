@@ -70,8 +70,26 @@ Database: a manifest file, not hand-written HTML. Maps are listed alphabetically
 clickable thumbnails; clicking one opens the full-size image in a viewer with scroll-to-
 zoom and click-and-drag panning (see `renderMapsPage`, `setupMapViewer` in `script.js`).
 
-1. Add an object to `maps.json`: `{ "name": ..., "slug": ..., "image": "images/Maps/<slug>.png" }`.
+Source map images can be huge (some are 20-40MB) since they need to stay high-quality for
+the zoom viewer. To avoid the grid page downloading every full-size map just to show small
+thumbnails, each entry has *two* images: `image` (full-size, opened in the viewer) and
+`thumbnail` (a small pre-generated JPEG shown in the grid).
+
+1. Add an object to `maps.json`: `{ "name": ..., "slug": ..., "image": "images/Maps/<slug>.<ext>", "thumbnail": "images/Maps/thumbs/<slug>.jpg" }`.
+   Read the map image itself to get its actual in-image title (map titles frequently don't
+   match their filename — e.g. a file named `Valeofzintarmap.png` turned out to be titled
+   "Vale of Zintar" and `WyrmsbaneCombined_v0.91.png` was actually "Tomb of the Last
+   Wyrmsbane"). If two source files are different renderings of the same place (e.g. a
+   top-down layout vs. an isometric render), keep both as separate entries and disambiguate
+   the names, e.g. `"Infested Crypt"` / `"Infested Crypt (Isometric)"`.
 2. Drop the full-size map image in `images/Maps/`, filename matching the `image` field.
+   Keep whatever format it already arrived in — don't force it to PNG or re-encode it;
+   the "don't JPEG-compress maps" rule above is about not throwing away quality on the
+   full-size image, not about normalizing formats.
+3. Generate the thumbnail into `images/Maps/thumbs/` — there's no Node/Python/ImageMagick
+   in this environment, so use PowerShell + `System.Drawing` (`Add-Type -AssemblyName
+   System.Drawing`) to resize to ~480px wide and save as JPEG quality ~80-85. This gets a
+   ~40MB map down to well under 100KB with no visible loss at thumbnail size.
 
 ## Adding a crafting recipe
 
