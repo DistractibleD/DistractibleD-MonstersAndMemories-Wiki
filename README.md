@@ -88,3 +88,18 @@ To add a new item:
 The search box, and the type/slot/class filters on the page, are all built automatically
 from whatever is in `items.json` — you don't need to update anything else when you add an
 item or a new class. Hovering an item's name on the page shows its screenshot.
+
+---
+
+## Part 4: The Crafting page
+
+The **Crafting** page shows every tradeskill (Alchemy, Blacksmithing, Cooking, etc. — the
+full list lives in `tradeskills.json`) as a grid of clickable categories. Tradeskills that
+aren't in the game yet show a "Planned" badge instead of a recipe list. Clicking a category
+shows its recipes, which come from `crafting.json`, the same way items come from
+`items.json`.
+
+To add a new recipe: add an object to `crafting.json` naming the tradeskill it belongs to,
+and drop its screenshot into `images/crafting/`. The recipe format is still simple since no
+real recipes have been added yet — as real ones come in, more detail (ingredients, yield,
+etc.) will get added the same way the Item Database grew over time.

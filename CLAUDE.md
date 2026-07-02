@@ -66,31 +66,55 @@ zoom and click-and-drag panning (see `renderMapsPage`, `setupMapViewer` in `scri
 1. Add an object to `maps.json`: `{ "name": ..., "slug": ..., "image": "images/Maps/<slug>.png" }`.
 2. Drop the full-size map image in `images/Maps/`, filename matching the `image` field.
 
-### New items/maps come in via `images/inbox/`
+## Adding a crafting recipe
+
+The Crafting page (`pages.json` entry with `"type": "crafting"`) shows a grid of tradeskill
+categories (from `tradeskills.json` — a fixed list, edit it directly to rename/add/remove a
+tradeskill); clicking one shows that tradeskill's recipes from `crafting.json` (see
+`renderCraftingPage`, `renderCraftingCategories`, `renderCraftingRecipes` in `script.js`).
+Each tradeskill has a `status` of `"live"` or `"planned"` — planned ones show a "Planned"
+badge and an explanatory message instead of a recipe list, since they exist in the game's
+design but aren't usable yet.
+
+The recipe schema in `crafting.json` is intentionally minimal right now — `name`, `slug`,
+`tradeskill` (must match a name in `tradeskills.json`), and optionally `image` — because no
+real recipe screenshot has been processed yet. Treat this the same way the item schema grew
+(tags, race, description, effect all got added once real cards showed those fields): once
+recipe screenshots start coming in, look at what the card actually shows (ingredients?
+yield? a crafting level? a resulting item?) and extend the schema and `renderCraftingRecipes`
+to match, rather than guessing the fields now.
+
+1. Add an object to `crafting.json` with at least `name`, `slug`, `tradeskill`.
+2. Recipe screenshots are saved as `.jpg` (quality 90), same as item screenshots — see
+   "Item screenshot format" above. Drop it in `images/crafting/`, filename matching the
+   `image` field.
+
+### New items/maps/recipes come in via `images/inbox/`
 
 The user drops new screenshots into `images/inbox/` (may appear as `images/Inbox` on
 disk — Windows paths are case-insensitive, don't create a second folder for it). This is
 the *only* place to look for new/unprocessed content — do not re-scan `images/items/` or
-re-read existing entries in `items.json`/`maps.json` looking for new work; that wastes
-tokens on files that haven't changed. Files are usually named with a random ID (from a
-screenshot tool), not the item/map name — the filename is not meaningful, always read the
-image itself.
+re-read existing entries in `items.json`/`maps.json`/`crafting.json` looking for new work;
+that wastes tokens on files that haven't changed. Files are usually named with a random ID
+(from a screenshot tool), not the item/map/recipe name — the filename is not meaningful,
+always read the image itself.
 
-This rule isn't limited to adding new entries — it applies to *any* task involving item/map
-screenshots (e.g. checking for cut-off/truncated text, auditing image quality, re-verifying
-data). Only ever read/process files sitting in `images/inbox/`; never re-open every existing
-file in `images/items/` or `images/Maps/` to go looking for problems. If a task requires
-checking already-processed images, say so and ask the user rather than re-scanning
-everything.
+This rule isn't limited to adding new entries — it applies to *any* task involving
+item/map/recipe screenshots (e.g. checking for cut-off/truncated text, auditing image
+quality, re-verifying data). Only ever read/process files sitting in `images/inbox/`; never
+re-open every existing file in `images/items/`, `images/Maps/`, or `images/crafting/` to go
+looking for problems. If a task requires checking already-processed images, say so and ask
+the user rather than re-scanning everything.
 
 Workflow when asked to process new items (or "check the inbox"):
 
 1. List `images/inbox/` — each file there is one unprocessed screenshot.
 2. For each one: read the image and figure out whether it's an **item** (the stat-card
-   popup style used elsewhere in this doc) or a **map** (a game map/zone image, no stat
-   card) — then follow the matching path below.
-3. Once a file has been moved out (to `images/items/`, `images/Maps/`, or
-   `images/duplicates/`), `images/inbox/` should no longer contain it — an empty inbox
+   popup style used elsewhere in this doc), a **map** (a game map/zone image, no stat
+   card), or a **recipe** (a tradeskill/crafting window screenshot) — then follow the
+   matching path below.
+3. Once a file has been moved out (to `images/items/`, `images/Maps/`, `images/crafting/`,
+   or `images/duplicates/`), `images/inbox/` should no longer contain it — an empty inbox
    means everything is processed.
 
 **Items:**
@@ -120,6 +144,19 @@ Workflow when asked to process new items (or "check the inbox"):
    - **Duplicate of an existing map:** move the file into `images/duplicates/`, named
      `<slug>-duplicate.png` (append `-2`, `-3`, etc. as needed), same as items.
 
+**Recipes:**
+
+1. Extract the recipe's name and which tradeskill it belongs to (must match a name in
+   `tradeskills.json` — if the card names a tradeskill not in that list, flag it to the user
+   rather than inventing a new category). See "Adding a crafting recipe" above for the
+   current (minimal, still-evolving) schema.
+2. Check whether that recipe's slug (or name) already exists in `crafting.json`.
+   - **Not a duplicate:** add an entry to `crafting.json`. Convert the screenshot to `.jpg`
+     (quality 90) and rename it to the recipe's slug, and move it into `images/crafting/`.
+     Use the same slug for the `image` field in the entry.
+   - **Duplicate of an existing recipe:** move the file into `images/duplicates/`, named
+     `<slug>-duplicate.jpg` (append `-2`, `-3`, etc. as needed), same as items.
+
 ## Known CSS gotcha
 
 `.content-inner img` (in `style.css`) sets `display: block` on every image rendered inside
@@ -133,10 +170,10 @@ styles set from JS rather than relying on a CSS class toggle.
 
 `.layout`/`.header-inner` cap at 1600px so the site doesn't stretch edge-to-edge on huge
 monitors, but still uses most of the screen on normal ones. `.content-inner` is capped at
-~820px for prose pages (readable line length), but data-driven pages (Item Database, Maps)
-get a `content-wide` class toggled from `loadPage()` in `script.js` that removes the cap —
-add that class (or extend the same `page.type` check) for any future full-width page
-rather than raising the prose cap.
+~820px for prose pages (readable line length), but data-driven pages (Item Database, Maps,
+Crafting) get a `content-wide` class toggled from `loadPage()` in `script.js` that removes
+the cap — add that class (or extend the same `page.type` check) for any future full-width
+page rather than raising the prose cap.
 
 The Item Database table uses `table-layout: fixed` with an explicit `<colgroup>` (percentage
 widths, set in `renderItemsPage`) and no `white-space: nowrap`, so long cells (Classes,

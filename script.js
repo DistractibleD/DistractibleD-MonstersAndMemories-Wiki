@@ -7,6 +7,8 @@
 let allPages = [];
 let itemsData = null; // cached contents of items.json, loaded on first visit to the Item Database page
 let mapsData = null; // cached contents of maps.json, loaded on first visit to the Maps page
+let craftingData = null; // cached contents of crafting.json, loaded on first visit to the Crafting page
+let tradeskillsData = null; // cached contents of tradeskills.json, loaded on first visit to the Crafting page
 
 async function init() {
   const res = await fetch('pages.json');
@@ -66,15 +68,17 @@ async function loadPage(file) {
   contentInner.innerHTML = '<p>Loading...</p>';
   const page = allPages.find(p => p.file === file);
 
-  // Data-driven pages (Item Database, Maps) use the full content width instead
-  // of the narrower reading width used for prose pages.
-  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps')));
+  // Data-driven pages (Item Database, Maps, Crafting) use the full content
+  // width instead of the narrower reading width used for prose pages.
+  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'crafting')));
 
   try {
     if (page && page.type === 'items') {
       await renderItemsPage(contentInner);
     } else if (page && page.type === 'maps') {
       await renderMapsPage(contentInner);
+    } else if (page && page.type === 'crafting') {
+      await renderCraftingPage(contentInner);
     } else {
       const res = await fetch('pages/' + file);
       if (!res.ok) throw new Error('Page not found');
@@ -492,6 +496,93 @@ function closeMapViewer() {
   if (!viewer) return;
   viewer.classList.remove('open');
   document.body.style.overflow = '';
+}
+
+/* ============================================
+   Crafting
+   Categories live in tradeskills.json (a fixed list —
+   edit it directly to rename/add/remove a tradeskill).
+   Recipes live in crafting.json, each tagged with a
+   "tradeskill" matching one of those category names.
+   The recipe schema is intentionally minimal for now
+   (name/slug/tradeskill/image) since no real recipe
+   data has been added yet — see CLAUDE.md.
+   ============================================ */
+
+async function renderCraftingPage(container) {
+  if (!tradeskillsData) {
+    const res = await fetch('tradeskills.json');
+    if (!res.ok) throw new Error('Could not load tradeskills.json');
+    tradeskillsData = await res.json();
+  }
+  if (!craftingData) {
+    const res = await fetch('crafting.json');
+    if (!res.ok) throw new Error('Could not load crafting.json');
+    craftingData = await res.json();
+  }
+
+  renderCraftingCategories(container);
+}
+
+function renderCraftingCategories(container) {
+  const sorted = [...tradeskillsData].sort((a, b) => a.name.localeCompare(b.name));
+
+  container.innerHTML = `
+    <h1>Crafting</h1>
+    <p>Browse recipes by tradeskill. "Planned" tradeskills exist in the game's design but
+    aren't usable yet.</p>
+    <div class="craft-grid">
+      ${sorted.map(ts => {
+        const count = craftingData.filter(r => r.tradeskill === ts.name).length;
+        return `
+          <div class="craft-card" data-tradeskill="${ts.name}">
+            <div class="craft-card-name">
+              ${ts.name}
+              ${ts.status === 'planned' ? '<span class="badge-planned">Planned</span>' : ''}
+            </div>
+            <div class="craft-card-count">${count} recipe${count === 1 ? '' : 's'}</div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+
+  container.querySelectorAll('.craft-card').forEach(card => {
+    card.addEventListener('click', () => renderCraftingRecipes(container, card.dataset.tradeskill));
+  });
+}
+
+function renderCraftingRecipes(container, tradeskillName) {
+  const tradeskill = tradeskillsData.find(ts => ts.name === tradeskillName);
+  const recipes = craftingData
+    .filter(r => r.tradeskill === tradeskillName)
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  container.innerHTML = `
+    <p><a href="#" id="craft-back-link">&larr; All tradeskills</a></p>
+    <h1>
+      ${tradeskillName}
+      ${tradeskill && tradeskill.status === 'planned' ? '<span class="badge-planned">Planned</span>' : ''}
+    </h1>
+    ${
+      tradeskill && tradeskill.status === 'planned'
+        ? '<p>This tradeskill hasn\'t been implemented in the game yet.</p>'
+        : recipes.length
+          ? `<ul class="craft-recipe-list">${recipes.map(r => `
+              <li>${r.image ? `<span class="item-name-hover" data-img="${r.image}" data-alt="${r.name}">${r.name}</span>` : r.name}</li>
+            `).join('')}</ul>`
+          : '<p>No recipes yet for this tradeskill.</p>'
+    }
+  `;
+
+  if (recipes.some(r => r.image)) {
+    setupItemTooltip(container.querySelector('.craft-recipe-list'));
+  }
+
+  container.querySelector('#craft-back-link').addEventListener('click', e => {
+    e.preventDefault();
+    renderCraftingCategories(container);
+  });
 }
 
 init();

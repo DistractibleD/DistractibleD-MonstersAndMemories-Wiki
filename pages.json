@@ -3,5 +3,6 @@
   { "title": "How This Wiki Works", "file": "how-it-works.md", "category": "Getting Started" },
   { "title": "Example: Stone Golem", "file": "example-boss.md", "category": "Bosses" },
   { "title": "Item Database", "file": "items", "category": "Items", "type": "items" },
-  { "title": "Maps", "file": "maps", "category": "Maps", "type": "maps" }
+  { "title": "Maps", "file": "maps", "category": "Maps", "type": "maps" },
+  { "title": "Crafting", "file": "crafting", "category": "Crafting", "type": "crafting" }
 ]
