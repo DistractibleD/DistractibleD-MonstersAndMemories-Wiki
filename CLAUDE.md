@@ -27,20 +27,27 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
    render time, don't store it) and `twoHanded: true` if the screenshot says "Two Handed".
    Armor/jewelry use `ac` and a `stats` object (`{"AGI": 1, "DEX": 2, ...}`). Saving-throw
    bonuses (e.g. "SV Fire: +2") go in a separate `resists` object (`{"FIRE": 2}`), not in
-   `stats`. `race` is an array (usually `["ALL"]`) — set it to the specific races listed on
-   the card if it isn't ALL.
+   `stats`. A "Haste: +6%" line goes in its own top-level `haste` field (e.g. `"haste": 6`),
+   not in `stats` or `resists` — it's a percentage, not a flat bonus. `race` is an array
+   (usually `["ALL"]`) — set it to the specific races listed on the card if it isn't ALL.
 2. Check the card for a tag line directly below the item name and above "Slot:" — e.g.
    "MAGIC". Capture every such tag (not just MAGIC) in a `tags` array, e.g. `["MAGIC"]` or
    `["MAGIC", "LORE"]`; use `[]` if there's no tag line. Known tags seen so far: MAGIC.
    Others the game is known to use but not yet seen on a card: LORE, NODROP, UNIQUE — if one
    shows up, add it to the item's `tags` array using the same all-caps spelling as the card.
-3. Item screenshots are saved as `.jpg` (quality 90), not `.png` — see "Item screenshot
+3. Bags/satchels/pouches/backpacks use `"type": "Container"` instead of Armor/Weapon/
+   Jewelry/Misc, with `capacity` (integer) and `maxSize` (`"Small"`/`"Medium"`/`"Large"`,
+   same Title Case as the item's own `size`) instead of `ac`/`stats`/`damage`. Their `slot`
+   is one of `"Bag"`, `"Belt"`, or `"Backpack"` — distinct from `"Waist"`, which is for
+   actual belt armor, not a container-carrying slot. Some containers can go in more than
+   one slot (e.g. `"Bag / Belt"`), same `"X / Y"` format used for `"Primary / Secondary"`.
+4. Item screenshots are saved as `.jpg` (quality 90), not `.png` — see "Item screenshot
    format" below. Drop it in `images/items/`, filename matching the `image` field.
 
-Filters (type/slot/class/race/tags) and search are all derived from `items.json` at
-runtime — no other file needs to change when items are added, including when a new tag
-value shows up for the first time (the tag filter dropdown is populated from whatever
-values exist in the data).
+Filters (type/slot/class/race/tags/max size) and search are all derived from `items.json`
+at runtime — no other file needs to change when items are added, including when a new tag,
+slot, or max-size value shows up for the first time (those dropdowns are populated from
+whatever values exist in the data).
 
 ## Item screenshot format
 

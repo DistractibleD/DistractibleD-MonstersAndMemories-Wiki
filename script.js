@@ -130,8 +130,13 @@ function formatStats(item) {
   const resistParts = ITEM_RESIST_ORDER
     .filter(res => item.resists && item.resists[res])
     .map(res => `SV ${res} +${item.resists[res]}`);
-  const all = [...parts, ...resistParts];
+  const hasteParts = item.haste ? [`Haste +${item.haste}%`] : [];
+  const all = [...parts, ...resistParts, ...hasteParts];
   return all.length ? all.join(', ') : '—';
+}
+
+function formatCapacity(item) {
+  return item.capacity != null ? `${item.capacity} / ${item.maxSize}` : '—';
 }
 
 function formatSlot(item) {
@@ -161,7 +166,9 @@ function itemSearchHaystack(item) {
     ratio != null ? `RATIO ${ratio.toFixed(2)}` : '',
     (item.tags || []).join(' '),
     item.description || '',
-    item.effect || ''
+    item.effect || '',
+    item.capacity != null ? `CAPACITY ${item.capacity}` : '',
+    item.maxSize ? `MAX SIZE ${item.maxSize}` : ''
   ].join(' ').toLowerCase();
 }
 
@@ -177,6 +184,7 @@ async function renderItemsPage(container) {
   const classes = [...new Set(itemsData.flatMap(i => i.classes).filter(c => c !== 'ALL'))].sort();
   const races = [...new Set(itemsData.flatMap(i => i.race).filter(r => r !== 'ALL'))].sort();
   const tags = [...new Set(itemsData.flatMap(i => i.tags || []))].sort();
+  const maxSizes = [...new Set(itemsData.map(i => i.maxSize).filter(Boolean))].sort();
 
   container.innerHTML = `
     <h1>Item Database</h1>
@@ -203,12 +211,18 @@ async function renderItemsPage(container) {
         <option value="">All tags</option>
         ${tags.map(t => `<option value="${t}">${t}</option>`).join('')}
       </select>
+      <select id="items-filter-maxsize" class="items-select">
+        <option value="">All max sizes</option>
+        ${maxSizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+      </select>
       <select id="items-sort" class="items-select">
         <option value="name-asc">Name (A-Z)</option>
         <option value="name-desc">Name (Z-A)</option>
         <option value="ac-desc">AC (High-Low)</option>
         <option value="ratio-desc">Ratio (High-Low)</option>
         <option value="ratio-asc">Ratio (Low-High)</option>
+        <option value="capacity-desc">Capacity (High-Low)</option>
+        <option value="capacity-asc">Capacity (Low-High)</option>
       </select>
     </div>
     <p class="items-count" id="items-count"></p>
@@ -222,6 +236,7 @@ async function renderItemsPage(container) {
           <col class="col-stats">
           <col class="col-dmg">
           <col class="col-weight">
+          <col class="col-capacity">
           <col class="col-classes">
           <col class="col-race">
         </colgroup>
@@ -234,6 +249,7 @@ async function renderItemsPage(container) {
             <th>Stats</th>
             <th>Dmg / Delay / Ratio</th>
             <th>Weight / Size</th>
+            <th>Capacity / Max Size</th>
             <th>Classes</th>
             <th>Race</th>
           </tr>
@@ -251,6 +267,7 @@ async function renderItemsPage(container) {
   const classFilter = container.querySelector('#items-filter-class');
   const raceFilter = container.querySelector('#items-filter-race');
   const tagFilter = container.querySelector('#items-filter-tag');
+  const maxSizeFilter = container.querySelector('#items-filter-maxsize');
   const sortSelect = container.querySelector('#items-sort');
 
   function update() {
@@ -260,6 +277,7 @@ async function renderItemsPage(container) {
     const cls = classFilter.value;
     const race = raceFilter.value;
     const tag = tagFilter.value;
+    const maxSize = maxSizeFilter.value;
 
     let filtered = itemsData.filter(item => {
       if (type && item.type !== type) return false;
@@ -267,6 +285,7 @@ async function renderItemsPage(container) {
       if (cls && !item.classes.includes('ALL') && !item.classes.includes(cls)) return false;
       if (race && !item.race.includes('ALL') && !item.race.includes(race)) return false;
       if (tag && !(item.tags || []).includes(tag)) return false;
+      if (maxSize && item.maxSize !== maxSize) return false;
       if (query && !itemSearchHaystack(item).includes(query)) return false;
       return true;
     });
@@ -276,6 +295,7 @@ async function renderItemsPage(container) {
       let av, bv;
       if (sortKey === 'name') { av = a.name.toLowerCase(); bv = b.name.toLowerCase(); }
       else if (sortKey === 'ac') { av = a.ac ?? -Infinity; bv = b.ac ?? -Infinity; }
+      else if (sortKey === 'capacity') { av = a.capacity ?? -Infinity; bv = b.capacity ?? -Infinity; }
       else { av = itemRatio(a) ?? -Infinity; bv = itemRatio(b) ?? -Infinity; }
       if (av < bv) return sortDir === 'asc' ? -1 : 1;
       if (av > bv) return sortDir === 'asc' ? 1 : -1;
@@ -288,7 +308,7 @@ async function renderItemsPage(container) {
   }
 
   [searchBox].forEach(el => el.addEventListener('input', update));
-  [typeFilter, slotFilter, classFilter, raceFilter, tagFilter, sortSelect].forEach(el => el.addEventListener('change', update));
+  [typeFilter, slotFilter, classFilter, raceFilter, tagFilter, maxSizeFilter, sortSelect].forEach(el => el.addEventListener('change', update));
 
   update();
 }
@@ -299,7 +319,7 @@ function escapeAttr(str) {
 
 function renderItemRows(tbody, items) {
   if (!items.length) {
-    tbody.innerHTML = '<tr><td colspan="9" class="items-empty">No items match your filters.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="10" class="items-empty">No items match your filters.</td></tr>';
     return;
   }
 
@@ -322,6 +342,7 @@ function renderItemRows(tbody, items) {
         <td>${formatStats(item)}</td>
         <td>${dmgCell}</td>
         <td>${item.weight} / ${item.size}</td>
+        <td>${formatCapacity(item)}</td>
         <td>${formatList(item.classes)}</td>
         <td>${formatList(item.race)}</td>
       </tr>

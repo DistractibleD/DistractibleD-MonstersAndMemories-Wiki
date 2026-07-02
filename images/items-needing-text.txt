@@ -41,5 +41,16 @@ Update (2026-07-02, inbox batch of 7 screenshots):
 
 Everything else in that batch (5 items) showed a complete card.
 
+Update (2026-07-02, inbox batch of 14 screenshots — bags/satchels/pouches
+plus assorted gear):
+
+- Mining Pouch (images/items/mining-pouch.jpg) — same pattern as Torch
+  above: the bottom decorative border isn't visible and "Race: ALL" runs
+  right to the raw image edge. The text itself is fully legible (nothing
+  is actually missing), just noting it in case a future re-check assumes
+  a cropped border means missing data.
+
+Everything else in that batch (13 items) showed a complete card.
+
 This file will be updated the next time new items are processed from the
 inbox, in case a future screenshot does turn out to be cut off.

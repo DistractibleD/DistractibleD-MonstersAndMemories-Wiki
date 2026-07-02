@@ -258,14 +258,15 @@ html, body {
 }
 /* Column proportions, tuned so short-but-unbreakable words (e.g. "Medium",
    "Weapon") fit without splitting mid-word. Overridden for mobile below. */
-.col-name { width: 17%; }
-.col-type { width: 9%; }
+.col-name { width: 16%; }
+.col-type { width: 8%; }
 .col-slot { width: 9%; }
 .col-ac { width: 5%; }
-.col-stats { width: 14%; }
-.col-dmg { width: 10%; }
-.col-weight { width: 8%; }
-.col-classes { width: 19%; }
+.col-stats { width: 12%; }
+.col-dmg { width: 9%; }
+.col-weight { width: 7%; }
+.col-capacity { width: 9%; }
+.col-classes { width: 16%; }
 .col-race { width: 9%; }
 .items-table th {
   background: var(--bg);
@@ -493,14 +494,15 @@ html, body {
   .content-inner .items-table { font-size: 0.78rem; }
   .content-inner .items-table th, .content-inner .items-table td { padding: 6px 6px; }
   /* Give the short-word columns relatively more room at narrow widths. */
-  .col-name { width: 17%; }
-  .col-type { width: 11%; }
-  .col-slot { width: 11%; }
+  .col-name { width: 15%; }
+  .col-type { width: 9%; }
+  .col-slot { width: 10%; }
   .col-ac { width: 5%; }
-  .col-stats { width: 12%; }
-  .col-dmg { width: 10%; }
-  .col-weight { width: 10%; }
-  .col-classes { width: 15%; }
+  .col-stats { width: 11%; }
+  .col-dmg { width: 9%; }
+  .col-weight { width: 9%; }
+  .col-capacity { width: 9%; }
+  .col-classes { width: 14%; }
   .col-race { width: 9%; }
   .maps-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
   .map-card img.map-card-thumb { height: 110px; }
