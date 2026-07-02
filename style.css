@@ -280,7 +280,7 @@ html, body {
   color: var(--text-dim);
   text-align: center !important;
 }
-.badge-magic {
+.badge-tag {
   display: inline-block;
   background: var(--accent-dim);
   color: var(--text);

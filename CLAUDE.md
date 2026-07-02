@@ -27,11 +27,19 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
    render time, don't store it) and `twoHanded: true` if the screenshot says "Two Handed".
    Armor/jewelry use `ac` and a `stats` object (`{"AGI": 1, "DEX": 2, ...}`). Saving-throw
    bonuses (e.g. "SV Fire: +2") go in a separate `resists` object (`{"FIRE": 2}`), not in
-   `stats`.
-2. Drop the item's screenshot in `images/items/`, filename matching the `image` field.
+   `stats`. `race` is an array (usually `["ALL"]`) — set it to the specific races listed on
+   the card if it isn't ALL.
+2. Check the card for a tag line directly below the item name and above "Slot:" — e.g.
+   "MAGIC". Capture every such tag (not just MAGIC) in a `tags` array, e.g. `["MAGIC"]` or
+   `["MAGIC", "LORE"]`; use `[]` if there's no tag line. Known tags seen so far: MAGIC.
+   Others the game is known to use but not yet seen on a card: LORE, NODROP, UNIQUE — if one
+   shows up, add it to the item's `tags` array using the same all-caps spelling as the card.
+3. Drop the item's screenshot in `images/items/`, filename matching the `image` field.
 
-Filters (type/slot/class) and search are all derived from `items.json` at runtime — no
-other file needs to change when items are added.
+Filters (type/slot/class/race/tags) and search are all derived from `items.json` at
+runtime — no other file needs to change when items are added, including when a new tag
+value shows up for the first time (the tag filter dropdown is populated from whatever
+values exist in the data).
 
 ## Adding a map to the Maps page
 
@@ -72,7 +80,8 @@ Workflow when asked to process new items (or "check the inbox"):
 
 **Items:**
 
-1. Extract the item's name and stats.
+1. Extract the item's name and stats, including `race` and any `tags` (see the tag/race
+   guidance in "Adding an item to the Item Database" above).
 2. Check whether that item's slug (or name) already exists in `items.json` — this is a
    cheap text check against the existing entries, not the same as re-scanning every image
    in `images/items/`, and it's required every time to catch duplicates.

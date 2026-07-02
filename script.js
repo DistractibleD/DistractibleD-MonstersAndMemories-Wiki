@@ -155,7 +155,7 @@ function itemSearchHaystack(item) {
     item.damage != null ? `DMG ${item.damage}` : '',
     item.delay != null ? `DELAY ${item.delay}` : '',
     ratio != null ? `RATIO ${ratio.toFixed(2)}` : '',
-    item.magic ? 'MAGIC' : ''
+    (item.tags || []).join(' ')
   ].join(' ').toLowerCase();
 }
 
@@ -169,6 +169,8 @@ async function renderItemsPage(container) {
   const slots = [...new Set(itemsData.map(i => i.slot))].sort();
   const types = [...new Set(itemsData.map(i => i.type))].sort();
   const classes = [...new Set(itemsData.flatMap(i => i.classes).filter(c => c !== 'ALL'))].sort();
+  const races = [...new Set(itemsData.flatMap(i => i.race).filter(r => r !== 'ALL'))].sort();
+  const tags = [...new Set(itemsData.flatMap(i => i.tags || []))].sort();
 
   container.innerHTML = `
     <h1>Item Database</h1>
@@ -186,6 +188,14 @@ async function renderItemsPage(container) {
       <select id="items-filter-class" class="items-select">
         <option value="">All classes</option>
         ${classes.map(c => `<option value="${c}">${c}</option>`).join('')}
+      </select>
+      <select id="items-filter-race" class="items-select">
+        <option value="">All races</option>
+        ${races.map(r => `<option value="${r}">${r}</option>`).join('')}
+      </select>
+      <select id="items-filter-tag" class="items-select">
+        <option value="">All tags</option>
+        ${tags.map(t => `<option value="${t}">${t}</option>`).join('')}
       </select>
       <select id="items-sort" class="items-select">
         <option value="name-asc">Name (A-Z)</option>
@@ -233,6 +243,8 @@ async function renderItemsPage(container) {
   const typeFilter = container.querySelector('#items-filter-type');
   const slotFilter = container.querySelector('#items-filter-slot');
   const classFilter = container.querySelector('#items-filter-class');
+  const raceFilter = container.querySelector('#items-filter-race');
+  const tagFilter = container.querySelector('#items-filter-tag');
   const sortSelect = container.querySelector('#items-sort');
 
   function update() {
@@ -240,11 +252,15 @@ async function renderItemsPage(container) {
     const type = typeFilter.value;
     const slot = slotFilter.value;
     const cls = classFilter.value;
+    const race = raceFilter.value;
+    const tag = tagFilter.value;
 
     let filtered = itemsData.filter(item => {
       if (type && item.type !== type) return false;
       if (slot && item.slot !== slot) return false;
       if (cls && !item.classes.includes('ALL') && !item.classes.includes(cls)) return false;
+      if (race && !item.race.includes('ALL') && !item.race.includes(race)) return false;
+      if (tag && !(item.tags || []).includes(tag)) return false;
       if (query && !itemSearchHaystack(item).includes(query)) return false;
       return true;
     });
@@ -266,7 +282,7 @@ async function renderItemsPage(container) {
   }
 
   [searchBox].forEach(el => el.addEventListener('input', update));
-  [typeFilter, slotFilter, classFilter, sortSelect].forEach(el => el.addEventListener('change', update));
+  [typeFilter, slotFilter, classFilter, raceFilter, tagFilter, sortSelect].forEach(el => el.addEventListener('change', update));
 
   update();
 }
@@ -286,7 +302,7 @@ function renderItemRows(tbody, items) {
     return `
       <tr>
         <td>
-          <span class="item-name-hover" data-img="${item.image}" data-alt="${item.name}">${item.magic ? '<span class="badge-magic">MAGIC</span> ' : ''}${item.name}</span>
+          <span class="item-name-hover" data-img="${item.image}" data-alt="${item.name}">${(item.tags || []).map(t => `<span class="badge-tag">${t}</span> `).join('')}${item.name}</span>
         </td>
         <td>${item.type}</td>
         <td>${formatSlot(item)}</td>
