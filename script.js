@@ -105,6 +105,7 @@ function onSearch(e) {
    ============================================ */
 
 const ITEM_STAT_ORDER = ['STR', 'STA', 'AGI', 'DEX', 'WIS', 'INT', 'CHA', 'HP'];
+const ITEM_RESIST_ORDER = ['FIRE', 'COLD', 'MAGIC', 'POISON', 'DISEASE', 'CORRUPTION'];
 
 function itemRatio(item) {
   if (item.damage == null || !item.delay) return null;
@@ -115,7 +116,15 @@ function formatStats(item) {
   const parts = ITEM_STAT_ORDER
     .filter(stat => item.stats && item.stats[stat])
     .map(stat => `${stat} +${item.stats[stat]}`);
-  return parts.length ? parts.join(', ') : '—';
+  const resistParts = ITEM_RESIST_ORDER
+    .filter(res => item.resists && item.resists[res])
+    .map(res => `SV ${res} +${item.resists[res]}`);
+  const all = [...parts, ...resistParts];
+  return all.length ? all.join(', ') : '—';
+}
+
+function formatSlot(item) {
+  return item.twoHanded ? `${item.slot} (2H)` : item.slot;
 }
 
 function formatList(values) {
@@ -129,7 +138,8 @@ function itemSearchHaystack(item) {
   return [
     item.name,
     item.type,
-    item.slot,
+    formatSlot(item),
+    item.twoHanded ? 'two handed' : '',
     item.skill,
     formatStats(item),
     formatList(item.classes),
@@ -261,7 +271,7 @@ function renderItemRows(tbody, items) {
           <span class="item-name-hover" data-img="${item.image}" data-alt="${item.name}">${item.magic ? '<span class="badge-magic">MAGIC</span> ' : ''}${item.name}</span>
         </td>
         <td>${item.type}</td>
-        <td>${item.slot}</td>
+        <td>${formatSlot(item)}</td>
         <td>${item.ac != null ? item.ac : '—'}</td>
         <td>${formatStats(item)}</td>
         <td>${dmgCell}</td>

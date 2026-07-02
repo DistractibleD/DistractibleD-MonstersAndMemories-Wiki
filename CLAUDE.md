@@ -24,8 +24,10 @@ The Item Database (`pages.json` entry with `"type": "items"`) is not a Markdown 
 it's a searchable/filterable/sortable table rendered by `script.js` from `items.json`.
 
 1. Add an object to `items.json`. Weapons use `damage` / `delay` (ratio is computed at
-   render time, don't store it). Armor/jewelry use `ac` and a `stats` object
-   (`{"AGI": 1, "DEX": 2, ...}`).
+   render time, don't store it) and `twoHanded: true` if the screenshot says "Two Handed".
+   Armor/jewelry use `ac` and a `stats` object (`{"AGI": 1, "DEX": 2, ...}`). Saving-throw
+   bonuses (e.g. "SV Fire: +2") go in a separate `resists` object (`{"FIRE": 2}`), not in
+   `stats`.
 2. Drop the item's screenshot in `images/items/`, filename matching the `image` field.
 
 Filters (type/slot/class) and search are all derived from `items.json` at runtime — no
