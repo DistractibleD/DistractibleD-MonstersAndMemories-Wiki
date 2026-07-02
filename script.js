@@ -26,6 +26,16 @@ async function init() {
     const page = allPages.find(p => p.file === file);
     if (page) loadPage(page.file);
   });
+
+  document.getElementById('site-title').addEventListener('click', e => {
+    e.preventDefault();
+    if (!allPages[0]) return;
+    document.getElementById('search-box').value = '';
+    buildSidebar(allPages);
+    const alreadyHome = location.hash.replace('#', '') === allPages[0].file;
+    location.hash = allPages[0].file;
+    if (alreadyHome) loadPage(allPages[0].file);
+  });
 }
 
 function buildSidebar(pages) {
@@ -439,14 +449,32 @@ async function renderMapsPage(container) {
 }
 
 // Full-size map viewer with scroll-to-zoom and click-and-drag panning.
-// A single overlay is created once and reused for every map.
+// A single overlay is created once and reused for every map. Source map
+// images vary wildly in native pixel size (some are 9000px+ wide), so the
+// zoomed-out floor and the starting view are computed per image instead of
+// being fixed values — otherwise a large map would open already too
+// "zoomed in" with no way to scroll out far enough to see the whole thing.
 let mapViewerScale = 1;
+let mapViewerMinScale = 0.1;
+let mapViewerMaxScale = 6;
 let mapViewerX = 0;
 let mapViewerY = 0;
 let mapViewerDragging = false;
 let mapViewerMoved = false;
 let mapViewerStartX = 0;
 let mapViewerStartY = 0;
+
+// The scale at which the image's natural size exactly fits inside the
+// viewer (minus a small margin) — used as both the initial view and the
+// floor for zooming out, so every map opens fully visible and can always
+// be zoomed back out to fully visible.
+function computeMapViewerFitScale(img) {
+  const naturalW = img.naturalWidth || 1;
+  const naturalH = img.naturalHeight || 1;
+  const availW = window.innerWidth * 0.94;
+  const availH = window.innerHeight * 0.9;
+  return Math.min(availW / naturalW, availH / naturalH);
+}
 
 function applyMapViewerTransform() {
   const img = document.getElementById('map-viewer-img');
@@ -470,7 +498,7 @@ function setupMapViewer() {
   viewer.addEventListener('wheel', e => {
     e.preventDefault();
     const factor = e.deltaY < 0 ? 1.15 : 1 / 1.15;
-    mapViewerScale = Math.min(6, Math.max(0.5, mapViewerScale * factor));
+    mapViewerScale = Math.min(mapViewerMaxScale, Math.max(mapViewerMinScale, mapViewerScale * factor));
     applyMapViewerTransform();
   }, { passive: false });
 
@@ -513,14 +541,24 @@ function openMapViewer(src, name) {
   setupMapViewer();
   const viewer = document.getElementById('map-viewer');
   const img = document.getElementById('map-viewer-img');
-  img.src = src;
   img.alt = name;
-  mapViewerScale = 1;
-  mapViewerX = 0;
-  mapViewerY = 0;
-  applyMapViewerTransform();
   viewer.classList.add('open');
   document.body.style.overflow = 'hidden';
+
+  const fitToViewer = () => {
+    const fitScale = computeMapViewerFitScale(img);
+    mapViewerMinScale = fitScale;
+    mapViewerMaxScale = Math.max(6, fitScale * 6);
+    mapViewerScale = fitScale;
+    mapViewerX = 0;
+    mapViewerY = 0;
+    applyMapViewerTransform();
+  };
+
+  img.onload = fitToViewer;
+  img.src = src;
+  // If this exact image is already loaded/cached, "load" won't fire again — handle directly.
+  if (img.complete && img.naturalWidth) fitToViewer();
 }
 
 function closeMapViewer() {
