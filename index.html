@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Wiki</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#" class="site-title" id="site-title">Game Wiki</a>
+      <input type="search" id="search-box" placeholder="Search pages..." autocomplete="off">
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" id="sidebar">
+      <!-- Page list gets built here automatically by script.js -->
+      <p class="sidebar-loading">Loading pages...</p>
+    </nav>
+
+    <main class="content" id="content">
+      <div class="content-inner" id="content-inner">
+        <p>Loading...</p>
+      </div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <p>This wiki is a static site — no login needed to browse. See <code>README.md</code> in the project files for how to add or edit pages.</p>
+  </footer>
+
+  <!-- marked.js turns Markdown files into HTML in the browser -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

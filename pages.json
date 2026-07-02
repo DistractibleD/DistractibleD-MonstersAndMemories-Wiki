@@ -1,0 +1,5 @@
+[
+  { "title": "Welcome", "file": "welcome.md", "category": "Getting Started" },
+  { "title": "How This Wiki Works", "file": "how-it-works.md", "category": "Getting Started" },
+  { "title": "Example: Stone Golem", "file": "example-boss.md", "category": "Bosses" }
+]
