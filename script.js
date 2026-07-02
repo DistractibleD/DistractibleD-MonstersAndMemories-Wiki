@@ -435,7 +435,7 @@ async function renderMapsPage(container) {
     <p>Click a map to view it full size. Scroll to zoom, click and drag to pan.</p>
     <div class="maps-grid">
       ${sorted.map(m => `
-        <div class="map-card" data-img="${m.image}" data-name="${m.name}">
+        <div class="map-card" data-img="${m.image}" data-thumb="${m.thumbnail || m.image}" data-name="${m.name}">
           <img class="map-card-thumb" src="${m.thumbnail || m.image}" alt="${m.name}" loading="lazy">
           <div class="map-card-name">${m.name}</div>
         </div>
@@ -444,7 +444,7 @@ async function renderMapsPage(container) {
   `;
 
   container.querySelectorAll('.map-card').forEach(card => {
-    card.addEventListener('click', () => openMapViewer(card.dataset.img, card.dataset.name));
+    card.addEventListener('click', () => openMapViewer(card.dataset.img, card.dataset.name, card.dataset.thumb));
   });
 }
 
@@ -537,7 +537,7 @@ function setupMapViewer() {
   });
 }
 
-function openMapViewer(src, name) {
+function openMapViewer(fullSrc, name, thumbSrc) {
   setupMapViewer();
   const viewer = document.getElementById('map-viewer');
   const img = document.getElementById('map-viewer-img');
@@ -555,10 +555,26 @@ function openMapViewer(src, name) {
     applyMapViewerTransform();
   };
 
-  img.onload = fitToViewer;
-  img.src = src;
-  // If this exact image is already loaded/cached, "load" won't fire again — handle directly.
-  if (img.complete && img.naturalWidth) fitToViewer();
+  const showAndFit = src => {
+    img.onload = fitToViewer;
+    img.src = src;
+    // If this exact image is already loaded/cached, "load" won't fire again — handle directly.
+    if (img.complete && img.naturalWidth) fitToViewer();
+  };
+
+  // Full-size maps can be tens of MB, so <img> keeps showing whatever was
+  // previously open until the new one finishes downloading. Show the
+  // (already-cached) small thumbnail immediately so the correct map
+  // appears right away, then swap in the full-quality image once it's
+  // done loading in the background.
+  const hasThumb = thumbSrc && thumbSrc !== fullSrc;
+  showAndFit(hasThumb ? thumbSrc : fullSrc);
+
+  if (hasThumb) {
+    const fullImg = new Image();
+    fullImg.onload = () => showAndFit(fullSrc);
+    fullImg.src = fullSrc;
+  }
 }
 
 function closeMapViewer() {
