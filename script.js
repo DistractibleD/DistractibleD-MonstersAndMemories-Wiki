@@ -224,6 +224,7 @@ async function renderItemsPage(container) {
         <option value="capacity-desc">Capacity (High-Low)</option>
         <option value="capacity-asc">Capacity (Low-High)</option>
       </select>
+      <button type="button" id="items-clear-filters" class="items-clear-btn">Clear filters</button>
     </div>
     <p class="items-count" id="items-count"></p>
     <div class="items-table-wrap">
@@ -309,6 +310,12 @@ async function renderItemsPage(container) {
 
   [searchBox].forEach(el => el.addEventListener('input', update));
   [typeFilter, slotFilter, classFilter, raceFilter, tagFilter, maxSizeFilter, sortSelect].forEach(el => el.addEventListener('change', update));
+
+  container.querySelector('#items-clear-filters').addEventListener('click', () => {
+    searchBox.value = '';
+    [typeFilter, slotFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].forEach(el => el.value = '');
+    update();
+  });
 
   update();
 }
