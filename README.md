@@ -81,7 +81,9 @@ To add a new item:
    the values. Weapons use `damage` / `delay` (the site calculates the damage-to-delay
    ratio automatically); armor and jewelry use `ac` and `stats` instead.
 2. Drop its screenshot into `images/items/`, named to match the `image` path you put in
-   that entry (e.g. `images/items/tunic-of-night.png`).
+   that entry (e.g. `images/items/tunic-of-night.jpg` — item screenshots are saved as
+   `.jpg` to keep the site's file size down; map images are the exception and stay as
+   high-quality `.png`, since those get zoomed in on).
 
 The search box, and the type/slot/class filters on the page, are all built automatically
 from whatever is in `items.json` — you don't need to update anything else when you add an

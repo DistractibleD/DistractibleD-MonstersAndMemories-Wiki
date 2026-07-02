@@ -34,12 +34,27 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
    `["MAGIC", "LORE"]`; use `[]` if there's no tag line. Known tags seen so far: MAGIC.
    Others the game is known to use but not yet seen on a card: LORE, NODROP, UNIQUE — if one
    shows up, add it to the item's `tags` array using the same all-caps spelling as the card.
-3. Drop the item's screenshot in `images/items/`, filename matching the `image` field.
+3. Item screenshots are saved as `.jpg` (quality 90), not `.png` — see "Item screenshot
+   format" below. Drop it in `images/items/`, filename matching the `image` field.
 
 Filters (type/slot/class/race/tags) and search are all derived from `items.json` at
 runtime — no other file needs to change when items are added, including when a new tag
 value shows up for the first time (the tag filter dropdown is populated from whatever
 values exist in the data).
+
+## Item screenshot format
+
+Item screenshots (`images/items/`, `images/duplicates/` for items) are stored as `.jpg` at
+quality 90, not `.png`. The popup card screenshots are mostly flat text over a noisy stone
+texture, which PNG compresses poorly (~350KB/file) — JPEG at q90 gets the same image down
+to ~65KB with no visible loss of text legibility, tested by comparing re-encoded crops
+against the originals. When moving a screenshot out of the inbox, convert it to `.jpg`
+(quality 90) as part of the move rather than keeping the original `.png`/other format.
+
+**Map** images are the opposite: keep them as high-quality `.png`, uncompressed — they're
+viewed zoomed-in in the map viewer (see below) where JPEG artifacts would actually be
+visible, and they're few enough in number that file size isn't a concern. Do not apply the
+JPEG conversion to anything in `images/Maps/`.
 
 ## Adding a map to the Maps page
 
@@ -85,14 +100,16 @@ Workflow when asked to process new items (or "check the inbox"):
 2. Check whether that item's slug (or name) already exists in `items.json` — this is a
    cheap text check against the existing entries, not the same as re-scanning every image
    in `images/items/`, and it's required every time to catch duplicates.
-   - **Not a duplicate:** add an entry to `items.json`. Rename the file to the item's
-     slug — lower case, spaces and punctuation replaced with dashes (e.g. "Tunic of Night"
-     → `tunic-of-night.png`) — and move (don't copy) it into `images/items/` under that
-     name. Use the same slug for the `image` field in the entry.
-   - **Duplicate of an existing item:** do not touch `items.json`. Move the file into
-     `images/duplicates/` instead, named `<slug>-duplicate.png` (append `-2`, `-3`, etc.
-     if more than one duplicate of the same item shows up) so the user can identify which
-     item it's a duplicate of at a glance and review it.
+   - **Not a duplicate:** add an entry to `items.json`. Convert the screenshot to `.jpg`
+     (quality 90, see "Item screenshot format" above) and rename it to the item's slug —
+     lower case, spaces and punctuation replaced with dashes (e.g. "Tunic of Night" →
+     `tunic-of-night.jpg`) — and move (don't copy) it into `images/items/` under that name.
+     Use the same slug for the `image` field in the entry.
+   - **Duplicate of an existing item:** do not touch `items.json`. Convert the screenshot
+     to `.jpg` (quality 90) and move it into `images/duplicates/` instead, named
+     `<slug>-duplicate.jpg` (append `-2`, `-3`, etc. if more than one duplicate of the same
+     item shows up) so the user can identify which item it's a duplicate of at a glance and
+     review it.
 
 **Maps:**
 

@@ -1,0 +1,59 @@
+Predicted missing items
+========================
+
+Built by looking for name patterns already in items.json (material/adjective
++ item type) and finding gaps in the set. This is inference from names/slots
+we already have on file, not a guess at stats — no screenshots were opened
+for this (per the inbox-only rule), so treat these as "things to watch for
+in the inbox," not confirmed items.
+
+HIGH CONFIDENCE — weapon material tiers
+----------------------------------------
+Corroded Bronze has a full 11-weapon set: Axe, Battle Axe, Dagger, Great
+Scythe, Greatsword, Longsword, Maul, Scimitar, Scythe, Shortsword, Trident.
+
+Copper only has 1 of those 11 (Copper Maul). Steel only has 1 (Steel
+Longsword). Since one material tier has the complete set, the other two
+tiers were very likely sold/dropped with the same 11 weapon types. Probable
+missing items:
+
+  Copper:  Axe, Battle Axe, Dagger, Great Scythe, Greatsword, Longsword,
+           Scimitar, Scythe, Shortsword, Trident
+  Steel:   Axe, Battle Axe, Dagger, Great Scythe, Greatsword, Maul,
+           Scimitar, Scythe, Shortsword, Trident
+
+MEDIUM CONFIDENCE — armor slot gaps within a material line
+-------------------------------------------------------------
+Rawhide (all Armor) currently covers: Waist, Feet, Wrist, Hands, Neck,
+Face, Shirt — 7 of the common armor slots. Head and Chest are the two
+common slots with no Rawhide piece yet, which stands out since almost
+every other slot is filled. Watch for a Rawhide Head piece and a Rawhide
+Chest piece.
+
+Tattered Wool (all Armor) only covers Head, Hands, Shirt — much sparser
+than Rawhide's 7 slots despite looking like a parallel starter-tier line.
+Feet/Waist/Wrist/Neck/Face pieces may exist and just haven't come in yet.
+
+Corroded Bronze also has two 2-piece armor sub-lines that may not be
+complete: "Plate" (Boots/Feet, Collar/Neck) and "Chain" (Gloves/Hands,
+Waistguard/Waist). Copper has one Plate piece (Breastplate/Chest) under a
+different naming style ("Enchanted Copper Plate Breastplate"), so the
+Copper/Steel Plate and Chain sub-lines may also be broader than what we
+have — lower confidence than the weapon list since we only have 1-2 data
+points per tier here, not a full template to compare against.
+
+LOW CONFIDENCE — noted, not enumerated
+-----------------------------------------
+- Jewelry follows an "Inlaid [Gem] [Metal] [Ring|Earring]" pattern (gems
+  seen: Black Pearl, Cat's Eye Agate, Malachite; metals seen: Copper, Iron,
+  Silver). Combinations not yet seen probably exist, but the combo space is
+  large enough that listing them out would be guessing rather than
+  inferring — just flag new Ring/Earring screenshots as likely part of this
+  family rather than assuming a specific missing combo.
+- "Fine Wood" material items (Worn Fine Wood Bow, Worn Fine Wood Buckler,
+  Cracked Fine Wood Staff) — only 2-3 items, not enough to see a template
+  yet. Worth re-checking this list once a few more show up.
+
+This file should be revisited whenever a batch of inbox items is processed —
+cross the item off here if it turns out to match, or add newly-discovered
+material/type patterns to the templates above.

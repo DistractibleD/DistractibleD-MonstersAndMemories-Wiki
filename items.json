@@ -2,7 +2,7 @@
   {
     "name": "Tunic of Night",
     "slug": "tunic-of-night",
-    "image": "images/items/tunic-of-night.png",
+    "image": "images/items/tunic-of-night.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -16,7 +16,7 @@
   {
     "name": "Inlaid Black Pearl Copper Ring",
     "slug": "inlaid-black-pearl-copper-ring",
-    "image": "images/items/inlaid-black-pearl-copper-ring.png",
+    "image": "images/items/inlaid-black-pearl-copper-ring.jpg",
     "type": "Jewelry",
     "tags": [],
     "slot": "Finger",
@@ -30,7 +30,7 @@
   {
     "name": "Inlaid Cat's Eye Agate Copper Ring",
     "slug": "inlaid-cats-eye-agate-copper-ring",
-    "image": "images/items/inlaid-cats-eye-agate-copper-ring.png",
+    "image": "images/items/inlaid-cats-eye-agate-copper-ring.jpg",
     "type": "Jewelry",
     "tags": [],
     "slot": "Finger",
@@ -44,7 +44,7 @@
   {
     "name": "Grandmaster's Dark Leather Hood",
     "slug": "grandmasters-dark-leather-hood",
-    "image": "images/items/grandmasters-dark-leather-hood.png",
+    "image": "images/items/grandmasters-dark-leather-hood.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Head",
@@ -58,7 +58,7 @@
   {
     "name": "Steel Longsword",
     "slug": "steel-longsword",
-    "image": "images/items/steel-longsword.png",
+    "image": "images/items/steel-longsword.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
@@ -73,7 +73,7 @@
   {
     "name": "Commander's Cloak",
     "slug": "commanders-cloak",
-    "image": "images/items/commanders-cloak.png",
+    "image": "images/items/commanders-cloak.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Back",
@@ -88,7 +88,7 @@
   {
     "name": "Copper Maul",
     "slug": "copper-maul",
-    "image": "images/items/copper-maul.png",
+    "image": "images/items/copper-maul.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
@@ -104,7 +104,7 @@
   {
     "name": "Mantle of Night",
     "slug": "mantle-of-night",
-    "image": "images/items/mantle-of-night.png",
+    "image": "images/items/mantle-of-night.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -118,7 +118,7 @@
   {
     "name": "Rawhide Belt",
     "slug": "rawhide-belt",
-    "image": "images/items/rawhide-belt.png",
+    "image": "images/items/rawhide-belt.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Waist",
@@ -131,7 +131,7 @@
   {
     "name": "Rawhide Boots",
     "slug": "rawhide-boots",
-    "image": "images/items/rawhide-boots.png",
+    "image": "images/items/rawhide-boots.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Feet",
@@ -144,7 +144,7 @@
   {
     "name": "Rawhide Bracelet",
     "slug": "rawhide-bracelet",
-    "image": "images/items/rawhide-bracelet.png",
+    "image": "images/items/rawhide-bracelet.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Wrist",
@@ -157,7 +157,7 @@
   {
     "name": "Rawhide Gloves",
     "slug": "rawhide-gloves",
-    "image": "images/items/rawhide-gloves.png",
+    "image": "images/items/rawhide-gloves.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Hands",
@@ -170,7 +170,7 @@
   {
     "name": "Tattered Rawhide Vest",
     "slug": "tattered-rawhide-vest",
-    "image": "images/items/tattered-rawhide-vest.png",
+    "image": "images/items/tattered-rawhide-vest.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Shirt",
@@ -183,7 +183,7 @@
   {
     "name": "Rawhide Mask",
     "slug": "rawhide-mask",
-    "image": "images/items/rawhide-mask.png",
+    "image": "images/items/rawhide-mask.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Face",
@@ -196,7 +196,7 @@
   {
     "name": "Stonehead Arrow",
     "slug": "stonehead-arrow",
-    "image": "images/items/stonehead-arrow.png",
+    "image": "images/items/stonehead-arrow.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Ammo",
@@ -211,7 +211,7 @@
   {
     "name": "Enchanted Copper Plate Breastplate",
     "slug": "enchanted-copper-plate-breastplate",
-    "image": "images/items/enchanted-copper-plate-breastplate.png",
+    "image": "images/items/enchanted-copper-plate-breastplate.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -225,7 +225,7 @@
   {
     "name": "Inlaid Malachite Iron Earring",
     "slug": "inlaid-malachite-iron-earring",
-    "image": "images/items/inlaid-malachite-iron-earring.png",
+    "image": "images/items/inlaid-malachite-iron-earring.jpg",
     "type": "Jewelry",
     "tags": [],
     "slot": "Ear",
@@ -240,7 +240,7 @@
   {
     "name": "Fallen Ranger Hide Bracer",
     "slug": "fallen-ranger-hide-bracer",
-    "image": "images/items/fallen-ranger-hide-bracer.png",
+    "image": "images/items/fallen-ranger-hide-bracer.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -254,7 +254,7 @@
   {
     "name": "Mantle of Umbrage",
     "slug": "mantle-of-umbrage",
-    "image": "images/items/mantle-of-umbrage.png",
+    "image": "images/items/mantle-of-umbrage.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -268,7 +268,7 @@
   {
     "name": "Worn Fine Wood Bow",
     "slug": "worn-fine-wood-bow",
-    "image": "images/items/worn-fine-wood-bow.png",
+    "image": "images/items/worn-fine-wood-bow.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Range",
@@ -283,7 +283,7 @@
   {
     "name": "Enchanted Cloth Tunic",
     "slug": "enchanted-cloth-tunic",
-    "image": "images/items/enchanted-cloth-tunic.png",
+    "image": "images/items/enchanted-cloth-tunic.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -297,7 +297,7 @@
   {
     "name": "Inlaid Black Pearl Silver Earring",
     "slug": "inlaid-black-pearl-silver-earring",
-    "image": "images/items/inlaid-black-pearl-silver-earring.png",
+    "image": "images/items/inlaid-black-pearl-silver-earring.jpg",
     "type": "Jewelry",
     "tags": [],
     "slot": "Ear",
@@ -311,7 +311,7 @@
   {
     "name": "Mining Pick",
     "slug": "mining-pick",
-    "image": "images/items/mining-pick.png",
+    "image": "images/items/mining-pick.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
@@ -326,7 +326,7 @@
   {
     "name": "Scarab Shell Shield",
     "slug": "scarab-shell-shield",
-    "image": "images/items/scarab-shell-shield.png",
+    "image": "images/items/scarab-shell-shield.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Secondary",
@@ -340,7 +340,7 @@
   {
     "name": "Rawhide Gorget",
     "slug": "rawhide-gorget",
-    "image": "images/items/rawhide-gorget.png",
+    "image": "images/items/rawhide-gorget.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Neck",
@@ -353,7 +353,7 @@
   {
     "name": "Lumberjack Axe",
     "slug": "lumberjack-axe",
-    "image": "images/items/lumberjack-axe.png",
+    "image": "images/items/lumberjack-axe.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
@@ -368,7 +368,7 @@
   {
     "name": "Seam Ripper",
     "slug": "seam-ripper",
-    "image": "images/items/seam-ripper.png",
+    "image": "images/items/seam-ripper.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
@@ -383,7 +383,7 @@
   {
     "name": "Corroded Bronze Shortsword",
     "slug": "corroded-bronze-shortsword",
-    "image": "images/items/corroded-bronze-shortsword.png",
+    "image": "images/items/corroded-bronze-shortsword.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
@@ -398,7 +398,7 @@
   {
     "name": "Corroded Bronze Scythe",
     "slug": "corroded-bronze-scythe",
-    "image": "images/items/corroded-bronze-scythe.png",
+    "image": "images/items/corroded-bronze-scythe.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
@@ -413,7 +413,7 @@
   {
     "name": "Corroded Bronze Battle Axe",
     "slug": "corroded-bronze-battle-axe",
-    "image": "images/items/corroded-bronze-battle-axe.png",
+    "image": "images/items/corroded-bronze-battle-axe.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
@@ -429,7 +429,7 @@
   {
     "name": "Cracked Fine Wood Staff",
     "slug": "cracked-fine-wood-staff",
-    "image": "images/items/cracked-fine-wood-staff.png",
+    "image": "images/items/cracked-fine-wood-staff.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
@@ -444,7 +444,7 @@
   {
     "name": "Corroded Bronze Longsword",
     "slug": "corroded-bronze-longsword",
-    "image": "images/items/corroded-bronze-longsword.png",
+    "image": "images/items/corroded-bronze-longsword.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
@@ -459,7 +459,7 @@
   {
     "name": "Corroded Bronze Axe",
     "slug": "corroded-bronze-axe",
-    "image": "images/items/corroded-bronze-axe.png",
+    "image": "images/items/corroded-bronze-axe.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
@@ -474,7 +474,7 @@
   {
     "name": "Corroded Bronze Dagger",
     "slug": "corroded-bronze-dagger",
-    "image": "images/items/corroded-bronze-dagger.png",
+    "image": "images/items/corroded-bronze-dagger.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
@@ -489,7 +489,7 @@
   {
     "name": "Corroded Bronze Trident",
     "slug": "corroded-bronze-trident",
-    "image": "images/items/corroded-bronze-trident.png",
+    "image": "images/items/corroded-bronze-trident.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
@@ -504,7 +504,7 @@
   {
     "name": "Ridgeline Sash",
     "slug": "ridgeline-sash",
-    "image": "images/items/ridgeline-sash.png",
+    "image": "images/items/ridgeline-sash.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Waist",
@@ -518,7 +518,7 @@
   {
     "name": "Bibic's Hunt Wraps",
     "slug": "bibics-hunt-wraps",
-    "image": "images/items/bibics-hunt-wraps.png",
+    "image": "images/items/bibics-hunt-wraps.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -532,7 +532,7 @@
   {
     "name": "Tattered Hide Cap",
     "slug": "tattered-hide-cap",
-    "image": "images/items/tattered-hide-cap.png",
+    "image": "images/items/tattered-hide-cap.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Head",
@@ -545,7 +545,7 @@
   {
     "name": "Tattered Wool Gloves",
     "slug": "tattered-wool-gloves",
-    "image": "images/items/tattered-wool-gloves.png",
+    "image": "images/items/tattered-wool-gloves.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Hands",
@@ -558,7 +558,7 @@
   {
     "name": "Corroded Bronze Plate Collar",
     "slug": "corroded-bronze-plate-collar",
-    "image": "images/items/corroded-bronze-plate-collar.png",
+    "image": "images/items/corroded-bronze-plate-collar.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Neck",
@@ -571,7 +571,7 @@
   {
     "name": "Corroded Bronze Maul",
     "slug": "corroded-bronze-maul",
-    "image": "images/items/corroded-bronze-maul.png",
+    "image": "images/items/corroded-bronze-maul.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
@@ -587,7 +587,7 @@
   {
     "name": "Hunting Longbow",
     "slug": "hunting-longbow",
-    "image": "images/items/hunting-longbow.png",
+    "image": "images/items/hunting-longbow.jpg",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Range",
@@ -603,7 +603,7 @@
   {
     "name": "Worn Fine Wood Buckler",
     "slug": "worn-fine-wood-buckler",
-    "image": "images/items/worn-fine-wood-buckler.png",
+    "image": "images/items/worn-fine-wood-buckler.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Secondary",
@@ -616,7 +616,7 @@
   {
     "name": "Torch",
     "slug": "torch",
-    "image": "images/items/torch.png",
+    "image": "images/items/torch.jpg",
     "type": "Misc",
     "tags": [],
     "slot": "Primary / Secondary",
@@ -628,7 +628,7 @@
   {
     "name": "Tattered Wool Cap",
     "slug": "tattered-wool-cap",
-    "image": "images/items/tattered-wool-cap.png",
+    "image": "images/items/tattered-wool-cap.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Head",
@@ -641,7 +641,7 @@
   {
     "name": "Gemless Staff",
     "slug": "gemless-staff",
-    "image": "images/items/gemless-staff.png",
+    "image": "images/items/gemless-staff.jpg",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary",
@@ -658,7 +658,7 @@
   {
     "name": "Arrow",
     "slug": "arrow",
-    "image": "images/items/arrow.png",
+    "image": "images/items/arrow.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Ammo",
@@ -673,7 +673,7 @@
   {
     "name": "Corroded Bronze Plate Boots",
     "slug": "corroded-bronze-plate-boots",
-    "image": "images/items/corroded-bronze-plate-boots.png",
+    "image": "images/items/corroded-bronze-plate-boots.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Feet",
@@ -686,7 +686,7 @@
   {
     "name": "Corroded Bronze Chain Gloves",
     "slug": "corroded-bronze-chain-gloves",
-    "image": "images/items/corroded-bronze-chain-gloves.png",
+    "image": "images/items/corroded-bronze-chain-gloves.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Hands",
@@ -699,7 +699,7 @@
   {
     "name": "Corroded Bronze Great Scythe",
     "slug": "corroded-bronze-great-scythe",
-    "image": "images/items/corroded-bronze-great-scythe.png",
+    "image": "images/items/corroded-bronze-great-scythe.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
@@ -715,7 +715,7 @@
   {
     "name": "Tattered Wool Shirt",
     "slug": "tattered-wool-shirt",
-    "image": "images/items/tattered-wool-shirt.png",
+    "image": "images/items/tattered-wool-shirt.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Shirt",
@@ -728,7 +728,7 @@
   {
     "name": "Corroded Bronze Scimitar",
     "slug": "corroded-bronze-scimitar",
-    "image": "images/items/corroded-bronze-scimitar.png",
+    "image": "images/items/corroded-bronze-scimitar.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
@@ -743,7 +743,7 @@
   {
     "name": "Corroded Bronze Chain Waistguard",
     "slug": "corroded-bronze-chain-waistguard",
-    "image": "images/items/corroded-bronze-chain-waistguard.png",
+    "image": "images/items/corroded-bronze-chain-waistguard.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Waist",
@@ -756,7 +756,7 @@
   {
     "name": "Corroded Bronze Greatsword",
     "slug": "corroded-bronze-greatsword",
-    "image": "images/items/corroded-bronze-greatsword.png",
+    "image": "images/items/corroded-bronze-greatsword.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
