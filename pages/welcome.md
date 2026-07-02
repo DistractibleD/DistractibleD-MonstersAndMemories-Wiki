@@ -1,6 +1,6 @@
 # Welcome
 
-**Monsters and Memories** is a community-made, old-school MMORPG inspired by the classic era of the genre. This is a community wiki for the game — a place to collect notes, strategies, and screenshots in one spot.
+**Monsters and Memories** is an old-school MMORPG made by Niche Worlds Cult, inspired by the classic era of the genre. This is a community wiki for the game — a place to collect notes, strategies, and screenshots in one spot.
 
 Use the menu on the left to browse pages, grouped by category (Bosses, Items, Maps, and so on).
 
