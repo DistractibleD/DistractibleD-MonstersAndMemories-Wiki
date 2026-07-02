@@ -1,0 +1,14 @@
+Items with possibly missing/cut-off text
+=========================================
+
+I reviewed all 34 item screenshots currently in images/items/ looking for
+signs that the in-game popup's text got cut off by the screenshot (missing
+bottom border, text running to the raw image edge, mid-word/mid-sentence
+cutoffs, etc).
+
+Result: none found. Every screenshot shows a complete popup card with its
+decorative border fully visible top and bottom, so nothing needs manual
+text added right now.
+
+This file will be updated the next time new items are processed from the
+inbox, in case a future screenshot does turn out to be cut off.

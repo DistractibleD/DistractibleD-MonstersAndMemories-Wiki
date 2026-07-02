@@ -53,6 +53,13 @@ tokens on files that haven't changed. Files are usually named with a random ID (
 screenshot tool), not the item/map name — the filename is not meaningful, always read the
 image itself.
 
+This rule isn't limited to adding new entries — it applies to *any* task involving item/map
+screenshots (e.g. checking for cut-off/truncated text, auditing image quality, re-verifying
+data). Only ever read/process files sitting in `images/inbox/`; never re-open every existing
+file in `images/items/` or `images/Maps/` to go looking for problems. If a task requires
+checking already-processed images, say so and ask the user rather than re-scanning
+everything.
+
 Workflow when asked to process new items (or "check the inbox"):
 
 1. List `images/inbox/` — each file there is one unprocessed screenshot.
