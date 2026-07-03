@@ -790,6 +790,17 @@ function renderRecipeComponents(recipe) {
   `;
 }
 
+// The recipe's own name (the crafted result) links to the Item Database
+// the same way a component does, if a matching item exists there yet.
+function renderRecipeName(r) {
+  const matched = findItemByName(r.name);
+  const tooltipImg = r.image || (matched && matched.image);
+  if (matched) {
+    return `<a href="#" class="craft-result-link item-name-hover" data-img="${tooltipImg}" data-alt="${escapeAttr(r.name)}" data-recipe="${escapeAttr(r.name)}">${r.name}</a>`;
+  }
+  return tooltipImg ? `<span class="item-name-hover" data-img="${tooltipImg}" data-alt="${escapeAttr(r.name)}">${r.name}</span>` : r.name;
+}
+
 function renderCraftingRecipes(container, tradeskillName) {
   const tradeskill = tradeskillsData.find(ts => ts.name === tradeskillName);
   const recipes = craftingData
@@ -809,7 +820,7 @@ function renderCraftingRecipes(container, tradeskillName) {
           ? `<ul class="craft-recipe-list">${recipes.map(r => `
               <li>
                 <div class="craft-recipe-header">
-                  ${r.image ? `<span class="item-name-hover" data-img="${r.image}" data-alt="${r.name}">${r.name}</span>` : r.name}
+                  ${renderRecipeName(r)}
                   ${r.difficultyColor ? `<span class="badge-difficulty badge-difficulty-${r.difficultyColor.toLowerCase().replace(/\s+/g, '-')}">${r.difficultyColor}</span>` : ''}
                 </div>
                 ${r.weight != null ? `<div class="craft-recipe-meta">Weight: ${r.weight} / Size: ${r.size}</div>` : ''}
@@ -820,9 +831,17 @@ function renderCraftingRecipes(container, tradeskillName) {
     }
   `;
 
-  if (recipes.some(r => r.image)) {
+  if (recipes.some(r => r.image || findItemByName(r.name))) {
     setupItemTooltip(container.querySelector('.craft-recipe-list'));
   }
+
+  container.querySelectorAll('.craft-result-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const item = findItemByName(link.dataset.recipe);
+      if (item) goToItem(item, { tradeskill: tradeskillName, name: link.dataset.recipe });
+    });
+  });
 
   container.querySelectorAll('.craft-component-link').forEach(link => {
     link.addEventListener('click', e => {

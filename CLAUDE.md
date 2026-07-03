@@ -127,6 +127,14 @@ extending it the same way as new fields show up on future cards, rather than gue
   card yet), it just renders as plain text. Don't try to resolve/store this link at data-entry
   time — leave it to resolve dynamically so components automatically become clickable later,
   the moment someone adds that material to `items.json`.
+- The recipe's own `name` (the crafted result) gets the same treatment via
+  `renderRecipeName` — if an item with that exact name exists in `items.json`, the recipe
+  name itself becomes a clickable link to it (this already connects several existing recipes
+  to items added in earlier batches, e.g. "Rawhide Belt"/"Rawhide Boots"/"Rawhide Backpack").
+  Clicking either kind of link (component or result) sets `pendingReturnToRecipe` before
+  navigating to the Item Database, which shows a "&larr; Back to \<recipe name\>" link at the
+  top of that page — see "Header search box" above for the same
+  pending-variable-consumed-on-render pattern.
 - `difficultyColor` / `difficultyText` — the recipe's trivial/skill-up status, shown as
   colored text on the card (e.g. green "This recipe is trivial to you."). The full color →
   message mapping (from the unofficial wiki, since MnM doesn't publish exact skill-up odds):
