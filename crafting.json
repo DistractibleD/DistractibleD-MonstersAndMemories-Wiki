@@ -228,6 +228,7 @@
     ],
     "difficultyColor": "Green",
     "difficultyText": "This recipe is trivial to you.",
+    "recipeSkillLevel": 5,
     "observedAtSkill": 22
   },
   {
@@ -245,6 +246,7 @@
     ],
     "difficultyColor": "Green",
     "difficultyText": "This recipe is trivial to you.",
+    "recipeSkillLevel": 5,
     "observedAtSkill": 22
   },
   {
