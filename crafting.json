@@ -3,43 +3,100 @@
     "name": "Enchanted Rawhide Canvas",
     "slug": "enchanted-rawhide-canvas",
     "tradeskill": "Leatherworking",
-    "difficultyColor": "Red",
-    "observedAtSkill": 22
+    "difficultyColor": "Green",
+    "observedAtSkill": 56
   },
   {
     "name": "Enchanted Rawhide Cap",
     "slug": "enchanted-rawhide-cap",
     "tradeskill": "Leatherworking",
-    "difficultyColor": "Red",
-    "observedAtSkill": 22
+    "difficultyColor": "Dark Blue",
+    "observedAtSkill": 56
   },
   {
     "name": "Enchanted Rawhide Leggings",
     "slug": "enchanted-rawhide-leggings",
     "tradeskill": "Leatherworking",
+    "difficultyColor": "White",
+    "recipeSkillLevel": 56,
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Hide Belt",
+    "slug": "hide-belt",
+    "tradeskill": "Leatherworking",
     "difficultyColor": "Red",
-    "observedAtSkill": 22
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Hide Bracelet",
+    "slug": "hide-bracelet",
+    "tradeskill": "Leatherworking",
+    "difficultyColor": "Red",
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Hide Canvas",
+    "slug": "hide-canvas",
+    "tradeskill": "Leatherworking",
+    "difficultyColor": "Orange",
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Hide Cloak",
+    "slug": "hide-cloak",
+    "tradeskill": "Leatherworking",
+    "difficultyColor": "Red",
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Hide Gloves",
+    "slug": "hide-gloves",
+    "tradeskill": "Leatherworking",
+    "difficultyColor": "Red",
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Hide Gorget",
+    "slug": "hide-gorget",
+    "tradeskill": "Leatherworking",
+    "difficultyColor": "Red",
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Hide Mask",
+    "slug": "hide-mask",
+    "tradeskill": "Leatherworking",
+    "difficultyColor": "Red",
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Hide Strap",
+    "slug": "hide-strap",
+    "tradeskill": "Leatherworking",
+    "difficultyColor": "Orange",
+    "observedAtSkill": 56
   },
   {
     "name": "Rawhide Backpack",
     "slug": "rawhide-backpack",
     "tradeskill": "Leatherworking",
-    "difficultyColor": "Red",
-    "observedAtSkill": 22
+    "difficultyColor": "Dark Blue",
+    "observedAtSkill": 56
   },
   {
     "name": "Rawhide Belt",
     "slug": "rawhide-belt",
     "tradeskill": "Leatherworking",
-    "difficultyColor": "Blue",
-    "observedAtSkill": 22
+    "difficultyColor": "Green",
+    "observedAtSkill": 56
   },
   {
     "name": "Rawhide Boots",
     "slug": "rawhide-boots",
     "tradeskill": "Leatherworking",
-    "difficultyColor": "Yellow",
-    "observedAtSkill": 22
+    "difficultyColor": "Green",
+    "observedAtSkill": 56
   },
   {
     "name": "Rawhide Bracelet",
@@ -75,64 +132,91 @@
     "name": "Rawhide Cap",
     "slug": "rawhide-cap",
     "tradeskill": "Leatherworking",
-    "difficultyColor": "Red",
-    "observedAtSkill": 22
+    "difficultyColor": "Green",
+    "observedAtSkill": 56
   },
   {
     "name": "Rawhide Cloak",
     "slug": "rawhide-cloak",
+    "image": "images/crafting/rawhide-cloak.jpg",
     "tradeskill": "Leatherworking",
+    "weight": 0.25,
+    "size": "Medium",
+    "components": [
+      { "item": "Rawhide Canvas", "quantity": 1 },
+      { "item": "Cloth Padding", "quantity": 2 },
+      { "item": "Rough Thread", "quantity": 2 }
+    ],
     "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
     "observedAtSkill": 22
   },
   {
     "name": "Rawhide Gloves",
     "slug": "rawhide-gloves",
+    "image": "images/crafting/rawhide-gloves.jpg",
     "tradeskill": "Leatherworking",
+    "weight": 0.5,
+    "size": "Small",
+    "components": [
+      { "item": "Rawhide Canvas", "quantity": 1 },
+      { "item": "Cloth Padding", "quantity": 2 },
+      { "item": "Rough Thread", "quantity": 2 }
+    ],
     "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
     "observedAtSkill": 22
   },
   {
     "name": "Rawhide Gorget",
     "slug": "rawhide-gorget",
+    "image": "images/crafting/rawhide-gorget.jpg",
     "tradeskill": "Leatherworking",
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Rawhide Canvas", "quantity": 1 },
+      { "item": "Cloth Padding", "quantity": 2 },
+      { "item": "Rough Thread", "quantity": 1 }
+    ],
     "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
     "observedAtSkill": 22
   },
   {
     "name": "Rawhide Leggings",
     "slug": "rawhide-leggings",
     "tradeskill": "Leatherworking",
-    "difficultyColor": "Red",
-    "observedAtSkill": 22
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 56
   },
   {
     "name": "Rawhide Mask",
     "slug": "rawhide-mask",
     "tradeskill": "Leatherworking",
-    "difficultyColor": "Blue",
-    "observedAtSkill": 22
+    "difficultyColor": "Green",
+    "observedAtSkill": 56
   },
   {
     "name": "Rawhide Saddle",
     "slug": "rawhide-saddle",
     "tradeskill": "Leatherworking",
-    "difficultyColor": "Red",
-    "observedAtSkill": 22
+    "difficultyColor": "Green",
+    "observedAtSkill": 56
   },
   {
     "name": "Rawhide Saddlebag",
     "slug": "rawhide-saddlebag",
     "tradeskill": "Leatherworking",
-    "difficultyColor": "Red",
-    "observedAtSkill": 22
+    "difficultyColor": "Green",
+    "observedAtSkill": 56
   },
   {
     "name": "Rawhide Shoulderpads",
     "slug": "rawhide-shoulderpads",
     "tradeskill": "Leatherworking",
-    "difficultyColor": "Red",
-    "observedAtSkill": 22
+    "difficultyColor": "Green",
+    "observedAtSkill": 56
   },
   {
     "name": "Rawhide Strap",
@@ -152,7 +236,8 @@
     "name": "Rawhide Tunic",
     "slug": "rawhide-tunic",
     "tradeskill": "Leatherworking",
-    "difficultyColor": "Red",
-    "observedAtSkill": 22
+    "difficultyColor": "White",
+    "recipeSkillLevel": 56,
+    "observedAtSkill": 56
   }
 ]

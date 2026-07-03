@@ -155,6 +155,19 @@
     "race": ["ALL"]
   },
   {
+    "name": "Rawhide Cloak",
+    "slug": "rawhide-cloak",
+    "image": "images/items/rawhide-cloak.jpg",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "ac": 3,
+    "weight": 0.25,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
+  },
+  {
     "name": "Rawhide Gloves",
     "slug": "rawhide-gloves",
     "image": "images/items/rawhide-gloves.jpg",

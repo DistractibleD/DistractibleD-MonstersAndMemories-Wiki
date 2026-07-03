@@ -52,5 +52,31 @@ plus assorted gear):
 
 Everything else in that batch (13 items) showed a complete card.
 
+Update (2026-07-03, inbox batch of 12 screenshots — Leatherworking crafting
+window recapture at skill 56 + individual recipe cards):
+
+- Rawhide Cloak (images/crafting/rawhide-cloak.jpg, also reused as
+  images/items/rawhide-cloak.jpg since no separate item-card screenshot
+  exists yet) — arrived as two screenshots, top half (kept as the saved
+  image) and bottom half. The bottom half's Components list (1 Rawhide
+  Canvas, 2 Cloth Padding, 2 Rough Thread) was merged into crafting.json;
+  the bottom-half screenshot was discarded, same pattern as The Measure
+  Stick above.
+- Rawhide Gorget and Rawhide Gloves (images/crafting/rawhide-gorget.jpg,
+  images/crafting/rawhide-gloves.jpg) — same top-half/bottom-half pattern
+  as Rawhide Cloak; components merged into crafting.json, bottom-half
+  screenshots discarded.
+- Stained Black Iron Dagger — two more screenshots came in, both showing
+  the same card (still cut off in different places, never both header and
+  full Race line in one shot). Since items.json already has the complete
+  data from the 2026-07-02 chat-supplied text, these were filed as
+  duplicates (images/duplicates/stained-black-iron-dagger-duplicate.jpg
+  and -duplicate-2.jpg) rather than replacing the saved screenshot.
+
+Everything else in that batch (4 crafting-window screenshots, used only to
+update recipe difficulty colors/skill and add the new "Hide" tier recipes)
+was reference material, not saved anywhere, per the crafting-window
+workflow in CLAUDE.md.
+
 This file will be updated the next time new items are processed from the
 inbox, in case a future screenshot does turn out to be cut off.
