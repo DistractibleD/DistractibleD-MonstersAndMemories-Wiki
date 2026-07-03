@@ -9,6 +9,18 @@ step, no backend, no login system. `index.html` + `style.css` + `script.js` load
 at runtime — either Markdown pages (via marked.js) or the Item Database (via `items.json`).
 See `README.md` for the full explanation written for the (non-technical) site owner.
 
+## The user's screenshots are the source of truth
+
+Everything the user posts (item/map/recipe screenshots, or stats typed directly in chat) is
+taken straight from the live game, right now. If it conflicts with anything found on an
+external site (the unofficial wiki, MnM Quest, MnM Classes Map, or any other fan resource
+looked up during research), the user's own screenshot wins — external wikis can easily be
+outdated (the unofficial wiki is already flagged as such on the Welcome page) or simply
+wrong for this game specifically. External sources are still useful for filling in gaps the
+user hasn't posted about yet (e.g. the tradeskill difficulty-color wording), but never use
+one to override, "correct," or second-guess something the user actually posted a screenshot
+of — if the two disagree, say so and ask rather than quietly going with the external source.
+
 ## Adding a normal wiki page
 
 1. Write the content as a `.md` file in `pages/`.
@@ -101,15 +113,49 @@ Each tradeskill has a `status` of `"live"` or `"planned"` — planned ones show 
 badge and an explanatory message instead of a recipe list, since they exist in the game's
 design but aren't usable yet.
 
-The recipe schema in `crafting.json` is intentionally minimal right now — `name`, `slug`,
-`tradeskill` (must match a name in `tradeskills.json`), and optionally `image` — because no
-real recipe screenshot has been processed yet. Treat this the same way the item schema grew
-(tags, race, description, effect all got added once real cards showed those fields): once
-recipe screenshots start coming in, look at what the card actually shows (ingredients?
-yield? a crafting level? a resulting item?) and extend the schema and `renderCraftingRecipes`
-to match, rather than guessing the fields now.
+The recipe schema in `crafting.json` grew once real recipe cards started coming in (same
+pattern as the item schema growing tags/race/description/effect from real cards) — keep
+extending it the same way as new fields show up on future cards, rather than guessing ahead:
 
-1. Add an object to `crafting.json` with at least `name`, `slug`, `tradeskill`.
+- `weight` / `size` — the crafted result's weight/size, shown directly on the recipe card
+  same as an item card (Title Case size, matching `items.json`'s convention).
+- `components` — array of `{ "item": "Name As Shown On Card", "quantity": N }`, parsed from
+  the card's "Components:" list (format on the card is `(N) Item Name`). Component names are
+  matched against `items.json` by exact name (case-insensitive) at render time — if a
+  matching item exists, `renderCraftingRecipes` makes it a clickable link to the Item
+  Database (via `findItemByName`/`goToItem`); if not (most raw materials don't have an item
+  card yet), it just renders as plain text. Don't try to resolve/store this link at data-entry
+  time — leave it to resolve dynamically so components automatically become clickable later,
+  the moment someone adds that material to `items.json`.
+- `difficultyColor` / `difficultyText` — the recipe's trivial/skill-up status, shown as
+  colored text on the card (e.g. green "This recipe is trivial to you."). The full color →
+  message mapping (from the unofficial wiki, since MnM doesn't publish exact skill-up odds):
+  Green "This recipe is trivial to you.", Light Blue "...simple task.", Dark Blue "...moderate
+  task.", White "...complex task.", Yellow "...daunting task.", Orange "...herculean task.",
+  and (not yet confirmed on a real card) Red "You will require all your skills to craft
+  this." Match the card's exact wording to a color from this list; if it doesn't match any of
+  these, flag it to the user rather than guessing a new one.
+- `observedAtSkill` — the user's skill in that tradeskill at the time the screenshot was
+  taken (ask them, since it's not shown on the card itself). This isn't a property of the
+  recipe — it's a data point for figuring out the recipe's own underlying skill level, since
+  MnM's exact trivial-skill formula isn't publicly documented anywhere (unlike EverQuest,
+  which this game is inspired by but doesn't necessarily share numbers with).
+- `recipeSkillLevel` — the recipe's own exact underlying skill requirement, when it can be
+  determined precisely. **Confirmed rule (from the user, 2026-07-03): a White recipe means
+  the recipe's skill level exactly equals the crafter's current skill.** So whenever a recipe
+  is observed as White, set `recipeSkillLevel` = `observedAtSkill` for that same
+  observation — that's an exact value, not a guess. For any other color, leave
+  `recipeSkillLevel` unset (null/absent) rather than estimating one, until either (a) that
+  same recipe is later observed as White at some skill, or (b) enough White observations
+  across many recipes reveal the color-band width (how many skill points separate each color
+  tier from White), letting non-white observations be converted to exact/ranged values too.
+  Colors above White (Yellow/Orange/Red) mean the recipe's skill level is *higher* than the
+  crafter's current skill (harder than you); colors below White (Dark Blue/Light Blue/Green)
+  mean it's *lower* (easier than you, Green being the most-exceeded/trivial end). Don't
+  invent the band width — just keep recording data points.
+
+1. Add an object to `crafting.json` with at least `name`, `slug`, `tradeskill`, plus whatever
+   of the above the card shows.
 2. Recipe screenshots are saved as `.jpg` (quality 90), same as item screenshots — see
    "Item screenshot format" above. Drop it in `images/crafting/`, filename matching the
    `image` field.
@@ -181,6 +227,29 @@ Workflow when asked to process new items (or "check the inbox"):
      Use the same slug for the `image` field in the entry.
    - **Duplicate of an existing recipe:** move the file into `images/duplicates/`, named
      `<slug>-duplicate.jpg` (append `-2`, `-3`, etc. as needed), same as items.
+
+## Header search box
+
+The search box in the header (`#search-box`, wired up in `init()`) searches everything on
+the wiki, not just page titles — it also matches against `items.json` (reusing
+`itemSearchHaystack`, the same haystack the Item Database's own search box uses) and
+`crafting.json` (matching against recipe name + tradeskill). Results are grouped into
+Pages/Items/Crafting sections in the sidebar via `renderSearchResults`.
+
+Clicking an item or recipe result needs to land the user on the right spot on a page that
+doesn't exist yet (the Item Database or Crafting page haven't rendered). This is done with
+two module-level variables, `pendingItemQuery` and `pendingCraftingTradeskill`, set right
+before navigating and consumed (and cleared) by `renderItemsPage`/`renderCraftingPage` once
+they render — pre-filling the Item Database's own search box, or jumping straight to a
+specific tradeskill's recipe list instead of the category grid. If you add another
+data-driven page that should be reachable from header search, follow the same pattern
+rather than trying to encode extra state into the URL hash (the hash is a plain page-file
+lookup elsewhere in the code, so cramming query info into it would break that).
+
+Items/crafting data is pre-fetched in the background during `init()` (via
+`ensureItemsData()`/`ensureCraftingData()`, the same helpers `renderItemsPage`/
+`renderCraftingPage` use) so header search works immediately, without requiring the user to
+have visited those pages first.
 
 ## Known CSS gotcha
 

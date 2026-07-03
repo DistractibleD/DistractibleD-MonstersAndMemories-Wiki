@@ -415,6 +415,55 @@ html, body {
   border-radius: 6px;
   margin-bottom: 8px;
 }
+.craft-recipe-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.craft-recipe-meta {
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  margin-top: 4px;
+}
+.craft-recipe-components {
+  margin-top: 8px;
+  font-size: 0.88rem;
+}
+.craft-recipe-components ul {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+}
+.craft-recipe-components li {
+  padding: 2px 0;
+  border: 0;
+  margin: 0;
+}
+.craft-recipe-components a {
+  color: var(--accent);
+}
+/* Recipe difficulty badges — colors match the game's own trivial/skill-up
+   tiers (Green = trivial/no XP, up through Red = hardest). */
+.badge-difficulty {
+  display: inline-block;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  padding: 1px 5px;
+  vertical-align: middle;
+}
+.badge-difficulty-green { background: #2e5c33; color: #b6f2b6; }
+.badge-difficulty-light-blue { background: #1f4d66; color: #b6e6ff; }
+.badge-difficulty-dark-blue { background: #1f3f66; color: #b6d0ff; }
+.badge-difficulty-blue { background: #1f3f66; color: #b6d0ff; }
+.badge-difficulty-white { background: #4a4a4a; color: #ffffff; }
+.badge-difficulty-yellow { background: #6b5c1f; color: #ffe9a8; }
+.badge-difficulty-orange { background: #6b3f1f; color: #ffcfa8; }
+.badge-difficulty-red { background: #6b1f1f; color: #ffb3b3; }
+.items-back-link {
+  margin: 0 0 6px;
+}
 
 /* Full-size map viewer (zoom + pan lightbox) */
 #map-viewer {

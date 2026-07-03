@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "name": "Rawhide Canvas",
+    "slug": "rawhide-canvas",
+    "image": "images/crafting/rawhide-canvas.jpg",
+    "tradeskill": "Leatherworking",
+    "weight": 0.2,
+    "size": "Small",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 6 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 22
+  },
+  {
+    "name": "Rawhide Strap",
+    "slug": "rawhide-strap",
+    "image": "images/crafting/rawhide-strap.jpg",
+    "tradeskill": "Leatherworking",
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 2 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 22
+  }
+]

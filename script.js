@@ -5,10 +5,42 @@
    ============================================ */
 
 let allPages = [];
-let itemsData = null; // cached contents of items.json, loaded on first visit to the Item Database page
+let itemsData = null; // cached contents of items.json
 let mapsData = null; // cached contents of maps.json, loaded on first visit to the Maps page
-let craftingData = null; // cached contents of crafting.json, loaded on first visit to the Crafting page
-let tradeskillsData = null; // cached contents of tradeskills.json, loaded on first visit to the Crafting page
+let craftingData = null; // cached contents of crafting.json
+let tradeskillsData = null; // cached contents of tradeskills.json
+
+// Set by the header search box when jumping straight to a specific item or
+// crafting recipe, then consumed (and cleared) by the corresponding render
+// function so the user lands directly on what they searched for.
+let pendingItemQuery = null;
+let pendingCraftingTradeskill = null;
+// Set when jumping to an item from a recipe's component list, so the Item
+// Database can show a "back to that recipe" link. Same consume-once pattern.
+let pendingReturnToRecipe = null;
+
+async function ensureItemsData() {
+  if (!itemsData) {
+    const res = await fetch('items.json');
+    if (!res.ok) throw new Error('Could not load items.json');
+    itemsData = await res.json();
+  }
+  return itemsData;
+}
+
+async function ensureCraftingData() {
+  if (!tradeskillsData) {
+    const res = await fetch('tradeskills.json');
+    if (!res.ok) throw new Error('Could not load tradeskills.json');
+    tradeskillsData = await res.json();
+  }
+  if (!craftingData) {
+    const res = await fetch('crafting.json');
+    if (!res.ok) throw new Error('Could not load crafting.json');
+    craftingData = await res.json();
+  }
+  return craftingData;
+}
 
 async function init() {
   const res = await fetch('pages.json');
@@ -19,6 +51,12 @@ async function init() {
   const requested = location.hash.replace('#', '');
   const startPage = allPages.find(p => p.file === requested) || allPages[0];
   if (startPage) loadPage(startPage.file);
+
+  // Pre-fetch item/crafting data in the background so the header search box
+  // can search them right away, without waiting for the user to first visit
+  // the Item Database or Crafting page.
+  ensureItemsData().catch(() => {});
+  ensureCraftingData().catch(() => {});
 
   document.getElementById('search-box').addEventListener('input', onSearch);
   window.addEventListener('hashchange', () => {
@@ -113,8 +151,88 @@ function onSearch(e) {
     buildSidebar(allPages);
     return;
   }
-  const filtered = allPages.filter(p => p.title.toLowerCase().includes(query));
-  buildSidebar(filtered);
+  renderSearchResults(query);
+}
+
+// The header search box searches across everything on the wiki — pages,
+// items, and crafting recipes — not just page titles, so someone searching
+// for e.g. an item or material name ends up in the right place instead of
+// just seeing an empty page list.
+function renderSearchResults(query) {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.innerHTML = '';
+
+  const matchedPages = allPages.filter(p => p.title.toLowerCase().includes(query));
+  const matchedItems = (itemsData || [])
+    .filter(item => itemSearchHaystack(item).includes(query))
+    .slice(0, 8);
+  const matchedRecipes = (craftingData || [])
+    .filter(r => `${r.name} ${r.tradeskill}`.toLowerCase().includes(query))
+    .slice(0, 8);
+
+  if (!matchedPages.length && !matchedItems.length && !matchedRecipes.length) {
+    sidebar.innerHTML = '<p class="sidebar-empty">No results found.</p>';
+    return;
+  }
+
+  function addSection(label, entries, makeLink) {
+    if (!entries.length) return;
+    const heading = document.createElement('div');
+    heading.className = 'sidebar-category';
+    heading.textContent = label;
+    sidebar.appendChild(heading);
+    entries.forEach(entry => sidebar.appendChild(makeLink(entry)));
+  }
+
+  addSection('Pages', matchedPages, page => {
+    const link = document.createElement('a');
+    link.href = '#' + page.file;
+    link.className = 'sidebar-link';
+    link.textContent = page.title;
+    link.dataset.file = page.file;
+    link.addEventListener('click', () => loadPage(page.file));
+    return link;
+  });
+
+  addSection('Items', matchedItems, item => {
+    const link = document.createElement('a');
+    link.href = '#items';
+    link.className = 'sidebar-link';
+    link.textContent = item.name;
+    link.addEventListener('click', () => goToItem(item));
+    return link;
+  });
+
+  addSection('Crafting', matchedRecipes, recipe => {
+    const link = document.createElement('a');
+    link.href = '#crafting';
+    link.className = 'sidebar-link';
+    link.textContent = `${recipe.name} (${recipe.tradeskill})`;
+    link.addEventListener('click', () => goToRecipe(recipe));
+    return link;
+  });
+}
+
+function goToItem(item, returnToRecipe) {
+  pendingItemQuery = item.name;
+  pendingReturnToRecipe = returnToRecipe || null;
+  const alreadyThere = location.hash.replace('#', '') === 'items';
+  location.hash = 'items';
+  if (alreadyThere) loadPage('items');
+}
+
+function goToRecipe(recipe) {
+  pendingCraftingTradeskill = recipe.tradeskill;
+  const alreadyThere = location.hash.replace('#', '') === 'crafting';
+  location.hash = 'crafting';
+  if (alreadyThere) loadPage('crafting');
+}
+
+// Case-insensitive lookup used to decide whether a recipe component name
+// (e.g. "Rawhide Scraps") has a matching entry in the Item Database yet —
+// most raw crafting materials don't, until someone adds a card for them.
+function findItemByName(name) {
+  return (itemsData || []).find(i => i.name.toLowerCase() === name.toLowerCase());
 }
 
 /* ============================================
@@ -183,11 +301,12 @@ function itemSearchHaystack(item) {
 }
 
 async function renderItemsPage(container) {
-  if (!itemsData) {
-    const res = await fetch('items.json');
-    if (!res.ok) throw new Error('Could not load items.json');
-    itemsData = await res.json();
-  }
+  await ensureItemsData();
+
+  // Landed here from a recipe's component list — remember which recipe so
+  // we can show a link back to it, instead of leaving the user stranded.
+  const returnToRecipe = pendingReturnToRecipe;
+  pendingReturnToRecipe = null;
 
   const slots = [...new Set(itemsData.map(i => i.slot))].sort();
   const types = [...new Set(itemsData.map(i => i.type))].sort();
@@ -197,6 +316,7 @@ async function renderItemsPage(container) {
   const maxSizes = [...new Set(itemsData.map(i => i.maxSize).filter(Boolean))].sort();
 
   container.innerHTML = `
+    ${returnToRecipe ? `<p class="items-back-link"><a href="#" id="items-back-to-recipe">&larr; Back to ${escapeAttr(returnToRecipe.name)}</a></p>` : ''}
     <h1>Item Database</h1>
     <p>Browse, search, filter, and sort every item on the wiki. Hover an item's name to see a screenshot.</p>
     <div class="items-toolbar">
@@ -280,6 +400,20 @@ async function renderItemsPage(container) {
   const tagFilter = container.querySelector('#items-filter-tag');
   const maxSizeFilter = container.querySelector('#items-filter-maxsize');
   const sortSelect = container.querySelector('#items-sort');
+
+  // Landed here from a header search result — pre-fill the search box with
+  // that item's name so the table filters straight down to it.
+  if (pendingItemQuery) {
+    searchBox.value = pendingItemQuery;
+    pendingItemQuery = null;
+  }
+
+  if (returnToRecipe) {
+    container.querySelector('#items-back-to-recipe').addEventListener('click', e => {
+      e.preventDefault();
+      goToRecipe(returnToRecipe);
+    });
+  }
 
   function update() {
     const query = searchBox.value.toLowerCase().trim();
@@ -596,15 +730,15 @@ function closeMapViewer() {
    ============================================ */
 
 async function renderCraftingPage(container) {
-  if (!tradeskillsData) {
-    const res = await fetch('tradeskills.json');
-    if (!res.ok) throw new Error('Could not load tradeskills.json');
-    tradeskillsData = await res.json();
-  }
-  if (!craftingData) {
-    const res = await fetch('crafting.json');
-    if (!res.ok) throw new Error('Could not load crafting.json');
-    craftingData = await res.json();
+  await ensureCraftingData();
+
+  // Landed here from a header search result for a specific recipe — jump
+  // straight to that recipe's tradeskill instead of the category grid.
+  if (pendingCraftingTradeskill) {
+    const target = pendingCraftingTradeskill;
+    pendingCraftingTradeskill = null;
+    renderCraftingRecipes(container, target);
+    return;
   }
 
   renderCraftingCategories(container);
@@ -638,6 +772,24 @@ function renderCraftingCategories(container) {
   });
 }
 
+function renderRecipeComponents(recipe) {
+  if (!recipe.components || !recipe.components.length) return '';
+  return `
+    <div class="craft-recipe-components">
+      Components:
+      <ul>
+        ${recipe.components.map(c => {
+          const matched = findItemByName(c.item);
+          const label = `${c.quantity}&times; ${escapeAttr(c.item)}`;
+          return matched
+            ? `<li><a href="#" class="craft-component-link" data-recipe="${escapeAttr(recipe.name)}" data-item="${escapeAttr(matched.name)}">${label}</a></li>`
+            : `<li>${label}</li>`;
+        }).join('')}
+      </ul>
+    </div>
+  `;
+}
+
 function renderCraftingRecipes(container, tradeskillName) {
   const tradeskill = tradeskillsData.find(ts => ts.name === tradeskillName);
   const recipes = craftingData
@@ -655,7 +807,14 @@ function renderCraftingRecipes(container, tradeskillName) {
         ? '<p>This tradeskill hasn\'t been implemented in the game yet.</p>'
         : recipes.length
           ? `<ul class="craft-recipe-list">${recipes.map(r => `
-              <li>${r.image ? `<span class="item-name-hover" data-img="${r.image}" data-alt="${r.name}">${r.name}</span>` : r.name}</li>
+              <li>
+                <div class="craft-recipe-header">
+                  ${r.image ? `<span class="item-name-hover" data-img="${r.image}" data-alt="${r.name}">${r.name}</span>` : r.name}
+                  ${r.difficultyColor ? `<span class="badge-difficulty badge-difficulty-${r.difficultyColor.toLowerCase().replace(/\s+/g, '-')}">${r.difficultyColor}</span>` : ''}
+                </div>
+                ${r.weight != null ? `<div class="craft-recipe-meta">Weight: ${r.weight} / Size: ${r.size}</div>` : ''}
+                ${renderRecipeComponents(r)}
+              </li>
             `).join('')}</ul>`
           : '<p>No recipes yet for this tradeskill.</p>'
     }
@@ -664,6 +823,14 @@ function renderCraftingRecipes(container, tradeskillName) {
   if (recipes.some(r => r.image)) {
     setupItemTooltip(container.querySelector('.craft-recipe-list'));
   }
+
+  container.querySelectorAll('.craft-component-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const item = findItemByName(link.dataset.item);
+      if (item) goToItem(item, { tradeskill: tradeskillName, name: link.dataset.recipe });
+    });
+  });
 
   container.querySelector('#craft-back-link').addEventListener('click', e => {
     e.preventDefault();
