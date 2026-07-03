@@ -235,6 +235,18 @@ function findItemByName(name) {
   return (itemsData || []).find(i => i.name.toLowerCase() === name.toLowerCase());
 }
 
+// Reverse lookups used by the item viewer's "Crafting" section: is this item
+// the result of a recipe, and/or a component in other recipes.
+function findRecipeForItem(itemName) {
+  return (craftingData || []).find(r => r.name.toLowerCase() === itemName.toLowerCase());
+}
+
+function findRecipesUsingItem(itemName) {
+  return (craftingData || []).filter(r =>
+    (r.components || []).some(c => c.item.toLowerCase() === itemName.toLowerCase())
+  );
+}
+
 /* ============================================
    Item Database
    Data lives in items.json. To add a new item,
@@ -391,6 +403,7 @@ async function renderItemsPage(container) {
   `;
 
   setupItemTooltip(container.querySelector('#items-tbody'));
+  setupItemClickToView(container.querySelector('#items-tbody'));
 
   const searchBox = container.querySelector('#items-search');
   const typeFilter = container.querySelector('#items-filter-type');
@@ -537,6 +550,109 @@ function setupItemTooltip(tbody) {
     if (span.contains(e.relatedTarget)) return;
     tooltip.style.display = 'none';
   });
+}
+
+// Clicking an item's name in the Item Database table opens the full item
+// viewer (see below) — a bigger, scrollable version of the hover preview,
+// with links to any crafting recipe the item is tied to.
+function setupItemClickToView(tbody) {
+  tbody.addEventListener('click', e => {
+    const span = e.target.closest('.item-name-hover');
+    if (!span) return;
+    const item = findItemByName(span.dataset.alt);
+    if (item) openItemViewer(item);
+  });
+}
+
+// Full item-card viewer. Item screenshots are already a comfortable size to
+// read (unlike the huge map images), so this doesn't zoom/pan like the Maps
+// viewer — it just shows the card at its natural size and lets a tall card
+// scroll inside a capped-height window, with the name pinned above the
+// scroll area (mimicking the scrollable panel the game itself uses for
+// overflowing cards) and any crafting links pinned below it.
+function setupItemViewer() {
+  if (document.getElementById('item-viewer')) return;
+
+  const viewer = document.createElement('div');
+  viewer.id = 'item-viewer';
+  viewer.innerHTML = `
+    <div id="item-viewer-panel">
+      <div id="item-viewer-header">
+        <span id="item-viewer-title"></span>
+        <button id="item-viewer-close" aria-label="Close">&times;</button>
+      </div>
+      <div id="item-viewer-scroll">
+        <img id="item-viewer-img" alt="">
+      </div>
+      <div id="item-viewer-info"></div>
+    </div>
+  `;
+  document.body.appendChild(viewer);
+
+  viewer.addEventListener('click', e => {
+    if (e.target === viewer) {
+      closeItemViewer();
+      return;
+    }
+    const link = e.target.closest('.item-viewer-recipe-link');
+    if (link) {
+      e.preventDefault();
+      const recipe = (craftingData || []).find(r => r.name === link.dataset.recipe && r.tradeskill === link.dataset.tradeskill);
+      if (recipe) {
+        closeItemViewer();
+        goToRecipe(recipe);
+      }
+    }
+  });
+
+  viewer.querySelector('#item-viewer-close').addEventListener('click', closeItemViewer);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeItemViewer();
+  });
+}
+
+async function openItemViewer(item) {
+  await ensureCraftingData();
+  setupItemViewer();
+
+  const viewer = document.getElementById('item-viewer');
+  viewer.querySelector('#item-viewer-title').textContent = item.name;
+  const img = viewer.querySelector('#item-viewer-img');
+  img.src = item.image;
+  img.alt = item.name;
+
+  const resultRecipe = findRecipeForItem(item.name);
+  const usedIn = findRecipesUsingItem(item.name);
+
+  let html = '';
+  if (resultRecipe) {
+    html += `<p><strong>Crafted via:</strong> <a href="#" class="item-viewer-recipe-link" data-recipe="${escapeAttr(resultRecipe.name)}" data-tradeskill="${escapeAttr(resultRecipe.tradeskill)}">${resultRecipe.name}</a> (${resultRecipe.tradeskill})</p>`;
+  }
+  if (usedIn.length) {
+    html += `<p><strong>Used to craft:</strong></p><ul>${usedIn.map(r =>
+      `<li><a href="#" class="item-viewer-recipe-link" data-recipe="${escapeAttr(r.name)}" data-tradeskill="${escapeAttr(r.tradeskill)}">${r.name}</a> (${r.tradeskill})</li>`
+    ).join('')}</ul>`;
+  }
+  // "foundAt" (quest/drop source) doesn't exist in items.json yet — this is
+  // ready for whenever that data starts coming in, no code changes needed then.
+  if (item.foundAt) {
+    html += `<p><strong>Found:</strong> ${escapeAttr(item.foundAt)}</p>`;
+  }
+
+  const info = viewer.querySelector('#item-viewer-info');
+  info.innerHTML = html;
+  info.style.display = html ? '' : 'none';
+
+  viewer.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeItemViewer() {
+  const viewer = document.getElementById('item-viewer');
+  if (!viewer) return;
+  viewer.classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 /* ============================================

@@ -285,6 +285,35 @@ Items/crafting data is pre-fetched in the background during `init()` (via
 `renderCraftingPage` use) so header search works immediately, without requiring the user to
 have visited those pages first.
 
+## Item viewer (click an item's name in the Item Database)
+
+Clicking an item's name in the Item Database table (`.item-name-hover`, the same span used
+for the hover-preview tooltip) opens `#item-viewer`, a modal showing that item's screenshot
+at a comfortable reading size — see `setupItemViewer`/`openItemViewer`/`closeItemViewer` in
+`script.js`. This is deliberately not the same design as the Maps zoom/pan viewer: item card
+screenshots are already sized to be read directly (unlike multi-thousand-pixel map images),
+so the modal doesn't zoom, it just caps the panel at a comfortable max size and lets a card
+taller than that scroll — mimicking the scrollable panel the game itself uses for overflowing
+cards. The item's name is pinned in a header above the scrolling image (visible even after
+scrolling down a tall card), and a "Crafting" section is pinned below it.
+
+The Crafting section is populated by two reverse lookups against `crafting.json`,
+`findRecipeForItem(name)` (is this item the *result* of a recipe) and
+`findRecipesUsingItem(name)` (is this item a *component* in one or more recipes) — both
+purely derived at render time from existing data, no new fields needed on `items.json` for
+this part. Clicking a recipe link closes the item viewer and calls `goToRecipe`, same
+navigation used elsewhere.
+
+The modal also checks for an optional `item.foundAt` string (not implemented on any item
+yet) and shows it as a "Found:" line if present — this is intentionally ready for a future
+"where you can find this item" field (quest reward / drop from a named mob or boss) without
+needing another code change when that data starts coming in. When the user starts supplying
+that information, add a `foundAt` field to the relevant `items.json` entries (free text is
+fine to start, e.g. `"Dropped by <mob name>"` or `"Quest reward: <quest name>"` — revisit
+this as a structured field only if/when enough data comes in to warrant it, same as every
+other schema field in this file). No new image files are needed for the item viewer itself —
+it reuses each item's existing `images/items/*.jpg`.
+
 ## Known CSS gotcha
 
 `.content-inner img` (in `style.css`) sets `display: block` on every image rendered inside
