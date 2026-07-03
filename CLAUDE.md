@@ -190,11 +190,14 @@ Workflow when asked to process new items (or "check the inbox"):
 1. List `images/inbox/` — each file there is one unprocessed screenshot.
 2. For each one: read the image and figure out whether it's an **item** (the stat-card
    popup style used elsewhere in this doc), a **map** (a game map/zone image, no stat
-   card), or a **recipe** (a tradeskill/crafting window screenshot) — then follow the
-   matching path below.
+   card), a **recipe** (a single crafting card, same popup style as an item but with a
+   "Components:" list), or a **crafting window** (the in-game tradeskill window listing
+   many known recipes at once, e.g. titled "Leatherworking" with a skill number at the
+   bottom) — then follow the matching path below.
 3. Once a file has been moved out (to `images/items/`, `images/Maps/`, `images/crafting/`,
-   or `images/duplicates/`), `images/inbox/` should no longer contain it — an empty inbox
-   means everything is processed.
+   or `images/duplicates/`) or deleted (crafting window screenshots — see below),
+   `images/inbox/` should no longer contain it — an empty inbox means everything is
+   processed.
 
 **Items:**
 
@@ -235,6 +238,29 @@ Workflow when asked to process new items (or "check the inbox"):
      Use the same slug for the `image` field in the entry.
    - **Duplicate of an existing recipe:** move the file into `images/duplicates/`, named
      `<slug>-duplicate.jpg` (append `-2`, `-3`, etc. as needed), same as items.
+
+**Crafting window screenshots** (a different thing from a recipe card — this is the
+in-game tradeskill window listing every known recipe for one tradeskill, name-only with a
+color per recipe, e.g. "Leatherworking 22 / 300" at the bottom): these are a reference
+source, not a recipe card, and don't get saved anywhere — process them and delete them from
+the inbox, don't move them into `images/crafting/` or `images/duplicates/`.
+
+1. The window's title bar names the tradeskill directly (more reliable than guessing from
+   item names, unlike the individual Rawhide Canvas/Strap cards which didn't state one).
+   The "X / 300" line at the bottom is the user's current skill in that tradeskill —
+   capture it as `observedAtSkill` on every recipe pulled from this screenshot.
+2. For each recipe name+color in the list: if it already exists in `crafting.json` (e.g. a
+   recipe that already has a full card), leave its existing entry alone — this window is a
+   secondary, lower-detail source and shouldn't overwrite data from an actual card. If it's
+   new, add a minimal entry: `name`, `slug`, `tradeskill`, `difficultyColor`,
+   `observedAtSkill` — no `image`/`weight`/`components` yet, since the window doesn't show
+   those (they fill in later if/when a full card for that recipe comes in).
+3. Match the recipe's difficulty color to the mapping in "Adding a crafting recipe" above.
+   If a color looks ambiguous (e.g. telling Light Blue from Dark Blue apart is genuinely
+   hard from a screenshot), say so and record the generic color rather than guessing which
+   shade — don't silently pick one.
+4. Delete the screenshot(s) from `images/inbox/` once processed — they don't get moved
+   anywhere, since nothing about them (aside from the extracted data) belongs on the wiki.
 
 ## Header search box
 

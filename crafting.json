@@ -44,8 +44,17 @@
   {
     "name": "Rawhide Bracelet",
     "slug": "rawhide-bracelet",
+    "image": "images/crafting/rawhide-bracelet.jpg",
     "tradeskill": "Leatherworking",
+    "weight": 0.5,
+    "size": "Small",
+    "components": [
+      { "item": "Rawhide Canvas", "quantity": 1 },
+      { "item": "Cloth Padding", "quantity": 2 },
+      { "item": "Rough Thread", "quantity": 1 }
+    ],
     "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
     "observedAtSkill": 22
   },
   {
