@@ -142,7 +142,10 @@ extending it the same way as new fields show up on future cards, rather than gue
   task.", White "...complex task.", Yellow "...daunting task.", Orange "...herculean task.",
   and (not yet confirmed on a real card) Red "You will require all your skills to craft
   this." Match the card's exact wording to a color from this list; if it doesn't match any of
-  these, flag it to the user rather than guessing a new one.
+  these, flag it to the user rather than guessing a new one. **Still record these fields on
+  every recipe (from a recipe card or a crafting-window screenshot) even though the site no
+  longer displays them** (removed 2026-07-03, see below) — they're the raw data the skill
+  estimates in `crafting-skill-estimates.md` are calculated from.
 - `observedAtSkill` — the user's skill in that tradeskill at the time the screenshot was
   taken (ask them, since it's not shown on the card itself). This isn't a property of the
   recipe — it's a data point for figuring out the recipe's own underlying skill level, since
@@ -161,6 +164,24 @@ extending it the same way as new fields show up on future cards, rather than gue
   crafter's current skill (harder than you); colors below White (Dark Blue/Light Blue/Green)
   mean it's *lower* (easier than you, Green being the most-exceeded/trivial end). Don't
   invent the band width — just keep recording data points.
+
+**The colored difficulty badge itself was removed from the Crafting page on 2026-07-03**
+(the user's call — a color is only accurate for whichever one user's skill it was captured
+at, so displaying it as if it were a fixed property of the recipe was misleading to anyone
+else, or to the same user later once their skill changes). `difficultyColor`/`difficultyText`/
+`observedAtSkill`/`recipeSkillLevel` still get recorded on every recipe as before — see the
+bullets above — they're just not rendered anywhere on the site anymore. In the same request,
+the user asked to keep trying to guess/calculate each recipe's real numeric skill
+requirement "in the background." That speculative work lives entirely in
+`crafting-skill-estimates.md` at the repo root (not linked from the site, not loaded by any
+code) — read it before adding new estimates, and update it (not `crafting.json`) whenever
+new observations come in, especially new White hits or a recapture at a different skill
+level, since those are what actually sharpen the estimate. Never write a guessed number into
+`crafting.json`'s `recipeSkillLevel` — that field stays reserved for values confirmed exact
+via a White observation. If the difficulty badge ever comes back (e.g. a "type in your
+skill" personalized calculator, which the accumulating estimates would make possible), the
+CSS for it is still in `style.css` (`.badge-difficulty*`) even though nothing references it
+right now.
 
 1. Add an object to `crafting.json` with at least `name`, `slug`, `tradeskill`, plus whatever
    of the above the card shows.

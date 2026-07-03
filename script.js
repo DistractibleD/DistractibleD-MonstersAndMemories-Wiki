@@ -937,7 +937,6 @@ function renderCraftingRecipes(container, tradeskillName) {
               <li>
                 <div class="craft-recipe-header">
                   ${renderRecipeName(r)}
-                  ${r.difficultyColor ? `<span class="badge-difficulty badge-difficulty-${r.difficultyColor.toLowerCase().replace(/\s+/g, '-')}">${r.difficultyColor}</span>` : ''}
                 </div>
                 ${r.weight != null ? `<div class="craft-recipe-meta">Weight: ${r.weight} / Size: ${r.size}</div>` : ''}
                 ${renderRecipeComponents(r)}
