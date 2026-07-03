@@ -216,6 +216,19 @@ Workflow when asked to process new items (or "check the inbox"):
      `<slug>-duplicate.jpg` (append `-2`, `-3`, etc. if more than one duplicate of the same
      item shows up) so the user can identify which item it's a duplicate of at a glance and
      review it.
+   - **Exception — the existing item's `images/items/` picture is a recipe-card proxy, not
+     a real item card:** some items (e.g. Rawhide Cloak) never had their own item-card
+     screenshot — their `images/items/*.jpg` is just a copy of their crafting recipe's card
+     (see "Item viewer" below), used as a stand-in so the Item Database has *something* to
+     show. If a screenshot comes in that's a genuine item card (name/Slot/AC/Class/Race
+     popup, not a "Components:" recipe card) for one of these items, this is not a
+     duplicate to discard — replace the file at `images/items/<slug>.jpg` with the new,
+     real item-card screenshot (converted to `.jpg` q90 as usual). Leave the matching
+     `images/crafting/<slug>.jpg` alone — that one must stay the recipe-card screenshot,
+     even after the item gets its own real picture; see "Item viewer" below for why the two
+     are kept deliberately separate. Re-check the item's stats against the new card while
+     you're there (same "user's screenshots are source of truth" rule as any other item),
+     and update `items.json` if anything differs from what the recipe card had shown.
 
 **Maps:**
 
@@ -313,6 +326,21 @@ fine to start, e.g. `"Dropped by <mob name>"` or `"Quest reward: <quest name>"` 
 this as a structured field only if/when enough data comes in to warrant it, same as every
 other schema field in this file). No new image files are needed for the item viewer itself —
 it reuses each item's existing `images/items/*.jpg`.
+
+`images/items/*.jpg` and `images/crafting/*.jpg` are kept deliberately separate, even for
+the same crafted item, and even when one was originally copied from the other. When a
+recipe's result has no item-card screenshot yet (e.g. Rawhide Cloak), its recipe-card
+screenshot gets reused as a stand-in for `images/items/<slug>.jpg` so the Item Database
+still has something to show (see the "Adding an item to the Item Database" inbox workflow
+above for the exact steps) — but the two files are never the *same* file going forward, and
+they should not stay in sync. **If the user later posts a real item-card screenshot for that
+item, replace `images/items/<slug>.jpg` with it — leave `images/crafting/<slug>.jpg` as the
+recipe-card screenshot it already is.** The Item Database and the Crafting page are showing
+two different things (what the item looks like vs. what the recipe to make it looks like)
+that only happen to have identical stat text for as long as no real item card exists; don't
+let a later item-card update overwrite the recipe's own picture, and don't treat the
+item-card screenshot as a duplicate-to-discard just because an image already exists at that
+slug — check whether the existing one is a proxy first.
 
 ## Known CSS gotcha
 
