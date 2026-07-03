@@ -58,18 +58,29 @@ async function init() {
   ensureItemsData().catch(() => {});
   ensureCraftingData().catch(() => {});
 
-  document.getElementById('search-box').addEventListener('input', onSearch);
+  const searchBox = document.getElementById('search-box');
+  searchBox.addEventListener('input', onSearch);
+  searchBox.addEventListener('focus', () => {
+    if (searchBox.value.trim()) openSearchResults();
+  });
   window.addEventListener('hashchange', () => {
     const file = location.hash.replace('#', '');
     const page = allPages.find(p => p.file === file);
     if (page) loadPage(page.file);
   });
 
+  // Clicking anywhere outside the search box/dropdown closes the dropdown.
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.header-search')) closeSearchResults();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeSearchResults();
+  });
+
   document.getElementById('site-title').addEventListener('click', e => {
     e.preventDefault();
     if (!allPages[0]) return;
-    document.getElementById('search-box').value = '';
-    buildSidebar(allPages);
+    clearSearch();
     const alreadyHome = location.hash.replace('#', '') === allPages[0].file;
     location.hash = allPages[0].file;
     if (alreadyHome) loadPage(allPages[0].file);
@@ -148,19 +159,34 @@ async function loadPage(file) {
 function onSearch(e) {
   const query = e.target.value.toLowerCase().trim();
   if (!query) {
-    buildSidebar(allPages);
+    closeSearchResults();
     return;
   }
   renderSearchResults(query);
 }
 
+function openSearchResults() {
+  document.getElementById('search-results').classList.add('open');
+}
+
+function closeSearchResults() {
+  document.getElementById('search-results').classList.remove('open');
+}
+
+function clearSearch() {
+  document.getElementById('search-box').value = '';
+  closeSearchResults();
+}
+
 // The header search box searches across everything on the wiki — pages,
 // items, and crafting recipes — not just page titles, so someone searching
 // for e.g. an item or material name ends up in the right place instead of
-// just seeing an empty page list.
+// just seeing an empty page list. Results render into a dropdown under the
+// search box (#search-results) rather than replacing the sidebar, so the
+// normal page navigation stays visible/usable while searching.
 function renderSearchResults(query) {
-  const sidebar = document.getElementById('sidebar');
-  sidebar.innerHTML = '';
+  const results = document.getElementById('search-results');
+  results.innerHTML = '';
 
   const matchedPages = allPages.filter(p => p.title.toLowerCase().includes(query));
   const matchedItems = (itemsData || [])
@@ -171,46 +197,59 @@ function renderSearchResults(query) {
     .slice(0, 8);
 
   if (!matchedPages.length && !matchedItems.length && !matchedRecipes.length) {
-    sidebar.innerHTML = '<p class="sidebar-empty">No results found.</p>';
+    results.innerHTML = '<p class="search-results-empty">No results found.</p>';
+    openSearchResults();
     return;
   }
 
   function addSection(label, entries, makeLink) {
     if (!entries.length) return;
     const heading = document.createElement('div');
-    heading.className = 'sidebar-category';
+    heading.className = 'search-result-category';
     heading.textContent = label;
-    sidebar.appendChild(heading);
-    entries.forEach(entry => sidebar.appendChild(makeLink(entry)));
+    results.appendChild(heading);
+    entries.forEach(entry => results.appendChild(makeLink(entry)));
   }
 
   addSection('Pages', matchedPages, page => {
     const link = document.createElement('a');
     link.href = '#' + page.file;
-    link.className = 'sidebar-link';
+    link.className = 'search-result-link';
     link.textContent = page.title;
-    link.dataset.file = page.file;
-    link.addEventListener('click', () => loadPage(page.file));
+    link.addEventListener('click', () => {
+      clearSearch();
+      loadPage(page.file);
+    });
     return link;
   });
 
   addSection('Items', matchedItems, item => {
     const link = document.createElement('a');
     link.href = '#items';
-    link.className = 'sidebar-link';
+    link.className = 'search-result-link';
     link.textContent = item.name;
-    link.addEventListener('click', () => goToItem(item));
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      clearSearch();
+      goToItem(item);
+    });
     return link;
   });
 
   addSection('Crafting', matchedRecipes, recipe => {
     const link = document.createElement('a');
     link.href = '#crafting';
-    link.className = 'sidebar-link';
+    link.className = 'search-result-link';
     link.textContent = `${recipe.name} (${recipe.tradeskill})`;
-    link.addEventListener('click', () => goToRecipe(recipe));
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      clearSearch();
+      goToRecipe(recipe);
+    });
     return link;
   });
+
+  openSearchResults();
 }
 
 function goToItem(item, returnToRecipe) {
@@ -919,9 +958,18 @@ function renderRecipeName(r) {
 
 function renderCraftingRecipes(container, tradeskillName) {
   const tradeskill = tradeskillsData.find(ts => ts.name === tradeskillName);
+  // Sorted by the recipe's real skill requirement (lowest first), matching the
+  // order the game's own crafting window lists them in — not alphabetically.
+  // Recipes without a known listOrder yet (no crafting-window screenshot seen
+  // for them) sort after all known ones, alphabetically among themselves.
   const recipes = craftingData
     .filter(r => r.tradeskill === tradeskillName)
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort((a, b) => {
+      const ao = a.listOrder ?? Infinity;
+      const bo = b.listOrder ?? Infinity;
+      if (ao !== bo) return ao - bo;
+      return a.name.localeCompare(b.name);
+    });
 
   container.innerHTML = `
     <p><a href="#" id="craft-back-link">&larr; All tradeskills</a></p>

@@ -44,15 +44,23 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
    (usually `["ALL"]`) — set it to the specific races listed on the card if it isn't ALL.
 2. Check the card for a tag line directly below the item name and above "Slot:" — e.g.
    "MAGIC". Capture every such tag (not just MAGIC) in a `tags` array, e.g. `["MAGIC"]` or
-   `["MAGIC", "LORE"]`; use `[]` if there's no tag line. Known tags seen so far: MAGIC.
-   Others the game is known to use but not yet seen on a card: LORE, NODROP, UNIQUE — if one
-   shows up, add it to the item's `tags` array using the same all-caps spelling as the card.
+   `["MAGIC", "UNIQUE", "NODROP"]`; use `[]` if there's no tag line. Known tags seen so far
+   (all confirmed on real cards): MAGIC, UNIQUE, NODROP (first seen together on the same
+   card, "Platinum Badge of the Living City", 2026-07-03) — use the same all-caps spelling
+   and order as shown on the card.
 3. Bags/satchels/pouches/backpacks use `"type": "Container"` instead of Armor/Weapon/
-   Jewelry/Misc, with `capacity` (integer) and `maxSize` (`"Small"`/`"Medium"`/`"Large"`,
-   same Title Case as the item's own `size`) instead of `ac`/`stats`/`damage`. Their `slot`
-   is one of `"Bag"`, `"Belt"`, or `"Backpack"` — distinct from `"Waist"`, which is for
-   actual belt armor, not a container-carrying slot. Some containers can go in more than
-   one slot (e.g. `"Bag / Belt"`), same `"X / Y"` format used for `"Primary / Secondary"`.
+   Jewelry/Misc, with `capacity` (integer) and `maxSize` (Title Case, same value set as the
+   item's own `size` field — Small/Medium/Large/Extra Large all seen on real cards) instead
+   of `ac`/`stats`/`damage`. Their `slot` is one of `"Bag"`, `"Belt"`, `"Backpack"`, or
+   `"Saddlebag"` (mount-only, `race` will be mount codes like `["HRS", "DNK"]` rather than
+   player races/ALL — see below) — distinct from `"Waist"`, which is for actual belt armor,
+   not a container-carrying slot. Some containers can go in more than one slot (e.g.
+   `"Bag / Belt"`), same `"X / Y"` format used for `"Primary / Secondary"`.
+3a. Mount equipment (saddles, saddlebags, rigging) works the same as any other item, just
+    with slots the game doesn't use for players — `"Rigging"` for the saddle itself,
+    `"Saddlebag"` for its cargo container — and a `race` array of mount codes read straight
+    off the card (e.g. `["HRS", "DNK"]`) instead of player classes/ALL. Don't try to map
+    these to the player race list; they're a separate namespace on the same field.
 4. Item screenshots are saved as `.jpg` (quality 90), not `.png` — see "Item screenshot
    format" below. Drop it in `images/items/`, filename matching the `image` field.
 
@@ -136,16 +144,28 @@ extending it the same way as new fields show up on future cards, rather than gue
   top of that page — see "Header search box" above for the same
   pending-variable-consumed-on-render pattern.
 - `difficultyColor` / `difficultyText` — the recipe's trivial/skill-up status, shown as
-  colored text on the card (e.g. green "This recipe is trivial to you."). The full color →
-  message mapping (from the unofficial wiki, since MnM doesn't publish exact skill-up odds):
-  Green "This recipe is trivial to you.", Light Blue "...simple task.", Dark Blue "...moderate
-  task.", White "...complex task.", Yellow "...daunting task.", Orange "...herculean task.",
-  and (not yet confirmed on a real card) Red "You will require all your skills to craft
-  this." Match the card's exact wording to a color from this list; if it doesn't match any of
-  these, flag it to the user rather than guessing a new one. **Still record these fields on
-  every recipe (from a recipe card or a crafting-window screenshot) even though the site no
-  longer displays them** (removed 2026-07-03, see below) — they're the raw data the skill
-  estimates in `crafting-skill-estimates.md` are calculated from.
+  colored text on the card. The full color → message mapping — confirmed exact wording for
+  Green, Dark Blue, Yellow, Orange, and Red now seen on real cards (2026-07-03); Light Blue
+  and White are still the unofficial wiki's paraphrase, since no card has shown that exact
+  text yet: Green "This recipe is trivial to you.", Light Blue "...simple task." (not yet
+  confirmed), Dark Blue "Your skills make this a moderate task.", White "...complex task."
+  (not yet confirmed), Yellow "Your skills make this a daunting task.", Orange "Your skills
+  make this a herculean task.", Red "You will require all your skills to craft this." Match
+  the card's exact wording to a color from this list; if it doesn't match any of these, flag
+  it to the user rather than guessing a new one. **Still record these fields on every recipe
+  (from a recipe card or a crafting-window screenshot) even though the site no longer
+  displays them** (removed 2026-07-03, see below) — they're the raw data the skill estimates
+  in `crafting-skill-estimates.md` are calculated from.
+- **A recipe card can arrive well after the fact and disagree with the most recent
+  crafting-window capture — that's expected, not an error.** E.g. a batch of individual
+  Leatherworking recipe cards processed 2026-07-03 showed Red/Yellow/Dark Blue for several
+  recipes that the *latest* window recapture had already shown as Green at a higher skill —
+  the cards matched the *original* skill-22 session's colors exactly, meaning they were just
+  screenshots taken back then and uploaded later. When this happens: keep the freshest
+  `difficultyColor`/`observedAtSkill` (don't let an older card overwrite a newer window
+  reading), but still merge in whatever the card newly reveals (`image`, `weight`, `size`,
+  `components`) since that's timeless information about the recipe, not a skill snapshot. If
+  it's unclear whether a card is old or current, say so rather than guessing.
 - `observedAtSkill` — the user's skill in that tradeskill at the time the screenshot was
   taken (ask them, since it's not shown on the card itself). This isn't a property of the
   recipe — it's a data point for figuring out the recipe's own underlying skill level, since
@@ -164,6 +184,10 @@ extending it the same way as new fields show up on future cards, rather than gue
   crafter's current skill (harder than you); colors below White (Dark Blue/Light Blue/Green)
   mean it's *lower* (easier than you, Green being the most-exceeded/trivial end). Don't
   invent the band width — just keep recording data points.
+- `listOrder` — an integer giving the recipe's position in the game's own crafting-window
+  list (1 = first/lowest skill requirement). This is what the Crafting page actually sorts
+  by now instead of alphabetically — see the "Crafting window screenshots" workflow below
+  for how it's derived and kept as one unbroken sequence per tradeskill.
 
 **The colored difficulty badge itself was removed from the Crafting page on 2026-07-03**
 (the user's call — a color is only accurate for whichever one user's skill it was captured
@@ -284,16 +308,36 @@ the inbox, don't move them into `images/crafting/` or `images/duplicates/`.
    The "X / 300" line at the bottom is the user's current skill in that tradeskill —
    capture it as `observedAtSkill` on every recipe pulled from this screenshot.
 2. For each recipe name+color in the list: if it already exists in `crafting.json` (e.g. a
-   recipe that already has a full card), leave its existing entry alone — this window is a
-   secondary, lower-detail source and shouldn't overwrite data from an actual card. If it's
-   new, add a minimal entry: `name`, `slug`, `tradeskill`, `difficultyColor`,
-   `observedAtSkill` — no `image`/`weight`/`components` yet, since the window doesn't show
-   those (they fill in later if/when a full card for that recipe comes in).
-3. Match the recipe's difficulty color to the mapping in "Adding a crafting recipe" above.
+   recipe that already has a full card), leave its card-derived fields alone (`image`,
+   `weight`, `size`, `components`, `difficultyText`) — this window is a secondary,
+   lower-detail source and shouldn't overwrite data from an actual card. If it's new, add a
+   minimal entry: `name`, `slug`, `tradeskill`, `difficultyColor`, `observedAtSkill` — no
+   `image`/`weight`/`components` yet, since the window doesn't show those (they fill in
+   later if/when a full card for that recipe comes in).
+3. `listOrder` — the recipe's position in the crafting window's list, counting from the very
+   top of the whole scrollable list (not just the top of one screenshot). **The Crafting page
+   sorts recipes by this field, ascending, instead of alphabetically** (`renderCraftingRecipes`
+   in `script.js`) — the user confirmed 2026-07-03 that the game's own list order is already
+   sorted by real skill requirement, low to high, so this position doubles as a difficulty
+   ranking without needing the (unreliable) color-based guessing in
+   `crafting-skill-estimates.md`. Capture/update `listOrder` on *every* recipe seen in the
+   window, including ones that already have a full card (unlike `difficultyColor` above, this
+   field isn't something a real recipe card ever shows, so there's no "actual card" data to
+   protect from being overwritten). If a screenshot batch only covers a portion of the full
+   list (scrolled to show 8 rows at a time, say), reconstruct the true list-wide position by
+   matching up rows that repeat between adjacent screenshots (same name *and* same color in
+   both) rather than assuming each screenshot starts a fresh count — a full recapture of a
+   tradeskill's list should end with `listOrder` values forming one unbroken 1..N sequence
+   with no gaps or repeats. If the screenshots don't overlap enough to confirm the exact
+   join between two batches, the color trend at the boundary (colors should move steadily
+   from Green at the low end toward Red at the high end, never jump back and forth) is
+   usually enough to infer the join — but say so and flag the uncertainty to the user rather
+   than presenting a guessed join as confirmed fact.
+4. Match the recipe's difficulty color to the mapping in "Adding a crafting recipe" above.
    If a color looks ambiguous (e.g. telling Light Blue from Dark Blue apart is genuinely
    hard from a screenshot), say so and record the generic color rather than guessing which
    shade — don't silently pick one.
-4. Delete the screenshot(s) from `images/inbox/` once processed — they don't get moved
+5. Delete the screenshot(s) from `images/inbox/` once processed — they don't get moved
    anywhere, since nothing about them (aside from the extracted data) belongs on the wiki.
 
 ## Header search box
