@@ -296,22 +296,31 @@ function findRecipesUsingItem(itemName) {
 
 const ITEM_STAT_ORDER = ['STR', 'STA', 'AGI', 'DEX', 'WIS', 'INT', 'CHA', 'HP', 'MANA'];
 const ITEM_RESIST_ORDER = ['FIRE', 'COLD', 'MAGIC', 'POISON', 'DISEASE', 'CORRUPTION'];
+const ITEM_TYPE_INITIAL = { Armor: 'A', Weapon: 'W', Jewelry: 'J', Container: 'C', Misc: 'M' };
 
 function itemRatio(item) {
   if (item.damage == null || !item.delay) return null;
   return item.damage / item.delay;
 }
 
+// Shared by formatStats() (comma text, used in the table + search) and the
+// item card's stat chips (see renderItemCardHTML) so the "which stats/
+// resists/haste does this item have" logic only lives in one place.
+function statEntries(item) {
+  const entries = [];
+  ITEM_STAT_ORDER.forEach(stat => {
+    if (item.stats && item.stats[stat]) entries.push({ label: stat, value: `+${item.stats[stat]}` });
+  });
+  ITEM_RESIST_ORDER.forEach(res => {
+    if (item.resists && item.resists[res]) entries.push({ label: `SV ${res}`, value: `+${item.resists[res]}` });
+  });
+  if (item.haste) entries.push({ label: 'Haste', value: `+${item.haste}%` });
+  return entries;
+}
+
 function formatStats(item) {
-  const parts = ITEM_STAT_ORDER
-    .filter(stat => item.stats && item.stats[stat])
-    .map(stat => `${stat} +${item.stats[stat]}`);
-  const resistParts = ITEM_RESIST_ORDER
-    .filter(res => item.resists && item.resists[res])
-    .map(res => `SV ${res} +${item.resists[res]}`);
-  const hasteParts = item.haste ? [`Haste +${item.haste}%`] : [];
-  const all = [...parts, ...resistParts, ...hasteParts];
-  return all.length ? all.join(', ') : '—';
+  const entries = statEntries(item);
+  return entries.length ? entries.map(e => `${e.label} ${e.value}`).join(', ') : '—';
 }
 
 function formatCapacity(item) {
@@ -369,7 +378,7 @@ async function renderItemsPage(container) {
   container.innerHTML = `
     ${returnToRecipe ? `<p class="items-back-link"><a href="#" id="items-back-to-recipe">&larr; Back to ${escapeAttr(returnToRecipe.name)}</a></p>` : ''}
     <h1>Item Database</h1>
-    <p>Browse, search, filter, and sort every item on the wiki. Hover an item's name to see a screenshot.</p>
+    <p>Browse, search, filter, and sort every item on the wiki. Hover an item's name to see its full card.</p>
     <div class="items-toolbar">
       <input type="search" id="items-search" class="items-search" placeholder="Search name, stat, class..." autocomplete="off">
       <select id="items-filter-type" class="items-select">
@@ -531,13 +540,11 @@ function renderItemRows(tbody, items) {
     const dmgCell = item.damage != null
       ? `${item.damage} / ${item.delay}${ratio != null ? ` = ${ratio.toFixed(2)}` : ''}`
       : '—';
-    const flavorText = [item.effect, item.description].filter(Boolean).join('\n\n');
-    const titleAttr = flavorText ? ` title="${escapeAttr(flavorText)}"` : '';
 
     return `
       <tr>
         <td>
-          <span class="item-name-hover" data-img="${item.image}" data-alt="${item.name}"${titleAttr}>${(item.tags || []).map(t => `<span class="badge-tag">${t}</span> `).join('')}${item.name}</span>
+          <span class="item-name-hover" data-alt="${item.name}">${(item.tags || []).map(t => `<span class="badge-tag">${t}</span> `).join('')}${item.name}</span>
         </td>
         <td>${item.type}</td>
         <td>${formatSlot(item)}</td>
@@ -553,27 +560,87 @@ function renderItemRows(tbody, items) {
   }).join('');
 }
 
-// A single floating preview image, shared by every row, positioned in the
-// viewport on hover so it's never clipped by the table's scroll container.
-function setupItemTooltip(tbody) {
+// Renders an item's full card — an original layout (not a screenshot, and
+// deliberately not modeled on any other site's item popup) built entirely
+// from items.json fields, used by both the hover preview and the item
+// viewer modal. A gold accent + letter-in-a-square icon (by item type)
+// marks it as an ITEM card, as opposed to the teal recipe cards below.
+function renderItemCardHTML(item) {
+  const initial = ITEM_TYPE_INITIAL[item.type] || '?';
+  const badges = (item.tags || []).map(t => `<span class="badge-tag">${t}</span>`).join('');
+
+  const fields = [{ label: 'Slot', value: formatSlot(item) }];
+  if (item.ac != null) fields.push({ label: 'AC', value: item.ac });
+  if (item.damage != null) {
+    fields.push({ label: 'Dmg', value: item.damage });
+    fields.push({ label: 'Delay', value: item.delay });
+    const ratio = itemRatio(item);
+    if (ratio != null) fields.push({ label: 'Ratio', value: ratio.toFixed(2) });
+    if (item.skill) fields.push({ label: 'Skill', value: item.skill });
+  }
+  if (item.capacity != null) {
+    fields.push({ label: 'Capacity', value: item.capacity });
+    fields.push({ label: 'Max size', value: item.maxSize });
+  }
+  fields.push({ label: 'Weight', value: item.weight });
+  fields.push({ label: 'Size', value: item.size });
+
+  const chips = statEntries(item)
+    .map(e => `<span class="item-card-chip">${e.label} <span class="item-card-chip-value">${e.value}</span></span>`)
+    .join('');
+
+  const flavor = [item.effect, item.description].filter(Boolean);
+
+  return `
+    <div class="item-card">
+      <div class="item-card-header">
+        <div class="item-card-icon">${initial}</div>
+        <div class="item-card-name">${escapeAttr(item.name)}</div>
+        ${badges ? `<div class="item-card-badges">${badges}</div>` : ''}
+      </div>
+      <div class="item-card-body">
+        <div class="item-card-grid">
+          ${fields.map(f => `<div class="item-card-field"><span class="item-card-field-label">${f.label}</span><span>${f.value}</span></div>`).join('')}
+        </div>
+        ${chips ? `<div class="item-card-chips">${chips}</div>` : ''}
+        ${flavor.length ? `<div class="item-card-section item-card-section-flavor">${flavor.map(escapeAttr).join('<br><br>')}</div>` : ''}
+        <div class="item-card-section">
+          Class: ${escapeAttr(formatList(item.classes))}<br>
+          Race: ${escapeAttr(formatList(item.race))}
+        </div>
+        <div class="item-card-section${item.foundAt ? '' : ' item-card-muted'}">
+          Found at &middot; ${item.foundAt ? escapeAttr(item.foundAt) : 'not yet known'}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// A single floating preview card, shared by every hoverable name on the
+// site (item rows, recipe names, recipe components), positioned in the
+// viewport on hover so it's never clipped by a scroll container. Looks up
+// the full item by name and renders its card fresh on every hover rather
+// than caching anything, since items.json is the only source of truth here.
+function setupItemTooltip(container) {
   let tooltip = document.getElementById('item-tooltip');
   if (!tooltip) {
-    tooltip = document.createElement('img');
+    tooltip = document.createElement('div');
     tooltip.id = 'item-tooltip';
     document.body.appendChild(tooltip);
   }
 
-  tbody.addEventListener('mouseover', e => {
+  container.addEventListener('mouseover', e => {
     const span = e.target.closest('.item-name-hover');
     if (!span) return;
+    const item = findItemByName(span.dataset.alt);
+    if (!item) return;
     const rect = span.getBoundingClientRect();
-    tooltip.src = span.dataset.img;
-    tooltip.alt = span.dataset.alt;
+    tooltip.innerHTML = renderItemCardHTML(item);
     tooltip.style.display = 'block';
 
-    const left = Math.min(rect.left, window.innerWidth - 296);
+    const left = Math.min(rect.left, window.innerWidth - 336);
     const spaceBelow = window.innerHeight - rect.bottom;
-    if (spaceBelow < 220 && rect.top > spaceBelow) {
+    if (spaceBelow < 260 && rect.top > spaceBelow) {
       tooltip.style.top = '';
       tooltip.style.bottom = (window.innerHeight - rect.top + 8) + 'px';
     } else {
@@ -583,7 +650,7 @@ function setupItemTooltip(tbody) {
     tooltip.style.left = Math.max(left, 8) + 'px';
   });
 
-  tbody.addEventListener('mouseout', e => {
+  container.addEventListener('mouseout', e => {
     const span = e.target.closest('.item-name-hover');
     if (!span) return;
     if (span.contains(e.relatedTarget)) return;
@@ -592,8 +659,8 @@ function setupItemTooltip(tbody) {
 }
 
 // Clicking an item's name in the Item Database table opens the full item
-// viewer (see below) — a bigger, scrollable version of the hover preview,
-// with links to any crafting recipe the item is tied to.
+// viewer (see below) — the same card as the hover preview, just bigger and
+// with crafting links attached, in a modal instead of a floating tooltip.
 function setupItemClickToView(tbody) {
   tbody.addEventListener('click', e => {
     const span = e.target.closest('.item-name-hover');
@@ -603,26 +670,20 @@ function setupItemClickToView(tbody) {
   });
 }
 
-// Full item-card viewer. Item screenshots are already a comfortable size to
-// read (unlike the huge map images), so this doesn't zoom/pan like the Maps
-// viewer — it just shows the card at its natural size and lets a tall card
-// scroll inside a capped-height window, with the name pinned above the
-// scroll area (mimicking the scrollable panel the game itself uses for
-// overflowing cards) and any crafting links pinned below it.
+// Full item-card viewer. Since the card is rendered from data (not a
+// screenshot), it's never too tall to fit — no scroll-within-the-card
+// trick needed here, just a simple max-height safety net on the whole
+// panel. The close button sits on the overlay itself (like the Maps
+// viewer's), since the card no longer has a dedicated header bar to put it in.
 function setupItemViewer() {
   if (document.getElementById('item-viewer')) return;
 
   const viewer = document.createElement('div');
   viewer.id = 'item-viewer';
   viewer.innerHTML = `
+    <button id="item-viewer-close" aria-label="Close">&times;</button>
     <div id="item-viewer-panel">
-      <div id="item-viewer-header">
-        <span id="item-viewer-title"></span>
-        <button id="item-viewer-close" aria-label="Close">&times;</button>
-      </div>
-      <div id="item-viewer-scroll">
-        <img id="item-viewer-img" alt="">
-      </div>
+      <div id="item-viewer-card"></div>
       <div id="item-viewer-info"></div>
     </div>
   `;
@@ -656,10 +717,7 @@ async function openItemViewer(item) {
   setupItemViewer();
 
   const viewer = document.getElementById('item-viewer');
-  viewer.querySelector('#item-viewer-title').textContent = item.name;
-  const img = viewer.querySelector('#item-viewer-img');
-  img.src = item.image;
-  img.alt = item.name;
+  viewer.querySelector('#item-viewer-card').innerHTML = renderItemCardHTML(item);
 
   const resultRecipe = findRecipeForItem(item.name);
   const usedIn = findRecipesUsingItem(item.name);
@@ -672,11 +730,6 @@ async function openItemViewer(item) {
     html += `<p><strong>Used to craft:</strong></p><ul>${usedIn.map(r =>
       `<li><a href="#" class="item-viewer-recipe-link" data-recipe="${escapeAttr(r.name)}" data-tradeskill="${escapeAttr(r.tradeskill)}">${r.name}</a> (${r.tradeskill})</li>`
     ).join('')}</ul>`;
-  }
-  // "foundAt" (quest/drop source) doesn't exist in items.json yet — this is
-  // ready for whenever that data starts coming in, no code changes needed then.
-  if (item.foundAt) {
-    html += `<p><strong>Found:</strong> ${escapeAttr(item.foundAt)}</p>`;
   }
 
   const info = viewer.querySelector('#item-viewer-info');
@@ -879,9 +932,9 @@ function closeMapViewer() {
    edit it directly to rename/add/remove a tradeskill).
    Recipes live in crafting.json, each tagged with a
    "tradeskill" matching one of those category names.
-   The recipe schema is intentionally minimal for now
-   (name/slug/tradeskill/image) since no real recipe
-   data has been added yet — see CLAUDE.md.
+   Recipes render as cards via renderRecipeCardHTML, the
+   same card system as the Item Database (see above) —
+   see CLAUDE.md for the full schema.
    ============================================ */
 
 async function renderCraftingPage(container) {
@@ -927,33 +980,54 @@ function renderCraftingCategories(container) {
   });
 }
 
-function renderRecipeComponents(recipe) {
-  if (!recipe.components || !recipe.components.length) return '';
-  return `
-    <div class="craft-recipe-components">
+// Renders a recipe's card — same structural language as renderItemCardHTML
+// (icon square, header badges, body sections) but in the teal "craft" accent
+// with the tradeskill name as its badge, so a recipe is never mistaken for
+// an item card at a glance even though both use the same card system.
+// The recipe's own name links to the Item Database (like a component does)
+// if a matching item exists there yet, with a hover preview of that item's
+// own card — the recipe card itself only shows what the recipe card shows
+// (weight/size/components), not the crafted result's full stats.
+function renderRecipeCardHTML(recipe) {
+  const matched = findItemByName(recipe.name);
+  const nameHtml = matched
+    ? `<a href="#" class="craft-result-link item-name-hover" data-alt="${escapeAttr(matched.name)}" data-recipe="${escapeAttr(recipe.name)}">${escapeAttr(recipe.name)}</a>`
+    : escapeAttr(recipe.name);
+
+  const fields = [];
+  if (recipe.weight != null) {
+    fields.push({ label: 'Weight', value: recipe.weight });
+    fields.push({ label: 'Size', value: recipe.size });
+  }
+
+  const componentsHtml = (recipe.components && recipe.components.length) ? `
+    <div class="item-card-section">
       Components:
-      <ul>
+      <ul class="item-card-components">
         ${recipe.components.map(c => {
-          const matched = findItemByName(c.item);
+          const m = findItemByName(c.item);
           const label = `${c.quantity}&times; ${escapeAttr(c.item)}`;
-          return matched
-            ? `<li><a href="#" class="craft-component-link" data-recipe="${escapeAttr(recipe.name)}" data-item="${escapeAttr(matched.name)}">${label}</a></li>`
+          return m
+            ? `<li><a href="#" class="craft-component-link item-name-hover" data-alt="${escapeAttr(m.name)}" data-recipe="${escapeAttr(recipe.name)}" data-item="${escapeAttr(m.name)}">${label}</a></li>`
             : `<li>${label}</li>`;
         }).join('')}
       </ul>
     </div>
-  `;
-}
+  ` : '';
 
-// The recipe's own name (the crafted result) links to the Item Database
-// the same way a component does, if a matching item exists there yet.
-function renderRecipeName(r) {
-  const matched = findItemByName(r.name);
-  const tooltipImg = r.image || (matched && matched.image);
-  if (matched) {
-    return `<a href="#" class="craft-result-link item-name-hover" data-img="${tooltipImg}" data-alt="${escapeAttr(r.name)}" data-recipe="${escapeAttr(r.name)}">${r.name}</a>`;
-  }
-  return tooltipImg ? `<span class="item-name-hover" data-img="${tooltipImg}" data-alt="${escapeAttr(r.name)}">${r.name}</span>` : r.name;
+  return `
+    <div class="item-card item-card-recipe">
+      <div class="item-card-header">
+        <div class="item-card-icon item-card-icon-recipe">${(recipe.tradeskill || '?').charAt(0)}</div>
+        <div class="item-card-name item-card-name-recipe">${nameHtml}</div>
+        <div class="item-card-badges"><span class="badge-tag badge-tag-craft">${escapeAttr(recipe.tradeskill)}</span></div>
+      </div>
+      <div class="item-card-body">
+        ${fields.length ? `<div class="item-card-grid">${fields.map(f => `<div class="item-card-field"><span class="item-card-field-label">${f.label}</span><span>${f.value}</span></div>`).join('')}</div>` : ''}
+        ${componentsHtml}
+      </div>
+    </div>
+  `;
 }
 
 function renderCraftingRecipes(container, tradeskillName) {
@@ -981,21 +1055,13 @@ function renderCraftingRecipes(container, tradeskillName) {
       tradeskill && tradeskill.status === 'planned'
         ? '<p>This tradeskill hasn\'t been implemented in the game yet.</p>'
         : recipes.length
-          ? `<ul class="craft-recipe-list">${recipes.map(r => `
-              <li>
-                <div class="craft-recipe-header">
-                  ${renderRecipeName(r)}
-                </div>
-                ${r.weight != null ? `<div class="craft-recipe-meta">Weight: ${r.weight} / Size: ${r.size}</div>` : ''}
-                ${renderRecipeComponents(r)}
-              </li>
-            `).join('')}</ul>`
+          ? `<div class="craft-recipe-grid">${recipes.map(renderRecipeCardHTML).join('')}</div>`
           : '<p>No recipes yet for this tradeskill.</p>'
     }
   `;
 
-  if (recipes.some(r => r.image || findItemByName(r.name))) {
-    setupItemTooltip(container.querySelector('.craft-recipe-list'));
+  if (recipes.length) {
+    setupItemTooltip(container.querySelector('.craft-recipe-grid'));
   }
 
   container.querySelectorAll('.craft-result-link').forEach(link => {

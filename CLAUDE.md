@@ -9,6 +9,11 @@ step, no backend, no login system. `index.html` + `style.css` + `script.js` load
 at runtime — either Markdown pages (via marked.js) or the Item Database (via `items.json`).
 See `README.md` for the full explanation written for the (non-technical) site owner.
 
+Items and crafting recipes are shown as **cards rendered entirely from JSON data** — not
+screenshots. This changed 2026-07-04 (previously the site showed the user's actual item
+screenshot); see "Item and recipe cards" below for the current system and why the change
+was made before assuming a screenshot needs saving anywhere for a new item or recipe.
+
 ## The user's screenshots are the source of truth
 
 Everything the user posts (item/map/recipe screenshots, or stats typed directly in chat) is
@@ -61,26 +66,32 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
     `"Saddlebag"` for its cargo container — and a `race` array of mount codes read straight
     off the card (e.g. `["HRS", "DNK"]`) instead of player classes/ALL. Don't try to map
     these to the player race list; they're a separate namespace on the same field.
-4. Item screenshots are saved as `.jpg` (quality 90), not `.png` — see "Item screenshot
-   format" below. Drop it in `images/items/`, filename matching the `image` field.
+4. No image file is needed. The item's screenshot is only ever the *source* you read stats
+   from — the site displays a card rendered from the JSON fields, not the screenshot itself
+   (see "Item and recipe cards" below). Don't convert, save, or reference a screenshot for a
+   new item; just delete it from the inbox once its data is captured. An `image` field can
+   still appear on older entries (left over from before 2026-07-04) — it's inert now, safe
+   to ignore, not something to keep populating.
 
 Filters (type/slot/class/race/tags/max size) and search are all derived from `items.json`
 at runtime — no other file needs to change when items are added, including when a new tag,
 slot, or max-size value shows up for the first time (those dropdowns are populated from
 whatever values exist in the data).
 
-## Item screenshot format
+## Item screenshot format (historical — items/recipes no longer use this; Maps still do)
 
-Item screenshots (`images/items/`, `images/duplicates/` for items) are stored as `.jpg` at
-quality 90, not `.png`. The popup card screenshots are mostly flat text over a noisy stone
-texture, which PNG compresses poorly (~350KB/file) — JPEG at q90 gets the same image down
-to ~65KB with no visible loss of text legibility, tested by comparing re-encoded crops
-against the originals. When moving a screenshot out of the inbox, convert it to `.jpg`
-(quality 90) as part of the move rather than keeping the original `.png`/other format.
+This section only applies to `images/Maps/` now. Item and recipe screenshots used to be
+converted to `.jpg` (quality 90) and saved in `images/items/`/`images/crafting/` for
+on-site display; since the 2026-07-04 switch to rendered cards (see "Item and recipe
+cards" below), new items/recipes don't save a screenshot at all — there's nothing left to
+convert. The historical reasoning (PNG compresses these popup-card screenshots poorly,
+~350KB vs ~65KB at JPEG q90 with no visible text-quality loss) is kept here only because
+old files in `images/items/`/`images/crafting/` were produced this way and remain in the
+repo, unused.
 
 **Map** images are the opposite: keep them as high-quality `.png`, uncompressed — they're
 viewed zoomed-in in the map viewer (see below) where JPEG artifacts would actually be
-visible, and they're few enough in number that file size isn't a concern. Do not apply the
+visible, and they're few enough in number that file size isn't a concern. Do not apply any
 JPEG conversion to anything in `images/Maps/`.
 
 ## Adding a map to the Maps page
@@ -135,10 +146,11 @@ extending it the same way as new fields show up on future cards, rather than gue
   card yet), it just renders as plain text. Don't try to resolve/store this link at data-entry
   time — leave it to resolve dynamically so components automatically become clickable later,
   the moment someone adds that material to `items.json`.
-- The recipe's own `name` (the crafted result) gets the same treatment via
-  `renderRecipeName` — if an item with that exact name exists in `items.json`, the recipe
-  name itself becomes a clickable link to it (this already connects several existing recipes
-  to items added in earlier batches, e.g. "Rawhide Belt"/"Rawhide Boots"/"Rawhide Backpack").
+- The recipe's own `name` (the crafted result) gets the same treatment inside
+  `renderRecipeCardHTML` — if an item with that exact name exists in `items.json`, the
+  recipe name itself becomes a clickable link to it (this already connects several existing
+  recipes to items added in earlier batches, e.g. "Rawhide Belt"/"Rawhide Boots"/"Rawhide
+  Backpack").
   Clicking either kind of link (component or result) sets `pendingReturnToRecipe` before
   navigating to the Item Database, which shows a "&larr; Back to \<recipe name\>" link at the
   top of that page — see "Header search box" above for the same
@@ -209,9 +221,10 @@ right now.
 
 1. Add an object to `crafting.json` with at least `name`, `slug`, `tradeskill`, plus whatever
    of the above the card shows.
-2. Recipe screenshots are saved as `.jpg` (quality 90), same as item screenshots — see
-   "Item screenshot format" above. Drop it in `images/crafting/`, filename matching the
-   `image` field.
+2. No image file is needed — same as items (see above), the recipe card screenshot is only
+   the source you transcribe from, not something saved for display. Delete it from the
+   inbox once its data is captured. Older entries may still carry an `image` field pointing
+   at `images/crafting/*.jpg` from before 2026-07-04 — inert, safe to ignore.
 
 ### New items/maps/recipes come in via `images/inbox/`
 
@@ -239,41 +252,27 @@ Workflow when asked to process new items (or "check the inbox"):
    "Components:" list), or a **crafting window** (the in-game tradeskill window listing
    many known recipes at once, e.g. titled "Leatherworking" with a skill number at the
    bottom) — then follow the matching path below.
-3. Once a file has been moved out (to `images/items/`, `images/Maps/`, `images/crafting/`,
-   or `images/duplicates/`) or deleted (crafting window screenshots — see below),
-   `images/inbox/` should no longer contain it — an empty inbox means everything is
-   processed.
+3. Once a screenshot's data has been captured into the relevant JSON file (items/recipes)
+   or the file has been moved out (`images/Maps/`, or `images/duplicates/` for a duplicate
+   of any kind), delete it from `images/inbox/` — an empty inbox means everything is
+   processed. Items and recipes never get moved into `images/items/`/`images/crafting/`
+   anymore (see "Item and recipe cards" below) — only Maps still save an image file.
 
 **Items:**
 
 1. Extract the item's name and stats, including `race` and any `tags` (see the tag/race
    guidance in "Adding an item to the Item Database" above).
 2. Check whether that item's slug (or name) already exists in `items.json` — this is a
-   cheap text check against the existing entries, not the same as re-scanning every image
-   in `images/items/`, and it's required every time to catch duplicates.
-   - **Not a duplicate:** add an entry to `items.json`. Convert the screenshot to `.jpg`
-     (quality 90, see "Item screenshot format" above) and rename it to the item's slug —
-     lower case, spaces and punctuation replaced with dashes (e.g. "Tunic of Night" →
-     `tunic-of-night.jpg`) — and move (don't copy) it into `images/items/` under that name.
-     Use the same slug for the `image` field in the entry.
-   - **Duplicate of an existing item:** do not touch `items.json`. Convert the screenshot
-     to `.jpg` (quality 90) and move it into `images/duplicates/` instead, named
-     `<slug>-duplicate.jpg` (append `-2`, `-3`, etc. if more than one duplicate of the same
-     item shows up) so the user can identify which item it's a duplicate of at a glance and
-     review it.
-   - **Exception — the existing item's `images/items/` picture is a recipe-card proxy, not
-     a real item card:** some items (e.g. Rawhide Cloak) never had their own item-card
-     screenshot — their `images/items/*.jpg` is just a copy of their crafting recipe's card
-     (see "Item viewer" below), used as a stand-in so the Item Database has *something* to
-     show. If a screenshot comes in that's a genuine item card (name/Slot/AC/Class/Race
-     popup, not a "Components:" recipe card) for one of these items, this is not a
-     duplicate to discard — replace the file at `images/items/<slug>.jpg` with the new,
-     real item-card screenshot (converted to `.jpg` q90 as usual). Leave the matching
-     `images/crafting/<slug>.jpg` alone — that one must stay the recipe-card screenshot,
-     even after the item gets its own real picture; see "Item viewer" below for why the two
-     are kept deliberately separate. Re-check the item's stats against the new card while
-     you're there (same "user's screenshots are source of truth" rule as any other item),
-     and update `items.json` if anything differs from what the recipe card had shown.
+   cheap text check against the existing entries, and it's required every time to catch
+   duplicates (there's no image to compare anymore, so this is a pure name/slug match).
+   - **Not a duplicate:** add an entry to `items.json`. Delete the screenshot from the inbox
+     — nothing to save.
+   - **Duplicate of an existing item:** don't touch `items.json`. If the new screenshot
+     reveals something the existing entry is missing or gets wrong (a stat that was
+     cut off before, a corrected number), update the existing entry — the user's newest
+     screenshot always wins (see "The user's screenshots are the source of truth" above).
+     Otherwise just delete it; there's no `images/duplicates/` step for items anymore since
+     there's no image to file away.
 
 **Maps:**
 
@@ -282,7 +281,8 @@ Workflow when asked to process new items (or "check the inbox"):
    - **Not a duplicate:** add an entry to `maps.json`. Rename the file to the map's slug
      and move it into `images/Maps/`, matching the `image` field.
    - **Duplicate of an existing map:** move the file into `images/duplicates/`, named
-     `<slug>-duplicate.png` (append `-2`, `-3`, etc. as needed), same as items.
+     `<slug>-duplicate.png` (append `-2`, `-3`, etc. as needed). Maps are the one type that
+     still works this way — the map viewer displays the actual image, not a rendered card.
 
 **Recipes:**
 
@@ -291,11 +291,12 @@ Workflow when asked to process new items (or "check the inbox"):
    rather than inventing a new category). See "Adding a crafting recipe" above for the
    current (minimal, still-evolving) schema.
 2. Check whether that recipe's slug (or name) already exists in `crafting.json`.
-   - **Not a duplicate:** add an entry to `crafting.json`. Convert the screenshot to `.jpg`
-     (quality 90) and rename it to the recipe's slug, and move it into `images/crafting/`.
-     Use the same slug for the `image` field in the entry.
-   - **Duplicate of an existing recipe:** move the file into `images/duplicates/`, named
-     `<slug>-duplicate.jpg` (append `-2`, `-3`, etc. as needed), same as items.
+   - **Not a duplicate:** add an entry to `crafting.json`. Delete the screenshot — nothing
+     to save.
+   - **Duplicate of an existing recipe:** don't touch `crafting.json` unless the new
+     screenshot reveals something new (e.g. this is the first full card for a recipe that
+     previously only had a minimal crafting-window entry — see below) or corrects something.
+     Delete the screenshot either way.
 
 **Crafting window screenshots** (a different thing from a recipe card — this is the
 in-game tradeskill window listing every known recipe for one tradeskill, name-only with a
@@ -363,49 +364,72 @@ Items/crafting data is pre-fetched in the background during `init()` (via
 `renderCraftingPage` use) so header search works immediately, without requiring the user to
 have visited those pages first.
 
-## Item viewer (click an item's name in the Item Database)
+## Item and recipe cards
 
-Clicking an item's name in the Item Database table (`.item-name-hover`, the same span used
-for the hover-preview tooltip) opens `#item-viewer`, a modal showing that item's screenshot
-at a comfortable reading size — see `setupItemViewer`/`openItemViewer`/`closeItemViewer` in
-`script.js`. This is deliberately not the same design as the Maps zoom/pan viewer: item card
-screenshots are already sized to be read directly (unlike multi-thousand-pixel map images),
-so the modal doesn't zoom, it just caps the panel at a comfortable max size and lets a card
-taller than that scroll — mimicking the scrollable panel the game itself uses for overflowing
-cards. The item's name is pinned in a header above the scrolling image (visible even after
-scrolling down a tall card), and a "Crafting" section is pinned below it.
+**As of 2026-07-04, items and recipes are shown as cards rendered entirely from JSON data —
+not screenshots.** The user compared the site to mnmquest.com's item popups, liked that
+approach better, and asked for an original (not copied) equivalent built from `items.json`/
+`crafting.json` instead of the game screenshot. This replaced the old system where the
+site displayed the user's actual screenshot (converted to `.jpg`, saved in `images/items/`
+or `images/crafting/`). That old system is what "Item screenshot format" above and the
+git history before this date describe — don't resurrect it without the user asking.
 
-The Crafting section is populated by two reverse lookups against `crafting.json`,
-`findRecipeForItem(name)` (is this item the *result* of a recipe) and
-`findRecipesUsingItem(name)` (is this item a *component* in one or more recipes) — both
-purely derived at render time from existing data, no new fields needed on `items.json` for
-this part. Clicking a recipe link closes the item viewer and calls `goToRecipe`, same
-navigation used elsewhere.
+Why this is a strict improvement, not just a reskin: the screenshot was *always* a
+secondary preview, never the source of truth (the JSON already had every fact needed for
+the table, filters, and search) — so drawing a card from that same JSON instead of showing
+a picture loses nothing. It also eliminates a whole category of problems this file used to
+carry workarounds for: cut-off/truncated screenshot text, the two-screenshot-merge dance
+for overflowing cards, and the item-image-vs-recipe-image proxy rule (a recipe's result
+with no item-card screenshot yet had to borrow the recipe card's picture as a stand-in) —
+none of that exists anymore, because there's no image lifecycle to manage. A card also
+never needs to scroll (unlike a screenshot, which could be taller than the viewer) since
+its layout just wraps to fit whatever fields exist.
 
-The modal also checks for an optional `item.foundAt` string (not implemented on any item
-yet) and shows it as a "Found:" line if present — this is intentionally ready for a future
-"where you can find this item" field (quest reward / drop from a named mob or boss) without
-needing another code change when that data starts coming in. When the user starts supplying
-that information, add a `foundAt` field to the relevant `items.json` entries (free text is
-fine to start, e.g. `"Dropped by <mob name>"` or `"Quest reward: <quest name>"` — revisit
-this as a structured field only if/when enough data comes in to warrant it, same as every
-other schema field in this file). No new image files are needed for the item viewer itself —
-it reuses each item's existing `images/items/*.jpg`.
+**The renderer:** `renderItemCardHTML(item)` (items) and `renderRecipeCardHTML(recipe)`
+(recipes) in `script.js` build the card's HTML from scratch each time it's shown — header
+(a letter-in-a-square icon, the name, tag/tradeskill badges), a field grid (Slot/AC/Weight/
+Size/etc., or Weight/Size for recipes), a row of stat chips (STR/AC bonuses, resists,
+haste — via the shared `statEntries(item)` helper, also used by the table's plain-text
+`formatStats()`), a Class/Race line, description/effect text, and — items only — a
+"Found at" line (see below). Recipes additionally list Components, each one a link to the
+Item Database when a matching item exists (same `findItemByName` dynamic-linking pattern
+as before, unchanged).
 
-`images/items/*.jpg` and `images/crafting/*.jpg` are kept deliberately separate, even for
-the same crafted item, and even when one was originally copied from the other. When a
-recipe's result has no item-card screenshot yet (e.g. Rawhide Cloak), its recipe-card
-screenshot gets reused as a stand-in for `images/items/<slug>.jpg` so the Item Database
-still has something to show (see the "Adding an item to the Item Database" inbox workflow
-above for the exact steps) — but the two files are never the *same* file going forward, and
-they should not stay in sync. **If the user later posts a real item-card screenshot for that
-item, replace `images/items/<slug>.jpg` with it — leave `images/crafting/<slug>.jpg` as the
-recipe-card screenshot it already is.** The Item Database and the Crafting page are showing
-two different things (what the item looks like vs. what the recipe to make it looks like)
-that only happen to have identical stat text for as long as no real item card exists; don't
-let a later item-card update overwrite the recipe's own picture, and don't treat the
-item-card screenshot as a duplicate-to-discard just because an image already exists at that
-slug — check whether the existing one is a proxy first.
+**Item cards use the gold `--accent`; recipe cards use the teal `--accent-craft`, with the
+recipe's own name colored teal and its tradeskill shown as a badge where an item card would
+show its tags.** This was a deliberate, explicit request from the user ("make a small
+adjustment to the recipes so they are not confused with items") — keep this color split
+if you touch either card type, since it's the only thing keeping the two visually distinct
+given they otherwise share the exact same card structure (`.item-card` base class, with
+`item-card-recipe`/`item-card-icon-recipe`/`item-card-name-recipe`/`badge-tag-craft`
+modifiers for the recipe variant).
+
+**Where cards appear:**
+- Hovering any `.item-name-hover` element (an Item Database row, a linked recipe name, or a
+  linked recipe component) shows the matched item's card in a floating tooltip
+  (`#item-tooltip`, positioned by `setupItemTooltip` — same flip-above-if-no-room-below
+  logic as before, just rendering a card's `innerHTML` instead of setting an `<img src>`).
+  The lookup is always by name (`data-alt` + `findItemByName`) — nothing caches an image
+  path anymore, so this always reflects the current data.
+- Clicking an item's name in the Item Database opens `#item-viewer`, a modal built by
+  `openItemViewer`/`setupItemViewer`, showing the same card at a larger size plus the
+  "Crafted via" / "Used to craft" section (two reverse lookups against `crafting.json`,
+  `findRecipeForItem`/`findRecipesUsingItem`, unchanged from before). Since a rendered card
+  can't be taller than its content, the modal doesn't need the old scroll-within-a-fixed-
+  height trick — `#item-viewer-panel` just caps at `max-height: 88vh` with a plain
+  `overflow-y: auto` as a safety net. The close button lives on the overlay itself (like
+  the Maps viewer's), since the card has no separate header bar to anchor it to anymore.
+- Every recipe on the Crafting page renders as its own card directly in the page (no
+  hover/click needed to see a recipe's own weight/size/components — they're always visible
+  in the grid, see `renderCraftingRecipes`).
+
+**`item.foundAt`** is an optional free-text string ("Dropped by \<mob name\>", "Quest
+reward: \<quest name\>") shown as a "Found at" line on every item card — present or not, the
+line always renders (as "not yet known" when absent), by design, so the field's existence
+is visible and the layout doesn't shift once it's filled in. No item has this populated yet;
+add it directly to the relevant `items.json` entry when that data starts coming in, no code
+changes needed. Revisit this as a structured field (e.g. with a link) only if/when enough
+data comes in to warrant it, same as every other schema field in this file.
 
 ## Known CSS gotcha
 

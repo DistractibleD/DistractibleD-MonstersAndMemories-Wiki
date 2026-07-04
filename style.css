@@ -12,6 +12,8 @@
   --text-dim: #9a9ba3;
   --accent: #e0a640;       /* <- change this hex to retheme the site */
   --accent-dim: #7a6636;
+  --accent-craft: #5fb3a3; /* crafting-only accent, keeps recipe cards visually distinct from item cards */
+  --accent-craft-dim: #35635a;
 }
 
 * { box-sizing: border-box; }
@@ -359,7 +361,133 @@ html, body {
   vertical-align: middle;
 }
 
-/* Hover-to-preview item screenshot; click for the full item viewer below */
+/* ---------- Item/recipe cards ----------
+   Shared, original card layout (not modeled on any other site) used
+   everywhere an item or recipe needs to show its full stats: the hover
+   preview (#item-tooltip), the item viewer modal, and every recipe card
+   on the Crafting page. Gold accent = item, teal accent = recipe — the
+   two are visually distinct even though they share the same structure,
+   so a recipe card is never mistaken for an item card at a glance. */
+.item-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.86rem;
+}
+.item-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.item-card-icon {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--bg-panel-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+.item-card-icon-recipe {
+  color: var(--accent-craft);
+}
+.item-card-name {
+  flex: 1;
+  min-width: 0;
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--accent);
+}
+.item-card-name a {
+  color: inherit;
+  text-decoration: none;
+}
+.item-card-name a:hover {
+  text-decoration: underline;
+}
+.item-card-name-recipe {
+  color: var(--accent-craft);
+}
+.item-card-badges {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.badge-tag-craft {
+  background: var(--accent-craft-dim);
+}
+.item-card-body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.item-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 4px 14px;
+  font-size: 0.82rem;
+}
+.item-card-field {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.item-card-field-label {
+  color: var(--text-dim);
+}
+.item-card-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.item-card-chip {
+  background: var(--bg-panel-hover);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 2px 7px;
+  font-size: 0.78rem;
+}
+.item-card-chip-value {
+  color: #8fc97a;
+}
+.item-card-section {
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+.item-card-section-flavor {
+  font-style: italic;
+  color: var(--text);
+}
+.item-card-muted {
+  color: #6b6c72;
+}
+.item-card-components {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  color: var(--text);
+}
+.item-card-components li {
+  padding: 2px 0;
+}
+.item-card-components a {
+  color: var(--accent);
+}
+
+/* Hover-to-preview item/recipe card; click an item's name for the full viewer */
 .item-name-hover {
   cursor: pointer;
   border-bottom: 1px dotted var(--accent-dim);
@@ -368,11 +496,10 @@ html, body {
   display: none;
   position: fixed;
   z-index: 200;
-  width: 280px;
-  max-width: 60vw;
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  width: 320px;
+  max-width: 90vw;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
   pointer-events: none;
 }
 
@@ -394,56 +521,34 @@ html, body {
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 10px;
-  max-width: min(700px, 92vw);
+  max-width: min(420px, 92vw);
   max-height: 88vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
 }
-#item-viewer-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--border);
-  flex: 0 0 auto;
-}
-#item-viewer-title {
-  font-family: 'Sora', sans-serif;
-  font-weight: 600;
-  font-size: 0.98rem;
+#item-viewer-card .item-card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 #item-viewer-close {
-  background: transparent;
-  border: 0;
-  color: var(--text-dim);
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  color: var(--text);
   font-size: 1.4rem;
   line-height: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   cursor: pointer;
-  padding: 0 4px;
 }
 #item-viewer-close:hover {
   color: var(--accent);
 }
-#item-viewer-scroll {
-  overflow-y: auto;
-  flex: 1 1 auto;
-  min-height: 0;
-}
-#item-viewer-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-}
 #item-viewer-info {
-  flex: 0 0 auto;
-  max-height: 30vh;
-  overflow-y: auto;
   padding: 12px 16px;
   border-top: 1px solid var(--border);
   font-size: 0.9rem;
@@ -539,43 +644,11 @@ html, body {
   vertical-align: middle;
   border: 1px solid var(--border);
 }
-.craft-recipe-list {
-  list-style: none;
-  padding: 0;
-  margin: 18px 0 0;
-}
-.craft-recipe-list li {
-  padding: 10px 14px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  margin-bottom: 8px;
-}
-.craft-recipe-header {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.craft-recipe-meta {
-  color: var(--text-dim);
-  font-size: 0.82rem;
-  margin-top: 4px;
-}
-.craft-recipe-components {
-  margin-top: 8px;
-  font-size: 0.88rem;
-}
-.craft-recipe-components ul {
-  list-style: none;
-  padding: 0;
-  margin: 4px 0 0;
-}
-.craft-recipe-components li {
-  padding: 2px 0;
-  border: 0;
-  margin: 0;
-}
-.craft-recipe-components a {
-  color: var(--accent);
+.craft-recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
 }
 /* Recipe difficulty badges — colors match the game's own trivial/skill-up
    tiers (Green = trivial/no XP, up through Red = hardest). */

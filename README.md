@@ -75,19 +75,18 @@ Unlike normal pages, the **Item Database** isn't a `.md` file — it's a searcha
 filterable, sortable table built from `items.json` (in the project root). You'll still
 never need to touch `index.html`, `style.css`, or `script.js` to use it.
 
-To add a new item:
-
-1. Add an object for it to `items.json` — copy an existing entry as a template and change
-   the values. Weapons use `damage` / `delay` (the site calculates the damage-to-delay
-   ratio automatically); armor and jewelry use `ac` and `stats` instead.
-2. Drop its screenshot into `images/items/`, named to match the `image` path you put in
-   that entry (e.g. `images/items/tunic-of-night.jpg` — item screenshots are saved as
-   `.jpg` to keep the site's file size down; map images are the exception and stay as
-   high-quality `.png`, since those get zoomed in on).
+To add a new item, add an object for it to `items.json` — copy an existing entry as a
+template and change the values. Weapons use `damage` / `delay` (the site calculates the
+damage-to-delay ratio automatically); armor and jewelry use `ac` and `stats` instead. You
+don't need to save a screenshot anywhere — the item's screenshot is just what you (or
+Claude) read the stats from; the site draws its own clean card from the data instead of
+showing the picture.
 
 The search box, and the type/slot/class filters on the page, are all built automatically
 from whatever is in `items.json` — you don't need to update anything else when you add an
-item or a new class. Hovering an item's name on the page shows its screenshot.
+item or a new class. Hovering an item's name on the page shows its full card (stats,
+classes, race, and so on) — an original design built from the data, not a picture of the
+in-game popup.
 
 ---
 
@@ -99,7 +98,7 @@ aren't in the game yet show a "Planned" badge instead of a recipe list. Clicking
 shows its recipes, which come from `crafting.json`, the same way items come from
 `items.json`.
 
-To add a new recipe: add an object to `crafting.json` naming the tradeskill it belongs to,
-and drop its screenshot into `images/crafting/`. The recipe format is still simple since no
-real recipes have been added yet — as real ones come in, more detail (ingredients, yield,
-etc.) will get added the same way the Item Database grew over time.
+To add a new recipe: add an object to `crafting.json` naming the tradeskill it belongs to
+— no screenshot needed, same as items above. Recipe cards look like item cards but in a
+different color (teal instead of gold) so the two are never confused, with the tradeskill
+name shown where an item card would show its tags.
