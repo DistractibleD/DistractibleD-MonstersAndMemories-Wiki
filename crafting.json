@@ -556,5 +556,487 @@
     "listOrder": 8,
     "difficultyColor": "Red",
     "observedAtSkill": 1
+  },
+  {
+    "name": "Copper Mounting",
+    "slug": "copper-mounting",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 1,
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Copper Setting",
+    "slug": "copper-setting",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 2,
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Copper Wire",
+    "slug": "copper-wire",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 3,
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Black Sapphire Copper Ring",
+    "slug": "inlaid-black-sapphire-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 4,
+    "difficultyColor": "White",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 0
+  },
+  {
+    "name": "Inlaid Bloodstone Copper Ring",
+    "slug": "inlaid-bloodstone-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 5,
+    "difficultyColor": "White",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 0
+  },
+  {
+    "name": "Inlaid Carnelian Copper Ring",
+    "slug": "inlaid-carnelian-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 6,
+    "difficultyColor": "White",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 0
+  },
+  {
+    "name": "Inlaid Cat's Eye Agate Copper Ring",
+    "slug": "inlaid-cats-eye-agate-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 7,
+    "difficultyColor": "White",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 0
+  },
+  {
+    "name": "Inlaid Diamond Copper Ring",
+    "slug": "inlaid-diamond-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 8,
+    "difficultyColor": "White",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 0
+  },
+  {
+    "name": "Inlaid Emerald Copper Ring",
+    "slug": "inlaid-emerald-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 9,
+    "difficultyColor": "White",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 0
+  },
+  {
+    "name": "Inlaid Hematite Copper Ring",
+    "slug": "inlaid-hematite-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 10,
+    "difficultyColor": "White",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 0
+  },
+  {
+    "name": "Inlaid Lapis Lazuli Copper Ring",
+    "slug": "inlaid-lapis-lazuli-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 11,
+    "difficultyColor": "White",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 0
+  },
+  {
+    "name": "Inlaid Onyx Copper Ring",
+    "slug": "inlaid-onyx-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 12,
+    "difficultyColor": "White",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 0
+  },
+  {
+    "name": "Inlaid Opal Copper Ring",
+    "slug": "inlaid-opal-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 13,
+    "difficultyColor": "White",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 0
+  },
+  {
+    "name": "Inlaid Peridot Copper Ring",
+    "slug": "inlaid-peridot-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 14,
+    "difficultyColor": "White",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 0
+  },
+  {
+    "name": "Inlaid Sapphire Copper Ring",
+    "slug": "inlaid-sapphire-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 15,
+    "difficultyColor": "White",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 0
+  },
+  {
+    "name": "Inlaid Topaz Copper Ring",
+    "slug": "inlaid-topaz-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 16,
+    "difficultyColor": "White",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 0
+  },
+  {
+    "name": "Inlaid Amber Copper Ring",
+    "slug": "inlaid-amber-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 17,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Black Pearl Copper Ring",
+    "slug": "inlaid-black-pearl-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 18,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Blue Diamond Copper Ring",
+    "slug": "inlaid-blue-diamond-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 19,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Fire Emerald Copper Ring",
+    "slug": "inlaid-fire-emerald-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 20,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Fire Opal Copper Ring",
+    "slug": "inlaid-fire-opal-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 21,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Jacinth Copper Ring",
+    "slug": "inlaid-jacinth-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 22,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Jade Copper Ring",
+    "slug": "inlaid-jade-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 23,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Jasper Copper Ring",
+    "slug": "inlaid-jasper-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 24,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Malachite Copper Ring",
+    "slug": "inlaid-malachite-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 25,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Pearl Copper Ring",
+    "slug": "inlaid-pearl-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 26,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Ruby Copper Ring",
+    "slug": "inlaid-ruby-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 27,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Star Rose Quartz Copper Ring",
+    "slug": "inlaid-star-rose-quartz-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 28,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Star Ruby Copper Ring",
+    "slug": "inlaid-star-ruby-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 29,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Turquoise Copper Ring",
+    "slug": "inlaid-turquoise-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 30,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Wolf's Eye Agate Copper Ring",
+    "slug": "inlaid-wolfs-eye-agate-copper-ring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 31,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Black Sapphire Copper Earring",
+    "slug": "inlaid-black-sapphire-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 32,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Bloodstone Copper Earring",
+    "slug": "inlaid-bloodstone-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 33,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Carnelian Copper Earring",
+    "slug": "inlaid-carnelian-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 34,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Cat's Eye Agate Copper Earring",
+    "slug": "inlaid-cats-eye-agate-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 35,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Diamond Copper Earring",
+    "slug": "inlaid-diamond-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 36,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Emerald Copper Earring",
+    "slug": "inlaid-emerald-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 37,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Hematite Copper Earring",
+    "slug": "inlaid-hematite-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 38,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Lapis Lazuli Copper Earring",
+    "slug": "inlaid-lapis-lazuli-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 39,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Onyx Copper Earring",
+    "slug": "inlaid-onyx-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 40,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Opal Copper Earring",
+    "slug": "inlaid-opal-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 41,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Peridot Copper Earring",
+    "slug": "inlaid-peridot-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 42,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Sapphire Copper Earring",
+    "slug": "inlaid-sapphire-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 43,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Topaz Copper Earring",
+    "slug": "inlaid-topaz-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 44,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Amber Copper Earring",
+    "slug": "inlaid-amber-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 45,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Black Pearl Copper Earring",
+    "slug": "inlaid-black-pearl-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 46,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Blue Diamond Copper Earring",
+    "slug": "inlaid-blue-diamond-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 47,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Fire Emerald Copper Earring",
+    "slug": "inlaid-fire-emerald-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 48,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Fire Opal Copper Earring",
+    "slug": "inlaid-fire-opal-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 49,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Jacinth Copper Earring",
+    "slug": "inlaid-jacinth-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 50,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Jade Copper Earring",
+    "slug": "inlaid-jade-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 51,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Jasper Copper Earring",
+    "slug": "inlaid-jasper-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 52,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Malachite Copper Earring",
+    "slug": "inlaid-malachite-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 53,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Pearl Copper Earring",
+    "slug": "inlaid-pearl-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 54,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Ruby Copper Earring",
+    "slug": "inlaid-ruby-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 55,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Star Rose Quartz Copper Earring",
+    "slug": "inlaid-star-rose-quartz-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 56,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Star Ruby Copper Earring",
+    "slug": "inlaid-star-ruby-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 57,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Turquoise Copper Earring",
+    "slug": "inlaid-turquoise-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 58,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Inlaid Wolf's Eye Agate Copper Earring",
+    "slug": "inlaid-wolfs-eye-agate-copper-earring",
+    "tradeskill": "Jewelcrafting",
+    "listOrder": 59,
+    "difficultyColor": "Red",
+    "observedAtSkill": 0
   }
 ]

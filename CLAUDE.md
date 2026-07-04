@@ -337,7 +337,10 @@ the inbox, don't move them into `images/crafting/` or `images/duplicates/`.
 1. The window's title bar names the tradeskill directly (more reliable than guessing from
    item names, unlike the individual Rawhide Canvas/Strap cards which didn't state one).
    The "X / 300" line at the bottom is the user's current skill in that tradeskill —
-   capture it as `observedAtSkill` on every recipe pulled from this screenshot.
+   capture it as `observedAtSkill` on every recipe pulled from this screenshot. **If that
+   line is missing from the screenshot** (confirmed by the user, 2026-07-04 — e.g. a window
+   screenshot that only shows the "Fletching" title with no "X / 300" line below it),
+   assume `observedAtSkill: 0` rather than leaving it unset or asking.
 2. For each recipe name+color in the list: if it already exists in `crafting.json` (e.g. a
    recipe that already has a full card), leave its card-derived fields alone (`image`,
    `weight`, `size`, `components`, `difficultyText`) — this window is a secondary,
