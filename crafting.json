@@ -491,7 +491,7 @@
     "tradeskill": "Fletching",
     "listOrder": 1,
     "difficultyColor": "Green",
-    "observedAtSkill": 1
+    "observedAtSkill": 27
   },
   {
     "name": "Arrow x500",
@@ -499,55 +499,111 @@
     "tradeskill": "Fletching",
     "listOrder": 2,
     "difficultyColor": "Green",
-    "observedAtSkill": 1
+    "observedAtSkill": 27
   },
   {
     "name": "Bow",
     "slug": "bow",
     "tradeskill": "Fletching",
     "listOrder": 3,
-    "difficultyColor": "White",
-    "observedAtSkill": 1
+    "difficultyColor": "Green",
+    "observedAtSkill": 27
   },
   {
     "name": "Buckler",
     "slug": "buckler",
     "tradeskill": "Fletching",
     "listOrder": 4,
-    "difficultyColor": "White",
-    "observedAtSkill": 1
+    "difficultyColor": "Green",
+    "observedAtSkill": 27
   },
   {
     "name": "Stonehead Arrow x100",
     "slug": "stonehead-arrow-x100",
     "tradeskill": "Fletching",
     "listOrder": 5,
-    "difficultyColor": "Orange",
-    "observedAtSkill": 1
+    "difficultyColor": "Green",
+    "observedAtSkill": 27
   },
   {
     "name": "Stonehead Arrow x1000",
     "slug": "stonehead-arrow-x1000",
     "tradeskill": "Fletching",
     "listOrder": 6,
-    "difficultyColor": "Orange",
-    "observedAtSkill": 1
+    "difficultyColor": "Green",
+    "observedAtSkill": 27
   },
   {
     "name": "Stonehead Arrow x500",
     "slug": "stonehead-arrow-x500",
     "tradeskill": "Fletching",
     "listOrder": 7,
-    "difficultyColor": "Orange",
-    "observedAtSkill": 1
+    "difficultyColor": "Green",
+    "observedAtSkill": 27
   },
   {
     "name": "Longbow",
     "slug": "longbow",
     "tradeskill": "Fletching",
     "listOrder": 8,
+    "difficultyColor": "Dark Blue",
+    "observedAtSkill": 27
+  },
+  {
+    "name": "Copperhead Arrow x100",
+    "slug": "copperhead-arrow-x100",
+    "tradeskill": "Fletching",
+    "listOrder": 9,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 27
+  },
+  {
+    "name": "Copperhead Arrow x1000",
+    "slug": "copperhead-arrow-x1000",
+    "tradeskill": "Fletching",
+    "listOrder": 10,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 27
+  },
+  {
+    "name": "Copperhead Arrow x500",
+    "slug": "copperhead-arrow-x500",
+    "tradeskill": "Fletching",
+    "listOrder": 11,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 27
+  },
+  {
+    "name": "Bronzehead Arrow x100",
+    "slug": "bronzehead-arrow-x100",
+    "tradeskill": "Fletching",
+    "listOrder": 12,
     "difficultyColor": "Red",
-    "observedAtSkill": 1
+    "observedAtSkill": 27
+  },
+  {
+    "name": "Bronzehead Arrow x1000",
+    "slug": "bronzehead-arrow-x1000",
+    "tradeskill": "Fletching",
+    "listOrder": 13,
+    "difficultyColor": "Red",
+    "observedAtSkill": 27
+  },
+  {
+    "name": "Bronzehead Arrow x500",
+    "slug": "bronzehead-arrow-x500",
+    "tradeskill": "Fletching",
+    "listOrder": 14,
+    "difficultyColor": "Red",
+    "observedAtSkill": 27
+  },
+  {
+    "name": "Recurve Bow",
+    "slug": "recurve-bow",
+    "tradeskill": "Fletching",
+    "listOrder": 15,
+    "difficultyColor": "Red",
+    "observedAtSkill": 27
   },
   {
     "name": "Copper Mounting",
@@ -1017,5 +1073,469 @@
     "listOrder": 59,
     "difficultyColor": "Red",
     "observedAtSkill": 0
+  },
+  {
+    "name": "Copper Kite Shield",
+    "slug": "copper-kite-shield",
+    "image": "images/crafting/copper-kite-shield.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 5.0,
+    "size": "Large",
+    "components": [
+      { "item": "Copper Bar", "quantity": 9 },
+      { "item": "Rawhide Strap", "quantity": 1 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Chain Wristguard",
+    "slug": "copper-chain-wristguard",
+    "image": "images/crafting/copper-chain-wristguard.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 1.4,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Chain Links", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Dark Blue"
+  },
+  {
+    "name": "Copper Chain Boots",
+    "slug": "copper-chain-boots",
+    "image": "images/crafting/copper-chain-boots.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 2.0,
+    "size": "Medium",
+    "components": [
+      { "item": "Copper Chain Links", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Chain Gorget",
+    "slug": "copper-chain-gorget",
+    "image": "images/crafting/copper-chain-gorget.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Chain Links", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Dark Blue"
+  },
+  {
+    "name": "Copper Chain Cloak",
+    "slug": "copper-chain-cloak",
+    "image": "images/crafting/copper-chain-cloak.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.25,
+    "size": "Medium",
+    "components": [
+      { "item": "Copper Chain Links", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Yellow"
+  },
+  {
+    "name": "Copper Chain Gloves",
+    "slug": "copper-chain-gloves",
+    "image": "images/crafting/copper-chain-gloves.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 2.0,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Chain Links", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Yellow"
+  },
+  {
+    "name": "Copper Chain Waistguard",
+    "slug": "copper-chain-waistguard",
+    "image": "images/crafting/copper-chain-waistguard.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.25,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Chain Links", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Chain Mask",
+    "slug": "copper-chain-mask",
+    "image": "images/crafting/copper-chain-mask.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.25,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Chain Links", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Plate Girdle",
+    "slug": "copper-plate-girdle",
+    "image": "images/crafting/copper-plate-girdle.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.25,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Plate", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Plate Collar",
+    "slug": "copper-plate-collar",
+    "image": "images/crafting/copper-plate-collar.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Plate", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Dark Blue"
+  },
+  {
+    "name": "Copper Plate Visor",
+    "slug": "copper-plate-visor",
+    "image": "images/crafting/copper-plate-visor.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.25,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Plate", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Plate Boots",
+    "slug": "copper-plate-boots",
+    "image": "images/crafting/copper-plate-boots.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 3.0,
+    "size": "Medium",
+    "components": [
+      { "item": "Copper Plate", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Plate Bracer",
+    "slug": "copper-plate-bracer",
+    "image": "images/crafting/copper-plate-bracer.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 2.0,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Plate", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Dark Blue"
+  },
+  {
+    "name": "Copper Plate Gauntlets",
+    "slug": "copper-plate-gauntlets",
+    "image": "images/crafting/copper-plate-gauntlets.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 3.0,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Plate", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Yellow"
+  },
+  {
+    "name": "Copper Plate Cloak",
+    "slug": "copper-plate-cloak",
+    "image": "images/crafting/copper-plate-cloak.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.25,
+    "size": "Medium",
+    "components": [
+      { "item": "Copper Plate", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Yellow"
+  },
+  {
+    "name": "Copper Chain Links",
+    "slug": "copper-chain-links",
+    "image": "images/crafting/copper-chain-links.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.2,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Bar", "quantity": 6 },
+      { "item": "Smithing Pliers", "quantity": 1 }
+    ],
+    "difficultyColor": "Light Blue"
+  },
+  {
+    "name": "Enchanted Copper Chain Links",
+    "slug": "enchanted-copper-chain-links",
+    "image": "images/crafting/enchanted-copper-chain-links.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Copper Bar", "quantity": 6 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Plate",
+    "slug": "copper-plate",
+    "image": "images/crafting/copper-plate.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.2,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Bar", "quantity": 6 },
+      { "item": "Smithing Hammer", "quantity": 1 }
+    ],
+    "difficultyColor": "Light Blue"
+  },
+  {
+    "name": "Enchanted Copper Plate",
+    "slug": "enchanted-copper-plate",
+    "image": "images/crafting/enchanted-copper-plate.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Copper Bar", "quantity": 6 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Fasteners",
+    "slug": "copper-fasteners",
+    "image": "images/crafting/copper-fasteners.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Copper Bar", "quantity": 2 }
+    ],
+    "difficultyColor": "Light Blue"
+  },
+  {
+    "name": "Copper Nails",
+    "slug": "copper-nails",
+    "image": "images/crafting/copper-nails.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Bar", "quantity": 6 }
+    ],
+    "difficultyColor": "White"
+  },
+  {
+    "name": "Copper Stirrups",
+    "slug": "copper-stirrups",
+    "image": "images/crafting/copper-stirrups.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Copper Tread", "quantity": 2 },
+      { "item": "Rawhide Strap", "quantity": 2 }
+    ],
+    "difficultyColor": "Light Blue"
+  },
+  {
+    "name": "Copper Tread",
+    "slug": "copper-tread",
+    "image": "images/crafting/copper-tread.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Copper Bar", "quantity": 1 },
+      { "item": "Rawhide Strap", "quantity": 1 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Cauldron",
+    "slug": "copper-cauldron",
+    "image": "images/crafting/copper-cauldron.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 2.5,
+    "size": "Medium",
+    "components": [
+      { "item": "Copper Bar", "quantity": 3 }
+    ],
+    "difficultyColor": "White"
+  },
+  {
+    "name": "Copper Scimitar",
+    "slug": "copper-scimitar",
+    "image": "images/crafting/copper-scimitar.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 7.0,
+    "size": "Medium",
+    "components": [
+      { "item": "Copper Bar", "quantity": 7 }
+    ],
+    "difficultyColor": "Orange"
+  },
+  {
+    "name": "Copper Scythe",
+    "slug": "copper-scythe",
+    "image": "images/crafting/copper-scythe.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 5.0,
+    "size": "Medium",
+    "components": [
+      { "item": "Copper Bar", "quantity": 7 }
+    ],
+    "difficultyColor": "Orange"
+  },
+  {
+    "name": "Copper Dagger",
+    "slug": "copper-dagger",
+    "image": "images/crafting/copper-dagger.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 3.0,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Bar", "quantity": 4 }
+    ],
+    "difficultyColor": "White"
+  },
+  {
+    "name": "Copper Mace",
+    "slug": "copper-mace",
+    "image": "images/crafting/copper-mace.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 7.0,
+    "size": "Large",
+    "components": [
+      { "item": "Copper Bar", "quantity": 7 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Spear",
+    "slug": "copper-spear",
+    "image": "images/crafting/copper-spear.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 7.0,
+    "size": "Large",
+    "components": [
+      { "item": "Copper Bar", "quantity": 9 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Shortsword",
+    "slug": "copper-shortsword",
+    "image": "images/crafting/copper-shortsword.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 5.0,
+    "size": "Medium",
+    "components": [
+      { "item": "Copper Bar", "quantity": 5 }
+    ],
+    "difficultyColor": "White"
+  },
+  {
+    "name": "Copper Battle Axe",
+    "slug": "copper-battle-axe",
+    "image": "images/crafting/copper-battle-axe.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 13.0,
+    "size": "Large",
+    "components": [
+      { "item": "Copper Bar", "quantity": 9 }
+    ],
+    "difficultyColor": "Orange"
+  },
+  {
+    "name": "Copper Great Scythe",
+    "slug": "copper-great-scythe",
+    "image": "images/crafting/copper-great-scythe.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 13.0,
+    "size": "Large",
+    "components": [
+      { "item": "Copper Bar", "quantity": 9 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Warhammer",
+    "slug": "copper-warhammer",
+    "image": "images/crafting/copper-warhammer.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 7.0,
+    "size": "Large",
+    "components": [
+      { "item": "Copper Bar", "quantity": 9 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Trident",
+    "slug": "copper-trident",
+    "image": "images/crafting/copper-trident.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 7.0,
+    "size": "Large",
+    "components": [
+      { "item": "Copper Bar", "quantity": 8 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Longsword",
+    "slug": "copper-longsword",
+    "image": "images/crafting/copper-longsword.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 7.0,
+    "size": "Medium",
+    "components": [
+      { "item": "Copper Bar", "quantity": 7 }
+    ],
+    "difficultyColor": "Red"
+  },
+  {
+    "name": "Copper Axe",
+    "slug": "copper-axe",
+    "image": "images/crafting/copper-axe.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 6.0,
+    "size": "Medium",
+    "components": [
+      { "item": "Copper Bar", "quantity": 7 }
+    ],
+    "difficultyColor": "Orange"
+  },
+  {
+    "name": "Copper Throwing Dagger",
+    "slug": "copper-throwing-dagger",
+    "image": "images/crafting/copper-throwing-dagger.jpg",
+    "tradeskill": "Blacksmithing",
+    "weight": 0.0,
+    "size": "Tiny",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 5 },
+      { "item": "Copper Bar", "quantity": 5 }
+    ],
+    "difficultyColor": "White"
   }
 ]

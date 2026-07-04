@@ -56,7 +56,8 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
    the Damned", 2026-07-04) — use the same all-caps spelling and order as shown on the card.
 3. Bags/satchels/pouches/backpacks use `"type": "Container"` instead of Armor/Weapon/
    Jewelry/Misc, with `capacity` (integer) and `maxSize` (Title Case, same value set as the
-   item's own `size` field — Small/Medium/Large/Extra Large all seen on real cards) instead
+   item's own `size` field — Tiny/Small/Medium/Large/Extra Large all seen on real cards, Tiny
+   first seen 2026-07-04 on several Blacksmithing components) instead
    of `ac`/`stats`/`damage`. Their `slot` is one of `"Bag"`, `"Belt"`, `"Backpack"`, or
    `"Saddlebag"` (mount-only, `race` will be mount codes like `["HRS", "DNK"]` rather than
    player races/ALL — see below) — distinct from `"Waist"`, which is for actual belt armor,
@@ -183,13 +184,12 @@ extending it the same way as new fields show up on future cards, rather than gue
   top of that page — see "Header search box" above for the same
   pending-variable-consumed-on-render pattern.
 - `difficultyColor` / `difficultyText` — the recipe's trivial/skill-up status, shown as
-  colored text on the card. The full color → message mapping — confirmed exact wording for
-  Green, Dark Blue, Yellow, Orange, and Red now seen on real cards (2026-07-03); Light Blue
-  and White are still the unofficial wiki's paraphrase, since no card has shown that exact
-  text yet: Green "This recipe is trivial to you.", Light Blue "...simple task." (not yet
-  confirmed), Dark Blue "Your skills make this a moderate task.", White "...complex task."
-  (not yet confirmed), Yellow "Your skills make this a daunting task.", Orange "Your skills
-  make this a herculean task.", Red "You will require all your skills to craft this." Match
+  colored text on the card. The full color → message mapping is now confirmed exact wording
+  for all seven colors, straight from real cards: Green "This recipe is trivial to you.",
+  Light Blue "Your skills make this a simple task." (confirmed 2026-07-04), Dark Blue "Your
+  skills make this a moderate task.", White "Your skills make this a complex task." (confirmed
+  2026-07-04), Yellow "Your skills make this a daunting task.", Orange "Your skills make this
+  a herculean task.", Red "You will require all your skills to craft this." Match
   the card's exact wording to a color from this list; if it doesn't match any of these, flag
   it to the user rather than guessing a new one. **Still record these fields on every recipe
   (from a recipe card or a crafting-window screenshot) even though the site no longer
