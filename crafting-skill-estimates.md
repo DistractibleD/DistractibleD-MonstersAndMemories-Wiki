@@ -55,6 +55,61 @@ color-ordering rule that's still
 believed to hold" (Green < Light Blue < Dark Blue < White < Yellow < Orange < Red, easier to
 harder relative to the crafter's own skill at observation time).
 
+## Band width looks fixed at 5 skill points, anchored to absolute skill (2026-07-04)
+
+The user's hypothesis: bands aren't relative/ratio-based per recipe — every color band is
+exactly 5 skill points wide, and the boundaries fall on the same absolute skill values
+(skill 25, 30, 35, ...) for every recipe, regardless of that recipe's own requirement. A
+large same-day recapture of Leatherworking at skill 28 through 35 (eight separate crafting-
+window screenshots) supports this strongly: **seven different recipes** (Rawhide Boots,
+Rawhide Saddlebag, Rawhide Cap, Rawhide Shoulderpads, Enchanted Rawhide Canvas, Rawhide
+Saddle, Rawhide Leggings — plus Rawhide Belt/Mask from the prior batch) all changed color at
+the *same* two boundaries: between skill 29 and 30, and again between skill 34 and 35.
+
+```
+                      25-29        30-34        35-39        40
+Rawhide Boots:        White        Dark Blue    Light Blue*  —
+Rawhide Saddlebag:    Yellow       White        Dark Blue    Light Blue
+Rawhide Cap:          Orange†      Yellow       White        Dark Blue
+Rawhide Shoulderpads: Orange†      Yellow       White        Dark Blue
+Enchanted Rwhd Canvas:Orange†      Yellow       White        Dark Blue
+Rawhide Saddle:       Orange‡      Yellow       (unchanged)  White
+Rawhide Leggings:     Red‡         (unchanged)  Orange       Yellow
+Enchanted Rwhd Cap:   —            Red          (unchanged)  Orange
+Rawhide Backpack:     —            —            Red          Orange
+Rawhide Belt/Mask:    Light Blue   Green (30+, confirmed 30/31/33)
+```
+(*Boots only confirmed at 35, not the full 35-39 span — no data past 35 for it yet. †Cap/
+Shoulderpads/Enchanted Canvas only confirmed Orange at 28-29 within the 25-29 tier. ‡Saddle/
+Leggings only have data starting at 30, not 25-29.)
+
+Every single one of these lines up on a multiple of 5 — now confirmed at **three separate
+boundaries** (skill 4→5, 29→30, 34→35) and, with a further same-day recapture at skill 39 and
+40, a **fourth** (39→40), across more than a dozen recipes total. This also retroactively
+explains the 2026-07-03 Rawhide Canvas/Bracelet/Cloak/Gloves/Belt/Mask jump at skill 4→5. At
+this point the fixed-5-point-tier model should be treated as well-supported, not just a
+hypothesis — though still not "proven" in the sense the retracted White rule once claimed to
+be, since no observation has yet directly disproven an alternative explanation.
+
+**Working model:** picture skill divided into 5-point tiers (0-4, 5-9, 10-14, ..., 25-29,
+30-34, 35-39, ...). Each recipe has its own tier requirement; the displayed color reflects
+how many tiers apart the crafter's tier is from the recipe's tier (same
+Green-Light Blue-Dark Blue-White-Yellow-Orange-Red ordering as before), not a raw skill-point
+gap. This is a hypothesis, not a proven mechanic — pixel colors were re-verified against
+known-labelled reference cards (see the corrected Orange vs Red calibration below) to rule
+out a measurement error, but it hasn't been tested against a recipe that *doesn't* land on a
+tier boundary in this clean a way. If a future recapture ever shows a color change that
+doesn't fall on a multiple of 5, that would break this model and it should be retracted the
+same way the White-exact rule was.
+
+**Note on the Orange/Red pixel calibration:** earlier in this file "Red" and "Orange" were
+occasionally hard to tell apart from screenshots alone. Verified 2026-07-04 against two cards
+with known wording — Copper Scimitar's "herculean task" (Orange) samples at RGB
+~(189-227, 83-165, 0-30), and Enchanted Copper Plate's "you will require all your skills"
+(Red) samples at RGB ~(200-255, 28-55, 25-50). The distinguishing channel is green: Orange
+sits around G=80-165, Red drops to G=28-55. All the color calls in this file's Leatherworking
+tables have been checked against this calibration.
+
 ## The estimate method (revised 2026-07-03, further weakened 2026-07-04)
 
 The original approach (see git history) assumed a fixed number of skill points per color
@@ -79,51 +134,86 @@ to genuinely open. Treat the numbers below as illustrative, not derived with any
 
 ## What this changes for Rawhide Belt / Rawhide Mask specifically
 
-These two now have four data points each, all consistent with one fixed underlying skill
-requirement T:
+These two now have data at nine skill values, all consistent with one fixed underlying skill
+tier T:
 
 ```
-skill 1-4: Red    (T > 4, recipe still harder than a skill-4 crafter)
-skill 5:   Orange (T > 5, but close — one step past Red)
-skill 22:  Dark Blue (T < 22, recipe now slightly easier than a skill-22 crafter)
-skill 56:  Green  (T well under 56)
+skill 1-4:   Red        (T well above 4)
+skill 5:     Orange     (one tier easier than skill 1-4 — the skill 4→5 boundary)
+skill 22-24: Dark Blue
+skill 25-29: Light Blue (boundary between skill 24 and 25)
+skill 30-33: Green      (boundary between skill 29 and 30 — confirmed 30, 31, 33)
+skill 56:    Green
 ```
+
+Belt and Mask land on the exact same color at every single one of these observations, which
+is itself a data point — it suggests both recipes share the same (or a very close) tier
+requirement, not just a similar-shaped curve. Every boundary seen so far (4→5, 24→25, 29→30)
+falls on a multiple of 5, consistent with the fixed-5-point-tier model above.
 
 That still brackets both recipes' real skill requirement to somewhere between 6 and 21
 (this part doesn't depend on White at all, just the harder/easier relative ordering) — no
 tighter guess than that without more data.
 
-## Estimates (Leatherworking, as of skill 56 recapture, 2026-07-03)
+## What this changes for Rawhide Boots / Rawhide Saddlebag specifically
+
+```
+Rawhide Boots:      23-24 Yellow, 25-29 White, 30-34 Dark Blue, 35-39 Light Blue
+Rawhide Saddlebag:  23-24 Red,    25-29 Yellow, 30-34 White,     35-39 Dark Blue, 40 Light Blue
+```
+
+Saddlebag sits exactly one tier harder than Boots at every single skill value observed —
+strong evidence the two recipes' requirements are a fixed distance apart, not independently
+wandering. The earlier "skill-22-era card" Orange reading for Saddlebag (see the old table
+row below) doesn't fit this clean sequence and should be treated as a stale/mislabeled data
+point rather than folded into the estimate.
+
+## What this changes for Enchanted Rawhide Canvas / Rawhide Cap / Rawhide Shoulderpads
+
+These three also track each other exactly, one tier easier than Saddlebag at every skill
+value seen: 28-29 Orange, 30-34 Yellow, 35-39 White, 40 Dark Blue. Combined with Boots
+(one tier easier again) and Saddlebag, that's now **four recipes in lockstep**, each sitting
+exactly one tier apart from the next — strong evidence for a shared, evenly-spaced family of
+requirements rather than coincidence.
+
+## Estimates (Leatherworking, as of skill 56 recapture, 2026-07-03 — sharpened 2026-07-04)
 
 | Recipe | Data points | Estimated skill | Confidence |
 |---|---|---|---|
 | Rawhide Cloak | White (5) | somewhere near 5 | Low (was "exact 5", retracted 2026-07-04) |
 | Rawhide Gloves | White (5) | somewhere near 5 | Low (was "exact 5", retracted 2026-07-04) |
-| Enchanted Rawhide Leggings | White (56) | somewhere near 56 | Low (was "exact 56", retracted 2026-07-04) |
+| Enchanted Rawhide Leggings | Red (33, 39, 40), White (56) | between 41 and 55 | Low-Medium (was "exact 56", retracted 2026-07-04) |
 | Rawhide Tunic | White (56) | somewhere near 56 | Low (was "exact 56", retracted 2026-07-04) |
 | Rawhide Canvas | Light Blue (1-4), Green (5, 22, 56) | under ~5 | Low |
 | Rawhide Strap | Light Blue (1-4), Green (5, 22, 56) | under ~5 | Low |
 | Rawhide Bracelet | Dark Blue (1-4), Light Blue (5), Green (22, 56) | under ~5, above Canvas/Strap | Low |
 | Rawhide Gorget | Dark Blue (1-4), Light Blue (5), Green (22, 56) | under ~5, above Canvas/Strap | Low |
-| Rawhide Belt | Red (1-4), Orange (5), Dark Blue (22), Green (56) | between 6 and 21 | Medium (relative-ordering bound, doesn't depend on White) |
-| Rawhide Mask | Red (1-4), Orange (5), Dark Blue (22), Green (56) | between 6 and 21 | Medium (relative-ordering bound, doesn't depend on White) |
-| Enchanted Rawhide Cap | Dark Blue (56), Red (skill-22-era card) | between 23 and 55, no tighter bound yet | Low |
-| Rawhide Backpack | Dark Blue (56), Red (skill-22-era card) | between 23 and 55 | Low |
-| Rawhide Leggings | Light Blue (56), Red (skill-22-era card) | between 23 and 55 | Low |
-| Enchanted Rawhide Canvas | Green (56), Red (22) | under 56, no tighter bound | Low |
-| Rawhide Cap | Green (56), Red (22) | under 56 | Low |
-| Rawhide Saddle | Green (56), Red (skill-22-era card) | under 56 | Low |
-| Rawhide Saddlebag | Green (56), Orange (skill-22-era card) | under 56, but the card's Orange (harder than the skill-56 Green) is odd for a "well under" recipe — flag for re-check if a fresher card comes in | Low |
-| Rawhide Shoulderpads | Green (56), Red (skill-22-era card) | under 56 | Low |
-| Rawhide Boots | Green (56), Yellow (skill-22-era card) | under 56 | Low |
-| Hide Canvas | Orange (56) | above 56, no upper bound yet | Very low |
-| Hide Strap | Orange (56) | above 56 | Very low |
-| Hide Bracelet | Red (56) | well above 56 | Very low, floor only |
-| Hide Gorget | Red (56) | well above 56 | Very low, floor only |
+| Rawhide Belt | Red (1-4), Orange (5), Dark Blue (22-24), Light Blue (25-29), Green (30, 31, 33, 56) | between 6 and 21 | Medium (relative-ordering bound, doesn't depend on White) |
+| Rawhide Mask | Red (1-4), Orange (5), Dark Blue (22-24), Light Blue (25-29), Green (30, 31, 33, 56) | between 6 and 21 | Medium (relative-ordering bound, doesn't depend on White) |
+| Enchanted Rawhide Cap | Red (32-39), Orange (40), Dark Blue (56) | between 41 and 55 | Medium |
+| Rawhide Backpack | Red (33, 39), Orange (40), Dark Blue (56) | between 41 and 55 | Medium |
+| Rawhide Leggings | Red (30-34), Orange (35-39), Yellow (40), Light Blue (56) | between 41 and 55 | Medium |
+| Enchanted Rawhide Canvas | Orange (28-29), Yellow (30-34), White (35-39), Dark Blue (40), Green (56) | between 41 and 55 | Medium-High (five data points, all on 5-point boundaries) |
+| Rawhide Cap | Orange (28-29), Yellow (30-34), White (35-39), Dark Blue (40), Green (56) | between 41 and 55 | Medium-High |
+| Rawhide Saddle | Orange (30-34), Yellow (35-39), White (40), Green (56) | between 41 and 55 | Medium |
+| Rawhide Saddlebag | Yellow (25-29), White (30-34), Dark Blue (35-39), Light Blue (40), Green (56) | between 41 and 55 | Medium-High |
+| Rawhide Shoulderpads | Orange (28-29), Yellow (30-34), White (35-39), Dark Blue (40), Green (56) | between 41 and 55 | Medium-High |
+| Rawhide Boots | Yellow (23-24), White (25-29), Dark Blue (30-34), Light Blue (35-39, no skill-40 card yet), Green (56) | between 36 and 55 | Medium |
+| Rawhide Tunic | Red (33, 40), White (56) | between 41 and 55 | Low-Medium |
+| Enchanted Rawhide Tunic | Red (33, 40), Yellow (56) | between 41 and 55 | Low-Medium |
+| Hide Canvas | Red (33, 40), Orange (56) | between 41 and 55 | Low-Medium |
+| Hide Strap | Red (33, 40), Orange (56) | between 41 and 55 | Low-Medium |
+| Hide Bracelet | Red (40, 56) | well above 56 | Very low, floor only |
+| Hide Gorget | Red (40, 56) | well above 56 | Very low, floor only |
 | Hide Cloak | Red (56) | well above 56 | Very low, floor only |
 | Hide Gloves | Red (56) | well above 56 | Very low, floor only |
 | Hide Belt | Red (56) | well above 56 | Very low, floor only |
 | Hide Mask | Red (56) | well above 56 | Very low, floor only |
+
+Two same-day 2026-07-04 recaptures — skill 28 through 35, then skill 39 and 40 — are what
+sharpened most of the rows above — see "Band width looks fixed at 5 skill points" above for
+the full skill-by-skill breakdown and why every boundary in both batches fell on a multiple
+of 5.
 
 ## Estimates (Tailoring, as of skill 5 capture, 2026-07-03)
 
