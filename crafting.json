@@ -490,5 +490,71 @@
     "listOrder": 15,
     "difficultyColor": "Red",
     "observedAtSkill": 5
+  },
+  {
+    "name": "Arrow x100",
+    "slug": "arrow-x100",
+    "tradeskill": "Fletching",
+    "listOrder": 1,
+    "difficultyColor": "Green",
+    "observedAtSkill": 1
+  },
+  {
+    "name": "Arrow x500",
+    "slug": "arrow-x500",
+    "tradeskill": "Fletching",
+    "listOrder": 2,
+    "difficultyColor": "Green",
+    "observedAtSkill": 1
+  },
+  {
+    "name": "Bow",
+    "slug": "bow",
+    "tradeskill": "Fletching",
+    "listOrder": 3,
+    "difficultyColor": "White",
+    "observedAtSkill": 1,
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Buckler",
+    "slug": "buckler",
+    "tradeskill": "Fletching",
+    "listOrder": 4,
+    "difficultyColor": "White",
+    "observedAtSkill": 1,
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Stonehead Arrow x100",
+    "slug": "stonehead-arrow-x100",
+    "tradeskill": "Fletching",
+    "listOrder": 5,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 1
+  },
+  {
+    "name": "Stonehead Arrow x1000",
+    "slug": "stonehead-arrow-x1000",
+    "tradeskill": "Fletching",
+    "listOrder": 6,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 1
+  },
+  {
+    "name": "Stonehead Arrow x500",
+    "slug": "stonehead-arrow-x500",
+    "tradeskill": "Fletching",
+    "listOrder": 7,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 1
+  },
+  {
+    "name": "Longbow",
+    "slug": "longbow",
+    "tradeskill": "Fletching",
+    "listOrder": 8,
+    "difficultyColor": "Red",
+    "observedAtSkill": 1
   }
 ]

@@ -52,8 +52,8 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
    "MAGIC". Capture every such tag (not just MAGIC) in a `tags` array, e.g. `["MAGIC"]` or
    `["MAGIC", "UNIQUE", "NODROP"]`; use `[]` if there's no tag line. Known tags seen so far
    (all confirmed on real cards): MAGIC, UNIQUE, NODROP (first seen together on the same
-   card, "Platinum Badge of the Living City", 2026-07-03) — use the same all-caps spelling
-   and order as shown on the card.
+   card, "Platinum Badge of the Living City", 2026-07-03), LORE (first seen on "Dagger of
+   the Damned", 2026-07-04) — use the same all-caps spelling and order as shown on the card.
 3. Bags/satchels/pouches/backpacks use `"type": "Container"` instead of Armor/Weapon/
    Jewelry/Misc, with `capacity` (integer) and `maxSize` (Title Case, same value set as the
    item's own `size` field — Small/Medium/Large/Extra Large all seen on real cards) instead
@@ -61,7 +61,10 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
    `"Saddlebag"` (mount-only, `race` will be mount codes like `["HRS", "DNK"]` rather than
    player races/ALL — see below) — distinct from `"Waist"`, which is for actual belt armor,
    not a container-carrying slot. Some containers can go in more than one slot (e.g.
-   `"Bag / Belt"`), same `"X / Y"` format used for `"Primary / Secondary"`.
+   `"Bag / Belt"`), same `"X / Y"` format used for `"Primary / Secondary"`. A container whose
+   card says "Tradeskill Container." (first seen on "Smuggler's Damaged Logbook", 2026-07-04)
+   gets `"tradeskillContainer": true` — shown on its card as a "TRADESKILL" badge alongside
+   any real tags.
 3a. Mount equipment (saddles, saddlebags, rigging) works the same as any other item, just
     with slots the game doesn't use for players — `"Rigging"` for the saddle itself,
     `"Saddlebag"` for its cargo container — and a `race` array of mount codes read straight
@@ -74,6 +77,27 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
    visitor — it exists purely so the data can be re-verified against the original card
    later if something's ever in doubt. Keep setting `image` on new entries the same way as
    before 2026-07-04.
+5. A green line starting with "Enchant" (e.g. "Enchant Boots: Minor Agility +1 AGI", seen on
+   "Copper Plate Boots", 2026-07-04) is **not** part of the item's own description or effect
+   — it's a temporary buff applied to that specific item by an Enchanter-tradeskill scroll,
+   not a fixed property of the base item. Leave it out of `description`/`effect` entirely;
+   record the item's other stats as normal (the card's Slot/AC/Weight/Size/Class/Race lines
+   describe the base item same as any other card). Revisit only if/when enchantment scrolls
+   themselves become their own trackable thing (e.g. Enchanter recipes in `crafting.json`).
+6. Food and drink use `"type": "Food"` or `"Drink"` (first added 2026-07-04) — there's no
+   on-card tag for either, only the flavor text ("This is a modest meal."/"...modest
+   drink."), so that's the signal to use. These cards never show Slot/Class/Race at all
+   (they're not equippable), so leave `slot` out entirely, but still set
+   `"classes": ["ALL"]`/`"race": ["ALL"]` — matching the existing convention for containers
+   (see above), which also never show Class/Race on their cards but are understood to be
+   unrestricted rather than actually missing that data. Raw crafting materials/currency
+   with no slot concept at all (ore, scraps, wood, coins — e.g. "Copper Ore", "Rawhide
+   Scraps") are the one case that *does* omit `classes`/`race` entirely (`"type": "Misc"`,
+   just `weight`/`size` and a `description` if the card has flavor text) — there's no
+   equivalent "always unrestricted" convention for them since they're never worn or
+   consumed by a class/race at all. The Item Database table and item cards already handle
+   items with no `slot`/`classes`/`race` gracefully (blank Slot field, no Class/Race
+   section on the card) — no code changes needed when adding more of either kind.
 
 Filters (type/slot/class/race/tags/max size) and search are all derived from `items.json`
 at runtime — no other file needs to change when items are added, including when a new tag,

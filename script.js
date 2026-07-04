@@ -18,6 +18,14 @@ let pendingCraftingTradeskill = null;
 // Set when jumping to an item from a recipe's component list, so the Item
 // Database can show a "back to that recipe" link. Same consume-once pattern.
 let pendingReturnToRecipe = null;
+// Set by goToRecipe so the recipe just navigated to (e.g. via an item's
+// "Crafted via"/"Used to craft" links) flashes once its card renders, making
+// it easy to spot among the rest of that tradeskill's recipe grid.
+let pendingHighlightRecipe = null;
+// Set by renderCraftingRecipes when it scrolls to a highlighted recipe, so
+// loadPage's normal "reset scroll to top on navigation" doesn't immediately
+// cancel that scroll.
+let suppressScrollReset = false;
 
 async function ensureItemsData() {
   if (!itemsData) {
@@ -153,7 +161,11 @@ async function loadPage(file) {
     link.classList.toggle('active', link.dataset.file === file);
   });
 
-  window.scrollTo(0, 0);
+  if (suppressScrollReset) {
+    suppressScrollReset = false;
+  } else {
+    window.scrollTo(0, 0);
+  }
 }
 
 function onSearch(e) {
@@ -262,6 +274,7 @@ function goToItem(item, returnToRecipe) {
 
 function goToRecipe(recipe) {
   pendingCraftingTradeskill = recipe.tradeskill;
+  pendingHighlightRecipe = recipe.slug;
   const alreadyThere = location.hash.replace('#', '') === 'crafting';
   location.hash = 'crafting';
   if (alreadyThere) loadPage('crafting');
@@ -296,7 +309,7 @@ function findRecipesUsingItem(itemName) {
 
 const ITEM_STAT_ORDER = ['STR', 'STA', 'AGI', 'DEX', 'WIS', 'INT', 'CHA', 'HP', 'MANA'];
 const ITEM_RESIST_ORDER = ['FIRE', 'COLD', 'MAGIC', 'POISON', 'DISEASE', 'CORRUPTION'];
-const ITEM_TYPE_INITIAL = { Armor: 'A', Weapon: 'W', Jewelry: 'J', Container: 'C', Misc: 'M' };
+const ITEM_TYPE_INITIAL = { Armor: 'A', Weapon: 'W', Jewelry: 'J', Container: 'C', Misc: 'M', Food: 'F', Drink: 'D' };
 
 function itemRatio(item) {
   if (item.damage == null || !item.delay) return null;
@@ -328,6 +341,7 @@ function formatCapacity(item) {
 }
 
 function formatSlot(item) {
+  if (!item.slot) return '—';
   return item.twoHanded ? `${item.slot} (2H)` : item.slot;
 }
 
@@ -368,10 +382,10 @@ async function renderItemsPage(container) {
   const returnToRecipe = pendingReturnToRecipe;
   pendingReturnToRecipe = null;
 
-  const slots = [...new Set(itemsData.map(i => i.slot))].sort();
+  const slots = [...new Set(itemsData.map(i => i.slot))].filter(Boolean).sort();
   const types = [...new Set(itemsData.map(i => i.type))].sort();
-  const classes = [...new Set(itemsData.flatMap(i => i.classes).filter(c => c !== 'ALL'))].sort();
-  const races = [...new Set(itemsData.flatMap(i => i.race).filter(r => r !== 'ALL'))].sort();
+  const classes = [...new Set(itemsData.flatMap(i => i.classes || []).filter(c => c !== 'ALL'))].sort();
+  const races = [...new Set(itemsData.flatMap(i => i.race || []).filter(r => r !== 'ALL'))].sort();
   const tags = [...new Set(itemsData.flatMap(i => i.tags || []))].sort();
   const maxSizes = [...new Set(itemsData.map(i => i.maxSize).filter(Boolean))].sort();
 
@@ -488,8 +502,8 @@ async function renderItemsPage(container) {
     let filtered = itemsData.filter(item => {
       if (type && item.type !== type) return false;
       if (slot && item.slot !== slot) return false;
-      if (cls && !item.classes.includes('ALL') && !item.classes.includes(cls)) return false;
-      if (race && !item.race.includes('ALL') && !item.race.includes(race)) return false;
+      if (cls && !(item.classes || []).includes('ALL') && !(item.classes || []).includes(cls)) return false;
+      if (race && !(item.race || []).includes('ALL') && !(item.race || []).includes(race)) return false;
       if (tag && !(item.tags || []).includes(tag)) return false;
       if (maxSize && item.maxSize !== maxSize) return false;
       if (query && !itemSearchHaystack(item).includes(query)) return false;
@@ -567,9 +581,11 @@ function renderItemRows(tbody, items) {
 // marks it as an ITEM card, as opposed to the teal recipe cards below.
 function renderItemCardHTML(item) {
   const initial = ITEM_TYPE_INITIAL[item.type] || '?';
-  const badges = (item.tags || []).map(t => `<span class="badge-tag">${t}</span>`).join('');
+  const badges = (item.tags || []).map(t => `<span class="badge-tag">${t}</span>`).join('')
+    + (item.tradeskillContainer ? '<span class="badge-tag">TRADESKILL</span>' : '');
 
-  const fields = [{ label: 'Slot', value: formatSlot(item) }];
+  const fields = [];
+  if (item.slot) fields.push({ label: 'Slot', value: formatSlot(item) });
   if (item.ac != null) fields.push({ label: 'AC', value: item.ac });
   if (item.damage != null) {
     fields.push({ label: 'Dmg', value: item.damage });
@@ -604,10 +620,11 @@ function renderItemCardHTML(item) {
         </div>
         ${chips ? `<div class="item-card-chips">${chips}</div>` : ''}
         ${flavor.length ? `<div class="item-card-section item-card-section-flavor">${flavor.map(escapeAttr).join('<br><br>')}</div>` : ''}
+        ${(item.classes || item.race) ? `
         <div class="item-card-section">
           Class: ${escapeAttr(formatList(item.classes))}<br>
           Race: ${escapeAttr(formatList(item.race))}
-        </div>
+        </div>` : ''}
         <div class="item-card-section${item.foundAt ? '' : ' item-card-muted'}">
           Found at &middot; ${item.foundAt ? escapeAttr(item.foundAt) : 'not yet known'}
         </div>
@@ -1016,7 +1033,7 @@ function renderRecipeCardHTML(recipe) {
   ` : '';
 
   return `
-    <div class="item-card item-card-recipe">
+    <div class="item-card item-card-recipe" data-recipe-slug="${escapeAttr(recipe.slug)}">
       <div class="item-card-header">
         <div class="item-card-icon item-card-icon-recipe">${(recipe.tradeskill || '?').charAt(0)}</div>
         <div class="item-card-name item-card-name-recipe">${nameHtml}</div>
@@ -1062,6 +1079,18 @@ function renderCraftingRecipes(container, tradeskillName) {
 
   if (recipes.length) {
     setupItemTooltip(container.querySelector('.craft-recipe-grid'));
+  }
+
+  if (pendingHighlightRecipe) {
+    const slug = pendingHighlightRecipe;
+    pendingHighlightRecipe = null;
+    const card = container.querySelector(`.item-card-recipe[data-recipe-slug="${CSS.escape(slug)}"]`);
+    if (card) {
+      suppressScrollReset = true;
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.classList.add('recipe-flash');
+      card.addEventListener('animationend', () => card.classList.remove('recipe-flash'), { once: true });
+    }
   }
 
   container.querySelectorAll('.craft-result-link').forEach(link => {

@@ -375,6 +375,13 @@ html, body {
   overflow: hidden;
   font-size: 0.86rem;
 }
+.recipe-flash {
+  animation: recipe-flash 1.2s ease-out 2;
+}
+@keyframes recipe-flash {
+  0% { box-shadow: 0 0 0 3px var(--accent-craft); }
+  100% { box-shadow: 0 0 0 3px transparent; }
+}
 .item-card-header {
   display: flex;
   align-items: center;
