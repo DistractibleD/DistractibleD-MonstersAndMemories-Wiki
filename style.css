@@ -419,6 +419,10 @@ html, body {
   fill: currentColor;
   stroke: none;
 }
+.item-card-titles {
+  flex: 1;
+  min-width: 0;
+}
 .item-card-name {
   flex: 1;
   min-width: 0;
@@ -426,6 +430,11 @@ html, body {
   font-weight: 600;
   font-size: 0.95rem;
   color: var(--accent);
+}
+.item-card-category {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-top: 1px;
 }
 .item-card-name a {
   color: inherit;

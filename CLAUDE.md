@@ -484,6 +484,13 @@ Recipe cards' own header icon (`item-card-icon-recipe`) uses the same `TRADESKIL
 lookup keyed by the recipe's tradeskill, falling back to the tradeskill's initial letter for
 any tradeskill without a dedicated icon yet.
 
+**Category label (2026-07-05):** a small muted line under the item's name on its card shows
+the same sub-type in words (e.g. "Greataxe", "Plate Armor", "Blacksmithing Material") —
+`itemCategoryLabel(item)` in `script.js` reuses the exact same `itemIconKeys(item)` the icon
+itself is built from (via a shared `ICON_LABELS` lookup), so the icon and the text label can
+never disagree with each other. Items only — recipe cards don't get this, since their
+tradeskill is already shown as a badge.
+
 The icon set went through several rounds with the user before landing (solid silhouettes →
 outline strokes → shape corrections against a reference sheet the user provided showing the
 game's actual equipment icons). The user was still not fully happy with the outline style as

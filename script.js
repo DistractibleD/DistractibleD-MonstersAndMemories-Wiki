@@ -419,20 +419,41 @@ function craftingIconKeys(item) {
   return tradeskills.map(ts => TRADESKILL_ICON[ts] || 'material');
 }
 
-// Returns the full icon HTML for an item card header — usually one icon,
-// but a Misc crafting material can show several (one per tradeskill it's
-// part of), concatenated left to right.
+// Human-readable label per icon key, shown as a small category line under
+// the item name on its card (see renderItemCardHTML). Kept in one place so
+// it never drifts out of sync with ICON_DEFS.
+const ICON_LABELS = {
+  sword: 'Sword', sword2h: 'Two-Handed Sword', dagger: 'Dagger', axe: 'Axe',
+  axe2h: 'Greataxe', mace: 'Mace', hammer: 'Hammer', maul2h: 'Maul',
+  spear: 'Spear', scythe: 'Scythe', bow: 'Bow', throwing: 'Throwing Weapon',
+  shield: 'Shield', plate: 'Plate Armor', chain: 'Chain Armor',
+  leather: 'Leather Armor', cloth: 'Cloth Armor', armor: 'Armor',
+  ring: 'Ring', earring: 'Earring', necklace: 'Necklace', food: 'Food',
+  drink: 'Drink', container: 'Container', blacksmithing: 'Blacksmithing Material',
+  tailoring: 'Tailoring Material', material: 'Crafting Material',
+};
+
+// The icon key(s) for an item's card header — usually one, but a Misc
+// crafting material can have several (one per tradeskill it's part of).
+// Shared by itemIconHTML (the icon glyphs) and itemCategoryLabel (the text
+// under the item's name) so the two never disagree with each other.
+function itemIconKeys(item) {
+  if (item.type === 'Weapon') return [weaponIconKey(item)];
+  if (item.type === 'Armor') return [armorIconKey(item)];
+  if (item.type === 'Jewelry') return [jewelryIconKey(item)];
+  if (item.type === 'Food') return ['food'];
+  if (item.type === 'Drink') return ['drink'];
+  if (item.type === 'Container') return ['container'];
+  if (item.type === 'Misc') return craftingIconKeys(item);
+  return ['material'];
+}
+
 function itemIconHTML(item) {
-  let keys;
-  if (item.type === 'Weapon') keys = [weaponIconKey(item)];
-  else if (item.type === 'Armor') keys = [armorIconKey(item)];
-  else if (item.type === 'Jewelry') keys = [jewelryIconKey(item)];
-  else if (item.type === 'Food') keys = ['food'];
-  else if (item.type === 'Drink') keys = ['drink'];
-  else if (item.type === 'Container') keys = ['container'];
-  else if (item.type === 'Misc') keys = craftingIconKeys(item);
-  else keys = ['material'];
-  return keys.map(svgIcon).join('');
+  return itemIconKeys(item).map(svgIcon).join('');
+}
+
+function itemCategoryLabel(item) {
+  return itemIconKeys(item).map(k => ICON_LABELS[k] || 'Item').join(', ');
 }
 
 function itemRatio(item) {
@@ -706,6 +727,7 @@ function renderItemRows(tbody, items) {
 // card, as opposed to the teal recipe cards below.
 function renderItemCardHTML(item) {
   const iconHtml = itemIconHTML(item);
+  const categoryLabel = itemCategoryLabel(item);
   const badges = (item.tags || []).map(t => `<span class="badge-tag">${t}</span>`).join('')
     + (item.tradeskillContainer ? '<span class="badge-tag">TRADESKILL</span>' : '');
 
@@ -736,7 +758,10 @@ function renderItemCardHTML(item) {
     <div class="item-card">
       <div class="item-card-header">
         <div class="item-card-icon">${iconHtml}</div>
-        <div class="item-card-name">${escapeAttr(item.name)}</div>
+        <div class="item-card-titles">
+          <div class="item-card-name">${escapeAttr(item.name)}</div>
+          <div class="item-card-category">${escapeAttr(categoryLabel)}</div>
+        </div>
         ${badges ? `<div class="item-card-badges">${badges}</div>` : ''}
       </div>
       <div class="item-card-body">
