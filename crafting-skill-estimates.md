@@ -26,8 +26,32 @@ Every recipe below that was previously listed as "exact"/"Confirmed" from a Whit
 observation has been downgraded — the underlying color+skill data point is still real and
 still recorded, only the "this means the exact value" interpretation has been removed.
 `crafting.json`'s `recipeSkillLevel` field has been cleared out entirely (see CLAUDE.md) and
-won't be repopulated until a real confirmed method exists. Nothing in this file should be
-read as more certain than "a reasonable band, given the color-ordering rule that's still
+won't be repopulated until a real confirmed method exists — with one narrow exception below.
+
+## The one case that *is* exact: Green at 0 skill
+
+The user confirmed (2026-07-04) the color scale is a continuous gradient tied to the gap
+between the crafter's skill and the recipe's requirement — e.g. a recipe requiring skill 50
+would show Red at 0 skill, some moderate color around skill 50, and Green once skill climbs
+well past 50 (their own example: "a craft that requires 50 skill will be Red if I am level
+0, ... and if I have 300 skill it will surely be Trivial green"). Combined with the axiom
+that skill requirements can't be negative, this pins down exactly one case: **a recipe
+observed as Green at `observedAtSkill: 0` must have `recipeSkillLevel: 0`** — Green means
+"far exceeds the requirement," and the only way to far-exceed something from a floor of 0 is
+if that something is also 0. This does NOT extend to White/Dark Blue/Light Blue at 0 skill —
+per the gradient model, a recipe with even a modest requirement (their example used 50)
+would already show as Red at 0 skill, not a moderate color, so seeing White at 0 skill just
+suggests a low requirement, it doesn't prove one exactly.
+
+None of the currently-recorded data has a Green observation at skill 0 yet (the Jewelcrafting
+batch below was White/Orange/Red at skill 0, not Green) — this rule is ready to apply the
+moment one shows up. The 13 Jewelcrafting Ring recipes observed as White at skill 0 (see
+table below) are worth flagging as *probably* low, by the same reasoning — a recipe with a
+real requirement of, say, 50 wouldn't show White for a skill-0 crafter — but "probably low"
+isn't the same as "exactly 0," so they stay unset in `crafting.json`.
+
+Nothing in this file should be read as more certain than "a reasonable band, given the
+color-ordering rule that's still
 believed to hold" (Green < Light Blue < Dark Blue < White < Yellow < Orange < Red, easier to
 harder relative to the crafter's own skill at observation time).
 

@@ -227,6 +227,17 @@ extending it the same way as new fields show up on future cards, rather than gue
   rest. Keep recording `difficultyColor`/`observedAtSkill` data points as always; see
   `crafting-skill-estimates.md` (also corrected 2026-07-04) for the speculative-estimate
   side of this.
+
+  **One narrow exception that *is* safe to set exactly (confirmed 2026-07-04):** a recipe
+  observed as **Green ("trivial") at `observedAtSkill: 0`** must have `recipeSkillLevel: 0`.
+  This isn't a claim about what Green means in general — it's just that a skill requirement
+  can't be negative, and Green means the crafter's skill *far exceeds* the requirement. At 0
+  skill, the only way to "far exceed" something is if that something is also 0. The user
+  confirmed the color scale is a continuous gradient tied to the gap between crafter skill
+  and requirement (e.g. a skill-50 recipe would show Red at 0 skill, not White) — so this
+  logic does **not** extend to White/Dark Blue/Light Blue at skill 0 the way the retracted
+  rule assumed; those colors just suggest a low requirement, they don't prove one exactly.
+  Only Green-at-0 is airtight enough to write into `recipeSkillLevel`.
 - `listOrder` — an integer giving the recipe's position in the game's own crafting-window
   list (1 = first/lowest skill requirement). This is what the Crafting page actually sorts
   by now instead of alphabetically — see the "Crafting window screenshots" workflow below
