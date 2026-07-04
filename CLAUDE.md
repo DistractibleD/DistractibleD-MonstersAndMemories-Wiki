@@ -448,13 +448,48 @@ not a display problem — see `images/items-needing-text.txt`, which tracks exac
 
 **The renderer:** `renderItemCardHTML(item)` (items) and `renderRecipeCardHTML(recipe)`
 (recipes) in `script.js` build the card's HTML from scratch each time it's shown — header
-(a letter-in-a-square icon, the name, tag/tradeskill badges), a field grid (Slot/AC/Weight/
+(a type icon, the name, tag/tradeskill badges), a field grid (Slot/AC/Weight/
 Size/etc., or Weight/Size for recipes), a row of stat chips (STR/AC bonuses, resists,
 haste — via the shared `statEntries(item)` helper, also used by the table's plain-text
 `formatStats()`), a Class/Race line, description/effect text, and — items only — a
 "Found at" line (see below). Recipes additionally list Components, each one a link to the
 Item Database when a matching item exists (same `findItemByName` dynamic-linking pattern
 as before, unchanged).
+
+**Item card icon (2026-07-04):** the header icon square used to just show a letter for the
+item's `type` (A/W/J/etc.); it's now an original outline icon (`ICON_DEFS` in `script.js`)
+picked by a more specific sub-type, entirely derived from fields items already have — no new
+schema field to keep in sync:
+- **Weapon** — `weaponIconKey(item)` reads `skill` + `twoHanded` + a name-keyword check
+  (`axe`/`scythe`/`hammer`/`dagger`) to pick one of: sword, 2H sword, dagger, axe, 2H axe
+  (greataxe — single-bladed, not double, per the reference sheet the user provided
+  2026-07-04), mace, hammer (distinct from mace — also from that sheet), maul (2H blunt),
+  spear, scythe, bow, throwing. Falls back to a plain sword if nothing matches.
+- **Armor** — `armorIconKey(item)` checks the name for "Plate"/"Chain"/"Rawhide"/"Hide"/
+  "Leather"/"Cloth" to pick a material icon; `slot === "Secondary"` or a name containing
+  "Shield"/"Buckler" gets the Shield icon instead (shields are their own category, not a
+  material tier). Anything that matches no keyword (most unique-named items) falls back to
+  a plain armor icon rather than guessing a material wrong.
+- **Jewelry** — `jewelryIconKey(item)` picks Ring/Earring/Necklace from the existing `slot`
+  field (Finger/Ear/Neck).
+- **Food / Drink / Container** — one fixed icon each.
+- **Misc (crafting materials)** — `craftingIconKeys(item)` looks up every tradeskill the
+  item is linked to in `crafting.json` (its own recipe's tradeskill, plus any tradeskill
+  that uses it as a component elsewhere) and shows one icon per tradeskill, left to right.
+  `TRADESKILL_ICON` only needs an entry for tradeskills that actually have a linked
+  material right now (Blacksmithing, Tailoring) — same extend-as-it-comes-up pattern as
+  tags/sizes elsewhere in this file. A material with no recipe link at all (most raw gems/
+  bars before their recipe exists) gets a generic raw-material icon.
+Recipe cards' own header icon (`item-card-icon-recipe`) uses the same `TRADESKILL_ICON`
+lookup keyed by the recipe's tradeskill, falling back to the tradeskill's initial letter for
+any tradeskill without a dedicated icon yet.
+
+The icon set went through several rounds with the user before landing (solid silhouettes →
+outline strokes → shape corrections against a reference sheet the user provided showing the
+game's actual equipment icons). The user was still not fully happy with the outline style as
+of 2026-07-04 and said they'd bring a different reference later for another pass — treat the
+current `ICON_DEFS` as a placeholder implementation, not a settled final design, if asked to
+touch this area again.
 
 **Item cards use the gold `--accent`; recipe cards use the teal `--accent-craft`, with the
 recipe's own name colored teal and its tradeskill shown as a badge where an item card would

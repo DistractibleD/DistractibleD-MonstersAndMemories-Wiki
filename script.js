@@ -309,7 +309,131 @@ function findRecipesUsingItem(itemName) {
 
 const ITEM_STAT_ORDER = ['STR', 'STA', 'AGI', 'DEX', 'WIS', 'INT', 'CHA', 'HP', 'MANA'];
 const ITEM_RESIST_ORDER = ['FIRE', 'COLD', 'MAGIC', 'POISON', 'DISEASE', 'CORRUPTION'];
-const ITEM_TYPE_INITIAL = { Armor: 'A', Weapon: 'W', Jewelry: 'J', Container: 'C', Misc: 'M', Food: 'F', Drink: 'D' };
+
+/* ============================================
+   Item type icons
+   Shown in the item card header instead of a plain type-initial letter.
+   Original outline icons (not copied from any reference), one per weapon/
+   armor/jewelry sub-type plus one per tradeskill for crafting materials.
+   Each entry is the inner markup for a 0 0 24 24 viewBox <svg>.
+   ============================================ */
+const ICON_DEFS = {
+  sword: `<path d="M11 15 L11 5 L12 2 L13 5 L13 15"/><line x1="8.5" y1="15" x2="15.5" y2="15"/><line x1="12" y1="15" x2="12" y2="20" stroke-width="2"/><circle cx="12" cy="21" r="1.1"/>`,
+  sword2h: `<path d="M10.3 13 L10.3 4 L12 1 L13.7 4 L13.7 13"/><line x1="12" y1="4" x2="12" y2="12" stroke-width="0.9"/><path d="M7 13 L17 13 M7 13 L5.5 11.5 M17 13 L18.5 11.5"/><line x1="12" y1="13" x2="12" y2="21" stroke-width="2"/><circle cx="12" cy="22" r="1.3"/>`,
+  dagger: `<path d="M11.3 14 L11.3 8 L12 6 L12.7 8 L12.7 14"/><line x1="10" y1="14" x2="14" y2="14"/><line x1="12" y1="14" x2="12" y2="17.5" stroke-width="1.8"/><circle cx="12" cy="18.5" r="0.9"/>`,
+  axe: `<line x1="12" y1="3" x2="12" y2="21" stroke-width="1.8"/><path d="M12 5 C7.5 4.3 5 8 6.8 12 C9.3 10.5 11.5 7 12 5 Z"/>`,
+  axe2h: `<line x1="12" y1="2" x2="12" y2="22" stroke-width="2"/><path d="M12 4 C5.5 3 2 8.5 4.5 14 C8.5 12 11.5 6.5 12 4 Z"/>`,
+  mace: `<line x1="12" y1="10" x2="12" y2="21" stroke-width="1.8"/><circle cx="12" cy="6.3" r="3.3"/><path class="ic-fill" d="M12 1 L13 3.1 L11 3.1 Z"/><path class="ic-fill" d="M17.3 6.3 L15.2 7.3 L15.2 5.3 Z"/><path class="ic-fill" d="M6.7 6.3 L8.8 5.3 L8.8 7.3 Z"/>`,
+  hammer: `<line x1="12" y1="8" x2="12" y2="21" stroke-width="1.8"/><path d="M6 4.3 L6 7.3 L11.3 7.3 L11.3 4.3 Z"/><path d="M12.7 4.3 L12.7 7.3 L18 5.8 Z"/>`,
+  maul2h: `<line x1="12" y1="9" x2="12" y2="22" stroke-width="2.2"/><path d="M5 2.5 L5 9 L19 9 L19 2.5 Z"/>`,
+  spear: `<line x1="12" y1="9" x2="12" y2="22" stroke-width="1.6"/><path d="M12 1 L14.3 8.8 L12 7 L9.7 8.8 Z"/><line x1="9" y1="9" x2="15" y2="9" stroke-width="1.2"/>`,
+  scythe: `<line x1="12.5" y1="9" x2="17" y2="22" stroke-width="1.8"/><path transform="translate(2,-1) scale(0.66)" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`,
+  bow: `<path d="M7.5 2 C2.5 7 2.5 17 7.5 22" stroke-width="1.8"/><line x1="7.7" y1="2.5" x2="7.7" y2="21.5" stroke-width="1"/>`,
+  throwing: `<path d="M6 18 L10 14" stroke-width="1.4"/><path class="ic-fill" d="M10 14 L11.6 12.2 L10.4 14.6 Z"/><path d="M9 19.5 L13.5 15" stroke-width="1.4"/><path class="ic-fill" d="M13.5 15 L15 13 L13.9 15.5 Z"/><path d="M12.5 20.5 L17 16" stroke-width="1.4"/><path class="ic-fill" d="M17 16 L18.5 14 L17.4 16.5 Z"/>`,
+  shield: `<path d="M12 2.5 L18.5 5 L18.5 11.5 C18.5 16.5 15.5 19.5 12 21.5 C8.5 19.5 5.5 16.5 5.5 11.5 L5.5 5 Z"/><circle class="ic-fill" cx="12" cy="10.5" r="1.6"/><line x1="12" y1="6" x2="12" y2="15" stroke-width="0.8"/><line x1="8" y1="10.5" x2="16" y2="10.5" stroke-width="0.8"/>`,
+  plate: `<path d="M12 3 C9.3 3 7.3 4.5 7 6.3 L6.3 9.5 C5.9 13.5 6.4 17 7.8 19.6 C9 21.2 10.4 22 12 22 C13.6 22 15 21.2 16.2 19.6 C17.6 17 18.1 13.5 17.7 9.5 L17 6.3 C16.7 4.5 14.7 3 12 3 Z"/><line x1="12" y1="6.5" x2="12" y2="18" stroke-width="0.9"/><path d="M9.2 8 C8.5 10.5 8.5 13 9.2 15.5" stroke-width="0.9"/><path d="M14.8 8 C15.5 10.5 15.5 13 14.8 15.5" stroke-width="0.9"/>`,
+  chain: `<path d="M8 5 L16 5 L18 7.5 L16 8.8 L16 22 L8 22 L8 8.8 L6 7.5 Z"/><circle cx="9.5" cy="11" r="1" stroke-width="0.8"/><circle cx="12.5" cy="11" r="1" stroke-width="0.8"/><circle cx="10.8" cy="14" r="1" stroke-width="0.8"/><circle cx="13.8" cy="14" r="1" stroke-width="0.8"/><circle cx="9.5" cy="17" r="1" stroke-width="0.8"/><circle cx="12.5" cy="17" r="1" stroke-width="0.8"/>`,
+  leather: `<path d="M8 5 L16 5 L17.2 9.5 L15.5 22 L8.5 22 L6.8 9.5 Z"/><path d="M10.3 9 L13.7 11 M13.7 9 L10.3 11" stroke-width="0.9"/><path d="M10 13.5 L14 15.5 M14 13.5 L10 15.5" stroke-width="0.9"/><path d="M9.8 18 L14.2 20 M14.2 18 L9.8 20" stroke-width="0.9"/>`,
+  cloth: `<path d="M9.5 3 L14.5 3 L17 7 L18.5 21 L14.5 21 L14 10 L10 10 L9.5 21 L5.5 21 Z"/><path d="M9.5 3 C10 4.5 11 5 12 5 C13 5 14 4.5 14.5 3" stroke-width="1"/>`,
+  armor: `<path d="M8 5 L16 5 L17.2 9.5 L15.5 22 L8.5 22 L6.8 9.5 Z"/>`,
+  ring: `<circle cx="12" cy="15" r="5.3" stroke-width="2"/><path class="ic-fill" d="M12 5 L14.5 8.5 L12 11.5 L9.5 8.5 Z"/>`,
+  earring: `<path d="M10 3 C10 5.5 12 5.5 12 8" stroke-width="1.6"/><path class="ic-fill" d="M12 8 L14.3 12 L12 16 L9.7 12 Z"/>`,
+  necklace: `<path d="M4 4 C4 12 8 15 12 15 C16 15 20 12 20 4" stroke-width="1.4"/><path class="ic-fill" d="M12 14 L14.5 18 L12 22 L9.5 18 Z"/>`,
+  food: `<path d="M12 9 C7.5 9 5.5 12 5.5 15 C5.5 18.5 8.5 21.5 12 21.5 C15.5 21.5 18.5 18.5 18.5 15 C18.5 12 16.5 9 12 9 Z"/><path d="M12 9 C12 6.5 10.7 5 9.3 4.3" stroke-width="1.2"/><path class="ic-fill" d="M12.2 5.2 C13.8 4 15.6 4.6 15.6 6.4 C13.9 7 12.7 6.4 12.2 5.2 Z"/>`,
+  drink: `<path d="M6 6 L17 6 L17 20 C17 21.1 16.1 22 15 22 L8 22 C6.9 22 6 21.1 6 20 Z"/><path d="M17 9.5 C20.5 9.5 20.5 15.5 17 15.5"/><line x1="7" y1="9.8" x2="16" y2="9.8" stroke-width="1.2"/>`,
+  container: `<path d="M9 4.5 C9 6.5 10.3 8 12 8 C13.7 8 15 6.5 15 4.5" stroke-width="1.4"/><path d="M8 9 L16 9 L17.5 21 C17.6 21.6 17.1 22 16.5 22 L7.5 22 C6.9 22 6.4 21.6 6.5 21 Z"/><path d="M8.5 9 L15.5 9 L14.5 12.3 L9.5 12.3 Z"/>`,
+  blacksmithing: `<path d="M5 9 L17 9 L22 10.5 L17 12 L5 12 Z"/><path d="M9.5 12 L9.5 15 L14.5 15 L14.5 12"/><path d="M7.5 15 L16.5 15 L18 20 L6 20 Z"/>`,
+  tailoring: `<line x1="12" y1="6" x2="12" y2="18" stroke-width="1.6"/><path class="ic-fill" d="M12 18 L13.2 20.5 L10.8 20.5 Z"/><ellipse cx="12" cy="4.3" rx="1.2" ry="1.7" stroke-width="1.2"/><path d="M13 4.8 C16.5 3.8 18.5 7 15.7 8.8 C13.3 10.4 14.7 12.7 12.4 14" stroke-width="1"/>`,
+  material: `<path d="M6 14 L9 6 L15 5 L19 11 L17 19 L8 20 Z"/>`,
+};
+
+// Maps a tradeskill name to one of the icons above, for crafting-material
+// items and recipe cards. Only tradeskills with a material actually linked
+// as a crafting.json component (or their own recipe) need an entry — every
+// other tradeskill falls back to the generic "material" icon (items) or its
+// own initial letter (recipes) until one of its materials shows up, same
+// extend-as-needed pattern as tags/sizes elsewhere in this file.
+const TRADESKILL_ICON = {
+  Blacksmithing: 'blacksmithing',
+  Tailoring: 'tailoring',
+};
+
+function svgIcon(key) {
+  return `<svg viewBox="0 0 24 24" class="type-icon">${ICON_DEFS[key] || ICON_DEFS.material}</svg>`;
+}
+
+// Weapon sub-type is derived from the existing skill/twoHanded/name fields —
+// no separate schema field to keep in sync. Falls back to a plain sword for
+// anything that doesn't match a known pattern.
+function weaponIconKey(item) {
+  const name = (item.name || '').toLowerCase();
+  if (item.skill === 'Archery') return 'bow';
+  if (item.skill === 'Throwing') return 'throwing';
+  if (item.skill === 'Stabbing') return name.includes('dagger') ? 'dagger' : 'spear';
+  if (item.skill === 'Slashing') {
+    if (name.includes('axe')) return item.twoHanded ? 'axe2h' : 'axe';
+    if (name.includes('scythe')) return 'scythe';
+    return item.twoHanded ? 'sword2h' : 'sword';
+  }
+  if (item.skill === 'Blunt') {
+    if (item.twoHanded) return 'maul2h';
+    return name.includes('hammer') ? 'hammer' : 'mace';
+  }
+  return 'sword';
+}
+
+// Armor material is guessed from the item name (Plate/Chain/Rawhide-Leather/
+// Cloth), same as the game's own naming convention for crafted armor lines.
+// Shields are checked first since they're their own category, not a
+// material tier. Anything that doesn't match a known material falls back to
+// a plain armor icon rather than guessing wrong.
+function armorIconKey(item) {
+  const name = (item.name || '').toLowerCase();
+  if (item.slot === 'Secondary' || name.includes('shield') || name.includes('buckler')) return 'shield';
+  if (name.includes('plate')) return 'plate';
+  if (name.includes('chain')) return 'chain';
+  if (name.includes('rawhide') || name.includes('hide') || name.includes('leather')) return 'leather';
+  if (name.includes('cloth')) return 'cloth';
+  return 'armor';
+}
+
+function jewelryIconKey(item) {
+  if (item.slot === 'Ear') return 'earring';
+  if (item.slot === 'Neck') return 'necklace';
+  return 'ring';
+}
+
+// A crafting material can belong to more than one tradeskill (crafted by
+// one, consumed as a component by another) — collect every tradeskill it
+// touches via crafting.json and show one icon per tradeskill, in the order
+// first seen. Falls back to a generic raw-material icon if it isn't linked
+// to any recipe yet.
+function craftingIconKeys(item) {
+  const tradeskills = [];
+  const ownRecipe = findRecipeForItem(item.name);
+  if (ownRecipe) tradeskills.push(ownRecipe.tradeskill);
+  findRecipesUsingItem(item.name).forEach(r => {
+    if (!tradeskills.includes(r.tradeskill)) tradeskills.push(r.tradeskill);
+  });
+  if (!tradeskills.length) return ['material'];
+  return tradeskills.map(ts => TRADESKILL_ICON[ts] || 'material');
+}
+
+// Returns the full icon HTML for an item card header — usually one icon,
+// but a Misc crafting material can show several (one per tradeskill it's
+// part of), concatenated left to right.
+function itemIconHTML(item) {
+  let keys;
+  if (item.type === 'Weapon') keys = [weaponIconKey(item)];
+  else if (item.type === 'Armor') keys = [armorIconKey(item)];
+  else if (item.type === 'Jewelry') keys = [jewelryIconKey(item)];
+  else if (item.type === 'Food') keys = ['food'];
+  else if (item.type === 'Drink') keys = ['drink'];
+  else if (item.type === 'Container') keys = ['container'];
+  else if (item.type === 'Misc') keys = craftingIconKeys(item);
+  else keys = ['material'];
+  return keys.map(svgIcon).join('');
+}
 
 function itemRatio(item) {
   if (item.damage == null || !item.delay) return null;
@@ -577,10 +701,11 @@ function renderItemRows(tbody, items) {
 // Renders an item's full card — an original layout (not a screenshot, and
 // deliberately not modeled on any other site's item popup) built entirely
 // from items.json fields, used by both the hover preview and the item
-// viewer modal. A gold accent + letter-in-a-square icon (by item type)
-// marks it as an ITEM card, as opposed to the teal recipe cards below.
+// viewer modal. A gold accent + type icon (weapon/armor sub-type, jewelry
+// slot, or tradeskill for materials — see itemIconHTML) marks it as an ITEM
+// card, as opposed to the teal recipe cards below.
 function renderItemCardHTML(item) {
-  const initial = ITEM_TYPE_INITIAL[item.type] || '?';
+  const iconHtml = itemIconHTML(item);
   const badges = (item.tags || []).map(t => `<span class="badge-tag">${t}</span>`).join('')
     + (item.tradeskillContainer ? '<span class="badge-tag">TRADESKILL</span>' : '');
 
@@ -610,7 +735,7 @@ function renderItemCardHTML(item) {
   return `
     <div class="item-card">
       <div class="item-card-header">
-        <div class="item-card-icon">${initial}</div>
+        <div class="item-card-icon">${iconHtml}</div>
         <div class="item-card-name">${escapeAttr(item.name)}</div>
         ${badges ? `<div class="item-card-badges">${badges}</div>` : ''}
       </div>
@@ -1035,7 +1160,7 @@ function renderRecipeCardHTML(recipe) {
   return `
     <div class="item-card item-card-recipe" data-recipe-slug="${escapeAttr(recipe.slug)}">
       <div class="item-card-header">
-        <div class="item-card-icon item-card-icon-recipe">${(recipe.tradeskill || '?').charAt(0)}</div>
+        <div class="item-card-icon item-card-icon-recipe">${TRADESKILL_ICON[recipe.tradeskill] ? svgIcon(TRADESKILL_ICON[recipe.tradeskill]) : (recipe.tradeskill || '?').charAt(0)}</div>
         <div class="item-card-name item-card-name-recipe">${nameHtml}</div>
         <div class="item-card-badges"><span class="badge-tag badge-tag-craft">${escapeAttr(recipe.tradeskill)}</span></div>
       </div>
