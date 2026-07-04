@@ -43,7 +43,6 @@
       { "item": "Rough Thread", "quantity": 3 }
     ],
     "difficultyColor": "White",
-    "recipeSkillLevel": 56,
     "observedAtSkill": 56
   },
   {
@@ -228,7 +227,6 @@
     ],
     "difficultyColor": "Green",
     "difficultyText": "This recipe is trivial to you.",
-    "recipeSkillLevel": 5,
     "observedAtSkill": 22
   },
   {
@@ -246,7 +244,6 @@
     ],
     "difficultyColor": "Green",
     "difficultyText": "This recipe is trivial to you.",
-    "recipeSkillLevel": 5,
     "observedAtSkill": 22
   },
   {
@@ -366,7 +363,6 @@
     "tradeskill": "Leatherworking",
     "listOrder": 19,
     "difficultyColor": "White",
-    "recipeSkillLevel": 56,
     "observedAtSkill": 56
   },
   {
@@ -415,7 +411,6 @@
     "tradeskill": "Tailoring",
     "listOrder": 6,
     "difficultyColor": "White",
-    "recipeSkillLevel": 5,
     "observedAtSkill": 5
   },
   {
@@ -424,7 +419,6 @@
     "tradeskill": "Tailoring",
     "listOrder": 7,
     "difficultyColor": "White",
-    "recipeSkillLevel": 5,
     "observedAtSkill": 5
   },
   {
@@ -513,8 +507,7 @@
     "tradeskill": "Fletching",
     "listOrder": 3,
     "difficultyColor": "White",
-    "observedAtSkill": 1,
-    "recipeSkillLevel": 1
+    "observedAtSkill": 1
   },
   {
     "name": "Buckler",
@@ -522,8 +515,7 @@
     "tradeskill": "Fletching",
     "listOrder": 4,
     "difficultyColor": "White",
-    "observedAtSkill": 1,
-    "recipeSkillLevel": 1
+    "observedAtSkill": 1
   },
   {
     "name": "Stonehead Arrow x100",
@@ -584,8 +576,7 @@
     "tradeskill": "Jewelcrafting",
     "listOrder": 4,
     "difficultyColor": "White",
-    "observedAtSkill": 0,
-    "recipeSkillLevel": 0
+    "observedAtSkill": 0
   },
   {
     "name": "Inlaid Bloodstone Copper Ring",
@@ -593,8 +584,7 @@
     "tradeskill": "Jewelcrafting",
     "listOrder": 5,
     "difficultyColor": "White",
-    "observedAtSkill": 0,
-    "recipeSkillLevel": 0
+    "observedAtSkill": 0
   },
   {
     "name": "Inlaid Carnelian Copper Ring",
@@ -602,8 +592,7 @@
     "tradeskill": "Jewelcrafting",
     "listOrder": 6,
     "difficultyColor": "White",
-    "observedAtSkill": 0,
-    "recipeSkillLevel": 0
+    "observedAtSkill": 0
   },
   {
     "name": "Inlaid Cat's Eye Agate Copper Ring",
@@ -611,8 +600,7 @@
     "tradeskill": "Jewelcrafting",
     "listOrder": 7,
     "difficultyColor": "White",
-    "observedAtSkill": 0,
-    "recipeSkillLevel": 0
+    "observedAtSkill": 0
   },
   {
     "name": "Inlaid Diamond Copper Ring",
@@ -620,8 +608,7 @@
     "tradeskill": "Jewelcrafting",
     "listOrder": 8,
     "difficultyColor": "White",
-    "observedAtSkill": 0,
-    "recipeSkillLevel": 0
+    "observedAtSkill": 0
   },
   {
     "name": "Inlaid Emerald Copper Ring",
@@ -629,8 +616,7 @@
     "tradeskill": "Jewelcrafting",
     "listOrder": 9,
     "difficultyColor": "White",
-    "observedAtSkill": 0,
-    "recipeSkillLevel": 0
+    "observedAtSkill": 0
   },
   {
     "name": "Inlaid Hematite Copper Ring",
@@ -638,8 +624,7 @@
     "tradeskill": "Jewelcrafting",
     "listOrder": 10,
     "difficultyColor": "White",
-    "observedAtSkill": 0,
-    "recipeSkillLevel": 0
+    "observedAtSkill": 0
   },
   {
     "name": "Inlaid Lapis Lazuli Copper Ring",
@@ -647,8 +632,7 @@
     "tradeskill": "Jewelcrafting",
     "listOrder": 11,
     "difficultyColor": "White",
-    "observedAtSkill": 0,
-    "recipeSkillLevel": 0
+    "observedAtSkill": 0
   },
   {
     "name": "Inlaid Onyx Copper Ring",
@@ -656,8 +640,7 @@
     "tradeskill": "Jewelcrafting",
     "listOrder": 12,
     "difficultyColor": "White",
-    "observedAtSkill": 0,
-    "recipeSkillLevel": 0
+    "observedAtSkill": 0
   },
   {
     "name": "Inlaid Opal Copper Ring",
@@ -665,8 +648,7 @@
     "tradeskill": "Jewelcrafting",
     "listOrder": 13,
     "difficultyColor": "White",
-    "observedAtSkill": 0,
-    "recipeSkillLevel": 0
+    "observedAtSkill": 0
   },
   {
     "name": "Inlaid Peridot Copper Ring",
@@ -674,8 +656,7 @@
     "tradeskill": "Jewelcrafting",
     "listOrder": 14,
     "difficultyColor": "White",
-    "observedAtSkill": 0,
-    "recipeSkillLevel": 0
+    "observedAtSkill": 0
   },
   {
     "name": "Inlaid Sapphire Copper Ring",
@@ -683,8 +664,7 @@
     "tradeskill": "Jewelcrafting",
     "listOrder": 15,
     "difficultyColor": "White",
-    "observedAtSkill": 0,
-    "recipeSkillLevel": 0
+    "observedAtSkill": 0
   },
   {
     "name": "Inlaid Topaz Copper Ring",
@@ -692,8 +672,7 @@
     "tradeskill": "Jewelcrafting",
     "listOrder": 16,
     "difficultyColor": "White",
-    "observedAtSkill": 0,
-    "recipeSkillLevel": 0
+    "observedAtSkill": 0
   },
   {
     "name": "Inlaid Amber Copper Ring",

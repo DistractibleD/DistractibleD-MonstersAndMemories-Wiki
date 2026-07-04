@@ -6,51 +6,57 @@ calculating this "in the background" now that the colored difficulty badge has b
 removed from the public Crafting page (the color is only meaningful for the one user's
 skill level at the moment the screenshot was taken, so showing it live was misleading).
 
-`crafting.json` still stores `difficultyColor` / `observedAtSkill` / `recipeSkillLevel`
-for every recipe — this file is a derived, speculative layer on top of that data, not a
-replacement for it. Don't copy the numbers below into `crafting.json`'s `recipeSkillLevel`
-field — that field is reserved for values confirmed exact via a White observation (see
-CLAUDE.md). Everything here is a guess of varying confidence.
+`crafting.json` still stores `difficultyColor` / `observedAtSkill` for every recipe — this
+file is a derived, speculative layer on top of that data, not a replacement for it. Don't
+copy the numbers below into `crafting.json`'s `recipeSkillLevel` field. Everything here is
+a guess of varying confidence — see the retraction below for why nothing here counts as
+exact anymore.
 
-## What we know for certain
+## Retraction (2026-07-04): White is not an exact pin
 
-Only a White observation pins down a recipe's skill level exactly (user-confirmed rule).
-Confirmed so far:
+The 2026-07-03 rule "a White recipe means the recipe's skill level exactly equals the
+crafter's current skill" is wrong — caught by the user themselves. If it were true, White
+would always be the *lowest* color a 0-skill crafter could ever see (nothing can be "easier
+than 0"), but Green/Dark Blue/Light Blue recipes are observed even at 0 skill. That's only
+possible if White doesn't mark a single exact point at all — it's presumably just another
+band, like every other color, that happens to straddle the crafter's current skill rather
+than pin it exactly.
 
-- **Rawhide Cloak: exactly 5** (Leatherworking)
-- **Rawhide Gloves: exactly 5** (Leatherworking)
-- **Enchanted Rawhide Leggings: exactly 56** (Leatherworking)
-- **Rawhide Tunic: exactly 56** (Leatherworking)
-- **Fine Cloth Cape: exactly 5** (Tailoring)
-- **Fine Cloth Gloves: exactly 5** (Tailoring)
+Every recipe below that was previously listed as "exact"/"Confirmed" from a White
+observation has been downgraded — the underlying color+skill data point is still real and
+still recorded, only the "this means the exact value" interpretation has been removed.
+`crafting.json`'s `recipeSkillLevel` field has been cleared out entirely (see CLAUDE.md) and
+won't be repopulated until a real confirmed method exists. Nothing in this file should be
+read as more certain than "a reasonable band, given the color-ordering rule that's still
+believed to hold" (Green < Light Blue < Dark Blue < White < Yellow < Orange < Red, easier to
+harder relative to the crafter's own skill at observation time).
 
-## The estimate method (revised 2026-07-03 — additive step size abandoned)
+## The estimate method (revised 2026-07-03, further weakened 2026-07-04)
 
-The original approach (see git history for the abandoned version) assumed a fixed number
-of skill points per color step and derived ~11.3 from the one Red(22)->White(56) pair.
-A second inbox batch on 2026-07-03 supplied crafting-window recaptures of the same first
-8 Leatherworking recipes (Rawhide Canvas/Strap/Bracelet/Gorget/Cloak/Gloves/Belt/Mask) at
-skill 1, 2, 3, 4, and 5 — and that data breaks the fixed-step model outright:
+The original approach (see git history) assumed a fixed number of skill points per color
+step and derived ~11.3 from one Red(22)->White(56) pair — treating White as an exact anchor.
+A second inbox batch on 2026-07-03 supplied crafting-window recaptures of the same first 8
+Leatherworking recipes (Rawhide Canvas/Strap/Bracelet/Gorget/Cloak/Gloves/Belt/Mask) at
+skill 1, 2, 3, 4, and 5:
 
 ```
 Skill 1-4 (unchanged across all four): Canvas/Strap = Light Blue, Bracelet/Gorget = Dark Blue,
                                         Cloak/Gloves = Yellow, Belt/Mask = Red
 Skill 5:                               Canvas/Strap = Green,      Bracelet/Gorget = Light Blue,
-                                        Cloak/Gloves = White (exact = 5), Belt/Mask = Orange
+                                        Cloak/Gloves = White,      Belt/Mask = Orange
 ```
 
-Four pairs of recipes each jumped a full color band in a single skill point (4 -> 5). If
-color bands were a fixed ~11 points wide (as the skill-22/56 pair suggested), that couldn't
-happen. The most likely explanation: **band width scales with the recipe's own skill
-requirement, not a flat number of points** — i.e. colors are probably ratio-based (something
-like your-skill / recipe-skill), so a T=5 recipe has ~1-point-wide bands while a T=56 recipe
-has ~11-point-wide bands. This isn't confirmed, just the hypothesis that now fits *all*
-observed data instead of contradicting half of it. Keep testing it against new data before
-trusting it further.
+Four pairs of recipes each jumped a full color band in a single skill point (4 -> 5). A
+fixed ~11-point band width couldn't produce that jump, so the working hypothesis became
+"band width scales with the recipe's own skill requirement" (roughly ratio-based). That
+hypothesis was built partly on treating the two White observations above as exact anchors
+(5 and 56) — with White's exactness now retracted, the ratio-vs-flat-step question is back
+to genuinely open. Treat the numbers below as illustrative, not derived with any rigor.
 
 ## What this changes for Rawhide Belt / Rawhide Mask specifically
 
-These two now have four data points each, all consistent with one fixed T:
+These two now have four data points each, all consistent with one fixed underlying skill
+requirement T:
 
 ```
 skill 1-4: Red    (T > 4, recipe still harder than a skill-4 crafter)
@@ -59,28 +65,27 @@ skill 22:  Dark Blue (T < 22, recipe now slightly easier than a skill-22 crafter
 skill 56:  Green  (T well under 56)
 ```
 
-That brackets both recipes' real skill requirement to **somewhere between 6 and 21**, most
-likely in the high teens given Dark Blue (a band close to White, not Light Blue or Green)
-is what skill 22 produced. Call it ~18-21 as a working guess — still a guess, but a much
-tighter one than "somewhere under 22."
+That still brackets both recipes' real skill requirement to somewhere between 6 and 21
+(this part doesn't depend on White at all, just the harder/easier relative ordering) — no
+tighter guess than that without more data.
 
 ## Estimates (Leatherworking, as of skill 56 recapture, 2026-07-03)
 
 | Recipe | Data points | Estimated skill | Confidence |
 |---|---|---|---|
-| Rawhide Cloak | White (5) | **5 (exact)** | Confirmed |
-| Rawhide Gloves | White (5) | **5 (exact)** | Confirmed |
-| Enchanted Rawhide Leggings | White (56) | **56 (exact)** | Confirmed |
-| Rawhide Tunic | White (56) | **56 (exact)** | Confirmed |
-| Rawhide Canvas | Light Blue (1-4), Green (5, 22, 56) | ~4, just under the skill-5 Green threshold | Medium |
-| Rawhide Strap | Light Blue (1-4), Green (5, 22, 56) | ~4, same reasoning | Medium |
-| Rawhide Bracelet | Dark Blue (1-4), Light Blue (5), Green (22, 56) | ~4-5 | Medium |
-| Rawhide Gorget | Dark Blue (1-4), Light Blue (5), Green (22, 56) | ~4-5 | Medium |
-| Rawhide Belt | Red (1-4), Orange (5), Dark Blue (22), Green (56) | ~18-21 | Medium |
-| Rawhide Mask | Red (1-4), Orange (5), Dark Blue (22), Green (56) | ~18-21 | Medium |
+| Rawhide Cloak | White (5) | somewhere near 5 | Low (was "exact 5", retracted 2026-07-04) |
+| Rawhide Gloves | White (5) | somewhere near 5 | Low (was "exact 5", retracted 2026-07-04) |
+| Enchanted Rawhide Leggings | White (56) | somewhere near 56 | Low (was "exact 56", retracted 2026-07-04) |
+| Rawhide Tunic | White (56) | somewhere near 56 | Low (was "exact 56", retracted 2026-07-04) |
+| Rawhide Canvas | Light Blue (1-4), Green (5, 22, 56) | under ~5 | Low |
+| Rawhide Strap | Light Blue (1-4), Green (5, 22, 56) | under ~5 | Low |
+| Rawhide Bracelet | Dark Blue (1-4), Light Blue (5), Green (22, 56) | under ~5, above Canvas/Strap | Low |
+| Rawhide Gorget | Dark Blue (1-4), Light Blue (5), Green (22, 56) | under ~5, above Canvas/Strap | Low |
+| Rawhide Belt | Red (1-4), Orange (5), Dark Blue (22), Green (56) | between 6 and 21 | Medium (relative-ordering bound, doesn't depend on White) |
+| Rawhide Mask | Red (1-4), Orange (5), Dark Blue (22), Green (56) | between 6 and 21 | Medium (relative-ordering bound, doesn't depend on White) |
 | Enchanted Rawhide Cap | Dark Blue (56), Red (skill-22-era card) | between 23 and 55, no tighter bound yet | Low |
 | Rawhide Backpack | Dark Blue (56), Red (skill-22-era card) | between 23 and 55 | Low |
-| Rawhide Leggings | Light Blue (56), Red (skill-22-era card) | between 23 and 55, likely toward the lower end (Light Blue is further from White than Dark Blue) | Low |
+| Rawhide Leggings | Light Blue (56), Red (skill-22-era card) | between 23 and 55 | Low |
 | Enchanted Rawhide Canvas | Green (56), Red (22) | under 56, no tighter bound | Low |
 | Rawhide Cap | Green (56), Red (22) | under 56 | Low |
 | Rawhide Saddle | Green (56), Red (skill-22-era card) | under 56 | Low |
@@ -103,14 +108,14 @@ much softer than the Leatherworking table above.
 
 | Recipe | Color (skill 5) | Estimated skill | Confidence |
 |---|---|---|---|
-| Fine Cloth Cape | White | **5 (exact)** | Confirmed |
-| Fine Cloth Gloves | White | **5 (exact)** | Confirmed |
+| Fine Cloth Cape | White | somewhere near 5 | Low (was "exact 5", retracted 2026-07-04) |
+| Fine Cloth Gloves | White | somewhere near 5 | Low (was "exact 5", retracted 2026-07-04) |
 | Bolt of Cloth | Green | under 5 | Low |
 | Cloth Padding | Green | under 5 | Low |
-| Bat Fur Braid | Light Blue | likely 3-4 | Low |
-| Fine Cloth Bracer | Light Blue | likely 3-4 | Low |
-| Fine Cloth Gorget | Light Blue | likely 3-4 | Low |
-| Cloth Pouch | Yellow | likely 6-7 | Low |
+| Bat Fur Braid | Light Blue | under 5 | Low |
+| Fine Cloth Bracer | Light Blue | under 5 | Low |
+| Fine Cloth Gorget | Light Blue | under 5 | Low |
+| Cloth Pouch | Yellow | above 5 | Low |
 | Fine Cloth Belt | Orange | above 5, no upper bound yet | Very low |
 | Fine Cloth Veil | Orange | above 5 | Very low |
 | Cloth Satchel | Red | well above 5 | Very low, floor only |
@@ -121,9 +126,10 @@ much softer than the Leatherworking table above.
 
 ## What would sharpen this
 
-More White observations at skill values we haven't sampled yet (especially somewhere in
-the 6-55 range for Leatherworking, and above 5 for Tailoring) would let the
-ratio-vs-flat-step question actually get resolved instead of guessed at. Recapturing a
-tradeskill's crafting window as skill climbs — especially right when a recipe visibly
-flips color — is the single most useful thing to log going forward; update this file
-rather than guessing further without new data.
+Since White no longer pins anything down exactly, the single most useful thing to log going
+forward is the same recipe recaptured across a wide spread of skill values, watching for
+exactly when/where it changes color — that's the only way left to bound a recipe's real
+skill requirement without leaning on an assumption that's already broken once. Recapturing
+a tradeskill's crafting window as skill climbs, especially right when a recipe visibly
+flips color, remains the best source of new data; update this file rather than guessing
+further without it.

@@ -211,18 +211,22 @@ extending it the same way as new fields show up on future cards, rather than gue
   MnM's exact trivial-skill formula isn't publicly documented anywhere (unlike EverQuest,
   which this game is inspired by but doesn't necessarily share numbers with).
 - `recipeSkillLevel` — the recipe's own exact underlying skill requirement, when it can be
-  determined precisely. **Confirmed rule (from the user, 2026-07-03): a White recipe means
-  the recipe's skill level exactly equals the crafter's current skill.** So whenever a recipe
-  is observed as White, set `recipeSkillLevel` = `observedAtSkill` for that same
-  observation — that's an exact value, not a guess. For any other color, leave
-  `recipeSkillLevel` unset (null/absent) rather than estimating one, until either (a) that
-  same recipe is later observed as White at some skill, or (b) enough White observations
-  across many recipes reveal the color-band width (how many skill points separate each color
-  tier from White), letting non-white observations be converted to exact/ranged values too.
-  Colors above White (Yellow/Orange/Red) mean the recipe's skill level is *higher* than the
-  crafter's current skill (harder than you); colors below White (Dark Blue/Light Blue/Green)
-  mean it's *lower* (easier than you, Green being the most-exceeded/trivial end). Don't
-  invent the band width — just keep recording data points.
+  determined precisely. **Retracted (2026-07-04): the "a White recipe means the recipe's
+  skill level exactly equals the crafter's current skill" rule from 2026-07-03 is wrong.**
+  The user caught the flaw themselves: if that were true, White would always be the lowest
+  possible color for a crafter with 0 skill (nothing can be "easier than 0"), but Green/Dark
+  Blue/Light Blue recipes are observed even at 0 skill — meaning White never pinned down an
+  exact value at all. Every `recipeSkillLevel` value previously written under this rule has
+  been removed from `crafting.json` (they were all `White` observations, so all of them were
+  affected). **Leave `recipeSkillLevel` unset for every recipe until a real confirmed method
+  is found** — don't write a number into this field on a hunch, and don't assume White has
+  any special exactness the other colors don't. Colors above White (Yellow/Orange/Red) still
+  mean the recipe is harder than the crafter's current skill, and colors below White (Dark
+  Blue/Light Blue/Green) still mean it's easier — that relative ordering isn't in question,
+  only the idea that White marks an exact single point rather than another band like the
+  rest. Keep recording `difficultyColor`/`observedAtSkill` data points as always; see
+  `crafting-skill-estimates.md` (also corrected 2026-07-04) for the speculative-estimate
+  side of this.
 - `listOrder` — an integer giving the recipe's position in the game's own crafting-window
   list (1 = first/lowest skill requirement). This is what the Crafting page actually sorts
   by now instead of alphabetically — see the "Crafting window screenshots" workflow below
@@ -238,10 +242,11 @@ the user asked to keep trying to guess/calculate each recipe's real numeric skil
 requirement "in the background." That speculative work lives entirely in
 `crafting-skill-estimates.md` at the repo root (not linked from the site, not loaded by any
 code) — read it before adding new estimates, and update it (not `crafting.json`) whenever
-new observations come in, especially new White hits or a recapture at a different skill
-level, since those are what actually sharpen the estimate. Never write a guessed number into
-`crafting.json`'s `recipeSkillLevel` — that field stays reserved for values confirmed exact
-via a White observation. If the difficulty badge ever comes back (e.g. a "type in your
+new observations come in, especially a recapture at a different skill level, since that's
+what actually sharpens the estimate. Never write a guessed (or, per the 2026-07-04
+retraction above, even a seemingly-"confirmed" White) number into `crafting.json`'s
+`recipeSkillLevel` — leave it unset until a real confirmed method exists. If the difficulty
+badge ever comes back (e.g. a "type in your
 skill" personalized calculator, which the accumulating estimates would make possible), the
 CSS for it is still in `style.css` (`.badge-difficulty*`) even though nothing references it
 right now.
