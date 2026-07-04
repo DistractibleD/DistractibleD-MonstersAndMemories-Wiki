@@ -106,8 +106,8 @@ whatever values exist in the data).
 
 ## Item screenshot format
 
-Item/recipe screenshots (`images/items/`, `images/crafting/`, `images/duplicates/` for
-either) are stored as `.jpg` at quality 90, not `.png` — this hasn't changed with the
+Item/recipe screenshots (`images/items/`, `images/crafting/`) are stored as `.jpg` at
+quality 90, not `.png` — this hasn't changed with the
 2026-07-04 switch to rendered cards, only *why* they're saved has (reference material for
 re-verifying data later, not something displayed on the site — see "Item and recipe
 cards" below). The popup card screenshots are mostly flat text over a noisy stone texture,
@@ -278,9 +278,18 @@ Workflow when asked to process new items (or "check the inbox"):
    "Components:" list), or a **crafting window** (the in-game tradeskill window listing
    many known recipes at once, e.g. titled "Leatherworking" with a skill number at the
    bottom) — then follow the matching path below.
-3. Once a file has been moved out (to `images/items/`, `images/Maps/`, `images/crafting/`,
-   or `images/duplicates/`), `images/inbox/` should no longer contain it — an empty inbox
+3. Once a file has been moved out (to `images/items/`, `images/Maps/`, `images/crafting/`)
+   or deleted as a duplicate, `images/inbox/` should no longer contain it — an empty inbox
    means everything is processed.
+
+**Duplicates (items/maps/recipes alike, confirmed 2026-07-04):** if a screenshot's item/map/
+recipe already exists (matched by slug or name), just delete it from the inbox — don't save
+it anywhere. There's no more `images/duplicates/` folder; the user decided that archive
+wasn't worth keeping. The one exception: if the new screenshot reveals something the
+existing entry is missing or gets wrong (a stat that was cut off before, a corrected
+number), still update `items.json`/`maps.json`/`crafting.json` with that new information
+before deleting the screenshot — the user's newest screenshot always wins (see "The user's
+screenshots are the source of truth" above).
 
 **Items:**
 
@@ -294,13 +303,8 @@ Workflow when asked to process new items (or "check the inbox"):
      lower case, spaces and punctuation replaced with dashes (e.g. "Tunic of Night" →
      `tunic-of-night.jpg`) — and move (don't copy) it into `images/items/` under that name.
      Use the same slug for the `image` field in the entry.
-   - **Duplicate of an existing item:** convert the screenshot to `.jpg` (quality 90) and
-     move it into `images/duplicates/` instead, named `<slug>-duplicate.jpg` (append `-2`,
-     `-3`, etc. if more than one duplicate of the same item shows up). If the new screenshot
-     reveals something the existing entry is missing or gets wrong (a stat that was cut off
-     before, a corrected number), update `items.json` too — the user's newest screenshot
-     always wins (see "The user's screenshots are the source of truth" above) — otherwise
-     leave `items.json` untouched and just file the duplicate away for reference.
+   - **Duplicate of an existing item:** delete the screenshot from the inbox (see
+     "Duplicates" above) — update `items.json` first if the new screenshot fills a gap.
 
 **Maps:**
 
@@ -308,8 +312,8 @@ Workflow when asked to process new items (or "check the inbox"):
 2. Check whether that map's slug (or name) already exists in `maps.json`.
    - **Not a duplicate:** add an entry to `maps.json`. Rename the file to the map's slug
      and move it into `images/Maps/`, matching the `image` field.
-   - **Duplicate of an existing map:** move the file into `images/duplicates/`, named
-     `<slug>-duplicate.png` (append `-2`, `-3`, etc. as needed), same as items.
+   - **Duplicate of an existing map:** delete the file from the inbox (see "Duplicates"
+     above).
 
 **Recipes:**
 
@@ -321,18 +325,17 @@ Workflow when asked to process new items (or "check the inbox"):
    - **Not a duplicate:** add an entry to `crafting.json`. Convert the screenshot to `.jpg`
      (quality 90) and rename it to the recipe's slug, and move it into `images/crafting/`.
      Use the same slug for the `image` field in the entry.
-   - **Duplicate of an existing recipe:** convert the screenshot to `.jpg` (quality 90) and
-     move it into `images/duplicates/`, named `<slug>-duplicate.jpg` (append `-2`, `-3`,
-     etc. as needed) — unless the new screenshot is the first *full card* for a recipe that
-     previously only had a minimal crafting-window entry (no `image`/`weight`/`components`
-     yet), in which case it's not really a duplicate — treat it like "not a duplicate"
-     above and fill in the fuller entry instead.
+   - **Duplicate of an existing recipe:** delete the screenshot from the inbox (see
+     "Duplicates" above) — unless the new screenshot is the first *full card* for a recipe
+     that previously only had a minimal crafting-window entry (no `image`/`weight`/
+     `components` yet), in which case it's not really a duplicate — treat it like "not a
+     duplicate" above and fill in the fuller entry instead.
 
 **Crafting window screenshots** (a different thing from a recipe card — this is the
 in-game tradeskill window listing every known recipe for one tradeskill, name-only with a
 color per recipe, e.g. "Leatherworking 22 / 300" at the bottom): these are a reference
 source, not a recipe card, and don't get saved anywhere — process them and delete them from
-the inbox, don't move them into `images/crafting/` or `images/duplicates/`.
+the inbox, don't move them into `images/crafting/`.
 
 1. The window's title bar names the tradeskill directly (more reliable than guessing from
    item names, unlike the individual Rawhide Canvas/Strap cards which didn't state one).
