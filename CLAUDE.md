@@ -9,10 +9,11 @@ step, no backend, no login system. `index.html` + `style.css` + `script.js` load
 at runtime — either Markdown pages (via marked.js) or the Item Database (via `items.json`).
 See `README.md` for the full explanation written for the (non-technical) site owner.
 
-Items and crafting recipes are shown as **cards rendered entirely from JSON data** — not
-screenshots. This changed 2026-07-04 (previously the site showed the user's actual item
-screenshot); see "Item and recipe cards" below for the current system and why the change
-was made before assuming a screenshot needs saving anywhere for a new item or recipe.
+Items and crafting recipes are **displayed** as cards rendered entirely from JSON data —
+not screenshots. This changed 2026-07-04 (previously the site showed the user's actual item
+screenshot); see "Item and recipe cards" below for the current system. The screenshot itself
+is still saved as a `.jpg` for every item/recipe (confirmed by the user 2026-07-04) — it's
+just archival/reference material now, not something the site shows anyone.
 
 ## The user's screenshots are the source of truth
 
@@ -66,28 +67,30 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
     `"Saddlebag"` for its cargo container — and a `race` array of mount codes read straight
     off the card (e.g. `["HRS", "DNK"]`) instead of player classes/ALL. Don't try to map
     these to the player race list; they're a separate namespace on the same field.
-4. No image file is needed. The item's screenshot is only ever the *source* you read stats
-   from — the site displays a card rendered from the JSON fields, not the screenshot itself
-   (see "Item and recipe cards" below). Don't convert, save, or reference a screenshot for a
-   new item; just delete it from the inbox once its data is captured. An `image` field can
-   still appear on older entries (left over from before 2026-07-04) — it's inert now, safe
-   to ignore, not something to keep populating.
+4. Still save the screenshot — convert to `.jpg` (quality 90, see "Item screenshot format"
+   below) into `images/items/`, filename matching the `image` field. **This is archival
+   only:** the site displays a card rendered from the JSON fields, not the screenshot
+   itself (see "Item and recipe cards" below), so the saved file is never shown to a
+   visitor — it exists purely so the data can be re-verified against the original card
+   later if something's ever in doubt. Keep setting `image` on new entries the same way as
+   before 2026-07-04.
 
 Filters (type/slot/class/race/tags/max size) and search are all derived from `items.json`
 at runtime — no other file needs to change when items are added, including when a new tag,
 slot, or max-size value shows up for the first time (those dropdowns are populated from
 whatever values exist in the data).
 
-## Item screenshot format (historical — items/recipes no longer use this; Maps still do)
+## Item screenshot format
 
-This section only applies to `images/Maps/` now. Item and recipe screenshots used to be
-converted to `.jpg` (quality 90) and saved in `images/items/`/`images/crafting/` for
-on-site display; since the 2026-07-04 switch to rendered cards (see "Item and recipe
-cards" below), new items/recipes don't save a screenshot at all — there's nothing left to
-convert. The historical reasoning (PNG compresses these popup-card screenshots poorly,
-~350KB vs ~65KB at JPEG q90 with no visible text-quality loss) is kept here only because
-old files in `images/items/`/`images/crafting/` were produced this way and remain in the
-repo, unused.
+Item/recipe screenshots (`images/items/`, `images/crafting/`, `images/duplicates/` for
+either) are stored as `.jpg` at quality 90, not `.png` — this hasn't changed with the
+2026-07-04 switch to rendered cards, only *why* they're saved has (reference material for
+re-verifying data later, not something displayed on the site — see "Item and recipe
+cards" below). The popup card screenshots are mostly flat text over a noisy stone texture,
+which PNG compresses poorly (~350KB/file) — JPEG at q90 gets the same image down to ~65KB
+with no visible loss of text legibility, tested by comparing re-encoded crops against the
+originals. When moving a screenshot out of the inbox, convert it to `.jpg` (quality 90) as
+part of the move rather than keeping the original `.png`/other format.
 
 **Map** images are the opposite: keep them as high-quality `.png`, uncompressed — they're
 viewed zoomed-in in the map viewer (see below) where JPEG artifacts would actually be
@@ -221,10 +224,9 @@ right now.
 
 1. Add an object to `crafting.json` with at least `name`, `slug`, `tradeskill`, plus whatever
    of the above the card shows.
-2. No image file is needed — same as items (see above), the recipe card screenshot is only
-   the source you transcribe from, not something saved for display. Delete it from the
-   inbox once its data is captured. Older entries may still carry an `image` field pointing
-   at `images/crafting/*.jpg` from before 2026-07-04 — inert, safe to ignore.
+2. Still save the screenshot — same as items (see above), convert to `.jpg` (quality 90)
+   into `images/crafting/`, filename matching the `image` field. Archival only, per "Item
+   and recipe cards" below — not something the site ever displays.
 
 ### New items/maps/recipes come in via `images/inbox/`
 
@@ -252,27 +254,29 @@ Workflow when asked to process new items (or "check the inbox"):
    "Components:" list), or a **crafting window** (the in-game tradeskill window listing
    many known recipes at once, e.g. titled "Leatherworking" with a skill number at the
    bottom) — then follow the matching path below.
-3. Once a screenshot's data has been captured into the relevant JSON file (items/recipes)
-   or the file has been moved out (`images/Maps/`, or `images/duplicates/` for a duplicate
-   of any kind), delete it from `images/inbox/` — an empty inbox means everything is
-   processed. Items and recipes never get moved into `images/items/`/`images/crafting/`
-   anymore (see "Item and recipe cards" below) — only Maps still save an image file.
+3. Once a file has been moved out (to `images/items/`, `images/Maps/`, `images/crafting/`,
+   or `images/duplicates/`), `images/inbox/` should no longer contain it — an empty inbox
+   means everything is processed.
 
 **Items:**
 
 1. Extract the item's name and stats, including `race` and any `tags` (see the tag/race
    guidance in "Adding an item to the Item Database" above).
 2. Check whether that item's slug (or name) already exists in `items.json` — this is a
-   cheap text check against the existing entries, and it's required every time to catch
-   duplicates (there's no image to compare anymore, so this is a pure name/slug match).
-   - **Not a duplicate:** add an entry to `items.json`. Delete the screenshot from the inbox
-     — nothing to save.
-   - **Duplicate of an existing item:** don't touch `items.json`. If the new screenshot
-     reveals something the existing entry is missing or gets wrong (a stat that was
-     cut off before, a corrected number), update the existing entry — the user's newest
-     screenshot always wins (see "The user's screenshots are the source of truth" above).
-     Otherwise just delete it; there's no `images/duplicates/` step for items anymore since
-     there's no image to file away.
+   cheap text check against the existing entries, not the same as re-scanning every image
+   in `images/items/`, and it's required every time to catch duplicates.
+   - **Not a duplicate:** add an entry to `items.json`. Convert the screenshot to `.jpg`
+     (quality 90, see "Item screenshot format" above) and rename it to the item's slug —
+     lower case, spaces and punctuation replaced with dashes (e.g. "Tunic of Night" →
+     `tunic-of-night.jpg`) — and move (don't copy) it into `images/items/` under that name.
+     Use the same slug for the `image` field in the entry.
+   - **Duplicate of an existing item:** convert the screenshot to `.jpg` (quality 90) and
+     move it into `images/duplicates/` instead, named `<slug>-duplicate.jpg` (append `-2`,
+     `-3`, etc. if more than one duplicate of the same item shows up). If the new screenshot
+     reveals something the existing entry is missing or gets wrong (a stat that was cut off
+     before, a corrected number), update `items.json` too — the user's newest screenshot
+     always wins (see "The user's screenshots are the source of truth" above) — otherwise
+     leave `items.json` untouched and just file the duplicate away for reference.
 
 **Maps:**
 
@@ -281,22 +285,24 @@ Workflow when asked to process new items (or "check the inbox"):
    - **Not a duplicate:** add an entry to `maps.json`. Rename the file to the map's slug
      and move it into `images/Maps/`, matching the `image` field.
    - **Duplicate of an existing map:** move the file into `images/duplicates/`, named
-     `<slug>-duplicate.png` (append `-2`, `-3`, etc. as needed). Maps are the one type that
-     still works this way — the map viewer displays the actual image, not a rendered card.
+     `<slug>-duplicate.png` (append `-2`, `-3`, etc. as needed), same as items.
 
 **Recipes:**
 
 1. Extract the recipe's name and which tradeskill it belongs to (must match a name in
    `tradeskills.json` — if the card names a tradeskill not in that list, flag it to the user
    rather than inventing a new category). See "Adding a crafting recipe" above for the
-   current (minimal, still-evolving) schema.
+   current schema.
 2. Check whether that recipe's slug (or name) already exists in `crafting.json`.
-   - **Not a duplicate:** add an entry to `crafting.json`. Delete the screenshot — nothing
-     to save.
-   - **Duplicate of an existing recipe:** don't touch `crafting.json` unless the new
-     screenshot reveals something new (e.g. this is the first full card for a recipe that
-     previously only had a minimal crafting-window entry — see below) or corrects something.
-     Delete the screenshot either way.
+   - **Not a duplicate:** add an entry to `crafting.json`. Convert the screenshot to `.jpg`
+     (quality 90) and rename it to the recipe's slug, and move it into `images/crafting/`.
+     Use the same slug for the `image` field in the entry.
+   - **Duplicate of an existing recipe:** convert the screenshot to `.jpg` (quality 90) and
+     move it into `images/duplicates/`, named `<slug>-duplicate.jpg` (append `-2`, `-3`,
+     etc. as needed) — unless the new screenshot is the first *full card* for a recipe that
+     previously only had a minimal crafting-window entry (no `image`/`weight`/`components`
+     yet), in which case it's not really a duplicate — treat it like "not a duplicate"
+     above and fill in the fuller entry instead.
 
 **Crafting window screenshots** (a different thing from a recipe card — this is the
 in-game tradeskill window listing every known recipe for one tradeskill, name-only with a
@@ -366,24 +372,33 @@ have visited those pages first.
 
 ## Item and recipe cards
 
-**As of 2026-07-04, items and recipes are shown as cards rendered entirely from JSON data —
-not screenshots.** The user compared the site to mnmquest.com's item popups, liked that
-approach better, and asked for an original (not copied) equivalent built from `items.json`/
-`crafting.json` instead of the game screenshot. This replaced the old system where the
-site displayed the user's actual screenshot (converted to `.jpg`, saved in `images/items/`
-or `images/crafting/`). That old system is what "Item screenshot format" above and the
-git history before this date describe — don't resurrect it without the user asking.
+**As of 2026-07-04, items and recipes are *displayed* as cards rendered entirely from JSON
+data — not screenshots.** The user compared the site to mnmquest.com's item popups, liked
+that approach better, and asked for an original (not copied) equivalent built from
+`items.json`/`crafting.json` instead of the game screenshot. This replaced the old system
+where the site displayed the user's actual screenshot on hover/click.
 
-Why this is a strict improvement, not just a reskin: the screenshot was *always* a
-secondary preview, never the source of truth (the JSON already had every fact needed for
-the table, filters, and search) — so drawing a card from that same JSON instead of showing
-a picture loses nothing. It also eliminates a whole category of problems this file used to
-carry workarounds for: cut-off/truncated screenshot text, the two-screenshot-merge dance
-for overflowing cards, and the item-image-vs-recipe-image proxy rule (a recipe's result
-with no item-card screenshot yet had to borrow the recipe card's picture as a stand-in) —
-none of that exists anymore, because there's no image lifecycle to manage. A card also
-never needs to scroll (unlike a screenshot, which could be taller than the viewer) since
-its layout just wraps to fit whatever fields exist.
+**The screenshot itself is still saved as a `.jpg`, same as always** (confirmed by the user
+2026-07-04, right after this change) — it's just no longer shown to visitors. Think of it as
+moving from "the screenshot is the display" to "the screenshot is the receipt": still filed
+in `images/items/`/`images/crafting/`, still referenced by the entry's `image` field, still
+useful if a stat's ever in doubt and needs re-checking against the original card — just not
+rendered anywhere on the page anymore. Follow "Item screenshot format" above and the inbox
+workflow's Items/Recipes sections as before; nothing about *saving* screenshots changed,
+only *displaying* them.
+
+Why swapping the display to a rendered card is a strict improvement, not just a reskin: the
+screenshot was always a secondary preview, never the source of truth for what's shown (the
+JSON already had every fact needed for the table, filters, and search) — so drawing a card
+from that same JSON instead of showing a picture loses nothing on the display side, while
+the saved screenshot keeps the verification value. It also eliminates a whole category of
+*display* problems this file used to carry workarounds for: the two-screenshot-merge dance
+for an oversized card, and the item-image-vs-recipe-image proxy rule (a recipe's result
+with no item-card screenshot yet had to borrow the recipe card's picture as a stand-in just
+to have something to show) — a card never needs to scroll or borrow another entry's picture,
+since its layout just wraps to fit whatever fields exist. Cut-off/truncated screenshot text
+is now purely a data-completeness question (did the missing text make it into the JSON?),
+not a display problem — see `images/items-needing-text.txt`, which tracks exactly that.
 
 **The renderer:** `renderItemCardHTML(item)` (items) and `renderRecipeCardHTML(recipe)`
 (recipes) in `script.js` build the card's HTML from scratch each time it's shown — header

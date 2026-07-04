@@ -1,82 +1,35 @@
-Items with possibly missing/cut-off text
+Items with possibly missing information
 =========================================
 
-I reviewed all 34 item screenshots currently in images/items/ looking for
-signs that the in-game popup's text got cut off by the screenshot (missing
-bottom border, text running to the raw image edge, mid-word/mid-sentence
-cutoffs, etc).
+This file tracks items where the *data* in items.json might be incomplete — not whether
+the saved screenshot's border/crop is complete. Since 2026-07-04 the site builds its own
+card from items.json and no longer displays the screenshot at all, so a screenshot that's
+visually cut off (missing border, text running to the raw edge) no longer matters on its
+own — only whether the actual stats/text made it into items.json. Screenshots are still
+kept (as .jpg) purely as the reference used to extract that data, per the user's
+2026-07-04 confirmation.
 
-Result: none found. Every screenshot shows a complete popup card with its
-decorative border fully visible top and bottom, so nothing needs manual
-text added right now.
+Update (2026-07-04, re-check of every item previously flagged in this file):
 
-Update (2026-07-02, inbox batch of 22 screenshots):
+- Torch — WAS missing data, now fixed. The card (images/items/torch.jpg) has an "Effect:"
+  line ("Torch (Passive. Must Equip. Level: 1)") and a description ("A simple torch.")
+  that had never actually been added to items.json (previous notes here were only about
+  the image's bottom border being cropped, not about the data itself) — both are now
+  added. Two more things on this card don't fit any existing schema field and weren't
+  added: "Fuel: 100%" (looks like a consumable/instance resource level, not a fixed item
+  property — no other item has shown anything like it) and "Right-click to activate."
+  (a green action-flag line, similar to a container's "Right-click to open." but not
+  currently tracked as a field for any item type). Flagging these in case a future card
+  clarifies whether they're worth a schema field.
+- Stained Black Iron Dagger — data is complete (full 14-class list, race, description all
+  present in items.json). The earlier note here was only about the saved screenshot being
+  visually cut off, which no longer matters since the screenshot isn't displayed. No action
+  needed.
+- The Measure Stick — data is complete (effect, description, weight/class/race all present,
+  merged from a two-screenshot capture back when screenshots were still the display). No
+  action needed.
+- Mining Pouch — data is complete; the earlier note was only about the image's cropped
+  border. No action needed.
 
-- Torch (images/items/torch.png) — the bottom decorative border isn't
-  visible in this screenshot; "Race: ALL" runs right to the raw image
-  edge. The card also has an "Effect:" line ("Torch (Passive. Must
-  Equip. Level: 1)") that may have more detail below what's shown. If
-  there's additional text below "Race: ALL" (or the Effect line was
-  longer), please add it here.
-
-Everything else in that batch (20 new items) showed a complete card.
-
-Update (2026-07-02, inbox batch of 7 screenshots):
-
-- Stained Black Iron Dagger (images/items/stained-black-iron-dagger.jpg) —
-  the screenshot cuts off mid-word on the last visible class ("SHM SPB
-  WIZ" is only half-visible) and "Race: ALL" is entirely out of frame.
-  The user supplied the missing text directly in chat, so items.json has
-  the full class list (14 classes) and race, but the saved screenshot
-  itself still visually ends before that text — if this item's data ever
-  needs re-verifying from the image alone, the image won't show the last
-  line.
-- The Measure Stick (images/items/the-measure-stick.jpg) — this item
-  arrived as two separate screenshots (top half + bottom half of the same
-  card, filenames Measure-1.png/Measure-2.png). Only the top half
-  (Measure-1) was kept as the item's screenshot; the bottom half's text
-  (Effect line, description, Weight/Class/Race) was merged into the
-  items.json entry and the second screenshot was discarded since there's
-  no mechanism for a second image per item.
-
-Everything else in that batch (5 items) showed a complete card.
-
-Update (2026-07-02, inbox batch of 14 screenshots — bags/satchels/pouches
-plus assorted gear):
-
-- Mining Pouch (images/items/mining-pouch.jpg) — same pattern as Torch
-  above: the bottom decorative border isn't visible and "Race: ALL" runs
-  right to the raw image edge. The text itself is fully legible (nothing
-  is actually missing), just noting it in case a future re-check assumes
-  a cropped border means missing data.
-
-Everything else in that batch (13 items) showed a complete card.
-
-Update (2026-07-03, inbox batch of 12 screenshots — Leatherworking crafting
-window recapture at skill 56 + individual recipe cards):
-
-- Rawhide Cloak (images/crafting/rawhide-cloak.jpg, also reused as
-  images/items/rawhide-cloak.jpg since no separate item-card screenshot
-  exists yet) — arrived as two screenshots, top half (kept as the saved
-  image) and bottom half. The bottom half's Components list (1 Rawhide
-  Canvas, 2 Cloth Padding, 2 Rough Thread) was merged into crafting.json;
-  the bottom-half screenshot was discarded, same pattern as The Measure
-  Stick above.
-- Rawhide Gorget and Rawhide Gloves (images/crafting/rawhide-gorget.jpg,
-  images/crafting/rawhide-gloves.jpg) — same top-half/bottom-half pattern
-  as Rawhide Cloak; components merged into crafting.json, bottom-half
-  screenshots discarded.
-- Stained Black Iron Dagger — two more screenshots came in, both showing
-  the same card (still cut off in different places, never both header and
-  full Race line in one shot). Since items.json already has the complete
-  data from the 2026-07-02 chat-supplied text, these were filed as
-  duplicates (images/duplicates/stained-black-iron-dagger-duplicate.jpg
-  and -duplicate-2.jpg) rather than replacing the saved screenshot.
-
-Everything else in that batch (4 crafting-window screenshots, used only to
-update recipe difficulty colors/skill and add the new "Hide" tier recipes)
-was reference material, not saved anywhere, per the crafting-window
-workflow in CLAUDE.md.
-
-This file will be updated the next time new items are processed from the
-inbox, in case a future screenshot does turn out to be cut off.
+Nothing else has been flagged as incomplete. This file will be updated only when there's
+a specific reason to believe an item's data (not its screenshot) is missing something.

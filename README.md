@@ -77,10 +77,10 @@ never need to touch `index.html`, `style.css`, or `script.js` to use it.
 
 To add a new item, add an object for it to `items.json` — copy an existing entry as a
 template and change the values. Weapons use `damage` / `delay` (the site calculates the
-damage-to-delay ratio automatically); armor and jewelry use `ac` and `stats` instead. You
-don't need to save a screenshot anywhere — the item's screenshot is just what you (or
-Claude) read the stats from; the site draws its own clean card from the data instead of
-showing the picture.
+damage-to-delay ratio automatically); armor and jewelry use `ac` and `stats` instead. Still
+save the screenshot into `images/items/` like before — the site draws its own clean card
+from the data instead of showing the picture, but the screenshot is kept on file so the
+data can always be double-checked against the original card later.
 
 The search box, and the type/slot/class filters on the page, are all built automatically
 from whatever is in `items.json` — you don't need to update anything else when you add an
@@ -98,7 +98,7 @@ aren't in the game yet show a "Planned" badge instead of a recipe list. Clicking
 shows its recipes, which come from `crafting.json`, the same way items come from
 `items.json`.
 
-To add a new recipe: add an object to `crafting.json` naming the tradeskill it belongs to
-— no screenshot needed, same as items above. Recipe cards look like item cards but in a
-different color (teal instead of gold) so the two are never confused, with the tradeskill
-name shown where an item card would show its tags.
+To add a new recipe: add an object to `crafting.json` naming the tradeskill it belongs to,
+and save its screenshot into `images/crafting/` — same idea as items above. Recipe cards
+look like item cards but in a different color (teal instead of gold) so the two are never
+confused, with the tradeskill name shown where an item card would show its tags.

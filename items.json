@@ -636,7 +636,9 @@
     "weight": 0.5,
     "size": "Small",
     "classes": ["ALL"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "effect": "Torch (Passive. Must Equip. Level: 1)",
+    "description": "A simple torch."
   },
   {
     "name": "Tattered Wool Cap",
