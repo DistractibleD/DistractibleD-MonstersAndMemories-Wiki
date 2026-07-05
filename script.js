@@ -328,38 +328,44 @@ const ITEM_RESIST_ORDER = ['FIRE', 'COLD', 'MAGIC', 'POISON', 'DISEASE', 'CORRUP
 /* ============================================
    Item type icons
    Shown in the item card header instead of a plain type-initial letter.
-   Original outline icons (not copied from any reference), one per weapon/
-   armor/jewelry sub-type plus one per tradeskill for crafting materials.
+   Solid gold silhouettes (2026-07-06), redrawn from a reference sheet of the
+   game's own equipment icons the user provided — not copied pixel-for-pixel
+   (that sheet's icons are its own asset), but shape/proportions matched to
+   it. Replaced an earlier outline/stroke style the user was never fully
+   happy with. Every shape here is closed and relies on the parent
+   `.type-icon` SVG having `fill: currentColor` (see style.css) — no per-path
+   fill/stroke attributes needed, so a card's icon always matches its card's
+   accent color (gold on item cards, teal on recipe cards) automatically.
    Each entry is the inner markup for a 0 0 24 24 viewBox <svg>.
    ============================================ */
 const ICON_DEFS = {
-  sword: `<path d="M11 15 L11 5 L12 2 L13 5 L13 15"/><line x1="8.5" y1="15" x2="15.5" y2="15"/><line x1="12" y1="15" x2="12" y2="20" stroke-width="2"/><circle cx="12" cy="21" r="1.1"/>`,
-  sword2h: `<path d="M10.3 13 L10.3 4 L12 1 L13.7 4 L13.7 13"/><line x1="12" y1="4" x2="12" y2="12" stroke-width="0.9"/><path d="M7 13 L17 13 M7 13 L5.5 11.5 M17 13 L18.5 11.5"/><line x1="12" y1="13" x2="12" y2="21" stroke-width="2"/><circle cx="12" cy="22" r="1.3"/>`,
-  dagger: `<path d="M11.3 14 L11.3 8 L12 6 L12.7 8 L12.7 14"/><line x1="10" y1="14" x2="14" y2="14"/><line x1="12" y1="14" x2="12" y2="17.5" stroke-width="1.8"/><circle cx="12" cy="18.5" r="0.9"/>`,
-  axe: `<line x1="12" y1="3" x2="12" y2="21" stroke-width="1.8"/><path d="M12 5 C7.5 4.3 5 8 6.8 12 C9.3 10.5 11.5 7 12 5 Z"/>`,
-  axe2h: `<line x1="12" y1="2" x2="12" y2="22" stroke-width="2"/><path d="M12 4 C5.5 3 2 8.5 4.5 14 C8.5 12 11.5 6.5 12 4 Z"/>`,
-  mace: `<line x1="12" y1="10" x2="12" y2="21" stroke-width="1.8"/><circle cx="12" cy="6.3" r="3.3"/><path class="ic-fill" d="M12 1 L13 3.1 L11 3.1 Z"/><path class="ic-fill" d="M17.3 6.3 L15.2 7.3 L15.2 5.3 Z"/><path class="ic-fill" d="M6.7 6.3 L8.8 5.3 L8.8 7.3 Z"/>`,
-  hammer: `<line x1="12" y1="8" x2="12" y2="21" stroke-width="1.8"/><path d="M6 4.3 L6 7.3 L11.3 7.3 L11.3 4.3 Z"/><path d="M12.7 4.3 L12.7 7.3 L18 5.8 Z"/>`,
-  maul2h: `<line x1="12" y1="9" x2="12" y2="22" stroke-width="2.2"/><path d="M5 2.5 L5 9 L19 9 L19 2.5 Z"/>`,
-  spear: `<line x1="12" y1="9" x2="12" y2="22" stroke-width="1.6"/><path d="M12 1 L14.3 8.8 L12 7 L9.7 8.8 Z"/><line x1="9" y1="9" x2="15" y2="9" stroke-width="1.2"/>`,
-  scythe: `<line x1="12.5" y1="9" x2="17" y2="22" stroke-width="1.8"/><path transform="translate(2,-1) scale(0.66)" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`,
-  bow: `<path d="M7.5 2 C2.5 7 2.5 17 7.5 22" stroke-width="1.8"/><line x1="7.7" y1="2.5" x2="7.7" y2="21.5" stroke-width="1"/>`,
-  ammo: `<line x1="5" y1="19" x2="16" y2="8" stroke-width="1.6"/><path class="ic-fill" d="M14.5 6.2 L20 4 L17.8 9.5 Z"/><path d="M5 19 L4 15 M5 19 L9 18" stroke-width="1.2"/>`,
-  throwing: `<path d="M6 18 L10 14" stroke-width="1.4"/><path class="ic-fill" d="M10 14 L11.6 12.2 L10.4 14.6 Z"/><path d="M9 19.5 L13.5 15" stroke-width="1.4"/><path class="ic-fill" d="M13.5 15 L15 13 L13.9 15.5 Z"/><path d="M12.5 20.5 L17 16" stroke-width="1.4"/><path class="ic-fill" d="M17 16 L18.5 14 L17.4 16.5 Z"/>`,
-  shield: `<path d="M12 2.5 L18.5 5 L18.5 11.5 C18.5 16.5 15.5 19.5 12 21.5 C8.5 19.5 5.5 16.5 5.5 11.5 L5.5 5 Z"/><circle class="ic-fill" cx="12" cy="10.5" r="1.6"/><line x1="12" y1="6" x2="12" y2="15" stroke-width="0.8"/><line x1="8" y1="10.5" x2="16" y2="10.5" stroke-width="0.8"/>`,
-  plate: `<path d="M12 3 C9.3 3 7.3 4.5 7 6.3 L6.3 9.5 C5.9 13.5 6.4 17 7.8 19.6 C9 21.2 10.4 22 12 22 C13.6 22 15 21.2 16.2 19.6 C17.6 17 18.1 13.5 17.7 9.5 L17 6.3 C16.7 4.5 14.7 3 12 3 Z"/><line x1="12" y1="6.5" x2="12" y2="18" stroke-width="0.9"/><path d="M9.2 8 C8.5 10.5 8.5 13 9.2 15.5" stroke-width="0.9"/><path d="M14.8 8 C15.5 10.5 15.5 13 14.8 15.5" stroke-width="0.9"/>`,
-  chain: `<path d="M8 5 L16 5 L18 7.5 L16 8.8 L16 22 L8 22 L8 8.8 L6 7.5 Z"/><circle cx="9.5" cy="11" r="1" stroke-width="0.8"/><circle cx="12.5" cy="11" r="1" stroke-width="0.8"/><circle cx="10.8" cy="14" r="1" stroke-width="0.8"/><circle cx="13.8" cy="14" r="1" stroke-width="0.8"/><circle cx="9.5" cy="17" r="1" stroke-width="0.8"/><circle cx="12.5" cy="17" r="1" stroke-width="0.8"/>`,
-  leather: `<path d="M8 5 L16 5 L17.2 9.5 L15.5 22 L8.5 22 L6.8 9.5 Z"/><path d="M10.3 9 L13.7 11 M13.7 9 L10.3 11" stroke-width="0.9"/><path d="M10 13.5 L14 15.5 M14 13.5 L10 15.5" stroke-width="0.9"/><path d="M9.8 18 L14.2 20 M14.2 18 L9.8 20" stroke-width="0.9"/>`,
-  cloth: `<path d="M9.5 3 L14.5 3 L17 7 L18.5 21 L14.5 21 L14 10 L10 10 L9.5 21 L5.5 21 Z"/><path d="M9.5 3 C10 4.5 11 5 12 5 C13 5 14 4.5 14.5 3" stroke-width="1"/>`,
-  armor: `<path d="M8 5 L16 5 L17.2 9.5 L15.5 22 L8.5 22 L6.8 9.5 Z"/>`,
-  ring: `<circle cx="12" cy="15" r="5.3" stroke-width="2"/><path class="ic-fill" d="M12 5 L14.5 8.5 L12 11.5 L9.5 8.5 Z"/>`,
-  earring: `<path d="M10 3 C10 5.5 12 5.5 12 8" stroke-width="1.6"/><path class="ic-fill" d="M12 8 L14.3 12 L12 16 L9.7 12 Z"/>`,
-  necklace: `<path d="M4 4 C4 12 8 15 12 15 C16 15 20 12 20 4" stroke-width="1.4"/><path class="ic-fill" d="M12 14 L14.5 18 L12 22 L9.5 18 Z"/>`,
-  food: `<path d="M12 9 C7.5 9 5.5 12 5.5 15 C5.5 18.5 8.5 21.5 12 21.5 C15.5 21.5 18.5 18.5 18.5 15 C18.5 12 16.5 9 12 9 Z"/><path d="M12 9 C12 6.5 10.7 5 9.3 4.3" stroke-width="1.2"/><path class="ic-fill" d="M12.2 5.2 C13.8 4 15.6 4.6 15.6 6.4 C13.9 7 12.7 6.4 12.2 5.2 Z"/>`,
-  drink: `<path d="M6 6 L17 6 L17 20 C17 21.1 16.1 22 15 22 L8 22 C6.9 22 6 21.1 6 20 Z"/><path d="M17 9.5 C20.5 9.5 20.5 15.5 17 15.5"/><line x1="7" y1="9.8" x2="16" y2="9.8" stroke-width="1.2"/>`,
-  container: `<path d="M9 4.5 C9 6.5 10.3 8 12 8 C13.7 8 15 6.5 15 4.5" stroke-width="1.4"/><path d="M8 9 L16 9 L17.5 21 C17.6 21.6 17.1 22 16.5 22 L7.5 22 C6.9 22 6.4 21.6 6.5 21 Z"/><path d="M8.5 9 L15.5 9 L14.5 12.3 L9.5 12.3 Z"/>`,
-  blacksmithing: `<path d="M5 9 L17 9 L22 10.5 L17 12 L5 12 Z"/><path d="M9.5 12 L9.5 15 L14.5 15 L14.5 12"/><path d="M7.5 15 L16.5 15 L18 20 L6 20 Z"/>`,
-  tailoring: `<line x1="12" y1="6" x2="12" y2="18" stroke-width="1.6"/><path class="ic-fill" d="M12 18 L13.2 20.5 L10.8 20.5 Z"/><ellipse cx="12" cy="4.3" rx="1.2" ry="1.7" stroke-width="1.2"/><path d="M13 4.8 C16.5 3.8 18.5 7 15.7 8.8 C13.3 10.4 14.7 12.7 12.4 14" stroke-width="1"/>`,
+  sword: `<path d="M12 1 L13.3 5 L12.6 15.5 L11.4 15.5 L10.7 5 Z"/><rect x="7" y="15.5" width="10" height="1.6"/><rect x="11" y="17.1" width="2" height="4"/><circle cx="12" cy="22" r="1.4"/>`,
+  sword2h: `<path d="M12 1 L13.6 4 L12.8 14 L11.2 14 L10.4 4 Z"/><rect x="6" y="14" width="12" height="1.8"/><rect x="10.8" y="15.8" width="2.4" height="6"/><circle cx="12" cy="22.5" r="1.5"/>`,
+  dagger: `<path d="M12 6 L13 8.5 L12.5 15 L11.5 15 L11 8.5 Z"/><rect x="9.5" y="15" width="5" height="1.2"/><rect x="11" y="16.2" width="2" height="2.8"/><circle cx="12" cy="19.5" r="1"/>`,
+  axe: `<rect x="11.3" y="2" width="1.4" height="20"/><path d="M12 5 C7 4 4.5 8 6.5 12.5 C9.2 11 11.5 7 12 5 Z"/>`,
+  axe2h: `<rect x="11.2" y="1.5" width="1.6" height="21"/><path d="M12.3 3.5 C5.5 2.3 2 8.5 5 14.5 C9 12 11.7 6 12.3 3.5 Z"/>`,
+  mace: `<rect x="11.2" y="9" width="1.6" height="13"/><circle cx="12" cy="6" r="3.6"/><path d="M12 0.8 L13.1 3.2 L10.9 3.2 Z"/><path d="M17.6 6 L15.2 7.1 L15.2 4.9 Z"/><path d="M6.4 6 L8.8 4.9 L8.8 7.1 Z"/><path d="M14.5 2.3 L13.9 4.5 L12.4 3 Z"/><path d="M9.5 2.3 L11.6 3 L10.1 4.5 Z"/>`,
+  hammer: `<rect x="11.2" y="8" width="1.6" height="14"/><rect x="5.5" y="3.5" width="13" height="5" rx="1"/>`,
+  maul2h: `<rect x="11.1" y="9" width="1.8" height="13"/><rect x="4.5" y="2.5" width="15" height="7" rx="1.2"/>`,
+  spear: `<rect x="11.3" y="8" width="1.4" height="14"/><path d="M12 1 L14.3 8.5 L9.7 8.5 Z"/>`,
+  scythe: `<rect x="11.6" y="7" width="1.3" height="15" transform="rotate(8 12 14)"/><path d="M17.5 4 C21 6 20 11 15.5 11.5 C12.5 11.8 10.5 10 10.8 8 C13 8.7 16 7 17.5 4 Z"/>`,
+  bow: `<path d="M7.5 2 C1 7.5 1 16.5 7.5 22 C5 16.5 5.4 7.5 7.5 2 Z"/><rect x="7.1" y="2.5" width="0.6" height="19"/>`,
+  ammo: `<path d="M6 20 L17 9 L18.4 10.4 L7.4 21.4 Z"/><path d="M15.5 6.5 L21 4 L18.5 9.5 Z"/><path d="M6 20 L4.5 15.5 L9 17 Z"/>`,
+  throwing: `<path d="M5.5 18 L9 14.5 L9.8 15.3 L6.3 18.8 Z"/><path d="M9 14.5 L10.6 12.7 L10 14.9 Z"/><path d="M8.5 19.5 L12.5 15.5 L13.3 16.3 L9.3 20.3 Z"/><path d="M12.5 15.5 L14 13.8 L13.5 15.9 Z"/><path d="M12 21 L16 17 L16.8 17.8 L12.8 21.8 Z"/><path d="M16 17 L17.5 15.2 L17 17.4 Z"/>`,
+  shield: `<path d="M12 2.2 L19 4.8 L19 11.5 C19 17 15.5 20.3 12 21.8 C8.5 20.3 5 17 5 11.5 L5 4.8 Z"/>`,
+  plate: `<path d="M8 4.5 L10.3 4.5 L12 7.3 L13.7 4.5 L16 4.5 L17.3 9.5 L16.6 13.2 L7.4 13.2 L6.7 9.5 Z"/><path d="M7.6 14.4 L16.4 14.4 L15.7 21 L8.3 21 Z"/>`,
+  chain: `<path d="M9.5 3 L14.5 3 L15.3 5.8 L18 7 L16.8 9.5 L15.6 8.5 L15.8 18 L14.6 18 L14.6 19.6 L13.4 18 L13.4 19.6 L12.2 18 L12.2 19.6 L11 18 L11 19.6 L9.8 18 L9.8 19.6 L8.6 18 L8.8 8.5 L7.6 9.5 L6.4 7 L9.1 5.8 Z"/>`,
+  leather: `<path d="M9.5 3 L14.5 3 L15.5 6 L18 7.5 L16.7 10 L15.5 8.8 L15.7 21 L8.3 21 L8.5 8.8 L7.3 10 L6 7.5 L8.5 6 Z"/>`,
+  cloth: `<path d="M9.3 3 C9.6 4.7 10.6 5.6 12 5.6 C13.4 5.6 14.4 4.7 14.7 3 L17.5 7.5 L18.6 21 L5.4 21 L6.5 7.5 Z"/>`,
+  armor: `<path d="M8.2 4.5 C8.6 6.3 10.1 7.2 12 7.2 C13.9 7.2 15.4 6.3 15.8 4.5 L17.3 9 L16.6 21 L7.4 21 L6.7 9 Z"/>`,
+  ring: `<path fill-rule="evenodd" d="M6.5 15 A5.5 5.5 0 1 0 17.5 15 A5.5 5.5 0 1 0 6.5 15 Z M9 15 A3 3 0 1 1 15 15 A3 3 0 1 1 9 15 Z"/><path d="M12 5 L14.4 8.6 L12 12.2 L9.6 8.6 Z"/>`,
+  earring: `<path fill-rule="evenodd" d="M10 4 A2 2 0 1 0 14 4 A2 2 0 1 0 10 4 Z M11 4 A1 1 0 1 1 13 4 A1 1 0 1 1 11 4 Z"/><path d="M12 6.5 L14.3 11 L12 15.5 L9.7 11 Z"/>`,
+  necklace: `<path fill-rule="evenodd" d="M12 2 C6.5 2 4.3 6 4.3 10.2 L6.7 10.2 C6.7 6.9 8.5 4.3 12 4.3 C15.5 4.3 17.3 6.9 17.3 10.2 L19.7 10.2 C19.7 6 17.5 2 12 2 Z"/><path d="M12 12 L14.6 16.8 L12 21.5 L9.4 16.8 Z"/>`,
+  food: `<path d="M12 9 C7.5 9 5.5 12 5.5 15.3 C5.5 18.7 8.3 21.5 12 21.5 C15.7 21.5 18.5 18.7 18.5 15.3 C18.5 12 16.5 9 12 9 Z"/><path d="M12 9 C12 6.3 10.6 4.8 9.1 4.1 C8.7 5.9 9.6 7.6 12 9 Z"/>`,
+  drink: `<path d="M6 6 L16.5 6 L16.5 20 C16.5 21.1 15.6 22 14.5 22 L8 22 C6.9 22 6 21.1 6 20 Z"/><path fill-rule="evenodd" d="M16.5 8.5 C20.5 8.5 20.5 15.5 16.5 15.5 L16.5 13.3 C18.3 13.3 18.3 10.7 16.5 10.7 Z"/>`,
+  container: `<path d="M9 4.5 C9 6.7 10.3 8.3 12 8.3 C13.7 8.3 15 6.7 15 4.5 L15 3.3 L9 3.3 Z"/><path d="M7.5 9 L16.5 9 L18 21.3 C18.1 21.7 17.8 22 17.4 22 L6.6 22 C6.2 22 5.9 21.7 6 21.3 Z"/><path d="M9.3 11 L14.7 11 L13.8 15.3 L10.2 15.3 Z"/>`,
+  blacksmithing: `<path d="M4 11 L15 11 L19.5 9 L19.5 12.5 L15 13.3 L15 15.5 L9.5 15.5 L9.5 13.3 L4 13.3 Z"/><path d="M10.5 15.5 L14.5 15.5 L15.5 21 L9.5 21 Z"/>`,
+  tailoring: `<path fill-rule="evenodd" d="M12 2.5 C13.1 2.5 14 3.5 14 4.8 C14 6.1 13.1 7.1 12 7.1 C10.9 7.1 10 6.1 10 4.8 C10 3.5 10.9 2.5 12 2.5 Z M12 3.7 C12.5 3.7 12.9 4.2 12.9 4.8 C12.9 5.4 12.5 5.9 12 5.9 C11.5 5.9 11.1 5.4 11.1 4.8 C11.1 4.2 11.5 3.7 12 3.7 Z"/><path d="M11.4 7 L12.6 7 L13.4 20.5 L12 22 L10.6 20.5 Z"/><path d="M8.5 9 C10.3 9 10.6 11 8.8 11.4 C10.8 11.6 11 13.6 9.2 14 L8.9 12.9 C9.8 12.7 9.7 11.9 8.6 11.9 L8.9 10.8 C10 10.6 9.9 9.9 8.8 10 Z"/>`,
   material: `<path d="M6 14 L9 6 L15 5 L19 11 L17 19 L8 20 Z"/>`,
 };
 

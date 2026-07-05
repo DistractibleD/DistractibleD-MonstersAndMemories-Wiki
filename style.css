@@ -391,12 +391,7 @@ html, body {
 .items-category-card-icon .type-icon {
   width: 100%;
   height: 100%;
-  stroke: currentColor;
-  fill: none;
-}
-.items-category-card-icon .type-icon .ic-fill {
   fill: currentColor;
-  stroke: none;
 }
 .items-category-card-name {
   font-family: 'Sora', sans-serif;
@@ -479,12 +474,7 @@ html, body {
   width: 20px;
   height: 20px;
   flex: 0 0 auto;
-  stroke: currentColor;
-  fill: none;
-}
-.item-card-icon .type-icon .ic-fill {
   fill: currentColor;
-  stroke: none;
 }
 .item-card-titles {
   flex: 1;

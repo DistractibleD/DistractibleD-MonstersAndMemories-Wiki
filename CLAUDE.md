@@ -509,9 +509,28 @@ tradeskill is already shown as a badge.
 The icon set went through several rounds with the user before landing (solid silhouettes →
 outline strokes → shape corrections against a reference sheet the user provided showing the
 game's actual equipment icons). The user was still not fully happy with the outline style as
-of 2026-07-04 and said they'd bring a different reference later for another pass — treat the
-current `ICON_DEFS` as a placeholder implementation, not a settled final design, if asked to
-touch this area again.
+of 2026-07-04 and said they'd bring a different reference later for another pass.
+
+**Second pass (2026-07-06):** the user brought a new, much more detailed reference sheet (a
+full "Monsters & Memories" equipment icon chart — weapons, armor by slot/material, shields,
+tradeskills, etc.) and asked to switch back to solid silhouettes, matching that sheet's
+style, but keep the existing color scheme (`currentColor`, so gold on item cards / teal on
+recipe cards — no new colors introduced). Scope was deliberately kept to redrawing the
+*existing* icon categories only (not the sheet's extra granularity like per-slot armor
+icons, magical foci, shield subtypes, or its full 24-icon tradeskill set — those remain
+future options if the user asks to expand coverage later). All of `ICON_DEFS` is now plain
+filled `<path>`/`<rect>`/`<circle>` shapes with no `stroke`; `.type-icon` in style.css sets
+`fill: currentColor` directly (the old `.ic-fill` sub-class from the outline era is gone,
+since every shape fills by default now). One gotcha hit while building this pass, worth
+remembering for any future icon work: drawing a filled ring/hoop (used for the ring/earring
+icons) via a single SVG arc command that sweeps *almost* 360° (endpoint offset by a tiny
+epsilon from the start point, a common "full circle from one arc" trick) renders incorrectly
+in Chrome — it produced a broken/partial shape instead of a clean donut. The fix was the
+standard two-arc-per-circle construction (`M (cx-r) cy A r r 0 1 0 (cx+r) cy A r r 0 1 0
+(cx-r) cy Z`, outer and inner circle each built from two semicircle arcs) combined with
+`fill-rule="evenodd"` across both — reliable, and what `ring`/`earring` use now. Treat the
+current `ICON_DEFS` as settled for the categories it covers unless the user asks to revisit
+the style again or expand coverage.
 
 **Item cards use the gold `--accent`; recipe cards use the teal `--accent-craft`, with the
 recipe's own name colored teal and its tradeskill shown as a badge where an item card would
