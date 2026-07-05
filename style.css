@@ -693,6 +693,51 @@ html, body {
   vertical-align: middle;
   border: 1px solid var(--border);
 }
+.gem-reference {
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.gem-reference h2 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  color: var(--accent-craft);
+}
+.gem-reference-note {
+  margin: 0 0 12px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+.gem-reference-tables {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.gem-table {
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+.gem-table th, .gem-table td {
+  border: 1px solid var(--border);
+  padding: 5px 10px;
+  text-align: left;
+}
+.gem-table thead th {
+  background: var(--bg);
+  color: var(--accent-craft);
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.gem-reference-footnote {
+  margin: 10px 0 0;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+}
 .craft-recipe-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));

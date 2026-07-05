@@ -9,6 +9,7 @@ let itemsData = null; // cached contents of items.json
 let mapsData = null; // cached contents of maps.json, loaded on first visit to the Maps page
 let craftingData = null; // cached contents of crafting.json
 let tradeskillsData = null; // cached contents of tradeskills.json
+let gemstonesData = null; // cached contents of gemstones.json
 
 // Set by the header search box when jumping straight to a specific item or
 // crafting recipe, then consumed (and cleared) by the corresponding render
@@ -48,6 +49,15 @@ async function ensureCraftingData() {
     craftingData = await res.json();
   }
   return craftingData;
+}
+
+async function ensureGemstonesData() {
+  if (!gemstonesData) {
+    const res = await fetch('gemstones.json');
+    if (!res.ok) throw new Error('Could not load gemstones.json');
+    gemstonesData = await res.json();
+  }
+  return gemstonesData;
 }
 
 async function init() {
@@ -1156,7 +1166,7 @@ async function renderCraftingPage(container) {
   if (pendingCraftingTradeskill) {
     const target = pendingCraftingTradeskill;
     pendingCraftingTradeskill = null;
-    renderCraftingRecipes(container, target);
+    await renderCraftingRecipes(container, target);
     return;
   }
 
@@ -1241,8 +1251,42 @@ function renderRecipeCardHTML(recipe) {
   `;
 }
 
-function renderCraftingRecipes(container, tradeskillName) {
+// Gemstone reference tables (gemstones.json) are general Jewelcrafting
+// knowledge — which gem gives which stat bonus when socketed — not tied to
+// any one recipe, so they render as their own section above the recipe grid
+// rather than living inside a recipe card. Extend to other tradeskills the
+// same way if a similar reference chart ever comes in for one of them.
+function renderGemstoneTablesHTML(tradeskillName) {
+  if (tradeskillName !== 'Jewelcrafting' || !gemstonesData) return '';
+  const categories = [...new Set(gemstonesData.map(g => g.category))];
+  return `
+    <div class="gem-reference">
+      <h2>Gemstone Stat Bonuses</h2>
+      <p class="gem-reference-note">Which stats each gem grants when socketed into a ring or earring — general
+      Jewelcrafting knowledge, not tied to any specific recipe below.</p>
+      <div class="gem-reference-tables">
+        ${categories.map(cat => `
+          <table class="gem-table">
+            <thead><tr><th colspan="2">${escapeAttr(cat)}</th></tr></thead>
+            <tbody>
+              ${gemstonesData.filter(g => g.category === cat).map(g => `
+                <tr>
+                  <td>${escapeAttr(g.gem)}${g.wyrmsbaneTurnIn ? ' *' : ''}</td>
+                  <td>${g.stats.join(', ')}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `).join('')}
+      </div>
+      ${gemstonesData.some(g => g.wyrmsbaneTurnIn) ? '<p class="gem-reference-footnote">* = Wyrmsbane Turn-In Gem</p>' : ''}
+    </div>
+  `;
+}
+
+async function renderCraftingRecipes(container, tradeskillName) {
   const tradeskill = tradeskillsData.find(ts => ts.name === tradeskillName);
+  if (tradeskillName === 'Jewelcrafting') await ensureGemstonesData();
   // Sorted by the recipe's real skill requirement (lowest first), matching the
   // order the game's own crafting window lists them in — not alphabetically.
   // Recipes without a known listOrder yet (no crafting-window screenshot seen
@@ -1262,6 +1306,7 @@ function renderCraftingRecipes(container, tradeskillName) {
       ${tradeskillName}
       ${tradeskill && tradeskill.status === 'planned' ? '<span class="badge-planned">Planned</span>' : ''}
     </h1>
+    ${renderGemstoneTablesHTML(tradeskillName)}
     ${
       tradeskill && tradeskill.status === 'planned'
         ? '<p>This tradeskill hasn\'t been implemented in the game yet.</p>'
