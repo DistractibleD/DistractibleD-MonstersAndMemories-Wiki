@@ -2519,5 +2519,121 @@
     "tags": [],
     "weight": 0.1,
     "size": "Small"
+  },
+  {
+    "name": "Emerald",
+    "slug": "emerald",
+    "image": "images/items/emerald.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Black Sapphire",
+    "slug": "black-sapphire",
+    "image": "images/items/black-sapphire.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Diamond",
+    "slug": "diamond",
+    "image": "images/items/diamond.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Blue Diamond",
+    "slug": "blue-diamond",
+    "image": "images/items/blue-diamond.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Platinum Ore",
+    "slug": "platinum-ore",
+    "image": "images/items/platinum-ore.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.25,
+    "size": "Small"
+  },
+  {
+    "name": "Brilliant Crystallized Magic",
+    "slug": "brilliant-crystallized-magic",
+    "image": "images/items/brilliant-crystallized-magic.jpg",
+    "type": "Misc",
+    "tags": ["MAGIC"],
+    "weight": 0.25,
+    "size": "Small"
+  },
+  {
+    "name": "Medium-Quality Wolf Pelt",
+    "slug": "medium-quality-wolf-pelt",
+    "image": "images/items/medium-quality-wolf-pelt.jpg",
+    "type": "Misc",
+    "tags": [],
+    "description": "A wolf pelt of average quality. It can be refined at a tannery.",
+    "weight": 3.0,
+    "size": "Medium"
+  },
+  {
+    "name": "Opal",
+    "slug": "opal",
+    "image": "images/items/opal.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Chipped Peridot",
+    "slug": "chipped-peridot",
+    "image": "images/items/chipped-peridot.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Malachite",
+    "slug": "malachite",
+    "image": "images/items/malachite.jpg",
+    "type": "Misc",
+    "tags": [],
+    "classes": ["ELE"],
+    "race": ["ALL"],
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Arcane Frond",
+    "slug": "arcane-frond",
+    "image": "images/items/arcane-frond.jpg",
+    "type": "Misc",
+    "tags": ["MAGIC"],
+    "weight": 0.25,
+    "size": "Small"
+  },
+  {
+    "name": "Overlord's Plate Helm",
+    "slug": "overlords-plate-helm",
+    "image": "images/items/overlords-plate-helm.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Head",
+    "ac": 20,
+    "stats": { "STR": 2, "STA": 2, "INT": 2, "HP": 10 },
+    "weight": 1.0,
+    "size": "Small",
+    "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"]
   }
 ]
