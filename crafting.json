@@ -1075,6 +1075,35 @@
     "observedAtSkill": 0
   },
   {
+    "name": "Brittle Sharpening Stone",
+    "slug": "brittle-sharpening-stone",
+    "image": "images/crafting/brittle-sharpening-stone.jpg",
+    "tradeskill": "Blacksmithing",
+    "listOrder": 1,
+    "weight": 0.15,
+    "size": "Small",
+    "components": [
+      { "item": "Brittle Stone", "quantity": 4 }
+    ],
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Brittle Weightstone",
+    "slug": "brittle-weightstone",
+    "image": "images/crafting/brittle-weightstone.jpg",
+    "tradeskill": "Blacksmithing",
+    "listOrder": 2,
+    "weight": 0.15,
+    "size": "Small",
+    "components": [
+      { "item": "Brittle Stone", "quantity": 1 },
+      { "item": "Cloth Scraps", "quantity": 1 }
+    ],
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 0
+  },
+  {
     "name": "Copper Kite Shield",
     "slug": "copper-kite-shield",
     "image": "images/crafting/copper-kite-shield.jpg",
@@ -1092,6 +1121,7 @@
     "slug": "copper-chain-wristguard",
     "image": "images/crafting/copper-chain-wristguard.jpg",
     "tradeskill": "Blacksmithing",
+    "listOrder": 8,
     "weight": 1.4,
     "size": "Small",
     "components": [
@@ -1118,6 +1148,7 @@
     "slug": "copper-chain-gorget",
     "image": "images/crafting/copper-chain-gorget.jpg",
     "tradeskill": "Blacksmithing",
+    "listOrder": 7,
     "weight": 0.1,
     "size": "Small",
     "components": [
@@ -1274,6 +1305,7 @@
     "slug": "copper-chain-links",
     "image": "images/crafting/copper-chain-links.jpg",
     "tradeskill": "Blacksmithing",
+    "listOrder": 3,
     "weight": 0.2,
     "size": "Small",
     "components": [
@@ -1299,6 +1331,7 @@
     "slug": "copper-plate",
     "image": "images/crafting/copper-plate.jpg",
     "tradeskill": "Blacksmithing",
+    "listOrder": 5,
     "weight": 0.2,
     "size": "Small",
     "components": [
@@ -1324,6 +1357,7 @@
     "slug": "copper-fasteners",
     "image": "images/crafting/copper-fasteners.jpg",
     "tradeskill": "Blacksmithing",
+    "listOrder": 4,
     "weight": 0.1,
     "size": "Tiny",
     "components": [
@@ -1348,6 +1382,7 @@
     "slug": "copper-stirrups",
     "image": "images/crafting/copper-stirrups.jpg",
     "tradeskill": "Blacksmithing",
+    "listOrder": 6,
     "weight": 0.1,
     "size": "Tiny",
     "components": [
@@ -1537,5 +1572,53 @@
       { "item": "Copper Bar", "quantity": 5 }
     ],
     "difficultyColor": "White"
+  },
+  {
+    "name": "Copper Bar",
+    "slug": "copper-bar",
+    "tradeskill": "Smelting",
+    "listOrder": 1,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Copper Bar",
+    "slug": "copper-bar-2",
+    "tradeskill": "Smelting",
+    "listOrder": 2,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Copper Scraps x4",
+    "slug": "copper-scraps-x4",
+    "tradeskill": "Smelting",
+    "listOrder": 3,
+    "difficultyColor": "Orange",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Tin Bar",
+    "slug": "tin-bar",
+    "tradeskill": "Smelting",
+    "listOrder": 4,
+    "difficultyColor": "White",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Tin Bar",
+    "slug": "tin-bar-2",
+    "tradeskill": "Smelting",
+    "listOrder": 5,
+    "difficultyColor": "White",
+    "observedAtSkill": 0
+  },
+  {
+    "name": "Tin Scraps x4",
+    "slug": "tin-scraps-x4",
+    "tradeskill": "Smelting",
+    "listOrder": 6,
+    "difficultyColor": "White",
+    "observedAtSkill": 0
   }
 ]
