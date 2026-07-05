@@ -100,10 +100,25 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
    items with no `slot`/`classes`/`race` gracefully (blank Slot field, no Class/Race
    section on the card) — no code changes needed when adding more of either kind.
 
-Filters (type/slot/class/race/tags/max size) and search are all derived from `items.json`
-at runtime — no other file needs to change when items are added, including when a new tag,
+Filters (slot/class/race/tags/max size) and search are all derived from `items.json` at
+runtime — no other file needs to change when items are added, including when a new tag,
 slot, or max-size value shows up for the first time (those dropdowns are populated from
 whatever values exist in the data).
+
+**Item Database browsing (2026-07-05):** the page opens on a category grid, one card per
+`item.type` (Weapon/Armor/Jewelry/Container/Food/Drink/Misc) with its item count —
+`renderItemsCategories` in `script.js`, the same pattern as the Crafting page's tradeskill
+grid (`renderCraftingCategories`). Clicking a category drills into `renderItemsList`, which
+is the actual search/filter/sort table, scoped to just that category — the old flat
+all-items table and its "Type" column/filter are gone, since type is now implied by which
+category you're in; the slot/class/race/tag/max-size dropdowns are also scoped to just the
+items in that category (so e.g. Weapons' class dropdown doesn't list Jewelry-only classes).
+The header search box (global, searches everything regardless of category) still works the
+same as before — clicking an item result calls `goToItem`, which now also sets
+`pendingItemCategory` (alongside the existing `pendingItemQuery`) so the Item Database opens
+directly on that item's category list with the search box pre-filled, instead of landing on
+the category grid. Recipe component/result links into the Item Database go through the same
+`goToItem` path, so they land in the right category too.
 
 ## Item screenshot format
 

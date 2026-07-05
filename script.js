@@ -16,6 +16,10 @@ let gemstonesData = null; // cached contents of gemstones.json
 // function so the user lands directly on what they searched for.
 let pendingItemQuery = null;
 let pendingCraftingTradeskill = null;
+// Set alongside pendingItemQuery (by goToItem) so the Item Database opens
+// directly on that item's category list instead of the category grid —
+// same idea as pendingCraftingTradeskill jumping past the tradeskill grid.
+let pendingItemCategory = null;
 // Set when jumping to an item from a recipe's component list, so the Item
 // Database can show a "back to that recipe" link. Same consume-once pattern.
 let pendingReturnToRecipe = null;
@@ -276,6 +280,7 @@ function renderSearchResults(query) {
 
 function goToItem(item, returnToRecipe) {
   pendingItemQuery = item.name;
+  pendingItemCategory = item.type;
   pendingReturnToRecipe = returnToRecipe || null;
   const alreadyThere = location.hash.replace('#', '') === 'items';
   location.hash = 'items';
@@ -472,6 +477,19 @@ function itemCategoryLabel(item) {
   return itemIconKeys(item).map(k => ICON_LABELS[k] || 'Item').join(', ');
 }
 
+// Generic icon + plural display label per item.type, used one level up from
+// the per-item sub-type icons above (itemIconKeys) — the Item Database's
+// category grid (see renderItemsCategories) just needs "this card is
+// Weapons", not "this card is a Two-Handed Sword".
+const ITEM_TYPE_ICON = {
+  Weapon: 'sword', Armor: 'armor', Jewelry: 'ring', Container: 'container',
+  Food: 'food', Drink: 'drink', Misc: 'material',
+};
+const ITEM_TYPE_LABELS = {
+  Weapon: 'Weapons', Armor: 'Armor', Jewelry: 'Jewelry', Container: 'Containers',
+  Food: 'Food', Drink: 'Drinks', Misc: 'Misc',
+};
+
 function itemRatio(item) {
   if (item.damage == null || !item.delay) return null;
   return item.damage / item.delay;
@@ -538,28 +556,80 @@ function itemSearchHaystack(item) {
 async function renderItemsPage(container) {
   await ensureItemsData();
 
+  // Landed here from a header search result for a specific item — jump
+  // straight to that item's category instead of the category grid (same
+  // pattern as pendingCraftingTradeskill on the Crafting page).
+  if (pendingItemCategory) {
+    const category = pendingItemCategory;
+    pendingItemCategory = null;
+    renderItemsList(container, category);
+    return;
+  }
+
+  renderItemsCategories(container);
+}
+
+// Top-level Item Database view: one card per item.type (Weapon, Armor,
+// Jewelry, Container, Food, Drink, Misc) with its item count, mirroring the
+// Crafting page's tradeskill grid (see renderCraftingCategories). Clicking a
+// card drills into renderItemsList, which holds the actual search/filter/
+// sort table, scoped to just that category.
+function renderItemsCategories(container) {
+  const types = [...new Set(itemsData.map(i => i.type))].sort();
+
+  container.innerHTML = `
+    <h1>Item Database</h1>
+    <p>Browse items by category. Click a category to search, filter, and sort within it.</p>
+    <div class="items-category-grid">
+      ${types.map(type => {
+        const count = itemsData.filter(i => i.type === type).length;
+        const icon = ITEM_TYPE_ICON[type] || 'material';
+        const label = ITEM_TYPE_LABELS[type] || type;
+        return `
+          <div class="items-category-card" data-type="${escapeAttr(type)}">
+            <div class="items-category-card-icon">${svgIcon(icon)}</div>
+            <div class="items-category-card-body">
+              <div class="items-category-card-name">${escapeAttr(label)}</div>
+              <div class="items-category-card-count">${count} item${count === 1 ? '' : 's'}</div>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+
+  container.querySelectorAll('.items-category-card').forEach(card => {
+    card.addEventListener('click', () => renderItemsList(container, card.dataset.type));
+  });
+}
+
+// One category's full item table — search box, slot/class/race/tag/max-size
+// filters (options scoped to just this category, so e.g. Weapons doesn't
+// show Jewelry's classes in its dropdown), click-to-sort columns, and the
+// existing hover/click card behavior. The "Type" column/filter from the old
+// flat table is gone since it's now implied by which category you're in.
+function renderItemsList(container, category) {
+  const categoryItems = itemsData.filter(i => i.type === category);
+  const categoryLabel = ITEM_TYPE_LABELS[category] || category;
+
   // Landed here from a recipe's component list — remember which recipe so
   // we can show a link back to it, instead of leaving the user stranded.
   const returnToRecipe = pendingReturnToRecipe;
   pendingReturnToRecipe = null;
 
-  const slots = [...new Set(itemsData.map(i => i.slot))].filter(Boolean).sort();
-  const types = [...new Set(itemsData.map(i => i.type))].sort();
-  const classes = [...new Set(itemsData.flatMap(i => i.classes || []).filter(c => c !== 'ALL'))].sort();
-  const races = [...new Set(itemsData.flatMap(i => i.race || []).filter(r => r !== 'ALL'))].sort();
-  const tags = [...new Set(itemsData.flatMap(i => i.tags || []))].sort();
-  const maxSizes = [...new Set(itemsData.map(i => i.maxSize).filter(Boolean))].sort();
+  const slots = [...new Set(categoryItems.map(i => i.slot))].filter(Boolean).sort();
+  const classes = [...new Set(categoryItems.flatMap(i => i.classes || []).filter(c => c !== 'ALL'))].sort();
+  const races = [...new Set(categoryItems.flatMap(i => i.race || []).filter(r => r !== 'ALL'))].sort();
+  const tags = [...new Set(categoryItems.flatMap(i => i.tags || []))].sort();
+  const maxSizes = [...new Set(categoryItems.map(i => i.maxSize).filter(Boolean))].sort();
 
   container.innerHTML = `
     ${returnToRecipe ? `<p class="items-back-link"><a href="#" id="items-back-to-recipe">&larr; Back to ${escapeAttr(returnToRecipe.name)}</a></p>` : ''}
-    <h1>Item Database</h1>
-    <p>Browse, search, filter, and sort every item on the wiki. Hover an item's name to see its full card.</p>
+    <p class="items-back-link"><a href="#" id="items-back-to-categories">&larr; All categories</a></p>
+    <h1>${escapeAttr(categoryLabel)}</h1>
+    <p>Browse, search, filter, and sort ${escapeAttr(categoryLabel.toLowerCase())} items. Hover an item's name to see its full card.</p>
     <div class="items-toolbar">
       <input type="search" id="items-search" class="items-search" placeholder="Search name, stat, class..." autocomplete="off">
-      <select id="items-filter-type" class="items-select">
-        <option value="">All types</option>
-        ${types.map(t => `<option value="${t}">${t}</option>`).join('')}
-      </select>
       <select id="items-filter-slot" class="items-select">
         <option value="">All slots</option>
         ${slots.map(s => `<option value="${s}">${s}</option>`).join('')}
@@ -587,7 +657,6 @@ async function renderItemsPage(container) {
       <table class="items-table">
         <colgroup>
           <col class="col-name">
-          <col class="col-type">
           <col class="col-slot">
           <col class="col-ac">
           <col class="col-stats">
@@ -600,7 +669,6 @@ async function renderItemsPage(container) {
         <thead>
           <tr>
             <th data-sort-key="name" class="sortable">Name</th>
-            <th data-sort-key="type" class="sortable">Type</th>
             <th data-sort-key="slot" class="sortable">Slot</th>
             <th data-sort-key="ac" class="sortable">AC</th>
             <th data-sort-key="stats" class="sortable">Stats</th>
@@ -620,7 +688,6 @@ async function renderItemsPage(container) {
   setupItemClickToView(container.querySelector('#items-tbody'));
 
   const searchBox = container.querySelector('#items-search');
-  const typeFilter = container.querySelector('#items-filter-type');
   const slotFilter = container.querySelector('#items-filter-slot');
   const classFilter = container.querySelector('#items-filter-class');
   const raceFilter = container.querySelector('#items-filter-race');
@@ -641,6 +708,11 @@ async function renderItemsPage(container) {
       goToRecipe(returnToRecipe);
     });
   }
+
+  container.querySelector('#items-back-to-categories').addEventListener('click', e => {
+    e.preventDefault();
+    renderItemsCategories(container);
+  });
 
   // Column headers sort by click — see itemSortValue for what each key reads
   // and ITEM_SORT_NUMERIC for which keys default to highest-first (numeric
@@ -671,15 +743,13 @@ async function renderItemsPage(container) {
 
   function update() {
     const query = searchBox.value.toLowerCase().trim();
-    const type = typeFilter.value;
     const slot = slotFilter.value;
     const cls = classFilter.value;
     const race = raceFilter.value;
     const tag = tagFilter.value;
     const maxSize = maxSizeFilter.value;
 
-    let filtered = itemsData.filter(item => {
-      if (type && item.type !== type) return false;
+    let filtered = categoryItems.filter(item => {
       if (slot && item.slot !== slot) return false;
       if (cls && !(item.classes || []).includes('ALL') && !(item.classes || []).includes(cls)) return false;
       if (race && !(item.race || []).includes('ALL') && !(item.race || []).includes(race)) return false;
@@ -702,15 +772,15 @@ async function renderItemsPage(container) {
     updateSortIndicators();
     renderItemRows(container.querySelector('#items-tbody'), filtered);
     container.querySelector('#items-count').textContent =
-      `Showing ${filtered.length} of ${itemsData.length} items`;
+      `Showing ${filtered.length} of ${categoryItems.length} items`;
   }
 
   [searchBox].forEach(el => el.addEventListener('input', update));
-  [typeFilter, slotFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].forEach(el => el.addEventListener('change', update));
+  [slotFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].forEach(el => el.addEventListener('change', update));
 
   container.querySelector('#items-clear-filters').addEventListener('click', () => {
     searchBox.value = '';
-    [typeFilter, slotFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].forEach(el => el.value = '');
+    [slotFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].forEach(el => el.value = '');
     update();
   });
 
@@ -725,7 +795,6 @@ const ITEM_SORT_NUMERIC = ['ac', 'ratio', 'weight', 'capacity'];
 function itemSortValue(item, key) {
   switch (key) {
     case 'name': return item.name.toLowerCase();
-    case 'type': return (item.type || '').toLowerCase();
     case 'slot': return (item.slot || '').toLowerCase();
     case 'ac': return item.ac != null ? item.ac : null;
     case 'stats': return formatStats(item).toLowerCase();
@@ -744,7 +813,7 @@ function escapeAttr(str) {
 
 function renderItemRows(tbody, items) {
   if (!items.length) {
-    tbody.innerHTML = '<tr><td colspan="10" class="items-empty">No items match your filters.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="9" class="items-empty">No items match your filters.</td></tr>';
     return;
   }
 
@@ -759,7 +828,6 @@ function renderItemRows(tbody, items) {
         <td>
           <span class="item-name-hover" data-alt="${item.name}">${(item.tags || []).map(t => `<span class="badge-tag">${t}</span> `).join('')}${item.name}</span>
         </td>
-        <td>${item.type}</td>
         <td>${formatSlot(item)}</td>
         <td>${item.ac != null ? item.ac : '—'}</td>
         <td>${formatStats(item)}</td>
