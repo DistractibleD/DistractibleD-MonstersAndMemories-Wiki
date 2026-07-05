@@ -329,6 +329,7 @@ const ICON_DEFS = {
   spear: `<line x1="12" y1="9" x2="12" y2="22" stroke-width="1.6"/><path d="M12 1 L14.3 8.8 L12 7 L9.7 8.8 Z"/><line x1="9" y1="9" x2="15" y2="9" stroke-width="1.2"/>`,
   scythe: `<line x1="12.5" y1="9" x2="17" y2="22" stroke-width="1.8"/><path transform="translate(2,-1) scale(0.66)" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`,
   bow: `<path d="M7.5 2 C2.5 7 2.5 17 7.5 22" stroke-width="1.8"/><line x1="7.7" y1="2.5" x2="7.7" y2="21.5" stroke-width="1"/>`,
+  ammo: `<line x1="5" y1="19" x2="16" y2="8" stroke-width="1.6"/><path class="ic-fill" d="M14.5 6.2 L20 4 L17.8 9.5 Z"/><path d="M5 19 L4 15 M5 19 L9 18" stroke-width="1.2"/>`,
   throwing: `<path d="M6 18 L10 14" stroke-width="1.4"/><path class="ic-fill" d="M10 14 L11.6 12.2 L10.4 14.6 Z"/><path d="M9 19.5 L13.5 15" stroke-width="1.4"/><path class="ic-fill" d="M13.5 15 L15 13 L13.9 15.5 Z"/><path d="M12.5 20.5 L17 16" stroke-width="1.4"/><path class="ic-fill" d="M17 16 L18.5 14 L17.4 16.5 Z"/>`,
   shield: `<path d="M12 2.5 L18.5 5 L18.5 11.5 C18.5 16.5 15.5 19.5 12 21.5 C8.5 19.5 5.5 16.5 5.5 11.5 L5.5 5 Z"/><circle class="ic-fill" cx="12" cy="10.5" r="1.6"/><line x1="12" y1="6" x2="12" y2="15" stroke-width="0.8"/><line x1="8" y1="10.5" x2="16" y2="10.5" stroke-width="0.8"/>`,
   plate: `<path d="M12 3 C9.3 3 7.3 4.5 7 6.3 L6.3 9.5 C5.9 13.5 6.4 17 7.8 19.6 C9 21.2 10.4 22 12 22 C13.6 22 15 21.2 16.2 19.6 C17.6 17 18.1 13.5 17.7 9.5 L17 6.3 C16.7 4.5 14.7 3 12 3 Z"/><line x1="12" y1="6.5" x2="12" y2="18" stroke-width="0.9"/><path d="M9.2 8 C8.5 10.5 8.5 13 9.2 15.5" stroke-width="0.9"/><path d="M14.8 8 C15.5 10.5 15.5 13 14.8 15.5" stroke-width="0.9"/>`,
@@ -367,6 +368,11 @@ function svgIcon(key) {
 // anything that doesn't match a known pattern.
 function weaponIconKey(item) {
   const name = (item.name || '').toLowerCase();
+  // Ammo (Arrow, Stonehead Arrow, ...) shares the Archery skill with actual
+  // bows in the data, but it's a consumable projectile, not the bow itself —
+  // same idea as Throwing weapons already getting their own category rather
+  // than being lumped in with melee weapons of the same skill.
+  if (item.slot === 'Ammo') return 'ammo';
   if (item.skill === 'Archery') return 'bow';
   if (item.skill === 'Throwing') return 'throwing';
   if (item.skill === 'Stabbing') return name.includes('dagger') ? 'dagger' : 'spear';
@@ -425,7 +431,7 @@ function craftingIconKeys(item) {
 const ICON_LABELS = {
   sword: 'Sword', sword2h: 'Two-Handed Sword', dagger: 'Dagger', axe: 'Axe',
   axe2h: 'Greataxe', mace: 'Mace', hammer: 'Hammer', maul2h: 'Maul',
-  spear: 'Spear', scythe: 'Scythe', bow: 'Bow', throwing: 'Throwing Weapon',
+  spear: 'Spear', scythe: 'Scythe', bow: 'Bow', ammo: 'Ammo', throwing: 'Throwing Weapon',
   shield: 'Shield', plate: 'Plate Armor', chain: 'Chain Armor',
   leather: 'Leather Armor', cloth: 'Cloth Armor', armor: 'Armor',
   ring: 'Ring', earring: 'Earring', necklace: 'Necklace', food: 'Food',
@@ -564,15 +570,6 @@ async function renderItemsPage(container) {
         <option value="">All max sizes</option>
         ${maxSizes.map(s => `<option value="${s}">${s}</option>`).join('')}
       </select>
-      <select id="items-sort" class="items-select">
-        <option value="name-asc">Name (A-Z)</option>
-        <option value="name-desc">Name (Z-A)</option>
-        <option value="ac-desc">AC (High-Low)</option>
-        <option value="ratio-desc">Ratio (High-Low)</option>
-        <option value="ratio-asc">Ratio (Low-High)</option>
-        <option value="capacity-desc">Capacity (High-Low)</option>
-        <option value="capacity-asc">Capacity (Low-High)</option>
-      </select>
       <button type="button" id="items-clear-filters" class="items-clear-btn">Clear filters</button>
     </div>
     <p class="items-count" id="items-count"></p>
@@ -592,16 +589,16 @@ async function renderItemsPage(container) {
         </colgroup>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Slot</th>
-            <th>AC</th>
-            <th>Stats</th>
-            <th>Dmg / Delay / Ratio</th>
-            <th>Weight / Size</th>
-            <th>Capacity / Max Size</th>
-            <th>Classes</th>
-            <th>Race</th>
+            <th data-sort-key="name" class="sortable">Name</th>
+            <th data-sort-key="type" class="sortable">Type</th>
+            <th data-sort-key="slot" class="sortable">Slot</th>
+            <th data-sort-key="ac" class="sortable">AC</th>
+            <th data-sort-key="stats" class="sortable">Stats</th>
+            <th data-sort-key="ratio" class="sortable">Dmg / Delay / Ratio</th>
+            <th data-sort-key="weight" class="sortable">Weight / Size</th>
+            <th data-sort-key="capacity" class="sortable">Capacity / Max Size</th>
+            <th data-sort-key="classes" class="sortable">Classes</th>
+            <th data-sort-key="race" class="sortable">Race</th>
           </tr>
         </thead>
         <tbody id="items-tbody"></tbody>
@@ -619,7 +616,7 @@ async function renderItemsPage(container) {
   const raceFilter = container.querySelector('#items-filter-race');
   const tagFilter = container.querySelector('#items-filter-tag');
   const maxSizeFilter = container.querySelector('#items-filter-maxsize');
-  const sortSelect = container.querySelector('#items-sort');
+  const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
 
   // Landed here from a header search result — pre-fill the search box with
   // that item's name so the table filters straight down to it.
@@ -634,6 +631,33 @@ async function renderItemsPage(container) {
       goToRecipe(returnToRecipe);
     });
   }
+
+  // Column headers sort by click — see itemSortValue for what each key reads
+  // and ITEM_SORT_NUMERIC for which keys default to highest-first (numeric
+  // columns) vs. A-Z-first (label columns) on their first click. Clicking
+  // the already-active column flips direction instead of picking a new one.
+  let sortKey = 'name';
+  let sortDir = 'asc';
+
+  function updateSortIndicators() {
+    sortHeaders.forEach(th => {
+      th.classList.toggle('sorted-asc', th.dataset.sortKey === sortKey && sortDir === 'asc');
+      th.classList.toggle('sorted-desc', th.dataset.sortKey === sortKey && sortDir === 'desc');
+    });
+  }
+
+  sortHeaders.forEach(th => {
+    th.addEventListener('click', () => {
+      const key = th.dataset.sortKey;
+      if (key === sortKey) {
+        sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortKey = key;
+        sortDir = ITEM_SORT_NUMERIC.includes(key) ? 'desc' : 'asc';
+      }
+      update();
+    });
+  });
 
   function update() {
     const query = searchBox.value.toLowerCase().trim();
@@ -655,25 +679,24 @@ async function renderItemsPage(container) {
       return true;
     });
 
-    const [sortKey, sortDir] = sortSelect.value.split('-');
     filtered.sort((a, b) => {
-      let av, bv;
-      if (sortKey === 'name') { av = a.name.toLowerCase(); bv = b.name.toLowerCase(); }
-      else if (sortKey === 'ac') { av = a.ac ?? -Infinity; bv = b.ac ?? -Infinity; }
-      else if (sortKey === 'capacity') { av = a.capacity ?? -Infinity; bv = b.capacity ?? -Infinity; }
-      else { av = itemRatio(a) ?? -Infinity; bv = itemRatio(b) ?? -Infinity; }
-      if (av < bv) return sortDir === 'asc' ? -1 : 1;
-      if (av > bv) return sortDir === 'asc' ? 1 : -1;
-      return 0;
+      const av = itemSortValue(a, sortKey);
+      const bv = itemSortValue(b, sortKey);
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      const cmp = typeof av === 'string' ? av.localeCompare(bv) : av - bv;
+      return sortDir === 'asc' ? cmp : -cmp;
     });
 
+    updateSortIndicators();
     renderItemRows(container.querySelector('#items-tbody'), filtered);
     container.querySelector('#items-count').textContent =
       `Showing ${filtered.length} of ${itemsData.length} items`;
   }
 
   [searchBox].forEach(el => el.addEventListener('input', update));
-  [typeFilter, slotFilter, classFilter, raceFilter, tagFilter, maxSizeFilter, sortSelect].forEach(el => el.addEventListener('change', update));
+  [typeFilter, slotFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].forEach(el => el.addEventListener('change', update));
 
   container.querySelector('#items-clear-filters').addEventListener('click', () => {
     searchBox.value = '';
@@ -682,6 +705,27 @@ async function renderItemsPage(container) {
   });
 
   update();
+}
+
+// One value per sortable column in the Item Database table — numeric for
+// AC/Ratio/Weight/Capacity (so click-to-sort can put highest first), string
+// for everything else (so it sorts A-Z first). Missing values sort last
+// regardless of direction, handled by the caller in renderItemsPage.
+const ITEM_SORT_NUMERIC = ['ac', 'ratio', 'weight', 'capacity'];
+function itemSortValue(item, key) {
+  switch (key) {
+    case 'name': return item.name.toLowerCase();
+    case 'type': return (item.type || '').toLowerCase();
+    case 'slot': return (item.slot || '').toLowerCase();
+    case 'ac': return item.ac != null ? item.ac : null;
+    case 'stats': return formatStats(item).toLowerCase();
+    case 'ratio': return itemRatio(item);
+    case 'weight': return item.weight != null ? item.weight : null;
+    case 'capacity': return item.capacity != null ? item.capacity : null;
+    case 'classes': return formatList(item.classes).toLowerCase();
+    case 'race': return formatList(item.race).toLowerCase();
+    default: return '';
+  }
 }
 
 function escapeAttr(str) {

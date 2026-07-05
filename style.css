@@ -344,6 +344,26 @@ html, body {
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
+.items-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+.items-table th.sortable:hover {
+  background: var(--bg-panel-hover);
+}
+.items-table th.sortable::after {
+  content: '';
+  display: inline-block;
+  width: 0.6em;
+}
+.items-table th.sorted-asc::after {
+  content: '\25B2';
+  margin-left: 4px;
+}
+.items-table th.sorted-desc::after {
+  content: '\25BC';
+  margin-left: 4px;
+}
 .items-empty {
   color: var(--text-dim);
   text-align: center !important;
