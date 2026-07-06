@@ -1586,8 +1586,12 @@ function renderCraftingCategories(container) {
 
   container.innerHTML = `
     <h1>Crafting</h1>
-    <p>Browse recipes by tradeskill. "Planned" tradeskills exist in the game's design but
-    aren't usable yet.</p>
+    <p>Browse recipes by tradeskill, or search below to jump straight to a specific recipe.
+    "Planned" tradeskills exist in the game's design but aren't usable yet.</p>
+    <div class="items-quick-search">
+      <input type="search" id="craft-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all recipes by name or tradeskill..." autocomplete="off">
+      <div id="craft-quick-search-results" class="items-quick-search-results"></div>
+    </div>
     <div class="craft-grid">
       ${sorted.map(ts => {
         const count = craftingData.filter(r => r.tradeskill === ts.name).length;
@@ -1606,6 +1610,46 @@ function renderCraftingCategories(container) {
 
   container.querySelectorAll('.craft-card').forEach(card => {
     card.addEventListener('click', () => renderCraftingRecipes(container, card.dataset.tradeskill));
+  });
+
+  // A shortcut past the tradeskill grid for anyone who already knows which
+  // recipe they want — same pattern as the Item Database's quick search
+  // (renderItemsCategories): scoped to crafting.json only, clicking a result
+  // reuses goToRecipe for the same tradeskill-jump + card-flash behavior as
+  // a header search result.
+  const quickSearchBox = container.querySelector('#craft-quick-search-box');
+  const quickSearchResults = container.querySelector('#craft-quick-search-results');
+
+  quickSearchBox.addEventListener('input', () => {
+    const query = quickSearchBox.value.toLowerCase().trim();
+    if (!query) {
+      quickSearchResults.classList.remove('open');
+      quickSearchResults.innerHTML = '';
+      return;
+    }
+
+    const matches = craftingData
+      .filter(r => `${r.name} ${r.tradeskill}`.toLowerCase().includes(query))
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .slice(0, 20);
+
+    quickSearchResults.innerHTML = matches.length
+      ? matches.map(recipe => `
+          <a href="#" class="search-result-link items-quick-search-result" data-slug="${escapeAttr(recipe.slug)}">
+            ${escapeAttr(recipe.name)}
+            <span class="items-quick-search-type">${escapeAttr(recipe.tradeskill)}</span>
+          </a>
+        `).join('')
+      : '<p class="search-results-empty">No recipes match.</p>';
+    quickSearchResults.classList.add('open');
+
+    quickSearchResults.querySelectorAll('.items-quick-search-result').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const recipe = craftingData.find(r => r.slug === link.dataset.slug);
+        if (recipe) goToRecipe(recipe);
+      });
+    });
   });
 }
 
