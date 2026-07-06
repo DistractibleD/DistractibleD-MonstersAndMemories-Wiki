@@ -10,6 +10,7 @@ let mapsData = null; // cached contents of maps.json, loaded on first visit to t
 let craftingData = null; // cached contents of crafting.json
 let tradeskillsData = null; // cached contents of tradeskills.json
 let gemstonesData = null; // cached contents of gemstones.json
+let monstersData = null; // cached contents of monsters.json
 
 // Set by the header search box when jumping straight to a specific item or
 // crafting recipe, then consumed (and cleared) by the corresponding render
@@ -23,6 +24,13 @@ let pendingItemCategory = null;
 // Set when jumping to an item from a recipe's component list, so the Item
 // Database can show a "back to that recipe" link. Same consume-once pattern.
 let pendingReturnToRecipe = null;
+// Same idea as pendingReturnToRecipe, but for jumping to an item from a
+// monster's drop table instead of a recipe's component list.
+let pendingReturnToMonster = null;
+// Set by the header search box (or the Monsters page's own quick search) when
+// jumping straight to a specific monster, then consumed by renderMonstersPage
+// so its search box is pre-filled — same pattern as pendingItemQuery.
+let pendingMonsterQuery = null;
 // Set by goToRecipe so the recipe just navigated to (e.g. via an item's
 // "Crafted via"/"Used to craft" links) flashes once its card renders, making
 // it easy to spot among the rest of that tradeskill's recipe grid.
@@ -31,6 +39,9 @@ let pendingHighlightRecipe = null;
 // Item Database table — set by goToItem so a search-result click flashes the
 // row once it renders, instead of just silently scrolling the page.
 let pendingHighlightItem = null;
+// Same idea again, for a monster's row on the Monsters page — set by
+// goToMonster so a header/quick-search result flashes the right row.
+let pendingHighlightMonster = null;
 // Set by renderCraftingRecipes when it scrolls to a highlighted recipe, so
 // loadPage's normal "reset scroll to top on navigation" doesn't immediately
 // cancel that scroll.
@@ -68,6 +79,15 @@ async function ensureGemstonesData() {
   return gemstonesData;
 }
 
+async function ensureMonstersData() {
+  if (!monstersData) {
+    const res = await fetch('monsters.json');
+    if (!res.ok) throw new Error('Could not load monsters.json');
+    monstersData = await res.json();
+  }
+  return monstersData;
+}
+
 async function init() {
   const res = await fetch('pages.json');
   allPages = await res.json();
@@ -78,11 +98,12 @@ async function init() {
   const startPage = allPages.find(p => p.file === requested) || allPages[0];
   if (startPage) loadPage(startPage.file);
 
-  // Pre-fetch item/crafting data in the background so the header search box
-  // can search them right away, without waiting for the user to first visit
-  // the Item Database or Crafting page.
+  // Pre-fetch item/crafting/monster data in the background so the header
+  // search box can search them right away, without waiting for the user to
+  // first visit the Item Database, Crafting, or Monsters page.
   ensureItemsData().catch(() => {});
   ensureCraftingData().catch(() => {});
+  ensureMonstersData().catch(() => {});
 
   const searchBox = document.getElementById('search-box');
   searchBox.addEventListener('input', onSearch);
@@ -153,9 +174,9 @@ async function loadPage(file) {
   contentInner.innerHTML = '<p>Loading...</p>';
   const page = allPages.find(p => p.file === file);
 
-  // Data-driven pages (Item Database, Maps, Crafting) use the full content
-  // width instead of the narrower reading width used for prose pages.
-  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'crafting')));
+  // Data-driven pages (Item Database, Maps, Crafting, Monsters) use the full
+  // content width instead of the narrower reading width used for prose pages.
+  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'crafting' || page.type === 'monsters')));
 
   try {
     if (page && page.type === 'items') {
@@ -164,6 +185,8 @@ async function loadPage(file) {
       await renderMapsPage(contentInner);
     } else if (page && page.type === 'crafting') {
       await renderCraftingPage(contentInner);
+    } else if (page && page.type === 'monsters') {
+      await renderMonstersPage(contentInner);
     } else {
       const res = await fetch('pages/' + file);
       if (!res.ok) throw new Error('Page not found');
@@ -246,8 +269,12 @@ function renderSearchResults(query) {
     .filter(r => `${r.name} ${r.tradeskill}`.toLowerCase().includes(query))
     .sort((a, b) => a.name.localeCompare(b.name))
     .slice(0, 8);
+  const matchedMonsters = (monstersData || [])
+    .filter(m => monsterSearchHaystack(m).includes(query))
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .slice(0, 8);
 
-  if (!matchedCategories.length && !matchedPages.length && !matchedItems.length && !matchedRecipes.length) {
+  if (!matchedCategories.length && !matchedPages.length && !matchedItems.length && !matchedRecipes.length && !matchedMonsters.length) {
     results.innerHTML = '<p class="search-results-empty">No results found.</p>';
     openSearchResults();
     return;
@@ -314,14 +341,38 @@ function renderSearchResults(query) {
     return link;
   });
 
+  addSection('Monsters', matchedMonsters, monster => {
+    const link = document.createElement('a');
+    link.href = '#monsters';
+    link.className = 'search-result-link';
+    link.textContent = monster.name;
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      clearSearch();
+      goToMonster(monster);
+    });
+    return link;
+  });
+
   openSearchResults();
 }
 
-function goToItem(item, returnToRecipe) {
+// `returnTo` is either a recipe object (from a recipe's own component list —
+// the existing case) or `{ kind: 'monster', name, slug }` (from a monster's
+// drop table) — distinguished by the `kind` tag so the two "back to X" links
+// on the Item Database don't collide. Recipe callers predate the `kind` tag
+// and don't set it, so the absence of `kind` still means "recipe".
+function goToItem(item, returnTo) {
   pendingItemQuery = item.name;
   pendingItemCategory = item.type;
-  pendingReturnToRecipe = returnToRecipe || null;
   pendingHighlightItem = item.slug;
+  if (returnTo && returnTo.kind === 'monster') {
+    pendingReturnToRecipe = null;
+    pendingReturnToMonster = returnTo;
+  } else {
+    pendingReturnToRecipe = returnTo || null;
+    pendingReturnToMonster = null;
+  }
   const alreadyThere = location.hash.replace('#', '') === 'items';
   location.hash = 'items';
   if (alreadyThere) loadPage('items');
@@ -334,6 +385,7 @@ function goToItemCategory(type) {
   pendingItemQuery = null;
   pendingItemCategory = type;
   pendingReturnToRecipe = null;
+  pendingReturnToMonster = null;
   pendingHighlightItem = null;
   const alreadyThere = location.hash.replace('#', '') === 'items';
   location.hash = 'items';
@@ -356,6 +408,19 @@ function goToCraftingCategory(tradeskillName) {
   const alreadyThere = location.hash.replace('#', '') === 'crafting';
   location.hash = 'crafting';
   if (alreadyThere) loadPage('crafting');
+}
+
+// Jumps to the Monsters page and flashes one monster's row — from a header
+// search result, the Monsters page's own quick search, or an item's "Back to
+// <Monster>" link (see pendingReturnToMonster). Works with either a full
+// monster object or the minimal `{ name, slug }` shape goToItem stores for
+// the return-to case, since only those two fields are needed here.
+function goToMonster(monster) {
+  pendingMonsterQuery = monster.name;
+  pendingHighlightMonster = monster.slug;
+  const alreadyThere = location.hash.replace('#', '') === 'monsters';
+  location.hash = 'monsters';
+  if (alreadyThere) loadPage('monsters');
 }
 
 // Case-insensitive lookup used to decide whether a recipe component name
@@ -580,15 +645,22 @@ function itemRatio(item) {
 // Shared by formatStats() (comma text, used in the table + search) and the
 // item card's stat chips (see renderItemCardHTML) so the "which stats/
 // resists/haste does this item have" logic only lives in one place.
+// Most stat/resist bonuses are positive, but a resist can be negative (e.g.
+// a corruption-themed item with "SV Corruption: -5") — only prepend "+" when
+// the number itself doesn't already carry a "-" sign.
+function formatSigned(n) {
+  return n < 0 ? `${n}` : `+${n}`;
+}
+
 function statEntries(item) {
   const entries = [];
   ITEM_STAT_ORDER.forEach(stat => {
-    if (item.stats && item.stats[stat]) entries.push({ label: stat, value: `+${item.stats[stat]}` });
+    if (item.stats && item.stats[stat]) entries.push({ label: stat, value: formatSigned(item.stats[stat]) });
   });
   ITEM_RESIST_ORDER.forEach(res => {
-    if (item.resists && item.resists[res]) entries.push({ label: `SV ${res}`, value: `+${item.resists[res]}` });
+    if (item.resists && item.resists[res]) entries.push({ label: `SV ${res}`, value: formatSigned(item.resists[res]) });
   });
-  if (item.haste) entries.push({ label: 'Haste', value: `+${item.haste}%` });
+  if (item.haste) entries.push({ label: 'Haste', value: `${formatSigned(item.haste)}%` });
   return entries;
 }
 
@@ -856,6 +928,10 @@ function renderItemsList(container, category, scope) {
   const returnToRecipe = pendingReturnToRecipe;
   pendingReturnToRecipe = null;
 
+  // Same idea, but for a monster's drop table.
+  const returnToMonster = pendingReturnToMonster;
+  pendingReturnToMonster = null;
+
   // Landed here from a search result for one specific item — flash its row
   // once the table renders, same idea as pendingHighlightRecipe on the
   // Crafting page.
@@ -870,6 +946,7 @@ function renderItemsList(container, category, scope) {
 
   container.innerHTML = `
     ${returnToRecipe ? `<p class="items-back-link"><a href="#" id="items-back-to-recipe">&larr; Back to ${escapeAttr(returnToRecipe.name)}</a></p>` : ''}
+    ${returnToMonster ? `<p class="items-back-link"><a href="#" id="items-back-to-monster">&larr; Back to ${escapeAttr(returnToMonster.name)}</a></p>` : ''}
     <p class="items-back-link"><a href="#" id="items-back-to-categories">&larr; ${escapeAttr(backLabel)}</a></p>
     <h1>${escapeAttr(heading)}</h1>
     <p>Browse, search, filter, and sort ${escapeAttr(subtitleLabel)} items. Hover an item's name to see its full card.</p>
@@ -951,6 +1028,13 @@ function renderItemsList(container, category, scope) {
     container.querySelector('#items-back-to-recipe').addEventListener('click', e => {
       e.preventDefault();
       goToRecipe(returnToRecipe);
+    });
+  }
+
+  if (returnToMonster) {
+    container.querySelector('#items-back-to-monster').addEventListener('click', e => {
+      e.preventDefault();
+      goToMonster(returnToMonster);
     });
   }
 
@@ -1544,6 +1628,13 @@ function renderRecipeCardHTML(recipe) {
     fields.push({ label: 'Weight', value: recipe.weight });
     fields.push({ label: 'Size', value: recipe.size });
   }
+  // Most recipes produce exactly one of `name` — Tanning is the first
+  // exception (a single pelt processed in a vat yields a stack of scrap
+  // material), so only show a "Yields" field when it's set instead of
+  // assuming every recipe's quantity is 1.
+  if (recipe.resultQuantity != null) {
+    fields.push({ label: 'Yields', value: `${recipe.resultQuantity}x` });
+  }
 
   const componentsHtml = (recipe.components && recipe.components.length) ? `
     <div class="item-card-section">
@@ -1630,6 +1721,7 @@ async function renderCraftingRecipes(container, tradeskillName) {
       ${tradeskillName}
       ${tradeskill && tradeskill.status === 'planned' ? '<span class="badge-planned">Planned</span>' : ''}
     </h1>
+    ${tradeskill && tradeskill.note ? `<p class="craft-tradeskill-note">${escapeAttr(tradeskill.note)}</p>` : ''}
     ${renderGemstoneTablesHTML(tradeskillName)}
     ${
       tradeskill && tradeskill.status === 'planned'
@@ -1676,6 +1768,281 @@ async function renderCraftingRecipes(container, tradeskillName) {
     e.preventDefault();
     renderCraftingCategories(container);
   });
+}
+
+/* ============================================
+   Monsters
+   Data lives in monsters.json. To add a new monster, add an object with a
+   name/slug/image (dropped into images/Monsters/, see that folder's
+   README.txt) plus whatever of maps/levelRange/drops the screenshot shows —
+   no code changes needed, same "derive filters from data" pattern as the
+   Item Database's slot/class/race dropdowns. A single sortable/filterable
+   table is enough for now rather than a category-grid-first layout like
+   Items — there's only one meaningful browsing dimension (map) instead of
+   Items' several, so a dropdown filter covers it without needing a whole
+   extra drill-down level.
+   ============================================ */
+
+function monsterSearchHaystack(monster) {
+  return [
+    monster.name,
+    (monster.maps || []).join(' '),
+    monster.levelRange || '',
+    (monster.drops || []).map(d => d.item).join(' ')
+  ].join(' ').toLowerCase();
+}
+
+function formatMonsterMaps(monster) {
+  return (monster.maps && monster.maps.length) ? monster.maps.join(', ') : '—';
+}
+
+async function renderMonstersPage(container) {
+  await ensureMonstersData();
+
+  const maps = [...new Set(monstersData.flatMap(m => m.maps || []))].sort();
+
+  container.innerHTML = `
+    <h1>Monsters</h1>
+    <p>Browse monsters alphabetically, or filter by map. Click a monster's name to see its
+    picture and drop table. Level ranges are the user's own best-guess estimates, not
+    confirmed in-game values.</p>
+    <div class="items-toolbar">
+      <input type="search" id="monsters-search" class="items-search" placeholder="Search name, map, drop..." autocomplete="off">
+      <select id="monsters-filter-map" class="items-select">
+        <option value="">All maps</option>
+        ${maps.map(m => `<option value="${escapeAttr(m)}">${escapeAttr(m)}</option>`).join('')}
+      </select>
+      <button type="button" id="monsters-clear-filters" class="items-clear-btn">Clear filters</button>
+    </div>
+    <p class="items-count" id="monsters-count"></p>
+    <div class="items-table-wrap">
+      <table class="items-table">
+        <colgroup>
+          <col class="col-monster-name">
+          <col class="col-monster-map">
+          <col class="col-monster-level">
+        </colgroup>
+        <thead>
+          <tr>
+            <th data-sort-key="name" class="sortable">Name</th>
+            <th data-sort-key="maps" class="sortable">Map</th>
+            <th data-sort-key="level" class="sortable">Level Range</th>
+          </tr>
+        </thead>
+        <tbody id="monsters-tbody"></tbody>
+      </table>
+    </div>
+  `;
+
+  const searchBox = container.querySelector('#monsters-search');
+  const mapFilter = container.querySelector('#monsters-filter-map');
+  const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
+
+  // Landed here from a header search result — pre-fill the search box with
+  // that monster's name so the table filters straight down to it.
+  if (pendingMonsterQuery) {
+    searchBox.value = pendingMonsterQuery;
+    pendingMonsterQuery = null;
+  }
+
+  let sortKey = 'name';
+  let sortDir = 'asc';
+
+  function updateSortIndicators() {
+    sortHeaders.forEach(th => {
+      th.classList.toggle('sorted-asc', th.dataset.sortKey === sortKey && sortDir === 'asc');
+      th.classList.toggle('sorted-desc', th.dataset.sortKey === sortKey && sortDir === 'desc');
+    });
+  }
+
+  sortHeaders.forEach(th => {
+    th.addEventListener('click', () => {
+      const key = th.dataset.sortKey;
+      if (key === sortKey) {
+        sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortKey = key;
+        sortDir = 'asc';
+      }
+      update();
+    });
+  });
+
+  function monsterSortValue(monster, key) {
+    switch (key) {
+      case 'name': return monster.name.toLowerCase();
+      case 'maps': return (monster.maps && monster.maps[0] || '').toLowerCase();
+      // Sorts by the leading number in a "5-8"-style range; monsters with no
+      // level range at all sort after every monster that has one.
+      case 'level': {
+        const match = /-?\d+/.exec(monster.levelRange || '');
+        return match ? parseInt(match[0], 10) : null;
+      }
+      default: return '';
+    }
+  }
+
+  function update() {
+    const query = searchBox.value.toLowerCase().trim();
+    const map = mapFilter.value;
+
+    let filtered = monstersData.filter(monster => {
+      if (map && !(monster.maps || []).includes(map)) return false;
+      if (query && !monsterSearchHaystack(monster).includes(query)) return false;
+      return true;
+    });
+
+    filtered.sort((a, b) => {
+      const av = monsterSortValue(a, sortKey);
+      const bv = monsterSortValue(b, sortKey);
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      const cmp = typeof av === 'string' ? av.localeCompare(bv) : av - bv;
+      return sortDir === 'asc' ? cmp : -cmp;
+    });
+
+    updateSortIndicators();
+    renderMonsterRows(container.querySelector('#monsters-tbody'), filtered);
+    container.querySelector('#monsters-count').textContent =
+      `Showing ${filtered.length} of ${monstersData.length} monsters`;
+  }
+
+  searchBox.addEventListener('input', update);
+  mapFilter.addEventListener('change', update);
+
+  container.querySelector('#monsters-clear-filters').addEventListener('click', () => {
+    searchBox.value = '';
+    mapFilter.value = '';
+    update();
+  });
+
+  update();
+  setupMonsterClickToView(container.querySelector('#monsters-tbody'));
+
+  if (pendingHighlightMonster) {
+    const slug = pendingHighlightMonster;
+    pendingHighlightMonster = null;
+    const row = container.querySelector(`#monsters-tbody tr[data-slug="${CSS.escape(slug)}"]`);
+    if (row) {
+      suppressScrollReset = true;
+      row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      row.classList.add('row-flash');
+      row.addEventListener('animationend', () => row.classList.remove('row-flash'), { once: true });
+    }
+  }
+}
+
+function renderMonsterRows(tbody, monsters) {
+  if (!monsters.length) {
+    tbody.innerHTML = `<tr><td colspan="3" class="items-empty">${monstersData.length ? 'No monsters match your filters.' : 'No monsters yet.'}</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = monsters.map(monster => `
+    <tr data-slug="${escapeAttr(monster.slug)}">
+      <td><span class="item-name-hover monster-name-hover" data-slug="${escapeAttr(monster.slug)}">${escapeAttr(monster.name)}</span></td>
+      <td>${escapeAttr(formatMonsterMaps(monster))}</td>
+      <td>${monster.levelRange ? escapeAttr(monster.levelRange) : '—'}</td>
+    </tr>
+  `).join('');
+}
+
+function findMonsterBySlug(slug) {
+  return (monstersData || []).find(m => m.slug === slug);
+}
+
+function setupMonsterClickToView(tbody) {
+  tbody.addEventListener('click', e => {
+    const span = e.target.closest('.monster-name-hover');
+    if (!span) return;
+    const monster = findMonsterBySlug(span.dataset.slug);
+    if (monster) openMonsterViewer(monster);
+  });
+}
+
+// Full monster viewer modal — picture, map(s), level range, and a drop table
+// whose items link to the Item Database when a matching item exists yet
+// (same findItemByName/goToItem dynamic-linking pattern as a recipe's
+// component list), same modal shell as the item viewer (#item-viewer).
+function setupMonsterViewer() {
+  if (document.getElementById('monster-viewer')) return;
+
+  const viewer = document.createElement('div');
+  viewer.id = 'monster-viewer';
+  viewer.innerHTML = `
+    <button id="monster-viewer-close" aria-label="Close">&times;</button>
+    <div id="monster-viewer-panel">
+      <div id="monster-viewer-card"></div>
+    </div>
+  `;
+  document.body.appendChild(viewer);
+
+  viewer.addEventListener('click', e => {
+    if (e.target === viewer) {
+      closeMonsterViewer();
+      return;
+    }
+    const link = e.target.closest('.monster-drop-link');
+    if (link) {
+      e.preventDefault();
+      const item = findItemByName(link.dataset.item);
+      const monster = findMonsterBySlug(link.dataset.monster);
+      if (item && monster) {
+        closeMonsterViewer();
+        goToItem(item, { kind: 'monster', name: monster.name, slug: monster.slug });
+      }
+    }
+  });
+
+  viewer.querySelector('#monster-viewer-close').addEventListener('click', closeMonsterViewer);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMonsterViewer();
+  });
+}
+
+function openMonsterViewer(monster) {
+  setupMonsterViewer();
+
+  const viewer = document.getElementById('monster-viewer');
+  const drops = monster.drops || [];
+
+  viewer.querySelector('#monster-viewer-card').innerHTML = `
+    <div class="monster-card">
+      ${monster.image ? `<img class="monster-card-image" src="${escapeAttr(monster.image)}" alt="${escapeAttr(monster.name)}">` : ''}
+      <div class="monster-card-body">
+        <h2 class="monster-card-name">${escapeAttr(monster.name)}</h2>
+        <div class="monster-card-field"><span class="item-card-field-label">Map</span><span>${escapeAttr(formatMonsterMaps(monster))}</span></div>
+        <div class="monster-card-field"><span class="item-card-field-label">Level Range</span><span>${monster.levelRange ? escapeAttr(monster.levelRange) : 'not yet known'}</span></div>
+        <div class="item-card-section">
+          Drops:
+          ${drops.length ? `
+            <ul class="item-card-components">
+              ${drops.map(d => {
+                const item = findItemByName(d.item);
+                return item
+                  ? `<li><a href="#" class="monster-drop-link item-name-hover" data-alt="${escapeAttr(item.name)}" data-item="${escapeAttr(item.name)}" data-monster="${escapeAttr(monster.slug)}">${escapeAttr(d.item)}</a></li>`
+                  : `<li>${escapeAttr(d.item)}</li>`;
+              }).join('')}
+            </ul>
+          ` : '<p class="monster-card-no-drops">No known drops yet.</p>'}
+        </div>
+      </div>
+    </div>
+  `;
+
+  setupItemTooltip(viewer.querySelector('#monster-viewer-card'));
+
+  viewer.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMonsterViewer() {
+  const viewer = document.getElementById('monster-viewer');
+  if (!viewer) return;
+  viewer.classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 init();

@@ -26,8 +26,8 @@
       { "item": "Cloth Padding", "quantity": 2 },
       { "item": "Rough Thread", "quantity": 2 }
     ],
-    "difficultyColor": "Dark Blue",
-    "observedAtSkill": 56
+    "difficultyColor": "Green",
+    "observedAtSkill": 72
   },
   {
     "name": "Enchanted Rawhide Leggings",
@@ -42,16 +42,16 @@
       { "item": "Cloth Padding", "quantity": 3 },
       { "item": "Rough Thread", "quantity": 3 }
     ],
-    "difficultyColor": "White",
-    "observedAtSkill": 56
+    "difficultyColor": "Green",
+    "observedAtSkill": 72
   },
   {
     "name": "Enchanted Rawhide Tunic",
     "slug": "enchanted-rawhide-tunic",
     "tradeskill": "Leatherworking",
     "listOrder": 20,
-    "difficultyColor": "Yellow",
-    "observedAtSkill": 56
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 72
   },
   {
     "name": "Hide Belt",
@@ -59,47 +59,47 @@
     "tradeskill": "Leatherworking",
     "listOrder": 27,
     "difficultyColor": "Red",
-    "observedAtSkill": 56
+    "observedAtSkill": 72
   },
   {
     "name": "Hide Bracelet",
     "slug": "hide-bracelet",
     "tradeskill": "Leatherworking",
     "listOrder": 23,
-    "difficultyColor": "Red",
-    "observedAtSkill": 56
+    "difficultyColor": "White",
+    "observedAtSkill": 72
   },
   {
     "name": "Hide Canvas",
     "slug": "hide-canvas",
     "tradeskill": "Leatherworking",
     "listOrder": 21,
-    "difficultyColor": "Orange",
-    "observedAtSkill": 56
+    "difficultyColor": "Dark Blue",
+    "observedAtSkill": 72
   },
   {
     "name": "Hide Cloak",
     "slug": "hide-cloak",
     "tradeskill": "Leatherworking",
     "listOrder": 25,
-    "difficultyColor": "Red",
-    "observedAtSkill": 56
+    "difficultyColor": "Orange",
+    "observedAtSkill": 72
   },
   {
     "name": "Hide Gloves",
     "slug": "hide-gloves",
     "tradeskill": "Leatherworking",
     "listOrder": 26,
-    "difficultyColor": "Red",
-    "observedAtSkill": 56
+    "difficultyColor": "Orange",
+    "observedAtSkill": 72
   },
   {
     "name": "Hide Gorget",
     "slug": "hide-gorget",
     "tradeskill": "Leatherworking",
     "listOrder": 24,
-    "difficultyColor": "Red",
-    "observedAtSkill": 56
+    "difficultyColor": "White",
+    "observedAtSkill": 72
   },
   {
     "name": "Hide Mask",
@@ -107,15 +107,23 @@
     "tradeskill": "Leatherworking",
     "listOrder": 28,
     "difficultyColor": "Red",
-    "observedAtSkill": 56
+    "observedAtSkill": 72
+  },
+  {
+    "name": "Hide Boots",
+    "slug": "hide-boots",
+    "tradeskill": "Leatherworking",
+    "listOrder": 29,
+    "difficultyColor": "Red",
+    "observedAtSkill": 72
   },
   {
     "name": "Hide Strap",
     "slug": "hide-strap",
     "tradeskill": "Leatherworking",
     "listOrder": 22,
-    "difficultyColor": "Orange",
-    "observedAtSkill": 56
+    "difficultyColor": "Dark Blue",
+    "observedAtSkill": 72
   },
   {
     "name": "Rawhide Backpack",
@@ -129,8 +137,8 @@
       { "item": "Rawhide Canvas", "quantity": 7 },
       { "item": "Rough Thread", "quantity": 3 }
     ],
-    "difficultyColor": "Dark Blue",
-    "observedAtSkill": 56
+    "difficultyColor": "Green",
+    "observedAtSkill": 72
   },
   {
     "name": "Rawhide Belt",
@@ -276,8 +284,8 @@
       { "item": "Cloth Padding", "quantity": 3 },
       { "item": "Rough Thread", "quantity": 3 }
     ],
-    "difficultyColor": "Light Blue",
-    "observedAtSkill": 56
+    "difficultyColor": "Green",
+    "observedAtSkill": 72
   },
   {
     "name": "Rawhide Mask",
@@ -362,8 +370,8 @@
     "slug": "rawhide-tunic",
     "tradeskill": "Leatherworking",
     "listOrder": 19,
-    "difficultyColor": "White",
-    "observedAtSkill": 56
+    "difficultyColor": "Green",
+    "observedAtSkill": 72
   },
   {
     "name": "Bolt of Cloth",
@@ -1620,5 +1628,92 @@
     "listOrder": 6,
     "difficultyColor": "White",
     "observedAtSkill": 0
+  },
+  {
+    "name": "Rawhide Scraps",
+    "slug": "rawhide-scraps-from-jackal-pelt",
+    "tradeskill": "Tanning",
+    "weight": 0.2,
+    "size": "Small",
+    "components": [
+      { "item": "Low-Quality Jackal Pelt", "quantity": 1 }
+    ],
+    "resultQuantity": 24
+  },
+  {
+    "name": "Rawhide Scraps",
+    "slug": "rawhide-scraps-from-wolf-pelt",
+    "tradeskill": "Tanning",
+    "weight": 0.2,
+    "size": "Small",
+    "components": [
+      { "item": "Low-Quality Wolf Pelt", "quantity": 1 }
+    ],
+    "resultQuantity": 24
+  },
+  {
+    "name": "Rawhide Scraps",
+    "slug": "rawhide-scraps-from-bear-pelt",
+    "tradeskill": "Tanning",
+    "weight": 0.2,
+    "size": "Small",
+    "components": [
+      { "item": "Low-Quality Bear Pelt", "quantity": 1 }
+    ],
+    "resultQuantity": 24
+  },
+  {
+    "name": "Hide Scraps",
+    "slug": "hide-scraps-from-jackal-pelt",
+    "tradeskill": "Tanning",
+    "components": [
+      { "item": "Medium-Quality Jackal Pelt", "quantity": 1 }
+    ],
+    "resultQuantity": 24
+  },
+  {
+    "name": "Hide Scraps",
+    "slug": "hide-scraps-from-wolf-pelt",
+    "tradeskill": "Tanning",
+    "components": [
+      { "item": "Medium-Quality Wolf Pelt", "quantity": 1 }
+    ],
+    "resultQuantity": 24
+  },
+  {
+    "name": "Hide Scraps",
+    "slug": "hide-scraps-from-bear-pelt",
+    "tradeskill": "Tanning",
+    "components": [
+      { "item": "Medium-Quality Bear Pelt", "quantity": 1 }
+    ],
+    "resultQuantity": 24
+  },
+  {
+    "name": "Leather Scraps",
+    "slug": "leather-scraps-from-jackal-pelt",
+    "tradeskill": "Tanning",
+    "components": [
+      { "item": "High-Quality Jackal Pelt", "quantity": 1 }
+    ],
+    "resultQuantity": 24
+  },
+  {
+    "name": "Leather Scraps",
+    "slug": "leather-scraps-from-wolf-pelt",
+    "tradeskill": "Tanning",
+    "components": [
+      { "item": "High-Quality Wolf Pelt", "quantity": 1 }
+    ],
+    "resultQuantity": 24
+  },
+  {
+    "name": "Leather Scraps",
+    "slug": "leather-scraps-from-bear-pelt",
+    "tradeskill": "Tanning",
+    "components": [
+      { "item": "High-Quality Bear Pelt", "quantity": 1 }
+    ],
+    "resultQuantity": 24
   }
 ]

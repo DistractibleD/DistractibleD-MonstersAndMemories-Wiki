@@ -45,9 +45,17 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
    render time, don't store it) and `twoHanded: true` if the screenshot says "Two Handed".
    Armor/jewelry use `ac` and a `stats` object (`{"AGI": 1, "DEX": 2, ...}`). Saving-throw
    bonuses (e.g. "SV Fire: +2") go in a separate `resists` object (`{"FIRE": 2}`), not in
-   `stats`. A "Haste: +6%" line goes in its own top-level `haste` field (e.g. `"haste": 6`),
-   not in `stats` or `resists` — it's a percentage, not a flat bonus. `race` is an array
-   (usually `["ALL"]`) — set it to the specific races listed on the card if it isn't ALL.
+   `stats`. A resist can be negative (e.g. "SV Corruption: -5", first seen 2026-07-06 on
+   "Corrupted Leather Tunic") — store it as a negative number (`{"CORRUPTION": -5}`);
+   `statEntries`/`formatSigned` in `script.js` render the sign correctly either way, so
+   nothing else needs to change for a negative value. A "Haste: +6%" line goes in its own
+   top-level `haste` field (e.g. `"haste": 6`), not in `stats` or `resists` — it's a
+   percentage, not a flat bonus. `race` is an array (usually `["ALL"]`) — set it to the
+   specific races listed on the card if it isn't ALL. If a card is missing its Race line
+   entirely where every other card in the batch had one, that's more likely a cropped
+   screenshot than a real absence — leave `race` unset and flag it in
+   `images/items-needing-text.txt` rather than guessing `["ALL"]` (see "Lunar Festival
+   Trousers", 2026-07-06).
 2. Check the card for a tag line directly below the item name and above "Slot:" — e.g.
    "MAGIC". Capture every such tag (not just MAGIC) in a `tags` array, e.g. `["MAGIC"]` or
    `["MAGIC", "UNIQUE", "NODROP"]`; use `[]` if there's no tag line. Known tags seen so far
@@ -257,6 +265,10 @@ extending it the same way as new fields show up on future cards, rather than gue
   list (1 = first/lowest skill requirement). This is what the Crafting page actually sorts
   by now instead of alphabetically — see the "Crafting window screenshots" workflow below
   for how it's derived and kept as one unbroken sequence per tradeskill.
+- `resultQuantity` — set only when a recipe produces more than one of its named result (first
+  needed 2026-07-06 for Tanning, see below, where a single pelt processes into "24x Rawhide
+  Scraps") — shown on the card as a "Yields" field. Every recipe without this field is still
+  assumed to produce exactly one of `name`, same as before this field existed.
 
 **The colored difficulty badge itself was removed from the Crafting page on 2026-07-03**
 (the user's call — a color is only accurate for whichever one user's skill it was captured
@@ -283,22 +295,47 @@ right now.
    into `images/crafting/`, filename matching the `image` field. Archival only, per "Item
    and recipe cards" below — not something the site ever displays.
 
-### New items/maps/recipes come in via `images/inbox/`
+### Tanning is different: no recipes, just vat processing (2026-07-06)
+
+Confirmed by the user: Tanning has no crafting-window entries or recipe cards at all —
+instead, any tier-appropriate pelt is dropped directly into a tanning vat to produce scrap
+material (Low-Quality pelt → 24x Rawhide Scraps, Medium-Quality → 24x Hide Scraps,
+High-Quality → 24x Leather Scraps, one entry per pelt type). These still live in
+`crafting.json` as ordinary entries (`name`/`slug`/`tradeskill: "Tanning"`/`components`/
+`resultQuantity: 24`), just without `difficultyColor`/`observedAtSkill`/`listOrder` — there's
+no in-game screenshot to source those from, so they're left unset rather than guessed.
+
+Since a Tanning "recipe" card would otherwise look like any other simple one-component
+recipe, with nothing on the page explaining *why* there's no image/difficulty/list order, a
+tradeskill can carry an optional `note` field in `tradeskills.json` (Tanning has one,
+explaining the vat mechanic) rendered as a callout right under the tradeskill's `<h1>` in
+`renderCraftingRecipes` — extend to another tradeskill the same way if it ever needs a
+similar structural explanation.
+
+The only source available for the pelt→scrap mapping itself was a screenshot that looks like
+a fan-wiki table (sortable-column styling, hyperlinked names), not the live game or an
+in-game window — per "The user's screenshots are the source of truth" above, that makes it
+weaker than a normal capture. Its "Trivial" skill column was recorded only in
+`crafting-skill-estimates.md` (clearly labeled as external, not a game screenshot), never
+written into `crafting.json`'s `recipeSkillLevel` — same caution as every other unconfirmed
+estimate in that file.
+
+### New items/maps/recipes/monsters come in via `images/inbox/`
 
 The user drops new screenshots into `images/inbox/` (may appear as `images/Inbox` on
 disk — Windows paths are case-insensitive, don't create a second folder for it). This is
 the *only* place to look for new/unprocessed content — do not re-scan `images/items/` or
-re-read existing entries in `items.json`/`maps.json`/`crafting.json` looking for new work;
-that wastes tokens on files that haven't changed. Files are usually named with a random ID
-(from a screenshot tool), not the item/map/recipe name — the filename is not meaningful,
-always read the image itself.
+re-read existing entries in `items.json`/`maps.json`/`crafting.json`/`monsters.json` looking
+for new work; that wastes tokens on files that haven't changed. Files are usually named with
+a random ID (from a screenshot tool), not the item/map/recipe/monster name — the filename is
+not meaningful, always read the image itself.
 
 This rule isn't limited to adding new entries — it applies to *any* task involving
-item/map/recipe screenshots (e.g. checking for cut-off/truncated text, auditing image
+item/map/recipe/monster screenshots (e.g. checking for cut-off/truncated text, auditing image
 quality, re-verifying data). Only ever read/process files sitting in `images/inbox/`; never
-re-open every existing file in `images/items/`, `images/Maps/`, or `images/crafting/` to go
-looking for problems. If a task requires checking already-processed images, say so and ask
-the user rather than re-scanning everything.
+re-open every existing file in `images/items/`, `images/Maps/`, `images/crafting/`, or
+`images/Monsters/` to go looking for problems. If a task requires checking already-processed
+images, say so and ask the user rather than re-scanning everything.
 
 Workflow when asked to process new items (or "check the inbox"):
 
@@ -306,12 +343,13 @@ Workflow when asked to process new items (or "check the inbox"):
 2. For each one: read the image and figure out whether it's an **item** (the stat-card
    popup style used elsewhere in this doc), a **map** (a game map/zone image, no stat
    card), a **recipe** (a single crafting card, same popup style as an item but with a
-   "Components:" list), or a **crafting window** (the in-game tradeskill window listing
+   "Components:" list), a **crafting window** (the in-game tradeskill window listing
    many known recipes at once, e.g. titled "Leatherworking" with a skill number at the
-   bottom) — then follow the matching path below.
-3. Once a file has been moved out (to `images/items/`, `images/Maps/`, `images/crafting/`)
-   or deleted as a duplicate, `images/inbox/` should no longer contain it — an empty inbox
-   means everything is processed.
+   bottom), or a **monster** (a picture of a creature, no stat card at all — see "Adding a
+   monster" below) — then follow the matching path below.
+3. Once a file has been moved out (to `images/items/`, `images/Maps/`, `images/crafting/`,
+   or `images/Monsters/`) or deleted as a duplicate, `images/inbox/` should no longer contain
+   it — an empty inbox means everything is processed.
 
 **Duplicates (items/maps/recipes alike, confirmed 2026-07-04):** if a screenshot's item/map/
 recipe already exists (matched by slug or name), just delete it from the inbox — don't save
@@ -362,6 +400,23 @@ screenshots are the source of truth" above).
      `components` yet), in which case it's not really a duplicate — treat it like "not a
      duplicate" above and fill in the fuller entry instead.
 
+**Monsters:** unlike items/recipes, a monster screenshot is just a picture of the creature —
+there's no in-game stat card to read stats off of. Map, level range, and drops come from
+whatever the user says directly in chat alongside the picture (counts as authoritative, same
+as a screenshot — see "The user's screenshots are the source of truth" above), not from the
+image itself.
+
+1. Check whether that monster's slug (or name) already exists in `monsters.json`.
+   - **Not a duplicate:** add an entry (see "Adding a monster" below for the schema).
+     Convert the screenshot to `.jpg` (quality 90) and rename it to the monster's slug, and
+     move it into `images/Monsters/`. Use the same slug for the `image` field.
+   - **Duplicate:** delete the screenshot from the inbox (see "Duplicates" above) — update
+     `monsters.json` first if the new screenshot/chat message fills a gap (e.g. a map or drop
+     that wasn't known before).
+2. If the user hasn't given a map, level range, or drop table yet, just add what's known
+   (name/image at minimum) rather than blocking on the rest — every field beyond
+   name/slug/image is optional, see "Adding a monster" below.
+
 **Crafting window screenshots** (a different thing from a recipe card — this is the
 in-game tradeskill window listing every known recipe for one tradeskill, name-only with a
 color per recipe, e.g. "Leatherworking 22 / 300" at the bottom): these are a reference
@@ -407,6 +462,60 @@ the inbox, don't move them into `images/crafting/`.
    shade — don't silently pick one.
 5. Delete the screenshot(s) from `images/inbox/` once processed — they don't get moved
    anywhere, since nothing about them (aside from the extracted data) belongs on the wiki.
+
+## Adding a monster
+
+Introduced 2026-07-06 as a new main category, alongside Items/Maps/Crafting. The Monsters
+page (`pages.json` entry with `"type": "monsters"`) is a single sortable/filterable table
+(`renderMonstersPage` in `script.js`) — unlike the Item Database, it doesn't need a
+category-grid-first layout, since there's only one meaningful browsing dimension (map)
+instead of several, so a dropdown filter covers it without a whole extra drill-down level.
+Sorted alphabetically by name by default; click the Map or Level Range column headers to
+sort by those instead, or use the map dropdown (populated from whatever maps actually exist
+in the data, same "derive filters from data" rule as every other dropdown in this file) to
+narrow to one map at a time.
+
+`monsters.json` schema — only `name`/`slug` are required, everything else is optional and
+fills in as the user provides it:
+
+- `image` — picture of the creature, dropped into `images/Monsters/` (see that folder's
+  README.txt), same `.jpg` quality-90 convention as item/recipe screenshots. Shown in the
+  monster viewer modal, not the table.
+- `maps` — array of map names the monster's been seen on (usually one, but kept as an array
+  in case the same monster template turns out to spawn in more than one zone). Not
+  necessarily tied to a `maps.json` entry — just plain text naming the zone.
+- `levelRange` — a plain string like `"5-8"`, not a structured min/max. The user's own
+  explicit call (2026-07-06): every level range they add is a guess, not a confirmed in-game
+  value, so the page says so directly in its intro text rather than presenting them as fact.
+  Kept as a free string rather than numeric fields since nothing currently needs to filter by
+  level, only display/sort it loosely (`renderMonstersPage` sorts by the leading number via a
+  regex, monsters with no range at all sort last).
+- `drops` — array of `{ "item": "Name As Shown" }`, exactly the same shape and the same
+  dynamic-linking convention as a recipe's `components` (see "Adding a crafting recipe"
+  above): matched against `items.json` by exact name at render time
+  (`findItemByName`/`goToItem`), clickable if a matching item exists yet, plain text if not —
+  don't resolve/store the link at data-entry time, let it resolve automatically once/if that
+  item gets added.
+
+Clicking a monster's name (`.monster-name-hover`, `setupMonsterClickToView`) opens
+`#monster-viewer`, a modal built by `openMonsterViewer`/`setupMonsterViewer` — same modal
+shell/close-button pattern as `#item-viewer`, just showing the real screenshot (`<img>`)
+instead of a data-rendered card, since a monster's picture has no card fields it could be
+rebuilt from the way an item's can. Clicking a drop that links to an item sets
+`pendingReturnToMonster` before navigating to the Item Database (mirroring
+`pendingReturnToRecipe` — see "Header search box" below for the shared
+pending-variable-consumed-on-render pattern) so that item's page shows a "&larr; Back to
+&lt;monster name&gt;" link; `goToItem`'s second argument now takes either a recipe object
+(untagged, the original case) or `{ kind: 'monster', name, slug }`, distinguished by the
+`kind` tag so the two "back to" links never collide.
+
+The Monsters page is wired into the header search box the same way Items/Crafting are (see
+"Header search box" below) — a "Monsters" results section, `goToMonster` navigating to the
+page and flashing the matched row (`pendingHighlightMonster`, same `row-flash` mechanism as
+an Item Database search result). It does **not** get its own "Categories" search entries the
+way Item types/tradeskills do — maps aren't modeled as a fixed list anywhere, so there's
+nothing equivalent to jump to directly; the map filter dropdown on the page itself covers
+that instead.
 
 ## Header search box
 
@@ -582,9 +691,9 @@ styles set from JS rather than relying on a CSS class toggle.
 `.layout`/`.header-inner` cap at 1600px so the site doesn't stretch edge-to-edge on huge
 monitors, but still uses most of the screen on normal ones. `.content-inner` is capped at
 ~820px for prose pages (readable line length), but data-driven pages (Item Database, Maps,
-Crafting) get a `content-wide` class toggled from `loadPage()` in `script.js` that removes
-the cap — add that class (or extend the same `page.type` check) for any future full-width
-page rather than raising the prose cap.
+Crafting, Monsters) get a `content-wide` class toggled from `loadPage()` in `script.js` that
+removes the cap — add that class (or extend the same `page.type` check) for any future
+full-width page rather than raising the prose cap.
 
 The Item Database table uses `table-layout: fixed` with an explicit `<colgroup>` (percentage
 widths, set in `renderItemsPage`) and no `white-space: nowrap`, so long cells (Classes,

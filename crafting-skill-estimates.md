@@ -247,3 +247,24 @@ skill requirement without leaning on an assumption that's already broken once. R
 a tradeskill's crafting window as skill climbs, especially right when a recipe visibly
 flips color, remains the best source of new data; update this file rather than guessing
 further without it.
+
+## Tanning (2026-07-06) — from an external reference table, not an in-game screenshot
+
+Tanning has no crafting-window entries at all (see CLAUDE.md — it's vat processing, not a
+recipe list), so there's no `difficultyColor`/`observedAtSkill` pair to record for any of
+the 9 pelt→scrap conversions added to `crafting.json`. The only numbers available came from
+a screenshot of what looks like a fan-wiki table (sortable-column styling, hyperlinked item
+names) rather than the live game, giving a "Trivial" skill number directly instead of a
+color. Per CLAUDE.md's rule that external wikis can be outdated/wrong and shouldn't be
+trusted the way the user's own screenshots are, these are recorded here only, not written
+into `crafting.json`'s `recipeSkillLevel`:
+
+| Result | Component | Trivial (per external table) |
+|---|---|---|
+| Rawhide Scraps | Low-Quality Jackal/Wolf/Bear Pelt | 25 |
+| Hide Scraps | Medium-Quality Jackal/Wolf/Bear Pelt | 50 |
+| Leather Scraps | High-Quality Jackal/Wolf/Bear Pelt | >50 |
+
+If the user ever confirms these against an actual in-game source (e.g. a skill-up while
+tanning at a known skill level), promote the confirmed value into `recipeSkillLevel`
+directly rather than treating this table as good enough on its own.

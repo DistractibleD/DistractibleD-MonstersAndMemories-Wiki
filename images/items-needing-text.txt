@@ -33,3 +33,13 @@ Update (2026-07-04, re-check of every item previously flagged in this file):
 
 Nothing else has been flagged as incomplete. This file will be updated only when there's
 a specific reason to believe an item's data (not its screenshot) is missing something.
+
+New flag (2026-07-06):
+
+- Lunar Festival Trousers — the inbox screenshot shows MAGIC/Slot/AC/stats/SV Magic/
+  description/Weight/Size/Class, then nothing — no "Race:" line at all, unlike every other
+  piece of armor processed so far. Every other card in this batch had one, so this looks
+  more like the screenshot being cut off right at the bottom edge than the item genuinely
+  having no race restriction. Added to items.json without a `race` field for now (rather
+  than guessing `["ALL"]`) — if the user reposts this card (or confirms there's really no
+  Race line on it), update the entry rather than leaving it as a silent gap.

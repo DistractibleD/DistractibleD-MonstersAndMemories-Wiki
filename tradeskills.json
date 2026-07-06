@@ -32,7 +32,7 @@
   { "name": "Stone Cutting", "status": "live" },
   { "name": "Survival", "status": "live" },
   { "name": "Tailoring", "status": "live" },
-  { "name": "Tanning", "status": "live" },
+  { "name": "Tanning", "status": "live", "note": "Tanning has no crafted recipes — instead, any tier-appropriate pelt is dropped into a tanning vat and processed directly into scrap material. Each card below shows one pelt-to-scrap conversion rather than a traditional recipe." },
   { "name": "Tinkering", "status": "planned" },
   { "name": "Wagoneering", "status": "planned" },
   { "name": "Wilderness", "status": "planned" },

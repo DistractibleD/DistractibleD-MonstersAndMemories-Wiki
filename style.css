@@ -334,6 +334,9 @@ html, body {
 .col-capacity { width: 10%; }
 .col-classes { width: 16%; }
 .col-race { width: 8%; }
+.col-monster-name { width: 45%; }
+.col-monster-map { width: 35%; }
+.col-monster-level { width: 20%; }
 .items-table th {
   background: var(--bg);
   color: var(--accent);
@@ -689,6 +692,75 @@ html, body {
   color: var(--accent);
 }
 
+/* Full monster viewer (click a monster's name on the Monsters page) — same
+   modal shell as #item-viewer, just with a real screenshot instead of a
+   data-rendered card, since a monster's picture (unlike an item's) has no
+   card fields it could be rebuilt from. */
+#monster-viewer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 11, 14, 0.85);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+#monster-viewer.open {
+  display: flex;
+}
+#monster-viewer-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  max-width: min(460px, 92vw);
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+#monster-viewer-close {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+#monster-viewer-close:hover {
+  color: var(--accent);
+}
+.monster-card-image {
+  display: block;
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+}
+.monster-card-body {
+  padding: 16px;
+  font-size: 0.9rem;
+}
+.monster-card-name {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+}
+.monster-card-field {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+}
+.monster-card-no-drops {
+  color: var(--text-dim);
+  margin: 4px 0 0;
+}
+
 /* ---------- Maps ---------- */
 .maps-grid {
   display: grid;
@@ -784,6 +856,15 @@ html, body {
   margin: 0 0 12px;
   color: var(--text-dim);
   font-size: 0.85rem;
+}
+.craft-tradeskill-note {
+  margin: 0 0 18px;
+  padding: 10px 14px;
+  background: var(--bg);
+  border-left: 3px solid var(--accent-craft);
+  border-radius: 4px;
+  color: var(--text-dim);
+  font-size: 0.88rem;
 }
 .gem-reference-tables {
   display: flex;
