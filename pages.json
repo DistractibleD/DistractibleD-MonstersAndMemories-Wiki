@@ -1,5 +1,6 @@
 [
   { "title": "Welcome", "file": "welcome.md", "category": "Getting Started" },
+  { "title": "Useful Links", "file": "useful-links.md", "category": "Useful Links" },
   { "title": "Item Database", "file": "items", "category": "Items", "type": "items" },
   { "title": "Maps", "file": "maps", "category": "Maps", "type": "maps" },
   { "title": "Crafting", "file": "crafting", "category": "Crafting", "type": "crafting" }

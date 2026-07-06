@@ -27,6 +27,10 @@ let pendingReturnToRecipe = null;
 // "Crafted via"/"Used to craft" links) flashes once its card renders, making
 // it easy to spot among the rest of that tradeskill's recipe grid.
 let pendingHighlightRecipe = null;
+// Same idea as pendingHighlightRecipe, but for a specific item's row in the
+// Item Database table — set by goToItem so a search-result click flashes the
+// row once it renders, instead of just silently scrolling the page.
+let pendingHighlightItem = null;
 // Set by renderCraftingRecipes when it scrolls to a highlighted recipe, so
 // loadPage's normal "reset scroll to top on navigation" doesn't immediately
 // cancel that scroll.
@@ -215,14 +219,35 @@ function renderSearchResults(query) {
   results.innerHTML = '';
 
   const matchedPages = allPages.filter(p => p.title.toLowerCase().includes(query));
+
+  // Categories (item-type categories like "Jewelry" and crafting tradeskills
+  // like "Jewelcrafting") surface above individual name matches — landing on
+  // the category itself is more useful than scrolling past a pile of
+  // individually-named items/recipes to find it. Combined and sorted
+  // alphabetically together so e.g. "Jewelcrafting" and "Jewelry" both
+  // appear at the top for a "jewel" search.
+  const itemTypes = itemsData ? [...new Set(itemsData.map(i => i.type))] : [];
+  const matchedItemCategories = itemTypes
+    .filter(type => (ITEM_TYPE_LABELS[type] || type).toLowerCase().includes(query))
+    .map(type => ({ kind: 'item', type, label: ITEM_TYPE_LABELS[type] || type }));
+  const matchedCraftCategories = (tradeskillsData || [])
+    .filter(ts => ts.name.toLowerCase().includes(query))
+    .map(ts => ({ kind: 'craft', tradeskill: ts.name, label: ts.name }));
+  const matchedCategories = [...matchedItemCategories, ...matchedCraftCategories]
+    .sort((a, b) => a.label.localeCompare(b.label));
+
+  // Individual name matches sort alphabetically (rather than data-file
+  // order) now that they're a secondary section below categories.
   const matchedItems = (itemsData || [])
     .filter(item => itemSearchHaystack(item).includes(query))
+    .sort((a, b) => a.name.localeCompare(b.name))
     .slice(0, 8);
   const matchedRecipes = (craftingData || [])
     .filter(r => `${r.name} ${r.tradeskill}`.toLowerCase().includes(query))
+    .sort((a, b) => a.name.localeCompare(b.name))
     .slice(0, 8);
 
-  if (!matchedPages.length && !matchedItems.length && !matchedRecipes.length) {
+  if (!matchedCategories.length && !matchedPages.length && !matchedItems.length && !matchedRecipes.length) {
     results.innerHTML = '<p class="search-results-empty">No results found.</p>';
     openSearchResults();
     return;
@@ -236,6 +261,20 @@ function renderSearchResults(query) {
     results.appendChild(heading);
     entries.forEach(entry => results.appendChild(makeLink(entry)));
   }
+
+  addSection('Categories', matchedCategories, category => {
+    const link = document.createElement('a');
+    link.href = category.kind === 'item' ? '#items' : '#crafting';
+    link.className = 'search-result-link';
+    link.textContent = category.kind === 'item' ? category.label : `${category.label} (Crafting)`;
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      clearSearch();
+      if (category.kind === 'item') goToItemCategory(category.type);
+      else goToCraftingCategory(category.tradeskill);
+    });
+    return link;
+  });
 
   addSection('Pages', matchedPages, page => {
     const link = document.createElement('a');
@@ -282,6 +321,20 @@ function goToItem(item, returnToRecipe) {
   pendingItemQuery = item.name;
   pendingItemCategory = item.type;
   pendingReturnToRecipe = returnToRecipe || null;
+  pendingHighlightItem = item.slug;
+  const alreadyThere = location.hash.replace('#', '') === 'items';
+  location.hash = 'items';
+  if (alreadyThere) loadPage('items');
+}
+
+// Jumps straight to a whole item-type category's list (e.g. from a "Jewelry"
+// category search result) rather than a single item — no query to pre-fill
+// and nothing to flash, since the destination *is* the whole list.
+function goToItemCategory(type) {
+  pendingItemQuery = null;
+  pendingItemCategory = type;
+  pendingReturnToRecipe = null;
+  pendingHighlightItem = null;
   const alreadyThere = location.hash.replace('#', '') === 'items';
   location.hash = 'items';
   if (alreadyThere) loadPage('items');
@@ -290,6 +343,16 @@ function goToItem(item, returnToRecipe) {
 function goToRecipe(recipe) {
   pendingCraftingTradeskill = recipe.tradeskill;
   pendingHighlightRecipe = recipe.slug;
+  const alreadyThere = location.hash.replace('#', '') === 'crafting';
+  location.hash = 'crafting';
+  if (alreadyThere) loadPage('crafting');
+}
+
+// Same idea as goToItemCategory but for a whole tradeskill (e.g. from a
+// "Jewelcrafting" category search result) — no specific recipe to highlight.
+function goToCraftingCategory(tradeskillName) {
+  pendingCraftingTradeskill = tradeskillName;
+  pendingHighlightRecipe = null;
   const alreadyThere = location.hash.replace('#', '') === 'crafting';
   location.hash = 'crafting';
   if (alreadyThere) loadPage('crafting');
@@ -623,6 +686,12 @@ function renderItemsList(container, category) {
   const returnToRecipe = pendingReturnToRecipe;
   pendingReturnToRecipe = null;
 
+  // Landed here from a search result for one specific item — flash its row
+  // once the table renders, same idea as pendingHighlightRecipe on the
+  // Crafting page.
+  const highlightSlug = pendingHighlightItem;
+  pendingHighlightItem = null;
+
   const slots = [...new Set(categoryItems.map(i => i.slot))].filter(Boolean).sort();
   const classes = [...new Set(categoryItems.flatMap(i => i.classes || []).filter(c => c !== 'ALL'))].sort();
   const races = [...new Set(categoryItems.flatMap(i => i.race || []).filter(r => r !== 'ALL'))].sort();
@@ -791,6 +860,16 @@ function renderItemsList(container, category) {
   });
 
   update();
+
+  if (highlightSlug) {
+    const row = container.querySelector(`#items-tbody tr[data-slug="${CSS.escape(highlightSlug)}"]`);
+    if (row) {
+      suppressScrollReset = true;
+      row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      row.classList.add('row-flash');
+      row.addEventListener('animationend', () => row.classList.remove('row-flash'), { once: true });
+    }
+  }
 }
 
 // One value per sortable column in the Item Database table — numeric for
@@ -830,7 +909,7 @@ function renderItemRows(tbody, items) {
       : '—';
 
     return `
-      <tr>
+      <tr data-slug="${escapeAttr(item.slug || '')}">
         <td>
           <span class="item-name-hover" data-alt="${item.name}">${(item.tags || []).map(t => `<span class="badge-tag">${t}</span> `).join('')}${item.name}</span>
         </td>

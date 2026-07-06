@@ -444,6 +444,16 @@ html, body {
   0% { box-shadow: 0 0 0 3px var(--accent-craft); }
   100% { box-shadow: 0 0 0 3px transparent; }
 }
+/* Same idea as .recipe-flash, but for a table row (a box-shadow ring doesn't
+   render cleanly on a <tr>) — a background-color flash instead, used to
+   locate a specific item's row after landing on it from a search result. */
+.row-flash {
+  animation: row-flash 1.2s ease-out 2;
+}
+@keyframes row-flash {
+  0% { background-color: var(--accent-dim); }
+  100% { background-color: transparent; }
+}
 .item-card-header {
   display: flex;
   align-items: center;
