@@ -50,6 +50,11 @@
     "slug": "enchanted-rawhide-tunic",
     "tradeskill": "Leatherworking",
     "listOrder": 20,
+    "components": [
+      { "item": "Enchanted Rawhide Canvas", "quantity": 4 },
+      { "item": "Rough Thread", "quantity": 3 },
+      { "item": "Cloth Padding", "quantity": 3 }
+    ],
     "difficultyColor": "Light Blue",
     "observedAtSkill": 72
   },
@@ -58,6 +63,11 @@
     "slug": "hide-belt",
     "tradeskill": "Leatherworking",
     "listOrder": 27,
+    "components": [
+      { "item": "Hide Canvas", "quantity": 1 },
+      { "item": "Rough Thread", "quantity": 1 },
+      { "item": "Wool Padding", "quantity": 2 }
+    ],
     "difficultyColor": "Red",
     "observedAtSkill": 72
   },
@@ -66,6 +76,11 @@
     "slug": "hide-bracelet",
     "tradeskill": "Leatherworking",
     "listOrder": 23,
+    "components": [
+      { "item": "Hide Canvas", "quantity": 1 },
+      { "item": "Rough Thread", "quantity": 1 },
+      { "item": "Wool Padding", "quantity": 2 }
+    ],
     "difficultyColor": "White",
     "observedAtSkill": 72
   },
@@ -74,6 +89,9 @@
     "slug": "hide-canvas",
     "tradeskill": "Leatherworking",
     "listOrder": 21,
+    "components": [
+      { "item": "Hide Scraps", "quantity": 6 }
+    ],
     "difficultyColor": "Dark Blue",
     "observedAtSkill": 72
   },
@@ -82,6 +100,11 @@
     "slug": "hide-cloak",
     "tradeskill": "Leatherworking",
     "listOrder": 25,
+    "components": [
+      { "item": "Hide Canvas", "quantity": 1 },
+      { "item": "Rough Thread", "quantity": 2 },
+      { "item": "Wool Padding", "quantity": 2 }
+    ],
     "difficultyColor": "Orange",
     "observedAtSkill": 72
   },
@@ -90,6 +113,11 @@
     "slug": "hide-gloves",
     "tradeskill": "Leatherworking",
     "listOrder": 26,
+    "components": [
+      { "item": "Hide Canvas", "quantity": 1 },
+      { "item": "Rough Thread", "quantity": 2 },
+      { "item": "Wool Padding", "quantity": 2 }
+    ],
     "difficultyColor": "Orange",
     "observedAtSkill": 72
   },
@@ -98,6 +126,11 @@
     "slug": "hide-gorget",
     "tradeskill": "Leatherworking",
     "listOrder": 24,
+    "components": [
+      { "item": "Hide Canvas", "quantity": 1 },
+      { "item": "Rough Thread", "quantity": 1 },
+      { "item": "Wool Padding", "quantity": 2 }
+    ],
     "difficultyColor": "White",
     "observedAtSkill": 72
   },
@@ -106,6 +139,11 @@
     "slug": "hide-mask",
     "tradeskill": "Leatherworking",
     "listOrder": 28,
+    "components": [
+      { "item": "Hide Canvas", "quantity": 1 },
+      { "item": "Rough Thread", "quantity": 1 },
+      { "item": "Wool Padding", "quantity": 2 }
+    ],
     "difficultyColor": "Red",
     "observedAtSkill": 72
   },
@@ -114,6 +152,11 @@
     "slug": "hide-boots",
     "tradeskill": "Leatherworking",
     "listOrder": 29,
+    "components": [
+      { "item": "Hide Canvas", "quantity": 1 },
+      { "item": "Rough Thread", "quantity": 2 },
+      { "item": "Wool Padding", "quantity": 2 }
+    ],
     "difficultyColor": "Red",
     "observedAtSkill": 72
   },
@@ -122,6 +165,9 @@
     "slug": "hide-strap",
     "tradeskill": "Leatherworking",
     "listOrder": 22,
+    "components": [
+      { "item": "Hide Scraps", "quantity": 2 }
+    ],
     "difficultyColor": "Dark Blue",
     "observedAtSkill": 72
   },
@@ -370,6 +416,11 @@
     "slug": "rawhide-tunic",
     "tradeskill": "Leatherworking",
     "listOrder": 19,
+    "components": [
+      { "item": "Rawhide Canvas", "quantity": 4 },
+      { "item": "Rough Thread", "quantity": 3 },
+      { "item": "Cloth Padding", "quantity": 3 }
+    ],
     "difficultyColor": "Green",
     "observedAtSkill": 72
   },
@@ -1715,5 +1766,703 @@
       { "item": "High-Quality Bear Pelt", "quantity": 1 }
     ],
     "resultQuantity": 24
+  },
+  {
+    "name": "Enchanted Hide Canvas",
+    "slug": "enchanted-hide-canvas",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Enchanted Hide", "quantity": 6 }
+    ]
+  },
+  {
+    "name": "Enchanted Hide Cap",
+    "slug": "enchanted-hide-cap",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Enchanted Hide Canvas", "quantity": 2 },
+      { "item": "Rough Thread", "quantity": 2 },
+      { "item": "Wool Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Hide Cap",
+    "slug": "hide-cap",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Canvas", "quantity": 2 },
+      { "item": "Rough Thread", "quantity": 2 },
+      { "item": "Wool Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Hide Shoulderpads",
+    "slug": "hide-shoulderpads",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Canvas", "quantity": 2 },
+      { "item": "Rough Thread", "quantity": 2 },
+      { "item": "Wool Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Enchanted Hide Leggings",
+    "slug": "enchanted-hide-leggings",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Enchanted Hide Canvas", "quantity": 3 },
+      { "item": "Rough Thread", "quantity": 3 },
+      { "item": "Wool Padding", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Hide Leggings",
+    "slug": "hide-leggings",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Canvas", "quantity": 3 },
+      { "item": "Rough Thread", "quantity": 3 },
+      { "item": "Wool Padding", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Enchanted Hide Tunic",
+    "slug": "enchanted-hide-tunic",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Enchanted Hide Canvas", "quantity": 4 },
+      { "item": "Rough Thread", "quantity": 3 },
+      { "item": "Wool Padding", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Hide Robe",
+    "slug": "hide-robe",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Canvas", "quantity": 4 },
+      { "item": "Rough Thread", "quantity": 3 },
+      { "item": "Wool Padding", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Hide Tunic",
+    "slug": "hide-tunic",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Canvas", "quantity": 4 },
+      { "item": "Rough Thread", "quantity": 3 },
+      { "item": "Wool Padding", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Hide Saddlebag",
+    "slug": "hide-saddlebag",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Canvas", "quantity": 6 },
+      { "item": "Rough Thread", "quantity": 4 }
+    ]
+  },
+  {
+    "name": "Hide Backpack",
+    "slug": "hide-backpack",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Canvas", "quantity": 7 },
+      { "item": "Rough Thread", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Hide Saddle",
+    "slug": "hide-saddle",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Scraps", "quantity": 2 },
+      { "item": "Hide Strap", "quantity": 3 },
+      { "item": "Bronze Stirrups", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Leather Canvas",
+    "slug": "leather-canvas",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Scraps", "quantity": 6 }
+    ]
+  },
+  {
+    "name": "Leather Strap",
+    "slug": "leather-strap",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Scraps", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Enchanted Leather Canvas",
+    "slug": "enchanted-leather-canvas",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Enchanted Leather", "quantity": 6 }
+    ]
+  },
+  {
+    "name": "Leather Bracelet",
+    "slug": "leather-bracelet",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Canvas", "quantity": 1 },
+      { "item": "Light Thread", "quantity": 1 },
+      { "item": "Cotton Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Leather Gorget",
+    "slug": "leather-gorget",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Canvas", "quantity": 1 },
+      { "item": "Light Thread", "quantity": 1 },
+      { "item": "Cotton Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Leather Cloak",
+    "slug": "leather-cloak",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Canvas", "quantity": 1 },
+      { "item": "Light Thread", "quantity": 2 },
+      { "item": "Cotton Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Leather Gloves",
+    "slug": "leather-gloves",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Canvas", "quantity": 1 },
+      { "item": "Light Thread", "quantity": 2 },
+      { "item": "Cotton Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Leather Belt",
+    "slug": "leather-belt",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Canvas", "quantity": 1 },
+      { "item": "Light Thread", "quantity": 1 },
+      { "item": "Cotton Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Leather Mask",
+    "slug": "leather-mask",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Canvas", "quantity": 1 },
+      { "item": "Light Thread", "quantity": 1 },
+      { "item": "Cotton Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Leather Boots",
+    "slug": "leather-boots",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Canvas", "quantity": 1 },
+      { "item": "Light Thread", "quantity": 2 },
+      { "item": "Cotton Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Enchanted Leather Cap",
+    "slug": "enchanted-leather-cap",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Enchanted Leather Canvas", "quantity": 2 },
+      { "item": "Light Thread", "quantity": 2 },
+      { "item": "Cotton Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Leather Cap",
+    "slug": "leather-cap",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Canvas", "quantity": 2 },
+      { "item": "Light Thread", "quantity": 2 },
+      { "item": "Cotton Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Leather Shoulderpads",
+    "slug": "leather-shoulderpads",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Canvas", "quantity": 2 },
+      { "item": "Light Thread", "quantity": 2 },
+      { "item": "Cotton Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Enchanted Leather Leggings",
+    "slug": "enchanted-leather-leggings",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Enchanted Leather Canvas", "quantity": 3 },
+      { "item": "Light Thread", "quantity": 3 },
+      { "item": "Cotton Padding", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Leather Leggings",
+    "slug": "leather-leggings",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Canvas", "quantity": 3 },
+      { "item": "Light Thread", "quantity": 3 },
+      { "item": "Cotton Padding", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Enchanted Leather Tunic",
+    "slug": "enchanted-leather-tunic",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Enchanted Leather Canvas", "quantity": 4 },
+      { "item": "Light Thread", "quantity": 3 },
+      { "item": "Cotton Padding", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Leather Tunic",
+    "slug": "leather-tunic",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Canvas", "quantity": 4 },
+      { "item": "Light Thread", "quantity": 3 },
+      { "item": "Cotton Padding", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Leather Saddlebag",
+    "slug": "leather-saddlebag",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Canvas", "quantity": 6 },
+      { "item": "Light Thread", "quantity": 4 }
+    ]
+  },
+  {
+    "name": "Leather Backpack",
+    "slug": "leather-backpack",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Canvas", "quantity": 7 },
+      { "item": "Light Thread", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Leather Saddle",
+    "slug": "leather-saddle",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Leather Scraps", "quantity": 2 },
+      { "item": "Leather Strap", "quantity": 3 },
+      { "item": "Iron Stirrups", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Padded Leather Canvas",
+    "slug": "padded-leather-canvas",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Scraps", "quantity": 6 }
+    ]
+  },
+  {
+    "name": "Padded Leather Strap",
+    "slug": "padded-leather-strap",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Scraps", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Enchanted Padded Leather Canvas",
+    "slug": "enchanted-padded-leather-canvas",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Enchanted Padded Leather", "quantity": 6 }
+    ]
+  },
+  {
+    "name": "Padded Leather Bracelet",
+    "slug": "padded-leather-bracelet",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Canvas", "quantity": 1 },
+      { "item": "Light Thread", "quantity": 1 },
+      { "item": "Linen Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Padded Leather Gorget",
+    "slug": "padded-leather-gorget",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Canvas", "quantity": 1 },
+      { "item": "Light Thread", "quantity": 1 },
+      { "item": "Linen Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Padded Leather Cloak",
+    "slug": "padded-leather-cloak",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Canvas", "quantity": 1 },
+      { "item": "Light Thread", "quantity": 2 },
+      { "item": "Linen Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Padded Leather Gloves",
+    "slug": "padded-leather-gloves",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Canvas", "quantity": 1 },
+      { "item": "Light Thread", "quantity": 2 },
+      { "item": "Linen Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Padded Leather Belt",
+    "slug": "padded-leather-belt",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Canvas", "quantity": 1 },
+      { "item": "Light Thread", "quantity": 1 },
+      { "item": "Linen Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Padded Leather Mask",
+    "slug": "padded-leather-mask",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Canvas", "quantity": 1 },
+      { "item": "Light Thread", "quantity": 1 },
+      { "item": "Linen Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Padded Leather Boots",
+    "slug": "padded-leather-boots",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Canvas", "quantity": 1 },
+      { "item": "Light Thread", "quantity": 2 },
+      { "item": "Linen Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Enchanted Padded Leather Cap",
+    "slug": "enchanted-padded-leather-cap",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Enchanted Padded Leather Canvas", "quantity": 2 },
+      { "item": "Light Thread", "quantity": 2 },
+      { "item": "Linen Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Padded Leather Cap",
+    "slug": "padded-leather-cap",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Canvas", "quantity": 2 },
+      { "item": "Light Thread", "quantity": 2 },
+      { "item": "Linen Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Padded Leather Shoulderpads",
+    "slug": "padded-leather-shoulderpads",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Canvas", "quantity": 2 },
+      { "item": "Light Thread", "quantity": 2 },
+      { "item": "Linen Padding", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Enchanted Padded Leather Leggings",
+    "slug": "enchanted-padded-leather-leggings",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Enchanted Padded Leather Canvas", "quantity": 3 },
+      { "item": "Light Thread", "quantity": 3 },
+      { "item": "Linen Padding", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Padded Leather Leggings",
+    "slug": "padded-leather-leggings",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Canvas", "quantity": 3 },
+      { "item": "Light Thread", "quantity": 3 },
+      { "item": "Linen Padding", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Enchanted Padded Leather Tunic",
+    "slug": "enchanted-padded-leather-tunic",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Enchanted Padded Leather Canvas", "quantity": 4 },
+      { "item": "Light Thread", "quantity": 3 },
+      { "item": "Linen Padding", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Padded Leather Tunic",
+    "slug": "padded-leather-tunic",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Canvas", "quantity": 4 },
+      { "item": "Light Thread", "quantity": 3 },
+      { "item": "Linen Padding", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Padded Leather Saddlebag",
+    "slug": "padded-leather-saddlebag",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Canvas", "quantity": 6 },
+      { "item": "Light Thread", "quantity": 4 }
+    ]
+  },
+  {
+    "name": "Padded Leather Backpack",
+    "slug": "padded-leather-backpack",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Canvas", "quantity": 7 },
+      { "item": "Light Thread", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Padded Leather Saddle",
+    "slug": "padded-leather-saddle",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Padded Leather Scraps", "quantity": 2 },
+      { "item": "Padded Leather Strap", "quantity": 3 },
+      { "item": "Steel Stirrups", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Rawhide Mask",
+    "slug": "patched-rawhide-mask",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 1 },
+      { "item": "Tattered Rawhide Mask", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Rawhide Tunic",
+    "slug": "patched-rawhide-tunic",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 2 },
+      { "item": "Tattered Rawhide Tunic", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Rawhide Leggings",
+    "slug": "patched-rawhide-leggings",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 2 },
+      { "item": "Tattered Rawhide Leggings", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Rawhide Shoulderpads",
+    "slug": "patched-rawhide-shoulderpads",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 1 },
+      { "item": "Tattered Rawhide Shoulderpads", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Rawhide Cap",
+    "slug": "patched-rawhide-cap",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 2 },
+      { "item": "Tattered Rawhide Cap", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Rawhide Cloak",
+    "slug": "patched-rawhide-cloak",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 2 },
+      { "item": "Tattered Rawhide Cloak", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Rawhide Gloves",
+    "slug": "patched-rawhide-gloves",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 1 },
+      { "item": "Tattered Rawhide Gloves", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Rawhide Bracelet",
+    "slug": "patched-rawhide-bracelet",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 1 },
+      { "item": "Tattered Rawhide Bracer", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Rawhide Belt",
+    "slug": "patched-rawhide-belt",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 1 },
+      { "item": "Tattered Rawhide Belt", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Rawhide Gorget",
+    "slug": "patched-rawhide-gorget",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 1 },
+      { "item": "Tattered Rawhide Gorget", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Rawhide Boots",
+    "slug": "patched-rawhide-boots",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 1 },
+      { "item": "Tattered Rawhide Boots", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Hide Tunic",
+    "slug": "patched-hide-tunic",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Scraps", "quantity": 2 },
+      { "item": "Tattered Hide Tunic", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Hide Leggings",
+    "slug": "patched-hide-leggings",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Scraps", "quantity": 2 },
+      { "item": "Tattered Hide Leggings", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Hide Cap",
+    "slug": "patched-hide-cap",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Scraps", "quantity": 2 },
+      { "item": "Tattered Hide Cap", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Hide Gloves",
+    "slug": "patched-hide-gloves",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Scraps", "quantity": 1 },
+      { "item": "Tattered Hide Gloves", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Hide Belt",
+    "slug": "patched-hide-belt",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Scraps", "quantity": 1 },
+      { "item": "Tattered Hide Belt", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Hide Gorget",
+    "slug": "patched-hide-gorget",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Scraps", "quantity": 1 },
+      { "item": "Tattered Hide Gorget", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Hide Cloak",
+    "slug": "patched-hide-cloak",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Scraps", "quantity": 1 },
+      { "item": "Tattered Hide Cloak", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Hide Mask",
+    "slug": "patched-hide-mask",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Scraps", "quantity": 1 },
+      { "item": "Tattered Hide Mask", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Hide Boots",
+    "slug": "patched-hide-boots",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Scraps", "quantity": 1 },
+      { "item": "Tattered Hide Boots", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Hide Bracer",
+    "slug": "patched-hide-bracer",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Scraps", "quantity": 1 },
+      { "item": "Tattered Hide Bracer", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Patched Hide Shoulderpads",
+    "slug": "patched-hide-shoulderpads",
+    "tradeskill": "Leatherworking",
+    "components": [
+      { "item": "Hide Scraps", "quantity": 1 },
+      { "item": "Tattered Hide Shoulderpads", "quantity": 1 }
+    ]
   }
 ]

@@ -268,3 +268,60 @@ into `crafting.json`'s `recipeSkillLevel`:
 If the user ever confirms these against an actual in-game source (e.g. a skill-up while
 tanning at a known skill level), promote the confirmed value into `recipeSkillLevel`
 directly rather than treating this table as good enough on its own.
+
+## Leatherworking — component/trivial reference tables (2026-07-06)
+
+A batch of screenshots that look like the same fan-wiki table style as the Tanning one above
+(sortable columns, hyperlinked item names, "Crafting Bench"/"Scrapping" columns) gave full
+`components` for many Leatherworking recipes that previously had none — those component lists
+were merged into `crafting.json` directly since they're structural/timeless data (same
+reasoning as always: components don't go stale the way a skill-gated color does), without
+touching any existing `difficultyColor`/`observedAtSkill` that came from an actual crafting-
+window capture. The "Trivial" skill numbers from these tables are recorded here only, per the
+same caution as Tanning:
+
+| Recipe | Trivial (external table) |
+|---|---|
+| Rawhide Bracelet | 10 |
+| Rawhide Gorget | 10 |
+| Rawhide Cloak | 20 |
+| Rawhide Gloves | 20 |
+| Rawhide Belt | 30 |
+| Rawhide Mask | 30 |
+| Rawhide Boots | 40 |
+| Rawhide Cap | 50 |
+| Rawhide Shoulderpads | 50 |
+| Rawhide Leggings | 70 |
+| Enchanted Rawhide Cap | 70 |
+| Enchanted Rawhide Leggings | 70 |
+| Rawhide Tunic | 70 |
+| Enchanted Rawhide Tunic | 75 |
+| Rawhide Canvas | 5 |
+| Rawhide Strap | 5 |
+| Enchanted Rawhide Canvas | 55 |
+| Hide Canvas | 80 |
+| Hide Strap | 80 |
+| Hide Bracelet | 85 |
+| Hide Gorget | 85 |
+| Hide Cloak | 95 |
+| Hide Gloves | 95 |
+| Hide Belt | 90+ (exact unknown) |
+| Hide Mask | 90+ (exact unknown) |
+| Hide Boots | 90+ (exact unknown) |
+| Enchanted Hide Cap | 120+ (exact unknown) |
+| Rawhide Saddlebag | 45 |
+| Rawhide Backpack | 65 |
+| Rawhide Saddle | 60 |
+| Patched Rawhide/Patched Hide (all 22 repair recipes) | 10 |
+
+Every other recipe added in this batch (Leather tier, Padded Leather tier, the remaining Hide
+tier armor pieces, all the saddles/saddlebags beyond Rawhide) had its Trivial column shown as
+"?" in the source table — genuinely unknown, not just omitted here.
+
+One source inconsistency worth flagging: the Patched Rawhide Armor table had a row with
+Item="Patched Rawhide Cloak" / component "Tattered Rawhide Cloak" but Result column showing
+"Patched Rawhide Gorget" — almost certainly a copy-paste error in the source, since a separate,
+properly-formed "Patched Rawhide Gorget" row already exists elsewhere in the same table with its
+own correct Tattered Rawhide Gorget input. Recorded in `crafting.json` as "Patched Rawhide
+Cloak" (trusting the Item column and its own input material over the one mismatched Result
+cell) — flag to the user if this turns out to be wrong.
