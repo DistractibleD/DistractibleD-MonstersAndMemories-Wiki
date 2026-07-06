@@ -559,6 +559,19 @@ const ITEM_TYPE_LABELS = {
   Food: 'Food', Drink: 'Drinks', Misc: 'Misc',
 };
 
+// Armor gets one extra level of browsing (material, then slot) before
+// landing on the actual item table — see renderArmorMaterials/renderArmorSlots.
+// Reuses armorIconKey's existing material guess (already used for the item
+// card icon) rather than a separate schema field. Fixed display order (light
+// to heavy, Shields/Other last) rather than alphabetical, and only materials
+// that actually have an item show up (same "derive from data" rule as every
+// other filter/dropdown in this file).
+const ARMOR_MATERIAL_ORDER = ['cloth', 'leather', 'chain', 'plate', 'shield', 'armor'];
+const ARMOR_MATERIAL_LABELS = {
+  cloth: 'Cloth', leather: 'Leather', chain: 'Chain', plate: 'Plate',
+  shield: 'Shields', armor: 'Other',
+};
+
 function itemRatio(item) {
   if (item.damage == null || !item.delay) return null;
   return item.damage / item.delay;
@@ -631,6 +644,15 @@ async function renderItemsPage(container) {
   if (pendingItemCategory) {
     const category = pendingItemCategory;
     pendingItemCategory = null;
+    // A category-only jump (e.g. clicking "Armor" as a search result, with
+    // no specific item) still goes through Armor's material grid, same as
+    // clicking the category card directly. A specific-item jump (pendingItemQuery
+    // set alongside) skips straight to the flat, unscoped list instead — the
+    // point there is to find one item wherever it lives, not to pick a material.
+    if (category === 'Armor' && !pendingItemQuery) {
+      renderArmorMaterials(container);
+      return;
+    }
     renderItemsList(container, category);
     return;
   }
@@ -642,13 +664,20 @@ async function renderItemsPage(container) {
 // Jewelry, Container, Food, Drink, Misc) with its item count, mirroring the
 // Crafting page's tradeskill grid (see renderCraftingCategories). Clicking a
 // card drills into renderItemsList, which holds the actual search/filter/
-// sort table, scoped to just that category.
+// sort table, scoped to just that category — except Armor, which drills into
+// renderArmorMaterials first (material, then slot) since it has enough items
+// to be worth splitting further; every other category goes straight to the
+// table same as before.
 function renderItemsCategories(container) {
   const types = [...new Set(itemsData.map(i => i.type))].sort();
 
   container.innerHTML = `
     <h1>Item Database</h1>
-    <p>Browse items by category. Click a category to search, filter, and sort within it.</p>
+    <p>Browse items by category, or search below to jump straight to a specific item.</p>
+    <div class="items-quick-search">
+      <input type="search" id="items-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all items by name, stat, class..." autocomplete="off">
+      <div id="items-quick-search-results" class="items-quick-search-results"></div>
+    </div>
     <div class="items-category-grid">
       ${types.map(type => {
         const count = itemsData.filter(i => i.type === type).length;
@@ -668,7 +697,128 @@ function renderItemsCategories(container) {
   `;
 
   container.querySelectorAll('.items-category-card').forEach(card => {
-    card.addEventListener('click', () => renderItemsList(container, card.dataset.type));
+    if (card.dataset.type === 'Armor') {
+      card.addEventListener('click', () => renderArmorMaterials(container));
+    } else {
+      card.addEventListener('click', () => renderItemsList(container, card.dataset.type));
+    }
+  });
+
+  // A shortcut past the whole category → (material →) slot drill-down for
+  // anyone who already knows what they're looking for. Scoped to items.json
+  // only (unlike the header search box, which also covers pages/recipes) so
+  // results stay relevant to this page. Clicking a result reuses goToItem —
+  // same category-jump + row-flash behavior as a header search result.
+  const quickSearchBox = container.querySelector('#items-quick-search-box');
+  const quickSearchResults = container.querySelector('#items-quick-search-results');
+
+  quickSearchBox.addEventListener('input', () => {
+    const query = quickSearchBox.value.toLowerCase().trim();
+    if (!query) {
+      quickSearchResults.classList.remove('open');
+      quickSearchResults.innerHTML = '';
+      return;
+    }
+
+    const matches = itemsData
+      .filter(item => itemSearchHaystack(item).includes(query))
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .slice(0, 20);
+
+    quickSearchResults.innerHTML = matches.length
+      ? matches.map(item => `
+          <a href="#" class="search-result-link items-quick-search-result" data-slug="${escapeAttr(item.slug)}">
+            ${escapeAttr(item.name)}
+            <span class="items-quick-search-type">${escapeAttr(ITEM_TYPE_LABELS[item.type] || item.type)}</span>
+          </a>
+        `).join('')
+      : '<p class="search-results-empty">No items match.</p>';
+    quickSearchResults.classList.add('open');
+
+    quickSearchResults.querySelectorAll('.items-quick-search-result').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const item = itemsData.find(i => i.slug === link.dataset.slug);
+        if (item) goToItem(item);
+      });
+    });
+  });
+}
+
+// Armor's first drill-down level: one card per material (Cloth/Leather/
+// Chain/Plate/Shields/Other — see ARMOR_MATERIAL_ORDER), each showing how
+// many armor items use that material. Clicking one drills into
+// renderArmorSlots for that material's slot breakdown.
+function renderArmorMaterials(container) {
+  const armorItems = itemsData.filter(i => i.type === 'Armor');
+  const materials = ARMOR_MATERIAL_ORDER.filter(m => armorItems.some(i => armorIconKey(i) === m));
+
+  container.innerHTML = `
+    <p class="items-back-link"><a href="#" id="items-back-to-categories">&larr; All categories</a></p>
+    <h1>Armor</h1>
+    <p>Browse armor by material. Click a material to see its item slots.</p>
+    <div class="items-category-grid">
+      ${materials.map(material => {
+        const count = armorItems.filter(i => armorIconKey(i) === material).length;
+        const label = ARMOR_MATERIAL_LABELS[material] || material;
+        return `
+          <div class="items-category-card" data-material="${escapeAttr(material)}">
+            <div class="items-category-card-icon">${svgIcon(material)}</div>
+            <div class="items-category-card-body">
+              <div class="items-category-card-name">${escapeAttr(label)}</div>
+              <div class="items-category-card-count">${count} item${count === 1 ? '' : 's'}</div>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+
+  container.querySelector('#items-back-to-categories').addEventListener('click', e => {
+    e.preventDefault();
+    renderItemsCategories(container);
+  });
+
+  container.querySelectorAll('.items-category-card').forEach(card => {
+    card.addEventListener('click', () => renderArmorSlots(container, card.dataset.material));
+  });
+}
+
+// Armor's second drill-down level: one card per item.slot within the chosen
+// material (Chest/Legs/Head/...), derived from the data same as every other
+// slot list in this file. Clicking one finally opens the real item table
+// (renderItemsList), scoped to both the material and the slot.
+function renderArmorSlots(container, material) {
+  const materialItems = itemsData.filter(i => i.type === 'Armor' && armorIconKey(i) === material);
+  const materialLabel = ARMOR_MATERIAL_LABELS[material] || material;
+  const slots = [...new Set(materialItems.map(i => i.slot))].filter(Boolean).sort();
+
+  container.innerHTML = `
+    <p class="items-back-link"><a href="#" id="items-back-to-materials">&larr; All armor materials</a></p>
+    <h1>${escapeAttr(materialLabel)} Armor</h1>
+    <p>Browse ${escapeAttr(materialLabel.toLowerCase())} armor by slot.</p>
+    <div class="items-category-grid">
+      ${slots.map(slot => {
+        const count = materialItems.filter(i => i.slot === slot).length;
+        return `
+          <div class="items-category-card" data-slot="${escapeAttr(slot)}">
+            <div class="items-category-card-body">
+              <div class="items-category-card-name">${escapeAttr(slot)}</div>
+              <div class="items-category-card-count">${count} item${count === 1 ? '' : 's'}</div>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+
+  container.querySelector('#items-back-to-materials').addEventListener('click', e => {
+    e.preventDefault();
+    renderArmorMaterials(container);
+  });
+
+  container.querySelectorAll('.items-category-card').forEach(card => {
+    card.addEventListener('click', () => renderItemsList(container, 'Armor', { material, slot: card.dataset.slot }));
   });
 }
 
@@ -677,9 +827,29 @@ function renderItemsCategories(container) {
 // show Jewelry's classes in its dropdown), click-to-sort columns, and the
 // existing hover/click card behavior. The "Type" column/filter from the old
 // flat table is gone since it's now implied by which category you're in.
-function renderItemsList(container, category) {
-  const categoryItems = itemsData.filter(i => i.type === category);
+// `scope` (optional) further narrows an Armor list down to one material/slot
+// combination, set when arriving via renderArmorSlots — every other category,
+// and any Armor list reached via search (see renderItemsPage), leaves it unset
+// and shows the full, unscoped category same as before.
+function renderItemsList(container, category, scope) {
+  const categoryItems = itemsData.filter(i => {
+    if (i.type !== category) return false;
+    if (scope) {
+      if (armorIconKey(i) !== scope.material) return false;
+      if (i.slot !== scope.slot) return false;
+    }
+    return true;
+  });
   const categoryLabel = ITEM_TYPE_LABELS[category] || category;
+
+  // Scoped Armor lists (material + slot) get their own heading/subtitle and
+  // a back link that returns to the slot grid instead of the top category
+  // grid — the unscoped case (every other category, plus an Armor list
+  // reached via search) keeps the original heading/back-link wording.
+  const materialLabel = scope ? (ARMOR_MATERIAL_LABELS[scope.material] || scope.material) : null;
+  const heading = scope ? `${materialLabel} Armor — ${scope.slot}` : categoryLabel;
+  const subtitleLabel = scope ? `${materialLabel.toLowerCase()} ${scope.slot.toLowerCase()}` : categoryLabel.toLowerCase();
+  const backLabel = scope ? `All ${materialLabel} armor slots` : 'All categories';
 
   // Landed here from a recipe's component list — remember which recipe so
   // we can show a link back to it, instead of leaving the user stranded.
@@ -700,9 +870,9 @@ function renderItemsList(container, category) {
 
   container.innerHTML = `
     ${returnToRecipe ? `<p class="items-back-link"><a href="#" id="items-back-to-recipe">&larr; Back to ${escapeAttr(returnToRecipe.name)}</a></p>` : ''}
-    <p class="items-back-link"><a href="#" id="items-back-to-categories">&larr; All categories</a></p>
-    <h1>${escapeAttr(categoryLabel)}</h1>
-    <p>Browse, search, filter, and sort ${escapeAttr(categoryLabel.toLowerCase())} items. Hover an item's name to see its full card.</p>
+    <p class="items-back-link"><a href="#" id="items-back-to-categories">&larr; ${escapeAttr(backLabel)}</a></p>
+    <h1>${escapeAttr(heading)}</h1>
+    <p>Browse, search, filter, and sort ${escapeAttr(subtitleLabel)} items. Hover an item's name to see its full card.</p>
     <div class="items-toolbar">
       <input type="search" id="items-search" class="items-search" placeholder="Search name, stat, class..." autocomplete="off">
       <select id="items-filter-slot" class="items-select">
@@ -786,7 +956,8 @@ function renderItemsList(container, category) {
 
   container.querySelector('#items-back-to-categories').addEventListener('click', e => {
     e.preventDefault();
-    renderItemsCategories(container);
+    if (scope) renderArmorSlots(container, scope.material);
+    else renderItemsCategories(container);
   });
 
   // Column headers sort by click — see itemSortValue for what each key reads

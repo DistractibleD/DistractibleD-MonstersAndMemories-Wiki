@@ -363,6 +363,34 @@ html, body {
   content: '\25BC';
   margin-left: 4px;
 }
+.items-quick-search {
+  position: relative;
+  margin: 18px 0 0;
+}
+.items-quick-search-box {
+  width: 100%;
+  max-width: 420px;
+  display: block;
+}
+.items-quick-search-results {
+  display: none;
+  margin-top: 8px;
+  max-width: 420px;
+  max-height: 360px;
+  overflow-y: auto;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px;
+}
+.items-quick-search-results.open {
+  display: block;
+}
+.items-quick-search-type {
+  float: right;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+}
 .items-category-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
