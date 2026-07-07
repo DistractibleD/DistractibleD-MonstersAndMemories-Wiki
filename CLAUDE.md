@@ -578,6 +578,22 @@ fills in as the user provides it:
   fields like `maps`/`levelRange`/`drops`. Never promote a monster's `rumor` into a
   confirmed field yourself — only the user saying it's confirmed does that.
 
+**A `drops` entry can be name-only, inferred rather than screenshot-confirmed, when the
+user explicitly asks for that (2026-07-07):** "a rotting skeleton" originally had 4
+confirmed "Rusty [Weapon]" drops from loot-window screenshots (Great Scythe, Battle Axe,
+Maul, War Lance). The user then asked to add "the rest of the rusted weapons," inferring
+the names from the naming pattern of the game's Bronze/Iron/Steel Blacksmithing weapon
+tiers (`crafting.json`), which all share the same 16 weapon types (Dagger, Shortsword,
+Throwing Dagger, Axe, Battle Axe, Scimitar, Scythe, Longsword, Spear, Trident, Mace,
+Warhammer, Great Scythe, War Lance, Greatsword, Maul) — the 12 not already confirmed were
+added the same way (`"Rusty [Type]"`, no material prefix, per the user's separate
+confirmation that Rusty weapons never carry a material name like the Rusty Iron/Rusty
+Copper armor-repair components do). These 12 have no matching `items.json` entry yet (no
+stats known), so they render as plain, unlinked text until a real card comes in — same as
+any other not-yet-added component/drop name. This is a one-off exception to "only the
+user's screenshots/chat are authoritative" — only do this kind of pattern-inferred bulk
+add again if the user explicitly asks for it the same way, not on your own initiative.
+
 Clicking a monster's name (`.monster-name-hover`, `setupMonsterClickToView`) opens
 `#monster-viewer`, a modal built by `openMonsterViewer`/`setupMonsterViewer` — same modal
 shell/close-button pattern as `#item-viewer`, just showing the real screenshot (`<img>`)

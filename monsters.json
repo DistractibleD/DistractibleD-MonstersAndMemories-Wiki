@@ -48,7 +48,19 @@
       { "item": "Rusty Great Scythe" },
       { "item": "Rusty Battle Axe" },
       { "item": "Rusty Maul" },
-      { "item": "Rusty War Lance" }
+      { "item": "Rusty War Lance" },
+      { "item": "Rusty Dagger" },
+      { "item": "Rusty Shortsword" },
+      { "item": "Rusty Throwing Dagger" },
+      { "item": "Rusty Axe" },
+      { "item": "Rusty Scimitar" },
+      { "item": "Rusty Scythe" },
+      { "item": "Rusty Longsword" },
+      { "item": "Rusty Spear" },
+      { "item": "Rusty Trident" },
+      { "item": "Rusty Mace" },
+      { "item": "Rusty Warhammer" },
+      { "item": "Rusty Greatsword" }
     ]
   },
   {
