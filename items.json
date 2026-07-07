@@ -3350,7 +3350,7 @@
     "twoHanded": true,
     "damage": 9,
     "delay": 48,
-    "skill": "STA",
+    "skill": "Stabbing",
     "weight": 13.0,
     "size": "Large",
     "classes": ["FTR", "INQ", "PAL", "SHD"],
@@ -3370,5 +3370,55 @@
     "size": "Medium",
     "classes": ["ARC", "BRD", "BST", "MNK", "RNG", "ROG", "SPB"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Tattered Cloth Gloves",
+    "slug": "tattered-cloth-gloves",
+    "image": "images/items/tattered-cloth-gloves.jpg",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Hands",
+    "ac": 1,
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Tattered Cloth Bracer",
+    "slug": "tattered-cloth-bracer",
+    "image": "images/items/tattered-cloth-bracer.jpg",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "ac": 1,
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Rusty Scimitar",
+    "slug": "rusty-scimitar",
+    "image": "images/items/rusty-scimitar.jpg",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "damage": 5,
+    "delay": 36,
+    "skill": "Slashing",
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "DRU", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB", "WIZ"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Bat Eye",
+    "slug": "bat-eye",
+    "image": "images/items/bat-eye.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
   }
 ]

@@ -34,14 +34,16 @@ Update (2026-07-04, re-check of every item previously flagged in this file):
 Nothing else has been flagged as incomplete. This file will be updated only when there's
 a specific reason to believe an item's data (not its screenshot) is missing something.
 
-New flag (2026-07-07):
+Resolved (2026-07-07):
 
-- Rusty War Lance — the card's weapon line reads "Skill: STA", not a full word like every
-  other weapon processed so far (Slashing/Blunt/Stabbing/Archery/Throwing). The image isn't
-  cropped at that point (there's clear empty space before the card's border), so this looks
-  like the game's own UI showing an abbreviation rather than a screenshot cut-off. Recorded
-  verbatim as `"skill": "STA"` rather than guessing it means "Stabbing" (plausible for a
-  lance, but a guess) — revisit if the user confirms which skill this actually is.
+- Rusty War Lance's "Skill: STA" — resolved. Three more "a rotting skeleton" loot-window
+  recaptures came in showing the same abbreviated style ("Skill: SLA") on Rusty Battle Axe,
+  Rusty Great Scythe, and the new Rusty Scimitar — all three already had (or could be
+  cross-checked against) a full-word `"skill": "Slashing"`, confirming "SLA" is just an
+  abbreviated rendering of "Slashing" in this particular loot-linked card view, not a
+  different skill. By the same 3-letter pattern, "STA" is "Stabbing" (also consistent with
+  a lance being a stabbing weapon everywhere else in this schema). Updated
+  `Rusty War Lance`'s `skill` to `"Stabbing"` in items.json.
 
 New flag (2026-07-06):
 
