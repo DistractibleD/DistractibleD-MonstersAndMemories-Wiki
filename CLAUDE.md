@@ -551,7 +551,40 @@ fills in as the user provides it:
   value, so the page says so directly in its intro text rather than presenting them as fact.
   Kept as a free string rather than numeric fields since nothing currently needs to filter by
   level, only display/sort it loosely (`renderMonstersPage` sorts by the leading number via a
-  regex, monsters with no range at all sort last).
+  regex, monsters with no range at all sort last). **Con color reference (2026-07-07):** in
+  this game a White con means the monster is the same level as the player looking at it — if
+  the user reports a monster conning White to a character of a known level, that pins down
+  (not just estimates) that monster's level exactly, and is strong enough to write directly
+  into `levelRange` as a single number rather than a guessed span. **Other con colors
+  (2026-07-07):** the exact level-difference each non-White color represents isn't known yet
+  (don't assume it maps 1:1 to EverQuest's scale — same caution as the tradeskill
+  trivial-skill formula elsewhere in this file). A monster conning Yellow (higher level) to a
+  character of known level N is recorded as `"N+"` (e.g. Yellow to a level-1 character →
+  `"2+"`) — an open lower bound, not a guessed exact number or span. Revisit this once/if the
+  user provides the actual color-to-level-difference scale for this game. **Full con-color
+  order confirmed (2026-07-07):** low to high, it's Light Green, Light Blue, Dark Blue,
+  White, Yellow, Orange, Red — the same seven colors already used for crafting recipe
+  difficulty (see the `difficultyColor` bullets under "Adding a crafting recipe" above),
+  just with "Light Green" standing in for that scale's plain "Green" as the trivial end.
+  Confirmed meanings so far: **Light Green** is trivial — the player gets no XP for killing
+  that monster; **White** is the same level as the player (see above, pins down an exact
+  level); **Red** is much higher level than the player, close to impossible to solo. The
+  exact level-difference each color (Light Blue/Dark Blue/Yellow/Orange) represents isn't
+  known yet — same rule as Yellow's `"N+"` above applies to any of these when a specific
+  monster's con comes in: record what's actually known, don't invent a number a color alone
+  doesn't confirm.
+
+  **`levelRange` display hidden (2026-07-07):** the user asked to stop showing level range
+  anywhere on the site until a more reliable conning method is found — same reasoning, and
+  the same pattern, as the crafting difficulty badge removal above (a value derived from an
+  unreliable/unconfirmed method shouldn't be presented as if it were fact). The "Level
+  Range" column is gone from the Monsters table (`renderMonstersPage`/`renderMonsterRows`,
+  now 2 columns instead of 3, `col-monster-level` removed from `style.css`), its sort option
+  is gone (`monsterSortValue` no longer has a `'level'` case), and the "Level Range" field is
+  gone from the monster viewer card (`openMonsterViewer`). **Keep recording `levelRange` in
+  `monsters.json` as before** (per the White/Yellow/Light-Green/Red con-color notes above) —
+  this is a display-only removal, not a data one, exactly like `difficultyColor` for crafting
+  recipes. Revisit showing it again once/if the user has a more reliable conning method.
 - `drops` — array of `{ "item": "Name As Shown" }`, exactly the same shape and the same
   dynamic-linking convention as a recipe's `components` (see "Adding a crafting recipe"
   above): matched against `items.json` by exact name at render time

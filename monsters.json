@@ -16,10 +16,12 @@
     "slug": "a-large-rat",
     "image": "images/Monsters/a-large-rat.jpg",
     "maps": ["Necropolis (Night Harbor)"],
+    "levelRange": "1",
     "drops": [
       { "item": "Raw Rat Meat" },
       { "item": "Rat Ear" },
-      { "item": "Rat Tooth" }
+      { "item": "Rat Tooth" },
+      { "item": "Burrow Hide Pants" }
     ]
   },
   {
@@ -27,6 +29,7 @@
     "slug": "a-young-crypt-scarab",
     "image": "images/Monsters/a-young-crypt-scarab.jpg",
     "maps": ["Necropolis (Night Harbor)"],
+    "levelRange": "2",
     "drops": [
       { "item": "Crypt Scarab Eye" },
       { "item": "Crypt Scarab Leg" }
@@ -35,6 +38,7 @@
   {
     "name": "a crypt scarab",
     "slug": "a-crypt-scarab",
+    "maps": ["Necropolis (Night Harbor)"],
     "drops": [
       { "item": "Crypt Scarab Leg" }
     ]
@@ -44,6 +48,7 @@
     "slug": "a-rotting-skeleton",
     "image": "images/Monsters/a-rotting-skeleton.jpg",
     "maps": ["Necropolis (Night Harbor)"],
+    "levelRange": "1",
     "drops": [
       { "item": "Bone Chips" },
       { "item": "Skeleton Jawbone" },

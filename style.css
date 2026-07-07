@@ -334,9 +334,8 @@ html, body {
 .col-capacity { width: 10%; }
 .col-classes { width: 16%; }
 .col-race { width: 8%; }
-.col-monster-name { width: 45%; }
-.col-monster-map { width: 35%; }
-.col-monster-level { width: 20%; }
+.col-monster-name { width: 50%; }
+.col-monster-map { width: 50%; }
 .items-table th {
   background: var(--bg);
   color: var(--accent);

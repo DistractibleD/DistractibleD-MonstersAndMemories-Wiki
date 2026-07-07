@@ -1856,8 +1856,7 @@ async function renderMonstersPage(container) {
   container.innerHTML = `
     <h1>Monsters</h1>
     <p>Browse monsters alphabetically, or filter by map. Click a monster's name to see its
-    picture and drop table. Level ranges are the user's own best-guess estimates, not
-    confirmed in-game values.</p>
+    picture and drop table.</p>
     <div class="items-toolbar">
       <input type="search" id="monsters-search" class="items-search" placeholder="Search name, map, drop..." autocomplete="off">
       <select id="monsters-filter-map" class="items-select">
@@ -1872,13 +1871,11 @@ async function renderMonstersPage(container) {
         <colgroup>
           <col class="col-monster-name">
           <col class="col-monster-map">
-          <col class="col-monster-level">
         </colgroup>
         <thead>
           <tr>
             <th data-sort-key="name" class="sortable">Name</th>
             <th data-sort-key="maps" class="sortable">Map</th>
-            <th data-sort-key="level" class="sortable">Level Range</th>
           </tr>
         </thead>
         <tbody id="monsters-tbody"></tbody>
@@ -1924,12 +1921,6 @@ async function renderMonstersPage(container) {
     switch (key) {
       case 'name': return monster.name.toLowerCase();
       case 'maps': return (monster.maps && monster.maps[0] || '').toLowerCase();
-      // Sorts by the leading number in a "5-8"-style range; monsters with no
-      // level range at all sort after every monster that has one.
-      case 'level': {
-        const match = /-?\d+/.exec(monster.levelRange || '');
-        return match ? parseInt(match[0], 10) : null;
-      }
       default: return '';
     }
   }
@@ -1987,7 +1978,7 @@ async function renderMonstersPage(container) {
 
 function renderMonsterRows(tbody, monsters) {
   if (!monsters.length) {
-    tbody.innerHTML = `<tr><td colspan="3" class="items-empty">${monstersData.length ? 'No monsters match your filters.' : 'No monsters yet.'}</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="2" class="items-empty">${monstersData.length ? 'No monsters match your filters.' : 'No monsters yet.'}</td></tr>`;
     return;
   }
 
@@ -1995,7 +1986,6 @@ function renderMonsterRows(tbody, monsters) {
     <tr data-slug="${escapeAttr(monster.slug)}">
       <td><span class="item-name-hover monster-name-hover" data-slug="${escapeAttr(monster.slug)}">${escapeAttr(monster.name)}</span></td>
       <td>${escapeAttr(formatMonsterMaps(monster))}</td>
-      <td>${monster.levelRange ? escapeAttr(monster.levelRange) : '—'}</td>
     </tr>
   `).join('');
 }
@@ -2077,7 +2067,6 @@ function openMonsterViewer(monster) {
       <div class="monster-card-body">
         <h2 class="monster-card-name">${escapeAttr(monster.name)}</h2>
         <div class="monster-card-field"><span class="item-card-field-label">Map</span><span>${escapeAttr(formatMonsterMaps(monster))}</span></div>
-        <div class="monster-card-field"><span class="item-card-field-label">Level Range</span><span>${monster.levelRange ? escapeAttr(monster.levelRange) : 'not yet known'}</span></div>
         ${related.length ? `
         <div class="monster-card-field">
           <span class="item-card-field-label">Place Holder</span>
