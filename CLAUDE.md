@@ -568,6 +568,15 @@ fills in as the user provides it:
   viewer, same dynamic-resolves-at-render-time convention as `drops`/`components` (via
   `findMonsterBySlug`) — if the referenced slug doesn't exist (yet), it just renders as plain
   text instead of a link. Optional; most monsters won't have this.
+- `rumor` — same field/semantics as `item.rumor` (see "Item and recipe cards" below): a
+  free-text, explicitly unverified note (spawn conditions, believed source, anything the
+  user *thinks* but hasn't confirmed), first added 2026-07-07 for Night Terror ("Spawns in
+  The Concourse of Souls (Necropolis/Night Harbor), only at night, after the Desert Bat
+  placeholder mobs there are killed" — from a user-marked map snip). Rendered on the
+  monster card only when set, in the same amber/italic `.item-card-section-rumor` style as
+  an item's rumor line, labeled "Rumor (unverified)" so it's never confused with confirmed
+  fields like `maps`/`levelRange`/`drops`. Never promote a monster's `rumor` into a
+  confirmed field yourself — only the user saying it's confirmed does that.
 
 Clicking a monster's name (`.monster-name-hover`, `setupMonsterClickToView`) opens
 `#monster-viewer`, a modal built by `openMonsterViewer`/`setupMonsterViewer` — same modal
@@ -748,6 +757,17 @@ is visible and the layout doesn't shift once it's filled in. No item has this po
 add it directly to the relevant `items.json` entry when that data starts coming in, no code
 changes needed. Revisit this as a structured field (e.g. with a link) only if/when enough
 data comes in to warrant it, same as every other schema field in this file.
+
+**`item.rumor`** (added 2026-07-07) is a separate optional free-text field for where the
+user *thinks* an item comes from, before it's confirmed — e.g. a guess based on partial
+information, someone else's claim, or a hunch, as opposed to `foundAt` which is only ever
+set once the user has confirmed the source themselves. Explicitly **not** the same field
+and never conflated: don't write a guess into `foundAt`, and don't promote `rumor` into
+`foundAt` unless the user explicitly says it's now confirmed. Unlike `foundAt`, an item
+card only shows the rumor line at all when `rumor` is actually set (no "not yet known"
+placeholder — most items will simply never have one), rendered in a distinct
+italic/amber style (`.item-card-section-rumor` in `style.css`) labeled "Rumor
+(unverified)" so it can never be mistaken for a confirmed `foundAt` line at a glance.
 
 ## Known CSS gotcha
 

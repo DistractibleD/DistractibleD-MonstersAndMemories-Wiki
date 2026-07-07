@@ -34,6 +34,15 @@ Update (2026-07-04, re-check of every item previously flagged in this file):
 Nothing else has been flagged as incomplete. This file will be updated only when there's
 a specific reason to believe an item's data (not its screenshot) is missing something.
 
+New flag (2026-07-07):
+
+- Rusty War Lance — the card's weapon line reads "Skill: STA", not a full word like every
+  other weapon processed so far (Slashing/Blunt/Stabbing/Archery/Throwing). The image isn't
+  cropped at that point (there's clear empty space before the card's border), so this looks
+  like the game's own UI showing an abbreviation rather than a screenshot cut-off. Recorded
+  verbatim as `"skill": "STA"` rather than guessing it means "Stabbing" (plausible for a
+  lance, but a guess) — revisit if the user confirms which skill this actually is.
+
 New flag (2026-07-06):
 
 - Lunar Festival Trousers — the inbox screenshot shows MAGIC/Slot/AC/stats/SV Magic/

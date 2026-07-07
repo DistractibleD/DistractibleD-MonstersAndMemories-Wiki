@@ -3325,5 +3325,50 @@
     "tags": [],
     "weight": 0.1,
     "size": "Small"
+  },
+  {
+    "name": "Sanguine Wildsteps",
+    "slug": "sanguine-wildsteps",
+    "image": "images/items/sanguine-wildsteps.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Feet",
+    "ac": 6,
+    "stats": { "STR": 1, "STA": 3 },
+    "weight": 0.5,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Rusty War Lance",
+    "slug": "rusty-war-lance",
+    "image": "images/items/rusty-war-lance.jpg",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "damage": 9,
+    "delay": 48,
+    "skill": "STA",
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Taskmaster's Leathers",
+    "slug": "taskmasters-leathers",
+    "image": "images/items/taskmasters-leathers.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Legs",
+    "ac": 25,
+    "stats": { "STR": 3, "STA": 1, "AGI": 4, "DEX": 4 },
+    "description": "Scarred and sweat-darkened leathers, bearing the weight of a taskmaster's rule.",
+    "weight": 1.5,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "MNK", "RNG", "ROG", "SPB"],
+    "race": ["ALL"]
   }
 ]

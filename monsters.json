@@ -47,7 +47,8 @@
       { "item": "Tattered Cloth Shirt" },
       { "item": "Rusty Great Scythe" },
       { "item": "Rusty Battle Axe" },
-      { "item": "Rusty Maul" }
+      { "item": "Rusty Maul" },
+      { "item": "Rusty War Lance" }
     ]
   },
   {
@@ -61,6 +62,7 @@
     ],
     "relatedMonsters": [
       { "label": "Desert Bat", "slug": "a-desert-bat" }
-    ]
+    ],
+    "rumor": "Spawns in The Concourse of Souls (Necropolis/Night Harbor), only at night, after the Desert Bat placeholder mobs there are killed."
   }
 ]

@@ -601,6 +601,10 @@ html, body {
 .item-card-muted {
   color: #6b6c72;
 }
+.item-card-section-rumor {
+  font-style: italic;
+  color: #ffe9a8;
+}
 .item-card-components {
   list-style: none;
   padding: 0;

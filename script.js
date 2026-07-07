@@ -1240,6 +1240,7 @@ function renderItemCardHTML(item) {
         <div class="item-card-section${item.foundAt ? '' : ' item-card-muted'}">
           Found at &middot; ${item.foundAt ? escapeAttr(item.foundAt) : 'not yet known'}
         </div>
+        ${item.rumor ? `<div class="item-card-section item-card-section-rumor">Rumor (unverified) &middot; ${escapeAttr(item.rumor)}</div>` : ''}
       </div>
     </div>
   `;
@@ -2100,6 +2101,7 @@ function openMonsterViewer(monster) {
             </ul>
           ` : '<p class="monster-card-no-drops">No known drops yet.</p>'}
         </div>
+        ${monster.rumor ? `<div class="item-card-section item-card-section-rumor">Rumor (unverified) &middot; ${escapeAttr(monster.rumor)}</div>` : ''}
       </div>
     </div>
   `;
