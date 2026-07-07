@@ -79,6 +79,6 @@
     "relatedMonsters": [
       { "label": "Desert Bat", "slug": "a-desert-bat" }
     ],
-    "rumor": "Spawns in The Concourse of Souls (Necropolis/Night Harbor), only at night, after the Desert Bat placeholder mobs there are killed."
+    "rumor": "Spawns in The Concourse of Souls (Necropolis/Night Harbor), only at night, after one of the Desert Bat placeholder mobs there is killed - seemingly random which one triggers it, not all of them."
   }
 ]
