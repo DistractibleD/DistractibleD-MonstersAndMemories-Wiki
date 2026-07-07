@@ -1041,3 +1041,53 @@ html, body {
   .map-card img.map-card-thumb { height: 110px; }
   #map-viewer-close { top: 10px; right: 12px; width: 34px; height: 34px; font-size: 1.2rem; }
 }
+
+/* On narrow/vertical screens a fixed multi-column table (Item Database has
+   9) squeezes every column too thin, forcing mid-word wraps ("Small" ->
+   "Smal"/"l"). Below this width, each row becomes a stacked card instead:
+   the header row is visually hidden (kept for accessibility) and every
+   <td> shows its own column label via data-label (set in script.js) using
+   a ::before, so the data still reads correctly without a colgroup at all.
+   cell-empty (also set in script.js for "—" placeholder cells) hides
+   cells with nothing to show instead of displaying a bare label. */
+@media (max-width: 640px) {
+  .content-inner .items-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .content-inner .items-table, .content-inner .items-table tbody, .content-inner .items-table tr {
+    display: block;
+    width: 100%;
+  }
+  .content-inner .items-table tr {
+    margin-bottom: 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .content-inner .items-table td {
+    display: flex;
+    gap: 10px;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    padding: 7px 10px;
+  }
+  .content-inner .items-table tr td:last-child { border-bottom: none; }
+  .content-inner .items-table td::before {
+    content: attr(data-label);
+    flex: 0 0 42%;
+    color: var(--accent);
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .content-inner .items-table td.cell-empty { display: none; }
+  .content-inner .items-table td:first-child { background: var(--bg-panel-hover); }
+  .content-inner .items-table td:first-child::before { display: none; }
+}

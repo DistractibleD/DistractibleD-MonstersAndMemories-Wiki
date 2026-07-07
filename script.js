@@ -1157,25 +1157,31 @@ function renderItemRows(tbody, items) {
     return;
   }
 
+  // data-label mirrors each column's header text — read by the narrow-screen
+  // stacked-card layout in style.css (each <td> becomes its own labeled row
+  // via a ::before). cell-empty marks placeholder "—" cells so that view can
+  // hide them instead of showing a label next to nothing.
   tbody.innerHTML = items.map(item => {
     const ratio = itemRatio(item);
     const dmgCell = item.damage != null
       ? `${item.damage} / ${item.delay}${ratio != null ? ` = ${ratio.toFixed(2)}` : ''}`
       : '—';
+    const acCell = item.ac != null ? item.ac : '—';
+    const capacityCell = formatCapacity(item);
 
     return `
       <tr data-slug="${escapeAttr(item.slug || '')}">
-        <td>
+        <td data-label="Name">
           <span class="item-name-hover" data-alt="${item.name}">${(item.tags || []).map(t => `<span class="badge-tag">${t}</span> `).join('')}${item.name}</span>
         </td>
-        <td>${formatSlot(item)}</td>
-        <td>${item.ac != null ? item.ac : '—'}</td>
-        <td>${formatStats(item)}</td>
-        <td>${dmgCell}</td>
-        <td>${item.weight} / ${item.size}</td>
-        <td>${formatCapacity(item)}</td>
-        <td>${formatList(item.classes)}</td>
-        <td>${formatList(item.race)}</td>
+        <td data-label="Slot"${formatSlot(item) === '—' ? ' class="cell-empty"' : ''}>${formatSlot(item)}</td>
+        <td data-label="AC"${acCell === '—' ? ' class="cell-empty"' : ''}>${acCell}</td>
+        <td data-label="Stats"${formatStats(item) === '—' ? ' class="cell-empty"' : ''}>${formatStats(item)}</td>
+        <td data-label="Dmg / Delay / Ratio"${dmgCell === '—' ? ' class="cell-empty"' : ''}>${dmgCell}</td>
+        <td data-label="Weight / Size">${item.weight} / ${item.size}</td>
+        <td data-label="Capacity / Max Size"${capacityCell === '—' ? ' class="cell-empty"' : ''}>${capacityCell}</td>
+        <td data-label="Classes"${formatList(item.classes) === '—' ? ' class="cell-empty"' : ''}>${formatList(item.classes)}</td>
+        <td data-label="Race"${formatList(item.race) === '—' ? ' class="cell-empty"' : ''}>${formatList(item.race)}</td>
       </tr>
     `;
   }).join('');
@@ -1984,8 +1990,8 @@ function renderMonsterRows(tbody, monsters) {
 
   tbody.innerHTML = monsters.map(monster => `
     <tr data-slug="${escapeAttr(monster.slug)}">
-      <td><span class="item-name-hover monster-name-hover" data-slug="${escapeAttr(monster.slug)}">${escapeAttr(monster.name)}</span></td>
-      <td>${escapeAttr(formatMonsterMaps(monster))}</td>
+      <td data-label="Name"><span class="item-name-hover monster-name-hover" data-slug="${escapeAttr(monster.slug)}">${escapeAttr(monster.name)}</span></td>
+      <td data-label="Map"${formatMonsterMaps(monster) === '—' ? ' class="cell-empty"' : ''}>${escapeAttr(formatMonsterMaps(monster))}</td>
     </tr>
   `).join('');
 }
