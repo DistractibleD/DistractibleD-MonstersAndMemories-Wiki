@@ -78,6 +78,22 @@
     ]
   },
   {
+    "name": "a Bloodynose quarreler",
+    "slug": "a-bloodynose-quarreler",
+    "drops": [
+      { "item": "Mushroom" },
+      { "item": "Cabbage" },
+      { "item": "Tattered Cloth Gorget" }
+    ]
+  },
+  {
+    "name": "a Bloodynose sergeant",
+    "slug": "a-bloodynose-sergeant",
+    "drops": [
+      { "item": "Tomato" }
+    ]
+  },
+  {
     "name": "Night Terror",
     "slug": "night-terror",
     "image": "images/Monsters/night-terror.jpg",

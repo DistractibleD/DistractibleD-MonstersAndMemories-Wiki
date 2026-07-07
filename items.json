@@ -3654,5 +3654,51 @@
     "size": "Small",
     "classes": ["ALL"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Mushroom",
+    "slug": "mushroom",
+    "image": "images/items/mushroom.jpg",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a light snack.",
+    "weight": 0.2,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Tomato",
+    "slug": "tomato",
+    "image": "images/items/tomato.jpg",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a generous snack. The bright red fruit of a tomato plant. It has a sweet-sour flavor.",
+    "weight": 0.2,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Cabbage",
+    "slug": "cabbage",
+    "image": "images/items/cabbage.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.25,
+    "size": "Small"
+  },
+  {
+    "name": "Tattered Cloth Gorget",
+    "slug": "tattered-cloth-gorget",
+    "image": "images/items/tattered-cloth-gorget.jpg",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Neck",
+    "ac": 1,
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
   }
 ]
