@@ -1,1 +1,66 @@
-[]
+[
+  {
+    "name": "a desert bat",
+    "slug": "a-desert-bat",
+    "image": "images/Monsters/a-desert-bat.jpg",
+    "drops": [
+      { "item": "Bat Wing" },
+      { "item": "Raw Bat Meat" },
+      { "item": "Bat Fur" }
+    ]
+  },
+  {
+    "name": "a large rat",
+    "slug": "a-large-rat",
+    "image": "images/Monsters/a-large-rat.jpg",
+    "drops": [
+      { "item": "Raw Rat Meat" },
+      { "item": "Rat Ear" },
+      { "item": "Rat Tooth" }
+    ]
+  },
+  {
+    "name": "a young crypt scarab",
+    "slug": "a-young-crypt-scarab",
+    "image": "images/Monsters/a-young-crypt-scarab.jpg",
+    "drops": [
+      { "item": "Crypt Scarab Eye" },
+      { "item": "Crypt Scarab Leg" }
+    ]
+  },
+  {
+    "name": "a crypt scarab",
+    "slug": "a-crypt-scarab",
+    "drops": [
+      { "item": "Crypt Scarab Leg" }
+    ]
+  },
+  {
+    "name": "a rotting skeleton",
+    "slug": "a-rotting-skeleton",
+    "image": "images/Monsters/a-rotting-skeleton.jpg",
+    "drops": [
+      { "item": "Bone Chips" },
+      { "item": "Skeleton Jawbone" },
+      { "item": "Tattered Cloth Pantaloons" },
+      { "item": "Cloth Scraps" },
+      { "item": "Tattered Cloth Shirt" },
+      { "item": "Rusty Great Scythe" },
+      { "item": "Rusty Battle Axe" },
+      { "item": "Rusty Maul" }
+    ]
+  },
+  {
+    "name": "Night Terror",
+    "slug": "night-terror",
+    "image": "images/Monsters/night-terror.jpg",
+    "maps": ["Necropolis (Night Harbor)"],
+    "drops": [
+      { "item": "Night Terror's Wing" },
+      { "item": "Adrullan: Online Adventures Design Document" }
+    ],
+    "relatedMonsters": [
+      { "label": "Desert Bat", "slug": "a-desert-bat" }
+    ]
+  }
+]

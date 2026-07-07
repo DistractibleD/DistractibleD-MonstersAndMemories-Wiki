@@ -442,22 +442,35 @@ screenshots are the source of truth" above).
      `components` yet), in which case it's not really a duplicate — treat it like "not a
      duplicate" above and fill in the fuller entry instead.
 
-**Monsters:** unlike items/recipes, a monster screenshot is just a picture of the creature —
-there's no in-game stat card to read stats off of. Map, level range, and drops come from
-whatever the user says directly in chat alongside the picture (counts as authoritative, same
-as a screenshot — see "The user's screenshots are the source of truth" above), not from the
-image itself.
+**Monsters:** a plain picture of the creature (its name floating over the model, no stat
+card) — see "Adding a monster" below for the **2026-07-07 named/boss-only picture policy**:
+most monsters (generic "a desert bat"/"a large rat"-style mobs) won't have a picture at all,
+and that's expected, not a gap to fill. Map, level range, and drops come from whatever the
+user says directly in chat alongside the picture (counts as authoritative, same as a
+screenshot — see "The user's screenshots are the source of truth" above), not from the image
+itself — **except** drops, which are usually shown directly via a loot-window screenshot
+(the in-game corpse-loot UI, one item icon per slot) paired with a plain item card for each
+icon (first seen 2026-07-07 for "a desert bat"/"a large rat"/"a young crypt scarab"/"a rotting
+skeleton") — read the item card to get the exact name rather than guessing from the icon
+alone, and process/add that item to `items.json` the same as any other new item in the same
+inbox batch (these are very often raw materials already referenced as plain-text, unlinked
+components elsewhere, e.g. "Raw Rat Meat" in a Cooking recipe — adding the real item makes
+that link resolve automatically). A monster's loot window can take more than one screenshot
+across separate messages to show every slot; keep adding newly-revealed drops to that
+monster's `drops` array rather than assuming one screenshot is the complete list.
 
 1. Check whether that monster's slug (or name) already exists in `monsters.json`.
-   - **Not a duplicate:** add an entry (see "Adding a monster" below for the schema).
-     Convert the screenshot to `.jpg` (quality 90) and rename it to the monster's slug, and
-     move it into `images/Monsters/`. Use the same slug for the `image` field.
+   - **Not a duplicate:** add an entry (see "Adding a monster" below for the schema). If a
+     picture was actually provided (Named/boss only, per the policy above), convert it to
+     `.jpg` (quality 90), rename it to the monster's slug, move it into `images/Monsters/`,
+     and use that slug for the `image` field — otherwise just omit `image` entirely.
    - **Duplicate:** delete the screenshot from the inbox (see "Duplicates" above) — update
-     `monsters.json` first if the new screenshot/chat message fills a gap (e.g. a map or drop
-     that wasn't known before).
+     `monsters.json` first if the new screenshot/chat message fills a gap (e.g. a map, level
+     range, or an additional drop that wasn't known before).
 2. If the user hasn't given a map, level range, or drop table yet, just add what's known
-   (name/image at minimum) rather than blocking on the rest — every field beyond
-   name/slug/image is optional, see "Adding a monster" below.
+   (name/slug at minimum, since image is now optional even for a finished entry) rather than
+   blocking on the rest — every field beyond name/slug is optional, see "Adding a monster"
+   below.
 
 **Crafting window screenshots** (a different thing from a recipe card — this is the
 in-game tradeskill window listing every known recipe for one tradeskill, name-only with a
@@ -522,7 +535,14 @@ fills in as the user provides it:
 
 - `image` — picture of the creature, dropped into `images/Monsters/` (see that folder's
   README.txt), same `.jpg` quality-90 convention as item/recipe screenshots. Shown in the
-  monster viewer modal, not the table.
+  monster viewer modal, not the table. **The user's explicit call (2026-07-07): only Named
+  monsters/bosses get a picture** — screenshotting and uploading one for every generic mob
+  ("a desert bat", "a large rat," etc.) is too much ongoing effort for too little payoff.
+  A generic monster is expected to have no `image` at all; that's the normal case, not a gap
+  to flag or ask about. `openMonsterViewer` already renders fine with no picture (no broken
+  `<img>`, per the existing "everything beyond name/slug is optional" design) so this needed
+  no code change, just a data-entry convention. Only prompt for/expect a screenshot when the
+  monster is clearly a unique/Named spawn or boss.
 - `maps` — array of map names the monster's been seen on (usually one, but kept as an array
   in case the same monster template turns out to spawn in more than one zone). Not
   necessarily tied to a `maps.json` entry — just plain text naming the zone.
@@ -537,7 +557,17 @@ fills in as the user provides it:
   above): matched against `items.json` by exact name at render time
   (`findItemByName`/`goToItem`), clickable if a matching item exists yet, plain text if not —
   don't resolve/store the link at data-entry time, let it resolve automatically once/if that
-  item gets added.
+  item gets added. Sourced from a loot-window screenshot (the in-game corpse-loot UI) paired
+  with a plain item card per icon — see the inbox workflow below.
+- `relatedMonsters` — array of `{ "label": "Display Text", "slug": "other-monsters-slug" }`,
+  first added 2026-07-07 for a Named boss whose loot flavor text ties it to an existing
+  generic mob (e.g. Night Terror's Wing: "A wing from the giant bat known as Night Terror" —
+  the user asked to cross-link it to "a desert bat"). Rendered on the monster card as a
+  "Place Holder" field (the user's own label for this — not a placeholder in the "TODO" sense,
+  it's the literal display label) with each `label` as a link to that other monster's own
+  viewer, same dynamic-resolves-at-render-time convention as `drops`/`components` (via
+  `findMonsterBySlug`) — if the referenced slug doesn't exist (yet), it just renders as plain
+  text instead of a link. Optional; most monsters won't have this.
 
 Clicking a monster's name (`.monster-name-hover`, `setupMonsterClickToView`) opens
 `#monster-viewer`, a modal built by `openMonsterViewer`/`setupMonsterViewer` — same modal

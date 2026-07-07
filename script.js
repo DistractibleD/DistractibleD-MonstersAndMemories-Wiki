@@ -2043,6 +2043,16 @@ function setupMonsterViewer() {
         closeMonsterViewer();
         goToItem(item, { kind: 'monster', name: monster.name, slug: monster.slug });
       }
+      return;
+    }
+    const relatedLink = e.target.closest('.monster-related-link');
+    if (relatedLink) {
+      e.preventDefault();
+      const related = findMonsterBySlug(relatedLink.dataset.slug);
+      if (related) {
+        closeMonsterViewer();
+        openMonsterViewer(related);
+      }
     }
   });
 
@@ -2058,6 +2068,7 @@ function openMonsterViewer(monster) {
 
   const viewer = document.getElementById('monster-viewer');
   const drops = monster.drops || [];
+  const related = monster.relatedMonsters || [];
 
   viewer.querySelector('#monster-viewer-card').innerHTML = `
     <div class="monster-card">
@@ -2066,6 +2077,16 @@ function openMonsterViewer(monster) {
         <h2 class="monster-card-name">${escapeAttr(monster.name)}</h2>
         <div class="monster-card-field"><span class="item-card-field-label">Map</span><span>${escapeAttr(formatMonsterMaps(monster))}</span></div>
         <div class="monster-card-field"><span class="item-card-field-label">Level Range</span><span>${monster.levelRange ? escapeAttr(monster.levelRange) : 'not yet known'}</span></div>
+        ${related.length ? `
+        <div class="monster-card-field">
+          <span class="item-card-field-label">Place Holder</span>
+          <span>${related.map(r => {
+            const m = findMonsterBySlug(r.slug);
+            return m
+              ? `<a href="#" class="monster-related-link" data-slug="${escapeAttr(m.slug)}">${escapeAttr(r.label)}</a>`
+              : escapeAttr(r.label);
+          }).join(', ')}</span>
+        </div>` : ''}
         <div class="item-card-section">
           Drops:
           ${drops.length ? `
