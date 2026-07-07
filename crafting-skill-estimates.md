@@ -255,21 +255,19 @@ recipe list), so there's no `difficultyColor`/`observedAtSkill` pair to record f
 the 9 pelt→scrap conversions added to `crafting.json`. The only numbers available came from
 a screenshot of what looks like a fan-wiki table (sortable-column styling, hyperlinked item
 names) rather than the live game, giving a "Trivial" skill number directly instead of a
-color. Per CLAUDE.md's rule that external wikis can be outdated/wrong and shouldn't be
-trusted the way the user's own screenshots are, these are recorded here only, not written
-into `crafting.json`'s `recipeSkillLevel`:
+color.
+
+**Update 2026-07-07:** the user confirmed "Trivial" *is* `recipeSkillLevel` by definition
+(the skill at which a recipe stops giving skill-ups), not a guess derived from it — see
+CLAUDE.md. The two exact values below are now written into `crafting.json` directly:
 
 | Result | Component | Trivial (per external table) |
 |---|---|---|
-| Rawhide Scraps | Low-Quality Jackal/Wolf/Bear Pelt | 25 |
-| Hide Scraps | Medium-Quality Jackal/Wolf/Bear Pelt | 50 |
-| Leather Scraps | High-Quality Jackal/Wolf/Bear Pelt | >50 |
+| Rawhide Scraps | Low-Quality Jackal/Wolf/Bear Pelt | 25 (now `recipeSkillLevel: 25`) |
+| Hide Scraps | Medium-Quality Jackal/Wolf/Bear Pelt | 50 (now `recipeSkillLevel: 50`) |
+| Leather Scraps | High-Quality Jackal/Wolf/Bear Pelt | >50 (still unset — not an exact number) |
 
-If the user ever confirms these against an actual in-game source (e.g. a skill-up while
-tanning at a known skill level), promote the confirmed value into `recipeSkillLevel`
-directly rather than treating this table as good enough on its own.
-
-## Leatherworking — component/trivial reference tables (2026-07-06)
+## Leatherworking — component/trivial reference tables (2026-07-06, promoted 2026-07-07)
 
 A batch of screenshots that look like the same fan-wiki table style as the Tanning one above
 (sortable columns, hyperlinked item names, "Crafting Bench"/"Scrapping" columns) gave full
@@ -277,8 +275,13 @@ A batch of screenshots that look like the same fan-wiki table style as the Tanni
 were merged into `crafting.json` directly since they're structural/timeless data (same
 reasoning as always: components don't go stale the way a skill-gated color does), without
 touching any existing `difficultyColor`/`observedAtSkill` that came from an actual crafting-
-window capture. The "Trivial" skill numbers from these tables are recorded here only, per the
-same caution as Tanning:
+window capture.
+
+**Update 2026-07-07:** every exact number below (i.e. everything except the `90+`/`120+`
+floor-only rows) has since been written into `crafting.json`'s `recipeSkillLevel` directly —
+see CLAUDE.md's 2026-07-07 clarification that "Trivial" *is* `recipeSkillLevel`, confirmed by
+the user, not a guess derived from it. This table stays here as the record of where those
+numbers came from:
 
 | Recipe | Trivial (external table) |
 |---|---|

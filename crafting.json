@@ -11,7 +11,8 @@
       { "item": "Enchanted Rawhide", "quantity": 6 }
     ],
     "difficultyColor": "Green",
-    "observedAtSkill": 56
+    "observedAtSkill": 56,
+    "recipeSkillLevel": 55
   },
   {
     "name": "Enchanted Rawhide Cap",
@@ -27,7 +28,8 @@
       { "item": "Rough Thread", "quantity": 2 }
     ],
     "difficultyColor": "Green",
-    "observedAtSkill": 72
+    "observedAtSkill": 72,
+    "recipeSkillLevel": 70
   },
   {
     "name": "Enchanted Rawhide Leggings",
@@ -43,7 +45,8 @@
       { "item": "Rough Thread", "quantity": 3 }
     ],
     "difficultyColor": "Green",
-    "observedAtSkill": 72
+    "observedAtSkill": 72,
+    "recipeSkillLevel": 70
   },
   {
     "name": "Enchanted Rawhide Tunic",
@@ -56,7 +59,8 @@
       { "item": "Cloth Padding", "quantity": 3 }
     ],
     "difficultyColor": "Light Blue",
-    "observedAtSkill": 72
+    "observedAtSkill": 72,
+    "recipeSkillLevel": 75
   },
   {
     "name": "Hide Belt",
@@ -82,7 +86,8 @@
       { "item": "Wool Padding", "quantity": 2 }
     ],
     "difficultyColor": "White",
-    "observedAtSkill": 72
+    "observedAtSkill": 72,
+    "recipeSkillLevel": 85
   },
   {
     "name": "Hide Canvas",
@@ -93,7 +98,8 @@
       { "item": "Hide Scraps", "quantity": 6 }
     ],
     "difficultyColor": "Dark Blue",
-    "observedAtSkill": 72
+    "observedAtSkill": 72,
+    "recipeSkillLevel": 80
   },
   {
     "name": "Hide Cloak",
@@ -106,7 +112,8 @@
       { "item": "Wool Padding", "quantity": 2 }
     ],
     "difficultyColor": "Orange",
-    "observedAtSkill": 72
+    "observedAtSkill": 72,
+    "recipeSkillLevel": 95
   },
   {
     "name": "Hide Gloves",
@@ -119,7 +126,8 @@
       { "item": "Wool Padding", "quantity": 2 }
     ],
     "difficultyColor": "Orange",
-    "observedAtSkill": 72
+    "observedAtSkill": 72,
+    "recipeSkillLevel": 95
   },
   {
     "name": "Hide Gorget",
@@ -132,7 +140,8 @@
       { "item": "Wool Padding", "quantity": 2 }
     ],
     "difficultyColor": "White",
-    "observedAtSkill": 72
+    "observedAtSkill": 72,
+    "recipeSkillLevel": 85
   },
   {
     "name": "Hide Mask",
@@ -169,7 +178,8 @@
       { "item": "Hide Scraps", "quantity": 2 }
     ],
     "difficultyColor": "Dark Blue",
-    "observedAtSkill": 72
+    "observedAtSkill": 72,
+    "recipeSkillLevel": 80
   },
   {
     "name": "Rawhide Backpack",
@@ -184,7 +194,8 @@
       { "item": "Rough Thread", "quantity": 3 }
     ],
     "difficultyColor": "Green",
-    "observedAtSkill": 72
+    "observedAtSkill": 72,
+    "recipeSkillLevel": 65
   },
   {
     "name": "Rawhide Belt",
@@ -200,7 +211,8 @@
       { "item": "Rough Thread", "quantity": 1 }
     ],
     "difficultyColor": "Green",
-    "observedAtSkill": 56
+    "observedAtSkill": 56,
+    "recipeSkillLevel": 30
   },
   {
     "name": "Rawhide Boots",
@@ -216,7 +228,8 @@
       { "item": "Rough Thread", "quantity": 2 }
     ],
     "difficultyColor": "Green",
-    "observedAtSkill": 56
+    "observedAtSkill": 56,
+    "recipeSkillLevel": 40
   },
   {
     "name": "Rawhide Bracelet",
@@ -233,7 +246,8 @@
     ],
     "difficultyColor": "Green",
     "difficultyText": "This recipe is trivial to you.",
-    "observedAtSkill": 22
+    "observedAtSkill": 22,
+    "recipeSkillLevel": 10
   },
   {
     "name": "Rawhide Canvas",
@@ -248,7 +262,8 @@
     ],
     "difficultyColor": "Green",
     "difficultyText": "This recipe is trivial to you.",
-    "observedAtSkill": 22
+    "observedAtSkill": 22,
+    "recipeSkillLevel": 5
   },
   {
     "name": "Rawhide Cap",
@@ -264,7 +279,8 @@
       { "item": "Rough Thread", "quantity": 2 }
     ],
     "difficultyColor": "Green",
-    "observedAtSkill": 56
+    "observedAtSkill": 56,
+    "recipeSkillLevel": 50
   },
   {
     "name": "Rawhide Cloak",
@@ -281,7 +297,8 @@
     ],
     "difficultyColor": "Green",
     "difficultyText": "This recipe is trivial to you.",
-    "observedAtSkill": 22
+    "observedAtSkill": 22,
+    "recipeSkillLevel": 20
   },
   {
     "name": "Rawhide Gloves",
@@ -298,7 +315,8 @@
     ],
     "difficultyColor": "Green",
     "difficultyText": "This recipe is trivial to you.",
-    "observedAtSkill": 22
+    "observedAtSkill": 22,
+    "recipeSkillLevel": 20
   },
   {
     "name": "Rawhide Gorget",
@@ -315,7 +333,8 @@
     ],
     "difficultyColor": "Green",
     "difficultyText": "This recipe is trivial to you.",
-    "observedAtSkill": 22
+    "observedAtSkill": 22,
+    "recipeSkillLevel": 10
   },
   {
     "name": "Rawhide Leggings",
@@ -331,7 +350,8 @@
       { "item": "Rough Thread", "quantity": 3 }
     ],
     "difficultyColor": "Green",
-    "observedAtSkill": 72
+    "observedAtSkill": 72,
+    "recipeSkillLevel": 70
   },
   {
     "name": "Rawhide Mask",
@@ -347,7 +367,8 @@
       { "item": "Rough Thread", "quantity": 1 }
     ],
     "difficultyColor": "Green",
-    "observedAtSkill": 56
+    "observedAtSkill": 56,
+    "recipeSkillLevel": 30
   },
   {
     "name": "Rawhide Saddle",
@@ -363,7 +384,8 @@
       { "item": "Copper Stirrups", "quantity": 1 }
     ],
     "difficultyColor": "Green",
-    "observedAtSkill": 56
+    "observedAtSkill": 56,
+    "recipeSkillLevel": 60
   },
   {
     "name": "Rawhide Saddlebag",
@@ -378,7 +400,8 @@
       { "item": "Rough Thread", "quantity": 4 }
     ],
     "difficultyColor": "Green",
-    "observedAtSkill": 56
+    "observedAtSkill": 56,
+    "recipeSkillLevel": 45
   },
   {
     "name": "Rawhide Shoulderpads",
@@ -394,7 +417,8 @@
       { "item": "Rough Thread", "quantity": 2 }
     ],
     "difficultyColor": "Green",
-    "observedAtSkill": 56
+    "observedAtSkill": 56,
+    "recipeSkillLevel": 50
   },
   {
     "name": "Rawhide Strap",
@@ -409,7 +433,8 @@
     ],
     "difficultyColor": "Green",
     "difficultyText": "This recipe is trivial to you.",
-    "observedAtSkill": 22
+    "observedAtSkill": 22,
+    "recipeSkillLevel": 5
   },
   {
     "name": "Rawhide Tunic",
@@ -422,7 +447,8 @@
       { "item": "Cloth Padding", "quantity": 3 }
     ],
     "difficultyColor": "Green",
-    "observedAtSkill": 72
+    "observedAtSkill": 72,
+    "recipeSkillLevel": 70
   },
   {
     "name": "Bolt of Cloth",
@@ -1173,7 +1199,8 @@
       { "item": "Copper Bar", "quantity": 9 },
       { "item": "Rawhide Strap", "quantity": 1 }
     ],
-    "difficultyColor": "Red"
+    "difficultyColor": "Red",
+    "recipeSkillLevel": 45
   },
   {
     "name": "Copper Chain Wristguard",
@@ -1187,7 +1214,8 @@
       { "item": "Copper Chain Links", "quantity": 1 },
       { "item": "Rawhide Strap", "quantity": 2 }
     ],
-    "difficultyColor": "Dark Blue"
+    "difficultyColor": "Dark Blue",
+    "recipeSkillLevel": 15
   },
   {
     "name": "Copper Chain Boots",
@@ -1200,7 +1228,8 @@
       { "item": "Copper Chain Links", "quantity": 1 },
       { "item": "Rawhide Strap", "quantity": 2 }
     ],
-    "difficultyColor": "Red"
+    "difficultyColor": "Red",
+    "recipeSkillLevel": 40
   },
   {
     "name": "Copper Chain Gorget",
@@ -1214,7 +1243,8 @@
       { "item": "Copper Chain Links", "quantity": 1 },
       { "item": "Rawhide Strap", "quantity": 2 }
     ],
-    "difficultyColor": "Dark Blue"
+    "difficultyColor": "Dark Blue",
+    "recipeSkillLevel": 15
   },
   {
     "name": "Copper Chain Cloak",
@@ -1227,7 +1257,8 @@
       { "item": "Copper Chain Links", "quantity": 1 },
       { "item": "Rawhide Strap", "quantity": 2 }
     ],
-    "difficultyColor": "Yellow"
+    "difficultyColor": "Yellow",
+    "recipeSkillLevel": 30
   },
   {
     "name": "Copper Chain Gloves",
@@ -1240,7 +1271,8 @@
       { "item": "Copper Chain Links", "quantity": 1 },
       { "item": "Rawhide Strap", "quantity": 2 }
     ],
-    "difficultyColor": "Yellow"
+    "difficultyColor": "Yellow",
+    "recipeSkillLevel": 30
   },
   {
     "name": "Copper Chain Waistguard",
@@ -1253,7 +1285,8 @@
       { "item": "Copper Chain Links", "quantity": 1 },
       { "item": "Rawhide Strap", "quantity": 2 }
     ],
-    "difficultyColor": "Red"
+    "difficultyColor": "Red",
+    "recipeSkillLevel": 30
   },
   {
     "name": "Copper Chain Mask",
@@ -1279,7 +1312,8 @@
       { "item": "Copper Plate", "quantity": 1 },
       { "item": "Rawhide Strap", "quantity": 2 }
     ],
-    "difficultyColor": "Red"
+    "difficultyColor": "Red",
+    "recipeSkillLevel": 30
   },
   {
     "name": "Copper Plate Collar",
@@ -1292,7 +1326,8 @@
       { "item": "Copper Plate", "quantity": 1 },
       { "item": "Rawhide Strap", "quantity": 2 }
     ],
-    "difficultyColor": "Dark Blue"
+    "difficultyColor": "Dark Blue",
+    "recipeSkillLevel": 15
   },
   {
     "name": "Copper Plate Visor",
@@ -1305,7 +1340,8 @@
       { "item": "Copper Plate", "quantity": 1 },
       { "item": "Rawhide Strap", "quantity": 2 }
     ],
-    "difficultyColor": "Red"
+    "difficultyColor": "Red",
+    "recipeSkillLevel": 30
   },
   {
     "name": "Copper Plate Boots",
@@ -1318,7 +1354,8 @@
       { "item": "Copper Plate", "quantity": 1 },
       { "item": "Rawhide Strap", "quantity": 2 }
     ],
-    "difficultyColor": "Red"
+    "difficultyColor": "Red",
+    "recipeSkillLevel": 40
   },
   {
     "name": "Copper Plate Bracer",
@@ -1331,7 +1368,8 @@
       { "item": "Copper Plate", "quantity": 1 },
       { "item": "Rawhide Strap", "quantity": 2 }
     ],
-    "difficultyColor": "Dark Blue"
+    "difficultyColor": "Dark Blue",
+    "recipeSkillLevel": 15
   },
   {
     "name": "Copper Plate Gauntlets",
@@ -1344,7 +1382,8 @@
       { "item": "Copper Plate", "quantity": 1 },
       { "item": "Rawhide Strap", "quantity": 2 }
     ],
-    "difficultyColor": "Yellow"
+    "difficultyColor": "Yellow",
+    "recipeSkillLevel": 30
   },
   {
     "name": "Copper Plate Cloak",
@@ -1357,7 +1396,8 @@
       { "item": "Copper Plate", "quantity": 1 },
       { "item": "Rawhide Strap", "quantity": 2 }
     ],
-    "difficultyColor": "Yellow"
+    "difficultyColor": "Yellow",
+    "recipeSkillLevel": 30
   },
   {
     "name": "Copper Chain Links",
@@ -1371,7 +1411,8 @@
       { "item": "Copper Bar", "quantity": 6 },
       { "item": "Smithing Pliers", "quantity": 1 }
     ],
-    "difficultyColor": "Light Blue"
+    "difficultyColor": "Light Blue",
+    "recipeSkillLevel": 5
   },
   {
     "name": "Enchanted Copper Chain Links",
@@ -1383,7 +1424,8 @@
     "components": [
       { "item": "Enchanted Copper Bar", "quantity": 6 }
     ],
-    "difficultyColor": "Red"
+    "difficultyColor": "Red",
+    "recipeSkillLevel": 40
   },
   {
     "name": "Copper Plate",
@@ -1397,7 +1439,8 @@
       { "item": "Copper Bar", "quantity": 6 },
       { "item": "Smithing Hammer", "quantity": 1 }
     ],
-    "difficultyColor": "Light Blue"
+    "difficultyColor": "Light Blue",
+    "recipeSkillLevel": 5
   },
   {
     "name": "Enchanted Copper Plate",
@@ -1409,7 +1452,8 @@
     "components": [
       { "item": "Enchanted Copper Bar", "quantity": 6 }
     ],
-    "difficultyColor": "Red"
+    "difficultyColor": "Red",
+    "recipeSkillLevel": 40
   },
   {
     "name": "Copper Fasteners",
@@ -1422,7 +1466,8 @@
     "components": [
       { "item": "Copper Bar", "quantity": 2 }
     ],
-    "difficultyColor": "Light Blue"
+    "difficultyColor": "Light Blue",
+    "recipeSkillLevel": 5
   },
   {
     "name": "Copper Nails",
@@ -1434,7 +1479,8 @@
     "components": [
       { "item": "Copper Bar", "quantity": 6 }
     ],
-    "difficultyColor": "White"
+    "difficultyColor": "White",
+    "recipeSkillLevel": 15
   },
   {
     "name": "Copper Stirrups",
@@ -1448,7 +1494,8 @@
       { "item": "Copper Tread", "quantity": 2 },
       { "item": "Rawhide Strap", "quantity": 2 }
     ],
-    "difficultyColor": "Light Blue"
+    "difficultyColor": "Light Blue",
+    "recipeSkillLevel": 50
   },
   {
     "name": "Copper Tread",
@@ -1461,7 +1508,8 @@
       { "item": "Copper Bar", "quantity": 1 },
       { "item": "Rawhide Strap", "quantity": 1 }
     ],
-    "difficultyColor": "Red"
+    "difficultyColor": "Red",
+    "recipeSkillLevel": 60
   },
   {
     "name": "Copper Cauldron",
@@ -1473,7 +1521,8 @@
     "components": [
       { "item": "Copper Bar", "quantity": 3 }
     ],
-    "difficultyColor": "White"
+    "difficultyColor": "White",
+    "recipeSkillLevel": 15
   },
   {
     "name": "Copper Scimitar",
@@ -1485,7 +1534,8 @@
     "components": [
       { "item": "Copper Bar", "quantity": 7 }
     ],
-    "difficultyColor": "Orange"
+    "difficultyColor": "Orange",
+    "recipeSkillLevel": 30
   },
   {
     "name": "Copper Scythe",
@@ -1497,7 +1547,8 @@
     "components": [
       { "item": "Copper Bar", "quantity": 7 }
     ],
-    "difficultyColor": "Orange"
+    "difficultyColor": "Orange",
+    "recipeSkillLevel": 40
   },
   {
     "name": "Copper Dagger",
@@ -1509,7 +1560,8 @@
     "components": [
       { "item": "Copper Bar", "quantity": 4 }
     ],
-    "difficultyColor": "White"
+    "difficultyColor": "White",
+    "recipeSkillLevel": 15
   },
   {
     "name": "Copper Mace",
@@ -1521,7 +1573,8 @@
     "components": [
       { "item": "Copper Bar", "quantity": 7 }
     ],
-    "difficultyColor": "Red"
+    "difficultyColor": "Red",
+    "recipeSkillLevel": 45
   },
   {
     "name": "Copper Spear",
@@ -1545,7 +1598,8 @@
     "components": [
       { "item": "Copper Bar", "quantity": 5 }
     ],
-    "difficultyColor": "White"
+    "difficultyColor": "White",
+    "recipeSkillLevel": 15
   },
   {
     "name": "Copper Battle Axe",
@@ -1557,7 +1611,8 @@
     "components": [
       { "item": "Copper Bar", "quantity": 9 }
     ],
-    "difficultyColor": "Orange"
+    "difficultyColor": "Orange",
+    "recipeSkillLevel": 30
   },
   {
     "name": "Copper Great Scythe",
@@ -1581,7 +1636,8 @@
     "components": [
       { "item": "Copper Bar", "quantity": 9 }
     ],
-    "difficultyColor": "Red"
+    "difficultyColor": "Red",
+    "recipeSkillLevel": 45
   },
   {
     "name": "Copper Trident",
@@ -1605,7 +1661,8 @@
     "components": [
       { "item": "Copper Bar", "quantity": 7 }
     ],
-    "difficultyColor": "Red"
+    "difficultyColor": "Red",
+    "recipeSkillLevel": 40
   },
   {
     "name": "Copper Axe",
@@ -1617,7 +1674,8 @@
     "components": [
       { "item": "Copper Bar", "quantity": 7 }
     ],
-    "difficultyColor": "Orange"
+    "difficultyColor": "Orange",
+    "recipeSkillLevel": 30
   },
   {
     "name": "Copper Throwing Dagger",
@@ -1630,7 +1688,8 @@
       { "item": "Rawhide Scraps", "quantity": 5 },
       { "item": "Copper Bar", "quantity": 5 }
     ],
-    "difficultyColor": "White"
+    "difficultyColor": "White",
+    "recipeSkillLevel": 15
   },
   {
     "name": "Copper Bar",
@@ -1689,7 +1748,8 @@
     "components": [
       { "item": "Low-Quality Jackal Pelt", "quantity": 1 }
     ],
-    "resultQuantity": 24
+    "resultQuantity": 24,
+    "recipeSkillLevel": 25
   },
   {
     "name": "Rawhide Scraps",
@@ -1700,7 +1760,8 @@
     "components": [
       { "item": "Low-Quality Wolf Pelt", "quantity": 1 }
     ],
-    "resultQuantity": 24
+    "resultQuantity": 24,
+    "recipeSkillLevel": 25
   },
   {
     "name": "Rawhide Scraps",
@@ -1711,7 +1772,8 @@
     "components": [
       { "item": "Low-Quality Bear Pelt", "quantity": 1 }
     ],
-    "resultQuantity": 24
+    "resultQuantity": 24,
+    "recipeSkillLevel": 25
   },
   {
     "name": "Hide Scraps",
@@ -1720,7 +1782,8 @@
     "components": [
       { "item": "Medium-Quality Jackal Pelt", "quantity": 1 }
     ],
-    "resultQuantity": 24
+    "resultQuantity": 24,
+    "recipeSkillLevel": 50
   },
   {
     "name": "Hide Scraps",
@@ -1729,7 +1792,8 @@
     "components": [
       { "item": "Medium-Quality Wolf Pelt", "quantity": 1 }
     ],
-    "resultQuantity": 24
+    "resultQuantity": 24,
+    "recipeSkillLevel": 50
   },
   {
     "name": "Hide Scraps",
@@ -1738,7 +1802,8 @@
     "components": [
       { "item": "Medium-Quality Bear Pelt", "quantity": 1 }
     ],
-    "resultQuantity": 24
+    "resultQuantity": 24,
+    "recipeSkillLevel": 50
   },
   {
     "name": "Leather Scraps",
@@ -2274,7 +2339,8 @@
     "components": [
       { "item": "Rawhide Scraps", "quantity": 1 },
       { "item": "Tattered Rawhide Mask", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Rawhide Tunic",
@@ -2283,7 +2349,8 @@
     "components": [
       { "item": "Rawhide Scraps", "quantity": 2 },
       { "item": "Tattered Rawhide Tunic", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Rawhide Leggings",
@@ -2292,7 +2359,8 @@
     "components": [
       { "item": "Rawhide Scraps", "quantity": 2 },
       { "item": "Tattered Rawhide Leggings", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Rawhide Shoulderpads",
@@ -2301,7 +2369,8 @@
     "components": [
       { "item": "Rawhide Scraps", "quantity": 1 },
       { "item": "Tattered Rawhide Shoulderpads", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Rawhide Cap",
@@ -2310,7 +2379,8 @@
     "components": [
       { "item": "Rawhide Scraps", "quantity": 2 },
       { "item": "Tattered Rawhide Cap", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Rawhide Cloak",
@@ -2319,7 +2389,8 @@
     "components": [
       { "item": "Rawhide Scraps", "quantity": 2 },
       { "item": "Tattered Rawhide Cloak", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Rawhide Gloves",
@@ -2328,7 +2399,8 @@
     "components": [
       { "item": "Rawhide Scraps", "quantity": 1 },
       { "item": "Tattered Rawhide Gloves", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Rawhide Bracelet",
@@ -2337,7 +2409,8 @@
     "components": [
       { "item": "Rawhide Scraps", "quantity": 1 },
       { "item": "Tattered Rawhide Bracer", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Rawhide Belt",
@@ -2346,7 +2419,8 @@
     "components": [
       { "item": "Rawhide Scraps", "quantity": 1 },
       { "item": "Tattered Rawhide Belt", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Rawhide Gorget",
@@ -2355,7 +2429,8 @@
     "components": [
       { "item": "Rawhide Scraps", "quantity": 1 },
       { "item": "Tattered Rawhide Gorget", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Rawhide Boots",
@@ -2364,7 +2439,8 @@
     "components": [
       { "item": "Rawhide Scraps", "quantity": 1 },
       { "item": "Tattered Rawhide Boots", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Hide Tunic",
@@ -2373,7 +2449,8 @@
     "components": [
       { "item": "Hide Scraps", "quantity": 2 },
       { "item": "Tattered Hide Tunic", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Hide Leggings",
@@ -2382,7 +2459,8 @@
     "components": [
       { "item": "Hide Scraps", "quantity": 2 },
       { "item": "Tattered Hide Leggings", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Hide Cap",
@@ -2391,7 +2469,8 @@
     "components": [
       { "item": "Hide Scraps", "quantity": 2 },
       { "item": "Tattered Hide Cap", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Hide Gloves",
@@ -2400,7 +2479,8 @@
     "components": [
       { "item": "Hide Scraps", "quantity": 1 },
       { "item": "Tattered Hide Gloves", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Hide Belt",
@@ -2409,7 +2489,8 @@
     "components": [
       { "item": "Hide Scraps", "quantity": 1 },
       { "item": "Tattered Hide Belt", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Hide Gorget",
@@ -2418,7 +2499,8 @@
     "components": [
       { "item": "Hide Scraps", "quantity": 1 },
       { "item": "Tattered Hide Gorget", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Hide Cloak",
@@ -2427,7 +2509,8 @@
     "components": [
       { "item": "Hide Scraps", "quantity": 1 },
       { "item": "Tattered Hide Cloak", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Hide Mask",
@@ -2436,7 +2519,8 @@
     "components": [
       { "item": "Hide Scraps", "quantity": 1 },
       { "item": "Tattered Hide Mask", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Hide Boots",
@@ -2445,7 +2529,8 @@
     "components": [
       { "item": "Hide Scraps", "quantity": 1 },
       { "item": "Tattered Hide Boots", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Hide Bracer",
@@ -2454,7 +2539,8 @@
     "components": [
       { "item": "Hide Scraps", "quantity": 1 },
       { "item": "Tattered Hide Bracer", "quantity": 1 }
-    ]
+    ],
+    "recipeSkillLevel": 10
   },
   {
     "name": "Patched Hide Shoulderpads",
@@ -2463,6 +2549,2381 @@
     "components": [
       { "item": "Hide Scraps", "quantity": 1 },
       { "item": "Tattered Hide Shoulderpads", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 10
+  },
+  {
+    "name": "Bronze Chain Gorget",
+    "slug": "bronze-chain-gorget",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Chain Links", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 85
+  },
+  {
+    "name": "Bronze Chain Wristguard",
+    "slug": "bronze-chain-wristguard",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Chain Links", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 85
+  },
+  {
+    "name": "Bronze Chain Cloak",
+    "slug": "bronze-chain-cloak",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Chain Links", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 95
+  },
+  {
+    "name": "Bronze Chain Gloves",
+    "slug": "bronze-chain-gloves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Chain Links", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 95
+  },
+  {
+    "name": "Bronze Chain Mask",
+    "slug": "bronze-chain-mask",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Chain Links", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 105
+  },
+  {
+    "name": "Bronze Chain Waistguard",
+    "slug": "bronze-chain-waistguard",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Chain Links", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 105
+  },
+  {
+    "name": "Bronze Chain Boots",
+    "slug": "bronze-chain-boots",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Chain Links", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 115
+  },
+  {
+    "name": "Bronze Chain Coif",
+    "slug": "bronze-chain-coif",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Chain Links", "quantity": 2 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 125
+  },
+  {
+    "name": "Bronze Chain Shoulderguards",
+    "slug": "bronze-chain-shoulderguards",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Chain Links", "quantity": 2 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 125
+  },
+  {
+    "name": "Enchanted Bronze Chain Coif",
+    "slug": "enchanted-bronze-chain-coif",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Bronze Chain Links", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 125
+  },
+  {
+    "name": "Bronze Chain Leggings",
+    "slug": "bronze-chain-leggings",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Chain Links", "quantity": 3 },
+      { "item": "Hide Strap", "quantity": 3 }
+    ],
+    "recipeSkillLevel": 135
+  },
+  {
+    "name": "Enchanted Bronze Chain Leggings",
+    "slug": "enchanted-bronze-chain-leggings",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Bronze Chain Links", "quantity": 3 },
+      { "item": "Hide Strap", "quantity": 3 }
+    ],
+    "recipeSkillLevel": 135
+  },
+  {
+    "name": "Bronze Chain Tunic",
+    "slug": "bronze-chain-tunic",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Chain Links", "quantity": 4 },
+      { "item": "Hide Strap", "quantity": 3 }
+    ],
+    "recipeSkillLevel": 145
+  },
+  {
+    "name": "Enchanted Bronze Chain Tunic",
+    "slug": "enchanted-bronze-chain-tunic",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Bronze Chain Links", "quantity": 4 },
+      { "item": "Hide Strap", "quantity": 3 }
+    ],
+    "recipeSkillLevel": 145
+  },
+  {
+    "name": "Bronze Plate Bracer",
+    "slug": "bronze-plate-bracer",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Plate", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 85
+  },
+  {
+    "name": "Bronze Plate Collar",
+    "slug": "bronze-plate-collar",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Plate", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 85
+  },
+  {
+    "name": "Bronze Plate Cloak",
+    "slug": "bronze-plate-cloak-recipe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Plate", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 95
+  },
+  {
+    "name": "Bronze Plate Gauntlets",
+    "slug": "bronze-plate-gauntlets-recipe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Plate", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 95
+  },
+  {
+    "name": "Bronze Plate Visor",
+    "slug": "bronze-plate-visor",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Plate", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 105
+  },
+  {
+    "name": "Bronze Plate Girdle",
+    "slug": "bronze-plate-girdle",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Plate", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 105
+  },
+  {
+    "name": "Bronze Plate Boots",
+    "slug": "bronze-plate-boots",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Plate", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 115
+  },
+  {
+    "name": "Bronze Plate Helm",
+    "slug": "bronze-plate-helm",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Plate", "quantity": 2 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 125
+  },
+  {
+    "name": "Bronze Plate Pauldrons",
+    "slug": "bronze-plate-pauldrons",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Plate", "quantity": 2 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 125
+  },
+  {
+    "name": "Enchanted Bronze Plate Helm",
+    "slug": "enchanted-bronze-plate-helm",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Bronze Plate", "quantity": 2 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 125
+  },
+  {
+    "name": "Bronze Plate Greaves",
+    "slug": "bronze-plate-greaves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Plate", "quantity": 3 },
+      { "item": "Hide Strap", "quantity": 3 }
+    ],
+    "recipeSkillLevel": 135
+  },
+  {
+    "name": "Enchanted Bronze Plate Greaves",
+    "slug": "enchanted-bronze-plate-greaves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Bronze Plate", "quantity": 3 },
+      { "item": "Hide Strap", "quantity": 3 }
+    ],
+    "recipeSkillLevel": 135
+  },
+  {
+    "name": "Bronze Plate Breastplate",
+    "slug": "bronze-plate-breastplate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Plate", "quantity": 4 },
+      { "item": "Hide Strap", "quantity": 3 }
+    ],
+    "recipeSkillLevel": 145
+  },
+  {
+    "name": "Enchanted Bronze Plate Breastplate",
+    "slug": "enchanted-bronze-plate-breastplate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Bronze Plate", "quantity": 4 },
+      { "item": "Hide Strap", "quantity": 3 }
+    ],
+    "recipeSkillLevel": 145
+  },
+  {
+    "name": "Bronze Dagger",
+    "slug": "bronze-dagger",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 4 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 90
+  },
+  {
+    "name": "Bronze Shortsword",
+    "slug": "bronze-shortsword",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 5 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 90
+  },
+  {
+    "name": "Bronze Throwing Dagger",
+    "slug": "bronze-throwing-dagger",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 5 },
+      { "item": "Hide Scraps", "quantity": 5 }
+    ],
+    "resultQuantity": 100,
+    "recipeSkillLevel": 90
+  },
+  {
+    "name": "Bronze Axe",
+    "slug": "bronze-axe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 100
+  },
+  {
+    "name": "Bronze Battle Axe",
+    "slug": "bronze-battle-axe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 100
+  },
+  {
+    "name": "Bronze Scimitar",
+    "slug": "bronze-scimitar",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 100
+  },
+  {
+    "name": "Bronze Scythe",
+    "slug": "bronze-scythe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 100
+  },
+  {
+    "name": "Bronze Longsword",
+    "slug": "bronze-longsword",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 110
+  },
+  {
+    "name": "Bronze Spear",
+    "slug": "bronze-spear",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 110
+  },
+  {
+    "name": "Bronze Trident",
+    "slug": "bronze-trident",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 8 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 110
+  },
+  {
+    "name": "Bronze Mace",
+    "slug": "bronze-mace",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 120
+  },
+  {
+    "name": "Bronze Warhammer",
+    "slug": "bronze-warhammer",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 120
+  },
+  {
+    "name": "Bronze Great Scythe",
+    "slug": "bronze-great-scythe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 110
+  },
+  {
+    "name": "Bronze War Lance",
+    "slug": "bronze-war-lance",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 130
+  },
+  {
+    "name": "Bronze Greatsword",
+    "slug": "bronze-greatsword",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 150
+  },
+  {
+    "name": "Bronze Maul",
+    "slug": "bronze-maul",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 150
+  },
+  {
+    "name": "Iron Chain Gorget",
+    "slug": "iron-chain-gorget",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Chain Links", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 155
+  },
+  {
+    "name": "Iron Chain Wristguard",
+    "slug": "iron-chain-wristguard",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Chain Links", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 155
+  },
+  {
+    "name": "Iron Chain Cloak",
+    "slug": "iron-chain-cloak",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Chain Links", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Iron Chain Gloves",
+    "slug": "iron-chain-gloves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Chain Links", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Iron Chain Mask",
+    "slug": "iron-chain-mask",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Chain Links", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Iron Chain Waistguard",
+    "slug": "iron-chain-waistguard",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Chain Links", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Iron Chain Boots",
+    "slug": "iron-chain-boots",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Chain Links", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Iron Chain Coif",
+    "slug": "iron-chain-coif",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Chain Links", "quantity": 2 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Iron Chain Shoulderguards",
+    "slug": "iron-chain-shoulderguards",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Chain Links", "quantity": 2 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Enchanted Iron Chain Coif",
+    "slug": "enchanted-iron-chain-coif",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Iron Chain Links", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Iron Chain Leggings",
+    "slug": "iron-chain-leggings",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Chain Links", "quantity": 3 },
+      { "item": "Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Enchanted Iron Chain Leggings",
+    "slug": "enchanted-iron-chain-leggings",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Iron Chain Links", "quantity": 3 },
+      { "item": "Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Iron Chain Tunic",
+    "slug": "iron-chain-tunic",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Chain Links", "quantity": 4 },
+      { "item": "Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Enchanted Iron Chain Tunic",
+    "slug": "enchanted-iron-chain-tunic",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Iron Chain Links", "quantity": 4 },
+      { "item": "Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Iron Plate Bracer",
+    "slug": "iron-plate-bracer",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Plate", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 155
+  },
+  {
+    "name": "Iron Plate Collar",
+    "slug": "iron-plate-collar",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Plate", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 155
+  },
+  {
+    "name": "Iron Plate Cloak",
+    "slug": "iron-plate-cloak",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Plate", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Iron Plate Gauntlets",
+    "slug": "iron-plate-gauntlets",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Plate", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Iron Plate Visor",
+    "slug": "iron-plate-visor",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Plate", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Iron Plate Girdle",
+    "slug": "iron-plate-girdle",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Plate", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Iron Plate Boots",
+    "slug": "iron-plate-boots",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Plate", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Iron Plate Helm",
+    "slug": "iron-plate-helm",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Plate", "quantity": 2 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Iron Plate Pauldrons",
+    "slug": "iron-plate-pauldrons",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Plate", "quantity": 2 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Enchanted Iron Plate Helm",
+    "slug": "enchanted-iron-plate-helm",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Iron Plate", "quantity": 2 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Iron Plate Greaves",
+    "slug": "iron-plate-greaves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Plate", "quantity": 3 },
+      { "item": "Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Enchanted Iron Plate Greaves",
+    "slug": "enchanted-iron-plate-greaves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Iron Plate", "quantity": 3 },
+      { "item": "Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Iron Plate Breastplate",
+    "slug": "iron-plate-breastplate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Plate", "quantity": 4 },
+      { "item": "Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Enchanted Iron Plate Breastplate",
+    "slug": "enchanted-iron-plate-breastplate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Iron Plate", "quantity": 4 },
+      { "item": "Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Iron Dagger",
+    "slug": "iron-dagger",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 4 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 165
+  },
+  {
+    "name": "Iron Shortsword",
+    "slug": "iron-shortsword",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 5 },
+      { "item": "Flux", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 165
+  },
+  {
+    "name": "Iron Throwing Dagger",
+    "slug": "iron-throwing-dagger",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 5 },
+      { "item": "Leather Scraps", "quantity": 5 }
+    ],
+    "resultQuantity": 100,
+    "recipeSkillLevel": 165
+  },
+  {
+    "name": "Iron Axe",
+    "slug": "iron-axe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron Battle Axe",
+    "slug": "iron-battle-axe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron Scimitar",
+    "slug": "iron-scimitar",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron Scythe",
+    "slug": "iron-scythe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron Longsword",
+    "slug": "iron-longsword",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron Spear",
+    "slug": "iron-spear",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron Trident",
+    "slug": "iron-trident",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 8 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron Mace",
+    "slug": "iron-mace",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron Warhammer",
+    "slug": "iron-warhammer",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron Great Scythe",
+    "slug": "iron-great-scythe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron War Lance",
+    "slug": "iron-war-lance",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron Greatsword",
+    "slug": "iron-greatsword",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron Maul",
+    "slug": "iron-maul",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Chain Gorget",
+    "slug": "steel-chain-gorget",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Chain Links", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Chain Wristguard",
+    "slug": "steel-chain-wristguard",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Chain Links", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Chain Cloak",
+    "slug": "steel-chain-cloak",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Chain Links", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Chain Gloves",
+    "slug": "steel-chain-gloves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Chain Links", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Chain Mask",
+    "slug": "steel-chain-mask",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Chain Links", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Chain Waistguard",
+    "slug": "steel-chain-waistguard",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Chain Links", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Chain Boots",
+    "slug": "steel-chain-boots",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Chain Links", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Chain Coif",
+    "slug": "steel-chain-coif",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Chain Links", "quantity": 2 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Chain Shoulderguards",
+    "slug": "steel-chain-shoulderguards",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Chain Links", "quantity": 2 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Enchanted Steel Chain Coif",
+    "slug": "enchanted-steel-chain-coif",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Steel Chain Links", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Chain Leggings",
+    "slug": "steel-chain-leggings",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Chain Links", "quantity": 3 },
+      { "item": "Padded Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Enchanted Steel Chain Leggings",
+    "slug": "enchanted-steel-chain-leggings",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Steel Chain Links", "quantity": 3 },
+      { "item": "Padded Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Steel Chain Tunic",
+    "slug": "steel-chain-tunic",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Chain Links", "quantity": 4 },
+      { "item": "Padded Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Enchanted Steel Chain Tunic",
+    "slug": "enchanted-steel-chain-tunic",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Steel Chain Links", "quantity": 4 },
+      { "item": "Padded Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Steel Plate Bracer",
+    "slug": "steel-plate-bracer",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Plate", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Plate Collar",
+    "slug": "steel-plate-collar",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Plate", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Plate Cloak",
+    "slug": "steel-plate-cloak",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Plate", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Plate Gauntlets",
+    "slug": "steel-plate-gauntlets",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Plate", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Plate Visor",
+    "slug": "steel-plate-visor",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Plate", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Plate Girdle",
+    "slug": "steel-plate-girdle",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Plate", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Plate Boots",
+    "slug": "steel-plate-boots",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Plate", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Plate Helm",
+    "slug": "steel-plate-helm",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Plate", "quantity": 2 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Plate Pauldrons",
+    "slug": "steel-plate-pauldrons",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Plate", "quantity": 2 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Enchanted Steel Plate Helm",
+    "slug": "enchanted-steel-plate-helm",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Steel Plate", "quantity": 2 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Steel Plate Greaves",
+    "slug": "steel-plate-greaves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Plate", "quantity": 3 },
+      { "item": "Padded Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Enchanted Steel Plate Greaves",
+    "slug": "enchanted-steel-plate-greaves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Steel Plate", "quantity": 3 },
+      { "item": "Padded Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Steel Plate Breastplate",
+    "slug": "steel-plate-breastplate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Plate", "quantity": 4 },
+      { "item": "Padded Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Enchanted Steel Plate Breastplate",
+    "slug": "enchanted-steel-plate-breastplate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Steel Plate", "quantity": 4 },
+      { "item": "Padded Leather Strap", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Steel Dagger",
+    "slug": "steel-dagger",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 4 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Shortsword",
+    "slug": "steel-shortsword",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 5 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Throwing Dagger",
+    "slug": "steel-throwing-dagger",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 5 },
+      { "item": "Padded Leather Scraps", "quantity": 5 }
+    ],
+    "resultQuantity": 100
+  },
+  {
+    "name": "Steel Axe",
+    "slug": "steel-axe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Battle Axe",
+    "slug": "steel-battle-axe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Scimitar",
+    "slug": "steel-scimitar-recipe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Scythe",
+    "slug": "steel-scythe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Longsword",
+    "slug": "steel-longsword",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Spear",
+    "slug": "steel-spear",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Trident",
+    "slug": "steel-trident",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 8 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Mace",
+    "slug": "steel-mace",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 7 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Warhammer",
+    "slug": "steel-warhammer",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Great Scythe",
+    "slug": "steel-great-scythe",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel War Lance",
+    "slug": "steel-war-lance",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Greatsword",
+    "slug": "steel-greatsword",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Maul",
+    "slug": "steel-maul",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Bronze Bracket",
+    "slug": "bronze-bracket",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 6 }
+    ],
+    "recipeSkillLevel": 80
+  },
+  {
+    "name": "Bronze Chain Links",
+    "slug": "bronze-chain-links",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 4 },
+      { "item": "Smithing Pliers", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 80
+  },
+  {
+    "name": "Bronze Fasteners",
+    "slug": "bronze-fasteners",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 6 }
+    ],
+    "recipeSkillLevel": 80
+  },
+  {
+    "name": "Bronze Hinge",
+    "slug": "bronze-hinge",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Plate", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 80
+  },
+  {
+    "name": "Bronze Plate",
+    "slug": "bronze-plate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 6 },
+      { "item": "Smithing Hammer", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 80
+  },
+  {
+    "name": "Bronze Tread",
+    "slug": "bronze-tread",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 120
+  },
+  {
+    "name": "Silver Chain Links",
+    "slug": "silver-chain-links",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Silver Bar", "quantity": 4 },
+      { "item": "Smithing Pliers", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 80
+  },
+  {
+    "name": "Silver Plate",
+    "slug": "silver-plate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Silver Bar", "quantity": 6 },
+      { "item": "Smithing Hammer", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 80
+  },
+  {
+    "name": "Bronze Cauldron",
+    "slug": "bronze-cauldron",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 3 }
+    ],
+    "recipeSkillLevel": 90
+  },
+  {
+    "name": "Tin Cauldron",
+    "slug": "tin-cauldron",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Tin Bar", "quantity": 3 }
+    ],
+    "recipeSkillLevel": 90
+  },
+  {
+    "name": "Enchanted Bronze Chain Links",
+    "slug": "enchanted-bronze-chain-links",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Bronze Bar", "quantity": 6 },
+      { "item": "Smithing Pliers", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 115
+  },
+  {
+    "name": "Enchanted Bronze Plate",
+    "slug": "enchanted-bronze-plate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Bronze Bar", "quantity": 6 },
+      { "item": "Smithing Hammer", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 115
+  },
+  {
+    "name": "Bronze Stirrups",
+    "slug": "bronze-stirrups",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Tread", "quantity": 2 },
+      { "item": "Hide Strap", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 130
+  },
+  {
+    "name": "Gold Chain Links",
+    "slug": "gold-chain-links",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Gold Bar", "quantity": 4 },
+      { "item": "Smithing Pliers", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 155
+  },
+  {
+    "name": "Gold Plate",
+    "slug": "gold-plate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Gold Bar", "quantity": 6 },
+      { "item": "Smithing Hammer", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 155
+  },
+  {
+    "name": "Iron Chain Links",
+    "slug": "iron-chain-links",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 4 },
+      { "item": "Smithing Pliers", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 155
+  },
+  {
+    "name": "Iron Fasteners",
+    "slug": "iron-fasteners",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 6 }
+    ],
+    "recipeSkillLevel": 155
+  },
+  {
+    "name": "Iron Plate",
+    "slug": "iron-plate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 6 },
+      { "item": "Smithing Hammer", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 155
+  },
+  {
+    "name": "Iron Tread",
+    "slug": "iron-tread",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron Cauldron",
+    "slug": "iron-cauldron",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 3 }
+    ],
+    "recipeSkillLevel": 165
+  },
+  {
+    "name": "Enchanted Iron Chain Links",
+    "slug": "enchanted-iron-chain-links",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Iron Bar", "quantity": 6 },
+      { "item": "Smithing Pliers", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Enchanted Iron Plate",
+    "slug": "enchanted-iron-plate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Iron Bar", "quantity": 6 },
+      { "item": "Smithing Hammer", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron Stirrups",
+    "slug": "iron-stirrups",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Tread", "quantity": 2 },
+      { "item": "Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Platinum Chain Links",
+    "slug": "platinum-chain-links",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Platinum Bar", "quantity": 4 },
+      { "item": "Smithing Pliers", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Platinum Plate",
+    "slug": "platinum-plate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Platinum Bar", "quantity": 6 },
+      { "item": "Smithing Hammer", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Chain Links",
+    "slug": "steel-chain-links",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 4 },
+      { "item": "Smithing Pliers", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Fasteners",
+    "slug": "steel-fasteners",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 6 }
+    ]
+  },
+  {
+    "name": "Steel Plate",
+    "slug": "steel-plate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 6 },
+      { "item": "Smithing Hammer", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Tread",
+    "slug": "steel-tread",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 1 },
+      { "item": "Padded Leather Strap", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Cauldron",
+    "slug": "steel-cauldron",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Bar", "quantity": 3 }
+    ]
+  },
+  {
+    "name": "Enchanted Steel Chain Links",
+    "slug": "enchanted-steel-chain-links",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Steel Bar", "quantity": 6 },
+      { "item": "Smithing Pliers", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Enchanted Steel Plate",
+    "slug": "enchanted-steel-plate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Enchanted Steel Bar", "quantity": 6 },
+      { "item": "Smithing Hammer", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Stirrups",
+    "slug": "steel-stirrups",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Tread", "quantity": 2 },
+      { "item": "Padded Leather Strap", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Jagged Sharpening Stone",
+    "slug": "jagged-sharpening-stone",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Jagged Stone", "quantity": 4 }
+    ],
+    "recipeSkillLevel": 80
+  },
+  {
+    "name": "Jagged Weightstone",
+    "slug": "jagged-weightstone",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Jagged Stone", "quantity": 1 },
+      { "item": "Wool Scraps", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 80
+  },
+  {
+    "name": "Weighty Sharpening Stone",
+    "slug": "weighty-sharpening-stone",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Weighty Stone", "quantity": 4 }
+    ],
+    "recipeSkillLevel": 155
+  },
+  {
+    "name": "Weighty Weightstone",
+    "slug": "weighty-weightstone",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Weighty Stone", "quantity": 1 },
+      { "item": "Cotton Scraps", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 155
+  },
+  {
+    "name": "Rigid Sharpening Stone",
+    "slug": "rigid-sharpening-stone",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Rigid Stone", "quantity": 4 }
+    ],
+    "recipeSkillLevel": 230
+  },
+  {
+    "name": "Rigid Weightstone",
+    "slug": "rigid-weightstone",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Rigid Stone", "quantity": 1 },
+      { "item": "Linen Scraps", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 230
+  },
+  {
+    "name": "Copper Plate Barding",
+    "slug": "copper-plate-barding",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Copper Plate", "quantity": 4 },
+      { "item": "Rawhide Strap", "quantity": 4 }
+    ],
+    "recipeSkillLevel": 65
+  },
+  {
+    "name": "Bronze Plate Barding",
+    "slug": "bronze-plate-barding",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Plate", "quantity": 4 },
+      { "item": "Hide Strap", "quantity": 4 }
+    ],
+    "recipeSkillLevel": 140
+  },
+  {
+    "name": "Silver Plate Barding",
+    "slug": "silver-plate-barding",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Silver Plate", "quantity": 4 },
+      { "item": "Hide Strap", "quantity": 4 }
+    ],
+    "recipeSkillLevel": 140
+  },
+  {
+    "name": "Gold Plate Barding",
+    "slug": "gold-plate-barding",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Gold Plate", "quantity": 4 },
+      { "item": "Leather Strap", "quantity": 4 }
+    ]
+  },
+  {
+    "name": "Iron Plate Barding",
+    "slug": "iron-plate-barding",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Plate", "quantity": 4 },
+      { "item": "Leather Strap", "quantity": 4 }
+    ]
+  },
+  {
+    "name": "Platinum Plate Barding",
+    "slug": "platinum-plate-barding",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Platinum Plate", "quantity": 4 },
+      { "item": "Padded Leather Strap", "quantity": 4 }
+    ]
+  },
+  {
+    "name": "Steel Plate Barding",
+    "slug": "steel-plate-barding",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Plate", "quantity": 4 },
+      { "item": "Padded Leather Strap", "quantity": 4 }
+    ]
+  },
+  {
+    "name": "Tarnished Bronze Plate Boots",
+    "slug": "tarnished-bronze-plate-boots",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 2 },
+      { "item": "Corroded Bronze Plate Boots", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Plate Bracer",
+    "slug": "tarnished-bronze-plate-bracer",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 2 },
+      { "item": "Corroded Bronze Plate Bracer", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Plate Breastplate",
+    "slug": "tarnished-bronze-plate-breastplate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 2 },
+      { "item": "Corroded Bronze Plate Breastplate", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Plate Cloak",
+    "slug": "tarnished-bronze-plate-cloak",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 1 },
+      { "item": "Corroded Bronze Plate Cloak", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Plate Collar",
+    "slug": "tarnished-bronze-plate-collar",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 1 },
+      { "item": "Corroded Bronze Plate Collar", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Plate Gauntlets",
+    "slug": "tarnished-bronze-plate-gauntlets",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 1 },
+      { "item": "Corroded Bronze Plate Gauntlets", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Plate Girdle",
+    "slug": "tarnished-bronze-plate-girdle",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 1 },
+      { "item": "Corroded Bronze Plate Girdle", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Plate Greaves",
+    "slug": "tarnished-bronze-plate-greaves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 2 },
+      { "item": "Corroded Bronze Plate Greaves", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Plate Helm",
+    "slug": "tarnished-bronze-plate-helm",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 2 },
+      { "item": "Corroded Bronze Plate Helm", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Plate Pauldrons",
+    "slug": "tarnished-bronze-plate-pauldrons",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 2 },
+      { "item": "Corroded Bronze Plate Pauldrons", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Plate Visor",
+    "slug": "tarnished-bronze-plate-visor",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 1 },
+      { "item": "Corroded Bronze Plate Visor", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Chain Boots",
+    "slug": "tarnished-bronze-chain-boots",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 1 },
+      { "item": "Corroded Bronze Chain Boots", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Chain Cloak",
+    "slug": "tarnished-bronze-chain-cloak",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 1 },
+      { "item": "Corroded Bronze Chain Cloak", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Chain Coif",
+    "slug": "tarnished-bronze-chain-coif",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 1 },
+      { "item": "Corroded Bronze Chain Coif", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Chain Gloves",
+    "slug": "tarnished-bronze-chain-gloves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 1 },
+      { "item": "Corroded Bronze Chain Gloves", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Chain Gorget",
+    "slug": "tarnished-bronze-chain-gorget",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 1 },
+      { "item": "Corroded Bronze Chain Gorget", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Chain Leggings",
+    "slug": "tarnished-bronze-chain-leggings",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 2 },
+      { "item": "Corroded Bronze Chain Leggings", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Chain Mask",
+    "slug": "tarnished-bronze-chain-mask",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 1 },
+      { "item": "Corroded Bronze Chain Mask", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Chain Shoulderguards",
+    "slug": "tarnished-bronze-chain-shoulderguards",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 1 },
+      { "item": "Corroded Bronze Chain Shoulderguards", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Chain Tunic",
+    "slug": "tarnished-bronze-chain-tunic",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 2 },
+      { "item": "Corroded Bronze Chain Tunic", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Chain Wasteguard",
+    "slug": "tarnished-bronze-chain-wasteguard",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 1 },
+      { "item": "Corroded Bronze Chain Wasteguard", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Bronze Chain Wristguard",
+    "slug": "tarnished-bronze-chain-wristguard",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Scraps", "quantity": 1 },
+      { "item": "Corroded Bronze Chain Wristguard", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Chain Boots",
+    "slug": "tarnished-iron-chain-boots",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 1 },
+      { "item": "Rusty Iron Chain Boots", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Chain Cloak",
+    "slug": "tarnished-iron-chain-cloak",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 1 },
+      { "item": "Rusty Iron Chain Cloak", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Chain Coif",
+    "slug": "tarnished-iron-chain-coif",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 2 },
+      { "item": "Rusty Iron Chain Coif", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Chain Gloves",
+    "slug": "tarnished-iron-chain-gloves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 1 },
+      { "item": "Rusty Iron Chain Gloves", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Chain Gorget",
+    "slug": "tarnished-iron-chain-gorget",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 1 },
+      { "item": "Rusty Iron Chain Gorget", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Chain Leggings",
+    "slug": "tarnished-iron-chain-leggings",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 2 },
+      { "item": "Rusty Iron Chain Leggings", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Chain Mask",
+    "slug": "tarnished-iron-chain-mask",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 1 },
+      { "item": "Rusty Iron Chain Mask", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Chain Shoulderguards",
+    "slug": "tarnished-iron-chain-shoulderguards",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 1 },
+      { "item": "Rusty Iron Chain Shoulderguards", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Chain Tunic",
+    "slug": "tarnished-iron-chain-tunic",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 2 },
+      { "item": "Rusty Iron Chain Tunic", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Chain Wristguard",
+    "slug": "tarnished-iron-chain-wristguard",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 1 },
+      { "item": "Rusty Iron Chain Wristguard", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Chain Waistguard",
+    "slug": "tarnished-iron-chain-waistguard",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 1 },
+      { "item": "Rusty Iron Chain Waistguard", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Plate Boots",
+    "slug": "tarnished-iron-plate-boots",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 2 },
+      { "item": "Rusty Iron Plate Boots", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Plate Bracer",
+    "slug": "tarnished-iron-plate-bracer",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 2 },
+      { "item": "Rusty Iron Plate Bracer", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Plate Breastplate",
+    "slug": "tarnished-iron-plate-breastplate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 2 },
+      { "item": "Rusty Iron Plate Breastplate", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Plate Cloak",
+    "slug": "tarnished-iron-plate-cloak",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 1 },
+      { "item": "Rusty Iron Plate Cloak", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Plate Collar",
+    "slug": "tarnished-iron-plate-collar",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 1 },
+      { "item": "Rusty Iron Plate Collar", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Plate Gauntlets",
+    "slug": "tarnished-iron-plate-gauntlets",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 1 },
+      { "item": "Rusty Iron Plate Gauntlets", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Plate Girdle",
+    "slug": "tarnished-iron-plate-girdle",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 1 },
+      { "item": "Rusty Iron Plate Girdle", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Plate Greaves",
+    "slug": "tarnished-iron-plate-greaves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 2 },
+      { "item": "Rusty Iron Plate Greaves", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Plate Helm",
+    "slug": "tarnished-iron-plate-helm",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 1 },
+      { "item": "Rusty Iron Plate Helm", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Plate Pauldrons",
+    "slug": "tarnished-iron-plate-pauldrons",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 2 },
+      { "item": "Rusty Iron Plate Pauldrons", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Iron Plate Visor",
+    "slug": "tarnished-iron-plate-visor",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 1 },
+      { "item": "Rusty Iron Plate Visor", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Chain Boots",
+    "slug": "tarnished-steel-chain-boots",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 1 },
+      { "item": "Rusty Steel Chain Boots", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Chain Cloak",
+    "slug": "tarnished-steel-chain-cloak",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 1 },
+      { "item": "Rusty Steel Chain Cloak", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Chain Coif",
+    "slug": "tarnished-steel-chain-coif",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 1 },
+      { "item": "Rusty Steel Chain Coif", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Chain Gloves",
+    "slug": "tarnished-steel-chain-gloves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 1 },
+      { "item": "Rusty Steel Chain Gloves", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Chain Gorget",
+    "slug": "tarnished-steel-chain-gorget",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 1 },
+      { "item": "Rusty Steel Chain Gorget", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Chain Leggings",
+    "slug": "tarnished-steel-chain-leggings",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 2 },
+      { "item": "Rusty Steel Chain Leggings", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Chain Mask",
+    "slug": "tarnished-steel-chain-mask",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 1 },
+      { "item": "Rusty Steel Chain Mask", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Chain Shoulderguards",
+    "slug": "tarnished-steel-chain-shoulderguards",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 2 },
+      { "item": "Rusty Steel Chain Shoulderguards", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Chain Tunic",
+    "slug": "tarnished-steel-chain-tunic",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 3 },
+      { "item": "Rusty Steel Chain Tunic", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Chain Wasteguard",
+    "slug": "tarnished-steel-chain-wasteguard",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 1 },
+      { "item": "Rusty Steel Chain Wasteguard", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Chain Wristguard",
+    "slug": "tarnished-steel-chain-wristguard",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 1 },
+      { "item": "Rusty Steel Chain Wristguard", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Plate Boots",
+    "slug": "tarnished-steel-plate-boots",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 2 },
+      { "item": "Rusty Steel Plate Boots", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Plate Bracer",
+    "slug": "tarnished-steel-plate-bracer",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 2 },
+      { "item": "Rusty Steel Plate Bracer", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Plate Breastplate",
+    "slug": "tarnished-steel-plate-breastplate",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 2 },
+      { "item": "Rusty Steel Plate Breastplate", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Plate Cloak",
+    "slug": "tarnished-steel-plate-cloak",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 1 },
+      { "item": "Rusty Steel Plate Cloak", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Plate Collar",
+    "slug": "tarnished-steel-plate-collar",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 1 },
+      { "item": "Rusty Steel Plate Collar", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Plate Gauntlets",
+    "slug": "tarnished-steel-plate-gauntlets",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 1 },
+      { "item": "Rusty Steel Plate Gauntlets", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Plate Girdle",
+    "slug": "tarnished-steel-plate-girdle",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 1 },
+      { "item": "Rusty Steel Plate Girdle", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Plate Greaves",
+    "slug": "tarnished-steel-plate-greaves",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 2 },
+      { "item": "Rusty Steel Plate Greaves", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Plate Helm",
+    "slug": "tarnished-steel-plate-helm",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 2 },
+      { "item": "Rusty Steel Plate Helm", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Plate Pauldrons",
+    "slug": "tarnished-steel-plate-pauldrons",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 2 },
+      { "item": "Rusty Steel Plate Pauldrons", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Tarnished Steel Plate Visor",
+    "slug": "tarnished-steel-plate-visor",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 1 },
+      { "item": "Rusty Steel Plate Visor", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Copper Tower Shield",
+    "slug": "copper-tower-shield",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Copper Bar", "quantity": 12 },
+      { "item": "Rawhide Strap", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 75
+  },
+  {
+    "name": "Bronze Kite Shield",
+    "slug": "bronze-kite-shield",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 120
+  },
+  {
+    "name": "Bronze Tower Shield",
+    "slug": "bronze-tower-shield",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 12 },
+      { "item": "Flux", "quantity": 1 },
+      { "item": "Hide Strap", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 150
+  },
+  {
+    "name": "Iron Kite Shield",
+    "slug": "iron-kite-shield",
+    "tradeskill": "Blacksmithing",
+    "components": [
+      { "item": "Iron Bar", "quantity": 9 },
+      { "item": "Flux", "quantity": 1 },
+      { "item": "Leather Strap", "quantity": 1 }
     ]
   }
 ]

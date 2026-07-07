@@ -261,6 +261,17 @@ extending it the same way as new fields show up on future cards, rather than gue
   logic does **not** extend to White/Dark Blue/Light Blue at skill 0 the way the retracted
   rule assumed; those colors just suggest a low requirement, they don't prove one exactly.
   Only Green-at-0 is airtight enough to write into `recipeSkillLevel`.
+
+  **This retraction is about color-based guessing specifically — it does not apply to an
+  actual stated "Trivial" number (2026-07-07).** The user confirmed directly: "Trivial" is
+  the skill at which a recipe stops giving skill-ups — i.e. it *is* `recipeSkillLevel` by
+  definition, not a guess derived from it. Whenever a source states a concrete Trivial number
+  (a recipe card, or a reference table like the ones used for Tanning/Leatherworking/
+  Blacksmithing), write it straight into `recipeSkillLevel`. A vague Trivial value (`"?"`, or
+  a `"90+"`/`"120+"` floor-only value) still doesn't count — only write in an exact stated
+  number. This retroactively upgraded every exact Trivial figure already sitting in
+  `crafting-skill-estimates.md` from Tanning and Leatherworking into `recipeSkillLevel` — see
+  those tradeskills' entries in `crafting.json`.
 - `listOrder` — an integer giving the recipe's position in the game's own crafting-window
   list (1 = first/lowest skill requirement). This is what the Crafting page actually sorts
   by now instead of alphabetically — see the "Crafting window screenshots" workflow below
@@ -315,10 +326,35 @@ similar structural explanation.
 The only source available for the pelt→scrap mapping itself was a screenshot that looks like
 a fan-wiki table (sortable-column styling, hyperlinked names), not the live game or an
 in-game window — per "The user's screenshots are the source of truth" above, that makes it
-weaker than a normal capture. Its "Trivial" skill column was recorded only in
-`crafting-skill-estimates.md` (clearly labeled as external, not a game screenshot), never
-written into `crafting.json`'s `recipeSkillLevel` — same caution as every other unconfirmed
-estimate in that file.
+weaker than a normal capture for anything *not* stated outright. Its "Trivial" skill column
+was originally recorded only in `crafting-skill-estimates.md` rather than `recipeSkillLevel`,
+but per the 2026-07-07 clarification above (Trivial *is* recipeSkillLevel, not a guess), the
+two exact values from that table (25 for Low-Quality, 50 for Medium-Quality) have since been
+promoted into `crafting.json` directly; the `>50` High-Quality value stays a floor-only note
+in the estimates file since it isn't an exact number.
+
+### Blacksmithing was populated from reference tables too (2026-07-07)
+
+Same fan-wiki-style tables as Leatherworking/Tanning (sortable columns, hyperlinked names,
+"Crafting Bench"/"Scrapping" columns) gave the full Copper→Bronze→Iron→Steel progression:
+chain/plate armor, weapons, shields, base materials (chain links/plate/fasteners/tread/
+stirrups/cauldron), sharpening/weight stones, mount barding, and a repair chain (Corroded/
+Rusty gear + metal scraps → "Tarnished" gear, all confirmed Trivial 20 in these tables).
+Exact Trivial numbers went straight into `recipeSkillLevel` per the clarification above;
+`"?"` or `"200?"`-style uncertain values were left unset rather than guessed.
+
+Two things from that same batch were deliberately **not** turned into recipe cards:
+- A "Hammer and Chisel Master List" table (worn gear + Hammer and Chisel → raw scraps) —
+  this is salvaging an item you already made for its materials back, not crafting something
+  new, so it doesn't fit the recipe-card model the way Tanning's vat processing or the
+  Corroded/Rusty repair chain does (those produce a new named, wearable item).
+- A "Tarnished Weapon Upgrades" table literally titled "(Needs Updates)" in the source and
+  using generic placeholder names ("Rusty Weapon" → "Tarnished Weapon") instead of real item
+  names — the source itself flags it as incomplete.
+
+If either of these turns out to matter later, the screenshots would need to be re-requested
+since they were deleted from `images/inbox/` once their usable data was extracted (per the
+usual rule below).
 
 ### New items/maps/recipes/monsters come in via `images/inbox/`
 
