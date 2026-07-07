@@ -3420,5 +3420,33 @@
     "tags": [],
     "weight": 0.1,
     "size": "Small"
+  },
+  {
+    "name": "Rusty Tower Shield",
+    "slug": "rusty-tower-shield",
+    "image": "images/items/rusty-tower-shield.jpg",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Secondary",
+    "ac": 4,
+    "weight": 8.0,
+    "size": "Large",
+    "classes": ["FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Scarab Greaves",
+    "slug": "scarab-greaves",
+    "image": "images/items/scarab-greaves.jpg",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Legs",
+    "ac": 2,
+    "stats": { "HP": 10 },
+    "description": "A pair of greaves fashioned from the iridescent carapace of a scarab.",
+    "weight": 1.5,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   }
 ]
