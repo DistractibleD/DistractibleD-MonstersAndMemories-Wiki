@@ -6,7 +6,7 @@
   { "name": "Brewing", "status": "planned" },
   { "name": "Carpentry", "status": "live" },
   { "name": "Cooking", "status": "live" },
-  { "name": "Disenchanting", "status": "live" },
+  { "name": "Disenchanting", "status": "live", "note": "Disenchanting runs backwards from a normal recipe: you feed in a MAGIC item (the card's \"Components\") and get a variable amount of magic powder/essence back, not a fixed crafted result. Since the output is a range rather than a single fixed item+quantity, each card's name describes both possible outputs and their ranges instead of naming one crafted item." },
   { "name": "Enchanting", "status": "live" },
   { "name": "Farming", "status": "planned" },
   { "name": "Fermenting", "status": "planned" },

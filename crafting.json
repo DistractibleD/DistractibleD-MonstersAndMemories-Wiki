@@ -1696,16 +1696,26 @@
     "slug": "copper-bar",
     "tradeskill": "Smelting",
     "listOrder": 1,
+    "components": [
+      { "item": "Copper Ore", "quantity": 1 },
+      { "item": "Crude Ingot Mold", "quantity": 1 }
+    ],
     "difficultyColor": "Orange",
-    "observedAtSkill": 0
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 25
   },
   {
     "name": "Copper Bar",
     "slug": "copper-bar-2",
     "tradeskill": "Smelting",
     "listOrder": 2,
+    "components": [
+      { "item": "Copper Scraps", "quantity": 6 },
+      { "item": "Crude Ingot Mold", "quantity": 1 }
+    ],
     "difficultyColor": "Orange",
-    "observedAtSkill": 0
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 25
   },
   {
     "name": "Copper Scraps x4",
@@ -1720,16 +1730,26 @@
     "slug": "tin-bar",
     "tradeskill": "Smelting",
     "listOrder": 4,
+    "components": [
+      { "item": "Tin Ore", "quantity": 1 },
+      { "item": "Crude Ingot Mold", "quantity": 1 }
+    ],
     "difficultyColor": "White",
-    "observedAtSkill": 0
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 35
   },
   {
     "name": "Tin Bar",
     "slug": "tin-bar-2",
     "tradeskill": "Smelting",
     "listOrder": 5,
+    "components": [
+      { "item": "Tin Scraps", "quantity": 6 },
+      { "item": "Crude Ingot Mold", "quantity": 1 }
+    ],
     "difficultyColor": "White",
-    "observedAtSkill": 0
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 35
   },
   {
     "name": "Tin Scraps x4",
@@ -4924,6 +4944,1545 @@
       { "item": "Iron Bar", "quantity": 9 },
       { "item": "Flux", "quantity": 1 },
       { "item": "Leather Strap", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Bronze Bar",
+    "slug": "bronze-bar",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Copper Bar", "quantity": 1 },
+      { "item": "Tin Bar", "quantity": 1 },
+      { "item": "Sturdy Ingot Mold", "quantity": 1 }
+    ],
+    "resultQuantity": 2,
+    "recipeSkillLevel": 50
+  },
+  {
+    "name": "Bronze Bar",
+    "slug": "bronze-bar-2",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Copper Scraps", "quantity": 6 },
+      { "item": "Sturdy Ingot Mold", "quantity": 1 }
+    ],
+    "resultQuantity": 2,
+    "recipeSkillLevel": 50
+  },
+  {
+    "name": "Silver Bar",
+    "slug": "silver-bar",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Silver Ore", "quantity": 1 },
+      { "item": "Sturdy Ingot Mold", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 60
+  },
+  {
+    "name": "Silver Bar",
+    "slug": "silver-bar-2",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Silver Scraps", "quantity": 6 },
+      { "item": "Sturdy Ingot Mold", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 60
+  },
+  {
+    "name": "Iron Bar",
+    "slug": "iron-bar",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Iron Ore", "quantity": 1 },
+      { "item": "Hardened Ingot Mold", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Iron Bar",
+    "slug": "iron-bar-2",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Iron Scraps", "quantity": 6 },
+      { "item": "Hardened Ingot Mold", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Gold Bar",
+    "slug": "gold-bar",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Gold Ore", "quantity": 1 },
+      { "item": "Hardened Ingot Mold", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Gold Bar",
+    "slug": "gold-bar-2",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Gold Scraps", "quantity": 6 },
+      { "item": "Hardened Ingot Mold", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Steel Bar",
+    "slug": "steel-bar",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Iron Bar", "quantity": 1 },
+      { "item": "Coal", "quantity": 1 },
+      { "item": "Flux", "quantity": 1 },
+      { "item": "Tempered Ingot Mold", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 100
+  },
+  {
+    "name": "Steel Bar",
+    "slug": "steel-bar-2",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Steel Scraps", "quantity": 6 },
+      { "item": "Tempered Ingot Mold", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 100
+  },
+  {
+    "name": "Platinum Bar",
+    "slug": "platinum-bar",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Platinum Ore", "quantity": 1 },
+      { "item": "Tempered Ingot Mold", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 110
+  },
+  {
+    "name": "Platinum Bar",
+    "slug": "platinum-bar-2",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Platinum Scraps", "quantity": 6 },
+      { "item": "Tempered Ingot Mold", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 110
+  },
+  {
+    "name": "Mithril Bar",
+    "slug": "mithril-bar",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Mithril Ore", "quantity": 1 },
+      { "item": "Masterwork Ingot Mold", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Mithril Bar",
+    "slug": "mithril-bar-2",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Mithril Scraps", "quantity": 6 },
+      { "item": "Masterwork Ingot Mold", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Cobalt Bar",
+    "slug": "cobalt-bar",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Cobalt Ore", "quantity": 1 },
+      { "item": "Masterwork Ingot Mold", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Cobalt Bar",
+    "slug": "cobalt-bar-2",
+    "tradeskill": "Smelting",
+    "components": [
+      { "item": "Cobalt Scraps", "quantity": 6 },
+      { "item": "Masterwork Ingot Mold", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Wood Frame",
+    "slug": "wood-frame",
+    "tradeskill": "Carpentry",
+    "components": [
+      { "item": "Wood Board", "quantity": 4 },
+      { "item": "Bronze Bracket", "quantity": 4 }
+    ],
+    "recipeSkillLevel": 5
+  },
+  {
+    "name": "Wood Panel",
+    "slug": "wood-panel",
+    "tradeskill": "Carpentry",
+    "components": [
+      { "item": "Wood Board", "quantity": 6 },
+      { "item": "Crude Wood Finish", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 5
+  },
+  {
+    "name": "Elder Wood Panel",
+    "slug": "elder-wood-panel",
+    "tradeskill": "Carpentry",
+    "components": [
+      { "item": "Elder Wood Panel Board", "quantity": 6 }
+    ],
+    "recipeSkillLevel": 10
+  },
+  {
+    "name": "Elder Wood Panel Frame",
+    "slug": "elder-wood-panel-frame",
+    "tradeskill": "Carpentry",
+    "components": [
+      { "item": "Elder Wood Panel Board", "quantity": 4 },
+      { "item": "Bronze Bracket", "quantity": 4 }
+    ],
+    "recipeSkillLevel": 15
+  },
+  {
+    "name": "Wooden Stool",
+    "slug": "wooden-stool",
+    "tradeskill": "Carpentry",
+    "components": [
+      { "item": "Copper Nails", "quantity": 2 },
+      { "item": "Wood Board", "quantity": 2 },
+      { "item": "Wood Panel", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 15
+  },
+  {
+    "name": "Wooden Chair",
+    "slug": "wooden-chair",
+    "tradeskill": "Carpentry",
+    "components": [
+      { "item": "Copper Nails", "quantity": 2 },
+      { "item": "Wood Board", "quantity": 4 },
+      { "item": "Wood Panel", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Wooden Storage Crate",
+    "slug": "wooden-storage-crate",
+    "tradeskill": "Carpentry",
+    "components": [
+      { "item": "Copper Nails", "quantity": 2 },
+      { "item": "Wood Panel", "quantity": 6 },
+      { "item": "Wood Frame", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Wooden Hand Cart",
+    "slug": "wooden-hand-cart",
+    "tradeskill": "Carpentry",
+    "components": [
+      { "item": "Copper Nails", "quantity": 1 },
+      { "item": "Wood Frame", "quantity": 1 },
+      { "item": "Wood Panel", "quantity": 2 },
+      { "item": "Wood Board", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Ironbark Frame",
+    "slug": "ironbark-frame",
+    "tradeskill": "Carpentry",
+    "components": [
+      { "item": "Ironbark Board", "quantity": 4 },
+      { "item": "Copper Bracket", "quantity": 4 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Ironbark Panel",
+    "slug": "ironbark-panel",
+    "tradeskill": "Carpentry",
+    "components": [
+      { "item": "Ironbark Board", "quantity": 6 }
+    ],
+    "recipeSkillLevel": 15
+  },
+  {
+    "name": "Display Box",
+    "slug": "display-box",
+    "tradeskill": "Carpentry",
+    "components": [
+      { "item": "Wood Frame", "quantity": 2 },
+      { "item": "Wood Panel", "quantity": 2 },
+      { "item": "Copper Nails", "quantity": 4 },
+      { "item": "Crude Wood Finish", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Wooden Table",
+    "slug": "wooden-table",
+    "tradeskill": "Carpentry",
+    "components": [
+      { "item": "Copper Nails", "quantity": 2 },
+      { "item": "Wood Board", "quantity": 4 },
+      { "item": "Wood Panel", "quantity": 4 }
+    ]
+  },
+  {
+    "name": "Cooked Ashira Meat",
+    "slug": "cooked-ashira-meat",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Ashira Meat", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Cooked Basilisk Meat",
+    "slug": "cooked-basilisk-meat",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Basilisk Meat", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Cooked Crocodile Meat",
+    "slug": "cooked-crocodile-meat",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Crocodile Meat", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Raw Basa Fillet",
+    "slug": "raw-basa-fillet",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Basa", "quantity": 1 },
+      { "item": "Cleaver", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Grouper Fillet",
+    "slug": "grouper-fillet",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Grouper", "quantity": 1 },
+      { "item": "Cleaver", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Cooked Whitefish Fillet",
+    "slug": "cooked-whitefish-fillet",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Whitefish", "quantity": 1 },
+      { "item": "Cleaver", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Raw Tide Minnow Fillet",
+    "slug": "raw-tide-minnow-fillet",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Tide Minnow", "quantity": 1 },
+      { "item": "Cleaver", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Cooked Bat Meat",
+    "slug": "cooked-bat-meat",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Bat Meat", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Cooked Beetle Meat",
+    "slug": "cooked-beetle-meat",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Beetle Meat", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Cooked Jackal Meat",
+    "slug": "cooked-jackal-meat",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Jackal Meat", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Cooked Rat Meat",
+    "slug": "cooked-rat-meat",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Rat Meat", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Cooked Scarab Meat",
+    "slug": "cooked-scarab-meat",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Scarab Meat", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Cooked Snake Meat",
+    "slug": "cooked-snake-meat",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Snake Meat", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 10
+  },
+  {
+    "name": "Crocodile Steak",
+    "slug": "crocodile-steak",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Crocodile Meat", "quantity": 1 },
+      { "item": "Butter", "quantity": 1 },
+      { "item": "Basil", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 10
+  },
+  {
+    "name": "Fish Bones",
+    "slug": "fish-bones",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Cleaver", "quantity": 1 },
+      { "item": "Raw Fish", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Fish Stock",
+    "slug": "fish-stock",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Fish Bones", "quantity": 8 },
+      { "item": "Water Flask", "quantity": 2 }
+    ],
+    "resultQuantity": 4
+  },
+  {
+    "name": "Pan Fried Whitefish",
+    "slug": "pan-fried-whitefish",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Cooked Whitefish Fillet", "quantity": 1 },
+      { "item": "Butter", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 15
+  },
+  {
+    "name": "Roasted Rat with Onion",
+    "slug": "roasted-rat-with-onion",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Rat Meat", "quantity": 1 },
+      { "item": "Onion", "quantity": 1 },
+      { "item": "Black Pepper", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 15
+  },
+  {
+    "name": "Boiled Scarab Legs",
+    "slug": "boiled-scarab-legs",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Scarab Leg", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Cabbage Stew",
+    "slug": "cabbage-stew",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Cabbage", "quantity": 1 },
+      { "item": "Onion", "quantity": 1 },
+      { "item": "Stock", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Peppered Wolf Meat",
+    "slug": "peppered-wolf-meat",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Wolf Meat", "quantity": 1 },
+      { "item": "Black Pepper", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Bat Jerky",
+    "slug": "bat-jerky",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Bat Meat", "quantity": 1 },
+      { "item": "Black Pepper", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 25
+  },
+  {
+    "name": "Cured Jackal Meat",
+    "slug": "cured-jackal-meat",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Jackal Meat", "quantity": 1 },
+      { "item": "Crystallized Salt", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 30
+  },
+  {
+    "name": "Spiced Snake Cutlet",
+    "slug": "spiced-snake-cutlet",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Snake Meat", "quantity": 1 },
+      { "item": "Garlic", "quantity": 1 },
+      { "item": "Basil", "quantity": 1 },
+      { "item": "Paprika", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 40
+  },
+  {
+    "name": "Garlic Rat Haunch",
+    "slug": "garlic-rat-haunch",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Rat Fillet", "quantity": 1 },
+      { "item": "Garlic", "quantity": 1 },
+      { "item": "Butter", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 45
+  },
+  {
+    "name": "Lemon Basa Fillet",
+    "slug": "lemon-basa-fillet",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Basa Fillet", "quantity": 1 },
+      { "item": "Lemon", "quantity": 1 },
+      { "item": "Crystallized Salt", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 45
+  },
+  {
+    "name": "Spicy Scarab Stew",
+    "slug": "spicy-scarab-stew",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Scarab Meat", "quantity": 1 },
+      { "item": "Onion", "quantity": 1 },
+      { "item": "Stock", "quantity": 1 },
+      { "item": "Black Pepper", "quantity": 1 },
+      { "item": "Carrot", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 50
+  },
+  {
+    "name": "Cheesy Mushshroom Soup",
+    "slug": "cheesy-mushshroom-soup",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Mushshroom", "quantity": 2 },
+      { "item": "Cheese", "quantity": 1 },
+      { "item": "Stock", "quantity": 1 },
+      { "item": "Black Pepper", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 60
+  },
+  {
+    "name": "Slow-Roasted Bear Shoulder",
+    "slug": "slow-roasted-bear-shoulder",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Bear Meat", "quantity": 1 },
+      { "item": "Butter", "quantity": 1 },
+      { "item": "Crystallized Salt", "quantity": 1 },
+      { "item": "Garlic", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 60
+  },
+  {
+    "name": "Crab Cakes",
+    "slug": "crab-cakes",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Bay Crab", "quantity": 2 },
+      { "item": "Lemon", "quantity": 1 },
+      { "item": "Parsley", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Tomato Onion Relish",
+    "slug": "tomato-onion-relish",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Tomato", "quantity": 2 },
+      { "item": "Onion", "quantity": 1 },
+      { "item": "White Vinegar", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Basilisk Skewers",
+    "slug": "basilisk-skewers",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Raw Basilisk Fillet Belly Piece", "quantity": 1 },
+      { "item": "Onion", "quantity": 1 },
+      { "item": "Crystallized Salt", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Creamy Grouper Stew",
+    "slug": "creamy-grouper-stew",
+    "tradeskill": "Cooking",
+    "components": [
+      { "item": "Grouper Fillet", "quantity": 2 },
+      { "item": "Garlic", "quantity": 1 },
+      { "item": "Mushshroom", "quantity": 1 },
+      { "item": "Stock", "quantity": 1 },
+      { "item": "Carrot", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Magic Powder & Glimmer of Magic (x1-2 each)",
+    "slug": "disenchant-cinder-beetle-shield",
+    "tradeskill": "Disenchanting",
+    "components": [
+      { "item": "Cinder Beetle Shield", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Enchanted Powder & Mote of Magic (x1-2 each)",
+    "slug": "disenchant-cinder-beetle-boots",
+    "tradeskill": "Disenchanting",
+    "components": [
+      { "item": "Cinder Beetle Boots", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 30
+  },
+  {
+    "name": "Enchanted Powder & Mote of Magic (x1-2 each)",
+    "slug": "disenchant-penitential-veil",
+    "tradeskill": "Disenchanting",
+    "components": [
+      { "item": "Penitential Veil", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 10
+  },
+  {
+    "name": "Enchanted Powder & Mote of Magic (x1-2 each)",
+    "slug": "disenchant-bloodied-bone",
+    "tradeskill": "Disenchanting",
+    "components": [
+      { "item": "Bloodied Bone", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 10
+  },
+  {
+    "name": "Enchanted Powder & Mote of Magic (x1-2 each)",
+    "slug": "disenchant-mantle-of-night",
+    "tradeskill": "Disenchanting",
+    "components": [
+      { "item": "Mantle of Night", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 10
+  },
+  {
+    "name": "Enchanted Powder (x1-5) & Mote of Magic (x0-2)",
+    "slug": "disenchant-clouded-crystallized-magic",
+    "tradeskill": "Disenchanting",
+    "components": [
+      { "item": "Clouded Crystallized Magic", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 15
+  },
+  {
+    "name": "Enchanted Powder (x1-5) & Mote of Magic (x0-2)",
+    "slug": "disenchant-magic-frond",
+    "tradeskill": "Disenchanting",
+    "components": [
+      { "item": "Magic Frond", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 15
+  },
+  {
+    "name": "Magic Powder (x1-4) & Glimmer of Magic (x0-2)",
+    "slug": "disenchant-glinting-crystallized-magic",
+    "tradeskill": "Disenchanting",
+    "components": [
+      { "item": "Glinting Crystallized Magic", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 30
+  },
+  {
+    "name": "Magic Powder (x1-4) & Glimmer of Magic (x0-2)",
+    "slug": "disenchant-enchanted-frond",
+    "tradeskill": "Disenchanting",
+    "components": [
+      { "item": "Enchanted Frond", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Arcane Powder (x1-4) & Spark of Magic (x0-2)",
+    "slug": "disenchant-shining-crystallized-magic",
+    "tradeskill": "Disenchanting",
+    "components": [
+      { "item": "Shining Crystallized Magic", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 45
+  },
+  {
+    "name": "Arcane Powder (x1-4) & Spark of Magic (x0-2)",
+    "slug": "disenchant-arcane-frond",
+    "tradeskill": "Disenchanting",
+    "components": [
+      { "item": "Arcane Frond", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 45
+  },
+  {
+    "name": "Astral Powder (x1-4) & Echo of Magic (x0-2)",
+    "slug": "disenchant-brilliant-crystallized-magic",
+    "tradeskill": "Disenchanting",
+    "components": [
+      { "item": "Brilliant Crystallized Magic", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 60
+  },
+  {
+    "name": "Coarse Blue Diamond Powder",
+    "slug": "coarse-blue-diamond-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Chipped Blue Diamond", "quantity": 1 }
+    ],
+    "resultQuantity": 4,
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Dragon's Vigil Powder",
+    "slug": "dragons-vigil-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Dragon's Vigil", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Duneleaf Powder",
+    "slug": "duneleaf-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Duneleaf", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Ethtongue Powder",
+    "slug": "ethtongue-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Ethtongue", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Flamestalk Powder",
+    "slug": "flamestalk-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Flamestalk", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Gadolvine Powder",
+    "slug": "gadolvine-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Gadolvine", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Ghost Poppy Powder",
+    "slug": "ghost-poppy-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Ghost Poppy", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Ironroot Powder",
+    "slug": "ironroot-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Ironroot", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Last Breath Powder",
+    "slug": "last-breath-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Last Breath", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Lionleaf Powder",
+    "slug": "lionleaf-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Lionleaf", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Magebloom Powder",
+    "slug": "magebloom-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Magebloom", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Moonveil Powder",
+    "slug": "moonveil-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Moonveil", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Nomad's Grace Powder",
+    "slug": "nomads-grace-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Nomad's Grace", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Phoenix Flower Powder",
+    "slug": "phoenix-flower-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Phoenix Flower", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Shadeshroom Powder",
+    "slug": "shadeshroom-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Shadeshroom", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Stranglevine Powder",
+    "slug": "stranglevine-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Stranglevine", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Stygian Moss Powder",
+    "slug": "stygian-moss-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Stygian Moss", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Sylvine Powder",
+    "slug": "sylvine-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Sylvine", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Whispering Sage Powder",
+    "slug": "whispering-sage-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Whispering Sage", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Witherweed Powder",
+    "slug": "witherweed-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Witherweed", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 1
+  },
+  {
+    "name": "Bone Ash",
+    "slug": "bone-ash",
+    "tradeskill": "Alchemy",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Bone Chips", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 20
+  },
+  {
+    "name": "Saffron Powder",
+    "slug": "saffron-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Jar of Saffron", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Imperfect Sapphire Powder",
+    "slug": "imperfect-sapphire-powder",
+    "tradeskill": "Alchemy",
+    "weight": 0.1,
+    "size": "Tiny",
+    "components": [
+      { "item": "Imperfect Sapphire", "quantity": 1 }
+    ],
+    "resultQuantity": 2
+  },
+  {
+    "name": "Crude Leather Sealant",
+    "slug": "crude-leather-sealant",
+    "tradeskill": "Alchemy",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Limestone", "quantity": 2 },
+      { "item": "Resin", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Basic Mortar",
+    "slug": "basic-mortar",
+    "tradeskill": "Alchemy",
+    "description": "Basic mortar made from sand and lime.",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Limestone", "quantity": 2 },
+      { "item": "Coarse Sand", "quantity": 2 }
+    ]
+  },
+  {
+    "name": "Minor Serum of Wisdom",
+    "slug": "minor-serum-of-wisdom",
+    "tradeskill": "Alchemy",
+    "description": "Center yourself, increasing your Wisdom by 5 for 1 hour.",
+    "effect": "Minor Serum of Wisdom (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Sylvine Powder", "quantity": 2 },
+      { "item": "Whispering Sage Powder", "quantity": 2 },
+      { "item": "Makeshift Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 10
+  },
+  {
+    "name": "Minor Serum of Dexterity",
+    "slug": "minor-serum-of-dexterity",
+    "tradeskill": "Alchemy",
+    "description": "Balance yourself, increasing your Dexterity by 5 for 1 hour.",
+    "effect": "Minor Serum of Dexterity (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Ghost Poppy Powder", "quantity": 2 },
+      { "item": "Nomad's Grace Powder", "quantity": 1 },
+      { "item": "Makeshift Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 10
+  },
+  {
+    "name": "Minor Tincture of Sagacity",
+    "slug": "minor-tincture-of-sagacity",
+    "tradeskill": "Alchemy",
+    "description": "Free your mind, increasing your Casting Speed by 20% for 20 seconds.",
+    "effect": "Minor Tincture of Sagacity (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Whispering Sage Powder", "quantity": 3 },
+      { "item": "Sylvine Powder", "quantity": 2 },
+      { "item": "Makeshift Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 10
+  },
+  {
+    "name": "Crude Fish Oil",
+    "slug": "crude-fish-oil",
+    "tradeskill": "Alchemy",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Any Raw Fish", "quantity": 5 },
+      { "item": "Makeshift Vial", "quantity": 5 }
+    ],
+    "resultQuantity": 5,
+    "recipeSkillLevel": 15
+  },
+  {
+    "name": "Crude Wood Finish",
+    "slug": "crude-wood-finish",
+    "tradeskill": "Alchemy",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Crude Fish Oil", "quantity": 2 },
+      { "item": "Resin", "quantity": 6 }
+    ],
+    "recipeSkillLevel": 15
+  },
+  {
+    "name": "Minor Serum of Agility",
+    "slug": "minor-serum-of-agility",
+    "tradeskill": "Alchemy",
+    "description": "Lighten yourself, increasing your Agility by 5 for 1 hour.",
+    "effect": "Minor Serum of Agility (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Ghost Poppy Powder", "quantity": 2 },
+      { "item": "Sylvine Powder", "quantity": 2 },
+      { "item": "Makeshift Vial", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Minor Tincture of Wrath",
+    "slug": "minor-tincture-of-wrath",
+    "tradeskill": "Alchemy",
+    "description": "Enrage yourself, increasing Physical Damage Dealt by 25% and Physical Damage received by 20% for 20 seconds.",
+    "effect": "Minor Tincture of Wrath (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Ghost Poppy Powder", "quantity": 3 },
+      { "item": "Snake Skin", "quantity": 1 },
+      { "item": "Makeshift Vial", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Jar of Yellow Paint",
+    "slug": "jar-of-yellow-paint",
+    "tradeskill": "Alchemy",
+    "description": "A jar filled with pungent yellow paint.",
+    "effect": "Disabled",
+    "weight": 0.8,
+    "size": "Small",
+    "components": [
+      { "item": "Saffron Powder", "quantity": 1 },
+      { "item": "Jar of Egg Whites", "quantity": 1 },
+      { "item": "Empty Jar", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Minor Serum of Strength",
+    "slug": "minor-serum-of-strength",
+    "tradeskill": "Alchemy",
+    "description": "Empower yourself, increasing your Strength by 5 for 1 hour.",
+    "effect": "Minor Serum of Strength (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Lionleaf Powder", "quantity": 2 },
+      { "item": "Ghost Poppy Powder", "quantity": 2 },
+      { "item": "Makeshift Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 30
+  },
+  {
+    "name": "Eltindra's Blessing",
+    "slug": "eltindras-blessing",
+    "tradeskill": "Alchemy",
+    "description": "10 Charges - Increases your movement speed by 40% for 60 minutes.",
+    "effect": "Speed of the Wild (On Click. Any Slot. Cast Time: 4s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Nomad's Grace Powder", "quantity": 7 },
+      { "item": "Wolf Heart", "quantity": 2 },
+      { "item": "Makeshift Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 220
+  },
+  {
+    "name": "Minor Serum of Charisma",
+    "slug": "minor-serum-of-charisma",
+    "tradeskill": "Alchemy",
+    "description": "Inspire yourself, increasing your Charisma by 5 for 1 hour.",
+    "effect": "Minor Serum of Charisma (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Lionleaf Powder", "quantity": 2 },
+      { "item": "Whispering Sage Powder", "quantity": 2 },
+      { "item": "Makeshift Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 30
+  },
+  {
+    "name": "Potion of Prickly Barrier",
+    "slug": "potion-of-prickly-barrier",
+    "tradeskill": "Alchemy",
+    "description": "Surround yourself with a prickly barrier, granting you a Damage Shield that deals 5 Physical Damage when hit for 15 minutes.",
+    "effect": "Potion of Prickly Barrier (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Ironroot Powder", "quantity": 2 },
+      { "item": "Fire Beetle Gland", "quantity": 1 },
+      { "item": "Makeshift Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 35
+  },
+  {
+    "name": "Minor Serum of Intelligence",
+    "slug": "minor-serum-of-intelligence",
+    "tradeskill": "Alchemy",
+    "description": "Focus yourself, increasing your Intelligence by 5 for 1 hour.",
+    "effect": "Minor Serum of Intelligence (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Sylvine Powder", "quantity": 2 },
+      { "item": "Nomad's Grace Powder", "quantity": 1 },
+      { "item": "Makeshift Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 40
+  },
+  {
+    "name": "Flux",
+    "slug": "flux",
+    "tradeskill": "Alchemy",
+    "description": "A reagent used by blacksmiths to forge metal.",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Limestone", "quantity": 2 },
+      { "item": "Bone Ash", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 50
+  },
+  {
+    "name": "Minor Serum of Stamina",
+    "slug": "minor-serum-of-stamina",
+    "tradeskill": "Alchemy",
+    "description": "Harden yourself, increasing your Stamina by 5 for 1 hour.",
+    "effect": "Minor Serum of Stamina (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Ironroot Powder", "quantity": 2 },
+      { "item": "Lionleaf Powder", "quantity": 2 },
+      { "item": "Makeshift Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 45
+  },
+  {
+    "name": "Potion of the Sense Magic",
+    "slug": "potion-of-the-sense-magic",
+    "tradeskill": "Alchemy",
+    "description": "Glaze your eyes with a magical coating, granting you the ability to see magical effects when considering targets for 30 minutes.",
+    "effect": "Potion of Sense Magic (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Whispering Sage Powder", "quantity": 2 },
+      { "item": "Wisp Dust", "quantity": 2 },
+      { "item": "Makeshift Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 55
+  },
+  {
+    "name": "Minor Stoneskin Tincture",
+    "slug": "minor-stoneskin-tincture",
+    "tradeskill": "Alchemy",
+    "description": "Harden your skin, reducing Physical Damage and Spell Damage received by 15%, and decreasing your Movement Speed by 50% for 20 seconds.",
+    "effect": "Minor Stoneskin Tincture (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Ironroot Powder", "quantity": 2 },
+      { "item": "Lionleaf Powder", "quantity": 1 },
+      { "item": "Makeshift Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 55
+  },
+  {
+    "name": "Minor Elixir of Deadliness",
+    "slug": "minor-elixir-of-deadliness",
+    "tradeskill": "Alchemy",
+    "description": "Become deadly, granting you a chance to activate Minor Deadliness on melee attacks for 1 hour.",
+    "effect": "Minor Elixir of Deadliness (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Crude Flask", "quantity": 1 },
+      { "item": "Pristine Drake Fang", "quantity": 2 },
+      { "item": "Ghost Poppy Powder", "quantity": 4 },
+      { "item": "Enchanted Powder", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 55
+  },
+  {
+    "name": "Minor Elixir of Tenacity",
+    "slug": "minor-elixir-of-tenacity",
+    "tradeskill": "Alchemy",
+    "description": "Become tenacious, granting you a chance to activate Minor Resolve when hit for 1 hour.",
+    "effect": "Minor Elixir of Tenacity (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Lionleaf Powder", "quantity": 6 },
+      { "item": "Dryad Sap", "quantity": 2 },
+      { "item": "Enchanted Powder", "quantity": 2 },
+      { "item": "Crude Flask", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 60
+  },
+  {
+    "name": "Minor Elixir of Concentration",
+    "slug": "minor-elixir-of-concentration",
+    "tradeskill": "Alchemy",
+    "description": "Enter a state of lucidity, granting you a chance to activate Minor Concentration when casting spells for 1 hour.",
+    "effect": "Minor Elixir of Concentration (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Whispering Sage Powder", "quantity": 4 },
+      { "item": "Spirit Powder", "quantity": 3 },
+      { "item": "Enchanted Powder", "quantity": 1 },
+      { "item": "Crude Flask", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 60
+  },
+  {
+    "name": "Lesser Serum of Dexterity",
+    "slug": "lesser-serum-of-dexterity",
+    "tradeskill": "Alchemy",
+    "description": "Focus yourself, increasing Dexterity by 10 for 1 hour.",
+    "effect": "Lesser Serum of Dexterity (On Click. Any Slot. Cast Time: 5s, Level: 15)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Gadolvine Powder", "quantity": 1 },
+      { "item": "Moonveil Powder", "quantity": 1 },
+      { "item": "Annealed Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 65
+  },
+  {
+    "name": "Lesser Serum of Wisdom",
+    "slug": "lesser-serum-of-wisdom",
+    "tradeskill": "Alchemy",
+    "description": "Center yourself, increasing Wisdom by 10 for 1 hour.",
+    "effect": "Lesser Serum of Wisdom (On Click. Any Slot. Cast Time: 5s, Level: 15)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Dragon's Vigil Powder", "quantity": 1 },
+      { "item": "Ironroot Powder", "quantity": 2 },
+      { "item": "Annealed Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 70
+  },
+  {
+    "name": "Lunar Shroud Potion",
+    "slug": "lunar-shroud-potion",
+    "tradeskill": "Alchemy",
+    "description": "Renders you completely transparent, making you virtually invisible.",
+    "effect": "Invisibility (On Click. Any Slot. Cast Time: Instant, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Moonveil Powder", "quantity": 2 },
+      { "item": "Wisp Dust", "quantity": 2 },
+      { "item": "Annealed Vial", "quantity": 2 }
+    ],
+    "recipeSkillLevel": 75
+  },
+  {
+    "name": "Clear Fish Oil",
+    "slug": "clear-fish-oil",
+    "tradeskill": "Alchemy",
+    "description": "Fish Oil",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Any Raw Fish", "quantity": 5 },
+      { "item": "Annealed Vial", "quantity": 5 }
+    ],
+    "resultQuantity": 5,
+    "recipeSkillLevel": 80
+  },
+  {
+    "name": "Clear Wood Finish",
+    "slug": "clear-wood-finish",
+    "tradeskill": "Alchemy",
+    "components": [
+      { "item": "Clear Fish Oil", "quantity": 1 },
+      { "item": "Resin", "quantity": 6 }
+    ],
+    "recipeSkillLevel": 80
+  },
+  {
+    "name": "Lesser Serum of Agility",
+    "slug": "lesser-serum-of-agility",
+    "tradeskill": "Alchemy",
+    "description": "Focus yourself, increasing Agility by 10 for 1 hour.",
+    "effect": "Lesser Serum of Intelligence (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Stranglevine Powder", "quantity": 1 },
+      { "item": "Dragon's Vigil Powder", "quantity": 1 },
+      { "item": "Annealed Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 85
+  },
+  {
+    "name": "Lesser Tincture of Sagacity",
+    "slug": "lesser-tincture-of-sagacity",
+    "tradeskill": "Alchemy",
+    "description": "Free your mind, increasing your Casting Speed by 20% and Spell Damage dealt by 10% for 20 seconds.",
+    "effect": "Lesser Tincture of Sagacity (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Dragon's Vigil Powder", "quantity": 2 },
+      { "item": "Moonveil Powder", "quantity": 2 },
+      { "item": "Annealed Vial", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Lesser Serum of Charisma",
+    "slug": "lesser-serum-of-charisma",
+    "tradeskill": "Alchemy",
+    "description": "Inspire yourself, increasing your Charisma by 10 for 1 hour.",
+    "effect": "Lesser Serum of Charisma (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Gadolvine Powder", "quantity": 1 },
+      { "item": "Stranglevine Powder", "quantity": 2 },
+      { "item": "Annealed Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 90
+  },
+  {
+    "name": "Lesser Serum of Strength",
+    "slug": "lesser-serum-of-strength",
+    "tradeskill": "Alchemy",
+    "description": "Empower yourself, increasing your Strength by 10 for 1 hour.",
+    "effect": "Lesser Serum of Strength (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Nomad's Grace Powder", "quantity": 1 },
+      { "item": "Ironroot Powder", "quantity": 2 },
+      { "item": "Annealed Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 90
+  },
+  {
+    "name": "Lesser Tincture of Wrath",
+    "slug": "lesser-tincture-of-wrath",
+    "tradeskill": "Alchemy",
+    "description": "Enrage yourself, increasing Physical Damage dealt by 15% and Physical Damage received by 20% for 20 seconds.",
+    "components": [
+      { "item": "Stranglevine Powder", "quantity": 2 },
+      { "item": "Fire Beetle Eye", "quantity": 1 },
+      { "item": "Annealed Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 105
+  },
+  {
+    "name": "Lesser Serum of Intelligence",
+    "slug": "lesser-serum-of-intelligence",
+    "tradeskill": "Alchemy",
+    "description": "Focus yourself, increasing your Intelligence by 10 for 1 hour.",
+    "components": [
+      { "item": "Whispering Sage Powder", "quantity": 1 },
+      { "item": "Moonveil Powder", "quantity": 1 },
+      { "item": "Annealed Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 105
+  },
+  {
+    "name": "Lesser Serum of Stamina",
+    "slug": "lesser-serum-of-stamina",
+    "tradeskill": "Alchemy",
+    "description": "Harden yourself, increasing your Stamina by 10 for 1 hour.",
+    "effect": "Lesser Serum of Stamina (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "components": [
+      { "item": "Stranglevine Powder", "quantity": 2 },
+      { "item": "Whispering Sage Powder", "quantity": 2 },
+      { "item": "Annealed Vial", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 105
+  },
+  {
+    "name": "Potion of the Gravewalker",
+    "slug": "potion-of-the-gravewalker",
+    "tradeskill": "Alchemy",
+    "description": "Shroud yourself in darkness, rendering you unseen by the undead for up to 10 minutes.",
+    "effect": "Potion of the Gravewalker (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Nomad's Grace Powder", "quantity": 3 },
+      { "item": "Zombie Skin", "quantity": 1 },
+      { "item": "Makeshift Vial", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Potion of Tranquility",
+    "slug": "potion-of-tranquility",
+    "tradeskill": "Alchemy",
+    "components": [
+      { "item": "Duneleaf Powder", "quantity": 4 },
+      { "item": "Imperfect Sapphire Powder", "quantity": 4 },
+      { "item": "Annealed Vial", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Lesser Stoneskin Tincture",
+    "slug": "lesser-stoneskin-tincture",
+    "tradeskill": "Alchemy",
+    "components": [
+      { "item": "Duneleaf Powder", "quantity": 1 },
+      { "item": "Drake Scale", "quantity": 1 },
+      { "item": "Annealed Vial", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Serum of Dexterity",
+    "slug": "serum-of-dexterity",
+    "tradeskill": "Alchemy",
+    "components": [
+      { "item": "Duneleaf Powder", "quantity": 1 },
+      { "item": "Shadeshroom Powder", "quantity": 1 },
+      { "item": "Tempered Vial", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Serum of Wisdom",
+    "slug": "serum-of-wisdom",
+    "tradeskill": "Alchemy",
+    "components": [
+      { "item": "Magebloom Powder", "quantity": 1 },
+      { "item": "Dragon's Vigil Powder", "quantity": 1 },
+      { "item": "Tempered Vial", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Lesser Elixir of Concentration",
+    "slug": "lesser-elixir-of-concentration",
+    "tradeskill": "Alchemy",
+    "components": [
+      { "item": "Moonveil Powder", "quantity": 3 },
+      { "item": "Still Elemental Core", "quantity": 2 },
+      { "item": "Magic Powder", "quantity": 1 },
+      { "item": "Leaded Flask", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Lesser Elixir of Deadliness",
+    "slug": "lesser-elixir-of-deadliness",
+    "tradeskill": "Alchemy",
+    "components": [
+      { "item": "Stranglevine Powder", "quantity": 3 },
+      { "item": "Greater Elemental Core", "quantity": 4 },
+      { "item": "Magic Powder", "quantity": 2 },
+      { "item": "Leaded Flask", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Lesser Elixir of Tenacity",
+    "slug": "lesser-elixir-of-tenacity",
+    "tradeskill": "Alchemy",
+    "components": [
+      { "item": "Ironroot Powder", "quantity": 4 },
+      { "item": "Granite Heart", "quantity": 3 },
+      { "item": "Magic Powder", "quantity": 2 },
+      { "item": "Leaded Flask", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Serum of Agility",
+    "slug": "serum-of-agility",
+    "tradeskill": "Alchemy",
+    "components": [
+      { "item": "Stygian Moss Powder", "quantity": 1 },
+      { "item": "Shadeshroom Powder", "quantity": 1 },
+      { "item": "Tempered Vial", "quantity": 1 }
     ]
   }
 ]

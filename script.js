@@ -1695,6 +1695,12 @@ function renderRecipeCardHTML(recipe) {
     </div>
   ` : '';
 
+  // Alchemy consumables (potions/serums/tinctures) are the first recipes
+  // whose result has its own flavor text and use-effect, same idea as an
+  // item's description/effect — recipes don't have a matching items.json
+  // entry to show that on, so it lives on the recipe card itself instead.
+  const flavor = [recipe.effect, recipe.description].filter(Boolean);
+
   return `
     <div class="item-card item-card-recipe" data-recipe-slug="${escapeAttr(recipe.slug)}">
       <div class="item-card-header">
@@ -1704,6 +1710,7 @@ function renderRecipeCardHTML(recipe) {
       </div>
       <div class="item-card-body">
         ${fields.length ? `<div class="item-card-grid">${fields.map(f => `<div class="item-card-field"><span class="item-card-field-label">${f.label}</span><span>${f.value}</span></div>`).join('')}</div>` : ''}
+        ${flavor.length ? `<div class="item-card-section item-card-section-flavor">${flavor.map(escapeAttr).join('<br><br>')}</div>` : ''}
         ${componentsHtml}
       </div>
     </div>

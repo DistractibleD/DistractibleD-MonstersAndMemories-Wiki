@@ -280,6 +280,12 @@ extending it the same way as new fields show up on future cards, rather than gue
   needed 2026-07-06 for Tanning, see below, where a single pelt processes into "24x Rawhide
   Scraps") — shown on the card as a "Yields" field. Every recipe without this field is still
   assumed to produce exactly one of `name`, same as before this field existed.
+- `effect` / `description` — free-text flavor for the crafted result itself (first needed
+  2026-07-07 for Alchemy potions/serums/tinctures, which have real use-effects the way an
+  item does). Same convention as the matching fields on an item: `effect` for the mechanical
+  "On Click. Any Slot. Cast Time: Xs, Level: N" line, `description` for pure flavor text.
+  Rendered on the recipe card the same way an item card shows its flavor text — most recipes
+  (a sword, a bar of metal) have neither and won't show this section at all.
 
 **The colored difficulty badge itself was removed from the Crafting page on 2026-07-03**
 (the user's call — a color is only accurate for whichever one user's skill it was captured

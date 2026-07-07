@@ -328,3 +328,28 @@ properly-formed "Patched Rawhide Gorget" row already exists elsewhere in the sam
 own correct Tattered Rawhide Gorget input. Recorded in `crafting.json` as "Patched Rawhide
 Cloak" (trusting the Item column and its own input material over the one mismatched Result
 cell) — flag to the user if this turns out to be wrong.
+
+## Alchemy, Carpentry, Cooking, Disenchanting, Smelting (2026-07-07)
+
+Same fan-wiki-style tables as Tanning/Leatherworking/Blacksmithing populated these five
+tradeskills (Smelting already had 6 recipes from an earlier in-game capture; only their
+missing `components` were filled in, same non-destructive rule as always). All exact Trivial
+values went straight into `recipeSkillLevel`; unknown ("?") ones were left unset.
+
+One more source inconsistency, same shape as the Patched Rawhide Cloak/Gorget mix-up above:
+the Cauldron combines table's "Lesser Serum of Agility" row has description text about
+Agility, and its own Item/Result name says "Agility," but the in-parentheses effect text
+reads "Lesser Serum of Intelligence (On Click. Any Slot. Cast Time: 5s, Level: 1)" — almost
+certainly a copy-paste error from the adjacent Intelligence row. Recorded in `crafting.json`
+exactly as shown (both the correct name and the mismatched effect text) rather than silently
+"fixing" the effect text — flag to the user if this turns out to matter.
+
+Two gathering skills from the same batch — **Fishing** (a skill chart: fish species, skill
+required, location, rarity, bait) and **Mining** (a skill chart: ore veins, skill range,
+location) — were deliberately left out of `crafting.json` entirely. Neither is a "combine
+components into a result" recipe the way every other tradeskill on this site is; they're
+skill-gated gathering actions with no components to list. Their raw materials (fish species,
+ore veins) also have no known weight/size, so no items.json entries were created for them
+either — Cooking recipes that reference a raw fish (e.g. "Raw Whitefish") just render as
+plain, unlinked text until a real item card for that fish comes in, same as any other
+not-yet-added component.
