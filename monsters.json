@@ -3,6 +3,7 @@
     "name": "a desert bat",
     "slug": "a-desert-bat",
     "image": "images/Monsters/a-desert-bat.jpg",
+    "maps": ["Necropolis (Night Harbor)"],
     "drops": [
       { "item": "Bat Wing" },
       { "item": "Raw Bat Meat" },
@@ -14,6 +15,7 @@
     "name": "a large rat",
     "slug": "a-large-rat",
     "image": "images/Monsters/a-large-rat.jpg",
+    "maps": ["Necropolis (Night Harbor)"],
     "drops": [
       { "item": "Raw Rat Meat" },
       { "item": "Rat Ear" },
@@ -24,6 +26,7 @@
     "name": "a young crypt scarab",
     "slug": "a-young-crypt-scarab",
     "image": "images/Monsters/a-young-crypt-scarab.jpg",
+    "maps": ["Necropolis (Night Harbor)"],
     "drops": [
       { "item": "Crypt Scarab Eye" },
       { "item": "Crypt Scarab Leg" }
@@ -40,6 +43,7 @@
     "name": "a rotting skeleton",
     "slug": "a-rotting-skeleton",
     "image": "images/Monsters/a-rotting-skeleton.jpg",
+    "maps": ["Necropolis (Night Harbor)"],
     "drops": [
       { "item": "Bone Chips" },
       { "item": "Skeleton Jawbone" },
