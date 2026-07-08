@@ -3810,5 +3810,27 @@
     "size": "Small",
     "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Corroded Bronze Kite Shield",
+    "slug": "corroded-bronze-kite-shield",
+    "image": "images/items/corroded-bronze-kite-shield.jpg",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Secondary",
+    "ac": 8,
+    "weight": 5.0,
+    "size": "Large",
+    "classes": ["BRD", "FTR", "INQ", "PAL", "RNG", "SHD"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Glinting Crystallized Magic",
+    "slug": "glinting-crystallized-magic",
+    "image": "images/items/glinting-crystallized-magic.jpg",
+    "type": "Misc",
+    "tags": ["MAGIC"],
+    "weight": 0.25,
+    "size": "Small"
   }
 ]
