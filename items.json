@@ -3778,5 +3778,37 @@
     "size": "Small",
     "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Moonrise Staff",
+    "slug": "moonrise-staff",
+    "image": "images/items/moonrise-staff.jpg",
+    "type": "Weapon",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Primary",
+    "twoHanded": true,
+    "damage": 17,
+    "delay": 39,
+    "skill": "Blunt",
+    "stats": { "WIS": 10, "HP": 10, "MANA": 20 },
+    "description": "A gnarled wooden staff adorned with raven feathers and a large cloudy pearl.",
+    "weight": 3.0,
+    "size": "Large",
+    "classes": ["CLR", "DRU", "PAL", "SHM"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Necrotic Chitin Pauldrons",
+    "slug": "necrotic-chitin-pauldrons",
+    "image": "images/items/necrotic-chitin-pauldrons.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Shoulders",
+    "ac": 27,
+    "stats": { "STA": 3, "INT": 3, "HP": 5, "MANA": 10 },
+    "weight": 3.0,
+    "size": "Small",
+    "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"]
   }
 ]

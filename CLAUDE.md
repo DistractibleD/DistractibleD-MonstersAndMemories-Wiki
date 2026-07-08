@@ -349,18 +349,37 @@ Rusty gear + metal scraps → "Tarnished" gear, all confirmed Trivial 20 in thes
 Exact Trivial numbers went straight into `recipeSkillLevel` per the clarification above;
 `"?"` or `"200?"`-style uncertain values were left unset rather than guessed.
 
-Two things from that same batch were deliberately **not** turned into recipe cards:
-- A "Hammer and Chisel Master List" table (worn gear + Hammer and Chisel → raw scraps) —
-  this is salvaging an item you already made for its materials back, not crafting something
-  new, so it doesn't fit the recipe-card model the way Tanning's vat processing or the
-  Corroded/Rusty repair chain does (those produce a new named, wearable item).
+One thing from that same batch was deliberately **not** turned into a recipe card:
 - A "Tarnished Weapon Upgrades" table literally titled "(Needs Updates)" in the source and
   using generic placeholder names ("Rusty Weapon" → "Tarnished Weapon") instead of real item
   names — the source itself flags it as incomplete.
 
-If either of these turns out to matter later, the screenshots would need to be re-requested
-since they were deleted from `images/inbox/` once their usable data was extracted (per the
+If this turns out to matter later, the screenshot would need to be re-requested since it was
+deleted from `images/inbox/` once the rest of the batch's usable data was extracted (per the
 usual rule below).
+
+**Reversed 2026-07-08:** the "Hammer and Chisel Master List" table (worn gear + Hammer and
+Chisel → raw scraps) was originally excluded from `crafting.json` for the reason above —
+salvaging an item you already made for its materials back doesn't fit the normal
+components-produce-a-new-item recipe model. The user explicitly asked to add it anyway
+("these recipes are for dismantling crafted gear and weapons to their components, and is a
+part of the Blacksmithing crafting"), so it's now in `crafting.json` as 93 ordinary-shaped
+Blacksmithing recipes: `components` is `[{ the worn item, quantity 1 or 2 }, { "Hammer and
+Chisel", quantity 1 or 2 }]`, and `name` is the scrap result. Since a handful of source items
+salvage into *two* different scrap types in different quantities (e.g. a weapon giving both
+tier-metal scraps and tier-hide scraps) — which the existing `resultQuantity` field can't
+express (it's one number for one named result) — those recipes fold both into the `name`
+string itself, `"<Item> (xN) & <Item> (xM)"`, the same workaround already used for
+Disenchanting's variable-output recipes (see above). Many of the 93 share an identical `name`
+(e.g. dozens are just "Iron Scraps") since the *source* item differs, not the result — this
+is expected, not a data error; `slug` still disambiguates each one (`<result>-from-<source>`).
+The source table is a fan-wiki-style reference (see the "weaker than a normal capture" caveat
+elsewhere in this file), and it was recorded verbatim even where a row looks internally
+inconsistent — e.g. "Copper Plate Boots" and "Copper Longsword" salvage into *Bronze* Scraps
+rather than Copper Scraps like every other Copper item in the table, and "Tarnished Bronze
+Mace" is the only weapon in its tier that doesn't also yield Rawhide Scraps. Don't
+"correct" these to match the surrounding pattern without a re-confirming screenshot — the
+table might just be wrong, or the game might genuinely be inconsistent here.
 
 ### New items/maps/recipes/monsters come in via `images/inbox/`
 
