@@ -6484,5 +6484,14 @@
       { "item": "Shadeshroom Powder", "quantity": 1 },
       { "item": "Tempered Vial", "quantity": 1 }
     ]
+  },
+  {
+    "name": "Enchant Chest: Minor Health",
+    "slug": "enchant-chest-minor-health",
+    "image": "images/crafting/enchant-chest-minor-health.jpg",
+    "tradeskill": "Enchanting",
+    "effect": "Enchant Chest: Minor Health +5 HP (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small"
   }
 ]
