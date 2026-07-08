@@ -1881,6 +1881,19 @@ function renderGemstoneTablesHTML(tradeskillName) {
   `;
 }
 
+// Matched against the local search box below — recipe name plus every
+// ingredient/tool in its components list (both are just entries in the same
+// `components` array; the schema doesn't distinguish a "tool" from a
+// consumed material), and the result's flavor text where it has one.
+function recipeSearchHaystack(recipe) {
+  return [
+    recipe.name,
+    recipe.effect || '',
+    recipe.description || '',
+    (recipe.components || []).map(c => c.item).join(' ')
+  ].join(' ').toLowerCase();
+}
+
 async function renderCraftingRecipes(container, tradeskillName) {
   const tradeskill = tradeskillsData.find(ts => ts.name === tradeskillName);
   if (tradeskillName === 'Jewelcrafting') await ensureGemstonesData();
@@ -1888,7 +1901,7 @@ async function renderCraftingRecipes(container, tradeskillName) {
   // order the game's own crafting window lists them in — not alphabetically.
   // Recipes without a known listOrder yet (no crafting-window screenshot seen
   // for them) sort after all known ones, alphabetically among themselves.
-  const recipes = craftingData
+  const allRecipes = craftingData
     .filter(r => r.tradeskill === tradeskillName)
     .sort((a, b) => {
       const ao = a.listOrder ?? Infinity;
@@ -1908,15 +1921,58 @@ async function renderCraftingRecipes(container, tradeskillName) {
     ${
       tradeskill && tradeskill.status === 'planned'
         ? '<p>This tradeskill hasn\'t been implemented in the game yet.</p>'
-        : recipes.length
-          ? `<div class="craft-recipe-grid">${recipes.map(renderRecipeCardHTML).join('')}</div>`
+        : allRecipes.length
+          ? `
+            <input type="search" id="craft-recipe-search" class="items-search" placeholder="Search ${escapeAttr(tradeskillName)} recipes, ingredients, tools..." autocomplete="off">
+            <p class="items-count" id="craft-recipe-count"></p>
+            <div class="craft-recipe-grid" id="craft-recipe-grid"></div>
+          `
           : '<p>No recipes yet for this tradeskill.</p>'
     }
   `;
 
-  if (recipes.length) {
-    setupItemTooltip(container.querySelector('.craft-recipe-grid'));
+  container.querySelector('#craft-back-link').addEventListener('click', e => {
+    e.preventDefault();
+    renderCraftingCategories(container);
+  });
+
+  if (!allRecipes.length) return;
+
+  const searchBox = container.querySelector('#craft-recipe-search');
+  const grid = container.querySelector('#craft-recipe-grid');
+  const countEl = container.querySelector('#craft-recipe-count');
+
+  function attachRecipeLinkHandlers() {
+    grid.querySelectorAll('.craft-result-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const item = findItemByName(link.dataset.recipe);
+        if (item) goToItem(item, { tradeskill: tradeskillName, name: link.dataset.recipe });
+      });
+    });
+
+    grid.querySelectorAll('.craft-component-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const item = findItemByName(link.dataset.item);
+        if (item) goToItem(item, { tradeskill: tradeskillName, name: link.dataset.recipe });
+      });
+    });
   }
+
+  function updateGrid() {
+    const query = searchBox.value.toLowerCase().trim();
+    const filtered = query ? allRecipes.filter(r => recipeSearchHaystack(r).includes(query)) : allRecipes;
+    grid.innerHTML = filtered.length
+      ? filtered.map(renderRecipeCardHTML).join('')
+      : '<p class="items-empty">No recipes match your search.</p>';
+    countEl.textContent = query ? `Showing ${filtered.length} of ${allRecipes.length} recipes` : '';
+    setupItemTooltip(grid);
+    attachRecipeLinkHandlers();
+  }
+
+  searchBox.addEventListener('input', updateGrid);
+  updateGrid();
 
   if (pendingHighlightRecipe) {
     const slug = pendingHighlightRecipe;
@@ -1929,27 +1985,6 @@ async function renderCraftingRecipes(container, tradeskillName) {
       card.addEventListener('animationend', () => card.classList.remove('recipe-flash'), { once: true });
     }
   }
-
-  container.querySelectorAll('.craft-result-link').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const item = findItemByName(link.dataset.recipe);
-      if (item) goToItem(item, { tradeskill: tradeskillName, name: link.dataset.recipe });
-    });
-  });
-
-  container.querySelectorAll('.craft-component-link').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const item = findItemByName(link.dataset.item);
-      if (item) goToItem(item, { tradeskill: tradeskillName, name: link.dataset.recipe });
-    });
-  });
-
-  container.querySelector('#craft-back-link').addEventListener('click', e => {
-    e.preventDefault();
-    renderCraftingCategories(container);
-  });
 }
 
 /* ============================================
