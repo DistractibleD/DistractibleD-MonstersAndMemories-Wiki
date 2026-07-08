@@ -771,6 +771,96 @@ standard two-arc-per-circle construction (`M (cx-r) cy A r r 0 1 0 (cx+r) cy A r
 current `ICON_DEFS` as settled for the categories it covers unless the user asks to revisit
 the style again or expand coverage.
 
+**Third pass (2026-07-08) — supersedes the second pass above.** The user posted another
+copy of the "Monsters & Memories" reference sheet and explicitly said to ignore every
+earlier icon-design instruction and start fresh from it, covering both item categories and
+crafting categories, inventing a matching-style icon for anything the sheet doesn't show.
+Two concrete changes from the second pass:
+- **Melee weapons are now tilted ~45°** (`<g transform="rotate(45 12 12)">` wrapping an
+  otherwise-upright shape) instead of drawn straight up-and-down — the sheet draws every
+  one-handed/two-handed weapon on a dynamic diagonal, and this was the most visually obvious
+  trait to match. Armor, shields, jewelry, and most tradeskill tool icons stay upright,
+  matching the sheet (only a few naturally "swung tool" tradeskill icons — Carpentry,
+  Tailoring, Mining, Skinning, Lumberjacking, Stone Cutting, Archaeology — also got the
+  diagonal treatment, for the same reason).
+- **`TRADESKILL_ICON` now covers every tradeskill in `tradeskills.json`, not just
+  Blacksmithing/Tailoring** — about half were drawn straight from the sheet by name match
+  (Alchemy, Brewing, Carpentry, Cooking, Fletching, Jewelcrafting, Leatherworking, Masonry,
+  Mining, Fishing, Skinning, Enchanting, Tinkering, Woodworking, and "Poison Making" mapped
+  to the sheet's "Poisoncrafting" flask+skull icon); the rest of the sheet's tradeskill icons
+  had no matching tradeskill in this game's data and were left unused (Baking, Botany,
+  Scribing, Engineering, Prospecting, Appraisal, Packing — though Packing's backpack shape
+  was reused for the `container` item-type icon, and Botany's leaf shape informed the new
+  `herbalism` icon). Every tradeskill this game actually has that the sheet didn't cover
+  (Animal Taming, Archaeology, Disenchanting, Farming, Fermenting, First Aid, Foraging,
+  Navigation, Pottery, Riding, Smelting, Spellcrafting, Spinning, Spycraft, Stone Cutting,
+  Survival, Tanning, Wagoneering, Wilderness) got an original icon in the same flat
+  gold/teal-silhouette language, per the user's "create one that fits" instruction — see
+  `ICON_DEFS` in `script.js` for the full set.
+- A new `scimitar` weapon icon was added (curved blade, distinct from the straight-bladed
+  `sword`) since the sheet draws it as its own weapon and this game already has a real
+  scimitar item ("Rusty Scimitar") — `weaponIconKey` now checks the name for "scimitar"
+  before falling through to the generic sword shapes.
+- **The Crafting page's tradeskill grid (`renderCraftingCategories`) shows an icon per card
+  for the first time** (`.craft-card-icon`, styled like `.items-category-card-icon` but with
+  the teal `--accent-craft`) — previously that grid had no icons at all, name/count only.
+  `TRADESKILL_ICON` covering every tradeskill (previous bullet) is what made this possible.
+- Armor material icons (`plate`/`chain`/`leather`/`cloth`/`armor`) were redrawn as a shared
+  tunic silhouette (shoulders, V-neck, two sleeves) with a per-material treatment layered on
+  top — `chain` gets a dot-grid texture, `plate` gets an evenodd-cut center groove + belt
+  line, `cloth` gets longer sleeves and a flared hem (robe), `leather` is the plain short-
+  sleeve tunic, `armor` (the no-material-match fallback) drops the sleeves entirely — instead
+  of each material being an unrelated one-off shape like the second pass.
+- Jewelry, food, drink, and the generic crafting-material fallback (`ring`/`earring`/
+  `necklace`/`food`/`drink`/`material`) were **not** on the reference sheet and were left
+  unchanged from the second pass — they already followed the same flat-silhouette language,
+  so redrawing them from scratch wasn't needed to "match" a sheet that doesn't cover them.
+
+**Fourth pass (2026-07-08, same day) — supersedes the third pass above.** The user posted a
+second, much more precise reference sheet the same day and said they really liked its look
+and to match it as closely as possible. Unlike the third pass's sheet, this one showed **all
+38 tradeskills by their exact in-game names** (no inventing needed for any of them) and
+rendered every icon as **a colored circular badge** (a muted, material-associated background
+color per category — stone grey, leather brown, slate blue, etc. — with a cream glyph on
+top), not a flat single-color silhouette. This changed the actual rendering architecture, not
+just individual shapes:
+- **`ICON_DEFS[key]` is now glyph-only markup; a parallel `ICON_BG[key]` map holds each
+  icon's background hex color; `svgIcon(key)` assembles the two** into
+  `<svg><circle fill="${bg}"/><g fill="#f3e9d6">${glyph}</g></svg>`. Icons no longer inherit
+  `currentColor` from their card — the gold-items/teal-recipes distinction from earlier
+  passes is now moot for icon *color* specifically (card names, badges, and borders still use
+  gold/teal elsewhere, so items vs. recipes are still visually distinct by those cues).
+  `.type-icon { fill: currentColor }` in `style.css` is now vestigial for icon coloring
+  (harmless to leave; the `<circle>`/`<g>` elements' own `fill` attributes win) but nothing
+  currently relies on removing it.
+- **Weapon icons collapsed to the sheet's own coarser categories** — 1H/2H × Bludgeoning/
+  Slashing/Piercing, plus Archery and Throwing — since that's all this sheet draws (no
+  separate axe/mace/hammer/dagger/scythe/scimitar shapes the way the third pass had).
+  `weaponIconKey` was simplified accordingly (`bludgeoning1h`/`bludgeoning2h`/`slashing1h`/
+  `slashing2h`/`piercing1h`/`piercing2h`/`archery`/`throwing`/`ammo`), trading away the third
+  pass's per-weapon-name visual specificity (a mace no longer looks different from a hammer)
+  for fidelity to this sheet — an explicit, deliberate tradeoff per the user's instruction to
+  match the sheet as closely as possible, not a regression to fix later.
+- Several tradeskill icons changed concept to match this sheet's actual drawings, replacing
+  third-pass guesses that turned out to depict something else once the exact sheet was seen:
+  Navigation is a ship's wheel (was a compass), Riding is a horse head (was a horseshoe),
+  Wagoneering is a covered wagon (was a wagon wheel), Wilderness is mountains (was a pine
+  tree), Smelting is a goblet/crucible (was a furnace), Poison Making is a bottle with a
+  skull-and-crossbones and a drip (was a plain skull flask), Spinning is a spinning wheel
+  (was a thread-wrapped spool), Spycraft is a hooded figure (was an eye-holed mask), Skinning
+  is two crossed knives (was one diagonal knife), Farming is a wheat sheaf (was a sprout),
+  Survival is a tent (was a campfire), Herbalism is a mortar and pestle (was a leaf), and
+  Lumberjacking is a single log (was a log-plus-axe combo, since the sheet's icon is just a
+  log — Woodworking already covers tool-in-use imagery).
+- **The armor material shapes (`plate`/`chain`/`leather`/`cloth`/`armor`), shields, jewelry,
+  food/drink/container, and the generic material fallback kept their third-pass shapes** —
+  only their color changed (a background circle was added per `ICON_BG`) — since this sheet's
+  Armor/Held sections show the same four materials + shield the third pass had already drawn
+  reasonably close to.
+- The `craft-card`/`items-category-card` CSS (`.craft-card-icon`/`.items-category-card-icon`
+  `color: var(--accent-craft)`/`var(--accent)`) is also now vestigial for the same
+  currentColor reason above — left in place, harmless.
+
 **Item cards use the gold `--accent`; recipe cards use the teal `--accent-craft`, with the
 recipe's own name colored teal and its tradeskill shown as a badge where an item card would
 show its tags.** This was a deliberate, explicit request from the user ("make a small

@@ -817,6 +817,9 @@ html, body {
   margin-top: 18px;
 }
 .craft-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -824,7 +827,21 @@ html, body {
   cursor: pointer;
 }
 .craft-card:hover {
-  border-color: var(--accent-dim);
+  border-color: var(--accent-craft-dim);
+}
+.craft-card-icon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  color: var(--accent-craft);
+}
+.craft-card-icon .type-icon {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+.craft-card-body {
+  min-width: 0;
 }
 .craft-card-name {
   font-family: 'Sora', sans-serif;
@@ -832,7 +849,7 @@ html, body {
   font-size: 0.95rem;
 }
 .craft-card:hover .craft-card-name {
-  color: var(--accent);
+  color: var(--accent-craft);
 }
 .craft-card-count {
   color: var(--text-dim);

@@ -456,85 +456,190 @@ const ITEM_RESIST_ORDER = ['FIRE', 'COLD', 'MAGIC', 'POISON', 'DISEASE', 'CORRUP
 /* ============================================
    Item type icons
    Shown in the item card header instead of a plain type-initial letter.
-   Solid gold silhouettes (2026-07-06), redrawn from a reference sheet of the
-   game's own equipment icons the user provided — not copied pixel-for-pixel
-   (that sheet's icons are its own asset), but shape/proportions matched to
-   it. Replaced an earlier outline/stroke style the user was never fully
-   happy with. Every shape here is closed and relies on the parent
-   `.type-icon` SVG having `fill: currentColor` (see style.css) — no per-path
-   fill/stroke attributes needed, so a card's icon always matches its card's
-   accent color (gold on item cards, teal on recipe cards) automatically.
-   Each entry is the inner markup for a 0 0 24 24 viewBox <svg>.
+   Redrawn 2026-07-08 (twice that day) from "Monsters & Memories" icon
+   reference sheets the user posted. The second sheet that day was far more
+   precise than the first (exact tradeskill names, per-category badge
+   colors) and the user asked to match it as closely as possible,
+   superseding the first same-day pass's flat single-color approach. Each
+   icon is now a colored circle background (`ICON_BG`, sampled from the
+   sheet's own palette) plus a cream glyph on top (`ICON_DEFS`), assembled
+   by `svgIcon()` — not copied pixel-for-pixel (the sheet's painterly
+   rendering is its own asset), but shape/orientation/color matched to it.
+   Melee weapons stay tilted ~45° (`<g transform="rotate(45 12 12)">`
+   wrapping an upright shape), matching the sheet's dynamic diagonal poses.
+   Weapon icons were also collapsed to the sheet's coarser 1H/2H ×
+   Bludgeoning/Slashing/Piercing (+ Archery/Throwing) categories instead of
+   a shape per weapon name — see `weaponIconKey`. Categories the sheet
+   doesn't cover (jewelry, food/drink, generic crafting material) kept
+   their prior shapes, just adapted to the bg+glyph structure with a
+   palette-matching color. See CLAUDE.md for the full history of both
+   same-day passes.
    ============================================ */
 const ICON_DEFS = {
-  sword: `<path d="M12 1 L13.3 5 L12.6 15.5 L11.4 15.5 L10.7 5 Z"/><rect x="7" y="15.5" width="10" height="1.6"/><rect x="11" y="17.1" width="2" height="4"/><circle cx="12" cy="22" r="1.4"/>`,
-  sword2h: `<path d="M12 1 L13.6 4 L12.8 14 L11.2 14 L10.4 4 Z"/><rect x="6" y="14" width="12" height="1.8"/><rect x="10.8" y="15.8" width="2.4" height="6"/><circle cx="12" cy="22.5" r="1.5"/>`,
-  dagger: `<path d="M12 6 L13 8.5 L12.5 15 L11.5 15 L11 8.5 Z"/><rect x="9.5" y="15" width="5" height="1.2"/><rect x="11" y="16.2" width="2" height="2.8"/><circle cx="12" cy="19.5" r="1"/>`,
-  axe: `<rect x="11.3" y="2" width="1.4" height="20"/><path d="M12 5 C7 4 4.5 8 6.5 12.5 C9.2 11 11.5 7 12 5 Z"/>`,
-  axe2h: `<rect x="11.2" y="1.5" width="1.6" height="21"/><path d="M12.3 3.5 C5.5 2.3 2 8.5 5 14.5 C9 12 11.7 6 12.3 3.5 Z"/>`,
-  mace: `<rect x="11.2" y="9" width="1.6" height="13"/><circle cx="12" cy="6" r="3.6"/><path d="M12 0.8 L13.1 3.2 L10.9 3.2 Z"/><path d="M17.6 6 L15.2 7.1 L15.2 4.9 Z"/><path d="M6.4 6 L8.8 4.9 L8.8 7.1 Z"/><path d="M14.5 2.3 L13.9 4.5 L12.4 3 Z"/><path d="M9.5 2.3 L11.6 3 L10.1 4.5 Z"/>`,
-  hammer: `<rect x="11.2" y="8" width="1.6" height="14"/><rect x="5.5" y="3.5" width="13" height="5" rx="1"/>`,
-  maul2h: `<rect x="11.1" y="9" width="1.8" height="13"/><rect x="4.5" y="2.5" width="15" height="7" rx="1.2"/>`,
-  spear: `<rect x="11.3" y="8" width="1.4" height="14"/><path d="M12 1 L14.3 8.5 L9.7 8.5 Z"/>`,
-  scythe: `<rect x="11.6" y="7" width="1.3" height="15" transform="rotate(8 12 14)"/><path d="M17.5 4 C21 6 20 11 15.5 11.5 C12.5 11.8 10.5 10 10.8 8 C13 8.7 16 7 17.5 4 Z"/>`,
-  bow: `<path d="M7.5 2 C1 7.5 1 16.5 7.5 22 C5 16.5 5.4 7.5 7.5 2 Z"/><rect x="7.1" y="2.5" width="0.6" height="19"/>`,
-  ammo: `<path d="M6 20 L17 9 L18.4 10.4 L7.4 21.4 Z"/><path d="M15.5 6.5 L21 4 L18.5 9.5 Z"/><path d="M6 20 L4.5 15.5 L9 17 Z"/>`,
-  throwing: `<path d="M5.5 18 L9 14.5 L9.8 15.3 L6.3 18.8 Z"/><path d="M9 14.5 L10.6 12.7 L10 14.9 Z"/><path d="M8.5 19.5 L12.5 15.5 L13.3 16.3 L9.3 20.3 Z"/><path d="M12.5 15.5 L14 13.8 L13.5 15.9 Z"/><path d="M12 21 L16 17 L16.8 17.8 L12.8 21.8 Z"/><path d="M16 17 L17.5 15.2 L17 17.4 Z"/>`,
-  shield: `<path d="M12 2.2 L19 4.8 L19 11.5 C19 17 15.5 20.3 12 21.8 C8.5 20.3 5 17 5 11.5 L5 4.8 Z"/>`,
-  plate: `<path d="M8 4.5 L10.3 4.5 L12 7.3 L13.7 4.5 L16 4.5 L17.3 9.5 L16.6 13.2 L7.4 13.2 L6.7 9.5 Z"/><path d="M7.6 14.4 L16.4 14.4 L15.7 21 L8.3 21 Z"/>`,
-  chain: `<path d="M9.5 3 L14.5 3 L15.3 5.8 L18 7 L16.8 9.5 L15.6 8.5 L15.8 18 L14.6 18 L14.6 19.6 L13.4 18 L13.4 19.6 L12.2 18 L12.2 19.6 L11 18 L11 19.6 L9.8 18 L9.8 19.6 L8.6 18 L8.8 8.5 L7.6 9.5 L6.4 7 L9.1 5.8 Z"/>`,
-  leather: `<path d="M9.5 3 L14.5 3 L15.5 6 L18 7.5 L16.7 10 L15.5 8.8 L15.7 21 L8.3 21 L8.5 8.8 L7.3 10 L6 7.5 L8.5 6 Z"/>`,
-  cloth: `<path d="M9.3 3 C9.6 4.7 10.6 5.6 12 5.6 C13.4 5.6 14.4 4.7 14.7 3 L17.5 7.5 L18.6 21 L5.4 21 L6.5 7.5 Z"/>`,
-  armor: `<path d="M8.2 4.5 C8.6 6.3 10.1 7.2 12 7.2 C13.9 7.2 15.4 6.3 15.8 4.5 L17.3 9 L16.6 21 L7.4 21 L6.7 9 Z"/>`,
+  bludgeoning1h: `<g transform="rotate(45 12 12)"><rect x="11.2" y="9" width="1.6" height="13"/><circle cx="12" cy="6" r="3.2"/><path d="M12 1 L12.9 3.2 L11.1 3.2 Z"/><path d="M17.3 6 L15.1 6.9 L15.1 5.1 Z"/><path d="M6.7 6 L8.9 5.1 L8.9 6.9 Z"/><path d="M14.6 2.6 L14.1 4.6 L12.7 3.1 Z"/><path d="M9.4 2.6 L11.3 3.1 L9.9 4.6 Z"/></g>`,
+  bludgeoning2h: `<g transform="rotate(45 12 12)"><rect x="11.1" y="9" width="1.8" height="13"/><rect x="4.8" y="3" width="14.4" height="6.5" rx="1.2"/></g>`,
+  slashing1h: `<g transform="rotate(45 12 12)"><path d="M12 1.5 L13 4.5 L12.5 15 L11.5 15 L11 4.5 Z"/><rect x="8.3" y="15" width="7.4" height="1.5"/><rect x="11" y="16.5" width="2" height="4.3"/><circle cx="12" cy="21.7" r="1.3"/></g>`,
+  slashing2h: `<g transform="rotate(45 12 12)"><path d="M12 0.8 L13.4 4 L12.7 13.5 L11.3 13.5 L10.6 4 Z"/><rect x="7" y="13.5" width="10" height="1.8"/><rect x="10.8" y="15.3" width="2.4" height="5.2"/><circle cx="12" cy="21.3" r="1.4"/></g>`,
+  piercing1h: `<g transform="rotate(45 12 12)"><rect x="11.3" y="8" width="1.4" height="14"/><path d="M12 2 L14 8 L10 8 Z"/><rect x="9.3" y="8.6" width="5.4" height="1"/></g>`,
+  piercing2h: `<g transform="rotate(45 12 12)"><rect x="11.3" y="6" width="1.4" height="16"/><path d="M12 1 L14.3 7.5 L9.7 7.5 Z"/><rect x="8.8" y="8.1" width="6.4" height="1.1"/></g>`,
+  archery: `<path d="M7 2 C1 7.5 1 16.5 7 22 C4.5 16.5 4.9 7.5 7 2 Z"/><rect x="6.6" y="2.3" width="0.6" height="19.4"/><g transform="rotate(-25 11 12)"><rect x="4" y="11.5" width="14" height="1"/><path d="M16.5 8.7 L20 7.3 L18.6 10.8 Z"/></g>`,
+  ammo: `<path d="M9 20 L8 8 C7.9 6.5 8.8 5.5 10 5.5 L14 5.5 C15.2 5.5 16.1 6.5 16 8 L15 20 Z"/><rect x="7.8" y="7.5" width="8.4" height="1.3" rx="0.5"/><rect x="7.8" y="11" width="8.4" height="1.3" rx="0.5"/><path d="M10 5.5 L9.3 1 L11 2.5 Z"/><path d="M12.2 5.5 L12.8 0.5 L14.2 2.3 Z"/>`,
+  throwing: `<g transform="rotate(45 12 12)"><rect x="7.4" y="4" width="1.1" height="15"/><path d="M7.95 2 L9.4 5 L6.5 5 Z"/><path d="M7.4 17.5 L6 20 L8.95 18.8 Z"/><rect x="11.45" y="2.5" width="1.1" height="17"/><path d="M12 0.5 L13.45 3.5 L10.55 3.5 Z"/><path d="M11.45 18 L10.05 20.5 L13 19.3 Z"/><rect x="15.5" y="4" width="1.1" height="15"/><path d="M16.05 2 L17.5 5 L14.6 5 Z"/><path d="M15.5 17.5 L14.1 20 L17.05 18.8 Z"/></g>`,
+  shield: `<path fill-rule="evenodd" d="M12 2.2 L19 4.8 L19 11.5 C19 17 15.5 20.3 12 21.8 C8.5 20.3 5 17 5 11.5 L5 4.8 Z M11.6 5.2 L12.4 5.2 L12.4 16.3 L11.6 16.3 Z"/>`,
+  plate: `<path fill-rule="evenodd" d="M7.5 7 L9.6 4.6 L12 6.6 L14.4 4.6 L16.5 7 L17.2 9 L16.2 21 L7.8 21 L6.8 9 Z M11.7 7.5 L12.3 7.5 L12.3 20.5 L11.7 20.5 Z M7.2 13.3 L16.8 13.3 L16.8 14.1 L7.2 14.1 Z"/><path d="M7.5 7 L4.3 8.7 L5.2 12.3 L7.9 10.4 Z"/><path d="M16.5 7 L19.7 8.7 L18.8 12.3 L16.1 10.4 Z"/>`,
+  chain: `<path d="M7.5 7 L9.6 4.6 L12 6.6 L14.4 4.6 L16.5 7 L17.2 9 L16.2 21 L7.8 21 L6.8 9 Z"/><path d="M7.5 7 L4.3 8.7 L5.2 12.3 L7.9 10.4 Z"/><path d="M16.5 7 L19.7 8.7 L18.8 12.3 L16.1 10.4 Z"/><circle cx="9.3" cy="10.5" r="0.55"/><circle cx="12" cy="10.5" r="0.55"/><circle cx="14.7" cy="10.5" r="0.55"/><circle cx="9.3" cy="13.5" r="0.55"/><circle cx="12" cy="13.5" r="0.55"/><circle cx="14.7" cy="13.5" r="0.55"/><circle cx="9.3" cy="16.5" r="0.55"/><circle cx="12" cy="16.5" r="0.55"/><circle cx="14.7" cy="16.5" r="0.55"/><circle cx="9.3" cy="19" r="0.55"/><circle cx="12" cy="19" r="0.55"/><circle cx="14.7" cy="19" r="0.55"/>`,
+  leather: `<path d="M7.5 7 L9.6 4.6 L12 6.6 L14.4 4.6 L16.5 7 L17.2 9 L16.2 21 L7.8 21 L6.8 9 Z"/><path d="M7.5 7 L4.3 8.7 L5.2 12.3 L7.9 10.4 Z"/><path d="M16.5 7 L19.7 8.7 L18.8 12.3 L16.1 10.4 Z"/>`,
+  cloth: `<path d="M7.5 7 L9.6 4.6 L12 6.6 L14.4 4.6 L16.5 7 L17.5 9.5 L18.3 21.5 L5.7 21.5 L6.5 9.5 Z"/><path d="M7.5 7 L3.8 9 L4.6 16 L7.6 13.5 Z"/><path d="M16.5 7 L20.2 9 L19.4 16 L16.4 13.5 Z"/>`,
+  armor: `<path d="M8.2 5 C8.6 6.8 10.1 7.6 12 7.6 C13.9 7.6 15.4 6.8 15.8 5 L17.3 9.5 L16.5 21 L7.5 21 L6.7 9.5 Z"/>`,
   ring: `<path fill-rule="evenodd" d="M6.5 15 A5.5 5.5 0 1 0 17.5 15 A5.5 5.5 0 1 0 6.5 15 Z M9 15 A3 3 0 1 1 15 15 A3 3 0 1 1 9 15 Z"/><path d="M12 5 L14.4 8.6 L12 12.2 L9.6 8.6 Z"/>`,
   earring: `<path fill-rule="evenodd" d="M10 4 A2 2 0 1 0 14 4 A2 2 0 1 0 10 4 Z M11 4 A1 1 0 1 1 13 4 A1 1 0 1 1 11 4 Z"/><path d="M12 6.5 L14.3 11 L12 15.5 L9.7 11 Z"/>`,
   necklace: `<path fill-rule="evenodd" d="M12 2 C6.5 2 4.3 6 4.3 10.2 L6.7 10.2 C6.7 6.9 8.5 4.3 12 4.3 C15.5 4.3 17.3 6.9 17.3 10.2 L19.7 10.2 C19.7 6 17.5 2 12 2 Z"/><path d="M12 12 L14.6 16.8 L12 21.5 L9.4 16.8 Z"/>`,
   food: `<path d="M12 9 C7.5 9 5.5 12 5.5 15.3 C5.5 18.7 8.3 21.5 12 21.5 C15.7 21.5 18.5 18.7 18.5 15.3 C18.5 12 16.5 9 12 9 Z"/><path d="M12 9 C12 6.3 10.6 4.8 9.1 4.1 C8.7 5.9 9.6 7.6 12 9 Z"/>`,
   drink: `<path d="M6 6 L16.5 6 L16.5 20 C16.5 21.1 15.6 22 14.5 22 L8 22 C6.9 22 6 21.1 6 20 Z"/><path fill-rule="evenodd" d="M16.5 8.5 C20.5 8.5 20.5 15.5 16.5 15.5 L16.5 13.3 C18.3 13.3 18.3 10.7 16.5 10.7 Z"/>`,
-  container: `<path d="M9 4.5 C9 6.7 10.3 8.3 12 8.3 C13.7 8.3 15 6.7 15 4.5 L15 3.3 L9 3.3 Z"/><path d="M7.5 9 L16.5 9 L18 21.3 C18.1 21.7 17.8 22 17.4 22 L6.6 22 C6.2 22 5.9 21.7 6 21.3 Z"/><path d="M9.3 11 L14.7 11 L13.8 15.3 L10.2 15.3 Z"/>`,
-  blacksmithing: `<path d="M4 11 L15 11 L19.5 9 L19.5 12.5 L15 13.3 L15 15.5 L9.5 15.5 L9.5 13.3 L4 13.3 Z"/><path d="M10.5 15.5 L14.5 15.5 L15.5 21 L9.5 21 Z"/>`,
-  tailoring: `<path fill-rule="evenodd" d="M12 2.5 C13.1 2.5 14 3.5 14 4.8 C14 6.1 13.1 7.1 12 7.1 C10.9 7.1 10 6.1 10 4.8 C10 3.5 10.9 2.5 12 2.5 Z M12 3.7 C12.5 3.7 12.9 4.2 12.9 4.8 C12.9 5.4 12.5 5.9 12 5.9 C11.5 5.9 11.1 5.4 11.1 4.8 C11.1 4.2 11.5 3.7 12 3.7 Z"/><path d="M11.4 7 L12.6 7 L13.4 20.5 L12 22 L10.6 20.5 Z"/><path d="M8.5 9 C10.3 9 10.6 11 8.8 11.4 C10.8 11.6 11 13.6 9.2 14 L8.9 12.9 C9.8 12.7 9.7 11.9 8.6 11.9 L8.9 10.8 C10 10.6 9.9 9.9 8.8 10 Z"/>`,
+  container: `<path d="M9.3 3.5 C9.3 5.8 10.4 7.2 12 7.2 C13.6 7.2 14.7 5.8 14.7 3.5 L14.7 3 L9.3 3 Z"/><path fill-rule="evenodd" d="M7 8.5 C7 7 8.5 6 12 6 C15.5 6 17 7 17 8.5 L17.8 20.5 C17.9 21.3 17.2 22 16.4 22 L7.6 22 C6.8 22 6.1 21.3 6.2 20.5 Z M11.2 11 L10.5 11 L10.2 15 L10.7 19.3 L11.4 19.3 L11.6 15 Z M13.8 11 L13.1 11 L12.9 15 L13.1 19.3 L13.8 19.3 L14.1 15 Z"/>`,
   material: `<path d="M6 14 L9 6 L15 5 L19 11 L17 19 L8 20 Z"/>`,
+  alchemy: `<path d="M10.5 2 L13.5 2 L13.5 3.2 L14.5 3.2 L14.5 4.2 L13.5 4.2 L13.5 8 L16.5 15.5 C17.3 17.6 15.8 20 13.4 20 L10.6 20 C8.2 20 6.7 17.6 7.5 15.5 L10.5 8 Z"/>`,
+  blacksmithing: `<path d="M4 11 L15 11 L19.5 9 L19.5 12.5 L15 13.3 L15 15.5 L9.5 15.5 L9.5 13.3 L4 13.3 Z"/><path d="M10.5 15.5 L14.5 15.5 L15.5 21 L9.5 21 Z"/>`,
+  brewing: `<path fill-rule="evenodd" d="M8 3 L16 3 L17 8 C17.5 10 17.5 14 17 16 L16 21 L8 21 L7 16 C6.5 14 6.5 10 7 8 Z M6.9 6.6 L17.1 6.6 L17.1 7.6 L6.9 7.6 Z M6.5 12.3 L17.5 12.3 L17.5 13.3 L6.5 13.3 Z M6.9 16.9 L17.1 16.9 L17.1 17.9 L6.9 17.9 Z"/>`,
+  carpentry: `<g transform="rotate(45 12 12)"><path d="M5 19 L16 3 L17.6 4.4 L6.6 20.4 Z"/><rect x="3.2" y="16.9" width="4.6" height="3.4" rx="0.8" transform="rotate(45 5.5 18.6)"/></g>`,
+  cooking: `<path d="M6 12 L18 12 L17.3 20 C17.2 21.1 16.3 22 15.2 22 L8.8 22 C7.7 22 6.8 21.1 6.7 20 Z"/><rect x="5" y="10.5" width="14" height="1.8" rx="0.9"/><path d="M3.5 12.5 L5.5 12.5 L5.5 15 L3.5 15 Z"/><path d="M18.5 12.5 L20.5 12.5 L20.5 15 L18.5 15 Z"/><path d="M8.5 8.3 C7.7 7.3 8 6.3 9 5.3 C8.3 6.5 9 7.3 9.5 8.1 Z"/><path d="M11.5 8.3 C10.7 7.3 11 6.3 12 5.3 C11.3 6.5 12 7.3 12.5 8.1 Z"/><path d="M14.5 8.3 C13.7 7.3 14 6.3 15 5.3 C14.3 6.5 15 7.3 15.5 8.1 Z"/>`,
+  fletching: `<g transform="rotate(45 12 12)"><rect x="7.4" y="3" width="1.1" height="17"/><path d="M7.95 1 L9.4 4.5 L6.5 4.5 Z"/><path d="M7.4 18 L6 20.5 L8.95 19.3 Z"/><rect x="11.45" y="2" width="1.1" height="18"/><path d="M12 0 L13.45 3.5 L10.55 3.5 Z"/><path d="M11.45 19 L10.05 21.5 L13 20.3 Z"/><rect x="15.5" y="3" width="1.1" height="17"/><path d="M16.05 1 L17.5 4.5 L14.6 4.5 Z"/><path d="M15.5 18 L14.1 20.5 L17.05 19.3 Z"/></g>`,
+  jewelcrafting: `<path fill-rule="evenodd" d="M12 2 L18.5 6.2 L18.5 14 L12 22 L5.5 14 L5.5 6.2 Z M9 7 L15 7 L15 8 L9 8 Z M11.4 8 L12.6 8 L12.6 20 L11.4 20 Z"/>`,
+  leatherworking: `<path d="M12 2 C14 2 14.5 4 13.5 5 C15.5 4.5 17 6 16 8 C18 8 19 10 17.5 11.5 C19 12.5 18.5 15 16.5 15 C17 17 15 18.5 13.5 17.5 C13.5 19.5 11 20.5 10 19 C8.5 20.5 6 19.5 6.5 17.5 C4.5 18 3 16 4.5 14.5 C2.5 14 2.5 11.5 4.5 11 C3.5 9.5 4.5 7.5 6.5 7.5 C6 5.5 8 4 9.5 5 C9.5 3 11 2 12 2 Z"/>`,
+  masonry: `<path d="M12 3 L17 6 L12 9 L7 6 Z"/><path d="M6 7.5 L11 10.5 L11 16 L6 13 Z"/><path d="M13 10.5 L18 7.5 L18 13 L13 16 Z"/><path d="M9.5 12.2 L12 13.7 L14.5 12.2 L14.5 17.7 L12 19.2 L9.5 17.7 Z"/>`,
+  tailoring: `<g transform="rotate(45 12 12)"><rect x="11.4" y="3" width="1.2" height="15" rx="0.6"/><path d="M12 2 L13.5 3.5 L12 5 L10.5 3.5 Z"/><path fill-rule="evenodd" d="M12 16 C14 16 15.5 17.5 15.5 19.3 C15.5 21.1 14 22.5 12.2 22.3 C13.3 21.8 14 20.8 14 19.5 C14 18.1 12.9 17 11.5 17 C11 17 10.5 17.2 10.1 17.5 L9.3 16.6 C10.1 16.2 11 16 12 16 Z"/></g>`,
+  woodworking: `<path d="M4 14 L20 14 L20 17 L4 17 Z"/><path d="M8 10 L16 10 L17.5 14 L6.5 14 Z"/><rect x="10.5" y="6" width="3" height="4.5"/><path d="M13 6.5 C15 6 16.5 7.5 15.5 9 C15 8 14 7.5 13 7.8 Z"/>`,
+  mining: `<g transform="rotate(45 12 12)"><rect x="11.3" y="6" width="1.4" height="16"/><path d="M12 2 C8 2 5 4.5 4 7.5 C6.5 7 9 6.5 12 6.5 C15 6.5 17.5 7 20 7.5 C19 4.5 16 2 12 2 Z"/></g>`,
+  fishing: `<path d="M4 12 C7 8 12 8 15 12 C12 16 7 16 4 12 Z"/><circle cx="6.3" cy="11.3" r="0.7"/><path d="M15 12 L19 9 L18 12 L19 15 Z"/><path d="M19 9 C20.5 8 21.5 8.5 21.3 10 C21 9.3 20.2 9.2 19.5 9.8 Z"/>`,
+  skinning: `<g transform="rotate(20 12 12)"><path d="M12 2 L12.8 4 L12.4 13 L11.6 13 L11.2 4 Z"/><rect x="10.5" y="13" width="3" height="6" rx="0.7"/></g><g transform="rotate(-20 12 12)"><path d="M12 2 L12.8 4 L12.4 13 L11.6 13 L11.2 4 Z"/><rect x="10.5" y="13" width="3" height="6" rx="0.7"/></g>`,
+  herbalism: `<path d="M6 13 C6 17.5 8.5 20 12 20 C15.5 20 18 17.5 18 13 Z"/><rect x="5.5" y="12" width="13" height="1.5" rx="0.7"/><g transform="rotate(35 15 8)"><rect x="14.3" y="4" width="1.4" height="9"/><ellipse cx="15" cy="4" rx="1.6" ry="1"/></g><path d="M9 10 C8 9 8.3 7.7 9.3 7 C8.9 8 9.4 8.9 10 9.6 Z"/>`,
+  foraging: `<path d="M12 12 C12 8 9 6 6 6.5 C6.5 9.5 8.5 11.5 12 12 Z"/><path d="M12 12 C12 8 15 6 18 6.5 C17.5 9.5 15.5 11.5 12 12 Z"/><path d="M12 12 C12 8.5 12 5.5 10.5 3.5 C13.5 3.5 14 6.5 12 12 Z"/><rect x="11.4" y="12" width="1.2" height="9"/>`,
+  tinkering: `<path fill-rule="evenodd" d="M16.2 12 A4.2 4.2 0 1 0 7.8 12 A4.2 4.2 0 1 0 16.2 12 Z M13.8 12 A1.8 1.8 0 1 1 10.2 12 A1.8 1.8 0 1 1 13.8 12 Z"/><rect x="11.3" y="1.8" width="1.4" height="3.2"/><rect x="11.3" y="18.8" width="1.4" height="3.2"/><g transform="rotate(60 12 12)"><rect x="11.3" y="1.8" width="1.4" height="3.2"/><rect x="11.3" y="18.8" width="1.4" height="3.2"/></g><g transform="rotate(120 12 12)"><rect x="11.3" y="1.8" width="1.4" height="3.2"/><rect x="11.3" y="18.8" width="1.4" height="3.2"/></g>`,
+  poisoncrafting: `<path d="M10.5 3 L13.5 3 L13.5 7 L15.3 12 C16.1 14.2 14.6 16.5 12.3 16.5 L11.7 16.5 C9.4 16.5 7.9 14.2 8.7 12 L10.5 7 Z"/><rect x="10" y="1.8" width="4" height="1.6" rx="0.5"/><path fill-rule="evenodd" d="M12 9 A2.1 2.1 0 1 0 12.01 9 Z M11.3 10.6 A0.45 0.45 0 1 0 10.4 10.6 A0.45 0.45 0 1 0 11.3 10.6 Z M13.6 10.6 A0.45 0.45 0 1 0 12.7 10.6 A0.45 0.45 0 1 0 13.6 10.6 Z"/><rect x="9.5" y="12" width="5" height="0.8" transform="rotate(20 12 12.4)"/><rect x="9.5" y="12" width="5" height="0.8" transform="rotate(-20 12 12.4)"/><path d="M11.6 18 C11.6 17.4 12.4 17.4 12.4 18 C12.4 18.6 12 19.5 12 19.5 C12 19.5 11.6 18.6 11.6 18 Z"/>`,
+  enchanting: `<path d="M8 3 L9 6.5 L12.5 7.5 L9 8.5 L8 12 L7 8.5 L3.5 7.5 L7 6.5 Z"/><path d="M17 9 L17.6 11.2 L19.8 11.8 L17.6 12.4 L17 14.6 L16.4 12.4 L14.2 11.8 L16.4 11.2 Z"/><path d="M13 15 L13.5 16.8 L15.3 17.3 L13.5 17.8 L13 19.6 L12.5 17.8 L10.7 17.3 L12.5 16.8 Z"/>`,
+  tanning: `<path d="M12 3 C14 3 14.5 4.5 13.7 5.5 C15.5 5 16.8 6.5 16 8.2 C17.5 8.5 18 10.5 16.5 11.5 C17.5 13 16.5 15 14.7 14.6 C14.8 16.5 12.7 17.5 11.5 16.2 C10.3 17.5 8.2 16.5 8.3 14.6 C6.5 15 5.5 13 6.5 11.5 C5 10.5 5.5 8.5 7 8.2 C6.2 6.5 7.5 5 9.3 5.5 C8.5 4.5 9 3 11 3 Z"/><rect x="3.5" y="19" width="2" height="2.6" rx="0.3" transform="rotate(45 4.5 20.3)"/><rect x="18.5" y="19" width="2" height="2.6" rx="0.3" transform="rotate(-45 19.5 20.3)"/>`,
+  smelting: `<path d="M8 3 L16 3 L15 11 C14.7 13 13.5 14 12 14 C10.5 14 9.3 13 9 11 Z"/><rect x="11.2" y="14" width="1.6" height="5"/><rect x="8" y="19" width="8" height="1.6" rx="0.5"/><path d="M10.5 6.5 C9.8 5.7 10 4.8 10.7 4 C10.3 4.9 10.8 5.6 11.2 6.2 Z"/><path d="M13.5 6.5 C12.8 5.7 13 4.8 13.7 4 C13.3 4.9 13.8 5.6 14.2 6.2 Z"/>`,
+  farming: `<rect x="11.3" y="10" width="1.4" height="12"/><path d="M12 6 C11.3 7 11.3 8 12 9 C12.7 8 12.7 7 12 6 Z"/><path d="M11 7.5 C10.3 8.3 10.3 9.3 11 10.3 C11.5 9.3 11.5 8.3 11 7.5 Z" transform="rotate(-15 12 12)"/><path d="M13 7.5 C13.7 8.3 13.7 9.3 13 10.3 C12.5 9.3 12.5 8.3 13 7.5 Z" transform="rotate(15 12 12)"/><rect x="9" y="20.5" width="6" height="1.3" rx="0.4"/>`,
+  fermenting: `<path d="M8 8 L16 8 L15.3 20 C15.2 21.1 14.3 22 13.2 22 L10.8 22 C9.7 22 8.8 21.1 8.7 20 Z"/><rect x="7" y="6.3" width="10" height="2.2" rx="1"/><rect x="9.5" y="3" width="5" height="3.3" rx="1"/><circle cx="11" cy="12" r="0.8"/><circle cx="13.3" cy="15" r="0.7"/><circle cx="10.5" cy="16.5" r="0.6"/>`,
+  firstaid: `<path fill-rule="evenodd" d="M4 4 L20 4 L20 20 L4 20 Z M9.5 6.5 L14.5 6.5 L14.5 9.5 L17.5 9.5 L17.5 14.5 L14.5 14.5 L14.5 17.5 L9.5 17.5 L9.5 14.5 L6.5 14.5 L6.5 9.5 L9.5 9.5 Z"/>`,
+  lumberjacking: `<path fill-rule="evenodd" d="M4 8 L8.5 8 L8.5 16 L4 16 Z M6.9 12 A1.7 1.7 0 1 1 6.89 12 Z M6.2 12 A1 1 0 1 1 6.19 12 Z"/><rect x="8.5" y="9.3" width="12.5" height="5.4" rx="1"/>`,
+  navigation: `<path fill-rule="evenodd" d="M17.5 12 A5.5 5.5 0 1 0 6.5 12 A5.5 5.5 0 1 0 17.5 12 Z M15 12 A2.5 2.5 0 1 1 10 12 A2.5 2.5 0 1 1 15 12 Z"/><rect x="11.3" y="1" width="1.4" height="4.5"/><rect x="11.3" y="18.5" width="1.4" height="4.5"/><rect x="1" y="11.3" width="4.5" height="1.4"/><rect x="18.5" y="11.3" width="4.5" height="1.4"/><g transform="rotate(45 12 12)"><rect x="11.3" y="1" width="1.4" height="4.5"/><rect x="11.3" y="18.5" width="1.4" height="4.5"/><rect x="1" y="11.3" width="4.5" height="1.4"/><rect x="18.5" y="11.3" width="4.5" height="1.4"/></g>`,
+  pottery: `<path d="M9.5 3 L14.5 3 L14.5 5 L15.5 6.5 L15.5 9 C15.5 12 17 13.5 17 16.5 C17 19.5 14.8 21.5 12 21.5 C9.2 21.5 7 19.5 7 16.5 C7 13.5 8.5 12 8.5 9 L8.5 6.5 L9.5 5 Z"/><rect x="4" y="21.5" width="16" height="1.3" rx="0.6"/>`,
+  riding: `<path d="M8 22 L8 15 C8 10 10 6 14 4 C13 6 13.5 7 15 7.5 C17 8 18 9.5 17.5 11.5 C19 11 20 12 19.5 13.5 C18.5 13 17.5 13.2 17 14 L17 22 L14.5 22 L14.5 17 L12.5 17 L12.5 22 Z"/><circle cx="15.5" cy="9" r="0.6"/>`,
+  spellcrafting: `<path d="M12 3 L12.7 6.5 L15.5 7.2 L12.7 7.9 L12 11.4 L11.3 7.9 L8.5 7.2 L11.3 6.5 Z"/><path d="M8 15 L16 15 L16 17 L8 17 Z"/><path d="M9.5 17 L14.5 17 L15.5 21 L8.5 21 Z"/><rect x="11.3" y="11.4" width="1.4" height="3.6"/>`,
+  spinning: `<path fill-rule="evenodd" d="M17.5 12 A6.5 6.5 0 1 0 4.5 12 A6.5 6.5 0 1 0 17.5 12 Z M15 12 A3.5 3.5 0 1 1 8 12 A3.5 3.5 0 1 1 15 12 Z"/><rect x="1" y="20" width="21" height="1.5" rx="0.5"/><rect x="4" y="15" width="1.3" height="6"/><rect x="17.3" y="15" width="1.3" height="6"/>`,
+  spycraft: `<path fill-rule="evenodd" d="M12 2 C7 2 5 6 5 10 C5 14 6.5 17 8 19 L8 22 L16 22 L16 19 C17.5 17 19 14 19 10 C19 6 17 2 12 2 Z M8.2 10 A1.3 1.3 0 1 0 8.21 10 Z M15.8 10 A1.3 1.3 0 1 0 15.81 10 Z"/>`,
+  stonecutting: `<rect x="4" y="14" width="9" height="8" rx="0.5"/><path d="M6 14 L4 10 L13 10 L11 14 Z"/><g transform="rotate(45 17 12)"><rect x="16.3" y="4" width="1.4" height="10"/><path d="M15.5 13 L18.5 13 L17.7 16.5 L16.3 16.5 Z"/></g>`,
+  survival: `<path d="M12 3 L20 20 L16.5 20 L12 9 L7.5 20 L4 20 Z"/><path d="M12 9 L14.5 15 L9.5 15 Z"/>`,
+  wagoneering: `<path d="M4 20 C4 14 7 10 12 10 C17 10 20 14 20 20 Z"/><rect x="3" y="19" width="18" height="1.5"/><circle cx="7" cy="21.5" r="1.8"/><circle cx="17" cy="21.5" r="1.8"/><rect x="9.5" y="13" width="1" height="6"/><rect x="13.5" y="13" width="1" height="6"/>`,
+  wilderness: `<path d="M2 20 L8 8 L12 14 L16 6 L22 20 Z"/><path d="M8 8 L9.5 10.5 L7.8 11 L6.5 10.2 Z"/><path d="M16 6 L17.8 9 L15.6 9.6 L14.3 8.4 Z"/>`,
+  animaltaming: `<circle cx="12" cy="15.5" r="4.2"/><circle cx="5.5" cy="10" r="1.9"/><circle cx="10.3" cy="6.3" r="2"/><circle cx="15.5" cy="6.5" r="1.9"/><circle cx="19" cy="10.3" r="1.8"/>`,
+  archaeology: `<g transform="rotate(35 9 9)"><rect x="8.3" y="3" width="1.4" height="10"/><path d="M6 12 C6 10.5 7.4 9.5 9 9.5 C10.6 9.5 12 10.5 12 12 L12 13.5 L6 13.5 Z"/></g><path d="M14 15 C14 13.3 15.8 12 18 12 C20.2 12 22 13.3 22 15 L22 19 C22 20.7 20.2 22 18 22 C15.8 22 14 20.7 14 19 Z"/><rect x="15" y="13.5" width="6" height="1.3"/>`,
+  disenchanting: `<path fill-rule="evenodd" d="M12 2 L17 6 L15.5 13 L12 22 L8.5 13 L7 6 Z M11 8 L13 8 L12.3 13 L13.5 13 L11.5 18 L12.2 14 L11 14 Z"/>`,
 };
 
-// Maps a tradeskill name to one of the icons above, for crafting-material
-// items and recipe cards. Only tradeskills with a material actually linked
-// as a crafting.json component (or their own recipe) need an entry — every
-// other tradeskill falls back to the generic "material" icon (items) or its
-// own initial letter (recipes) until one of its materials shows up, same
-// extend-as-needed pattern as tags/sizes elsewhere in this file.
+// Background circle color per icon key — approximated from the reference
+// sheet's own per-category badge colors (muted, material-associated: stone
+// grey, leather brown, slate blue, etc.), not the site's gold/teal accent
+// colors. Categories the sheet doesn't show (jewelry, food/drink, generic
+// material) get a palette-matching color of their own so every icon still
+// renders as a colored badge. See svgIcon().
+const ICON_BG = {
+  bludgeoning1h: '#8a8a83', bludgeoning2h: '#5f5b52',
+  slashing1h: '#7a3a28', slashing2h: '#8a4a2a',
+  piercing1h: '#4f6b7a', piercing2h: '#44607a',
+  archery: '#3d4a35', throwing: '#5a4a6a', ammo: '#5a4025',
+  shield: '#35526a', plate: '#66727e', chain: '#4a4a4a',
+  leather: '#3a2e22', cloth: '#8f7a52', armor: '#5a5248',
+  ring: '#6a5a3a', earring: '#6a5a3a', necklace: '#6a5a3a',
+  food: '#5a6a2e', drink: '#5a4a2e', container: '#4a3a24', material: '#5a5850',
+  alchemy: '#3a4a2e', animaltaming: '#6a5228', archaeology: '#4a3c2e',
+  blacksmithing: '#3a2a1e', brewing: '#7a4a20', carpentry: '#4a3a1e',
+  cooking: '#5a2e1e', disenchanting: '#4a5a6a', enchanting: '#4a3560',
+  farming: '#4a5a2e', fermenting: '#3a4a2e', firstaid: '#6a2020',
+  fishing: '#24405a', fletching: '#2e4a2e', foraging: '#3a5a3a',
+  herbalism: '#3f4f30', jewelcrafting: '#7a6a3a', leatherworking: '#5a3e22',
+  lumberjacking: '#4a3a20', masonry: '#55554e', mining: '#3a3a45',
+  navigation: '#2e4a5e', pottery: '#5a4a30', poisoncrafting: '#4a3550',
+  riding: '#5a3a20', skinning: '#4a2020', smelting: '#3a3a3a',
+  spellcrafting: '#4a3560', spinning: '#4a3a4a', spycraft: '#2e2438',
+  stonecutting: '#34424e', survival: '#3a4a2e', tailoring: '#4a3520',
+  tanning: '#4a3520', tinkering: '#6a5a2e', wagoneering: '#4a3820',
+  wilderness: '#2a3a24', woodworking: '#4a3820',
+};
+
+// Maps a tradeskill name (tradeskills.json) to one of the icons above — used
+// for crafting-material item cards, recipe cards, and the Crafting page's
+// own tradeskill grid (see renderCraftingCategories). The 2026-07-08
+// reference sheet showed all 38 tradeskills by their exact in-game names,
+// so every entry here is a direct name match (unlike the same-day first
+// pass, which had to invent about half of them). A tradeskill added to
+// tradeskills.json in the future without an entry here falls back to the
+// generic "material" icon (items) or its own initial letter (recipes).
 const TRADESKILL_ICON = {
+  Alchemy: 'alchemy',
+  'Animal Taming': 'animaltaming',
+  Archaeology: 'archaeology',
   Blacksmithing: 'blacksmithing',
+  Brewing: 'brewing',
+  Carpentry: 'carpentry',
+  Cooking: 'cooking',
+  Disenchanting: 'disenchanting',
+  Enchanting: 'enchanting',
+  Farming: 'farming',
+  Fermenting: 'fermenting',
+  'First Aid': 'firstaid',
+  Fishing: 'fishing',
+  Fletching: 'fletching',
+  Foraging: 'foraging',
+  Herbalism: 'herbalism',
+  Jewelcrafting: 'jewelcrafting',
+  Leatherworking: 'leatherworking',
+  Lumberjacking: 'lumberjacking',
+  Masonry: 'masonry',
+  Mining: 'mining',
+  Navigation: 'navigation',
+  Pottery: 'pottery',
+  'Poison Making': 'poisoncrafting',
+  Riding: 'riding',
+  Skinning: 'skinning',
+  Smelting: 'smelting',
+  Spellcrafting: 'spellcrafting',
+  Spinning: 'spinning',
+  Spycraft: 'spycraft',
+  'Stone Cutting': 'stonecutting',
+  Survival: 'survival',
   Tailoring: 'tailoring',
+  Tanning: 'tanning',
+  Tinkering: 'tinkering',
+  Wagoneering: 'wagoneering',
+  Wilderness: 'wilderness',
+  Woodworking: 'woodworking',
 };
 
 function svgIcon(key) {
-  return `<svg viewBox="0 0 24 24" class="type-icon">${ICON_DEFS[key] || ICON_DEFS.material}</svg>`;
+  const bg = ICON_BG[key] || '#55524a';
+  const glyph = ICON_DEFS[key] || ICON_DEFS.material;
+  return `<svg viewBox="0 0 24 24" class="type-icon"><circle cx="12" cy="12" r="11.5" fill="${bg}"/><g fill="#f3e9d6">${glyph}</g></svg>`;
 }
 
-// Weapon sub-type is derived from the existing skill/twoHanded/name fields —
-// no separate schema field to keep in sync. Falls back to a plain sword for
-// anything that doesn't match a known pattern.
+// Weapon icon is keyed off the reference sheet's own (coarser) categories —
+// 1H/2H × Bludgeoning/Slashing/Piercing, plus Archery/Throwing — derived
+// from the existing skill/twoHanded fields, no separate schema field to
+// keep in sync. This intentionally dropped the previous pass's per-weapon-
+// name detail (axe/mace/hammer/dagger/scythe/scimitar each had their own
+// icon) since the 2026-07-08 reference sheet only draws these six damage-
+// type badges, not one per weapon name — matching the sheet took priority
+// over that finer distinction. Falls back to 1H Slashing for anything that
+// doesn't match a known skill.
 function weaponIconKey(item) {
-  const name = (item.name || '').toLowerCase();
-  // Ammo (Arrow, Stonehead Arrow, ...) shares the Archery skill with actual
-  // bows in the data, but it's a consumable projectile, not the bow itself —
-  // same idea as Throwing weapons already getting their own category rather
-  // than being lumped in with melee weapons of the same skill.
   if (item.slot === 'Ammo') return 'ammo';
-  if (item.skill === 'Archery') return 'bow';
+  if (item.skill === 'Archery') return 'archery';
   if (item.skill === 'Throwing') return 'throwing';
-  if (item.skill === 'Stabbing') return name.includes('dagger') ? 'dagger' : 'spear';
-  if (item.skill === 'Slashing') {
-    if (name.includes('axe')) return item.twoHanded ? 'axe2h' : 'axe';
-    if (name.includes('scythe')) return 'scythe';
-    return item.twoHanded ? 'sword2h' : 'sword';
-  }
-  if (item.skill === 'Blunt') {
-    if (item.twoHanded) return 'maul2h';
-    return name.includes('hammer') ? 'hammer' : 'mace';
-  }
-  return 'sword';
+  if (item.skill === 'Stabbing') return item.twoHanded ? 'piercing2h' : 'piercing1h';
+  if (item.skill === 'Slashing') return item.twoHanded ? 'slashing2h' : 'slashing1h';
+  if (item.skill === 'Blunt') return item.twoHanded ? 'bludgeoning2h' : 'bludgeoning1h';
+  return 'slashing1h';
 }
 
 // Armor material is guessed from the item name (Plate/Chain/Rawhide-Leather/
@@ -578,14 +683,29 @@ function craftingIconKeys(item) {
 // the item name on its card (see renderItemCardHTML). Kept in one place so
 // it never drifts out of sync with ICON_DEFS.
 const ICON_LABELS = {
-  sword: 'Sword', sword2h: 'Two-Handed Sword', dagger: 'Dagger', axe: 'Axe',
-  axe2h: 'Greataxe', mace: 'Mace', hammer: 'Hammer', maul2h: 'Maul',
-  spear: 'Spear', scythe: 'Scythe', bow: 'Bow', ammo: 'Ammo', throwing: 'Throwing Weapon',
+  bludgeoning1h: 'Bludgeoning (1H)', bludgeoning2h: 'Bludgeoning (2H)',
+  slashing1h: 'Slashing (1H)', slashing2h: 'Slashing (2H)',
+  piercing1h: 'Piercing (1H)', piercing2h: 'Piercing (2H)',
+  archery: 'Archery', ammo: 'Ammo', throwing: 'Throwing Weapon',
   shield: 'Shield', plate: 'Plate Armor', chain: 'Chain Armor',
   leather: 'Leather Armor', cloth: 'Cloth Armor', armor: 'Armor',
   ring: 'Ring', earring: 'Earring', necklace: 'Necklace', food: 'Food',
-  drink: 'Drink', container: 'Container', blacksmithing: 'Blacksmithing Material',
-  tailoring: 'Tailoring Material', material: 'Crafting Material',
+  drink: 'Drink', container: 'Container', material: 'Crafting Material',
+  alchemy: 'Alchemy Material', animaltaming: 'Animal Taming Material',
+  archaeology: 'Archaeology Material', blacksmithing: 'Blacksmithing Material',
+  brewing: 'Brewing Material', carpentry: 'Carpentry Material', cooking: 'Cooking Material',
+  disenchanting: 'Disenchanting Material', enchanting: 'Enchanting Material',
+  farming: 'Farming Material', fermenting: 'Fermenting Material', firstaid: 'First Aid Material',
+  fishing: 'Fishing Material', fletching: 'Fletching Material', foraging: 'Foraging Material',
+  herbalism: 'Herbalism Material', jewelcrafting: 'Jewelcrafting Material',
+  leatherworking: 'Leatherworking Material', lumberjacking: 'Lumberjacking Material',
+  masonry: 'Masonry Material', mining: 'Mining Material', navigation: 'Navigation Material',
+  pottery: 'Pottery Material', poisoncrafting: 'Poison Making Material', riding: 'Riding Material',
+  skinning: 'Skinning Material', smelting: 'Smelting Material', spellcrafting: 'Spellcrafting Material',
+  spinning: 'Spinning Material', spycraft: 'Spycraft Material', stonecutting: 'Stone Cutting Material',
+  survival: 'Survival Material', tailoring: 'Tailoring Material', tanning: 'Tanning Material',
+  tinkering: 'Tinkering Material', wagoneering: 'Wagoneering Material', wilderness: 'Wilderness Material',
+  woodworking: 'Woodworking Material',
 };
 
 // The icon key(s) for an item's card header — usually one, but a Misc
@@ -616,7 +736,7 @@ function itemCategoryLabel(item) {
 // category grid (see renderItemsCategories) just needs "this card is
 // Weapons", not "this card is a Two-Handed Sword".
 const ITEM_TYPE_ICON = {
-  Weapon: 'sword', Armor: 'armor', Jewelry: 'ring', Container: 'container',
+  Weapon: 'slashing1h', Armor: 'armor', Jewelry: 'ring', Container: 'container',
   Food: 'food', Drink: 'drink', Misc: 'material',
 };
 const ITEM_TYPE_LABELS = {
@@ -1602,13 +1722,17 @@ function renderCraftingCategories(container) {
     <div class="craft-grid">
       ${sorted.map(ts => {
         const count = craftingData.filter(r => r.tradeskill === ts.name).length;
+        const icon = TRADESKILL_ICON[ts.name] || 'material';
         return `
           <div class="craft-card" data-tradeskill="${ts.name}">
-            <div class="craft-card-name">
-              ${ts.name}
-              ${ts.status === 'planned' ? '<span class="badge-planned">Planned</span>' : ''}
+            <div class="craft-card-icon">${svgIcon(icon)}</div>
+            <div class="craft-card-body">
+              <div class="craft-card-name">
+                ${ts.name}
+                ${ts.status === 'planned' ? '<span class="badge-planned">Planned</span>' : ''}
+              </div>
+              <div class="craft-card-count">${count} recipe${count === 1 ? '' : 's'}</div>
             </div>
-            <div class="craft-card-count">${count} recipe${count === 1 ? '' : 's'}</div>
           </div>
         `;
       }).join('')}
