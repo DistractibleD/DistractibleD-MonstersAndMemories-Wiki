@@ -17,5 +17,6 @@
   { "name": "Tel Ekir", "slug": "tel-ekir", "image": "images/Maps/tel-ekir.jpg", "thumbnail": "images/Maps/thumbs/tel-ekir.jpg" },
   { "name": "The Grain Cellar", "slug": "the-grain-cellar", "image": "images/Maps/the-grain-cellar.png", "thumbnail": "images/Maps/thumbs/the-grain-cellar.jpg" },
   { "name": "Tomb of the Last Wyrmsbane", "slug": "tomb-of-the-last-wyrmsbane", "image": "images/Maps/tomb-of-the-last-wyrmsbane.png", "thumbnail": "images/Maps/thumbs/tomb-of-the-last-wyrmsbane.jpg" },
+  { "name": "Tomb of the Last Wyrmsbane (Isometric)", "slug": "tomb-of-the-last-wyrmsbane-isometric", "image": "images/Maps/tomb-of-the-last-wyrmsbane-isometric.jpg", "thumbnail": "images/Maps/thumbs/tomb-of-the-last-wyrmsbane-isometric.jpg" },
   { "name": "Vale of Zintar", "slug": "vale-of-zintar", "image": "images/Maps/vale-of-zintar.png", "thumbnail": "images/Maps/thumbs/vale-of-zintar.jpg" }
 ]
