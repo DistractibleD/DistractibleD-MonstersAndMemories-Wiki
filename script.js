@@ -853,6 +853,13 @@ function formatSlot(item) {
   return item.twoHanded ? `${item.slot} (2H)` : item.slot;
 }
 
+// Bows specifically (not the Range-slot Copper Throwing Dagger, and not
+// Ammo-slot arrows, which are a bow's ammunition rather than the bow
+// itself) — used by the Weapons category's handedness/type filter.
+function isBow(item) {
+  return item.skill === 'Archery' && item.slot === 'Range';
+}
+
 function formatList(values) {
   if (!values || !values.length) return '—';
   if (values.includes('ALL')) return 'All';
@@ -1137,9 +1144,10 @@ function renderItemsList(container, category, scope) {
       </select>
       ${isWeaponCategory ? `
       <select id="items-filter-handedness" class="items-select">
-        <option value="">One/Two Handed</option>
+        <option value="">All Weapon Types</option>
         <option value="one">One Handed</option>
         <option value="two">Two Handed</option>
+        <option value="bow">Bow</option>
       </select>` : ''}
       <select id="items-filter-class" class="items-select">
         <option value="">All classes</option>
@@ -1273,7 +1281,8 @@ function renderItemsList(container, category, scope) {
     let filtered = categoryItems.filter(item => {
       if (slot && item.slot !== slot) return false;
       if (handedness === 'two' && !item.twoHanded) return false;
-      if (handedness === 'one' && item.twoHanded) return false;
+      if (handedness === 'one' && (item.twoHanded || isBow(item))) return false;
+      if (handedness === 'bow' && !isBow(item)) return false;
       if (cls && !(item.classes || []).includes('ALL') && !(item.classes || []).includes(cls)) return false;
       if (race && !(item.race || []).includes('ALL') && !(item.race || []).includes(race)) return false;
       if (tag && !(item.tags || []).includes(tag)) return false;
