@@ -328,11 +328,13 @@ html, body {
 .col-name { width: 18%; }
 .col-slot { width: 10%; }
 .col-ac { width: 6%; }
-.col-stats { width: 14%; }
-.col-dmg { width: 10%; }
+.col-stats { width: 13%; }
+.col-damage { width: 4%; }
+.col-delay { width: 4%; }
+.col-ratio { width: 4%; }
 .col-weight { width: 8%; }
 .col-capacity { width: 10%; }
-.col-classes { width: 16%; }
+.col-classes { width: 15%; }
 .col-race { width: 8%; }
 .col-monster-name { width: 50%; }
 .col-monster-map { width: 50%; }
@@ -1116,7 +1118,9 @@ html, body {
   .col-slot { width: 10%; }
   .col-ac { width: 5%; }
   .col-stats { width: 11%; }
-  .col-dmg { width: 9%; }
+  .col-damage { width: 3%; }
+  .col-delay { width: 3%; }
+  .col-ratio { width: 3%; }
   .col-weight { width: 9%; }
   .col-capacity { width: 9%; }
   .col-classes { width: 14%; }

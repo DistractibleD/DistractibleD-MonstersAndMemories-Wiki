@@ -1114,6 +1114,10 @@ function renderItemsList(container, category, scope) {
   pendingHighlightItem = null;
 
   const slots = [...new Set(categoryItems.map(i => i.slot))].filter(Boolean).sort();
+  // Handedness isn't a data value to derive like the dropdowns below (it's a
+  // plain boolean, `item.twoHanded`) — only offered on the Weapon category,
+  // where the field is actually meaningful.
+  const isWeaponCategory = category === 'Weapon';
   const classes = [...new Set(categoryItems.flatMap(i => i.classes || []).filter(c => c !== 'ALL'))].sort();
   const races = [...new Set(categoryItems.flatMap(i => i.race || []).filter(r => r !== 'ALL'))].sort();
   const tags = [...new Set(categoryItems.flatMap(i => i.tags || []))].sort();
@@ -1131,6 +1135,12 @@ function renderItemsList(container, category, scope) {
         <option value="">All slots</option>
         ${slots.map(s => `<option value="${s}">${s}</option>`).join('')}
       </select>
+      ${isWeaponCategory ? `
+      <select id="items-filter-handedness" class="items-select">
+        <option value="">One/Two Handed</option>
+        <option value="one">One Handed</option>
+        <option value="two">Two Handed</option>
+      </select>` : ''}
       <select id="items-filter-class" class="items-select">
         <option value="">All classes</option>
         ${classes.map(c => `<option value="${c}">${c}</option>`).join('')}
@@ -1157,7 +1167,9 @@ function renderItemsList(container, category, scope) {
           <col class="col-slot">
           <col class="col-ac">
           <col class="col-stats">
-          <col class="col-dmg">
+          <col class="col-damage">
+          <col class="col-delay">
+          <col class="col-ratio">
           <col class="col-weight">
           <col class="col-capacity">
           <col class="col-classes">
@@ -1169,7 +1181,9 @@ function renderItemsList(container, category, scope) {
             <th data-sort-key="slot" class="sortable">Slot</th>
             <th data-sort-key="ac" class="sortable">AC</th>
             <th data-sort-key="stats" class="sortable">Stats</th>
-            <th data-sort-key="ratio" class="sortable">Dmg / Delay / Ratio</th>
+            <th data-sort-key="damage" class="sortable">Damage</th>
+            <th data-sort-key="delay" class="sortable">Delay</th>
+            <th data-sort-key="ratio" class="sortable">Ratio</th>
             <th data-sort-key="weight" class="sortable">Weight / Size</th>
             <th data-sort-key="capacity" class="sortable">Capacity / Max Size</th>
             <th data-sort-key="classes" class="sortable">Classes</th>
@@ -1186,6 +1200,7 @@ function renderItemsList(container, category, scope) {
 
   const searchBox = container.querySelector('#items-search');
   const slotFilter = container.querySelector('#items-filter-slot');
+  const handednessFilter = container.querySelector('#items-filter-handedness');
   const classFilter = container.querySelector('#items-filter-class');
   const raceFilter = container.querySelector('#items-filter-race');
   const tagFilter = container.querySelector('#items-filter-tag');
@@ -1249,6 +1264,7 @@ function renderItemsList(container, category, scope) {
   function update() {
     const query = searchBox.value.toLowerCase().trim();
     const slot = slotFilter.value;
+    const handedness = handednessFilter ? handednessFilter.value : '';
     const cls = classFilter.value;
     const race = raceFilter.value;
     const tag = tagFilter.value;
@@ -1256,6 +1272,8 @@ function renderItemsList(container, category, scope) {
 
     let filtered = categoryItems.filter(item => {
       if (slot && item.slot !== slot) return false;
+      if (handedness === 'two' && !item.twoHanded) return false;
+      if (handedness === 'one' && item.twoHanded) return false;
       if (cls && !(item.classes || []).includes('ALL') && !(item.classes || []).includes(cls)) return false;
       if (race && !(item.race || []).includes('ALL') && !(item.race || []).includes(race)) return false;
       if (tag && !(item.tags || []).includes(tag)) return false;
@@ -1281,11 +1299,11 @@ function renderItemsList(container, category, scope) {
   }
 
   [searchBox].forEach(el => el.addEventListener('input', update));
-  [slotFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].forEach(el => el.addEventListener('change', update));
+  [slotFilter, handednessFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].filter(Boolean).forEach(el => el.addEventListener('change', update));
 
   container.querySelector('#items-clear-filters').addEventListener('click', () => {
     searchBox.value = '';
-    [slotFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].forEach(el => el.value = '');
+    [slotFilter, handednessFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].filter(Boolean).forEach(el => el.value = '');
     update();
   });
 
@@ -1306,13 +1324,15 @@ function renderItemsList(container, category, scope) {
 // AC/Ratio/Weight/Capacity (so click-to-sort can put highest first), string
 // for everything else (so it sorts A-Z first). Missing values sort last
 // regardless of direction, handled by the caller in renderItemsPage.
-const ITEM_SORT_NUMERIC = ['ac', 'ratio', 'weight', 'capacity'];
+const ITEM_SORT_NUMERIC = ['ac', 'damage', 'delay', 'ratio', 'weight', 'capacity'];
 function itemSortValue(item, key) {
   switch (key) {
     case 'name': return item.name.toLowerCase();
     case 'slot': return (item.slot || '').toLowerCase();
     case 'ac': return item.ac != null ? item.ac : null;
     case 'stats': return formatStats(item).toLowerCase();
+    case 'damage': return item.damage != null ? item.damage : null;
+    case 'delay': return item.delay != null ? item.delay : null;
     case 'ratio': return itemRatio(item);
     case 'weight': return item.weight != null ? item.weight : null;
     case 'capacity': return item.capacity != null ? item.capacity : null;
@@ -1328,7 +1348,7 @@ function escapeAttr(str) {
 
 function renderItemRows(tbody, items) {
   if (!items.length) {
-    tbody.innerHTML = '<tr><td colspan="9" class="items-empty">No items match your filters.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="11" class="items-empty">No items match your filters.</td></tr>';
     return;
   }
 
@@ -1338,9 +1358,9 @@ function renderItemRows(tbody, items) {
   // hide them instead of showing a label next to nothing.
   tbody.innerHTML = items.map(item => {
     const ratio = itemRatio(item);
-    const dmgCell = item.damage != null
-      ? `${item.damage} / ${item.delay}${ratio != null ? ` = ${ratio.toFixed(2)}` : ''}`
-      : '—';
+    const damageCell = item.damage != null ? item.damage : '—';
+    const delayCell = item.delay != null ? item.delay : '—';
+    const ratioCell = ratio != null ? ratio.toFixed(2) : '—';
     const acCell = item.ac != null ? item.ac : '—';
     const capacityCell = formatCapacity(item);
 
@@ -1352,7 +1372,9 @@ function renderItemRows(tbody, items) {
         <td data-label="Slot"${formatSlot(item) === '—' ? ' class="cell-empty"' : ''}>${formatSlot(item)}</td>
         <td data-label="AC"${acCell === '—' ? ' class="cell-empty"' : ''}>${acCell}</td>
         <td data-label="Stats"${formatStats(item) === '—' ? ' class="cell-empty"' : ''}>${formatStats(item)}</td>
-        <td data-label="Dmg / Delay / Ratio"${dmgCell === '—' ? ' class="cell-empty"' : ''}>${dmgCell}</td>
+        <td data-label="Damage"${damageCell === '—' ? ' class="cell-empty"' : ''}>${damageCell}</td>
+        <td data-label="Delay"${delayCell === '—' ? ' class="cell-empty"' : ''}>${delayCell}</td>
+        <td data-label="Ratio"${ratioCell === '—' ? ' class="cell-empty"' : ''}>${ratioCell}</td>
         <td data-label="Weight / Size">${item.weight} / ${item.size}</td>
         <td data-label="Capacity / Max Size"${capacityCell === '—' ? ' class="cell-empty"' : ''}>${capacityCell}</td>
         <td data-label="Classes"${formatList(item.classes) === '—' ? ' class="cell-empty"' : ''}>${formatList(item.classes)}</td>
