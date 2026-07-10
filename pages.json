@@ -4,5 +4,6 @@
   { "title": "Item Database", "file": "items", "category": "Items", "type": "items" },
   { "title": "Maps", "file": "maps", "category": "Maps", "type": "maps" },
   { "title": "Crafting", "file": "crafting", "category": "Crafting", "type": "crafting" },
-  { "title": "Monsters", "file": "monsters", "category": "Monsters", "type": "monsters" }
+  { "title": "Monsters", "file": "monsters", "category": "Monsters", "type": "monsters" },
+  { "title": "Companions", "file": "companions", "category": "Companions", "type": "companions" }
 ]

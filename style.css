@@ -474,6 +474,16 @@ html, body {
   0% { box-shadow: 0 0 0 3px var(--accent-craft); }
   100% { box-shadow: 0 0 0 3px transparent; }
 }
+/* Same idea as .recipe-flash, but gold (var(--accent)) instead of teal, for
+   highlighting a plain item-styled card (e.g. a Companions card) rather than
+   a teal recipe card. */
+.card-flash {
+  animation: card-flash 1.2s ease-out 2;
+}
+@keyframes card-flash {
+  0% { box-shadow: 0 0 0 3px var(--accent); }
+  100% { box-shadow: 0 0 0 3px transparent; }
+}
 /* Same idea as .recipe-flash, but for a table row (a box-shadow ring doesn't
    render cleanly on a <tr>) — a background-color flash instead, used to
    locate a specific item's row after landing on it from a search result. */
@@ -928,6 +938,63 @@ html, body {
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 14px;
   margin-top: 18px;
+}
+
+/* ---------- Companions ---------- */
+.companion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 12px;
+}
+/* Reuses .gem-reference's box styling for the "shared by every companion"
+   callout, but in the gold item accent rather than gem-reference's teal
+   crafting accent, since companion cards use the plain gold .item-card
+   style, not the teal recipe variant. */
+.companion-shared-abilities h2 {
+  color: var(--accent);
+}
+.companion-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+.companion-skill {
+  background: var(--bg-panel-hover);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+.companion-skill-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.companion-skill-name {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 0.86rem;
+  color: var(--text);
+}
+.companion-skill-type {
+  font-size: 0.66rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.companion-skill-desc {
+  margin-top: 4px;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+.companion-skill-meta {
+  margin-top: 6px;
+  font-size: 0.74rem;
+  color: var(--text-dim);
+  opacity: 0.8;
 }
 /* Recipe difficulty badges — colors match the game's own trivial/skill-up
    tiers (Green = trivial/no XP, up through Red = hardest). */

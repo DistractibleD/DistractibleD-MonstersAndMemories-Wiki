@@ -666,6 +666,65 @@ way Item types/tradeskills do — maps aren't modeled as a fixed list anywhere, 
 nothing equivalent to jump to directly; the map filter dropdown on the page itself covers
 that instead.
 
+## Adding a Beastmaster companion
+
+Introduced 2026-07-10 as a new main category alongside Items/Maps/Crafting/Monsters. The
+Companions page (`pages.json` entry with `"type": "companions"`) shows every tamed-pet type
+the Beastmaster class can summon, rendered as item-card-style cards (`renderCompanionCardHTML`
+in `script.js`, reusing the plain gold `.item-card` styling — not the teal recipe variant,
+since companions aren't a crafted/tradeskill thing) rather than the raw screenshots they were
+sourced from. This was an explicit user request: "Use the same style as we did with items, no
+need to use actual screenshots."
+
+Two data files, both flat arrays like every other `*.json` in this repo:
+
+- `companions.json` — one entry per tamed animal type: `name` (e.g. "A Bear Companion"),
+  `slug`, `animal` (a lowercase icon key — see below), `observedAtLevel` (the pet's level in
+  the screenshot it was captured from — recorded as an observation, not asserted as a fixed
+  per-species level, since the four companions seen so far are at four different levels with
+  no indication they're pinned to a fixed value), and `skills` — an array of that companion's
+  *own* unique ability/abilities only (see below).
+- `companion-skills.json` — the abilities every companion shares regardless of animal type.
+  Confirmed identical (same name/description/cooldown/range) across every companion's pet
+  window so far: **Provoke** (Martial Ability, threat generation) and **Bite** (Might Ability,
+  a physical damage attack). Recorded once here instead of being repeated on every companion
+  entry — the user's own words: "i think that all pets have Provoke and Bite so i will only
+  link the last pet-skill for each pet." Rendered as a "Shared Abilities (Every Companion)"
+  reference block above the companion grid (`renderCompanionsPage`), same idea as
+  `renderGemstoneTablesHTML`'s Jewelcrafting gem table — general knowledge not tied to one
+  entry, shown once rather than duplicated on every card.
+
+A skill object (used in both files) is `{ name, type, description, castTime, cooldown, range
+}` — `type` is "Martial Ability" or "Might Ability" as shown on the ability tooltip, `range`
+is omitted for self-cast/no-range abilities (e.g. Mighty Roar). This intentionally drops some
+of the pet-ability tooltip's boilerplate lines (Innate, Does Not Trigger Global Cooldown,
+Requires Line of Sight on Cast, Cannot Fizzle, Resist Element) — true of every companion
+ability seen so far, so not worth a field each; only the fields that actually vary/matter
+for a reader are captured, the same curation `renderItemCardHTML` already applies to item
+stats.
+
+**Screenshots are not archived for this category, unlike items/recipes/monsters.** A pet's
+screenshot batch is several stacked UI windows (the Pet window plus one tooltip per ability)
+captured across multiple messages — a reference capture, not one clean per-entry card — so
+per the user's explicit "no need to use actual screenshots" instruction, and matching the
+existing precedent for a crafting-window screenshot (see "Crafting window screenshots" under
+"Adding a crafting recipe" above: processed for data, then deleted, never saved), these are
+processed for their data and deleted from `images/inbox/` rather than moved anywhere.
+
+**Icons:** four new `ICON_DEFS`/`ICON_BG` keys (`bear`, `rat`, `crocodile`, `spider`) in the
+same flat-silhouette-in-a-colored-circle style as every other icon (see "Item and recipe
+cards" below) — a companion's card icon is just `svgIcon(companion.animal)`, no separate
+lookup table needed since `animal` doubles as the icon key directly. Add another animal key
+the same way when a new companion type comes in (dog, wolf, snake, etc. are all plausible
+future Beastmaster pets going by the class's usual EverQuest-inspired kit, though nothing
+about this game's actual roster is confirmed beyond the four seen so far).
+
+The Companions page has its own local search box (name/animal/ability text — same
+`companionSearchHaystack` + substring-filter pattern used everywhere else in this file) and
+is wired into the header search box the same way Monsters is (`goToCompanion`,
+`pendingHighlightCompanion`, `.card-flash` — a new gold-accent flash animation, since
+`.recipe-flash`'s teal doesn't match a plain `.item-card`).
+
 ## Header search box
 
 The search box in the header (`#search-box`, wired up in `init()`) searches everything on

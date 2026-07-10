@@ -11,6 +11,8 @@ let craftingData = null; // cached contents of crafting.json
 let tradeskillsData = null; // cached contents of tradeskills.json
 let gemstonesData = null; // cached contents of gemstones.json
 let monstersData = null; // cached contents of monsters.json
+let companionsData = null; // cached contents of companions.json
+let companionSkillsData = null; // cached contents of companion-skills.json
 
 // Set by the header search box when jumping straight to a specific item or
 // crafting recipe, then consumed (and cleared) by the corresponding render
@@ -42,6 +44,9 @@ let pendingHighlightItem = null;
 // Same idea again, for a monster's row on the Monsters page — set by
 // goToMonster so a header/quick-search result flashes the right row.
 let pendingHighlightMonster = null;
+// Same idea again, for a companion's card on the Companions page — set by
+// goToCompanion so a header search result flashes the right card.
+let pendingHighlightCompanion = null;
 // Set by renderCraftingRecipes when it scrolls to a highlighted recipe, so
 // loadPage's normal "reset scroll to top on navigation" doesn't immediately
 // cancel that scroll.
@@ -88,6 +93,20 @@ async function ensureMonstersData() {
   return monstersData;
 }
 
+async function ensureCompanionsData() {
+  if (!companionSkillsData) {
+    const res = await fetch('companion-skills.json');
+    if (!res.ok) throw new Error('Could not load companion-skills.json');
+    companionSkillsData = await res.json();
+  }
+  if (!companionsData) {
+    const res = await fetch('companions.json');
+    if (!res.ok) throw new Error('Could not load companions.json');
+    companionsData = await res.json();
+  }
+  return companionsData;
+}
+
 async function init() {
   const res = await fetch('pages.json');
   allPages = await res.json();
@@ -98,12 +117,14 @@ async function init() {
   const startPage = allPages.find(p => p.file === requested) || allPages[0];
   if (startPage) loadPage(startPage.file);
 
-  // Pre-fetch item/crafting/monster data in the background so the header
-  // search box can search them right away, without waiting for the user to
-  // first visit the Item Database, Crafting, or Monsters page.
+  // Pre-fetch item/crafting/monster/companion data in the background so the
+  // header search box can search them right away, without waiting for the
+  // user to first visit the Item Database, Crafting, Monsters, or Companions
+  // page.
   ensureItemsData().catch(() => {});
   ensureCraftingData().catch(() => {});
   ensureMonstersData().catch(() => {});
+  ensureCompanionsData().catch(() => {});
 
   const searchBox = document.getElementById('search-box');
   searchBox.addEventListener('input', onSearch);
@@ -176,7 +197,7 @@ async function loadPage(file) {
 
   // Data-driven pages (Item Database, Maps, Crafting, Monsters) use the full
   // content width instead of the narrower reading width used for prose pages.
-  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'crafting' || page.type === 'monsters')));
+  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'crafting' || page.type === 'monsters' || page.type === 'companions')));
 
   try {
     if (page && page.type === 'items') {
@@ -187,6 +208,8 @@ async function loadPage(file) {
       await renderCraftingPage(contentInner);
     } else if (page && page.type === 'monsters') {
       await renderMonstersPage(contentInner);
+    } else if (page && page.type === 'companions') {
+      await renderCompanionsPage(contentInner);
     } else {
       const res = await fetch('pages/' + file);
       if (!res.ok) throw new Error('Page not found');
@@ -273,8 +296,12 @@ function renderSearchResults(query) {
     .filter(m => monsterSearchHaystack(m).includes(query))
     .sort((a, b) => a.name.localeCompare(b.name))
     .slice(0, 8);
+  const matchedCompanions = (companionsData || [])
+    .filter(c => companionSearchHaystack(c).includes(query))
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .slice(0, 8);
 
-  if (!matchedCategories.length && !matchedPages.length && !matchedItems.length && !matchedRecipes.length && !matchedMonsters.length) {
+  if (!matchedCategories.length && !matchedPages.length && !matchedItems.length && !matchedRecipes.length && !matchedMonsters.length && !matchedCompanions.length) {
     results.innerHTML = '<p class="search-results-empty">No results found.</p>';
     openSearchResults();
     return;
@@ -354,6 +381,19 @@ function renderSearchResults(query) {
     return link;
   });
 
+  addSection('Companions', matchedCompanions, companion => {
+    const link = document.createElement('a');
+    link.href = '#companions';
+    link.className = 'search-result-link';
+    link.textContent = companion.name;
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      clearSearch();
+      goToCompanion(companion);
+    });
+    return link;
+  });
+
   openSearchResults();
 }
 
@@ -421,6 +461,13 @@ function goToMonster(monster) {
   const alreadyThere = location.hash.replace('#', '') === 'monsters';
   location.hash = 'monsters';
   if (alreadyThere) loadPage('monsters');
+}
+
+function goToCompanion(companion) {
+  pendingHighlightCompanion = companion.slug;
+  const alreadyThere = location.hash.replace('#', '') === 'companions';
+  location.hash = 'companions';
+  if (alreadyThere) loadPage('companions');
 }
 
 // Case-insensitive lookup used to decide whether a recipe component name
@@ -536,6 +583,13 @@ const ICON_DEFS = {
   animaltaming: `<circle cx="12" cy="15.5" r="4.2"/><circle cx="5.5" cy="10" r="1.9"/><circle cx="10.3" cy="6.3" r="2"/><circle cx="15.5" cy="6.5" r="1.9"/><circle cx="19" cy="10.3" r="1.8"/>`,
   archaeology: `<g transform="rotate(35 9 9)"><rect x="8.3" y="3" width="1.4" height="10"/><path d="M6 12 C6 10.5 7.4 9.5 9 9.5 C10.6 9.5 12 10.5 12 12 L12 13.5 L6 13.5 Z"/></g><path d="M14 15 C14 13.3 15.8 12 18 12 C20.2 12 22 13.3 22 15 L22 19 C22 20.7 20.2 22 18 22 C15.8 22 14 20.7 14 19 Z"/><rect x="15" y="13.5" width="6" height="1.3"/>`,
   disenchanting: `<path fill-rule="evenodd" d="M12 2 L17 6 L15.5 13 L12 22 L8.5 13 L7 6 Z M11 8 L13 8 L12.3 13 L13.5 13 L11.5 18 L12.2 14 L11 14 Z"/>`,
+  // Beastmaster companion icons — one flat silhouette per tamed animal type,
+  // same style as the tradeskill glyphs above. Extend with another animal
+  // key the same way whenever a new companion type is confirmed.
+  bear: `<circle cx="12" cy="13.5" r="7"/><circle cx="5.8" cy="6.5" r="2.5"/><circle cx="18.2" cy="6.5" r="2.5"/><ellipse cx="12" cy="16.3" rx="3" ry="2.4"/>`,
+  rat: `<ellipse cx="9.5" cy="14.8" rx="6.3" ry="4.1"/><circle cx="16.2" cy="11.4" r="3.1"/><circle cx="17.5" cy="8.4" r="1.4"/><path d="M19.1 11.1 L22.5 10.3 L19.6 12.7 Z"/><path d="M3.8 13.2 C1.3 13.7 0.8 16.7 2.8 18.7 C2.1 16.7 2.8 14.7 4.6 14.2 Z"/>`,
+  crocodile: `<path d="M2 14 L4 11 L6 13.5 L8 10.5 L10 13 L12 10.5 L14 13 L16 11 L19 12 L23 11.5 L23 13.7 L19 14.5 L14.5 16.3 L9 16.8 L4.5 16.3 Z"/><circle cx="18.3" cy="11.6" r="0.6"/><path d="M6.5 16.6 L6 19.3 L7.6 19.3 L7.7 16.7 Z"/><path d="M12.5 16.7 L12.2 19.4 L13.8 19.4 L13.7 16.6 Z"/>`,
+  spider: `<circle cx="12" cy="15" r="4.4"/><circle cx="12" cy="8.7" r="2.8"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(55 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(25 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(-25 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(-55 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(125 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(155 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(205 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(235 12 12)"/>`,
 };
 
 // Background circle color per icon key — approximated from the reference
@@ -566,6 +620,7 @@ const ICON_BG = {
   stonecutting: '#34424e', survival: '#3a4a2e', tailoring: '#4a3520',
   tanning: '#4a3520', tinkering: '#6a5a2e', wagoneering: '#4a3820',
   wilderness: '#2a3a24', woodworking: '#4a3820',
+  bear: '#4a3323', rat: '#5c5347', crocodile: '#33472c', spider: '#241f30',
 };
 
 // Maps a tradeskill name (tradeskills.json) to one of the icons above — used
@@ -2271,6 +2326,120 @@ function closeMonsterViewer() {
   if (!viewer) return;
   viewer.classList.remove('open');
   document.body.style.overflow = '';
+}
+
+/* ============================================
+   Beastmaster Companions
+   Data lives in companions.json (one entry per tamed animal type) and
+   companion-skills.json (the abilities every companion shares — Provoke and
+   Bite, confirmed identical across every companion seen so far, so they're
+   recorded once here instead of being repeated on every companion entry).
+   Rendered as item-card-style cards (see renderItemCardHTML), not the raw
+   Pet-window/skill-tooltip screenshots they're sourced from — those are UI
+   reference captures (several stacked windows per screenshot), not a single
+   clean per-entry card, so like a crafting-window screenshot they're
+   processed for their data and discarded rather than archived.
+   ============================================ */
+
+function companionSearchHaystack(companion) {
+  return [
+    companion.name,
+    companion.animal || '',
+    (companion.skills || []).map(s => `${s.name} ${s.description || ''}`).join(' ')
+  ].join(' ').toLowerCase();
+}
+
+function renderCompanionSkillHTML(skill) {
+  const meta = [
+    skill.castTime ? `Cast: ${skill.castTime}` : '',
+    skill.cooldown ? `Cooldown: ${skill.cooldown}` : '',
+    skill.range ? `Range: ${skill.range}` : ''
+  ].filter(Boolean).join(' &middot; ');
+
+  return `
+    <div class="companion-skill">
+      <div class="companion-skill-header">
+        <span class="companion-skill-name">${escapeAttr(skill.name)}</span>
+        ${skill.type ? `<span class="companion-skill-type">${escapeAttr(skill.type)}</span>` : ''}
+      </div>
+      ${skill.description ? `<div class="companion-skill-desc">${escapeAttr(skill.description)}</div>` : ''}
+      ${meta ? `<div class="companion-skill-meta">${meta}</div>` : ''}
+    </div>
+  `;
+}
+
+function renderCompanionCardHTML(companion) {
+  const skills = companion.skills || [];
+  return `
+    <div class="item-card" data-companion-slug="${escapeAttr(companion.slug)}">
+      <div class="item-card-header">
+        <div class="item-card-icon">${svgIcon(companion.animal)}</div>
+        <div class="item-card-titles">
+          <div class="item-card-name">${escapeAttr(companion.name)}</div>
+          <div class="item-card-category">Beastmaster Companion</div>
+        </div>
+      </div>
+      <div class="item-card-body">
+        ${companion.observedAtLevel != null ? `
+        <div class="item-card-grid">
+          <div class="item-card-field"><span class="item-card-field-label">Level</span><span>${companion.observedAtLevel}</span></div>
+        </div>` : ''}
+        <div class="item-card-section">
+          Abilities:
+          <div class="companion-skills">
+            ${skills.length ? skills.map(renderCompanionSkillHTML).join('') : '<p class="item-card-muted">No unique abilities known yet.</p>'}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+async function renderCompanionsPage(container) {
+  await ensureCompanionsData();
+
+  container.innerHTML = `
+    <h1>Beastmaster Companions</h1>
+    <p>Pets tamed and summoned by the Beastmaster class. Every companion shares the two
+    abilities below regardless of animal type, plus one or more unique abilities of its own.</p>
+    <div class="gem-reference companion-shared-abilities">
+      <h2>Shared Abilities (Every Companion)</h2>
+      <div class="companion-skills">
+        ${companionSkillsData.map(renderCompanionSkillHTML).join('')}
+      </div>
+    </div>
+    <input type="search" id="companion-search" class="items-search" placeholder="Search companions, abilities..." autocomplete="off">
+    <p class="items-count" id="companion-count"></p>
+    <div class="companion-grid" id="companion-grid"></div>
+  `;
+
+  const searchBox = container.querySelector('#companion-search');
+  const grid = container.querySelector('#companion-grid');
+  const countEl = container.querySelector('#companion-count');
+
+  function update() {
+    const query = searchBox.value.toLowerCase().trim();
+    const filtered = query ? companionsData.filter(c => companionSearchHaystack(c).includes(query)) : companionsData;
+    grid.innerHTML = filtered.length
+      ? filtered.map(renderCompanionCardHTML).join('')
+      : `<p class="items-empty">${companionsData.length ? 'No companions match your search.' : 'No companions yet.'}</p>`;
+    countEl.textContent = query ? `Showing ${filtered.length} of ${companionsData.length} companions` : '';
+  }
+
+  searchBox.addEventListener('input', update);
+  update();
+
+  if (pendingHighlightCompanion) {
+    const slug = pendingHighlightCompanion;
+    pendingHighlightCompanion = null;
+    const card = container.querySelector(`.item-card[data-companion-slug="${CSS.escape(slug)}"]`);
+    if (card) {
+      suppressScrollReset = true;
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.classList.add('card-flash');
+      card.addEventListener('animationend', () => card.classList.remove('card-flash'), { once: true });
+    }
+  }
 }
 
 init();
