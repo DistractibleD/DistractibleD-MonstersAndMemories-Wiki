@@ -438,6 +438,18 @@ html, body {
   font-size: 0.8rem;
   margin-top: 4px;
 }
+/* Monsters page section headings (Named Monsters / Regular Monsters) —
+   small inline icon next to the heading text. */
+.monsters-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.monsters-section-heading .type-icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+}
 .items-empty {
   color: var(--text-dim);
   text-align: center !important;

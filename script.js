@@ -33,6 +33,10 @@ let pendingReturnToMonster = null;
 // jumping straight to a specific monster, then consumed by renderMonstersPage
 // so its search box is pre-filled — same pattern as pendingItemQuery.
 let pendingMonsterQuery = null;
+// Set alongside pendingMonsterQuery (by goToMonster) so the Monsters page
+// opens directly on that monster's named/regular + zone list instead of the
+// top category grid — same idea as pendingItemCategory for the Item Database.
+let pendingMonsterScope = null;
 // Set by goToRecipe so the recipe just navigated to (e.g. via an item's
 // "Crafted via"/"Used to craft" links) flashes once its card renders, making
 // it easy to spot among the rest of that tradeskill's recipe grid.
@@ -456,8 +460,13 @@ function goToCraftingCategory(tradeskillName) {
 // monster object or the minimal `{ name, slug }` shape goToItem stores for
 // the return-to case, since only those two fields are needed here.
 function goToMonster(monster) {
+  // The caller sometimes only has the minimal `{ name, slug }` shape (e.g.
+  // an item's "Back to <Monster>" link) — look up the full record when
+  // possible so the named/zone scope below is accurate.
+  const full = findMonsterBySlug(monster.slug) || monster;
   pendingMonsterQuery = monster.name;
   pendingHighlightMonster = monster.slug;
+  pendingMonsterScope = { named: !!full.named, map: monsterZone(full) };
   const alreadyThere = location.hash.replace('#', '') === 'monsters';
   location.hash = 'monsters';
   if (alreadyThere) loadPage('monsters');
@@ -590,6 +599,10 @@ const ICON_DEFS = {
   rat: `<ellipse cx="9.5" cy="14.8" rx="6.3" ry="4.1"/><circle cx="16.2" cy="11.4" r="3.1"/><circle cx="17.5" cy="8.4" r="1.4"/><path d="M19.1 11.1 L22.5 10.3 L19.6 12.7 Z"/><path d="M3.8 13.2 C1.3 13.7 0.8 16.7 2.8 18.7 C2.1 16.7 2.8 14.7 4.6 14.2 Z"/>`,
   crocodile: `<path d="M2 14 L4 11 L6 13.5 L8 10.5 L10 13 L12 10.5 L14 13 L16 11 L19 12 L23 11.5 L23 13.7 L19 14.5 L14.5 16.3 L9 16.8 L4.5 16.3 Z"/><circle cx="18.3" cy="11.6" r="0.6"/><path d="M6.5 16.6 L6 19.3 L7.6 19.3 L7.7 16.7 Z"/><path d="M12.5 16.7 L12.2 19.4 L13.8 19.4 L13.7 16.6 Z"/>`,
   spider: `<circle cx="12" cy="15" r="4.4"/><circle cx="12" cy="8.7" r="2.8"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(55 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(25 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(-25 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(-55 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(125 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(155 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(205 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(235 12 12)"/>`,
+  // Monsters page section icons — boss (skull) vs. regular (paw print),
+  // used on the zone-grid cards in each section (see renderMonstersCategories).
+  boss: `<path d="M12 3 C7 3 4 6.5 4 11 C4 13.5 5 15.5 6.5 17 L6.5 19.5 C6.5 20.3 7.1 21 8 21 L9 21 L9 19 L10 19 L10 21 L14 21 L14 19 L15 19 L15 21 L16 21 C16.9 21 17.5 20.3 17.5 19.5 L17.5 17 C19 15.5 20 13.5 20 11 C20 6.5 17 3 12 3 Z"/><circle cx="8.7" cy="11" r="1.8"/><circle cx="15.3" cy="11" r="1.8"/><path d="M11.3 12.7 L12.7 12.7 L12 15.2 Z"/>`,
+  paw: `<ellipse cx="12" cy="16" rx="5" ry="4"/><circle cx="6.5" cy="9" r="2"/><circle cx="10.5" cy="6.5" r="2"/><circle cx="14.5" cy="6.5" r="2"/><circle cx="18" cy="9" r="2"/>`,
 };
 
 // Background circle color per icon key — approximated from the reference
@@ -621,6 +634,7 @@ const ICON_BG = {
   tanning: '#4a3520', tinkering: '#6a5a2e', wagoneering: '#4a3820',
   wilderness: '#2a3a24', woodworking: '#4a3820',
   bear: '#4a3323', rat: '#5c5347', crocodile: '#33472c', spider: '#241f30',
+  boss: '#5a1f1f', paw: '#3f4f30',
 };
 
 // Maps a tradeskill name (tradeskills.json) to one of the icons above — used
@@ -2079,11 +2093,18 @@ async function renderCraftingRecipes(container, tradeskillName) {
    name/slug/image (dropped into images/Monsters/, see that folder's
    README.txt) plus whatever of maps/levelRange/drops the screenshot shows —
    no code changes needed, same "derive filters from data" pattern as the
-   Item Database's slot/class/race dropdowns. A single sortable/filterable
-   table is enough for now rather than a category-grid-first layout like
-   Items — there's only one meaningful browsing dimension (map) instead of
-   Items' several, so a dropdown filter covers it without needing a whole
-   extra drill-down level.
+   Item Database's slot/class/race dropdowns.
+
+   Named (boss) monsters get an explicit `"named": true` flag (2026-07-11) —
+   name casing alone isn't a reliable signal, since some confirmed bosses use
+   the same lowercase "a/the X" style as regular mobs (e.g. "a corrupted
+   ashira", "a shimmering shadow"). Monsters without this flag are treated as
+   regular. The page is a two-level drill-down, same pattern as the Item
+   Database and Crafting page: a top-level view (renderMonstersCategories)
+   showing two separate areas — Named Monsters (Bosses) and Regular
+   Monsters — each a grid of zone cards (one per map, derived from the
+   data), and renderMonstersList, the actual sortable/searchable table,
+   scoped to one (named, zone) combination at a time.
    ============================================ */
 
 function monsterSearchHaystack(monster) {
@@ -2099,21 +2120,126 @@ function formatMonsterMaps(monster) {
   return (monster.maps && monster.maps.length) ? monster.maps.join(', ') : '—';
 }
 
+// The zone a monster is filed under for the category-grid browsing view —
+// its first map, or a fallback bucket for the handful of monsters with no
+// map recorded yet.
+function monsterZone(monster) {
+  return (monster.maps && monster.maps[0]) || 'Unknown Zone';
+}
+
 async function renderMonstersPage(container) {
   await ensureMonstersData();
 
-  const maps = [...new Set(monstersData.flatMap(m => m.maps || []))].sort();
+  // Landed here from a header search result for a specific monster — jump
+  // straight to its named/regular + zone list instead of the top-level
+  // category grid (same pattern as pendingItemCategory on the Item Database).
+  if (pendingMonsterScope) {
+    const scope = pendingMonsterScope;
+    pendingMonsterScope = null;
+    renderMonstersList(container, scope);
+    return;
+  }
+
+  renderMonstersCategories(container);
+}
+
+function renderMonstersCategories(container) {
+  const named = monstersData.filter(m => m.named);
+  const regular = monstersData.filter(m => !m.named);
+
+  function zoneCards(list, icon) {
+    if (!list.length) return '<p class="items-empty">None recorded yet.</p>';
+    const zones = [...new Set(list.map(monsterZone))].sort();
+    return `
+      <div class="items-category-grid">
+        ${zones.map(zone => {
+          const count = list.filter(m => monsterZone(m) === zone).length;
+          return `
+            <div class="items-category-card" data-zone="${escapeAttr(zone)}">
+              <div class="items-category-card-icon">${svgIcon(icon)}</div>
+              <div class="items-category-card-body">
+                <div class="items-category-card-name">${escapeAttr(zone)}</div>
+                <div class="items-category-card-count">${count} monster${count === 1 ? '' : 's'}</div>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+  }
 
   container.innerHTML = `
     <h1>Monsters</h1>
-    <p>Browse monsters alphabetically, or filter by map. Click a monster's name to see its
-    picture and drop table.</p>
+    <p>Browse named (boss) or regular monsters by zone, or search below to jump straight to a
+    specific monster.</p>
+    <div class="items-quick-search">
+      <input type="search" id="monsters-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all monsters by name, map, drop..." autocomplete="off">
+      <div id="monsters-quick-search-results" class="items-quick-search-results"></div>
+    </div>
+    <h2 class="monsters-section-heading">${svgIcon('boss')} Named Monsters (Bosses)</h2>
+    <div data-named="true">${zoneCards(named, 'boss')}</div>
+    <h2 class="monsters-section-heading">${svgIcon('paw')} Regular Monsters</h2>
+    <div data-named="false">${zoneCards(regular, 'paw')}</div>
+  `;
+
+  container.querySelectorAll('.items-category-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const isNamed = card.closest('[data-named]').dataset.named === 'true';
+      renderMonstersList(container, { named: isNamed, map: card.dataset.zone });
+    });
+  });
+
+  // A shortcut past the (named/regular →) zone drill-down for anyone who
+  // already knows what they're looking for — same pattern as the Item
+  // Database's own quick search (see renderItemsCategories).
+  const quickSearchBox = container.querySelector('#monsters-quick-search-box');
+  const quickSearchResults = container.querySelector('#monsters-quick-search-results');
+
+  quickSearchBox.addEventListener('input', () => {
+    const query = quickSearchBox.value.toLowerCase().trim();
+    if (!query) {
+      quickSearchResults.classList.remove('open');
+      quickSearchResults.innerHTML = '';
+      return;
+    }
+
+    const matches = monstersData
+      .filter(monster => monsterSearchHaystack(monster).includes(query))
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .slice(0, 20);
+
+    quickSearchResults.innerHTML = matches.length
+      ? matches.map(monster => `
+          <a href="#" class="search-result-link items-quick-search-result" data-slug="${escapeAttr(monster.slug)}">
+            ${escapeAttr(monster.name)}
+            <span class="items-quick-search-type">${escapeAttr(monsterZone(monster))}</span>
+          </a>
+        `).join('')
+      : '<p class="search-results-empty">No monsters match.</p>';
+    quickSearchResults.classList.add('open');
+
+    quickSearchResults.querySelectorAll('.items-quick-search-result').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const monster = findMonsterBySlug(link.dataset.slug);
+        if (monster) goToMonster(monster);
+      });
+    });
+  });
+}
+
+function renderMonstersList(container, scope) {
+  const scopedMonsters = monstersData.filter(m => !!m.named === scope.named && monsterZone(m) === scope.map);
+  const sectionLabel = scope.named ? 'Named Monsters (Bosses)' : 'Regular Monsters';
+  const backLabel = `All ${scope.named ? 'named' : 'regular'} monster zones`;
+
+  container.innerHTML = `
+    <p class="items-back-link"><a href="#" id="monsters-back-to-categories">&larr; ${escapeAttr(backLabel)}</a></p>
+    <h1>${escapeAttr(scope.map)} — ${escapeAttr(sectionLabel)}</h1>
+    <p>Browse, search, and sort ${escapeAttr(scope.named ? 'named (boss)' : 'regular')} monsters in
+    ${escapeAttr(scope.map)}. Click a monster's name to see its picture and drop table.</p>
     <div class="items-toolbar">
-      <input type="search" id="monsters-search" class="items-search" placeholder="Search name, map, drop..." autocomplete="off">
-      <select id="monsters-filter-map" class="items-select">
-        <option value="">All maps</option>
-        ${maps.map(m => `<option value="${escapeAttr(m)}">${escapeAttr(m)}</option>`).join('')}
-      </select>
+      <input type="search" id="monsters-search" class="items-search" placeholder="Search name, drop..." autocomplete="off">
       <button type="button" id="monsters-clear-filters" class="items-clear-btn">Clear filters</button>
     </div>
     <p class="items-count" id="monsters-count"></p>
@@ -2134,8 +2260,12 @@ async function renderMonstersPage(container) {
     </div>
   `;
 
+  container.querySelector('#monsters-back-to-categories').addEventListener('click', e => {
+    e.preventDefault();
+    renderMonstersCategories(container);
+  });
+
   const searchBox = container.querySelector('#monsters-search');
-  const mapFilter = container.querySelector('#monsters-filter-map');
   const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
 
   // Landed here from a header search result — pre-fill the search box with
@@ -2178,10 +2308,8 @@ async function renderMonstersPage(container) {
 
   function update() {
     const query = searchBox.value.toLowerCase().trim();
-    const map = mapFilter.value;
 
-    let filtered = monstersData.filter(monster => {
-      if (map && !(monster.maps || []).includes(map)) return false;
+    let filtered = scopedMonsters.filter(monster => {
       if (query && !monsterSearchHaystack(monster).includes(query)) return false;
       return true;
     });
@@ -2199,15 +2327,13 @@ async function renderMonstersPage(container) {
     updateSortIndicators();
     renderMonsterRows(container.querySelector('#monsters-tbody'), filtered);
     container.querySelector('#monsters-count').textContent =
-      `Showing ${filtered.length} of ${monstersData.length} monsters`;
+      `Showing ${filtered.length} of ${scopedMonsters.length} monsters`;
   }
 
   searchBox.addEventListener('input', update);
-  mapFilter.addEventListener('change', update);
 
   container.querySelector('#monsters-clear-filters').addEventListener('click', () => {
     searchBox.value = '';
-    mapFilter.value = '';
     update();
   });
 

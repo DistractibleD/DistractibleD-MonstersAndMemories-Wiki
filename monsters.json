@@ -98,6 +98,7 @@
   {
     "name": "Night Terror",
     "slug": "night-terror",
+    "named": true,
     "image": "images/Monsters/night-terror.jpg",
     "maps": ["Necropolis (Night Harbor)"],
     "drops": [
@@ -121,8 +122,14 @@
     "slug": "a-bone-carver"
   },
   {
+    "name": "an ashira warrior",
+    "slug": "an-ashira-warrior",
+    "image": "images/Monsters/an-ashira-warrior.jpg"
+  },
+  {
     "name": "the corrupted ashira",
     "slug": "the-corrupted-ashira",
+    "named": true,
     "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Corrupted Leather Cap" },
@@ -147,6 +154,7 @@
   {
     "name": "Fernic the Cur",
     "slug": "fernic-the-cur",
+    "named": true,
     "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Desert Nomad Bracer" },
@@ -157,6 +165,7 @@
   {
     "name": "Onis the Elder",
     "slug": "onis-the-elder",
+    "named": true,
     "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Fang-Backed Boots" },
@@ -169,6 +178,7 @@
   {
     "name": "Hemalmula the Hunter",
     "slug": "hemalmula-the-hunter",
+    "named": true,
     "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Duneshoulder Pauldrons" },
@@ -180,6 +190,7 @@
   {
     "name": "Rami Al-Qawwaasr",
     "slug": "rami-al-qawwaasr",
+    "named": true,
     "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Vale Giant Shortbow" },
@@ -189,6 +200,7 @@
   {
     "name": "Khal'Baar the Growler",
     "slug": "khalbaar-the-growler",
+    "named": true,
     "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Carved Spirit Totem" }
@@ -197,6 +209,7 @@
   {
     "name": "Hadir the Shipbreaker",
     "slug": "hadir-the-shipbreaker",
+    "named": true,
     "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Hadir's Iron Fist" },
@@ -208,6 +221,7 @@
   {
     "name": "Spicy Raziq",
     "slug": "spicy-raziq",
+    "named": true,
     "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Stirring Stick" },
@@ -218,6 +232,7 @@
   {
     "name": "Seshena the Lost",
     "slug": "seshena-the-lost",
+    "named": true,
     "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Knotted Cudgel" },
@@ -230,6 +245,7 @@
   {
     "name": "Chompers",
     "slug": "chompers",
+    "named": true,
     "maps": ["Shaded Dunes"],
     "levelRange": "~16",
     "drops": [
@@ -240,6 +256,7 @@
   {
     "name": "Dhajr Spitemaw",
     "slug": "dhajr-spitemaw",
+    "named": true,
     "maps": ["Shaded Dunes"],
     "levelRange": "8+",
     "drops": [
@@ -250,6 +267,7 @@
   {
     "name": "Toma the Two-Faced",
     "slug": "toma-the-two-faced",
+    "named": true,
     "maps": ["Shaded Dunes"],
     "levelRange": "9+",
     "drops": [
@@ -261,6 +279,7 @@
   {
     "name": "Yezkiel the Gatekeeper",
     "slug": "yezkiel-the-gatekeeper",
+    "named": true,
     "maps": ["Shaded Dunes"],
     "levelRange": "20+",
     "drops": [
@@ -273,6 +292,7 @@
   {
     "name": "Maleq",
     "slug": "maleq",
+    "named": true,
     "maps": ["Shaded Dunes"],
     "levelRange": "~40",
     "drops": [
@@ -286,6 +306,7 @@
   {
     "name": "a shimmering shadow",
     "slug": "a-shimmering-shadow",
+    "named": true,
     "maps": ["Shaded Dunes"],
     "levelRange": "~30",
     "drops": [
@@ -299,6 +320,7 @@
   {
     "name": "Noel Klares",
     "slug": "noel-klares",
+    "named": true,
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Noel Klares' Ring" }
@@ -308,6 +330,7 @@
   {
     "name": "a pale lieutenant",
     "slug": "a-pale-lieutenant",
+    "named": true,
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Ironhide Girdle" }
@@ -317,6 +340,7 @@
   {
     "name": "Captain Caspian",
     "slug": "captain-caspian",
+    "named": true,
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Moonveil Bracer" },
@@ -327,6 +351,7 @@
   {
     "name": "Manciple Daphne",
     "slug": "manciple-daphne",
+    "named": true,
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Charmweaver Robe" }
@@ -336,6 +361,7 @@
   {
     "name": "a cunning privateer",
     "slug": "a-cunning-privateer",
+    "named": true,
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Dirty Pirate Earring" }
@@ -345,6 +371,7 @@
   {
     "name": "Grubbfist",
     "slug": "grubbfist",
+    "named": true,
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Grubbfist's Smasher" }
@@ -354,6 +381,7 @@
   {
     "name": "Victualler Veera",
     "slug": "victualler-veera",
+    "named": true,
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Phantom Stein" }
@@ -363,6 +391,7 @@
   {
     "name": "Cormac Renshaw",
     "slug": "cormac-renshaw",
+    "named": true,
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Ragged Leather Gloves" },
@@ -373,6 +402,7 @@
   {
     "name": "Eamon Kassir",
     "slug": "eamon-kassir",
+    "named": true,
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Savage Heartplate" }

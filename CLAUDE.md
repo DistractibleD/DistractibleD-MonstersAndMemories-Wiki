@@ -540,14 +540,12 @@ the inbox, don't move them into `images/crafting/`.
 ## Adding a monster
 
 Introduced 2026-07-06 as a new main category, alongside Items/Maps/Crafting. The Monsters
-page (`pages.json` entry with `"type": "monsters"`) is a single sortable/filterable table
-(`renderMonstersPage` in `script.js`) — unlike the Item Database, it doesn't need a
-category-grid-first layout, since there's only one meaningful browsing dimension (map)
-instead of several, so a dropdown filter covers it without a whole extra drill-down level.
-Sorted alphabetically by name by default; click the Map or Level Range column headers to
-sort by those instead, or use the map dropdown (populated from whatever maps actually exist
-in the data, same "derive filters from data" rule as every other dropdown in this file) to
-narrow to one map at a time.
+page (`pages.json` entry with `"type": "monsters"`) is a two-level drill-down as of
+2026-07-11 (see "Named vs. regular, browse-by-zone restructure" below for why) — a
+top-level category grid (`renderMonstersCategories`) split into two areas, then a
+sortable/searchable table (`renderMonstersList`) scoped to one area + zone at a time. Each
+list is sorted alphabetically by name by default; click the Map column header to sort by
+that instead.
 
 `monsters.json` schema — only `name`/`slug` are required, everything else is optional and
 fills in as the user provides it:
@@ -661,10 +659,48 @@ pending-variable-consumed-on-render pattern) so that item's page shows a "&larr;
 The Monsters page is wired into the header search box the same way Items/Crafting are (see
 "Header search box" below) — a "Monsters" results section, `goToMonster` navigating to the
 page and flashing the matched row (`pendingHighlightMonster`, same `row-flash` mechanism as
-an Item Database search result). It does **not** get its own "Categories" search entries the
-way Item types/tradeskills do — maps aren't modeled as a fixed list anywhere, so there's
-nothing equivalent to jump to directly; the map filter dropdown on the page itself covers
-that instead.
+an Item Database search result). As of 2026-07-11, `goToMonster` also sets
+`pendingMonsterScope` (`{ named, map }`, derived from the target monster's own `named` flag
+and first `maps` entry) so a search result lands directly in the right scoped list instead
+of the top-level category grid — same idea as `pendingItemCategory` on the Item Database.
+
+### Named vs. regular, browse-by-zone restructure (2026-07-11)
+
+The user asked for the same category-grid-first browsing pattern Items and Crafting already
+have: a separate area for named (boss) monsters vs. regular ones, each subdivided by zone.
+This replaced the single flat table + map dropdown from the original 2026-07-06 version.
+
+- **`monster.named`** — a new optional boolean, `true` for confirmed named/boss monsters.
+  This has to be an explicit field rather than derived from name casing, because several
+  confirmed bosses use the exact same lowercase "a/the X" naming style as regular trash mobs
+  (e.g. "a corrupted ashira", "a shimmering shadow", "a pale lieutenant", "a cunning
+  privateer" are all bosses per their source reference tables) — there's no reliable
+  string-pattern signal to key off. A monster with no `named` field (or `named: false`) is
+  treated as regular; every monster added before this date was retroactively marked
+  `"named": true` if it came from a table the user explicitly called a boss/named-monster
+  list (Vale of Zintar, Shaded Dunes, Night Harbor "rumored" bosses, Night Terror), and left
+  unmarked otherwise (the original desert-bat-family regular mobs).
+- **`renderMonstersCategories(container)`** — the new top-level view. Two sections, "Named
+  Monsters (Bosses)" (skull icon) and "Regular Monsters" (paw-print icon), each a grid of
+  zone cards reusing the Item Database's `.items-category-card` styling. A zone card's zone
+  is a monster's first `maps` entry, or a fallback `"Unknown Zone"` bucket for the handful of
+  monsters with no map recorded yet (`monsterZone()` helper) — clicking a card calls
+  `renderMonstersList(container, { named, map })`. Also has its own quick-search box
+  (`#monsters-quick-search-box`), same pattern as the Item Database's and Crafting's.
+- **`renderMonstersList(container, scope)`** — the original table (search box, sortable
+  Name/Map columns, click-to-view modal), just filtered down to
+  `monster.named === scope.named && monsterZone(monster) === scope.map`, with a back link
+  to the category grid instead of a map filter dropdown (redundant now that zone is fixed by
+  the scope).
+- Two new icons, `boss` (skull) and `paw` (paw print), added to `ICON_DEFS`/`ICON_BG` — used
+  once per section heading and once per zone card within that section (zones themselves
+  don't have their own icons, so every card in a section shares its section's icon).
+- **Gotcha hit while building this:** `goToMonster`'s zone fallback must match
+  `monsterZone()`'s fallback exactly (`"Unknown Zone"`, not `null`/`undefined`) — using a
+  different fallback there caused `renderMonstersList` to call `escapeAttr(null)`, which
+  throws (`.replace` on `null`) and gets silently swallowed by `loadPage`'s catch block,
+  surfacing as a blank "Page not found" instead of a visible JS error. Worth remembering if
+  a future pending-scope-style feature hits the same silent-failure shape.
 
 ## Adding a Beastmaster companion
 
