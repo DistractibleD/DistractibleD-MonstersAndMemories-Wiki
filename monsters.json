@@ -117,5 +117,26 @@
   {
     "name": "a bone carver",
     "slug": "a-bone-carver"
+  },
+  {
+    "name": "the corrupted ashira",
+    "slug": "the-corrupted-ashira",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Sand-Blasted Coif" },
+      { "item": "Corrupted Leather Mask" },
+      { "item": "Corrupted Leather Gorget" },
+      { "item": "Corrupted Leather Shoulderpads" },
+      { "item": "Corrupted Leather Cloak" },
+      { "item": "Corrupted Leather Tunic" },
+      { "item": "Corrupted Leather Robe" },
+      { "item": "Corrupted Leather Bracer" },
+      { "item": "Corrupted Leather Leggings" },
+      { "item": "Corrupted Leather Belt" },
+      { "item": "Corrupted Leather Gloves" },
+      { "item": "Sand-Blasted Boots" },
+      { "item": "Mace of Malice" }
+    ],
+    "rumor": "A fan-wiki-style reference table listed this drop table as a full \"Corrupted Leather\" armor set including a \"Corrupted Leather Cap\" (Head) and \"Corrupted Leather Boots\" (Feet) — but in-game screenshots show the actual Head and Feet drops are named \"Sand-Blasted Coif\"/\"Sand-Blasted Boots\" instead, with different stats than the table guessed. The other 7 Corrupted Leather pieces (Mask, Shoulderpads, Cloak, Robe, Bracer, Belt, Gloves) are recorded here from that same table but aren't in items.json yet since the table has no Weight/Size data for them — see images/items-needing-text.txt."
   }
 ]

@@ -45,6 +45,20 @@ Resolved (2026-07-07):
   a lance being a stabbing weapon everywhere else in this schema). Updated
   `Rusty War Lance`'s `skill` to `"Stabbing"` in items.json.
 
+New flag (2026-07-11):
+
+- Corrupted Leather Mask, Shoulderpads, Cloak, Robe, Bracer, Belt, Gloves — these 7 pieces
+  are recorded as drops on "the corrupted ashira" (monsters.json) but have no items.json
+  entry yet. Source is a fan-wiki-style reference table (Armor Slot/Race/Class/AC/Stats
+  columns only — no Weight or Size column at all), and per this repo's convention every
+  item needs a weight/size (renderItemCardHTML shows them unconditionally, no "not yet
+  known" fallback the way foundAt has). The same table's Cap and Boots rows also turned out
+  to be wrong once real screenshots came in (see "the corrupted ashira" rumor field) — the
+  actual items are "Sand-Blasted Coif"/"Sand-Blasted Boots", not "Corrupted Leather
+  Cap"/"Corrupted Leather Boots" — so the other 7 rows shouldn't be trusted as exact either
+  until a real in-game card confirms them. Add proper items.json entries once screenshots of
+  these 7 pieces come in.
+
 New flag (2026-07-06):
 
 - Lunar Festival Trousers — the inbox screenshot shows MAGIC/Slot/AC/stats/SV Magic/

@@ -3832,5 +3832,34 @@
     "tags": ["MAGIC"],
     "weight": 0.25,
     "size": "Small"
+  },
+  {
+    "name": "Sand-Blasted Boots",
+    "slug": "sand-blasted-boots",
+    "image": "images/items/sand-blasted-boots.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Feet",
+    "ac": 13,
+    "stats": { "STR": 4, "AGI": 3, "HP": 5 },
+    "weight": 0.5,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Corrupted Leather Leggings",
+    "slug": "corrupted-leather-leggings",
+    "image": "images/items/corrupted-leather-leggings.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Legs",
+    "ac": 14,
+    "stats": { "STR": 5, "STA": 1 },
+    "resists": { "CORRUPTION": -5 },
+    "weight": 1.5,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   }
 ]
