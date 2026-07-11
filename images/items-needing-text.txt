@@ -47,17 +47,25 @@ Resolved (2026-07-07):
 
 New flag (2026-07-11):
 
-- Corrupted Leather Mask, Shoulderpads, Cloak, Robe, Bracer, Belt, Gloves — these 7 pieces
-  are recorded as drops on "the corrupted ashira" (monsters.json) but have no items.json
-  entry yet. Source is a fan-wiki-style reference table (Armor Slot/Race/Class/AC/Stats
-  columns only — no Weight or Size column at all), and per this repo's convention every
-  item needs a weight/size (renderItemCardHTML shows them unconditionally, no "not yet
-  known" fallback the way foundAt has). The same table's Cap and Boots rows also turned out
-  to be wrong once real screenshots came in (see "the corrupted ashira" rumor field) — the
-  actual items are "Sand-Blasted Coif"/"Sand-Blasted Boots", not "Corrupted Leather
-  Cap"/"Corrupted Leather Boots" — so the other 7 rows shouldn't be trusted as exact either
+- Corrupted Leather Cap, Mask, Shoulderpads, Cloak, Robe, Bracer, Belt, Gloves, Boots — these
+  9 pieces are recorded as drops on "the corrupted ashira" (monsters.json) but have no
+  items.json entry yet. Source is a fan-wiki-style reference table (Armor Slot/Race/Class/
+  AC/Stats columns only — no Weight or Size column at all), and per this repo's convention
+  every item needs a weight/size (renderItemCardHTML shows them unconditionally, no "not yet
+  known" fallback the way foundAt has). None of these 9 rows should be trusted as exact
   until a real in-game card confirms them. Add proper items.json entries once screenshots of
-  these 7 pieces come in.
+  these 9 pieces come in.
+  (Correction 2026-07-11: "Sand-Blasted Coif"/"Sand-Blasted Boots" were briefly recorded as
+  alternate Head/Feet drops for this same monster — the user has since confirmed those two
+  actually drop in a different zone, unrelated to "the corrupted ashira", so they've been
+  removed from its drop list. Their own items.json entries are unaffected, just the
+  drop-source link.)
+  (Update 2026-07-11: the user confirmed "Corrupted Leather" is a blanket/category term for
+  this exact 12-piece set, not a separate item — matching how it was already recorded. The
+  user also named one more drop from this monster, "Corrupted Leather Scraps", presumably a
+  raw material like Rawhide/Hide/Leather Scraps from Tanning — added to "the corrupted
+  ashira"'s drop list as plain text, no items.json entry yet since no weight/size/stats are
+  known for it.)
 
 New flag (2026-07-06):
 

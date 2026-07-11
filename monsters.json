@@ -74,8 +74,10 @@
       { "item": "Rusty Greatsword" },
       { "item": "Tattered Cloth Gloves" },
       { "item": "Tattered Cloth Bracer" },
-      { "item": "Rusty Tower Shield" }
-    ]
+      { "item": "Rusty Tower Shield" },
+      { "item": "Shattered Skeleton Femur" }
+    ],
+    "rumor": "\"Shattered Skeleton Femur\" comes from a community reference table the user described as rumored drops, not confirmed via an in-game screenshot like the rest of this monster's drop list — treat it as less certain than the other entries above."
   },
   {
     "name": "a Bloodynose quarreler",
@@ -123,7 +125,7 @@
     "slug": "the-corrupted-ashira",
     "maps": ["Vale of Zintar"],
     "drops": [
-      { "item": "Sand-Blasted Coif" },
+      { "item": "Corrupted Leather Cap" },
       { "item": "Corrupted Leather Mask" },
       { "item": "Corrupted Leather Gorget" },
       { "item": "Corrupted Leather Shoulderpads" },
@@ -134,9 +136,247 @@
       { "item": "Corrupted Leather Leggings" },
       { "item": "Corrupted Leather Belt" },
       { "item": "Corrupted Leather Gloves" },
-      { "item": "Sand-Blasted Boots" },
-      { "item": "Mace of Malice" }
+      { "item": "Corrupted Leather Boots" },
+      { "item": "Corrupted Leather Scraps" },
+      { "item": "Mace of Malice" },
+      { "item": "Ashira War Tooth" },
+      { "item": "Ashira Hunter Tooth" }
     ],
-    "rumor": "A fan-wiki-style reference table listed this drop table as a full \"Corrupted Leather\" armor set including a \"Corrupted Leather Cap\" (Head) and \"Corrupted Leather Boots\" (Feet) — but in-game screenshots show the actual Head and Feet drops are named \"Sand-Blasted Coif\"/\"Sand-Blasted Boots\" instead, with different stats than the table guessed. The other 7 Corrupted Leather pieces (Mask, Shoulderpads, Cloak, Robe, Bracer, Belt, Gloves) are recorded here from that same table but aren't in items.json yet since the table has no Weight/Size data for them — see images/items-needing-text.txt."
+    "rumor": "A fan-wiki-style reference table listed a full \"Corrupted Leather\" armor set for this monster, including \"Corrupted Leather Cap\" (Head) and \"Corrupted Leather Boots\" (Feet). \"Sand-Blasted Coif\"/\"Sand-Blasted Boots\" were previously (incorrectly) recorded here too, assumed to be alternate Head/Feet drops — the user has since confirmed those two actually drop in a different zone, not from this monster, so they've been removed from this drop list. 9 of the 14 Corrupted Leather pieces (Cap, Mask, Shoulderpads, Cloak, Robe, Bracer, Belt, Gloves, Boots) aren't in items.json yet since the source table has no Weight/Size data for them — see images/items-needing-text.txt. A separate \"named monsters (bosses) in Vale of Zintar\" reference table lists a boss named \"a corrupted ashira\" (note the \"a\" instead of \"the\") dropping only \"Ashira War Tooth\" and \"Ashira Hunter Tooth\" (both Primary/Secondary weapons, no stats known yet) — assumed to be this same boss and merged in here, but neither of those two sources mentions the other's drops at all, so this identification isn't fully confirmed. Flag for correction if \"a corrupted ashira\" turns out to be a different monster than this one."
+  },
+  {
+    "name": "Fernic the Cur",
+    "slug": "fernic-the-cur",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Desert Nomad Bracer" },
+      { "item": "Fernstalker's Sash" },
+      { "item": "Ironwood Shortsword" }
+    ]
+  },
+  {
+    "name": "Onis the Elder",
+    "slug": "onis-the-elder",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Fang-Backed Boots" },
+      { "item": "Moonrise Staff" },
+      { "item": "Desert Nomad Treadwraps" },
+      { "item": "Ceremonial Plated Mantle" },
+      { "item": "Sekhara Manacles" }
+    ]
+  },
+  {
+    "name": "Hemalmula the Hunter",
+    "slug": "hemalmula-the-hunter",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Duneshoulder Pauldrons" },
+      { "item": "Duneseeker's Hood" },
+      { "item": "Dune Giant's Pendant" },
+      { "item": "Windstorm Moccasins" }
+    ]
+  },
+  {
+    "name": "Rami Al-Qawwaasr",
+    "slug": "rami-al-qawwaasr",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Vale Giant Shortbow" },
+      { "item": "Duneshaper's Ring" }
+    ]
+  },
+  {
+    "name": "Khal'Baar the Growler",
+    "slug": "khalbaar-the-growler",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Carved Spirit Totem" }
+    ]
+  },
+  {
+    "name": "Hadir the Shipbreaker",
+    "slug": "hadir-the-shipbreaker",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Hadir's Iron Fist" },
+      { "item": "Hadir's Blade" },
+      { "item": "Shipbreaker Soft Wraps" },
+      { "item": "Sandcoated Belt" }
+    ]
+  },
+  {
+    "name": "Spicy Raziq",
+    "slug": "spicy-raziq",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Stirring Stick" },
+      { "item": "Polished Sandstone" },
+      { "item": "Scholar's Shoulderpads" }
+    ]
+  },
+  {
+    "name": "Seshena the Lost",
+    "slug": "seshena-the-lost",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Knotted Cudgel" },
+      { "item": "Embermoss Ring" },
+      { "item": "Chain Dervish Mantle" },
+      { "item": "Onyx Bat Figurine" },
+      { "item": "Desert Nomad Belt" }
+    ]
+  },
+  {
+    "name": "Chompers",
+    "slug": "chompers",
+    "maps": ["Shaded Dunes"],
+    "levelRange": "~16",
+    "drops": [
+      { "item": "Chompers's Tooth" },
+      { "item": "Chompers Hide Tunic" }
+    ]
+  },
+  {
+    "name": "Dhajr Spitemaw",
+    "slug": "dhajr-spitemaw",
+    "maps": ["Shaded Dunes"],
+    "levelRange": "8+",
+    "drops": [
+      { "item": "Claw of the Ashira Hunter" },
+      { "item": "Spitemaw's Ring" }
+    ]
+  },
+  {
+    "name": "Toma the Two-Faced",
+    "slug": "toma-the-two-faced",
+    "maps": ["Shaded Dunes"],
+    "levelRange": "9+",
+    "drops": [
+      { "item": "Toma's Signet Ring" },
+      { "item": "Smuggler's Damaged Logbook" },
+      { "item": "Filthy Cloth Hood" }
+    ]
+  },
+  {
+    "name": "Yezkiel the Gatekeeper",
+    "slug": "yezkiel-the-gatekeeper",
+    "maps": ["Shaded Dunes"],
+    "levelRange": "20+",
+    "drops": [
+      { "item": "Dark Buckler" },
+      { "item": "Sindr's Horn" },
+      { "item": "Dark Tower Shield" },
+      { "item": "Grimoire of Demonology" }
+    ]
+  },
+  {
+    "name": "Maleq",
+    "slug": "maleq",
+    "maps": ["Shaded Dunes"],
+    "levelRange": "~40",
+    "drops": [
+      { "item": "Giant Fire Wedding Ring" },
+      { "item": "Sand Giant's Napkin" },
+      { "item": "Maleq's Toothpick" },
+      { "item": "Sand-Blasted Coif" },
+      { "item": "Duneshaper Gauntlets" }
+    ]
+  },
+  {
+    "name": "a shimmering shadow",
+    "slug": "a-shimmering-shadow",
+    "maps": ["Shaded Dunes"],
+    "levelRange": "~30",
+    "drops": [
+      { "item": "Shimmering Shaow Veil" },
+      { "item": "Moonwhisper Knot" },
+      { "item": "Shimmering Scimtar" },
+      { "item": "Umbracast Greaves" }
+    ],
+    "rumor": "\"Shimmering Shaow Veil\" and \"Shimmering Scimtar\" are recorded exactly as spelled on the source reference table — likely \"Shadow Veil\"/\"Scimitar\" typos, but left unchanged pending a real in-game screenshot to confirm the actual names rather than silently correcting them."
+  },
+  {
+    "name": "Noel Klares",
+    "slug": "noel-klares",
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Noel Klares' Ring" }
+    ],
+    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+  },
+  {
+    "name": "a pale lieutenant",
+    "slug": "a-pale-lieutenant",
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Ironhide Girdle" }
+    ],
+    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+  },
+  {
+    "name": "Captain Caspian",
+    "slug": "captain-caspian",
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Moonveil Bracer" },
+      { "item": "Thirstbound Grips" }
+    ],
+    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+  },
+  {
+    "name": "Manciple Daphne",
+    "slug": "manciple-daphne",
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Charmweaver Robe" }
+    ],
+    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+  },
+  {
+    "name": "a cunning privateer",
+    "slug": "a-cunning-privateer",
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Dirty Pirate Earring" }
+    ],
+    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+  },
+  {
+    "name": "Grubbfist",
+    "slug": "grubbfist",
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Grubbfist's Smasher" }
+    ],
+    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+  },
+  {
+    "name": "Victualler Veera",
+    "slug": "victualler-veera",
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Phantom Stein" }
+    ],
+    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+  },
+  {
+    "name": "Cormac Renshaw",
+    "slug": "cormac-renshaw",
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Ragged Leather Gloves" },
+      { "item": "Seafarer's Shroud" }
+    ],
+    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+  },
+  {
+    "name": "Eamon Kassir",
+    "slug": "eamon-kassir",
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Savage Heartplate" }
+    ],
+    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
   }
 ]

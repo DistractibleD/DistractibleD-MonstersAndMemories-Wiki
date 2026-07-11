@@ -1032,7 +1032,8 @@
     "weight": 0.7,
     "size": "Small",
     "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "foundAt": "Dropped by Maleq (Shaded Dunes)"
   },
   {
     "name": "Mining Pouch",
@@ -1806,7 +1807,8 @@
     "weight": 0.3,
     "size": "Small",
     "classes": ["ALL"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "foundAt": "Dropped by Toma the Two-Faced (Shaded Dunes)"
   },
   {
     "name": "Antique Billon Coin",
@@ -1909,7 +1911,8 @@
     "weight": 3.0,
     "size": "Medium",
     "classes": ["ALL"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "foundAt": "Dropped by a shimmering shadow (Shaded Dunes)"
   },
   {
     "name": "Wood",
@@ -2930,7 +2933,8 @@
     "weight": 0.5,
     "size": "Medium",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "foundAt": "Dropped by Hemalmula the Hunter (Vale of Zintar)"
   },
   {
     "name": "Thornbark Mantle",
@@ -3795,7 +3799,8 @@
     "weight": 3.0,
     "size": "Large",
     "classes": ["CLR", "DRU", "PAL", "SHM"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "foundAt": "Dropped by Onis the Elder (Vale of Zintar)"
   },
   {
     "name": "Necrotic Chitin Pauldrons",
