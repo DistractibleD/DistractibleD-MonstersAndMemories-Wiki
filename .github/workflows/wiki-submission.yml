@@ -1,0 +1,90 @@
+name: Process Wiki Submission
+
+# Triggered by a new issue opened via the "Wiki Submission" template (see
+# .github/ISSUE_TEMPLATE/wiki-submission.yml, which auto-applies the
+# "submission" label). Pulls any screenshot(s) attached to the issue into
+# images/Inbox/ and opens a pull request — it never commits to main directly.
+# Merging the PR is the "accept", closing it is the "deny"; either way the
+# live site is untouched until a human decides.
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  process-submission:
+    if: contains(github.event.issue.labels.*.name, 'submission')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download attached screenshot(s) into images/Inbox
+        id: extract
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -e
+          mkdir -p images/Inbox
+          # GitHub inserts drag-and-dropped images as markdown: ![name](url)
+          echo "$ISSUE_BODY" | grep -oE '!\[[^]]*\]\([^)]+\)' | sed -E 's/!\[[^]]*\]\(([^)]+)\)/\1/' | sort -u > /tmp/urls.txt || true
+
+          COUNT=0
+          while IFS= read -r URL; do
+            [ -z "$URL" ] && continue
+            COUNT=$((COUNT+1))
+            TMPFILE="/tmp/download-$COUNT"
+            curl -sL "$URL" -o "$TMPFILE"
+            MIME=$(file --brief --mime-type "$TMPFILE" || echo "application/octet-stream")
+            case "$MIME" in
+              image/png) EXT="png" ;;
+              image/jpeg) EXT="jpg" ;;
+              image/gif) EXT="gif" ;;
+              image/webp) EXT="webp" ;;
+              *) EXT="" ;;
+            esac
+            if [ -z "$EXT" ]; then
+              echo "Skipping non-image attachment ($MIME): $URL"
+              COUNT=$((COUNT-1))
+              continue
+            fi
+            mv "$TMPFILE" "images/Inbox/issue-${ISSUE_NUMBER}-${COUNT}.${EXT}"
+          done < /tmp/urls.txt
+
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+
+      - name: Open pull request with the submission
+        if: steps.extract.outputs.count != '0'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          base: main
+          branch: submission/issue-${{ github.event.issue.number }}
+          commit-message: "Add submission from issue #${{ github.event.issue.number }} to inbox"
+          title: "Wiki submission: issue #${{ github.event.issue.number }}"
+          body: |
+            Automated PR created from #${{ github.event.issue.number }}.
+
+            This only adds the submitted screenshot(s) to `images/Inbox/` — nothing else
+            changes, and nothing is live until this PR is merged. **Merge to accept,
+            close (without merging) to deny.** Merging still leaves the actual wiki-data
+            entry (items.json/monsters.json/etc.) to be done afterward through the normal
+            "check inbox" process, same as any other screenshot.
+
+            Closes #${{ github.event.issue.number }}
+          labels: submission
+
+      - name: Comment if no image was found
+        if: steps.extract.outputs.count == '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "I couldn't find an attached image on this submission. Could you edit the issue and drag-and-drop (or paste) a screenshot into the Screenshot field?"
+            });

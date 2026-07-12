@@ -1266,3 +1266,20 @@ past the session.
 
 The user is non-technical and relies on Claude to commit and push. Changes are not pushed
 automatically — wait for an explicit request (e.g. "push") before running `git push`.
+
+## Community submissions (2026-07-12)
+
+Visitors can submit a screenshot for review via a GitHub Issue using the "Wiki Submission"
+template (`.github/ISSUE_TEMPLATE/wiki-submission.yml`) — one screenshot + optional notes,
+same shape as what the user already posts directly in chat. A GitHub Action
+(`.github/workflows/wiki-submission.yml`) runs on every new issue carrying the
+auto-applied `submission` label: it pulls any drag-and-dropped image(s) out of the issue
+body and opens a pull request that adds them to `images/Inbox/` — it never commits to
+`main` directly. **Merging the PR is the accept, closing it (without merging) is the
+deny** — either way nothing on the live site changes until a human decides, and a merged
+submission still just lands in the inbox to go through the normal "check inbox" workflow
+above, exactly like a screenshot the user posted directly. This was deliberately kept to
+the mechanical part only (moving the image into the repo) — no LLM call, no API key, no
+auto-generated JSON — so it's cheap to run and easy to reason about; extending it to also
+draft the actual `items.json`/`monsters.json` entry automatically would be a future,
+separate step if ever wanted.
