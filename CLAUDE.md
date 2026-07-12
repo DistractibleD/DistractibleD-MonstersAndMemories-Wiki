@@ -1321,3 +1321,32 @@ entirely rather than left alongside the new one, to avoid two parallel, confusin
   auto-generated JSON, just moving the screenshot into the repo safely. Extending it to
   also draft the actual `items.json`/`monsters.json` entry automatically would be a future,
   separate step if ever wanted.
+- **This actually works end to end** — confirmed 2026-07-12 with a real test submission
+  (a plain curl POST straight to the deployed Worker, bypassing the browser entirely, since
+  CORS only restricts *browser* callers — see the security note two bullets down) that
+  successfully created a real pull request on the repo.
+- **Security posture, in case it's asked about again later:** the `GITHUB_TOKEN` never
+  leaves the Worker (not logged, not returned in any response), and it's scoped to only
+  Contents+PRs on this one repo, so worst-case token exposure can't touch other repos or
+  account settings. The Worker's own code is hard-coded to only ever create a new branch +
+  one file + one PR — it can't be made to touch `main` or other files no matter what a
+  caller sends it. `ALLOWED_ORIGIN`/CORS is *not* real access control (it only stops
+  browser-based JS from other sites reading the response; a direct script/curl call can
+  still reach the endpoint) — the honeypot field filters unsophisticated bots, but a
+  determined scripted caller could still spam junk PRs. That's a nuisance (manual cleanup),
+  not a security hole, since nothing reaches the live site without a manual merge. Rate-
+  limiting the Worker would close that gap if it ever becomes a real problem — not built yet,
+  deliberately deferred until it's actually needed.
+- **`images/samples/`** holds a few example screenshots shown directly on the Submit page
+  (`SUBMIT_EXAMPLES` in `script.js`) so visitors can see what a *complete* submission looks
+  like before they send one — added 2026-07-13 from screenshots the user dropped in
+  `images/Inbox/` named `"Use as <type> sample.png"`. Unlike every other inbox image
+  covered elsewhere in this file, these are **permanent site content the page displays**,
+  not archival/pending-review material, so they get a folder of their own rather than
+  `images/items/`, `images/Monsters/`, etc. Converted to `.jpg` quality 90 same as any other
+  screenshot. Clicking a thumbnail opens `#sample-viewer`, a minimal image lightbox (same
+  overlay/close-button shell as `#monster-viewer`, just a plain `<img>` with no card data).
+  The accompanying copy deliberately emphasizes capturing the *entire* card/window — the
+  user's own stated reason for adding these was to cut down on submissions with cropped-off
+  text. Add another example the same way (drop a `.jpg` into `images/samples/`, add an entry
+  to `SUBMIT_EXAMPLES`) if a new submission type needs its own sample.

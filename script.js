@@ -2941,12 +2941,38 @@ async function renderCompanionsPage(container) {
 // "not set up yet" message instead of silently failing.
 const SUBMIT_WORKER_URL = 'https://muddy-bar-88a7.mnm-wiki.workers.dev';
 
+// Example screenshots shown on the Submit page so visitors know what a
+// usable submission looks like — added directly to images/samples/ (not
+// images/Inbox/, since these are permanent site content the page displays,
+// not archival/pending-review material). Extend this array the same way if
+// another example type is ever needed.
+const SUBMIT_EXAMPLES = [
+  { image: 'images/samples/sample-loot.jpg', label: 'Item / loot window' },
+  { image: 'images/samples/sample-monster.jpg', label: 'Monster picture' },
+  { image: 'images/samples/sample-companion.jpg', label: 'Companion / ability screenshot' }
+];
+
 function renderSubmitPage(container) {
   container.innerHTML = `
     <h1>Submit a Screenshot</h1>
     <p>Found something not on the wiki yet? Attach one screenshot below — an item card, a
     monster picture, a map, a recipe card, anything from the game. It won't appear on the
     wiki automatically; every submission is reviewed first.</p>
+    <div class="submit-examples">
+      <div class="submit-examples-grid">
+        ${SUBMIT_EXAMPLES.map(ex => `
+          <button type="button" class="submit-example" data-full="${escapeAttr(ex.image)}">
+            <img src="${escapeAttr(ex.image)}" alt="Example: ${escapeAttr(ex.label)}">
+            <span>${escapeAttr(ex.label)}</span>
+          </button>
+        `).join('')}
+      </div>
+      <p class="submit-examples-note">Click an example to see it full-size. Notice how each one
+      captures the <strong>entire</strong> card or window, with nothing cut off at the edges —
+      that's the most important thing to get right. A screenshot missing part of the text (a
+      stat, a name, a component) is much less useful than one that's a little messy but
+      complete.</p>
+    </div>
     ${!SUBMIT_WORKER_URL ? `
       <p class="submit-form-notice">This form isn't finished being set up yet (no Worker URL
       configured), so submissions can't be sent right now. Come back soon!</p>
@@ -2978,6 +3004,10 @@ function renderSubmitPage(container) {
       </form>
     `}
   `;
+
+  container.querySelectorAll('.submit-example').forEach(btn => {
+    btn.addEventListener('click', () => openSampleViewer(btn.dataset.full));
+  });
 
   if (!SUBMIT_WORKER_URL) return;
 
@@ -3061,6 +3091,40 @@ function renderSubmitPage(container) {
     status.className = 'submit-status submit-status-error';
     button.disabled = false;
   });
+}
+
+// Minimal full-size image lightbox for the Submit page's example thumbnails
+// — same overlay/close-button shell as #monster-viewer, just showing a plain
+// <img> instead of a data-rendered card, since there's no card data here.
+function setupSampleViewer() {
+  if (document.getElementById('sample-viewer')) return;
+
+  const viewer = document.createElement('div');
+  viewer.id = 'sample-viewer';
+  viewer.innerHTML = `
+    <button id="sample-viewer-close" aria-label="Close">&times;</button>
+    <img id="sample-viewer-img" alt="Example screenshot, full size">
+  `;
+  document.body.appendChild(viewer);
+
+  viewer.addEventListener('click', e => {
+    if (e.target === viewer) closeSampleViewer();
+  });
+  viewer.querySelector('#sample-viewer-close').addEventListener('click', closeSampleViewer);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeSampleViewer();
+  });
+}
+
+function openSampleViewer(imageSrc) {
+  setupSampleViewer();
+  document.getElementById('sample-viewer-img').src = imageSrc;
+  document.getElementById('sample-viewer').classList.add('open');
+}
+
+function closeSampleViewer() {
+  const viewer = document.getElementById('sample-viewer');
+  if (viewer) viewer.classList.remove('open');
 }
 
 init();

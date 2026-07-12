@@ -1342,3 +1342,83 @@ html, body {
   font-family: 'Sora', sans-serif;
   font-weight: 600;
 }
+.submit-examples {
+  margin: 18px 0 26px;
+  max-width: 640px;
+}
+.submit-examples-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+.submit-example {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 140px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  text-align: center;
+}
+.submit-example:hover {
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
+.submit-example img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.submit-examples-note {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+/* ---------- Sample screenshot lightbox (Submit page examples) ---------- */
+#sample-viewer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 11, 14, 0.85);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+#sample-viewer.open {
+  display: flex;
+}
+#sample-viewer-img {
+  max-width: 92vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+#sample-viewer-close {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+#sample-viewer-close:hover {
+  color: var(--accent);
+}
