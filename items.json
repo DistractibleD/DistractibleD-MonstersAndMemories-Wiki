@@ -4834,5 +4834,17 @@
     "size": "Small",
     "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Cooked Orc Meat",
+    "slug": "cooked-orc-meat",
+    "image": "images/items/cooked-orc-meat.jpg",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a modest meal.",
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
   }
 ]

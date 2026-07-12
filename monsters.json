@@ -1017,9 +1017,13 @@
   {
     "name": "a Dustrend foot soldier",
     "slug": "a-dustrend-foot-soldier",
+    "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Corroded Bronze Longsword" },
       { "item": "Corroded Bronze Chain Mask" },
+      { "item": "Corroded Bronze Kite Shield" },
+      { "item": "Worn Fine Wood Bow" },
+      { "item": "Cooked Orc Meat" },
       { "item": "Corroded Bronze Shortsword" },
       { "item": "Corroded Bronze Scythe" },
       { "item": "Corroded Bronze Battle Axe" },
@@ -1032,12 +1036,11 @@
       { "item": "Corroded Bronze Greatsword" },
       { "item": "Corroded Bronze Long Spear" },
       { "item": "Corroded Bronze Tower Shield" },
-      { "item": "Corroded Bronze Kite Shield" },
       { "item": "Corroded Bronze Plate Collar" },
       { "item": "Corroded Bronze Plate Boots" },
       { "item": "Corroded Bronze Chain Gloves" },
       { "item": "Corroded Bronze Chain Waistguard" }
     ],
-    "rumor": "No map confirmed yet for this monster. Directly confirmed via loot-window screenshots: Corroded Bronze Longsword and Corroded Bronze Chain Mask (a newly-discovered 19th piece of the Corroded Bronze set, backfilled onto a Dustrend priest above too). Everything else in this drop list is inferred per the user's 2026-07-12 quality-set rule."
+    "rumor": "Directly confirmed via loot-window screenshots: Corroded Bronze Longsword, Corroded Bronze Chain Mask (a newly-discovered 19th piece of the Corroded Bronze set, backfilled onto a Dustrend priest above too), Corroded Bronze Kite Shield, Worn Fine Wood Bow, and Cooked Orc Meat. Everything else in this drop list is inferred per the user's 2026-07-12 quality-set rule."
   }
 ]
