@@ -562,7 +562,26 @@ fills in as the user provides it:
   monster is clearly a unique/Named spawn or boss.
 - `maps` — array of map names the monster's been seen on (usually one, but kept as an array
   in case the same monster template turns out to spawn in more than one zone). Not
-  necessarily tied to a `maps.json` entry — just plain text naming the zone.
+  necessarily tied to a `maps.json` entry — just plain text naming the zone. Must match a
+  real top-level map (i.e. a `maps.json` entry) — a named sub-area within a map (e.g.
+  "Necropolis" within "Night Harbor") is **not** a map of its own and goes in `area` instead
+  (see below), not appended into the map string. This was a real mistake, corrected
+  2026-07-12: several monsters had `"Necropolis (Night Harbor)"` as their map, which the user
+  clarified (2026-07-12) was misleading — Necropolis isn't its own map, just an area inside
+  Night Harbor — so those entries were fixed to `"maps": ["Night Harbor"], "area":
+  "Necropolis"`. The user warned they'll keep reporting other Night Harbor monsters by their
+  sub-area the same way, so expect more of this split going forward, for Night Harbor and
+  possibly other maps too.
+- `area` — optional plain string naming a confirmed sub-area within one of the monster's
+  `maps` (e.g. "Necropolis", "The Concourse of Souls" would be more specific still and
+  belongs in `rumor`/prose instead — `area` is for the coarser, confirmed subdivision the
+  user actually names when correcting a map). Unlike `rumor`, this is treated as confirmed
+  (the user states it directly, same authority as a screenshot — see "The user's screenshots
+  are the source of truth" above), so it's its own field rather than being folded into the
+  unverified-styled `rumor` text. Rendered on the monster card as an "Area" field right below
+  "Map" (`openMonsterViewer` in `script.js`), and included in `monsterSearchHaystack` so it's
+  searchable. Does not affect zone-grid grouping on the Monsters page — that's still driven
+  by `maps` (specifically `monsterZone()`, which reads `maps[0]`), not `area`.
 - `levelRange` — a plain string like `"5-8"`, not a structured min/max. The user's own
   explicit call (2026-07-06): every level range they add is a guess, not a confirmed in-game
   value, so the page says so directly in its intro text rather than presenting them as fact.

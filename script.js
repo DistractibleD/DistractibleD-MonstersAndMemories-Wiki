@@ -2111,6 +2111,7 @@ function monsterSearchHaystack(monster) {
   return [
     monster.name,
     (monster.maps || []).join(' '),
+    monster.area || '',
     monster.levelRange || '',
     (monster.drops || []).map(d => d.item).join(' ')
   ].join(' ').toLowerCase();
@@ -2444,6 +2445,7 @@ function openMonsterViewer(monster) {
       <div class="monster-card-body">
         <h2 class="monster-card-name">${escapeAttr(monster.name)}</h2>
         <div class="monster-card-field"><span class="item-card-field-label">Map</span><span>${escapeAttr(formatMonsterMaps(monster))}</span></div>
+        ${monster.area ? `<div class="monster-card-field"><span class="item-card-field-label">Area</span><span>${escapeAttr(monster.area)}</span></div>` : ''}
         ${related.length ? `
         <div class="monster-card-field">
           <span class="item-card-field-label">Place Holder</span>

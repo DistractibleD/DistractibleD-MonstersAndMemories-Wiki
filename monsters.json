@@ -3,7 +3,8 @@
     "name": "a desert bat",
     "slug": "a-desert-bat",
     "image": "images/Monsters/a-desert-bat.jpg",
-    "maps": ["Necropolis (Night Harbor)", "Sungreet Strand"],
+    "maps": ["Night Harbor", "Sungreet Strand"],
+    "area": "Necropolis",
     "drops": [
       { "item": "Bat Wing" },
       { "item": "Raw Bat Meat" },
@@ -15,7 +16,8 @@
     "name": "a large rat",
     "slug": "a-large-rat",
     "image": "images/Monsters/a-large-rat.jpg",
-    "maps": ["Necropolis (Night Harbor)", "Sungreet Strand"],
+    "maps": ["Night Harbor", "Sungreet Strand"],
+    "area": "Necropolis",
     "levelRange": "1",
     "drops": [
       { "item": "Raw Rat Meat" },
@@ -29,7 +31,8 @@
     "name": "a young crypt scarab",
     "slug": "a-young-crypt-scarab",
     "image": "images/Monsters/a-young-crypt-scarab.jpg",
-    "maps": ["Necropolis (Night Harbor)"],
+    "maps": ["Night Harbor"],
+    "area": "Necropolis",
     "levelRange": "2",
     "drops": [
       { "item": "Crypt Scarab Eye" },
@@ -39,7 +42,8 @@
   {
     "name": "a crypt scarab",
     "slug": "a-crypt-scarab",
-    "maps": ["Necropolis (Night Harbor)"],
+    "maps": ["Night Harbor"],
+    "area": "Necropolis",
     "drops": [
       { "item": "Crypt Scarab Leg" }
     ]
@@ -48,7 +52,8 @@
     "name": "a rotting skeleton",
     "slug": "a-rotting-skeleton",
     "image": "images/Monsters/a-rotting-skeleton.jpg",
-    "maps": ["Necropolis (Night Harbor)", "Sungreet Strand"],
+    "maps": ["Night Harbor", "Sungreet Strand"],
+    "area": "Necropolis",
     "levelRange": "1",
     "drops": [
       { "item": "Bone Chips" },
@@ -110,7 +115,8 @@
     "slug": "night-terror",
     "named": true,
     "image": "images/Monsters/night-terror.jpg",
-    "maps": ["Necropolis (Night Harbor)"],
+    "maps": ["Night Harbor"],
+    "area": "Necropolis",
     "drops": [
       { "item": "Night Terror's Wing" },
       { "item": "Adrullan: Online Adventures Design Document" }
@@ -118,7 +124,7 @@
     "relatedMonsters": [
       { "label": "Desert Bat", "slug": "a-desert-bat" }
     ],
-    "rumor": "Spawns in The Concourse of Souls (Necropolis/Night Harbor), only at night, after one of the Desert Bat placeholder mobs there is killed - seemingly random which one triggers it, not all of them."
+    "rumor": "Spawns in The Concourse of Souls, a spot within the Necropolis area, only at night, after one of the Desert Bat placeholder mobs there is killed - seemingly random which one triggers it, not all of them."
   },
   {
     "name": "a sly farmhand",
