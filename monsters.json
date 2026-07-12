@@ -874,13 +874,13 @@
     "name": "a crocodile",
     "slug": "a-crocodile",
     "image": "images/Monsters/a-crocodile.jpg",
-    "maps": ["Shaded Dunes"]
+    "maps": ["Shaded Dunes", "Sungreet Strand"]
   },
   {
     "name": "a caiman",
     "slug": "a-caiman",
     "image": "images/Monsters/a-caiman.jpg",
-    "maps": ["Shaded Dunes"]
+    "maps": ["Shaded Dunes", "Sungreet Strand"]
   },
   {
     "name": "a blister beetle",
