@@ -84,6 +84,7 @@
       { "item": "Tattered Cloth Boots" },
       { "item": "Tattered Cloth Robe" },
       { "item": "Rusty Tower Shield" },
+      { "item": "Rusty Long Spear" },
       { "item": "Shattered Skeleton Femur" }
     ],
     "rumor": "\"Shattered Skeleton Femur\" comes from a community reference table the user described as rumored drops, not confirmed via an in-game screenshot like the rest of this monster's drop list — treat it as less certain than the other entries above. \"Tattered Cloth Cap\" and \"Tattered Cloth Gorget\" are inferred, not directly screenshot-confirmed for this monster — per the user's 2026-07-12 rule, a monster confirmed dropping one piece of a quality set (this one already had 4 other Tattered Cloth pieces) is assumed to be able to drop any other known piece of that same set."
@@ -163,6 +164,10 @@
       { "item": "Tattered Rawhide Gorget" },
       { "item": "Tattered Rawhide Belt" },
       { "item": "Tattered Rawhide Mask" },
+      { "item": "Tattered Rawhide Gloves" },
+      { "item": "Tattered Rawhide Bracer" },
+      { "item": "Tattered Rawhide Boots" },
+      { "item": "Tattered Rawhide Vest" },
       { "item": "Worn Buckler" },
       { "item": "Worn Bow" },
       { "item": "Torch" },
@@ -182,9 +187,10 @@
       { "item": "Rusty War Lance" },
       { "item": "Rusty Greatsword" },
       { "item": "Rusty Maul" },
-      { "item": "Rusty Tower Shield" }
+      { "item": "Rusty Tower Shield" },
+      { "item": "Rusty Long Spear" }
     ],
-    "rumor": "Directly confirmed via loot-window screenshots: Raw Ashira Meat, Tattered Cloth Cap, Tattered Cloth Pantaloons, Tattered Cloth Boots, Ashira Warrior Pelt, Ashira Warrior Necklace, Ashira Warrior Bracer, Onion, Garlic, Cabbage, Tattered Rawhide Gorget, Tattered Rawhide Belt, Worn Buckler, Worn Bow, Torch, Rusty Warhammer, and Rusty Axe. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Rusty weapons via Warhammer/Axe, Tattered Cloth via Cap/Pantaloons/Boots), it's assumed to be able to drop any other known piece of that same set."
+    "rumor": "Directly confirmed via loot-window screenshots: Raw Ashira Meat, Tattered Cloth Cap, Tattered Cloth Pantaloons, Tattered Cloth Boots, Ashira Warrior Pelt, Ashira Warrior Necklace, Ashira Warrior Bracer, Onion, Garlic, Cabbage, Tattered Rawhide Gorget, Tattered Rawhide Belt, Worn Buckler, Worn Bow, Torch, Rusty Warhammer, and Rusty Axe. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Rusty weapons via Warhammer/Axe, Tattered Cloth via Cap/Pantaloons/Boots, Tattered Rawhide via Gorget/Belt), it's assumed to be able to drop any other known piece of that same set. Tattered Rawhide Gloves/Bracer/Boots/Vest and Rusty Long Spear are newly-discovered pieces of those quality sets (via a smuggler/a wererat's own loot windows, 2026-07-12) backfilled in here too."
   },
   {
     "name": "an ashira lookout",
@@ -212,9 +218,10 @@
       { "item": "Rusty War Lance" },
       { "item": "Rusty Greatsword" },
       { "item": "Rusty Maul" },
-      { "item": "Rusty Tower Shield" }
+      { "item": "Rusty Tower Shield" },
+      { "item": "Rusty Long Spear" }
     ],
-    "rumor": "Directly confirmed via loot-window screenshots: Ashira Scout Necklace, Ashira Tail, Cloth Scraps, Rawhide Scraps, Raw Ashira Meat, Bell Pepper, and Rusty Trident. Every other Rusty weapon/shield in this list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set, it's assumed to be able to drop any other known piece of that same set. No map confirmed yet for this monster."
+    "rumor": "Directly confirmed via loot-window screenshots: Ashira Scout Necklace, Ashira Tail, Cloth Scraps, Rawhide Scraps, Raw Ashira Meat, Bell Pepper, and Rusty Trident. Every other Rusty weapon/shield in this list (including Rusty Long Spear, a newly-discovered Rusty piece as of 2026-07-12) is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set, it's assumed to be able to drop any other known piece of that same set. No map confirmed yet for this monster."
   },
   {
     "name": "a snake",
@@ -374,14 +381,24 @@
     "slug": "toma-the-two-faced",
     "named": true,
     "maps": ["Shaded Dunes"],
+    "areas": ["Smugglers Camp"],
     "levelRange": "9+",
     "drops": [
       { "item": "Toma's Signet Ring" },
       { "item": "Smuggler's Damaged Logbook" },
       { "item": "Filthy Cloth Hood" },
-      { "item": "Smuggler's Greaves" }
+      { "item": "Smuggler's Greaves" },
+      { "item": "Cloth Scraps" },
+      { "item": "Torch" },
+      { "item": "Tattered Rawhide Gloves" },
+      { "item": "Tattered Rawhide Gorget" },
+      { "item": "Tattered Rawhide Belt" },
+      { "item": "Tattered Rawhide Mask" },
+      { "item": "Tattered Rawhide Bracer" },
+      { "item": "Tattered Rawhide Boots" },
+      { "item": "Tattered Rawhide Vest" }
     ],
-    "rumor": "\"Smuggler's Greaves\" is attributed to this Toma based on the item's own name — no monster thumbnail was visible in that screenshot, but it matches the same \"Smuggler's\" naming already confirmed here via \"Smuggler's Damaged Logbook\" (Toma's location, Smugglers Camp)."
+    "rumor": "\"Smuggler's Greaves\" is attributed to this Toma based on the item's own name — no monster thumbnail was visible in that screenshot, but it matches the same \"Smuggler's\" naming already confirmed here via \"Smuggler's Damaged Logbook\" (Toma's location, Smugglers Camp). Toma's Signet Ring, Cloth Scraps, Torch, and Tattered Rawhide Gloves are directly confirmed via a loot-window screenshot (2026-07-12). The rest of the Tattered Rawhide family (Gorget, Belt, Mask, Bracer, Boots, Vest) is inferred per the user's 2026-07-12 quality-set rule, now that Toma is confirmed dropping one piece (Gloves)."
   },
   {
     "name": "Yezkiel the Gatekeeper",
@@ -573,9 +590,10 @@
       { "item": "Rusty War Lance" },
       { "item": "Rusty Greatsword" },
       { "item": "Rusty Maul" },
-      { "item": "Rusty Tower Shield" }
+      { "item": "Rusty Tower Shield" },
+      { "item": "Rusty Long Spear" }
     ],
-    "rumor": "Found at the Grave Robber camp within North Gate. Directly confirmed via loot-window screenshots: Rusty Great Scythe and Chipped Bloodstone. Every other Rusty weapon/shield here is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set, it's assumed to be able to drop any other known piece of that same set."
+    "rumor": "Found at the Grave Robber camp within North Gate. Directly confirmed via loot-window screenshots: Rusty Great Scythe and Chipped Bloodstone. Every other Rusty weapon/shield here (including Rusty Long Spear, a newly-discovered Rusty piece as of 2026-07-12) is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set, it's assumed to be able to drop any other known piece of that same set."
   },
   {
     "name": "a grave robber",
@@ -602,6 +620,10 @@
       { "item": "Tattered Cloth Bracer" },
       { "item": "Tattered Cloth Boots" },
       { "item": "Tattered Rawhide Gorget" },
+      { "item": "Tattered Rawhide Gloves" },
+      { "item": "Tattered Rawhide Bracer" },
+      { "item": "Tattered Rawhide Boots" },
+      { "item": "Tattered Rawhide Vest" },
       { "item": "Rusty Dagger" },
       { "item": "Rusty Throwing Dagger" },
       { "item": "Rusty Axe" },
@@ -617,9 +639,10 @@
       { "item": "Rusty War Lance" },
       { "item": "Rusty Greatsword" },
       { "item": "Rusty Maul" },
-      { "item": "Rusty Tower Shield" }
+      { "item": "Rusty Tower Shield" },
+      { "item": "Rusty Long Spear" }
     ],
-    "rumor": "Found at the Grave Robber camp within North Gate. Directly confirmed via loot-window screenshots: Cracked Staff, Tattered Cloth Robe, Garlic, Rawhide Scraps, Torch, Tattered Rawhide Belt, Rusty Shortsword, Raw Human Meat, Cloth Scraps, and Tattered Rawhide Mask. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Tattered Cloth via Robe, Tattered Rawhide via Belt/Mask, Rusty weapons via Shortsword), it's assumed to be able to drop any other known piece of that same set."
+    "rumor": "Found at the Grave Robber camp within North Gate. Directly confirmed via loot-window screenshots: Cracked Staff, Tattered Cloth Robe, Garlic, Rawhide Scraps, Torch, Tattered Rawhide Belt, Rusty Shortsword, Raw Human Meat, Cloth Scraps, and Tattered Rawhide Mask. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Tattered Cloth via Robe, Tattered Rawhide via Belt/Mask, Rusty weapons via Shortsword), it's assumed to be able to drop any other known piece of that same set. Tattered Rawhide Gloves/Bracer/Boots/Vest and Rusty Long Spear are newly-discovered pieces of those quality sets (2026-07-12) backfilled in here too."
   },
   {
     "name": "a spiderling",
@@ -645,6 +668,10 @@
       { "item": "Worn Buckler" },
       { "item": "Tattered Rawhide Gorget" },
       { "item": "Tattered Rawhide Mask" },
+      { "item": "Tattered Rawhide Gloves" },
+      { "item": "Tattered Rawhide Bracer" },
+      { "item": "Tattered Rawhide Boots" },
+      { "item": "Tattered Rawhide Vest" },
       { "item": "Rusty Dagger" },
       { "item": "Rusty Throwing Dagger" },
       { "item": "Rusty Axe" },
@@ -660,9 +687,10 @@
       { "item": "Rusty War Lance" },
       { "item": "Rusty Greatsword" },
       { "item": "Rusty Maul" },
-      { "item": "Rusty Tower Shield" }
+      { "item": "Rusty Tower Shield" },
+      { "item": "Rusty Long Spear" }
     ],
-    "rumor": "Found at the Grave Robber camp within North Gate. Directly confirmed via loot-window screenshots: Rusty Kite Shield, Potato, Tattered Rawhide Belt, Rusty Shortsword, Raw Human Meat, Note from Ariblast, Cheese, and Worn Buckler. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Tattered Rawhide via Belt, Rusty weapons via Shortsword), it's assumed to be able to drop any other known piece of that same set."
+    "rumor": "Found at the Grave Robber camp within North Gate. Directly confirmed via loot-window screenshots: Rusty Kite Shield, Potato, Tattered Rawhide Belt, Rusty Shortsword, Raw Human Meat, Note from Ariblast, Cheese, and Worn Buckler. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Tattered Rawhide via Belt, Rusty weapons via Shortsword), it's assumed to be able to drop any other known piece of that same set. Tattered Rawhide Gloves/Bracer/Boots/Vest and Rusty Long Spear are newly-discovered pieces of those quality sets (2026-07-12) backfilled in here too."
   },
   {
     "name": "a cultist",
@@ -716,5 +744,137 @@
     "slug": "a-skeleton",
     "image": "images/Monsters/a-skeleton.jpg",
     "maps": ["Shaded Dunes"]
+  },
+  {
+    "name": "a restless ghoul",
+    "slug": "a-restless-ghoul",
+    "image": "images/Monsters/a-restless-ghoul.jpg",
+    "maps": ["Fallen Pass"]
+  },
+  {
+    "name": "a large crypt broodmatron",
+    "slug": "a-large-crypt-broodmatron",
+    "named": true,
+    "image": "images/Monsters/a-large-crypt-broodmatron.jpg",
+    "maps": ["Ancient Crypt"],
+    "areas": ["Infected Crypt"],
+    "rumor": "\"Infected Crypt\" is assumed to be an area within the Ancient Crypt map (the same relationship as Necropolis within Night Harbor) rather than its own map, since no separate \"Infected Crypt\" map exists — flag for correction if that turns out to be wrong. This monster's orange nameplate and \"large\"/boss-style naming are why it's marked as named/boss; note the very similar name to \"a crypt broodmother\" (seen in a separate loot-window screenshot the same day) — these may turn out to be the same creature, but each is recorded exactly as its own screenshot displayed it rather than merged on a guess."
+  },
+  {
+    "name": "a crypt broodmother",
+    "slug": "a-crypt-broodmother",
+    "named": true,
+    "maps": ["Ancient Crypt"],
+    "areas": ["Infected Crypt"],
+    "drops": [
+      { "item": "Broodwarden Carapace" }
+    ],
+    "rumor": "\"Infected Crypt\" is assumed to be an area within the Ancient Crypt map (the same relationship as Necropolis within Night Harbor) rather than its own map — flag for correction if that turns out to be wrong. No full creature picture available yet, only a small loot-window inventory icon. Note the very similar name to \"a large crypt broodmatron\" (seen in a separate screenshot the same day, filename called it a \"boss\") — these may turn out to be the same creature, but each is recorded exactly as its own screenshot displayed it rather than merged on a guess."
+  },
+  {
+    "name": "a stumbling zombie",
+    "slug": "a-stumbling-zombie",
+    "image": "images/Monsters/a-stumbling-zombie.jpg",
+    "maps": ["Shaded Dunes"],
+    "drops": [
+      { "item": "Rawhide Scraps" },
+      { "item": "Vibroplasmic Residue" }
+    ]
+  },
+  {
+    "name": "a smuggler",
+    "slug": "a-smuggler",
+    "image": "images/Monsters/a-smuggler.jpg",
+    "maps": ["Shaded Dunes"],
+    "areas": ["Smugglers Camp"],
+    "drops": [
+      { "item": "Rusty Great Scythe" },
+      { "item": "Rusty Battle Axe" },
+      { "item": "Rusty Maul" },
+      { "item": "Rusty War Lance" },
+      { "item": "Rusty Dagger" },
+      { "item": "Rusty Shortsword" },
+      { "item": "Rusty Throwing Dagger" },
+      { "item": "Rusty Axe" },
+      { "item": "Rusty Scimitar" },
+      { "item": "Rusty Scythe" },
+      { "item": "Rusty Longsword" },
+      { "item": "Rusty Spear" },
+      { "item": "Rusty Trident" },
+      { "item": "Rusty Mace" },
+      { "item": "Rusty Warhammer" },
+      { "item": "Rusty Greatsword" },
+      { "item": "Rusty Tower Shield" },
+      { "item": "Rusty Long Spear" }
+    ],
+    "rumor": "Directly confirmed via a loot-window screenshot: Rusty Long Spear (a newly-discovered Rusty piece as of 2026-07-12). Every other Rusty weapon/shield here is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set, it's assumed to be able to drop any other known piece of that same set."
+  },
+  {
+    "name": "a wererat",
+    "slug": "a-wererat",
+    "image": "images/Monsters/a-wererat.jpg",
+    "maps": ["Shaded Dunes"],
+    "areas": ["Smugglers Camp"],
+    "drops": [
+      { "item": "Wererat Pelt" },
+      { "item": "Worn Bow" },
+      { "item": "Cloth Scraps" },
+      { "item": "Rawhide Scraps" },
+      { "item": "Severed Ring Finger" },
+      { "item": "Spirit World Ch. 1" },
+      { "item": "Tattered Rawhide Gorget" },
+      { "item": "Tattered Rawhide Belt" },
+      { "item": "Tattered Rawhide Mask" },
+      { "item": "Tattered Rawhide Gloves" },
+      { "item": "Tattered Rawhide Bracer" },
+      { "item": "Tattered Rawhide Boots" },
+      { "item": "Tattered Rawhide Vest" },
+      { "item": "Tattered Cloth Cap" },
+      { "item": "Tattered Cloth Pantaloons" },
+      { "item": "Tattered Cloth Gorget" },
+      { "item": "Tattered Cloth Shirt" },
+      { "item": "Tattered Cloth Gloves" },
+      { "item": "Tattered Cloth Bracer" },
+      { "item": "Tattered Cloth Boots" },
+      { "item": "Tattered Cloth Robe" },
+      { "item": "Rusty Great Scythe" },
+      { "item": "Rusty Battle Axe" },
+      { "item": "Rusty Maul" },
+      { "item": "Rusty War Lance" },
+      { "item": "Rusty Dagger" },
+      { "item": "Rusty Shortsword" },
+      { "item": "Rusty Throwing Dagger" },
+      { "item": "Rusty Axe" },
+      { "item": "Rusty Scimitar" },
+      { "item": "Rusty Scythe" },
+      { "item": "Rusty Longsword" },
+      { "item": "Rusty Spear" },
+      { "item": "Rusty Trident" },
+      { "item": "Rusty Mace" },
+      { "item": "Rusty Warhammer" },
+      { "item": "Rusty Greatsword" },
+      { "item": "Rusty Tower Shield" },
+      { "item": "Rusty Long Spear" }
+    ],
+    "rumor": "Directly confirmed via loot-window screenshots: Rusty Dagger, Rawhide Scraps, Wererat Pelt, Rusty Scythe, Tattered Rawhide Bracer, Worn Bow, Tattered Rawhide Boots, Rusty Tower Shield, Tattered Rawhide Vest, Cloth Scraps, Severed Ring Finger, Spirit World Ch. 1, Rusty Warhammer, and Tattered Cloth Pantaloons. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Rusty weapons, Tattered Rawhide, Tattered Cloth), it's assumed to be able to drop any other known piece of that same set. Tattered Rawhide Gloves/Bracer/Boots/Vest are newly-discovered additions to that quality-set roster from this monster's (and Toma the Two-Faced's) screenshots, and have been backfilled onto every other monster already known to drop other Tattered Rawhide pieces."
+  },
+  {
+    "name": "a crocodile",
+    "slug": "a-crocodile",
+    "image": "images/Monsters/a-crocodile.jpg",
+    "maps": ["Shaded Dunes"]
+  },
+  {
+    "name": "a caiman",
+    "slug": "a-caiman",
+    "image": "images/Monsters/a-caiman.jpg",
+    "maps": ["Shaded Dunes"]
+  },
+  {
+    "name": "a blister beetle",
+    "slug": "a-blister-beetle",
+    "image": "images/Monsters/a-blister-beetle.jpg",
+    "maps": ["Night Harbor"],
+    "areas": ["West Gate"]
   }
 ]

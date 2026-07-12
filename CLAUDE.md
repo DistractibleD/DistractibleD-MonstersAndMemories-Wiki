@@ -573,6 +573,12 @@ fills in as the user provides it:
   this was confirmed the same day: a second batch (2026-07-12) added a "North Gate" area, and
   two monsters already known from Necropolis (desert bat, large rat) turned out to also spawn
   at North Gate — hence `areas` being an array from the start rather than a single string.
+  Applied the same way 2026-07-12 to a different map: "In Infected Crypt 1.png"/"Broodmother
+  boss from Infected Crypt.png" named a location "Infected Crypt" that isn't its own
+  `maps.json` entry, but "Ancient Crypt" already is — by the same reasoning as Necropolis, this
+  was treated as `"maps": ["Ancient Crypt"], "areas": ["Infected Crypt"]` rather than inventing
+  a new top-level map, flagged with a rumor note since (unlike Necropolis) the user hasn't
+  explicitly confirmed this particular relationship yet.
 - `areas` — optional array of confirmed sub-area names within the monster's `maps` (e.g.
   `["Necropolis"]`, or `["Necropolis", "North Gate"]` for a monster seen in more than one).
   Same idea as `maps` being an array for multi-zone monsters. A more specific single-spot
@@ -680,11 +686,16 @@ drops at least one item from a recognized quality-set family.
   literal in-game grouping — confirmed families so far: **Rusty** (weapons + Rusty Tower
   Shield), **Tattered Cloth** (armor), **Tattered Rawhide** (armor). Treat a new shared
   prefix as its own family the same way if one shows up.
-  - Known Rusty pieces (17): Dagger, Shortsword, Throwing Dagger, Axe, Battle Axe, Scimitar,
-    Scythe, Longsword, Spear, Trident, Mace, Warhammer, Great Scythe, War Lance, Greatsword,
-    Maul, Tower Shield.
-  - Known Tattered Cloth pieces (7): Cap, Gorget, Pantaloons, Shirt, Gloves, Bracer, Boots.
-  - Known Tattered Rawhide pieces (2): Gorget, Belt.
+  - Known Rusty pieces (18): Dagger, Shortsword, Throwing Dagger, Axe, Battle Axe, Scimitar,
+    Scythe, Longsword, Spear, Long Spear, Trident, Mace, Warhammer, Great Scythe, War Lance,
+    Greatsword, Maul, Tower Shield. "Long Spear" (added 2026-07-12, from "a smuggler"'s own
+    loot window) is a distinct, separate 2H weapon from "Spear" (1H) — not a naming variant of
+    it — but still counts as the same Rusty-prefixed quality-set family per this rule's own
+    prefix-based definition.
+  - Known Tattered Cloth pieces (8): Cap, Gorget, Pantaloons, Shirt, Gloves, Bracer, Boots, Robe.
+  - Known Tattered Rawhide pieces (7): Gorget, Belt, Mask, Gloves, Bracer, Boots, Vest. Gloves/
+    Bracer/Boots/Vest were all added 2026-07-12, sourced from Toma the Two-Faced's and "a
+    wererat"'s own loot-window screenshots.
 - The backfill is **per-monster**, based on the *global* known roster of a family (not just
   what that one monster's own screenshots have shown) — if Monster A is newly confirmed
   dropping one Tattered Cloth piece, it gets every *other* Tattered Cloth piece already known
@@ -696,6 +707,19 @@ drops at least one item from a recognized quality-set family.
   skeleton" and "a Bloodynose quarreler" — retroactively got the pieces they were missing
   (Cap/Gorget/Boots and Cap/Pantaloons/Shirt/Gloves/Bracer/Boots respectively) once those
   pieces became known via a different monster's screenshot.
+- **Second wave, 2026-07-12 (same day):** "a wererat" (new monster, Shaded Dunes/Smugglers
+  Camp) had loot-window screenshots confirming Rusty Dagger/Scythe/Warhammer/Tower Shield,
+  Tattered Rawhide Bracer/Boots/Vest (three brand-new Rawhide pieces), and Tattered Cloth
+  Pantaloons — it got the full Rusty (18), Tattered Rawhide (7), and Tattered Cloth (8)
+  rosters. "a smuggler" (new monster, same area) confirmed one brand-new Rusty piece, Rusty
+  Long Spear, and got the full Rusty roster. Toma the Two-Faced got a loot-window screenshot
+  confirming Tattered Rawhide Gloves (a fourth brand-new Rawhide piece, alongside
+  Bracer/Boots/Vest above) and was backfilled the full Rawhide roster. Every *existing*
+  monster already carrying a full Rusty roster ("a rotting skeleton", "an ashira warrior",
+  "an ashira lookout", "an exiled researcher", "a grave robber", "a disgraced friar") got
+  Rusty Long Spear appended retroactively; the three of those that already had some Tattered
+  Rawhide pieces ("an ashira warrior", "a grave robber", "a disgraced friar") got the four new
+  Rawhide pieces (Gloves/Bracer/Boots/Vest) backfilled too.
 - Every monster with inferred drops gets a `rumor` note listing exactly which of its drops
   were directly screenshot-confirmed vs. inferred by this rule, so the distinction stays
   visible on the page (not silently blended into the confirmed drop list).
