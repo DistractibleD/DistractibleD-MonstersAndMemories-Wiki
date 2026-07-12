@@ -876,7 +876,7 @@
     "name": "a blister beetle",
     "slug": "a-blister-beetle",
     "image": "images/Monsters/a-blister-beetle.jpg",
-    "maps": ["Night Harbor"],
+    "maps": ["Night Harbor", "Sungreet Strand"],
     "areas": ["West Gate"]
   }
 ]
