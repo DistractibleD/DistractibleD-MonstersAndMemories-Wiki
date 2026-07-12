@@ -33,10 +33,6 @@ let pendingReturnToMonster = null;
 // jumping straight to a specific monster, then consumed by renderMonstersPage
 // so its search box is pre-filled — same pattern as pendingItemQuery.
 let pendingMonsterQuery = null;
-// Set alongside pendingMonsterQuery (by goToMonster) so the Monsters page
-// opens directly on that monster's named/regular + zone list instead of the
-// top category grid — same idea as pendingItemCategory for the Item Database.
-let pendingMonsterScope = null;
 // Set by goToRecipe so the recipe just navigated to (e.g. via an item's
 // "Crafted via"/"Used to craft" links) flashes once its card renders, making
 // it easy to spot among the rest of that tradeskill's recipe grid.
@@ -116,10 +112,18 @@ async function init() {
   allPages = await res.json();
   buildSidebar(allPages);
 
-  // Load a page based on the URL (e.g. index.html#stone-golem), or the first page by default
+  // Load a page based on the URL (e.g. index.html#stone-golem), or the first
+  // page by default. The Monsters page uses a sub-route within its own hash
+  // (e.g. #monsters/named/Vale%20of%20Zintar — see goToMonster) to make the
+  // browser Back button pop from a zone list to the category grid instead of
+  // leaving the page entirely, so the page lookup only matches on the part
+  // before the first "/", while the full hash (with sub-route) is what
+  // actually gets loaded.
   const requested = location.hash.replace('#', '');
-  const startPage = allPages.find(p => p.file === requested) || allPages[0];
-  if (startPage) loadPage(startPage.file);
+  const requestedBase = requested.split('/')[0];
+  const matchedPage = allPages.find(p => p.file === requestedBase);
+  const startPage = matchedPage || allPages[0];
+  if (startPage) loadPage(matchedPage ? requested : startPage.file);
 
   // Pre-fetch item/crafting/monster/companion data in the background so the
   // header search box can search them right away, without waiting for the
@@ -137,8 +141,8 @@ async function init() {
   });
   window.addEventListener('hashchange', () => {
     const file = location.hash.replace('#', '');
-    const page = allPages.find(p => p.file === file);
-    if (page) loadPage(page.file);
+    const page = allPages.find(p => p.file === file.split('/')[0]);
+    if (page) loadPage(file);
   });
 
   // Clicking anywhere outside the search box/dropdown closes the dropdown.
@@ -197,7 +201,11 @@ function buildSidebar(pages) {
 async function loadPage(file) {
   const contentInner = document.getElementById('content-inner');
   contentInner.innerHTML = '<p>Loading...</p>';
-  const page = allPages.find(p => p.file === file);
+  // The Monsters page's own zone sub-route (e.g. "monsters/named/Vale of
+  // Zintar") lives after the first "/" — strip it for the page-type lookup,
+  // but keep the full `file` around to hand to renderMonstersPage below.
+  const baseFile = file.split('/')[0];
+  const page = allPages.find(p => p.file === baseFile);
 
   // Data-driven pages (Item Database, Maps, Crafting, Monsters) use the full
   // content width instead of the narrower reading width used for prose pages.
@@ -211,7 +219,7 @@ async function loadPage(file) {
     } else if (page && page.type === 'crafting') {
       await renderCraftingPage(contentInner);
     } else if (page && page.type === 'monsters') {
-      await renderMonstersPage(contentInner);
+      await renderMonstersPage(contentInner, file);
     } else if (page && page.type === 'companions') {
       await renderCompanionsPage(contentInner);
     } else {
@@ -226,7 +234,7 @@ async function loadPage(file) {
 
   // Highlight the active link in the sidebar
   document.querySelectorAll('.sidebar-link').forEach(link => {
-    link.classList.toggle('active', link.dataset.file === file);
+    link.classList.toggle('active', link.dataset.file === baseFile);
   });
 
   if (suppressScrollReset) {
@@ -466,10 +474,14 @@ function goToMonster(monster) {
   const full = findMonsterBySlug(monster.slug) || monster;
   pendingMonsterQuery = monster.name;
   pendingHighlightMonster = monster.slug;
-  pendingMonsterScope = { named: !!full.named, map: monsterZone(full) };
-  const alreadyThere = location.hash.replace('#', '') === 'monsters';
-  location.hash = 'monsters';
-  if (alreadyThere) loadPage('monsters');
+  // The named/zone scope is encoded directly in the hash (see
+  // renderMonstersPage) rather than a pending variable, so that landing on a
+  // specific monster also creates a proper browser-history entry — pressing
+  // Back then pops to the category grid instead of leaving the page.
+  const targetHash = `monsters/${full.named ? 'named' : 'regular'}/${encodeURIComponent(monsterZone(full))}`;
+  const alreadyThere = location.hash.replace('#', '') === targetHash;
+  location.hash = targetHash;
+  if (alreadyThere) loadPage(targetHash);
 }
 
 function goToCompanion(companion) {
@@ -898,6 +910,7 @@ function itemSearchHaystack(item) {
     (item.tags || []).join(' '),
     item.description || '',
     item.effect || '',
+    item.readText || '',
     item.capacity != null ? `CAPACITY ${item.capacity}` : '',
     item.maxSize ? `MAX SIZE ${item.maxSize}` : ''
   ].join(' ').toLowerCase();
@@ -1458,6 +1471,7 @@ function renderItemCardHTML(item) {
         </div>
         ${chips ? `<div class="item-card-chips">${chips}</div>` : ''}
         ${flavor.length ? `<div class="item-card-section item-card-section-flavor">${flavor.map(escapeAttr).join('<br><br>')}</div>` : ''}
+        ${item.readText ? `<div class="item-card-section item-card-section-note">Note text &middot; ${escapeAttr(item.readText).replace(/\n/g, '<br>')}</div>` : ''}
         ${(item.classes || item.race) ? `
         <div class="item-card-section">
           Class: ${escapeAttr(formatList(item.classes))}<br>
@@ -1903,6 +1917,12 @@ function renderRecipeCardHTML(recipe) {
     fields.push({ label: 'Weight', value: recipe.weight });
     fields.push({ label: 'Size', value: recipe.size });
   }
+  // Bag/container-crafting recipes (e.g. Cloth Satchel) show the crafted
+  // result's capacity the same way a Container item does.
+  if (recipe.capacity != null) {
+    fields.push({ label: 'Capacity', value: recipe.capacity });
+    fields.push({ label: 'Max size', value: recipe.maxSize });
+  }
   // Most recipes produce exactly one of `name` — Tanning is the first
   // exception (a single pelt processed in a vat yields a stack of scrap
   // material), so only show a "Yields" field when it's set instead of
@@ -2111,7 +2131,7 @@ function monsterSearchHaystack(monster) {
   return [
     monster.name,
     (monster.maps || []).join(' '),
-    monster.area || '',
+    (monster.areas || []).join(' '),
     monster.levelRange || '',
     (monster.drops || []).map(d => d.item).join(' ')
   ].join(' ').toLowerCase();
@@ -2128,16 +2148,18 @@ function monsterZone(monster) {
   return (monster.maps && monster.maps[0]) || 'Unknown Zone';
 }
 
-async function renderMonstersPage(container) {
+async function renderMonstersPage(container, file) {
   await ensureMonstersData();
 
-  // Landed here from a header search result for a specific monster — jump
-  // straight to its named/regular + zone list instead of the top-level
-  // category grid (same pattern as pendingItemCategory on the Item Database).
-  if (pendingMonsterScope) {
-    const scope = pendingMonsterScope;
-    pendingMonsterScope = null;
-    renderMonstersList(container, scope);
+  // A zone-scoped view is encoded as a sub-route in the hash itself —
+  // "monsters/named/<map>" or "monsters/regular/<map>" (see goToMonster and
+  // the zone-card click handler in renderMonstersCategories) — rather than a
+  // pending variable, so that drilling into a zone creates a real
+  // browser-history entry: pressing Back pops to the category grid instead
+  // of leaving the Monsters page entirely.
+  const parts = (file || 'monsters').split('/');
+  if (parts.length >= 3) {
+    renderMonstersList(container, { named: parts[1] === 'named', map: decodeURIComponent(parts[2]) });
     return;
   }
 
@@ -2186,7 +2208,10 @@ function renderMonstersCategories(container) {
   container.querySelectorAll('.items-category-card').forEach(card => {
     card.addEventListener('click', () => {
       const isNamed = card.closest('[data-named]').dataset.named === 'true';
-      renderMonstersList(container, { named: isNamed, map: card.dataset.zone });
+      // Navigate via the hash (rather than calling renderMonstersList
+      // directly) so this creates a browser-history entry — pressing Back
+      // from the zone list returns here instead of leaving the page.
+      location.hash = `monsters/${isNamed ? 'named' : 'regular'}/${encodeURIComponent(card.dataset.zone)}`;
     });
   });
 
@@ -2263,7 +2288,10 @@ function renderMonstersList(container, scope) {
 
   container.querySelector('#monsters-back-to-categories').addEventListener('click', e => {
     e.preventDefault();
-    renderMonstersCategories(container);
+    // Set via the hash (not a direct renderMonstersCategories call) so this
+    // stays consistent with the browser's history — matches whatever the
+    // Back button would already do from here.
+    location.hash = 'monsters';
   });
 
   const searchBox = container.querySelector('#monsters-search');
@@ -2445,7 +2473,7 @@ function openMonsterViewer(monster) {
       <div class="monster-card-body">
         <h2 class="monster-card-name">${escapeAttr(monster.name)}</h2>
         <div class="monster-card-field"><span class="item-card-field-label">Map</span><span>${escapeAttr(formatMonsterMaps(monster))}</span></div>
-        ${monster.area ? `<div class="monster-card-field"><span class="item-card-field-label">Area</span><span>${escapeAttr(monster.area)}</span></div>` : ''}
+        ${(monster.areas && monster.areas.length) ? `<div class="monster-card-field"><span class="item-card-field-label">Area</span><span>${escapeAttr(monster.areas.join(', '))}</span></div>` : ''}
         ${related.length ? `
         <div class="monster-card-field">
           <span class="item-card-field-label">Place Holder</span>

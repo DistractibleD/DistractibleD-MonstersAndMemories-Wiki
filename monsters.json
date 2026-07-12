@@ -4,7 +4,7 @@
     "slug": "a-desert-bat",
     "image": "images/Monsters/a-desert-bat.jpg",
     "maps": ["Night Harbor", "Sungreet Strand"],
-    "area": "Necropolis",
+    "areas": ["Necropolis", "North Gate"],
     "drops": [
       { "item": "Bat Wing" },
       { "item": "Raw Bat Meat" },
@@ -17,7 +17,7 @@
     "slug": "a-large-rat",
     "image": "images/Monsters/a-large-rat.jpg",
     "maps": ["Night Harbor", "Sungreet Strand"],
-    "area": "Necropolis",
+    "areas": ["Necropolis", "North Gate"],
     "levelRange": "1",
     "drops": [
       { "item": "Raw Rat Meat" },
@@ -32,7 +32,7 @@
     "slug": "a-young-crypt-scarab",
     "image": "images/Monsters/a-young-crypt-scarab.jpg",
     "maps": ["Night Harbor"],
-    "area": "Necropolis",
+    "areas": ["Necropolis"],
     "levelRange": "2",
     "drops": [
       { "item": "Crypt Scarab Eye" },
@@ -43,7 +43,7 @@
     "name": "a crypt scarab",
     "slug": "a-crypt-scarab",
     "maps": ["Night Harbor"],
-    "area": "Necropolis",
+    "areas": ["Necropolis"],
     "drops": [
       { "item": "Crypt Scarab Leg" }
     ]
@@ -53,7 +53,7 @@
     "slug": "a-rotting-skeleton",
     "image": "images/Monsters/a-rotting-skeleton.jpg",
     "maps": ["Night Harbor", "Sungreet Strand"],
-    "area": "Necropolis",
+    "areas": ["Necropolis"],
     "levelRange": "1",
     "drops": [
       { "item": "Bone Chips" },
@@ -82,6 +82,7 @@
       { "item": "Tattered Cloth Gloves" },
       { "item": "Tattered Cloth Bracer" },
       { "item": "Tattered Cloth Boots" },
+      { "item": "Tattered Cloth Robe" },
       { "item": "Rusty Tower Shield" },
       { "item": "Shattered Skeleton Femur" }
     ],
@@ -99,7 +100,8 @@
       { "item": "Tattered Cloth Shirt" },
       { "item": "Tattered Cloth Gloves" },
       { "item": "Tattered Cloth Bracer" },
-      { "item": "Tattered Cloth Boots" }
+      { "item": "Tattered Cloth Boots" },
+      { "item": "Tattered Cloth Robe" }
     ],
     "rumor": "The Tattered Cloth pieces beyond Gorget are inferred, not directly screenshot-confirmed for this monster — per the user's 2026-07-12 rule, a monster confirmed dropping one piece of a quality set is assumed to be able to drop any other known piece of that same set."
   },
@@ -116,7 +118,7 @@
     "named": true,
     "image": "images/Monsters/night-terror.jpg",
     "maps": ["Night Harbor"],
-    "area": "Necropolis",
+    "areas": ["Necropolis"],
     "drops": [
       { "item": "Night Terror's Wing" },
       { "item": "Adrullan: Online Adventures Design Document" }
@@ -151,6 +153,7 @@
       { "item": "Tattered Cloth Gloves" },
       { "item": "Tattered Cloth Bracer" },
       { "item": "Tattered Cloth Boots" },
+      { "item": "Tattered Cloth Robe" },
       { "item": "Ashira Warrior Pelt" },
       { "item": "Ashira Warrior Necklace" },
       { "item": "Ashira Warrior Bracer" },
@@ -159,6 +162,7 @@
       { "item": "Cabbage" },
       { "item": "Tattered Rawhide Gorget" },
       { "item": "Tattered Rawhide Belt" },
+      { "item": "Tattered Rawhide Mask" },
       { "item": "Worn Buckler" },
       { "item": "Worn Bow" },
       { "item": "Torch" },
@@ -216,7 +220,8 @@
     "name": "a snake",
     "slug": "a-snake",
     "image": "images/Monsters/a-snake.jpg",
-    "maps": ["Sungreet Strand"]
+    "maps": ["Sungreet Strand", "Night Harbor"],
+    "areas": ["North Gate"]
   },
   {
     "name": "a jackal pup",
@@ -373,8 +378,10 @@
     "drops": [
       { "item": "Toma's Signet Ring" },
       { "item": "Smuggler's Damaged Logbook" },
-      { "item": "Filthy Cloth Hood" }
-    ]
+      { "item": "Filthy Cloth Hood" },
+      { "item": "Smuggler's Greaves" }
+    ],
+    "rumor": "\"Smuggler's Greaves\" is attributed to this Toma based on the item's own name — no monster thumbnail was visible in that screenshot, but it matches the same \"Smuggler's\" naming already confirmed here via \"Smuggler's Damaged Logbook\" (Toma's location, Smugglers Camp)."
   },
   {
     "name": "Yezkiel the Gatekeeper",
@@ -474,9 +481,10 @@
     "named": true,
     "maps": ["Night Harbor"],
     "drops": [
-      { "item": "Grubbfist's Smasher" }
+      { "item": "Grubbfist's Smasher" },
+      { "item": "Grubbfist's Filthy Mantle" }
     ],
-    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+    "rumor": "\"Grubbfist's Smasher\" is sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot. \"Grubbfist's Filthy Mantle\" is directly confirmed via a real item card — attributed to this Grubbfist based on the item's own name (no monster thumbnail was visible in that screenshot, but the naming makes the source unambiguous)."
   },
   {
     "name": "Victualler Veera",
@@ -508,5 +516,205 @@
       { "item": "Savage Heartplate" }
     ],
     "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+  },
+  {
+    "name": "an ashira scout",
+    "slug": "an-ashira-scout",
+    "image": "images/Monsters/an-ashira-scout.jpg",
+    "maps": ["Night Harbor"],
+    "areas": ["North Gate"],
+    "drops": [
+      { "item": "Multhele Root" },
+      { "item": "Ashira Scout Necklace" }
+    ]
+  },
+  {
+    "name": "a dunes scarab",
+    "slug": "a-dunes-scarab",
+    "image": "images/Monsters/a-dunes-scarab.jpg",
+    "maps": ["Night Harbor"],
+    "areas": ["North Gate"]
+  },
+  {
+    "name": "a fire beetle",
+    "slug": "a-fire-beetle",
+    "image": "images/Monsters/a-fire-beetle.jpg",
+    "maps": ["Night Harbor"],
+    "areas": ["North Gate"]
+  },
+  {
+    "name": "a curious jackal",
+    "slug": "a-curious-jackal",
+    "image": "images/Monsters/a-curious-jackal.jpg",
+    "maps": ["Night Harbor"],
+    "areas": ["North Gate"]
+  },
+  {
+    "name": "an exiled researcher",
+    "slug": "an-exiled-researcher",
+    "image": "images/Monsters/an-exiled-researcher.jpg",
+    "maps": ["Night Harbor"],
+    "areas": ["North Gate"],
+    "drops": [
+      { "item": "Rusty Great Scythe" },
+      { "item": "Chipped Bloodstone" },
+      { "item": "Rusty Dagger" },
+      { "item": "Rusty Shortsword" },
+      { "item": "Rusty Throwing Dagger" },
+      { "item": "Rusty Axe" },
+      { "item": "Rusty Battle Axe" },
+      { "item": "Rusty Scimitar" },
+      { "item": "Rusty Scythe" },
+      { "item": "Rusty Longsword" },
+      { "item": "Rusty Spear" },
+      { "item": "Rusty Trident" },
+      { "item": "Rusty Mace" },
+      { "item": "Rusty Warhammer" },
+      { "item": "Rusty War Lance" },
+      { "item": "Rusty Greatsword" },
+      { "item": "Rusty Maul" },
+      { "item": "Rusty Tower Shield" }
+    ],
+    "rumor": "Found at the Grave Robber camp within North Gate. Directly confirmed via loot-window screenshots: Rusty Great Scythe and Chipped Bloodstone. Every other Rusty weapon/shield here is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set, it's assumed to be able to drop any other known piece of that same set."
+  },
+  {
+    "name": "a grave robber",
+    "slug": "a-grave-robber",
+    "image": "images/Monsters/a-grave-robber.jpg",
+    "maps": ["Night Harbor"],
+    "areas": ["North Gate"],
+    "drops": [
+      { "item": "Cracked Staff" },
+      { "item": "Tattered Cloth Robe" },
+      { "item": "Garlic" },
+      { "item": "Rawhide Scraps" },
+      { "item": "Torch" },
+      { "item": "Tattered Rawhide Belt" },
+      { "item": "Rusty Shortsword" },
+      { "item": "Raw Human Meat" },
+      { "item": "Cloth Scraps" },
+      { "item": "Tattered Rawhide Mask" },
+      { "item": "Tattered Cloth Cap" },
+      { "item": "Tattered Cloth Gorget" },
+      { "item": "Tattered Cloth Pantaloons" },
+      { "item": "Tattered Cloth Shirt" },
+      { "item": "Tattered Cloth Gloves" },
+      { "item": "Tattered Cloth Bracer" },
+      { "item": "Tattered Cloth Boots" },
+      { "item": "Tattered Rawhide Gorget" },
+      { "item": "Rusty Dagger" },
+      { "item": "Rusty Throwing Dagger" },
+      { "item": "Rusty Axe" },
+      { "item": "Rusty Battle Axe" },
+      { "item": "Rusty Scimitar" },
+      { "item": "Rusty Scythe" },
+      { "item": "Rusty Longsword" },
+      { "item": "Rusty Spear" },
+      { "item": "Rusty Trident" },
+      { "item": "Rusty Mace" },
+      { "item": "Rusty Warhammer" },
+      { "item": "Rusty Great Scythe" },
+      { "item": "Rusty War Lance" },
+      { "item": "Rusty Greatsword" },
+      { "item": "Rusty Maul" },
+      { "item": "Rusty Tower Shield" }
+    ],
+    "rumor": "Found at the Grave Robber camp within North Gate. Directly confirmed via loot-window screenshots: Cracked Staff, Tattered Cloth Robe, Garlic, Rawhide Scraps, Torch, Tattered Rawhide Belt, Rusty Shortsword, Raw Human Meat, Cloth Scraps, and Tattered Rawhide Mask. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Tattered Cloth via Robe, Tattered Rawhide via Belt/Mask, Rusty weapons via Shortsword), it's assumed to be able to drop any other known piece of that same set."
+  },
+  {
+    "name": "a spiderling",
+    "slug": "a-spiderling",
+    "image": "images/Monsters/a-spiderling.jpg",
+    "maps": ["Night Harbor"],
+    "areas": ["North Gate"]
+  },
+  {
+    "name": "a disgraced friar",
+    "slug": "a-disgraced-friar",
+    "image": "images/Monsters/a-disgraced-friar.jpg",
+    "maps": ["Night Harbor"],
+    "areas": ["North Gate"],
+    "drops": [
+      { "item": "Rusty Kite Shield" },
+      { "item": "Potato" },
+      { "item": "Tattered Rawhide Belt" },
+      { "item": "Rusty Shortsword" },
+      { "item": "Raw Human Meat" },
+      { "item": "Note from Ariblast" },
+      { "item": "Cheese" },
+      { "item": "Worn Buckler" },
+      { "item": "Tattered Rawhide Gorget" },
+      { "item": "Tattered Rawhide Mask" },
+      { "item": "Rusty Dagger" },
+      { "item": "Rusty Throwing Dagger" },
+      { "item": "Rusty Axe" },
+      { "item": "Rusty Battle Axe" },
+      { "item": "Rusty Scimitar" },
+      { "item": "Rusty Scythe" },
+      { "item": "Rusty Longsword" },
+      { "item": "Rusty Spear" },
+      { "item": "Rusty Trident" },
+      { "item": "Rusty Mace" },
+      { "item": "Rusty Warhammer" },
+      { "item": "Rusty Great Scythe" },
+      { "item": "Rusty War Lance" },
+      { "item": "Rusty Greatsword" },
+      { "item": "Rusty Maul" },
+      { "item": "Rusty Tower Shield" }
+    ],
+    "rumor": "Found at the Grave Robber camp within North Gate. Directly confirmed via loot-window screenshots: Rusty Kite Shield, Potato, Tattered Rawhide Belt, Rusty Shortsword, Raw Human Meat, Note from Ariblast, Cheese, and Worn Buckler. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Tattered Rawhide via Belt, Rusty weapons via Shortsword), it's assumed to be able to drop any other known piece of that same set."
+  },
+  {
+    "name": "a cultist",
+    "slug": "a-cultist",
+    "maps": ["Shaded Dunes"],
+    "drops": [
+      { "item": "Aashir's Journal Page 42" },
+      { "item": "Mushroom" }
+    ],
+    "rumor": "Found outside the Ancient Crypt."
+  },
+  {
+    "name": "a risen commander",
+    "slug": "a-risen-commander",
+    "image": "images/Monsters/a-risen-commander.jpg",
+    "maps": ["Shaded Dunes"],
+    "rumor": "Found outside the Ancient Crypt."
+  },
+  {
+    "name": "a risen thaumaturgist",
+    "slug": "a-risen-thaumaturgist",
+    "image": "images/Monsters/a-risen-thaumaturgist.jpg",
+    "maps": ["Shaded Dunes"],
+    "drops": [
+      { "item": "Worn Fine Wood Bow" },
+      { "item": "Corroded Bronze Shortsword" },
+      { "item": "Wool Scraps" }
+    ],
+    "rumor": "Found outside the Ancient Crypt."
+  },
+  {
+    "name": "a rattlesnake",
+    "slug": "a-rattlesnake",
+    "image": "images/Monsters/a-rattlesnake.jpg",
+    "maps": ["Shaded Dunes"]
+  },
+  {
+    "name": "a giant spider",
+    "slug": "a-giant-spider",
+    "image": "images/Monsters/a-giant-spider.jpg",
+    "maps": ["Shaded Dunes"]
+  },
+  {
+    "name": "a sickened ashira",
+    "slug": "a-sickened-ashira",
+    "image": "images/Monsters/a-sickened-ashira.jpg",
+    "maps": ["Shaded Dunes"]
+  },
+  {
+    "name": "a skeleton",
+    "slug": "a-skeleton",
+    "image": "images/Monsters/a-skeleton.jpg",
+    "maps": ["Shaded Dunes"]
   }
 ]

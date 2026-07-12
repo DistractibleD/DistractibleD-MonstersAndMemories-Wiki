@@ -564,24 +564,27 @@ fills in as the user provides it:
   in case the same monster template turns out to spawn in more than one zone). Not
   necessarily tied to a `maps.json` entry — just plain text naming the zone. Must match a
   real top-level map (i.e. a `maps.json` entry) — a named sub-area within a map (e.g.
-  "Necropolis" within "Night Harbor") is **not** a map of its own and goes in `area` instead
+  "Necropolis" within "Night Harbor") is **not** a map of its own and goes in `areas` instead
   (see below), not appended into the map string. This was a real mistake, corrected
   2026-07-12: several monsters had `"Necropolis (Night Harbor)"` as their map, which the user
-  clarified (2026-07-12) was misleading — Necropolis isn't its own map, just an area inside
-  Night Harbor — so those entries were fixed to `"maps": ["Night Harbor"], "area":
-  "Necropolis"`. The user warned they'll keep reporting other Night Harbor monsters by their
-  sub-area the same way, so expect more of this split going forward, for Night Harbor and
-  possibly other maps too.
-- `area` — optional plain string naming a confirmed sub-area within one of the monster's
-  `maps` (e.g. "Necropolis", "The Concourse of Souls" would be more specific still and
-  belongs in `rumor`/prose instead — `area` is for the coarser, confirmed subdivision the
-  user actually names when correcting a map). Unlike `rumor`, this is treated as confirmed
-  (the user states it directly, same authority as a screenshot — see "The user's screenshots
-  are the source of truth" above), so it's its own field rather than being folded into the
-  unverified-styled `rumor` text. Rendered on the monster card as an "Area" field right below
-  "Map" (`openMonsterViewer` in `script.js`), and included in `monsterSearchHaystack` so it's
-  searchable. Does not affect zone-grid grouping on the Monsters page — that's still driven
-  by `maps` (specifically `monsterZone()`, which reads `maps[0]`), not `area`.
+  clarified was misleading — Necropolis isn't its own map, just an area inside Night Harbor —
+  so those entries were fixed to `"maps": ["Night Harbor"], "areas": ["Necropolis"]`. The user
+  warned they'd keep reporting other Night Harbor monsters by their sub-area the same way, and
+  this was confirmed the same day: a second batch (2026-07-12) added a "North Gate" area, and
+  two monsters already known from Necropolis (desert bat, large rat) turned out to also spawn
+  at North Gate — hence `areas` being an array from the start rather than a single string.
+- `areas` — optional array of confirmed sub-area names within the monster's `maps` (e.g.
+  `["Necropolis"]`, or `["Necropolis", "North Gate"]` for a monster seen in more than one).
+  Same idea as `maps` being an array for multi-zone monsters. A more specific single-spot
+  callout ("The Concourse of Souls", say) is finer-grained still and belongs in `rumor`/prose
+  instead — `areas` is for the coarser, confirmed subdivision the user actually names.
+  Unlike `rumor`, this is treated as confirmed (the user states it directly, same authority
+  as a screenshot — see "The user's screenshots are the source of truth" above), so it's its
+  own field rather than being folded into the unverified-styled `rumor` text. Rendered on the
+  monster card as an "Area" field right below "Map" (`openMonsterViewer` in `script.js`,
+  comma-joined), and included in `monsterSearchHaystack` so it's searchable. Does not affect
+  zone-grid grouping on the Monsters page — that's still driven by `maps` (specifically
+  `monsterZone()`, which reads `maps[0]`), not `areas`.
 - `levelRange` — a plain string like `"5-8"`, not a structured min/max. The user's own
   explicit call (2026-07-06): every level range they add is a guess, not a confirmed in-game
   value, so the page says so directly in its intro text rather than presenting them as fact.
@@ -757,6 +760,28 @@ This replaced the single flat table + map dropdown from the original 2026-07-06 
   throws (`.replace` on `null`) and gets silently swallowed by `loadPage`'s catch block,
   surfacing as a blank "Page not found" instead of a visible JS error. Worth remembering if
   a future pending-scope-style feature hits the same silent-failure shape.
+
+**Zone drill-down uses a hash sub-route, not a pending variable (2026-07-12 fix).** The
+first version of this feature used a `pendingMonsterScope` variable (matching the
+`pendingItemCategory` pattern elsewhere) to jump straight into a zone list. The user then
+pointed out a real UX problem: since switching between the category grid and a zone list
+never changed the URL, the browser's own Back button had no "Monsters" state to pop to —
+pressing Back from a zone list skipped straight past the category grid to whatever page was
+open *before* Monsters (e.g. Maps), instead of letting the user pick a different zone.
+
+Fixed by encoding the zone scope directly in the hash as a sub-route —
+`#monsters/named/<url-encoded map>` or `#monsters/regular/<url-encoded map>` — so drilling
+into a zone is a real navigation the browser tracks, not just an in-page function call.
+`pendingMonsterScope` is gone entirely; `goToMonster`, the zone-card click handler in
+`renderMonstersCategories`, and the "back to categories" link all just set `location.hash`
+now, and `renderMonstersPage(container, file)` parses the sub-route (`file.split('/')`) to
+decide whether to render the category grid or a scoped list. This required two other spots
+to learn about the sub-route too: `loadPage`/the `hashchange` listener now match pages by
+the part of the hash *before* the first `/` (so `"monsters/named/X"` still resolves to the
+Monsters page entry), and `init()`'s startup routing does the same so a direct link/reload
+into a zone URL still lands on the right zone instead of falling back to the first page. No
+other page currently uses a hash sub-route, but this is the pattern to reuse if one needs
+the same "drill-down should be Back-button-navigable" behavior later.
 
 ## Adding a Beastmaster companion
 
@@ -1077,6 +1102,20 @@ card only shows the rumor line at all when `rumor` is actually set (no "not yet 
 placeholder — most items will simply never have one), rendered in a distinct
 italic/amber style (`.item-card-section-rumor` in `style.css`) labeled "Rumor
 (unverified)" so it can never be mistaken for a confirmed `foundAt` line at a glance.
+
+**`item.readText`** (added 2026-07-12) is the full text of a readable note/letter item —
+first needed for "Note from Ariblast" (NODROP, dropped by "a disgraced friar" in Night
+Harbor's North Gate area), whose card shows a green "Right-click to read." line in-game; the
+user opened it and asked for that revealed text to show on the item's page. Distinct from
+`description` (the card's own short flavor line, e.g. "A note from Ariblast to his disgraced
+group.") — `readText` is the longer content revealed only after actually reading the note.
+Rendered as its own section (`.item-card-section-note` in `style.css`, quoted-letter style:
+italic with a left accent border) labeled "Note text", right after the flavor/effect section.
+Preserve the note's own paragraph breaks by embedding literal `\n` characters in the JSON
+string — `renderItemCardHTML` converts each `\n` to `<br>` after escaping (this is the one
+field where that matters; `description`/`effect` have never needed internal line breaks so
+far). Also included in `itemSearchHaystack` so note contents are searchable. Use this same
+field for any future readable book/letter/scroll item, not just notes specifically.
 
 ## Known CSS gotcha
 

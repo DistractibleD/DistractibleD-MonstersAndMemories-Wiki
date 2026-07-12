@@ -628,6 +628,12 @@ html, body {
   font-style: italic;
   color: #ffe9a8;
 }
+.item-card-section-note {
+  font-style: italic;
+  color: var(--text);
+  border-left: 2px solid var(--accent-dim);
+  padding-left: 8px;
+}
 .item-card-components {
   list-style: none;
   padding: 0;

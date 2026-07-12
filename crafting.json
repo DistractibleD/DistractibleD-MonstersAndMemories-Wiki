@@ -533,8 +533,13 @@
   {
     "name": "Cloth Satchel",
     "slug": "cloth-satchel",
+    "image": "images/crafting/cloth-satchel.jpg",
     "tradeskill": "Tailoring",
     "listOrder": 11,
+    "weight": 0.5,
+    "size": "Medium",
+    "capacity": 8,
+    "maxSize": "Medium",
     "difficultyColor": "Red",
     "observedAtSkill": 5
   },
@@ -565,10 +570,50 @@
   {
     "name": "Fine Cloth Mantle",
     "slug": "fine-cloth-mantle",
+    "image": "images/crafting/fine-cloth-mantle.jpg",
     "tradeskill": "Tailoring",
     "listOrder": 15,
+    "weight": 0.35,
+    "size": "Small",
+    "components": [
+      { "item": "Bolt of Cloth", "quantity": 2 },
+      { "item": "Rough Thread", "quantity": 2 },
+      { "item": "Copper Fasteners", "quantity": 2 }
+    ],
     "difficultyColor": "Red",
-    "observedAtSkill": 5
+    "observedAtSkill": 16
+  },
+  {
+    "name": "Fine Cloth Pants",
+    "slug": "fine-cloth-pants",
+    "image": "images/crafting/fine-cloth-pants.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 16,
+    "weight": 0.85,
+    "size": "Medium",
+    "components": [
+      { "item": "Bolt of Cloth", "quantity": 3 },
+      { "item": "Rough Thread", "quantity": 3 },
+      { "item": "Copper Fasteners", "quantity": 3 }
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 16
+  },
+  {
+    "name": "Enchanted Cloth Cap",
+    "slug": "enchanted-cloth-cap",
+    "image": "images/crafting/enchanted-cloth-cap.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 17,
+    "weight": 0.25,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Bolt of Cloth", "quantity": 2 },
+      { "item": "Rough Thread", "quantity": 2 },
+      { "item": "Copper Fasteners", "quantity": 2 }
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 16
   },
   {
     "name": "Arrow x100",
