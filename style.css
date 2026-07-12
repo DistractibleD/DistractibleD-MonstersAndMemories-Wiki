@@ -338,6 +338,15 @@ html, body {
 .col-race { width: 8%; }
 .col-monster-name { width: 50%; }
 .col-monster-map { width: 50%; }
+.col-gathering-name { width: 22%; }
+.col-gathering-skill { width: 10%; }
+.col-gathering-results { width: 23%; }
+.col-gathering-location { width: 35%; }
+.gathering-note-row td {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  padding-top: 0;
+}
 .items-table th {
   background: var(--bg);
   color: var(--accent);

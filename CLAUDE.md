@@ -312,6 +312,50 @@ right now.
    into `images/crafting/`, filename matching the `image` field. Archival only, per "Item
    and recipe cards" below — not something the site ever displays.
 
+### Gathering tradeskills are a separate area, not recipes (2026-07-13)
+
+Mining, Lumberjacking, Herbalism, and Fishing are **gathering** tradeskills — the user's own
+call: you interact directly with a resource node in the world (a vein, a wood pile, etc.)
+rather than combining components into a crafted result, so they don't fit `crafting.json`'s
+recipe shape at all (no components, no single named result, but a *minimum skill to even
+attempt the node* that no crafted recipe has). They get their own data file,
+`gathering-nodes.json`, and their own area on the Crafting page instead of being squeezed
+into the recipe-card grid.
+
+- **`tradeskillsData[].category`** — an optional field in `tradeskills.json`, `"gathering"`
+  for exactly these four tradeskills, unset for everything else. `renderCraftingCategories`
+  splits the top-level tradeskill grid into two sections this way — "Crafting" and
+  "Gathering" — same two-group layout as the Monsters page's Named/Regular split. Add a new
+  tradeskill to the gathering group the same way if one ever comes in.
+- **`gathering-nodes.json`** — a flat array, one object per node: `name`, `slug`,
+  `tradeskill`, `locations` (array of free-text location strings — these are gathering spots
+  named by a source table, not tied to `maps.json` the way a monster's `maps` field is),
+  and two optional skill fields: `minSkill` (skill required to even attempt the node) and
+  `trivialSkill` (the point where it stops giving skill-ups — same "Trivial" concept as
+  `crafting.json`'s `recipeSkillLevel`, just named differently since this is a separate file/
+  shape). Only write an exact number into `minSkill`/`trivialSkill` when the source states
+  one outright — a floor-only value (`"225+"`, `">92"`) or a fully unknown value (`"???"`)
+  gets left unset with a `note` field capturing the raw text instead, same caution as
+  `recipeSkillLevel` elsewhere in this file. `results` (array of item names, same
+  dynamic-linking-by-exact-name convention as a recipe's `components` or a monster's `drops`)
+  is optional — only include it when the source table actually has a Results column (the
+  Lumberjacking table did; the first Mining table given didn't, so Mining nodes just omit it
+  rather than guessing what a vein yields).
+- **Source tables so far are fan-wiki-style reference charts** (the Mining table explicitly
+  dated "As of 5/26 Closed Beta"), same weaker-than-a-screenshot caveat as the Tanning/
+  Leatherworking/Blacksmithing tables elsewhere in this file — good enough to seed real
+  numbers, but supersede it without hesitation if the user's own in-game observation ever
+  disagrees.
+- **Rendering:** `renderGatheringNodes(container, tradeskillName)` in `script.js` — a
+  sortable/searchable table (Name/Min Skill/Trivial/Results/Location columns), same
+  structural pattern as `renderMonstersList`'s table rather than the recipe-card grid, since
+  a node has no image/components to justify a card. A node's `note` (when set) renders as its
+  own small row directly under it. Wired into the same navigation paths a normal tradeskill
+  already has — the tradeskill grid's card click, the header search box (`matchedGatheringNodes`,
+  a new "Gathering" results section), and the Crafting page's own quick search box — all
+  routed based on `tradeskill.category` so a gathering tradeskill lands on
+  `renderGatheringNodes` instead of `renderCraftingRecipes` wherever the two paths diverge.
+
 ### Tanning is different: no recipes, just vat processing (2026-07-06)
 
 Confirmed by the user: Tanning has no crafting-window entries or recipe cards at all —

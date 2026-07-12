@@ -9,6 +9,7 @@ let itemsData = null; // cached contents of items.json
 let mapsData = null; // cached contents of maps.json, loaded on first visit to the Maps page
 let craftingData = null; // cached contents of crafting.json
 let tradeskillsData = null; // cached contents of tradeskills.json
+let gatheringData = null; // cached contents of gathering-nodes.json
 let gemstonesData = null; // cached contents of gemstones.json
 let monstersData = null; // cached contents of monsters.json
 let companionsData = null; // cached contents of companions.json
@@ -71,6 +72,11 @@ async function ensureCraftingData() {
     const res = await fetch('crafting.json');
     if (!res.ok) throw new Error('Could not load crafting.json');
     craftingData = await res.json();
+  }
+  if (!gatheringData) {
+    const res = await fetch('gathering-nodes.json');
+    if (!res.ok) throw new Error('Could not load gathering-nodes.json');
+    gatheringData = await res.json();
   }
   return craftingData;
 }
@@ -304,6 +310,10 @@ function renderSearchResults(query) {
     .filter(r => `${r.name} ${r.tradeskill}`.toLowerCase().includes(query))
     .sort((a, b) => a.name.localeCompare(b.name))
     .slice(0, 8);
+  const matchedGatheringNodes = (gatheringData || [])
+    .filter(n => `${n.name} ${n.tradeskill}`.toLowerCase().includes(query))
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .slice(0, 8);
   const matchedMonsters = (monstersData || [])
     .filter(m => monsterSearchHaystack(m).includes(query))
     .sort((a, b) => a.name.localeCompare(b.name))
@@ -313,7 +323,7 @@ function renderSearchResults(query) {
     .sort((a, b) => a.name.localeCompare(b.name))
     .slice(0, 8);
 
-  if (!matchedCategories.length && !matchedPages.length && !matchedItems.length && !matchedRecipes.length && !matchedMonsters.length && !matchedCompanions.length) {
+  if (!matchedCategories.length && !matchedPages.length && !matchedItems.length && !matchedRecipes.length && !matchedGatheringNodes.length && !matchedMonsters.length && !matchedCompanions.length) {
     results.innerHTML = '<p class="search-results-empty">No results found.</p>';
     openSearchResults();
     return;
@@ -376,6 +386,19 @@ function renderSearchResults(query) {
       e.preventDefault();
       clearSearch();
       goToRecipe(recipe);
+    });
+    return link;
+  });
+
+  addSection('Gathering', matchedGatheringNodes, node => {
+    const link = document.createElement('a');
+    link.href = '#crafting';
+    link.className = 'search-result-link';
+    link.textContent = `${node.name} (${node.tradeskill})`;
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      clearSearch();
+      goToCraftingCategory(node.tradeskill);
     });
     return link;
   });
@@ -1812,51 +1835,83 @@ function closeMapViewer() {
 async function renderCraftingPage(container) {
   await ensureCraftingData();
 
-  // Landed here from a header search result for a specific recipe — jump
-  // straight to that recipe's tradeskill instead of the category grid.
+  // Landed here from a header search result for a specific recipe/node —
+  // jump straight to that tradeskill instead of the category grid. Gathering
+  // tradeskills (Mining, Lumberjacking, Herbalism, Fishing) render as a node
+  // table instead of a recipe grid — see renderGatheringNodes.
   if (pendingCraftingTradeskill) {
     const target = pendingCraftingTradeskill;
     pendingCraftingTradeskill = null;
-    await renderCraftingRecipes(container, target);
+    const ts = tradeskillsData.find(t => t.name === target);
+    if (ts && ts.category === 'gathering') {
+      renderGatheringNodes(container, target);
+    } else {
+      await renderCraftingRecipes(container, target);
+    }
     return;
   }
 
   renderCraftingCategories(container);
 }
 
+// Tradeskills split into two groups, same "named/regular"-style layout as
+// the Monsters page: ordinary crafted-goods tradeskills (a recipe grid, see
+// renderCraftingRecipes) and gathering tradeskills — Mining, Lumberjacking,
+// Herbalism, Fishing (2026-07-13) — whose skill nodes have no components/
+// crafted result at all, just a min skill to attempt, a trivial skill, and
+// where to find them (see renderGatheringNodes, gathering-nodes.json).
+// `tradeskill.category === 'gathering'` (tradeskills.json) is what decides
+// which group/renderer a tradeskill belongs to.
 function renderCraftingCategories(container) {
-  const sorted = [...tradeskillsData].sort((a, b) => a.name.localeCompare(b.name));
+  const gathering = tradeskillsData.filter(ts => ts.category === 'gathering').sort((a, b) => a.name.localeCompare(b.name));
+  const crafted = tradeskillsData.filter(ts => ts.category !== 'gathering').sort((a, b) => a.name.localeCompare(b.name));
+
+  function tradeskillCards(list, isGathering) {
+    return `
+      <div class="craft-grid">
+        ${list.map(ts => {
+          const count = isGathering
+            ? gatheringData.filter(n => n.tradeskill === ts.name).length
+            : craftingData.filter(r => r.tradeskill === ts.name).length;
+          const icon = TRADESKILL_ICON[ts.name] || 'material';
+          return `
+            <div class="craft-card" data-tradeskill="${escapeAttr(ts.name)}" data-gathering="${isGathering}">
+              <div class="craft-card-icon">${svgIcon(icon)}</div>
+              <div class="craft-card-body">
+                <div class="craft-card-name">
+                  ${ts.name}
+                  ${ts.status === 'planned' ? '<span class="badge-planned">Planned</span>' : ''}
+                </div>
+                <div class="craft-card-count">${count} ${isGathering ? 'node' : 'recipe'}${count === 1 ? '' : 's'}</div>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+  }
 
   container.innerHTML = `
     <h1>Crafting</h1>
     <p>Browse recipes by tradeskill, or search below to jump straight to a specific recipe.
     "Planned" tradeskills exist in the game's design but aren't usable yet.</p>
     <div class="items-quick-search">
-      <input type="search" id="craft-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all recipes by name or tradeskill..." autocomplete="off">
+      <input type="search" id="craft-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all recipes and gathering nodes by name or tradeskill..." autocomplete="off">
       <div id="craft-quick-search-results" class="items-quick-search-results"></div>
     </div>
-    <div class="craft-grid">
-      ${sorted.map(ts => {
-        const count = craftingData.filter(r => r.tradeskill === ts.name).length;
-        const icon = TRADESKILL_ICON[ts.name] || 'material';
-        return `
-          <div class="craft-card" data-tradeskill="${ts.name}">
-            <div class="craft-card-icon">${svgIcon(icon)}</div>
-            <div class="craft-card-body">
-              <div class="craft-card-name">
-                ${ts.name}
-                ${ts.status === 'planned' ? '<span class="badge-planned">Planned</span>' : ''}
-              </div>
-              <div class="craft-card-count">${count} recipe${count === 1 ? '' : 's'}</div>
-            </div>
-          </div>
-        `;
-      }).join('')}
-    </div>
+    <h2 class="monsters-section-heading">${svgIcon('blacksmithing')} Crafting</h2>
+    ${tradeskillCards(crafted, false)}
+    <h2 class="monsters-section-heading">${svgIcon('mining')} Gathering</h2>
+    <p>Resource nodes you interact with directly in the world instead of crafting from components —
+    each one has a minimum skill to attempt it and a trivial skill where it stops giving skill-ups.</p>
+    ${tradeskillCards(gathering, true)}
   `;
 
   container.querySelectorAll('.craft-card').forEach(card => {
-    card.addEventListener('click', () => renderCraftingRecipes(container, card.dataset.tradeskill));
+    card.addEventListener('click', () => {
+      if (card.dataset.gathering === 'true') renderGatheringNodes(container, card.dataset.tradeskill);
+      else renderCraftingRecipes(container, card.dataset.tradeskill);
+    });
   });
 
   // A shortcut past the tradeskill grid for anyone who already knows which
@@ -1875,26 +1930,35 @@ function renderCraftingCategories(container) {
       return;
     }
 
-    const matches = craftingData
+    const recipeMatches = craftingData
       .filter(r => `${r.name} ${r.tradeskill}`.toLowerCase().includes(query))
+      .map(r => ({ kind: 'recipe', slug: r.slug, name: r.name, tradeskill: r.tradeskill }));
+    const nodeMatches = gatheringData
+      .filter(n => `${n.name} ${n.tradeskill}`.toLowerCase().includes(query))
+      .map(n => ({ kind: 'node', slug: n.slug, name: n.name, tradeskill: n.tradeskill }));
+    const matches = [...recipeMatches, ...nodeMatches]
       .sort((a, b) => a.name.localeCompare(b.name))
       .slice(0, 20);
 
     quickSearchResults.innerHTML = matches.length
-      ? matches.map(recipe => `
-          <a href="#" class="search-result-link items-quick-search-result" data-slug="${escapeAttr(recipe.slug)}">
-            ${escapeAttr(recipe.name)}
-            <span class="items-quick-search-type">${escapeAttr(recipe.tradeskill)}</span>
+      ? matches.map(m => `
+          <a href="#" class="search-result-link items-quick-search-result" data-kind="${m.kind}" data-slug="${escapeAttr(m.slug)}" data-tradeskill="${escapeAttr(m.tradeskill)}">
+            ${escapeAttr(m.name)}
+            <span class="items-quick-search-type">${escapeAttr(m.tradeskill)}</span>
           </a>
         `).join('')
-      : '<p class="search-results-empty">No recipes match.</p>';
+      : '<p class="search-results-empty">No recipes or gathering nodes match.</p>';
     quickSearchResults.classList.add('open');
 
     quickSearchResults.querySelectorAll('.items-quick-search-result').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
-        const recipe = craftingData.find(r => r.slug === link.dataset.slug);
-        if (recipe) goToRecipe(recipe);
+        if (link.dataset.kind === 'node') {
+          goToCraftingCategory(link.dataset.tradeskill);
+        } else {
+          const recipe = craftingData.find(r => r.slug === link.dataset.slug);
+          if (recipe) goToRecipe(recipe);
+        }
       });
     });
   });
@@ -2107,6 +2171,167 @@ async function renderCraftingRecipes(container, tradeskillName) {
       card.addEventListener('animationend', () => card.classList.remove('recipe-flash'), { once: true });
     }
   }
+}
+
+// Matched against a gathering node's own search box — name plus its results
+// and locations, same idea as recipeSearchHaystack.
+function gatheringNodeSearchHaystack(node) {
+  return [
+    node.name,
+    (node.results || []).join(' '),
+    (node.locations || []).join(' '),
+    node.note || ''
+  ].join(' ').toLowerCase();
+}
+
+// Gathering tradeskills (Mining, Lumberjacking, Herbalism, Fishing) don't
+// have recipes — a node has no components and no single crafted result, just
+// a minimum skill to interact with it, a trivial skill where skill-ups stop,
+// and where in the world to find it (gathering-nodes.json). This renders as
+// a sortable/searchable table (same structural pattern as renderMonstersList)
+// rather than the recipe-card grid renderCraftingRecipes uses, since a node
+// has no image/components to justify a card. `results` — what the node
+// actually yields — is optional; only Lumberjacking's source table listed
+// it explicitly (2026-07-13), Mining's didn't, so most Mining rows just omit
+// it rather than guessing (see gathering-nodes.json).
+function renderGatheringNodes(container, tradeskillName) {
+  const tradeskill = tradeskillsData.find(ts => ts.name === tradeskillName);
+  const allNodes = gatheringData.filter(n => n.tradeskill === tradeskillName);
+
+  container.innerHTML = `
+    <p><a href="#" id="gathering-back-link">&larr; All tradeskills</a></p>
+    <h1>
+      ${tradeskillName}
+      ${tradeskill && tradeskill.status === 'planned' ? '<span class="badge-planned">Planned</span>' : ''}
+    </h1>
+    ${tradeskill && tradeskill.note ? `<p class="craft-tradeskill-note">${escapeAttr(tradeskill.note)}</p>` : ''}
+    ${
+      tradeskill && tradeskill.status === 'planned'
+        ? '<p>This tradeskill hasn\'t been implemented in the game yet.</p>'
+        : allNodes.length
+          ? `
+            <input type="search" id="gathering-search" class="items-search" placeholder="Search ${escapeAttr(tradeskillName)} nodes, results, locations..." autocomplete="off">
+            <p class="items-count" id="gathering-count"></p>
+            <div class="items-table-wrap">
+              <table class="items-table">
+                <colgroup>
+                  <col class="col-gathering-name">
+                  <col class="col-gathering-skill">
+                  <col class="col-gathering-skill">
+                  <col class="col-gathering-results">
+                  <col class="col-gathering-location">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th data-sort-key="name" class="sortable">Name</th>
+                    <th data-sort-key="minSkill" class="sortable">Min Skill</th>
+                    <th data-sort-key="trivialSkill" class="sortable">Trivial</th>
+                    <th>Results</th>
+                    <th>Location</th>
+                  </tr>
+                </thead>
+                <tbody id="gathering-tbody"></tbody>
+              </table>
+            </div>
+          `
+          : '<p>No gathering nodes recorded yet for this tradeskill.</p>'
+    }
+  `;
+
+  container.querySelector('#gathering-back-link').addEventListener('click', e => {
+    e.preventDefault();
+    renderCraftingCategories(container);
+  });
+
+  if (!allNodes.length) return;
+
+  const searchBox = container.querySelector('#gathering-search');
+  const tbody = container.querySelector('#gathering-tbody');
+  const countEl = container.querySelector('#gathering-count');
+  const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
+
+  let sortKey = 'minSkill';
+  let sortDir = 'asc';
+
+  function updateSortIndicators() {
+    sortHeaders.forEach(th => {
+      th.classList.toggle('sorted-asc', th.dataset.sortKey === sortKey && sortDir === 'asc');
+      th.classList.toggle('sorted-desc', th.dataset.sortKey === sortKey && sortDir === 'desc');
+    });
+  }
+
+  sortHeaders.forEach(th => {
+    th.addEventListener('click', () => {
+      const key = th.dataset.sortKey;
+      if (key === sortKey) {
+        sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortKey = key;
+        sortDir = 'asc';
+      }
+      update();
+    });
+  });
+
+  function nodeSortValue(node, key) {
+    if (key === 'name') return node.name.toLowerCase();
+    return node[key];
+  }
+
+  function renderRows(nodes) {
+    if (!nodes.length) {
+      tbody.innerHTML = `<tr><td colspan="5" class="items-empty">No nodes match your search.</td></tr>`;
+      return;
+    }
+    tbody.innerHTML = nodes.map(node => `
+      <tr>
+        <td data-label="Name">${escapeAttr(node.name)}</td>
+        <td data-label="Min Skill"${node.minSkill == null ? ' class="cell-empty"' : ''}>${node.minSkill != null ? node.minSkill : '?'}</td>
+        <td data-label="Trivial"${node.trivialSkill == null ? ' class="cell-empty"' : ''}>${node.trivialSkill != null ? node.trivialSkill : '?'}</td>
+        <td data-label="Results"${!(node.results && node.results.length) ? ' class="cell-empty"' : ''}>${
+          (node.results || []).map(r => {
+            const m = findItemByName(r);
+            return m
+              ? `<a href="#" class="item-name-hover gathering-result-link" data-alt="${escapeAttr(m.name)}" data-item="${escapeAttr(m.name)}">${escapeAttr(r)}</a>`
+              : escapeAttr(r);
+          }).join(', ') || '—'
+        }</td>
+        <td data-label="Location"${!(node.locations && node.locations.length) ? ' class="cell-empty"' : ''}>${escapeAttr((node.locations || []).join('; ')) || '—'}</td>
+      </tr>
+      ${node.note ? `<tr class="gathering-note-row"><td colspan="5"><em>${escapeAttr(node.note)}</em></td></tr>` : ''}
+    `).join('');
+
+    tbody.querySelectorAll('.gathering-result-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const item = findItemByName(link.dataset.item);
+        if (item) goToItem(item);
+      });
+    });
+    setupItemTooltip(tbody);
+  }
+
+  function update() {
+    const query = searchBox.value.toLowerCase().trim();
+    let filtered = query ? allNodes.filter(n => gatheringNodeSearchHaystack(n).includes(query)) : allNodes;
+
+    filtered = [...filtered].sort((a, b) => {
+      const av = nodeSortValue(a, sortKey);
+      const bv = nodeSortValue(b, sortKey);
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      const cmp = typeof av === 'string' ? av.localeCompare(bv) : av - bv;
+      return sortDir === 'asc' ? cmp : -cmp;
+    });
+
+    updateSortIndicators();
+    renderRows(filtered);
+    countEl.textContent = query ? `Showing ${filtered.length} of ${allNodes.length} nodes` : '';
+  }
+
+  searchBox.addEventListener('input', update);
+  update();
 }
 
 /* ============================================
