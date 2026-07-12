@@ -4,7 +4,7 @@
     "slug": "a-desert-bat",
     "image": "images/Monsters/a-desert-bat.jpg",
     "maps": ["Night Harbor", "Sungreet Strand"],
-    "areas": ["Necropolis", "North Gate"],
+    "areas": ["Necropolis", "North Gate", "West Gate"],
     "drops": [
       { "item": "Bat Wing" },
       { "item": "Raw Bat Meat" },
@@ -17,7 +17,7 @@
     "slug": "a-large-rat",
     "image": "images/Monsters/a-large-rat.jpg",
     "maps": ["Night Harbor", "Sungreet Strand"],
-    "areas": ["Necropolis", "North Gate"],
+    "areas": ["Necropolis", "North Gate", "West Gate"],
     "levelRange": "1",
     "drops": [
       { "item": "Raw Rat Meat" },
@@ -53,7 +53,7 @@
     "slug": "a-rotting-skeleton",
     "image": "images/Monsters/a-rotting-skeleton.jpg",
     "maps": ["Night Harbor", "Sungreet Strand"],
-    "areas": ["Necropolis"],
+    "areas": ["Necropolis", "West Gate"],
     "levelRange": "1",
     "drops": [
       { "item": "Bone Chips" },
@@ -228,12 +228,14 @@
     "slug": "a-snake",
     "image": "images/Monsters/a-snake.jpg",
     "maps": ["Sungreet Strand", "Night Harbor"],
-    "areas": ["North Gate"]
+    "areas": ["North Gate", "West Gate"]
   },
   {
     "name": "a jackal pup",
     "slug": "a-jackal-pup",
     "image": "images/Monsters/a-jackal-pup.jpg",
+    "maps": ["Night Harbor"],
+    "areas": ["West Gate"],
     "drops": [
       { "item": "Raw Jackal Meat" }
     ]
@@ -649,7 +651,7 @@
     "slug": "a-spiderling",
     "image": "images/Monsters/a-spiderling.jpg",
     "maps": ["Night Harbor"],
-    "areas": ["North Gate"]
+    "areas": ["North Gate", "West Gate"]
   },
   {
     "name": "a disgraced friar",

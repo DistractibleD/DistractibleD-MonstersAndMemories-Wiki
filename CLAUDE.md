@@ -578,7 +578,13 @@ fills in as the user provides it:
   `maps.json` entry, but "Ancient Crypt" already is — by the same reasoning as Necropolis, this
   was treated as `"maps": ["Ancient Crypt"], "areas": ["Infected Crypt"]` rather than inventing
   a new top-level map, flagged with a rumor note since (unlike Necropolis) the user hasn't
-  explicitly confirmed this particular relationship yet.
+  explicitly confirmed this particular relationship yet. A third Night Harbor area, "West
+  Gate", was confirmed the same day via a screenshot ("a blister beetle", a new monster) and
+  then directly in chat, where the user listed six existing monsters also found there (Desert
+  Bat, Snake, Large Rat, Rotten Skeleton, Jackal Pup, Spiderling) — matched to their existing
+  entries ("a rotting skeleton" for "Rotten Skeleton", same naming-drift caution as elsewhere
+  in this file) and had "West Gate" appended to each one's `areas` array (creating the field
+  for "a jackal pup", which had no `maps`/`areas` at all before).
 - `areas` — optional array of confirmed sub-area names within the monster's `maps` (e.g.
   `["Necropolis"]`, or `["Necropolis", "North Gate"]` for a monster seen in more than one).
   Same idea as `maps` being an array for multi-zone monsters. A more specific single-spot
