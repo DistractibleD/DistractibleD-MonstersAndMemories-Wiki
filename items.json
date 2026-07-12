@@ -4821,5 +4821,18 @@
     "size": "Medium",
     "classes": ["ALL"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Corroded Bronze Chain Mask",
+    "slug": "corroded-bronze-chain-mask",
+    "image": "images/items/corroded-bronze-chain-mask.jpg",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Face",
+    "ac": 3,
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"]
   }
 ]

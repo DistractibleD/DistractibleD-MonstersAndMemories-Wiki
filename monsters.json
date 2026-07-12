@@ -985,5 +985,57 @@
     "slug": "a-willowisp",
     "image": "images/Monsters/a-willowisp.jpg",
     "maps": ["Shaded Dunes"]
+  },
+  {
+    "name": "a Dustrend priest",
+    "slug": "a-dustrend-priest",
+    "drops": [
+      { "item": "Corroded Bronze Axe" },
+      { "item": "Corroded Bronze Scythe" },
+      { "item": "Corroded Bronze Shortsword" },
+      { "item": "Corroded Bronze Battle Axe" },
+      { "item": "Corroded Bronze Longsword" },
+      { "item": "Corroded Bronze Dagger" },
+      { "item": "Corroded Bronze Trident" },
+      { "item": "Corroded Bronze Maul" },
+      { "item": "Corroded Bronze Great Scythe" },
+      { "item": "Corroded Bronze Scimitar" },
+      { "item": "Corroded Bronze Greatsword" },
+      { "item": "Corroded Bronze Long Spear" },
+      { "item": "Corroded Bronze Tower Shield" },
+      { "item": "Corroded Bronze Kite Shield" },
+      { "item": "Corroded Bronze Plate Collar" },
+      { "item": "Corroded Bronze Plate Boots" },
+      { "item": "Corroded Bronze Chain Gloves" },
+      { "item": "Corroded Bronze Chain Waistguard" },
+      { "item": "Corroded Bronze Chain Mask" }
+    ],
+    "rumor": "No map confirmed yet for this monster. Directly confirmed via loot-window screenshots: Corroded Bronze Axe and Corroded Bronze Scythe. Everything else in this drop list is inferred — per the user's 2026-07-12 quality-set rule, once a monster is confirmed dropping one piece of a quality set (here, the Corroded Bronze weapon/armor tier), it's assumed to be able to drop any other known piece of that same set. This is the first monster confirmed dropping any Corroded Bronze piece, even though the full 18-piece set was already in items.json from an earlier reference table."
+  },
+  {
+    "name": "a Dustrend foot soldier",
+    "slug": "a-dustrend-foot-soldier",
+    "drops": [
+      { "item": "Corroded Bronze Longsword" },
+      { "item": "Corroded Bronze Chain Mask" },
+      { "item": "Corroded Bronze Shortsword" },
+      { "item": "Corroded Bronze Scythe" },
+      { "item": "Corroded Bronze Battle Axe" },
+      { "item": "Corroded Bronze Axe" },
+      { "item": "Corroded Bronze Dagger" },
+      { "item": "Corroded Bronze Trident" },
+      { "item": "Corroded Bronze Maul" },
+      { "item": "Corroded Bronze Great Scythe" },
+      { "item": "Corroded Bronze Scimitar" },
+      { "item": "Corroded Bronze Greatsword" },
+      { "item": "Corroded Bronze Long Spear" },
+      { "item": "Corroded Bronze Tower Shield" },
+      { "item": "Corroded Bronze Kite Shield" },
+      { "item": "Corroded Bronze Plate Collar" },
+      { "item": "Corroded Bronze Plate Boots" },
+      { "item": "Corroded Bronze Chain Gloves" },
+      { "item": "Corroded Bronze Chain Waistguard" }
+    ],
+    "rumor": "No map confirmed yet for this monster. Directly confirmed via loot-window screenshots: Corroded Bronze Longsword and Corroded Bronze Chain Mask (a newly-discovered 19th piece of the Corroded Bronze set, backfilled onto a Dustrend priest above too). Everything else in this drop list is inferred per the user's 2026-07-12 quality-set rule."
   }
 ]

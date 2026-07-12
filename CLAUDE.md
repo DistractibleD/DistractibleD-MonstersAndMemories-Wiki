@@ -770,8 +770,8 @@ drops at least one item from a recognized quality-set family.
 
 - A "quality set" is identified by a shared name prefix denoting a tier/material, not a
   literal in-game grouping — confirmed families so far: **Rusty** (weapons + Rusty Tower
-  Shield), **Tattered Cloth** (armor), **Tattered Rawhide** (armor). Treat a new shared
-  prefix as its own family the same way if one shows up.
+  Shield), **Tattered Cloth** (armor), **Tattered Rawhide** (armor), **Corroded Bronze**
+  (weapons + armor). Treat a new shared prefix as its own family the same way if one shows up.
   - Known Rusty pieces (18): Dagger, Shortsword, Throwing Dagger, Axe, Battle Axe, Scimitar,
     Scythe, Longsword, Spear, Long Spear, Trident, Mace, Warhammer, Great Scythe, War Lance,
     Greatsword, Maul, Tower Shield. "Long Spear" (added 2026-07-12, from "a smuggler"'s own
@@ -785,6 +785,13 @@ drops at least one item from a recognized quality-set family.
   - Known Tattered Rawhide pieces (7): Gorget, Belt, Mask, Gloves, Bracer, Boots, Vest. Gloves/
     Bracer/Boots/Vest were all added 2026-07-12, sourced from Toma the Two-Faced's and "a
     wererat"'s own loot-window screenshots.
+  - Known Corroded Bronze pieces (19): Shortsword, Scythe, Battle Axe, Longsword, Axe, Dagger,
+    Trident, Maul, Great Scythe, Scimitar, Greatsword, Long Spear, Tower Shield, Kite Shield,
+    Plate Collar, Plate Boots, Chain Gloves, Chain Waistguard, Chain Mask. The first 18 of
+    these were already in `items.json` from an earlier reference table, but no monster had
+    ever been confirmed dropping any of them until "a Dustrend priest"/"a Dustrend foot
+    soldier" (added 2026-07-12/13) — Chain Mask is the 19th piece, newly discovered from "a
+    Dustrend foot soldier"'s own loot window.
 - The backfill is **per-monster**, based on the *global* known roster of a family (not just
   what that one monster's own screenshots have shown) — if Monster A is newly confirmed
   dropping one Tattered Cloth piece, it gets every *other* Tattered Cloth piece already known
