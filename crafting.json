@@ -5646,7 +5646,8 @@
     "tradeskill": "Disenchanting",
     "components": [
       { "item": "Cinder Beetle Shield", "quantity": 1 }
-    ]
+    ],
+    "note": "Cinder Beetle Shield is no longer tagged MAGIC in-game and can no longer actually be disenchanted — kept here for reference, per the source table's own caveat."
   },
   {
     "name": "Enchanted Powder & Mote of Magic (x1-2 each)",

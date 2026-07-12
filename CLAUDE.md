@@ -347,14 +347,50 @@ into the recipe-card grid.
   numbers, but supersede it without hesitation if the user's own in-game observation ever
   disagrees.
 - **Rendering:** `renderGatheringNodes(container, tradeskillName)` in `script.js` — a
-  sortable/searchable table (Name/Min Skill/Trivial/Results/Location columns), same
-  structural pattern as `renderMonstersList`'s table rather than the recipe-card grid, since
-  a node has no image/components to justify a card. A node's `note` (when set) renders as its
-  own small row directly under it. Wired into the same navigation paths a normal tradeskill
-  already has — the tradeskill grid's card click, the header search box (`matchedGatheringNodes`,
-  a new "Gathering" results section), and the Crafting page's own quick search box — all
-  routed based on `tradeskill.category` so a gathering tradeskill lands on
-  `renderGatheringNodes` instead of `renderCraftingRecipes` wherever the two paths diverge.
+  sortable/searchable table, same structural pattern as `renderMonstersList`'s table rather
+  than the recipe-card grid, since a node has no image/components to justify a card. A node's
+  `note` (when set) renders as its own small row directly under it. Wired into the same
+  navigation paths a normal tradeskill already has — the tradeskill grid's card click, the
+  header search box (`matchedGatheringNodes`, a new "Gathering" results section), and the
+  Crafting page's own quick search box — all routed based on `tradeskill.category` so a
+  gathering tradeskill lands on `renderGatheringNodes` instead of `renderCraftingRecipes`
+  wherever the two paths diverge.
+- **Columns are derived per-tradeskill from the data, not fixed** (`gatheringColumns()` in
+  `script.js`) — Name and Min Skill always show; Trivial/Results/Rarity/Bait Required each
+  only appear if at least one node of that tradeskill actually uses that field. This is what
+  let Fishing (2026-07-13) show Rarity/Bait Required columns instead of Trivial/Results
+  without any further code change: `rarity` and `baitRequired` are two more optional
+  free-text fields on a node, first needed for Fishing's own source table (a Fishing Skill
+  Chart with Fish/Fishing Skill Required/Location/Rarity/Bait Required columns — no Trivial
+  or Results at all, unlike Mining/Lumberjacking). Extend the same way if a future tradeskill
+  needs a column none of the existing ones have.
+- **Herbalism** (2026-07-13) populated the same way from its own skill chart (Herb Name/Req
+  skill/Max skill/Location/Notes) — `Req skill`→`minSkill`, `Max skill`→`trivialSkill`, and
+  the table's own free-text "Notes" column (spawn conditions, sub-location detail like "In
+  Glass Flats at the large bone graveyard") maps straight onto the existing `note` field
+  rather than a new one, since it serves the same "extra context under the row" purpose. A
+  `>88`-style inexact range (Moonveil's trivial, shown as `"88>?>77"` on the source table)
+  gets the same treatment as a floor-only value: left unset, raw text preserved in `note`.
+  Herbalism's tradeskill `note` (in `tradeskills.json`) is the source page's own "Getting
+  Started" paragraph (trainer location, early-leveling herbs) — same idea as Lumberjacking's
+  equip-axe-and-right-click note, general how-to info rather than a specific node's data.
+- **Disenchanting is *not* a gathering tradeskill, despite the user asking (2026-07-13)
+  whether it should be one.** The distinction that matters: a gathering node consumes
+  nothing and only gates on skill (mine/chop/fish/harvest a world resource), while
+  Disenchanting consumes a specific MAGIC item (its card's own "Components" list) to
+  produce output — that's structurally an ordinary recipe, just running "backwards" (see
+  the existing Disenchanting tradeskill note), and it already lives in `crafting.json` as
+  12 ordinary-shaped recipes. Left as-is rather than moved. The same "Mechanics" screenshot
+  did add real info worth keeping: Disenchanting requires a Disenchanting Cube (placed in a
+  bag slot, MAGIC item + Combine), can fail and destroy the item with nothing gained, and the
+  resulting powder's quality/tier depends on the item disenchanted in some not-yet-understood
+  way — folded into Disenchanting's existing `tradeskills.json` note. The same source table
+  also flagged that "Cinder Beetle Shield" is no longer tagged MAGIC in-game and can't
+  actually be disenchanted anymore — recorded as a new optional per-recipe `note` field on
+  that one `crafting.json` entry (`disenchant-cinder-beetle-shield`) rather than removing the
+  recipe, since it's still useful historical/reference data. `renderRecipeCardHTML` renders
+  `recipe.note` (when set) as an italic line at the bottom of the card, right after
+  Components — extend this same field to any other recipe that needs a similar caveat.
 
 ### Tanning is different: no recipes, just vat processing (2026-07-06)
 

@@ -2029,6 +2029,7 @@ function renderRecipeCardHTML(recipe) {
         ${fields.length ? `<div class="item-card-grid">${fields.map(f => `<div class="item-card-field"><span class="item-card-field-label">${f.label}</span><span>${f.value}</span></div>`).join('')}</div>` : ''}
         ${flavor.length ? `<div class="item-card-section item-card-section-flavor">${flavor.map(escapeAttr).join('<br><br>')}</div>` : ''}
         ${componentsHtml}
+        ${recipe.note ? `<div class="item-card-section"><em>${escapeAttr(recipe.note)}</em></div>` : ''}
       </div>
     </div>
   `;
@@ -2180,6 +2181,8 @@ function gatheringNodeSearchHaystack(node) {
     node.name,
     (node.results || []).join(' '),
     (node.locations || []).join(' '),
+    node.rarity || '',
+    node.baitRequired || '',
     node.note || ''
   ].join(' ').toLowerCase();
 }
@@ -2194,9 +2197,65 @@ function gatheringNodeSearchHaystack(node) {
 // actually yields — is optional; only Lumberjacking's source table listed
 // it explicitly (2026-07-13), Mining's didn't, so most Mining rows just omit
 // it rather than guessing (see gathering-nodes.json).
+// The extra columns beyond Name/Min Skill/Location vary by tradeskill —
+// Mining has neither Trivial-for-every-row nor Results, Lumberjacking has
+// Trivial+Results, Fishing has Rarity+Bait Required instead of either. Rather
+// than hard-code one fixed column set, the columns actually shown are derived
+// from whichever optional fields any node of this tradeskill actually uses —
+// same "derive from data, no code change needed for the next tradeskill"
+// philosophy as the Item Database's filter dropdowns.
+function gatheringColumns(nodes) {
+  const columns = [
+    { key: 'name', label: 'Name', sortable: true, colClass: 'col-gathering-name' },
+    { key: 'minSkill', label: 'Min Skill', sortable: true, colClass: 'col-gathering-skill' }
+  ];
+  if (nodes.some(n => n.trivialSkill != null)) {
+    columns.push({ key: 'trivialSkill', label: 'Trivial', sortable: true, colClass: 'col-gathering-skill' });
+  }
+  if (nodes.some(n => n.results && n.results.length)) {
+    columns.push({ key: 'results', label: 'Results', sortable: false, colClass: 'col-gathering-results' });
+  }
+  if (nodes.some(n => n.rarity)) {
+    columns.push({ key: 'rarity', label: 'Rarity', sortable: false, colClass: 'col-gathering-rarity' });
+  }
+  if (nodes.some(n => n.baitRequired)) {
+    columns.push({ key: 'baitRequired', label: 'Bait Required', sortable: false, colClass: 'col-gathering-bait' });
+  }
+  columns.push({ key: 'locations', label: 'Location', sortable: false, colClass: 'col-gathering-location' });
+  return columns;
+}
+
+function gatheringCellHTML(node, key) {
+  switch (key) {
+    case 'name':
+      return `<td data-label="Name">${escapeAttr(node.name)}</td>`;
+    case 'minSkill':
+    case 'trivialSkill':
+      return `<td data-label="${key === 'minSkill' ? 'Min Skill' : 'Trivial'}"${node[key] == null ? ' class="cell-empty"' : ''}>${node[key] != null ? node[key] : '?'}</td>`;
+    case 'results':
+      return `<td data-label="Results"${!(node.results && node.results.length) ? ' class="cell-empty"' : ''}>${
+        (node.results || []).map(r => {
+          const m = findItemByName(r);
+          return m
+            ? `<a href="#" class="item-name-hover gathering-result-link" data-alt="${escapeAttr(m.name)}" data-item="${escapeAttr(m.name)}">${escapeAttr(r)}</a>`
+            : escapeAttr(r);
+        }).join(', ') || '—'
+      }</td>`;
+    case 'rarity':
+      return `<td data-label="Rarity"${!node.rarity ? ' class="cell-empty"' : ''}>${escapeAttr(node.rarity || '—')}</td>`;
+    case 'baitRequired':
+      return `<td data-label="Bait Required"${!node.baitRequired ? ' class="cell-empty"' : ''}>${escapeAttr(node.baitRequired || '—')}</td>`;
+    case 'locations':
+      return `<td data-label="Location"${!(node.locations && node.locations.length) ? ' class="cell-empty"' : ''}>${escapeAttr((node.locations || []).join('; ')) || '—'}</td>`;
+    default:
+      return '<td></td>';
+  }
+}
+
 function renderGatheringNodes(container, tradeskillName) {
   const tradeskill = tradeskillsData.find(ts => ts.name === tradeskillName);
   const allNodes = gatheringData.filter(n => n.tradeskill === tradeskillName);
+  const columns = gatheringColumns(allNodes);
 
   container.innerHTML = `
     <p><a href="#" id="gathering-back-link">&larr; All tradeskills</a></p>
@@ -2215,19 +2274,14 @@ function renderGatheringNodes(container, tradeskillName) {
             <div class="items-table-wrap">
               <table class="items-table">
                 <colgroup>
-                  <col class="col-gathering-name">
-                  <col class="col-gathering-skill">
-                  <col class="col-gathering-skill">
-                  <col class="col-gathering-results">
-                  <col class="col-gathering-location">
+                  ${columns.map(c => `<col class="${c.colClass}">`).join('')}
                 </colgroup>
                 <thead>
                   <tr>
-                    <th data-sort-key="name" class="sortable">Name</th>
-                    <th data-sort-key="minSkill" class="sortable">Min Skill</th>
-                    <th data-sort-key="trivialSkill" class="sortable">Trivial</th>
-                    <th>Results</th>
-                    <th>Location</th>
+                    ${columns.map(c => c.sortable
+                      ? `<th data-sort-key="${c.key}" class="sortable">${c.label}</th>`
+                      : `<th>${c.label}</th>`
+                    ).join('')}
                   </tr>
                 </thead>
                 <tbody id="gathering-tbody"></tbody>
@@ -2249,6 +2303,7 @@ function renderGatheringNodes(container, tradeskillName) {
   const tbody = container.querySelector('#gathering-tbody');
   const countEl = container.querySelector('#gathering-count');
   const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
+  const columnCount = columns.length;
 
   let sortKey = 'minSkill';
   let sortDir = 'asc';
@@ -2280,25 +2335,14 @@ function renderGatheringNodes(container, tradeskillName) {
 
   function renderRows(nodes) {
     if (!nodes.length) {
-      tbody.innerHTML = `<tr><td colspan="5" class="items-empty">No nodes match your search.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="${columnCount}" class="items-empty">No nodes match your search.</td></tr>`;
       return;
     }
     tbody.innerHTML = nodes.map(node => `
       <tr>
-        <td data-label="Name">${escapeAttr(node.name)}</td>
-        <td data-label="Min Skill"${node.minSkill == null ? ' class="cell-empty"' : ''}>${node.minSkill != null ? node.minSkill : '?'}</td>
-        <td data-label="Trivial"${node.trivialSkill == null ? ' class="cell-empty"' : ''}>${node.trivialSkill != null ? node.trivialSkill : '?'}</td>
-        <td data-label="Results"${!(node.results && node.results.length) ? ' class="cell-empty"' : ''}>${
-          (node.results || []).map(r => {
-            const m = findItemByName(r);
-            return m
-              ? `<a href="#" class="item-name-hover gathering-result-link" data-alt="${escapeAttr(m.name)}" data-item="${escapeAttr(m.name)}">${escapeAttr(r)}</a>`
-              : escapeAttr(r);
-          }).join(', ') || '—'
-        }</td>
-        <td data-label="Location"${!(node.locations && node.locations.length) ? ' class="cell-empty"' : ''}>${escapeAttr((node.locations || []).join('; ')) || '—'}</td>
+        ${columns.map(c => gatheringCellHTML(node, c.key)).join('')}
       </tr>
-      ${node.note ? `<tr class="gathering-note-row"><td colspan="5"><em>${escapeAttr(node.note)}</em></td></tr>` : ''}
+      ${node.note ? `<tr class="gathering-note-row"><td colspan="${columnCount}"><em>${escapeAttr(node.note)}</em></td></tr>` : ''}
     `).join('');
 
     tbody.querySelectorAll('.gathering-result-link').forEach(link => {

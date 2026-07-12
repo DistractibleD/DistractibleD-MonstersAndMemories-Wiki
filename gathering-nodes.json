@@ -230,5 +230,230 @@
     "results": ["Whisperpine Wood", "Resin"],
     "locations": ["Keeper's Bight"],
     "note": "Trivial only given as a floor on the source table: \"110+\"."
+  },
+  {
+    "name": "Raw Whitefish",
+    "slug": "raw-whitefish",
+    "tradeskill": "Fishing",
+    "minSkill": 1,
+    "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
+    "rarity": "Common",
+    "baitRequired": "No at fishing skill 50"
+  },
+  {
+    "name": "Raw Basa",
+    "slug": "raw-basa",
+    "tradeskill": "Fishing",
+    "minSkill": 1,
+    "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
+    "rarity": "Uncommon",
+    "baitRequired": "No"
+  },
+  {
+    "name": "Raw Grouper",
+    "slug": "raw-grouper",
+    "tradeskill": "Fishing",
+    "minSkill": 1,
+    "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
+    "rarity": "Uncommon",
+    "baitRequired": "No at fishing skill 75"
+  },
+  {
+    "name": "Raw Bay Crab",
+    "slug": "raw-bay-crab",
+    "tradeskill": "Fishing",
+    "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
+    "rarity": "Rare",
+    "baitRequired": "?",
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+  },
+  {
+    "name": "Raw Thorn Sturgeon",
+    "slug": "raw-thorn-sturgeon",
+    "tradeskill": "Fishing",
+    "locations": ["Night Harbor", "Evershade Weald"],
+    "rarity": "Very Rare",
+    "baitRequired": "?",
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+  },
+  {
+    "name": "Raw Tide Minnow",
+    "slug": "raw-tide-minnow",
+    "tradeskill": "Fishing",
+    "locations": ["Shallow Shoals"],
+    "baitRequired": "No at fishing skill 100",
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+  },
+  {
+    "name": "Deep Sea Devourer",
+    "slug": "deep-sea-devourer",
+    "tradeskill": "Fishing",
+    "locations": ["Shallow Shoals"],
+    "rarity": "Very Rare",
+    "baitRequired": "?",
+    "note": "Fishing skill required only given as an uncertain value on the source table: \"95?\"."
+  },
+  {
+    "name": "Lionleaf",
+    "slug": "lionleaf",
+    "tradeskill": "Herbalism",
+    "minSkill": 1,
+    "trivialSkill": 15,
+    "locations": ["Evershade Weald", "Night Harbor", "Shaded Dunes"]
+  },
+  {
+    "name": "Ghost Poppy",
+    "slug": "ghost-poppy",
+    "tradeskill": "Herbalism",
+    "minSkill": 1,
+    "trivialSkill": 20,
+    "locations": ["Night Harbor", "Shaded Dunes", "Evershade Weald", "Sungreet Strand"]
+  },
+  {
+    "name": "Selstie Kelp",
+    "slug": "selstie-kelp",
+    "tradeskill": "Herbalism",
+    "minSkill": 1,
+    "locations": ["Evershade Weald"],
+    "note": "Needed for the Bard Starter Quest (Faelindral); no observed skill-ups from harvesting. Trivial only given as a floor on the source table: \">20\"."
+  },
+  {
+    "name": "Sylvine",
+    "slug": "sylvine",
+    "tradeskill": "Herbalism",
+    "minSkill": 1,
+    "trivialSkill": 30,
+    "locations": ["Evershade Weald"]
+  },
+  {
+    "name": "Nomad's Grace",
+    "slug": "nomads-grace",
+    "tradeskill": "Herbalism",
+    "minSkill": 10,
+    "trivialSkill": 45,
+    "locations": ["Evershade Weald", "Shaded Dunes", "Sungreet Strand"]
+  },
+  {
+    "name": "Whispering Sage",
+    "slug": "whispering-sage",
+    "tradeskill": "Herbalism",
+    "minSkill": 15,
+    "trivialSkill": 65,
+    "locations": ["Evershade Weald", "Shaded Dunes"]
+  },
+  {
+    "name": "Ironroot",
+    "slug": "ironroot",
+    "tradeskill": "Herbalism",
+    "minSkill": 30,
+    "trivialSkill": 80,
+    "locations": ["Shaded Dunes", "Sungreet Strand"]
+  },
+  {
+    "name": "Moonveil",
+    "slug": "moonveil",
+    "tradeskill": "Herbalism",
+    "minSkill": 35,
+    "locations": ["Evershade Weald", "Keeper's Bight", "Shallow Shoals"],
+    "note": "Only spawns at night, at 6pm in-game. Trivial is somewhere between 77 and 88 (exact value unknown) — shown as \"88>?>77\" on the source table."
+  },
+  {
+    "name": "Stranglevine",
+    "slug": "stranglevine",
+    "tradeskill": "Herbalism",
+    "minSkill": 55,
+    "trivialSkill": 105,
+    "locations": ["Fallen Pass"]
+  },
+  {
+    "name": "Duneleaf",
+    "slug": "duneleaf",
+    "tradeskill": "Herbalism",
+    "minSkill": 90,
+    "trivialSkill": 140,
+    "locations": ["Shaded Dunes", "Sungreet Strand"]
+  },
+  {
+    "name": "Gadolvine",
+    "slug": "gadolvine",
+    "tradeskill": "Herbalism",
+    "minSkill": 80,
+    "trivialSkill": 125,
+    "locations": ["Fallen Pass", "Shallow Shoals"],
+    "note": "In the water at Southern Beach, near invisible Smuggler Lookouts."
+  },
+  {
+    "name": "Dragon's Vigil",
+    "slug": "dragons-vigil",
+    "tradeskill": "Herbalism",
+    "minSkill": 110,
+    "trivialSkill": 160,
+    "locations": ["Evershade Weald", "Keeper's Bight"]
+  },
+  {
+    "name": "Stygian Moss",
+    "slug": "stygian-moss",
+    "tradeskill": "Herbalism",
+    "minSkill": 125,
+    "trivialSkill": 175,
+    "locations": ["Sungreet Strand", "Fallen Pass"],
+    "note": "In the dwarven caves for Sungreet Strand, in the undead caves for Fallen Pass."
+  },
+  {
+    "name": "Shadeshroom",
+    "slug": "shadeshroom",
+    "tradeskill": "Herbalism",
+    "minSkill": 160,
+    "trivialSkill": 210,
+    "locations": ["Fallen Pass"]
+  },
+  {
+    "name": "Magebloom",
+    "slug": "magebloom",
+    "tradeskill": "Herbalism",
+    "minSkill": 150,
+    "trivialSkill": 200,
+    "locations": ["Shaded Dunes", "Fallen Pass", "Glass Flats"]
+  },
+  {
+    "name": "Last Breath",
+    "slug": "last-breath",
+    "tradeskill": "Herbalism",
+    "minSkill": 170,
+    "trivialSkill": 220,
+    "locations": ["Fallen Pass", "Glass Flats"],
+    "note": "In Glass Flats at the large bone graveyard."
+  },
+  {
+    "name": "Witherweed",
+    "slug": "witherweed",
+    "tradeskill": "Herbalism",
+    "minSkill": 185,
+    "trivialSkill": 235,
+    "locations": ["Glass Flats"]
+  },
+  {
+    "name": "Ethtongue",
+    "slug": "ethtongue",
+    "tradeskill": "Herbalism",
+    "minSkill": 200,
+    "trivialSkill": 250,
+    "locations": ["Shallow Shoals", "Scarwood"]
+  },
+  {
+    "name": "Phoenix Flower",
+    "slug": "phoenix-flower",
+    "tradeskill": "Herbalism",
+    "minSkill": 215,
+    "trivialSkill": 265,
+    "locations": ["Fallen Pass", "Glass Flats"]
+  },
+  {
+    "name": "Flamestalk",
+    "slug": "flamestalk",
+    "tradeskill": "Herbalism",
+    "trivialSkill": 250,
+    "locations": ["Vale of Zintar"],
+    "note": "In Giant City. Min skill given only as an uncertain value on the source table: \"250?\"."
   }
 ]
