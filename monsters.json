@@ -989,6 +989,8 @@
   {
     "name": "a Dustrend priest",
     "slug": "a-dustrend-priest",
+    "image": "images/Monsters/a-dustrend-priest.jpg",
+    "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Corroded Bronze Axe" },
       { "item": "Corroded Bronze Scythe" },
@@ -1010,7 +1012,7 @@
       { "item": "Corroded Bronze Chain Waistguard" },
       { "item": "Corroded Bronze Chain Mask" }
     ],
-    "rumor": "No map confirmed yet for this monster. Directly confirmed via loot-window screenshots: Corroded Bronze Axe and Corroded Bronze Scythe. Everything else in this drop list is inferred — per the user's 2026-07-12 quality-set rule, once a monster is confirmed dropping one piece of a quality set (here, the Corroded Bronze weapon/armor tier), it's assumed to be able to drop any other known piece of that same set. This is the first monster confirmed dropping any Corroded Bronze piece, even though the full 18-piece set was already in items.json from an earlier reference table."
+    "rumor": "Directly confirmed via loot-window screenshots: Corroded Bronze Axe and Corroded Bronze Scythe. Everything else in this drop list is inferred — per the user's 2026-07-12 quality-set rule, once a monster is confirmed dropping one piece of a quality set (here, the Corroded Bronze weapon/armor tier), it's assumed to be able to drop any other known piece of that same set. This is the first monster confirmed dropping any Corroded Bronze piece, even though the full 18-piece set was already in items.json from an earlier reference table."
   },
   {
     "name": "a Dustrend foot soldier",
