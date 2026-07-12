@@ -23,7 +23,11 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
+  /* Same splash-screen art, kept as a faint fixed backdrop behind the whole
+     site (not just the splash) — a near-opaque --bg wash over it keeps it
+     from competing with sidebar/content readability, since .site-header and
+     .content already have their own solid panels on top of this. */
+  background: linear-gradient(rgba(20, 21, 26, 0.94), rgba(20, 21, 26, 0.94)), url('images/splash-hero.jpg') center/cover fixed no-repeat;
   color: var(--text);
   font-family: 'Inter', system-ui, sans-serif;
   line-height: 1.6;
