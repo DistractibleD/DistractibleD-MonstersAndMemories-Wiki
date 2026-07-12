@@ -171,6 +171,20 @@ html, body {
   border-left: 2px solid var(--accent);
   color: var(--accent);
 }
+/* A single-page category whose page title just repeats the category name
+   (see buildSidebar in script.js) collapses into one heading-styled link —
+   same uppercase/small-caps look as .sidebar-category, but interactive. */
+.sidebar-category-link {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin: 20px 0 8px;
+}
+.sidebar-category-link:first-child { margin-top: 0; }
+.sidebar-category-link:hover { color: var(--accent); }
 
 /* ---------- Content ---------- */
 .content {

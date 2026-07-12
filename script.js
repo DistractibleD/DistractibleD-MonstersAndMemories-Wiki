@@ -187,12 +187,32 @@ function buildSidebar(pages) {
   }
 
   for (const cat of Object.keys(categories)) {
+    const pagesInCat = categories[cat];
+
+    // A category holding exactly one page whose title just repeats the
+    // category name (e.g. "Maps" -> "Maps") reads as a redundant stacked
+    // label — collapse it into a single clickable heading-styled link
+    // instead. Categories that actually group more than one page (or whose
+    // single page has a distinct title, like "Getting Started" -> "Welcome")
+    // keep the normal heading + link(s) layout.
+    if (pagesInCat.length === 1 && pagesInCat[0].title === cat) {
+      const page = pagesInCat[0];
+      const link = document.createElement('a');
+      link.href = '#' + page.file;
+      link.className = 'sidebar-link sidebar-category-link';
+      link.textContent = cat;
+      link.dataset.file = page.file;
+      link.addEventListener('click', () => loadPage(page.file));
+      sidebar.appendChild(link);
+      continue;
+    }
+
     const heading = document.createElement('div');
     heading.className = 'sidebar-category';
     heading.textContent = cat;
     sidebar.appendChild(heading);
 
-    for (const page of categories[cat]) {
+    for (const page of pagesInCat) {
       const link = document.createElement('a');
       link.href = '#' + page.file;
       link.className = 'sidebar-link';
