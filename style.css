@@ -1221,6 +1221,12 @@ body:not(.site-entered) .sidebar {
   border-radius: 4px;
   padding: 1px 5px;
 }
+.site-footer a {
+  color: var(--accent);
+}
+.site-footer a:hover {
+  text-decoration: none;
+}
 
 /* ---------- Mobile ---------- */
 @media (max-width: 780px) {
