@@ -1,0 +1,28 @@
+name: Wiki Submission
+description: Submit a screenshot for the Monsters and Memories wiki (item, monster, map, or recipe)
+title: "[Submission] "
+labels: ["submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing! This won't go live automatically — every submission is
+        reviewed before anything is added to the wiki.
+
+        Please submit **one screenshot per issue**: an item card, a monster picture, a map,
+        a recipe card, or similar. Click into the box below and drag-and-drop (or paste)
+        your image — GitHub will attach it automatically.
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Drag and drop (or paste) your screenshot here.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes (optional)
+      description: Any extra context — which map/zone this is from, the monster's name if it's not shown on screen, etc.
+    validations:
+      required: false
