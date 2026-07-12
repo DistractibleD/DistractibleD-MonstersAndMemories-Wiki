@@ -1267,19 +1267,57 @@ past the session.
 The user is non-technical and relies on Claude to commit and push. Changes are not pushed
 automatically — wait for an explicit request (e.g. "push") before running `git push`.
 
-## Community submissions (2026-07-12)
+## Community submissions (2026-07-12, redesigned same day)
 
-Visitors can submit a screenshot for review via a GitHub Issue using the "Wiki Submission"
-template (`.github/ISSUE_TEMPLATE/wiki-submission.yml`) — one screenshot + optional notes,
-same shape as what the user already posts directly in chat. A GitHub Action
-(`.github/workflows/wiki-submission.yml`) runs on every new issue carrying the
-auto-applied `submission` label: it pulls any drag-and-dropped image(s) out of the issue
-body and opens a pull request that adds them to `images/Inbox/` — it never commits to
-`main` directly. **Merging the PR is the accept, closing it (without merging) is the
-deny** — either way nothing on the live site changes until a human decides, and a merged
-submission still just lands in the inbox to go through the normal "check inbox" workflow
-above, exactly like a screenshot the user posted directly. This was deliberately kept to
-the mechanical part only (moving the image into the repo) — no LLM call, no API key, no
-auto-generated JSON — so it's cheap to run and easy to reason about; extending it to also
-draft the actual `items.json`/`monsters.json` entry automatically would be a future,
-separate step if ever wanted.
+**Visitors submit through a real form directly on the wiki — never linked out to GitHub,
+never need a GitHub account.** This replaced an earlier version (a GitHub Issue template +
+Action) that the user rejected specifically because it sent visitors to github.com and
+required them to have an account — "most users will just give up if they have to navigate
+something complicated." The Issue template/Action from that first version were removed
+entirely rather than left alongside the new one, to avoid two parallel, confusing systems.
+
+- **`pages.json`** has a `"Submit a Screenshot"` entry, `"type": "submit"`, in its own
+  `"Contribute"` sidebar category — same `type`-driven routing as Items/Maps/Crafting/
+  Monsters/Companions (`loadPage` in `script.js`), just narrower reading-width rather than
+  `content-wide` since a form doesn't need the full page.
+- **`renderSubmitPage(container)`** in `script.js` builds the actual form: a drag-and-drop/
+  click-to-browse screenshot field with a live preview, an optional notes textarea, a
+  honeypot field hidden via CSS (`.submit-honeypot`, off-screen rather than
+  `display:none` — a real bot-filtering technique, not just a stray unused field), and a
+  submit button that POSTs a `FormData` (image + notes + honeypot value) straight to a
+  Cloudflare Worker via `fetch`. Client-side error handling distinguishes a real API-
+  provided error message from a raw network/fetch failure — the latter never shows the
+  browser's own wording (e.g. "Failed to fetch") to a non-technical visitor, always a
+  friendly fallback instead.
+- **Why a Worker at all:** GitHub Pages only serves static files — it cannot run any code,
+  so it can't hold the GitHub token needed to open a pull request. A token embedded in the
+  page's own JavaScript would be visible to anyone via dev tools, which would let a
+  stranger do anything that token can do to the repo. A small serverless function is the
+  minimum piece of infrastructure that can hold that secret safely while still giving
+  visitors a form that lives entirely on the wiki.
+- **`cloudflare-worker/submit-worker.js`** is that function — not deployed by GitHub Pages
+  at all (kept in the repo purely for reference/version history/diffing). To actually
+  deploy or update it, its contents get pasted into the Worker's own editor in the
+  Cloudflare dashboard. It receives the form's `FormData`, validates the file (type/size)
+  and checks the honeypot, then uses the GitHub REST API (with a `GITHUB_TOKEN` stored as a
+  Worker *secret*, never a plain variable) to create a branch, commit the screenshot into
+  `images/Inbox/`, and open a pull request — it never commits to `main` directly. **Merging
+  that PR is the accept, closing it (without merging) is the deny** — either way nothing on
+  the live site changes until a human decides, and a merged submission still just lands in
+  the inbox to go through the normal "check inbox" workflow above, exactly like a
+  screenshot the user posts directly.
+- **`SUBMIT_WORKER_URL`** (top of the Submit-a-Screenshot section in `script.js`) is left
+  empty (`''`) until the Worker is actually deployed — the page detects this and shows a
+  plain "not set up yet" notice instead of a broken/silently-failing form. This is a
+  one-line edit once the real `workers.dev` URL exists; don't guess or invent a URL here.
+- **Setup that has to happen outside this repo** (the site owner's one-time cost, not
+  something to build here): a free Cloudflare account, pasting the Worker script in via
+  their dashboard, minting a GitHub fine-grained Personal Access Token scoped to *only* this
+  repo (Contents + Pull requests, read/write) and saving it as the Worker's `GITHUB_TOKEN`
+  secret, then copying the deployed Worker's URL into `SUBMIT_WORKER_URL`. None of this is
+  something Claude can do on the user's behalf — creating third-party accounts and minting
+  auth tokens are both outside what an assistant should do unattended.
+- Kept deliberately mechanical, same as the version it replaced — no LLM call, no
+  auto-generated JSON, just moving the screenshot into the repo safely. Extending it to
+  also draft the actual `items.json`/`monsters.json` entry automatically would be a future,
+  separate step if ever wanted.

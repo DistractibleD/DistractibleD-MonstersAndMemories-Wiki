@@ -228,6 +228,8 @@ async function loadPage(file) {
       await renderMonstersPage(contentInner, file);
     } else if (page && page.type === 'companions') {
       await renderCompanionsPage(contentInner);
+    } else if (page && page.type === 'submit') {
+      renderSubmitPage(contentInner);
     } else {
       const res = await fetch('pages/' + file);
       if (!res.ok) throw new Error('Page not found');
@@ -2898,6 +2900,147 @@ async function renderCompanionsPage(container) {
       card.addEventListener('animationend', () => card.classList.remove('card-flash'), { once: true });
     }
   }
+}
+
+/* ============================================
+   Submit a Screenshot
+   A plain on-wiki form — visitors never see GitHub or need an account. The
+   form POSTs directly to a small Cloudflare Worker (see
+   cloudflare-worker/submit-worker.js), which is the only piece of this
+   feature GitHub Pages itself can't host, since Pages can only serve static
+   files and can't safely hold the GitHub token needed to open a pull
+   request. The Worker adds the screenshot to images/Inbox/ on a new branch
+   and opens a PR — merging it is the accept, closing it is the deny, and
+   the live site never changes until that decision is made (same "check
+   inbox" workflow as any other screenshot once merged).
+   ============================================ */
+
+// Set this to your deployed Worker's URL (Cloudflare dashboard -> your
+// worker -> the "workers.dev" URL shown at the top) once you've deployed
+// cloudflare-worker/submit-worker.js. Until then the form shows a clear
+// "not set up yet" message instead of silently failing.
+const SUBMIT_WORKER_URL = 'https://muddy-bar-88a7.mnm-wiki.workers.dev';
+
+function renderSubmitPage(container) {
+  container.innerHTML = `
+    <h1>Submit a Screenshot</h1>
+    <p>Found something not on the wiki yet? Attach one screenshot below — an item card, a
+    monster picture, a map, a recipe card, anything from the game. It won't appear on the
+    wiki automatically; every submission is reviewed first.</p>
+    ${!SUBMIT_WORKER_URL ? `
+      <p class="submit-form-notice">This form isn't finished being set up yet (no Worker URL
+      configured), so submissions can't be sent right now. Come back soon!</p>
+    ` : `
+      <form id="submit-form" class="submit-form">
+        <label class="submit-drop-zone" id="submit-drop-zone" for="submit-file-input">
+          <div id="submit-drop-zone-empty">
+            <strong>Click to choose a screenshot</strong>
+            <span>or drag and drop it here</span>
+          </div>
+          <div id="submit-drop-zone-preview" class="submit-drop-zone-preview" hidden>
+            <img id="submit-preview-img" alt="Selected screenshot preview">
+            <span id="submit-preview-name"></span>
+          </div>
+        </label>
+        <input type="file" id="submit-file-input" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+
+        <label for="submit-notes">Notes (optional)</label>
+        <textarea id="submit-notes" rows="3" placeholder="Which map/zone is this from? What's the monster's name if it's not shown? Anything else worth knowing." maxlength="2000"></textarea>
+
+        <!-- Honeypot: hidden from real visitors via CSS, so anything that fills it in is a bot. -->
+        <div class="submit-honeypot" aria-hidden="true">
+          <label for="submit-website">Leave this field blank</label>
+          <input type="text" id="submit-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button type="submit" id="submit-button">Submit</button>
+        <p id="submit-status" class="submit-status" role="status"></p>
+      </form>
+    `}
+  `;
+
+  if (!SUBMIT_WORKER_URL) return;
+
+  const form = container.querySelector('#submit-form');
+  const dropZone = container.querySelector('#submit-drop-zone');
+  const fileInput = container.querySelector('#submit-file-input');
+  const emptyState = container.querySelector('#submit-drop-zone-empty');
+  const previewState = container.querySelector('#submit-drop-zone-preview');
+  const previewImg = container.querySelector('#submit-preview-img');
+  const previewName = container.querySelector('#submit-preview-name');
+  const notesBox = container.querySelector('#submit-notes');
+  const button = container.querySelector('#submit-button');
+  const status = container.querySelector('#submit-status');
+
+  function showPreview(file) {
+    const url = URL.createObjectURL(file);
+    previewImg.src = url;
+    previewName.textContent = `${file.name} (${(file.size / 1024).toFixed(0)} KB)`;
+    emptyState.hidden = true;
+    previewState.hidden = false;
+  }
+
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files[0]) showPreview(fileInput.files[0]);
+  });
+
+  ['dragover', 'dragleave', 'drop'].forEach(evt => {
+    dropZone.addEventListener(evt, e => e.preventDefault());
+  });
+  dropZone.addEventListener('dragover', () => dropZone.classList.add('submit-drop-zone-active'));
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('submit-drop-zone-active'));
+  dropZone.addEventListener('drop', e => {
+    dropZone.classList.remove('submit-drop-zone-active');
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      fileInput.files = e.dataTransfer.files;
+      showPreview(file);
+    }
+  });
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const file = fileInput.files[0];
+    if (!file) {
+      status.textContent = 'Please choose a screenshot first.';
+      status.className = 'submit-status submit-status-error';
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('screenshot', file);
+    formData.append('notes', notesBox.value);
+    formData.append('website', container.querySelector('#submit-website').value);
+
+    button.disabled = true;
+    status.textContent = 'Submitting...';
+    status.className = 'submit-status';
+
+    // Only a real, API-provided error message (from a JSON response) is
+    // shown verbatim — a raw network/CORS failure (e.g. the browser's own
+    // "Failed to fetch") is never surfaced to the visitor as-is, since
+    // that's meaningless to a non-technical reader.
+    let friendlyError = null;
+    try {
+      const res = await fetch(SUBMIT_WORKER_URL, { method: 'POST', body: formData });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.error) {
+        friendlyError = data.error || 'Submission failed — please try again.';
+      } else {
+        form.hidden = true;
+        const thanks = document.createElement('p');
+        thanks.className = 'submit-status submit-status-success';
+        thanks.textContent = 'Thanks! Your screenshot has been submitted for review.';
+        form.insertAdjacentElement('afterend', thanks);
+        return;
+      }
+    } catch (err) {
+      friendlyError = 'Could not reach the submission service — please check your connection and try again.';
+    }
+    status.textContent = friendlyError;
+    status.className = 'submit-status submit-status-error';
+    button.disabled = false;
+  });
 }
 
 init();
