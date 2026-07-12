@@ -42,8 +42,9 @@
   {
     "name": "a crypt scarab",
     "slug": "a-crypt-scarab",
+    "image": "images/Monsters/a-crypt-scarab.jpg",
     "maps": ["Night Harbor"],
-    "areas": ["Necropolis"],
+    "areas": ["Necropolis", "North Gate"],
     "drops": [
       { "item": "Crypt Scarab Leg" }
     ]
@@ -83,6 +84,7 @@
       { "item": "Tattered Cloth Bracer" },
       { "item": "Tattered Cloth Boots" },
       { "item": "Tattered Cloth Robe" },
+      { "item": "Tattered Cloth Veil" },
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" },
       { "item": "Shattered Skeleton Femur" }
@@ -102,7 +104,8 @@
       { "item": "Tattered Cloth Gloves" },
       { "item": "Tattered Cloth Bracer" },
       { "item": "Tattered Cloth Boots" },
-      { "item": "Tattered Cloth Robe" }
+      { "item": "Tattered Cloth Robe" },
+      { "item": "Tattered Cloth Veil" }
     ],
     "rumor": "The Tattered Cloth pieces beyond Gorget are inferred, not directly screenshot-confirmed for this monster — per the user's 2026-07-12 rule, a monster confirmed dropping one piece of a quality set is assumed to be able to drop any other known piece of that same set."
   },
@@ -132,9 +135,12 @@
   {
     "name": "a sly farmhand",
     "slug": "a-sly-farmhand",
+    "image": "images/Monsters/a-sly-farmhand.jpg",
+    "maps": ["Sungreet Strand"],
     "drops": [
       { "item": "Corroded Bronze Kite Shield" }
-    ]
+    ],
+    "rumor": "Map inferred from batch timing — this screenshot arrived right after a run of other Sungreet Strand monster pictures, but no filename/chat text explicitly named the zone for this one specifically."
   },
   {
     "name": "a bone carver",
@@ -155,6 +161,7 @@
       { "item": "Tattered Cloth Bracer" },
       { "item": "Tattered Cloth Boots" },
       { "item": "Tattered Cloth Robe" },
+      { "item": "Tattered Cloth Veil" },
       { "item": "Ashira Warrior Pelt" },
       { "item": "Ashira Warrior Necklace" },
       { "item": "Ashira Warrior Bracer" },
@@ -190,7 +197,7 @@
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" }
     ],
-    "rumor": "Directly confirmed via loot-window screenshots: Raw Ashira Meat, Tattered Cloth Cap, Tattered Cloth Pantaloons, Tattered Cloth Boots, Ashira Warrior Pelt, Ashira Warrior Necklace, Ashira Warrior Bracer, Onion, Garlic, Cabbage, Tattered Rawhide Gorget, Tattered Rawhide Belt, Worn Buckler, Worn Bow, Torch, Rusty Warhammer, and Rusty Axe. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Rusty weapons via Warhammer/Axe, Tattered Cloth via Cap/Pantaloons/Boots, Tattered Rawhide via Gorget/Belt), it's assumed to be able to drop any other known piece of that same set. Tattered Rawhide Gloves/Bracer/Boots/Vest and Rusty Long Spear are newly-discovered pieces of those quality sets (via a smuggler/a wererat's own loot windows, 2026-07-12) backfilled in here too."
+    "rumor": "Directly confirmed via loot-window screenshots: Raw Ashira Meat, Tattered Cloth Cap, Tattered Cloth Pantaloons, Tattered Cloth Boots, Ashira Warrior Pelt, Ashira Warrior Necklace, Ashira Warrior Bracer, Onion, Garlic, Cabbage, Tattered Rawhide Gorget, Tattered Rawhide Belt, Worn Buckler, Worn Bow, Torch, Rusty Warhammer, and Rusty Axe. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Rusty weapons via Warhammer/Axe, Tattered Cloth via Cap/Pantaloons/Boots, Tattered Rawhide via Gorget/Belt), it's assumed to be able to drop any other known piece of that same set. Tattered Rawhide Gloves/Bracer/Boots/Vest, Rusty Long Spear, and Tattered Cloth Veil are newly-discovered pieces of those quality sets (via a smuggler/a wererat/an angered spirit's own loot windows, 2026-07-12) backfilled in here too."
   },
   {
     "name": "an ashira lookout",
@@ -621,6 +628,7 @@
       { "item": "Tattered Cloth Gloves" },
       { "item": "Tattered Cloth Bracer" },
       { "item": "Tattered Cloth Boots" },
+      { "item": "Tattered Cloth Veil" },
       { "item": "Tattered Rawhide Gorget" },
       { "item": "Tattered Rawhide Gloves" },
       { "item": "Tattered Rawhide Bracer" },
@@ -644,7 +652,7 @@
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" }
     ],
-    "rumor": "Found at the Grave Robber camp within North Gate. Directly confirmed via loot-window screenshots: Cracked Staff, Tattered Cloth Robe, Garlic, Rawhide Scraps, Torch, Tattered Rawhide Belt, Rusty Shortsword, Raw Human Meat, Cloth Scraps, and Tattered Rawhide Mask. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Tattered Cloth via Robe, Tattered Rawhide via Belt/Mask, Rusty weapons via Shortsword), it's assumed to be able to drop any other known piece of that same set. Tattered Rawhide Gloves/Bracer/Boots/Vest and Rusty Long Spear are newly-discovered pieces of those quality sets (2026-07-12) backfilled in here too."
+    "rumor": "Found at the Grave Robber camp within North Gate. Directly confirmed via loot-window screenshots: Cracked Staff, Tattered Cloth Robe, Garlic, Rawhide Scraps, Torch, Tattered Rawhide Belt, Rusty Shortsword, Raw Human Meat, Cloth Scraps, Tattered Rawhide Mask, and Rusty Greatsword. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Tattered Cloth via Robe, Tattered Rawhide via Belt/Mask, Rusty weapons via Shortsword/Greatsword), it's assumed to be able to drop any other known piece of that same set. Tattered Rawhide Gloves/Bracer/Boots/Vest, Rusty Long Spear, and Tattered Cloth Veil are newly-discovered pieces of those quality sets (2026-07-12) backfilled in here too."
   },
   {
     "name": "a spiderling",
@@ -727,13 +735,13 @@
     "name": "a rattlesnake",
     "slug": "a-rattlesnake",
     "image": "images/Monsters/a-rattlesnake.jpg",
-    "maps": ["Shaded Dunes"]
+    "maps": ["Shaded Dunes", "Sungreet Strand"]
   },
   {
     "name": "a giant spider",
     "slug": "a-giant-spider",
     "image": "images/Monsters/a-giant-spider.jpg",
-    "maps": ["Shaded Dunes"]
+    "maps": ["Shaded Dunes", "Sungreet Strand"]
   },
   {
     "name": "a sickened ashira",
@@ -745,7 +753,8 @@
     "name": "a skeleton",
     "slug": "a-skeleton",
     "image": "images/Monsters/a-skeleton.jpg",
-    "maps": ["Shaded Dunes"]
+    "maps": ["Shaded Dunes", "Night Harbor"],
+    "areas": ["North Gate"]
   },
   {
     "name": "a restless ghoul",
@@ -839,6 +848,7 @@
       { "item": "Tattered Cloth Bracer" },
       { "item": "Tattered Cloth Boots" },
       { "item": "Tattered Cloth Robe" },
+      { "item": "Tattered Cloth Veil" },
       { "item": "Rusty Great Scythe" },
       { "item": "Rusty Battle Axe" },
       { "item": "Rusty Maul" },
@@ -858,7 +868,7 @@
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" }
     ],
-    "rumor": "Directly confirmed via loot-window screenshots: Rusty Dagger, Rawhide Scraps, Wererat Pelt, Rusty Scythe, Tattered Rawhide Bracer, Worn Bow, Tattered Rawhide Boots, Rusty Tower Shield, Tattered Rawhide Vest, Cloth Scraps, Severed Ring Finger, Spirit World Ch. 1, Rusty Warhammer, and Tattered Cloth Pantaloons. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Rusty weapons, Tattered Rawhide, Tattered Cloth), it's assumed to be able to drop any other known piece of that same set. Tattered Rawhide Gloves/Bracer/Boots/Vest are newly-discovered additions to that quality-set roster from this monster's (and Toma the Two-Faced's) screenshots, and have been backfilled onto every other monster already known to drop other Tattered Rawhide pieces."
+    "rumor": "Directly confirmed via loot-window screenshots: Rusty Dagger, Rawhide Scraps, Wererat Pelt, Rusty Scythe, Tattered Rawhide Bracer, Worn Bow, Tattered Rawhide Boots, Rusty Tower Shield, Tattered Rawhide Vest, Cloth Scraps, Severed Ring Finger, Spirit World Ch. 1, Rusty Warhammer, and Tattered Cloth Pantaloons. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Rusty weapons, Tattered Rawhide, Tattered Cloth), it's assumed to be able to drop any other known piece of that same set. Tattered Rawhide Gloves/Bracer/Boots/Vest are newly-discovered additions to that quality-set roster from this monster's (and Toma the Two-Faced's) screenshots, and have been backfilled onto every other monster already known to drop other Tattered Rawhide pieces. Tattered Cloth Veil (from an angered spirit's own loot window) has similarly been backfilled here."
   },
   {
     "name": "a crocodile",
@@ -878,5 +888,96 @@
     "image": "images/Monsters/a-blister-beetle.jpg",
     "maps": ["Night Harbor", "Sungreet Strand"],
     "areas": ["West Gate"]
+  },
+  {
+    "name": "a cemetery rat",
+    "slug": "a-cemetery-rat",
+    "image": "images/Monsters/a-cemetery-rat.jpg",
+    "maps": ["Night Harbor"],
+    "areas": ["North Gate"]
+  },
+  {
+    "name": "a large dunes bat",
+    "slug": "a-large-dunes-bat",
+    "image": "images/Monsters/a-large-dunes-bat.jpg",
+    "maps": ["Night Harbor"],
+    "areas": ["North Gate"]
+  },
+  {
+    "name": "a giant fire beetle",
+    "slug": "a-giant-fire-beetle",
+    "image": "images/Monsters/a-giant-fire-beetle.jpg",
+    "maps": ["Sungreet Strand"]
+  },
+  {
+    "name": "a ghost",
+    "slug": "a-ghost",
+    "image": "images/Monsters/a-ghost.jpg",
+    "maps": ["Sungreet Strand"]
+  },
+  {
+    "name": "a smarmy hunter",
+    "slug": "a-smarmy-hunter",
+    "image": "images/Monsters/a-smarmy-hunter.jpg",
+    "maps": ["Sungreet Strand"]
+  },
+  {
+    "name": "a giant dunes scarab",
+    "slug": "a-giant-dunes-scarab",
+    "image": "images/Monsters/a-giant-dunes-scarab.jpg",
+    "maps": ["Sungreet Strand"]
+  },
+  {
+    "name": "an ashira shaman",
+    "slug": "an-ashira-shaman",
+    "image": "images/Monsters/an-ashira-shaman.jpg",
+    "maps": ["Sungreet Strand"]
+  },
+  {
+    "name": "a hired thug",
+    "slug": "a-hired-thug",
+    "image": "images/Monsters/a-hired-thug.jpg",
+    "maps": ["Sungreet Strand"]
+  },
+  {
+    "name": "a water elementaling",
+    "slug": "a-water-elementaling",
+    "image": "images/Monsters/a-water-elementaling.jpg",
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Elemental Core" }
+    ]
+  },
+  {
+    "name": "a filthy acolyte",
+    "slug": "a-filthy-acolyte",
+    "image": "images/Monsters/a-filthy-acolyte.jpg",
+    "maps": ["Sungreet Strand"]
+  },
+  {
+    "name": "an angered spirit",
+    "slug": "an-angered-spirit",
+    "image": "images/Monsters/an-angered-spirit.jpg",
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Tattered Cloth Veil" },
+      { "item": "Tattered Cloth Cap" },
+      { "item": "Tattered Cloth Gorget" },
+      { "item": "Tattered Cloth Pantaloons" },
+      { "item": "Tattered Cloth Shirt" },
+      { "item": "Tattered Cloth Gloves" },
+      { "item": "Tattered Cloth Bracer" },
+      { "item": "Tattered Cloth Boots" },
+      { "item": "Tattered Cloth Robe" },
+      { "item": "Worn Bow" },
+      { "item": "Onion" }
+    ],
+    "rumor": "Map inferred from batch timing (arrived amid a run of Sungreet Strand screenshots), not explicitly named in the filename/chat. Directly confirmed via a loot-window screenshot: Tattered Cloth Veil, Worn Bow, and Onion. The rest of the Tattered Cloth family is inferred per the user's 2026-07-12 quality-set rule, and Tattered Cloth Veil (a newly-discovered 9th piece of that family) has been backfilled onto every other monster already known to drop other Tattered Cloth pieces."
+  },
+  {
+    "name": "a bandit",
+    "slug": "a-bandit",
+    "image": "images/Monsters/a-bandit.jpg",
+    "maps": ["Sungreet Strand"]
   }
 ]

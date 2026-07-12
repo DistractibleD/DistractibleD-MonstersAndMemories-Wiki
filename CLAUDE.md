@@ -698,7 +698,10 @@ drops at least one item from a recognized quality-set family.
     loot window) is a distinct, separate 2H weapon from "Spear" (1H) — not a naming variant of
     it — but still counts as the same Rusty-prefixed quality-set family per this rule's own
     prefix-based definition.
-  - Known Tattered Cloth pieces (8): Cap, Gorget, Pantaloons, Shirt, Gloves, Bracer, Boots, Robe.
+  - Known Tattered Cloth pieces (9): Cap, Gorget, Pantaloons, Shirt, Gloves, Bracer, Boots, Robe,
+    Veil. Veil (added 2026-07-12, from "an angered spirit"'s own loot window) was backfilled onto
+    every other monster already carrying the full Tattered Cloth roster (a rotting skeleton, a
+    Bloodynose quarreler, an ashira warrior, a grave robber, a wererat).
   - Known Tattered Rawhide pieces (7): Gorget, Belt, Mask, Gloves, Bracer, Boots, Vest. Gloves/
     Bracer/Boots/Vest were all added 2026-07-12, sourced from Toma the Two-Faced's and "a
     wererat"'s own loot-window screenshots.

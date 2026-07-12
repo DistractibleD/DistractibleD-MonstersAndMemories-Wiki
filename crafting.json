@@ -565,7 +565,7 @@
     "tradeskill": "Tailoring",
     "listOrder": 14,
     "difficultyColor": "Red",
-    "observedAtSkill": 5
+    "observedAtSkill": 22
   },
   {
     "name": "Fine Cloth Mantle",
@@ -581,7 +581,7 @@
       { "item": "Copper Fasteners", "quantity": 2 }
     ],
     "difficultyColor": "Red",
-    "observedAtSkill": 16
+    "observedAtSkill": 22
   },
   {
     "name": "Fine Cloth Pants",
@@ -597,7 +597,7 @@
       { "item": "Copper Fasteners", "quantity": 3 }
     ],
     "difficultyColor": "Red",
-    "observedAtSkill": 16
+    "observedAtSkill": 22
   },
   {
     "name": "Enchanted Cloth Cap",
@@ -613,7 +613,55 @@
       { "item": "Copper Fasteners", "quantity": 2 }
     ],
     "difficultyColor": "Red",
-    "observedAtSkill": 16
+    "observedAtSkill": 22
+  },
+  {
+    "name": "Enchanted Cloth Pants",
+    "slug": "enchanted-cloth-pants",
+    "image": "images/crafting/enchanted-cloth-pants.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 18,
+    "weight": 0.85,
+    "size": "Medium",
+    "components": [
+      { "item": "Enchanted Bolt of Cloth", "quantity": 3 },
+      { "item": "Rough Thread", "quantity": 3 },
+      { "item": "Copper Fasteners", "quantity": 3 }
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 22
+  },
+  {
+    "name": "Fine Cloth Robe",
+    "slug": "fine-cloth-robe",
+    "image": "images/crafting/fine-cloth-robe.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 19,
+    "weight": 1.1,
+    "size": "Medium",
+    "components": [
+      { "item": "Bolt of Cloth", "quantity": 4 },
+      { "item": "Rough Thread", "quantity": 3 },
+      { "item": "Copper Fasteners", "quantity": 3 }
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 22
+  },
+  {
+    "name": "Fine Cloth Tunic",
+    "slug": "fine-cloth-tunic",
+    "image": "images/crafting/fine-cloth-tunic.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 20,
+    "weight": 1.1,
+    "size": "Medium",
+    "components": [
+      { "item": "Bolt of Cloth", "quantity": 4 },
+      { "item": "Rough Thread", "quantity": 3 },
+      { "item": "Copper Fasteners", "quantity": 3 }
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 22
   },
   {
     "name": "Arrow x100",
