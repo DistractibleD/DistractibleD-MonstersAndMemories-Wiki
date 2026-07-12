@@ -983,7 +983,7 @@
   {
     "name": "a willowisp",
     "slug": "a-willowisp",
-    "maps": ["Shaded Dunes"],
-    "rumor": "Reported directly in chat as \"Willowisp\", not yet confirmed via an in-game screenshot — name recorded here as \"a willowisp\" to match this wiki's usual lowercase \"a/an X\" naming convention for regular monsters, but the exact in-game wording/casing isn't confirmed yet."
+    "image": "images/Monsters/a-willowisp.jpg",
+    "maps": ["Shaded Dunes"]
   }
 ]
