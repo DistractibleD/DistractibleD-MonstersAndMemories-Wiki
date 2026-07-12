@@ -3,7 +3,7 @@
     "name": "a desert bat",
     "slug": "a-desert-bat",
     "image": "images/Monsters/a-desert-bat.jpg",
-    "maps": ["Necropolis (Night Harbor)"],
+    "maps": ["Necropolis (Night Harbor)", "Sungreet Strand"],
     "drops": [
       { "item": "Bat Wing" },
       { "item": "Raw Bat Meat" },
@@ -15,7 +15,7 @@
     "name": "a large rat",
     "slug": "a-large-rat",
     "image": "images/Monsters/a-large-rat.jpg",
-    "maps": ["Necropolis (Night Harbor)"],
+    "maps": ["Necropolis (Night Harbor)", "Sungreet Strand"],
     "levelRange": "1",
     "drops": [
       { "item": "Raw Rat Meat" },
@@ -48,12 +48,14 @@
     "name": "a rotting skeleton",
     "slug": "a-rotting-skeleton",
     "image": "images/Monsters/a-rotting-skeleton.jpg",
-    "maps": ["Necropolis (Night Harbor)"],
+    "maps": ["Necropolis (Night Harbor)", "Sungreet Strand"],
     "levelRange": "1",
     "drops": [
       { "item": "Bone Chips" },
       { "item": "Skeleton Jawbone" },
+      { "item": "Tattered Cloth Cap" },
       { "item": "Tattered Cloth Pantaloons" },
+      { "item": "Tattered Cloth Gorget" },
       { "item": "Cloth Scraps" },
       { "item": "Tattered Cloth Shirt" },
       { "item": "Rusty Great Scythe" },
@@ -74,10 +76,11 @@
       { "item": "Rusty Greatsword" },
       { "item": "Tattered Cloth Gloves" },
       { "item": "Tattered Cloth Bracer" },
+      { "item": "Tattered Cloth Boots" },
       { "item": "Rusty Tower Shield" },
       { "item": "Shattered Skeleton Femur" }
     ],
-    "rumor": "\"Shattered Skeleton Femur\" comes from a community reference table the user described as rumored drops, not confirmed via an in-game screenshot like the rest of this monster's drop list — treat it as less certain than the other entries above."
+    "rumor": "\"Shattered Skeleton Femur\" comes from a community reference table the user described as rumored drops, not confirmed via an in-game screenshot like the rest of this monster's drop list — treat it as less certain than the other entries above. \"Tattered Cloth Cap\" and \"Tattered Cloth Gorget\" are inferred, not directly screenshot-confirmed for this monster — per the user's 2026-07-12 rule, a monster confirmed dropping one piece of a quality set (this one already had 4 other Tattered Cloth pieces) is assumed to be able to drop any other known piece of that same set."
   },
   {
     "name": "a Bloodynose quarreler",
@@ -85,8 +88,15 @@
     "drops": [
       { "item": "Mushroom" },
       { "item": "Cabbage" },
-      { "item": "Tattered Cloth Gorget" }
-    ]
+      { "item": "Tattered Cloth Gorget" },
+      { "item": "Tattered Cloth Cap" },
+      { "item": "Tattered Cloth Pantaloons" },
+      { "item": "Tattered Cloth Shirt" },
+      { "item": "Tattered Cloth Gloves" },
+      { "item": "Tattered Cloth Bracer" },
+      { "item": "Tattered Cloth Boots" }
+    ],
+    "rumor": "The Tattered Cloth pieces beyond Gorget are inferred, not directly screenshot-confirmed for this monster — per the user's 2026-07-12 rule, a monster confirmed dropping one piece of a quality set is assumed to be able to drop any other known piece of that same set."
   },
   {
     "name": "a Bloodynose sergeant",
@@ -124,7 +134,91 @@
   {
     "name": "an ashira warrior",
     "slug": "an-ashira-warrior",
-    "image": "images/Monsters/an-ashira-warrior.jpg"
+    "image": "images/Monsters/an-ashira-warrior.jpg",
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Raw Ashira Meat" },
+      { "item": "Tattered Cloth Cap" },
+      { "item": "Tattered Cloth Pantaloons" },
+      { "item": "Tattered Cloth Gorget" },
+      { "item": "Tattered Cloth Shirt" },
+      { "item": "Tattered Cloth Gloves" },
+      { "item": "Tattered Cloth Bracer" },
+      { "item": "Tattered Cloth Boots" },
+      { "item": "Ashira Warrior Pelt" },
+      { "item": "Ashira Warrior Necklace" },
+      { "item": "Ashira Warrior Bracer" },
+      { "item": "Onion" },
+      { "item": "Garlic" },
+      { "item": "Cabbage" },
+      { "item": "Tattered Rawhide Gorget" },
+      { "item": "Tattered Rawhide Belt" },
+      { "item": "Worn Buckler" },
+      { "item": "Worn Bow" },
+      { "item": "Torch" },
+      { "item": "Rusty Warhammer" },
+      { "item": "Rusty Axe" },
+      { "item": "Rusty Dagger" },
+      { "item": "Rusty Shortsword" },
+      { "item": "Rusty Throwing Dagger" },
+      { "item": "Rusty Battle Axe" },
+      { "item": "Rusty Scimitar" },
+      { "item": "Rusty Scythe" },
+      { "item": "Rusty Longsword" },
+      { "item": "Rusty Spear" },
+      { "item": "Rusty Trident" },
+      { "item": "Rusty Mace" },
+      { "item": "Rusty Great Scythe" },
+      { "item": "Rusty War Lance" },
+      { "item": "Rusty Greatsword" },
+      { "item": "Rusty Maul" },
+      { "item": "Rusty Tower Shield" }
+    ],
+    "rumor": "Directly confirmed via loot-window screenshots: Raw Ashira Meat, Tattered Cloth Cap, Tattered Cloth Pantaloons, Tattered Cloth Boots, Ashira Warrior Pelt, Ashira Warrior Necklace, Ashira Warrior Bracer, Onion, Garlic, Cabbage, Tattered Rawhide Gorget, Tattered Rawhide Belt, Worn Buckler, Worn Bow, Torch, Rusty Warhammer, and Rusty Axe. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Rusty weapons via Warhammer/Axe, Tattered Cloth via Cap/Pantaloons/Boots), it's assumed to be able to drop any other known piece of that same set."
+  },
+  {
+    "name": "an ashira lookout",
+    "slug": "an-ashira-lookout",
+    "drops": [
+      { "item": "Ashira Scout Necklace" },
+      { "item": "Ashira Tail" },
+      { "item": "Cloth Scraps" },
+      { "item": "Rawhide Scraps" },
+      { "item": "Raw Ashira Meat" },
+      { "item": "Bell Pepper" },
+      { "item": "Rusty Trident" },
+      { "item": "Rusty Dagger" },
+      { "item": "Rusty Shortsword" },
+      { "item": "Rusty Throwing Dagger" },
+      { "item": "Rusty Axe" },
+      { "item": "Rusty Battle Axe" },
+      { "item": "Rusty Scimitar" },
+      { "item": "Rusty Scythe" },
+      { "item": "Rusty Longsword" },
+      { "item": "Rusty Spear" },
+      { "item": "Rusty Mace" },
+      { "item": "Rusty Warhammer" },
+      { "item": "Rusty Great Scythe" },
+      { "item": "Rusty War Lance" },
+      { "item": "Rusty Greatsword" },
+      { "item": "Rusty Maul" },
+      { "item": "Rusty Tower Shield" }
+    ],
+    "rumor": "Directly confirmed via loot-window screenshots: Ashira Scout Necklace, Ashira Tail, Cloth Scraps, Rawhide Scraps, Raw Ashira Meat, Bell Pepper, and Rusty Trident. Every other Rusty weapon/shield in this list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set, it's assumed to be able to drop any other known piece of that same set. No map confirmed yet for this monster."
+  },
+  {
+    "name": "a snake",
+    "slug": "a-snake",
+    "image": "images/Monsters/a-snake.jpg",
+    "maps": ["Sungreet Strand"]
+  },
+  {
+    "name": "a jackal pup",
+    "slug": "a-jackal-pup",
+    "image": "images/Monsters/a-jackal-pup.jpg",
+    "drops": [
+      { "item": "Raw Jackal Meat" }
+    ]
   },
   {
     "name": "the corrupted ashira",

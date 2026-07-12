@@ -640,9 +640,46 @@ added the same way (`"Rusty [Type]"`, no material prefix, per the user's separat
 confirmation that Rusty weapons never carry a material name like the Rusty Iron/Rusty
 Copper armor-repair components do). These 12 have no matching `items.json` entry yet (no
 stats known), so they render as plain, unlinked text until a real card comes in — same as
-any other not-yet-added component/drop name. This is a one-off exception to "only the
-user's screenshots/chat are authoritative" — only do this kind of pattern-inferred bulk
-add again if the user explicitly asks for it the same way, not on your own initiative.
+any other not-yet-added component/drop name. This was originally a one-off exception to
+"only the user's screenshots/chat are authoritative," but the user generalized it into a
+standing rule on 2026-07-12 (see "Quality-set drop inference" below) — the exception note
+above is kept for historical context (it's what the rule was first modeled on) but the rule
+itself is no longer one-off.
+
+### Quality-set drop inference (2026-07-12)
+
+**Standing rule, stated by the user:** "If a monster drops 1 piece of an item quality set
+(like Rusty weapons or Tattered armor), assume that mob can drop any of the other items in
+that quality range." Unlike the Rusty-weapon bulk-add above, this doesn't need to be
+re-requested each time — apply it automatically whenever new inbox data confirms a monster
+drops at least one item from a recognized quality-set family.
+
+- A "quality set" is identified by a shared name prefix denoting a tier/material, not a
+  literal in-game grouping — confirmed families so far: **Rusty** (weapons + Rusty Tower
+  Shield), **Tattered Cloth** (armor), **Tattered Rawhide** (armor). Treat a new shared
+  prefix as its own family the same way if one shows up.
+  - Known Rusty pieces (17): Dagger, Shortsword, Throwing Dagger, Axe, Battle Axe, Scimitar,
+    Scythe, Longsword, Spear, Trident, Mace, Warhammer, Great Scythe, War Lance, Greatsword,
+    Maul, Tower Shield.
+  - Known Tattered Cloth pieces (7): Cap, Gorget, Pantaloons, Shirt, Gloves, Bracer, Boots.
+  - Known Tattered Rawhide pieces (2): Gorget, Belt.
+- The backfill is **per-monster**, based on the *global* known roster of a family (not just
+  what that one monster's own screenshots have shown) — if Monster A is newly confirmed
+  dropping one Tattered Cloth piece, it gets every *other* Tattered Cloth piece already known
+  from *any* monster, not just pieces it's personally been seen dropping. First applied
+  2026-07-12: "an ashira warrior" (confirmed dropping Rusty Warhammer/Axe and Tattered Cloth
+  Cap/Pantaloons) got the full remaining Rusty and Tattered Cloth rosters backfilled; "an
+  ashira lookout" (confirmed dropping one Rusty Trident) got the rest of the Rusty roster;
+  and two *existing* monsters that already dropped some Tattered Cloth pieces — "a rotting
+  skeleton" and "a Bloodynose quarreler" — retroactively got the pieces they were missing
+  (Cap/Gorget/Boots and Cap/Pantaloons/Shirt/Gloves/Bracer/Boots respectively) once those
+  pieces became known via a different monster's screenshot.
+- Every monster with inferred drops gets a `rumor` note listing exactly which of its drops
+  were directly screenshot-confirmed vs. inferred by this rule, so the distinction stays
+  visible on the page (not silently blended into the confirmed drop list).
+- Items still need a real screenshot before getting a full `items.json` entry (stats aren't
+  guessed) — an inferred drop with no matching item just renders as unlinked plain text
+  until a card comes in, same as any other not-yet-added item name.
 
 Clicking a monster's name (`.monster-name-hover`, `setupMonsterClickToView`) opens
 `#monster-viewer`, a modal built by `openMonsterViewer`/`setupMonsterViewer` — same modal
