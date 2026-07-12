@@ -650,7 +650,7 @@
     "name": "a spiderling",
     "slug": "a-spiderling",
     "image": "images/Monsters/a-spiderling.jpg",
-    "maps": ["Night Harbor"],
+    "maps": ["Night Harbor", "Sungreet Strand"],
     "areas": ["North Gate", "West Gate"]
   },
   {
