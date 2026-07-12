@@ -2919,7 +2919,7 @@ async function renderCompanionsPage(container) {
 // worker -> the "workers.dev" URL shown at the top) once you've deployed
 // cloudflare-worker/submit-worker.js. Until then the form shows a clear
 // "not set up yet" message instead of silently failing.
-const SUBMIT_WORKER_URL = '';
+const SUBMIT_WORKER_URL = 'https://muddy-bar-88a7.mnm-wiki.workers.dev';
 
 function renderSubmitPage(container) {
   container.innerHTML = `
