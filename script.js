@@ -113,7 +113,23 @@ async function ensureCompanionsData() {
   return companionsData;
 }
 
+// Splash screen shown on every fresh load (see #splash-screen in
+// index.html) — clicking Enter adds .site-entered to <body>, which both
+// fades the splash out and slides the sidebar in (both driven from that one
+// class, see style.css). Intentionally shows every time rather than
+// remembering "already entered" in sessionStorage/localStorage — it's meant
+// to be a recurring welcome, not a one-time onboarding step.
+function setupSplashScreen() {
+  const btn = document.getElementById('splash-enter-btn');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    document.body.classList.add('site-entered');
+  });
+}
+
 async function init() {
+  setupSplashScreen();
+
   const res = await fetch('pages.json');
   allPages = await res.json();
   buildSidebar(allPages);

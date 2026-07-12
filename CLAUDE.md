@@ -1246,6 +1246,32 @@ Item Database (or a future feature) doesn't seem to apply, check this first — 
 specificity (`.content-inner .my-class`) or, more robustly, control visibility via inline
 styles set from JS rather than relying on a CSS class toggle.
 
+## Splash screen (2026-07-13)
+
+A full-viewport gate (`#splash-screen` in `index.html`) shows in front of everything on
+every fresh page load — the site's actual name, "Petrichor's Monsters and Memories Wiki",
+lives here (the header/`<title>` still just say "Game Wiki", untouched, since only the
+splash text was requested). Background art is `images/splash-hero.jpg`, converted from a
+`.webp` the user dropped in `images/Inbox/` — **note for future sessions: `System.Drawing`
+(GDI+) cannot load `.webp` at all ("Out of memory" is the misleading error it throws for an
+unsupported format), but `System.Windows.Media.Imaging.BitmapDecoder` (WPF, `Add-Type
+-AssemblyName PresentationCore`) can, since it goes through the OS's WIC codecs instead —
+use that path (`BitmapDecoder` to load, `JpegBitmapEncoder` to save) for any future `.webp`
+input instead of the usual `System.Drawing` crop/convert helper.**
+
+Clicking **Enter** adds a single `.site-entered` class to `<body>` (`setupSplashScreen()` in
+`script.js`) — everything else is driven off that one class in CSS: the splash fades out
+(`opacity`/`visibility` transition) while the sidebar simultaneously slides in from the left
+(`transform: translateX(-130%)` → `none`, plus an opacity fade). The sidebar keeps its normal
+reserved layout space the whole time (only its own position animates, via `transform`, not
+`display`/layout properties), so there's no content-column jump when it arrives — the splash
+screen is what actually hides the mid-animation state from view. `body:not(.site-entered) {
+overflow: hidden }` blocks background scrolling while the splash is up.
+
+**Deliberately shows on every load, not just once per visitor** — no `sessionStorage`/
+`localStorage` "already entered" check. This was the simplest reading of the request; revisit
+only if the user says the repetition is annoying.
+
 ## Layout width
 
 `.layout`/`.header-inner` cap at 1600px so the site doesn't stretch edge-to-edge on huge
