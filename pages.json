@@ -5,5 +5,6 @@
   { "title": "Maps", "file": "maps", "category": "Maps", "type": "maps" },
   { "title": "Crafting", "file": "crafting", "category": "Crafting", "type": "crafting" },
   { "title": "Monsters", "file": "monsters", "category": "Monsters", "type": "monsters" },
-  { "title": "Companions", "file": "companions", "category": "Companions", "type": "companions" }
+  { "title": "Companions", "file": "companions", "category": "Companions", "type": "companions" },
+  { "title": "Submit a Screenshot", "file": "submit", "category": "Contribute", "type": "submit" }
 ]
