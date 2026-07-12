@@ -1899,12 +1899,12 @@ function renderCraftingCategories(container) {
       <input type="search" id="craft-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all recipes and gathering nodes by name or tradeskill..." autocomplete="off">
       <div id="craft-quick-search-results" class="items-quick-search-results"></div>
     </div>
-    <h2 class="monsters-section-heading">${svgIcon('blacksmithing')} Crafting</h2>
-    ${tradeskillCards(crafted, false)}
     <h2 class="monsters-section-heading">${svgIcon('mining')} Gathering</h2>
     <p>Resource nodes you interact with directly in the world instead of crafting from components —
     each one has a minimum skill to attempt it and a trivial skill where it stops giving skill-ups.</p>
     ${tradeskillCards(gathering, true)}
+    <h2 class="monsters-section-heading">${svgIcon('blacksmithing')} Crafting</h2>
+    ${tradeskillCards(crafted, false)}
   `;
 
   container.querySelectorAll('.craft-card').forEach(card => {
