@@ -35,6 +35,19 @@ html, body {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
+/* Sticky footer: body is a full-viewport-height flex column with .layout as
+   the only growing item, so .site-footer always lands at the bottom of the
+   screen on short pages instead of riding up right under the content, but
+   still gets pushed down the page normally (not fixed/overlapping) once
+   content is taller than the viewport. */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.layout {
+  flex: 1 0 auto;
+}
 /* Lock scrolling behind the splash screen until the visitor clicks Enter —
    see #splash-screen and the .site-entered toggle below. */
 body:not(.site-entered) {
@@ -226,16 +239,6 @@ body:not(.site-entered) .sidebar {
   color: var(--text-dim);
   font-size: 0.9rem;
 }
-.sidebar-category {
-  font-family: 'Sora', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin: 20px 0 8px;
-}
-.sidebar-category:first-child { margin-top: 0; }
 .sidebar-link {
   display: block;
   padding: 7px 10px;
@@ -254,20 +257,6 @@ body:not(.site-entered) .sidebar {
   border-left: 2px solid var(--accent);
   color: var(--accent);
 }
-/* A single-page category whose page title just repeats the category name
-   (see buildSidebar in script.js) collapses into one heading-styled link —
-   same uppercase/small-caps look as .sidebar-category, but interactive. */
-.sidebar-category-link {
-  font-family: 'Sora', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin: 20px 0 8px;
-}
-.sidebar-category-link:first-child { margin-top: 0; }
-.sidebar-category-link:hover { color: var(--accent); }
 
 /* ---------- Content ---------- */
 .content {
@@ -1238,7 +1227,6 @@ body:not(.site-entered) .sidebar {
     flex-wrap: wrap;
     gap: 6px;
   }
-  .sidebar-category { width: 100%; margin: 10px 0 2px; }
   .content-inner { padding: 24px 22px; }
   #search-box { width: 140px; }
   .items-search { flex-basis: 100%; }

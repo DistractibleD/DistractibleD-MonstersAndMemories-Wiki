@@ -194,49 +194,22 @@ function buildSidebar(pages) {
     return;
   }
 
-  // Group pages by category so the sidebar stays organized as the wiki grows
-  const categories = {};
+  // One flat, uniformly-styled list — every page's own `category` (still set
+  // in pages.json for future use) no longer drives any visual grouping here.
+  // The old version split pages into per-category headings, which only
+  // looked reasonable when a category held more than one page; with every
+  // category down to exactly one page, it produced arbitrary style
+  // differences (some links dim/uppercase, some white, some indented under a
+  // heading) rather than any real structure. Revisit grouping if a category
+  // ever grows past one page again.
   for (const page of pages) {
-    const cat = page.category || 'Pages';
-    if (!categories[cat]) categories[cat] = [];
-    categories[cat].push(page);
-  }
-
-  for (const cat of Object.keys(categories)) {
-    const pagesInCat = categories[cat];
-
-    // A category holding exactly one page whose title just repeats the
-    // category name (e.g. "Maps" -> "Maps") reads as a redundant stacked
-    // label — collapse it into a single clickable heading-styled link
-    // instead. Categories that actually group more than one page (or whose
-    // single page has a distinct title, like "Getting Started" -> "Welcome")
-    // keep the normal heading + link(s) layout.
-    if (pagesInCat.length === 1 && pagesInCat[0].title === cat) {
-      const page = pagesInCat[0];
-      const link = document.createElement('a');
-      link.href = '#' + page.file;
-      link.className = 'sidebar-link sidebar-category-link';
-      link.textContent = cat;
-      link.dataset.file = page.file;
-      link.addEventListener('click', () => loadPage(page.file));
-      sidebar.appendChild(link);
-      continue;
-    }
-
-    const heading = document.createElement('div');
-    heading.className = 'sidebar-category';
-    heading.textContent = cat;
-    sidebar.appendChild(heading);
-
-    for (const page of pagesInCat) {
-      const link = document.createElement('a');
-      link.href = '#' + page.file;
-      link.className = 'sidebar-link';
-      link.textContent = page.title;
-      link.dataset.file = page.file;
-      link.addEventListener('click', () => loadPage(page.file));
-      sidebar.appendChild(link);
-    }
+    const link = document.createElement('a');
+    link.href = '#' + page.file;
+    link.className = 'sidebar-link';
+    link.textContent = page.title;
+    link.dataset.file = page.file;
+    link.addEventListener('click', () => loadPage(page.file));
+    sidebar.appendChild(link);
   }
 }
 
