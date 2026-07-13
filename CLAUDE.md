@@ -319,14 +319,25 @@ call: you interact directly with a resource node in the world (a vein, a wood pi
 rather than combining components into a crafted result, so they don't fit `crafting.json`'s
 recipe shape at all (no components, no single named result, but a *minimum skill to even
 attempt the node* that no crafted recipe has). They get their own data file,
-`gathering-nodes.json`, and their own area on the Crafting page instead of being squeezed
-into the recipe-card grid.
+`gathering-nodes.json`.
+
+**Split into its own top-level page (2026-07-13, later the same day — supersedes the
+"own area on the Crafting page" framing below):** Gathering originally shared the Crafting
+page as a second section; the user then asked to split it out into a fully separate
+top-level page, `pages.json`'s `"Gathering"` entry (`"type": "gathering"`), placed directly
+above `"Crafting"` in the sidebar. `renderGatheringPage`/`renderGatheringCategories` in
+`script.js` are the Gathering-page equivalents of `renderCraftingPage`/
+`renderCraftingCategories`, sharing only the `tradeskillGridHTML(list, isGathering)` card
+markup helper — each page's own quick-search box, header-search wiring
+(`goToGatheringCategory` alongside `goToCraftingCategory`), and `pendingGatheringTradeskill`
+(alongside `pendingCraftingTradeskill`) are otherwise independent. `renderGatheringNodes`
+itself (the actual node table) is unchanged — only how you reach it moved.
 
 - **`tradeskillsData[].category`** — an optional field in `tradeskills.json`, `"gathering"`
-  for exactly these four tradeskills, unset for everything else. `renderCraftingCategories`
-  splits the top-level tradeskill grid into two sections this way — "Crafting" and
-  "Gathering" — same two-group layout as the Monsters page's Named/Regular split. Add a new
-  tradeskill to the gathering group the same way if one ever comes in.
+  for exactly these four tradeskills, unset for everything else. This is what
+  `renderCraftingCategories`/`renderGatheringCategories` each filter on to build their own
+  page's tradeskill grid. Add a new tradeskill to the gathering group the same way if one
+  ever comes in.
 - **`gathering-nodes.json`** — a flat array, one object per node: `name`, `slug`,
   `tradeskill`, `locations` (array of free-text location strings — these are gathering spots
   named by a source table, not tied to `maps.json` the way a monster's `maps` field is),
@@ -349,12 +360,10 @@ into the recipe-card grid.
 - **Rendering:** `renderGatheringNodes(container, tradeskillName)` in `script.js` — a
   sortable/searchable table, same structural pattern as `renderMonstersList`'s table rather
   than the recipe-card grid, since a node has no image/components to justify a card. A node's
-  `note` (when set) renders as its own small row directly under it. Wired into the same
-  navigation paths a normal tradeskill already has — the tradeskill grid's card click, the
-  header search box (`matchedGatheringNodes`, a new "Gathering" results section), and the
-  Crafting page's own quick search box — all routed based on `tradeskill.category` so a
-  gathering tradeskill lands on `renderGatheringNodes` instead of `renderCraftingRecipes`
-  wherever the two paths diverge.
+  `note` (when set) renders as its own small row directly under it. Wired into the Gathering
+  page's own navigation paths — its tradeskill grid's card click, the header search box
+  (`matchedGatheringNodes`, a "Gathering" results section), and its own quick search box —
+  see the "Split into its own top-level page" note above.
 - **Columns are derived per-tradeskill from the data, not fixed** (`gatheringColumns()` in
   `script.js`) — Name and Min Skill always show; Trivial/Results/Rarity/Bait Required each
   only appear if at least one node of that tradeskill actually uses that field. This is what
