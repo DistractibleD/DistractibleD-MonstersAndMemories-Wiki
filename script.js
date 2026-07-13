@@ -2193,7 +2193,7 @@ async function renderCraftingRecipes(container, tradeskillName) {
           ? `
             <input type="search" id="craft-recipe-search" class="items-search" placeholder="Search ${escapeAttr(tradeskillName)} recipes, ingredients, tools..." autocomplete="off">
             <p class="items-count" id="craft-recipe-count"></p>
-            <div class="craft-recipe-grid" id="craft-recipe-grid"></div>
+            <div id="craft-recipe-grid"></div>
           `
           : '<p>No recipes yet for this tradeskill.</p>'
     }
@@ -2228,12 +2228,38 @@ async function renderCraftingRecipes(container, tradeskillName) {
     });
   }
 
+  // A recipe's optional `station` (e.g. Alchemy's "Mortar and Pestle" vs
+  // "Cauldron", first needed 2026-07-13) groups the grid into headed
+  // sections instead of one flat list, when the tradeskill's recipes
+  // actually use it — most tradeskills have no `station` on any recipe, so
+  // this falls back to the plain flat grid for them automatically. Ordered
+  // to match the real crafting process (grind into powder first, then
+  // combine into a potion) rather than whatever order the names happen to
+  // sort in; an unlisted future station value just sorts first.
+  const STATION_ORDER = ['Mortar and Pestle', 'Cauldron'];
+  const stations = [...new Set(allRecipes.map(r => r.station).filter(Boolean))]
+    .sort((a, b) => STATION_ORDER.indexOf(a) - STATION_ORDER.indexOf(b));
+
   function updateGrid() {
     const query = searchBox.value.toLowerCase().trim();
     const filtered = query ? allRecipes.filter(r => recipeSearchHaystack(r).includes(query)) : allRecipes;
-    grid.innerHTML = filtered.length
-      ? filtered.map(renderRecipeCardHTML).join('')
-      : '<p class="items-empty">No recipes match your search.</p>';
+
+    if (!filtered.length) {
+      grid.innerHTML = '<p class="items-empty">No recipes match your search.</p>';
+    } else if (stations.length) {
+      const groups = stations.map(station => {
+        const inStation = filtered.filter(r => r.station === station);
+        return inStation.length
+          ? `<h2>${escapeAttr(station)}</h2><div class="craft-recipe-grid">${inStation.map(renderRecipeCardHTML).join('')}</div>`
+          : '';
+      });
+      const unstationed = filtered.filter(r => !r.station);
+      if (unstationed.length) groups.push(`<div class="craft-recipe-grid">${unstationed.map(renderRecipeCardHTML).join('')}</div>`);
+      grid.innerHTML = groups.join('');
+    } else {
+      grid.innerHTML = `<div class="craft-recipe-grid">${filtered.map(renderRecipeCardHTML).join('')}</div>`;
+    }
+
     countEl.textContent = query ? `Showing ${filtered.length} of ${allRecipes.length} recipes` : '';
     setupItemTooltip(grid);
     attachRecipeLinkHandlers();

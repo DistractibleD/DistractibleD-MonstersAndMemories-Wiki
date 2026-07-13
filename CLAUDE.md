@@ -286,6 +286,17 @@ extending it the same way as new fields show up on future cards, rather than gue
   "On Click. Any Slot. Cast Time: Xs, Level: N" line, `description` for pure flavor text.
   Rendered on the recipe card the same way an item card shows its flavor text — most recipes
   (a sword, a bar of metal) have neither and won't show this section at all.
+- `station` — optional, which in-game crafting device the recipe is combined at, when a
+  tradeskill actually uses more than one. First needed 2026-07-13 for Alchemy, which is a
+  two-step tradeskill (see its `tradeskills.json` note): raw herbs/reagents grind into
+  powder at a **Mortar and Pestle**, then the powder combines with a vial at a **Cauldron**
+  to produce the final potion/serum/tincture. Every Alchemy recipe got `"station"` set to one
+  of those two exact strings. `renderCraftingRecipes` in `script.js` groups a tradeskill's
+  recipe grid into headed sections by `station` (ordered `STATION_ORDER` = Mortar and Pestle
+  before Cauldron, matching the real process order, not alphabetical) whenever at least one
+  of its recipes has the field set — a tradeskill where no recipe sets `station` (every
+  tradeskill except Alchemy right now) renders as the original flat grid, unaffected. Extend
+  the same way if another multi-device tradeskill comes in later.
 
 **The colored difficulty badge itself was removed from the Crafting page on 2026-07-03**
 (the user's call — a color is only accurate for whichever one user's skill it was captured
