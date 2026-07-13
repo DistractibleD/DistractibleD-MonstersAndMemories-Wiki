@@ -3652,6 +3652,16 @@
     "size": "Tiny"
   },
   {
+    "name": "Lionleaf",
+    "slug": "lionleaf",
+    "image": "images/items/lionleaf.jpg",
+    "type": "Misc",
+    "tags": [],
+    "description": "A resilient herb often found growing near rocks and structures.",
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
     "name": "Skri'Var Silkstrand",
     "slug": "skrivar-silkstrand",
     "image": "images/items/skrivar-silkstrand.jpg",

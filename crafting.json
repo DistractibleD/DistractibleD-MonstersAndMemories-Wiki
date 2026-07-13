@@ -1849,8 +1849,8 @@
     "slug": "tin-scraps-x4",
     "tradeskill": "Smelting",
     "listOrder": 6,
-    "difficultyColor": "White",
-    "observedAtSkill": 0
+    "difficultyColor": "Green",
+    "observedAtSkill": 55
   },
   {
     "name": "Rawhide Scraps",
@@ -5052,102 +5052,172 @@
     "name": "Bronze Bar",
     "slug": "bronze-bar",
     "tradeskill": "Smelting",
+    "listOrder": 7,
     "components": [
       { "item": "Copper Bar", "quantity": 1 },
       { "item": "Tin Bar", "quantity": 1 },
       { "item": "Sturdy Ingot Mold", "quantity": 1 }
     ],
     "resultQuantity": 2,
-    "recipeSkillLevel": 50
+    "recipeSkillLevel": 50,
+    "difficultyColor": "Green",
+    "observedAtSkill": 55
   },
   {
     "name": "Bronze Bar",
     "slug": "bronze-bar-2",
     "tradeskill": "Smelting",
+    "listOrder": 8,
     "components": [
       { "item": "Copper Scraps", "quantity": 6 },
       { "item": "Sturdy Ingot Mold", "quantity": 1 }
     ],
     "resultQuantity": 2,
-    "recipeSkillLevel": 50
+    "recipeSkillLevel": 50,
+    "difficultyColor": "Green",
+    "observedAtSkill": 55
+  },
+  {
+    "name": "Bronze Scraps x4",
+    "slug": "bronze-scraps-x4",
+    "tradeskill": "Smelting",
+    "listOrder": 9,
+    "difficultyColor": "Green",
+    "observedAtSkill": 55
   },
   {
     "name": "Silver Bar",
     "slug": "silver-bar",
     "tradeskill": "Smelting",
+    "listOrder": 10,
     "components": [
       { "item": "Silver Ore", "quantity": 1 },
       { "item": "Sturdy Ingot Mold", "quantity": 1 }
     ],
-    "recipeSkillLevel": 60
+    "recipeSkillLevel": 60,
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 55
   },
   {
     "name": "Silver Bar",
     "slug": "silver-bar-2",
     "tradeskill": "Smelting",
+    "listOrder": 11,
     "components": [
       { "item": "Silver Scraps", "quantity": 6 },
       { "item": "Sturdy Ingot Mold", "quantity": 1 }
     ],
-    "recipeSkillLevel": 60
+    "recipeSkillLevel": 60,
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 55
+  },
+  {
+    "name": "Silver Scraps x4",
+    "slug": "silver-scraps-x4",
+    "tradeskill": "Smelting",
+    "listOrder": 12,
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 55
   },
   {
     "name": "Iron Bar",
     "slug": "iron-bar",
     "tradeskill": "Smelting",
+    "listOrder": 13,
     "components": [
       { "item": "Iron Ore", "quantity": 1 },
       { "item": "Hardened Ingot Mold", "quantity": 1 }
-    ]
+    ],
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 55
   },
   {
     "name": "Iron Bar",
     "slug": "iron-bar-2",
     "tradeskill": "Smelting",
+    "listOrder": 14,
     "components": [
       { "item": "Iron Scraps", "quantity": 6 },
       { "item": "Hardened Ingot Mold", "quantity": 1 }
-    ]
+    ],
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 55
+  },
+  {
+    "name": "Iron Scraps x4",
+    "slug": "iron-scraps-x4",
+    "tradeskill": "Smelting",
+    "listOrder": 15,
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 55
   },
   {
     "name": "Gold Bar",
     "slug": "gold-bar",
     "tradeskill": "Smelting",
+    "listOrder": 16,
     "components": [
       { "item": "Gold Ore", "quantity": 1 },
       { "item": "Hardened Ingot Mold", "quantity": 1 }
-    ]
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 55
   },
   {
     "name": "Gold Bar",
     "slug": "gold-bar-2",
     "tradeskill": "Smelting",
+    "listOrder": 17,
     "components": [
       { "item": "Gold Scraps", "quantity": 6 },
       { "item": "Hardened Ingot Mold", "quantity": 1 }
-    ]
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 55
+  },
+  {
+    "name": "Gold Scraps x4",
+    "slug": "gold-scraps-x4",
+    "tradeskill": "Smelting",
+    "listOrder": 18,
+    "difficultyColor": "Red",
+    "observedAtSkill": 55
   },
   {
     "name": "Steel Bar",
     "slug": "steel-bar",
     "tradeskill": "Smelting",
+    "listOrder": 19,
     "components": [
       { "item": "Iron Bar", "quantity": 1 },
       { "item": "Coal", "quantity": 1 },
       { "item": "Flux", "quantity": 1 },
       { "item": "Tempered Ingot Mold", "quantity": 1 }
     ],
-    "recipeSkillLevel": 100
+    "recipeSkillLevel": 100,
+    "difficultyColor": "Red",
+    "observedAtSkill": 55
   },
   {
     "name": "Steel Bar",
     "slug": "steel-bar-2",
     "tradeskill": "Smelting",
+    "listOrder": 20,
     "components": [
       { "item": "Steel Scraps", "quantity": 6 },
       { "item": "Tempered Ingot Mold", "quantity": 1 }
     ],
-    "recipeSkillLevel": 100
+    "recipeSkillLevel": 100,
+    "difficultyColor": "Red",
+    "observedAtSkill": 55
+  },
+  {
+    "name": "Steel Scraps x4",
+    "slug": "steel-scraps-x4",
+    "tradeskill": "Smelting",
+    "listOrder": 21,
+    "difficultyColor": "Red",
+    "observedAtSkill": 55
   },
   {
     "name": "Platinum Bar",
