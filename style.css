@@ -355,8 +355,8 @@ body:not(.site-entered) .sidebar {
   margin: 18px 0 6px;
 }
 .items-search, .items-select {
-  background: var(--bg);
-  border: 1px solid var(--border);
+  background: var(--bg-panel-hover);
+  border: 1px solid var(--accent-dim);
   color: var(--text);
   padding: 8px 12px;
   border-radius: 6px;
@@ -367,9 +367,13 @@ body:not(.site-entered) .sidebar {
   flex: 1 1 220px;
   min-width: 180px;
 }
+.items-search::placeholder, .items-select::placeholder {
+  color: var(--text-dim);
+}
 .items-search:focus, .items-select:focus {
   outline: none;
-  border-color: var(--accent-dim);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
 }
 .items-clear-btn {
   background: transparent;
