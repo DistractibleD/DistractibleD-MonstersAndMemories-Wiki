@@ -6045,7 +6045,9 @@
       { "item": "Whispering Sage Powder", "quantity": 2 },
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 10
+    "recipeSkillLevel": 10,
+    "difficultyColor": "White",
+    "observedAtSkill": 1
   },
   {
     "name": "Minor Serum of Dexterity",
@@ -6060,13 +6062,15 @@
       { "item": "Nomad's Grace Powder", "quantity": 1 },
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 10
+    "recipeSkillLevel": 10,
+    "difficultyColor": "White",
+    "observedAtSkill": 1
   },
   {
     "name": "Minor Tincture of Sagacity",
     "slug": "minor-tincture-of-sagacity",
     "tradeskill": "Alchemy",
-    "description": "Free your mind, increasing your Casting Speed by 20% for 20 seconds.",
+    "description": "Free your mind, increasing your Casting Speed by 15% and Spell Damage dealt by 5% for 20 seconds.",
     "effect": "Minor Tincture of Sagacity (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
     "weight": 1.0,
     "size": "Small",
@@ -6075,7 +6079,9 @@
       { "item": "Sylvine Powder", "quantity": 2 },
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 10
+    "recipeSkillLevel": 10,
+    "difficultyColor": "Dark Blue",
+    "observedAtSkill": 1
   },
   {
     "name": "Crude Fish Oil",
@@ -6088,7 +6094,9 @@
       { "item": "Makeshift Vial", "quantity": 5 }
     ],
     "resultQuantity": 5,
-    "recipeSkillLevel": 15
+    "recipeSkillLevel": 15,
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 1
   },
   {
     "name": "Crude Wood Finish",
@@ -6097,10 +6105,12 @@
     "weight": 0.0,
     "size": "Small",
     "components": [
-      { "item": "Crude Fish Oil", "quantity": 2 },
+      { "item": "Crude Fish Oil", "quantity": 1 },
       { "item": "Resin", "quantity": 6 }
     ],
-    "recipeSkillLevel": 15
+    "recipeSkillLevel": 15,
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 1
   },
   {
     "name": "Minor Serum of Agility",
@@ -6114,13 +6124,15 @@
       { "item": "Ghost Poppy Powder", "quantity": 2 },
       { "item": "Sylvine Powder", "quantity": 2 },
       { "item": "Makeshift Vial", "quantity": 1 }
-    ]
+    ],
+    "difficultyColor": "Orange",
+    "observedAtSkill": 1
   },
   {
     "name": "Minor Tincture of Wrath",
     "slug": "minor-tincture-of-wrath",
     "tradeskill": "Alchemy",
-    "description": "Enrage yourself, increasing Physical Damage Dealt by 25% and Physical Damage received by 20% for 20 seconds.",
+    "description": "Enrage yourself, increasing your Physical Damage dealt by 10% and Physical Damage received by 20% for 20 seconds.",
     "effect": "Minor Tincture of Wrath (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
     "weight": 1.0,
     "size": "Small",
@@ -6128,7 +6140,9 @@
       { "item": "Ghost Poppy Powder", "quantity": 3 },
       { "item": "Snake Skin", "quantity": 1 },
       { "item": "Makeshift Vial", "quantity": 1 }
-    ]
+    ],
+    "difficultyColor": "Orange",
+    "observedAtSkill": 1
   },
   {
     "name": "Jar of Yellow Paint",
@@ -6142,7 +6156,9 @@
       { "item": "Saffron Powder", "quantity": 1 },
       { "item": "Jar of Egg Whites", "quantity": 1 },
       { "item": "Empty Jar", "quantity": 1 }
-    ]
+    ],
+    "difficultyColor": "Orange",
+    "observedAtSkill": 1
   },
   {
     "name": "Minor Serum of Strength",
@@ -6157,7 +6173,9 @@
       { "item": "Ghost Poppy Powder", "quantity": 2 },
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 30
+    "recipeSkillLevel": 30,
+    "difficultyColor": "Red",
+    "observedAtSkill": 1
   },
   {
     "name": "Eltindra's Blessing",
@@ -6187,7 +6205,9 @@
       { "item": "Whispering Sage Powder", "quantity": 2 },
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 30
+    "recipeSkillLevel": 30,
+    "difficultyColor": "Red",
+    "observedAtSkill": 1
   },
   {
     "name": "Potion of Prickly Barrier",
@@ -6202,7 +6222,9 @@
       { "item": "Fire Beetle Gland", "quantity": 1 },
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 35
+    "recipeSkillLevel": 35,
+    "difficultyColor": "Red",
+    "observedAtSkill": 1
   },
   {
     "name": "Minor Serum of Intelligence",
@@ -6217,7 +6239,9 @@
       { "item": "Nomad's Grace Powder", "quantity": 1 },
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 40
+    "recipeSkillLevel": 40,
+    "difficultyColor": "Red",
+    "observedAtSkill": 1
   },
   {
     "name": "Flux",
@@ -6230,7 +6254,9 @@
       { "item": "Limestone", "quantity": 2 },
       { "item": "Bone Ash", "quantity": 2 }
     ],
-    "recipeSkillLevel": 50
+    "recipeSkillLevel": 50,
+    "difficultyColor": "Red",
+    "observedAtSkill": 1
   },
   {
     "name": "Minor Serum of Stamina",
@@ -6245,7 +6271,9 @@
       { "item": "Lionleaf Powder", "quantity": 2 },
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 45
+    "recipeSkillLevel": 45,
+    "difficultyColor": "Red",
+    "observedAtSkill": 1
   },
   {
     "name": "Potion of the Sense Magic",
@@ -6260,7 +6288,9 @@
       { "item": "Wisp Dust", "quantity": 2 },
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 55
+    "recipeSkillLevel": 55,
+    "difficultyColor": "Red",
+    "observedAtSkill": 1
   },
   {
     "name": "Minor Stoneskin Tincture",
@@ -6509,8 +6539,12 @@
     "name": "Potion of Tranquility",
     "slug": "potion-of-tranquility",
     "tradeskill": "Alchemy",
+    "description": "Sooth your mind, increasing your Mana Regeneration by 2 for 20 minutes.",
+    "effect": "Potion of the Tranquility (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
     "components": [
-      { "item": "Duneleaf Powder", "quantity": 4 },
+      { "item": "Duneleaf Powder", "quantity": 3 },
       { "item": "Imperfect Sapphire Powder", "quantity": 4 },
       { "item": "Annealed Vial", "quantity": 1 }
     ]
@@ -6519,6 +6553,10 @@
     "name": "Lesser Stoneskin Tincture",
     "slug": "lesser-stoneskin-tincture",
     "tradeskill": "Alchemy",
+    "description": "Harden your skin, reducing all damage received by 15%, and decreasing your movement speed by 50% for 20 seconds.",
+    "effect": "Lesser Stoneskin Tincture (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
     "components": [
       { "item": "Duneleaf Powder", "quantity": 1 },
       { "item": "Drake Scale", "quantity": 1 },
@@ -6529,6 +6567,10 @@
     "name": "Serum of Dexterity",
     "slug": "serum-of-dexterity",
     "tradeskill": "Alchemy",
+    "description": "Balance yourself, increasing your Dexterity by 15 for 1 hour.",
+    "effect": "Serum of Dexterity (On Click. Any Slot. Cast Time: 5s, Level: 30)",
+    "weight": 1.0,
+    "size": "Small",
     "components": [
       { "item": "Duneleaf Powder", "quantity": 1 },
       { "item": "Shadeshroom Powder", "quantity": 1 },
@@ -6539,6 +6581,10 @@
     "name": "Serum of Wisdom",
     "slug": "serum-of-wisdom",
     "tradeskill": "Alchemy",
+    "description": "Center yourself, increasing your Wisdom by 15 for 1 hour.",
+    "effect": "Serum of Wisdom (On Click. Any Slot. Cast Time: 5s, Level: 30)",
+    "weight": 1.0,
+    "size": "Small",
     "components": [
       { "item": "Magebloom Powder", "quantity": 1 },
       { "item": "Dragon's Vigil Powder", "quantity": 1 },
@@ -6549,6 +6595,10 @@
     "name": "Lesser Elixir of Concentration",
     "slug": "lesser-elixir-of-concentration",
     "tradeskill": "Alchemy",
+    "description": "Enter a state of lucidity, granting you a chance to activate Lesser Concentration when casting spells for 1 hour.",
+    "effect": "Lesser Elixir of Concentration (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
     "components": [
       { "item": "Moonveil Powder", "quantity": 3 },
       { "item": "Still Elemental Core", "quantity": 2 },
@@ -6560,6 +6610,10 @@
     "name": "Lesser Elixir of Deadliness",
     "slug": "lesser-elixir-of-deadliness",
     "tradeskill": "Alchemy",
+    "description": "Become deadly, granting you the chance to activate Lesser Deadliness on melee attacks for 1 hour.",
+    "effect": "Lesser Elixir of Deadliness (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
     "components": [
       { "item": "Stranglevine Powder", "quantity": 3 },
       { "item": "Greater Elemental Core", "quantity": 4 },
@@ -6571,6 +6625,10 @@
     "name": "Lesser Elixir of Tenacity",
     "slug": "lesser-elixir-of-tenacity",
     "tradeskill": "Alchemy",
+    "description": "Become tenacious, granting you a chance to activate Lesser Brace and Lesser Resolve when hit for 1 hour.",
+    "effect": "Lesser Elixir of Tenacity (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
     "components": [
       { "item": "Ironroot Powder", "quantity": 4 },
       { "item": "Granite Heart", "quantity": 3 },
@@ -6582,10 +6640,108 @@
     "name": "Serum of Agility",
     "slug": "serum-of-agility",
     "tradeskill": "Alchemy",
+    "description": "Lighten yourself, increasing your Agility by 15 for 1 hour.",
+    "effect": "Serum of Agility (On Click. Any Slot. Cast Time: 5s, Level: 30)",
+    "weight": 1.0,
+    "size": "Small",
     "components": [
       { "item": "Stygian Moss Powder", "quantity": 1 },
       { "item": "Shadeshroom Powder", "quantity": 1 },
       { "item": "Tempered Vial", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Serum of Charisma",
+    "slug": "serum-of-charisma",
+    "tradeskill": "Alchemy",
+    "description": "Inspire yourself, increasing your Charisma by 15 for 1 hour.",
+    "effect": "Serum of Charisma (On Click. Any Slot. Cast Time: 5s, Level: 30)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Stygian Moss Powder", "quantity": 1 },
+      { "item": "Stranglevine Powder", "quantity": 2 },
+      { "item": "Tempered Vial", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Serum of Strength",
+    "slug": "serum-of-strength",
+    "tradeskill": "Alchemy",
+    "description": "Empower yourself, increasing your Strength by 15 for 1 hour.",
+    "effect": "Serum of Strength (On Click. Any Slot. Cast Time: 5s, Level: 30)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Duneleaf Powder", "quantity": 1 },
+      { "item": "Gadolvine Powder", "quantity": 1 },
+      { "item": "Tempered Vial", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Serum of Intelligence",
+    "slug": "serum-of-intelligence",
+    "tradeskill": "Alchemy",
+    "description": "Enlighten yourself, increasing your Intelligence by 15 for 1 hour.",
+    "effect": "Serum of Intelligence (On Click. Any Slot. Cast Time: 5s, Level: 30)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Magebloom Powder", "quantity": 1 },
+      { "item": "Gadolvine Powder", "quantity": 1 },
+      { "item": "Tempered Vial", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Tincture of Sagacity",
+    "slug": "tincture-of-sagacity",
+    "tradeskill": "Alchemy",
+    "description": "Free your mind, increasing your Casting Speed by 25% and Spell Damage dealt by 15% for 20 seconds.",
+    "effect": "Lesser Tincture of Sagacity (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
+    "note": "The effect line reads \"Lesser Tincture of Sagacity\" on the source table even though this recipe (unlike Minor/Lesser tier) has no \"Lesser\" in its own name — recorded verbatim rather than corrected, since the table may just be reusing the wrong tooltip text.",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Etheral Ectoplasm", "quantity": 1 },
+      { "item": "Magebloom Powder", "quantity": 1 },
+      { "item": "Tempered Vial", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Potion of Abyssal Breath",
+    "slug": "potion-of-abyssal-breath",
+    "tradeskill": "Alchemy",
+    "description": "Fill your lungs with magical air, granting you the ability to breathe underwater for 30 minutes.",
+    "effect": "Potion of Abyssal Breath (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Gadolvine Powder", "quantity": 2 },
+      { "item": "Great Bight Shark Fin", "quantity": 2 },
+      { "item": "Abyssal Watcher", "quantity": 1 },
+      { "item": "Tempered Vial", "quantity": 1 }
+    ]
+  },
+  {
+    "name": "Refined Fish Oil",
+    "slug": "refined-fish-oil",
+    "tradeskill": "Alchemy",
+    "description": "Fish Oil",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Any Raw Fish", "quantity": 5 },
+      { "item": "Tempered Vial", "quantity": 5 }
+    ],
+    "resultQuantity": 5
+  },
+  {
+    "name": "Refined Wood Finish",
+    "slug": "refined-wood-finish",
+    "tradeskill": "Alchemy",
+    "components": [
+      { "item": "Refined Fish Oil", "quantity": 1 },
+      { "item": "Resin", "quantity": 6 }
     ]
   },
   {

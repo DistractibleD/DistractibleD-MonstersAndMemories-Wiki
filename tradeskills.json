@@ -1,5 +1,5 @@
 [
-  { "name": "Alchemy", "status": "live" },
+  { "name": "Alchemy", "status": "live", "note": "Alchemist Vizyl is the alchemy trainer, located in the Blackfeather Bazaar in Night Harbor. Next to him is an alchemist who sells the required flasks and vials, and will buy back excess cauldrons and ingredients. Alchemy is a two-step process: first, grind herbs and reagents into powder using a Mortar and Pestle (place it in a bag slot to access its combine menu); then combine the powder with a vial inside a cauldron to produce the final product. Temporary cauldrons are player-crafted through Blacksmithing, while a permanent one can be bought from the alchemy vendor. Blacksmithing-made cauldrons have more combine slots at higher tiers: Copper (6), Tin (7), Bronze (8), Iron (9), Steel (10)." },
   { "name": "Animal Taming", "status": "planned" },
   { "name": "Archaeology", "status": "planned" },
   { "name": "Blacksmithing", "status": "live" },

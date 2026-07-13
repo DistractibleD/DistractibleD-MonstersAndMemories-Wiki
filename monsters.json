@@ -928,10 +928,19 @@
     "maps": ["Sungreet Strand"]
   },
   {
+    "name": "a palm hunter",
+    "slug": "a-palm-hunter",
+    "image": "images/Monsters/a-palm-hunter.jpg"
+  },
+  {
     "name": "an ashira shaman",
     "slug": "an-ashira-shaman",
     "image": "images/Monsters/an-ashira-shaman.jpg",
-    "maps": ["Sungreet Strand"]
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Lemon" },
+      { "item": "Onion" }
+    ]
   },
   {
     "name": "a hired thug",

@@ -2840,6 +2840,24 @@
     "race": ["ALL"]
   },
   {
+    "name": "Surgeon's Razor",
+    "slug": "surgeons-razor",
+    "image": "images/items/surgeons-razor.jpg",
+    "type": "Weapon",
+    "tags": ["MAGIC", "LORE"],
+    "slot": "Primary / Secondary",
+    "damage": 13,
+    "delay": 23,
+    "skill": "Stabbing",
+    "stats": { "STR": 1, "DEX": 2, "HP": 5 },
+    "effect": "Life Siphon (Chance On Hit. Level: 40)",
+    "description": "A cutter's knife.",
+    "weight": 1.2,
+    "size": "Small",
+    "classes": ["ARC", "BRD", "BST", "ELE", "ENC", "FTR", "INQ", "NEC", "RNG", "ROG", "SHD", "SHM", "SPB", "WIZ"],
+    "race": ["ALL"]
+  },
+  {
     "name": "Oak Wood Bo Staff",
     "slug": "oak-wood-bo-staff",
     "image": "images/items/oak-wood-bo-staff.jpg",
@@ -3525,6 +3543,21 @@
     "race": ["ALL"]
   },
   {
+    "name": "Skri'Var Scapula",
+    "slug": "skrivar-scapula",
+    "image": "images/items/skrivar-scapula.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Chest",
+    "ac": 41,
+    "stats": { "WIS": 6 },
+    "resists": { "POISON": 3 },
+    "weight": 6.0,
+    "size": "Medium",
+    "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"]
+  },
+  {
     "name": "Filthy Cloth Hood",
     "slug": "filthy-cloth-hood",
     "image": "images/items/filthy-cloth-hood.jpg",
@@ -3752,6 +3785,18 @@
     "tags": [],
     "description": "This is a light snack.",
     "weight": 0.2,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Lemon",
+    "slug": "lemon",
+    "image": "images/items/lemon.jpg",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a light snack. A yellow citrus fruit with a sour-sweet flavor.",
+    "weight": 0.5,
     "size": "Small",
     "classes": ["ALL"],
     "race": ["ALL"]
