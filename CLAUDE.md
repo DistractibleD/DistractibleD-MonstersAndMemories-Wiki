@@ -1301,6 +1301,47 @@ Item Database (or a future feature) doesn't seem to apply, check this first — 
 specificity (`.content-inner .my-class`) or, more robustly, control visibility via inline
 styles set from JS rather than relying on a CSS class toggle.
 
+**Second gotcha (found/fixed 2026-07-14):** `.layout` is `display: flex` with
+`align-items: flex-start` — needed for the desktop side-by-side row (sidebar + content),
+so the sidebar column doesn't stretch to match content's height. But at the mobile
+breakpoint `.layout` switches to `flex-direction: column`, and `align-items` then governs
+the *width* (cross axis) instead of height — `flex-start` means children stop stretching
+to fill it. `.sidebar` had its own explicit `width: 100%` override to compensate, but
+`.content` never did, so at any narrow-but-not-quite-mobile width (~780-900px) `.content`
+collapsed to fit-content width (as little as ~200px) instead of filling the screen,
+stranding the fixed background art in the leftover gap on both sides — this was the root
+cause of the "looks absolutely awful in tall narrow format" report. Fixed by adding
+`align-items: stretch` to `.layout` inside the mobile media query, restretching the whole
+column instead of patching each child's width individually. If a future narrow-layout
+change adds a new direct child of `.layout`, it gets this stretch behavior for free — no
+per-child width override needed, unlike the sidebar's pre-existing one.
+
+## Mobile / narrow-viewport layout (2026-07-14)
+
+The user reported the site "looks absolutely awful" in a tall/narrow browser window and
+asked for general narrow-viewport optimization (both for a resized desktop window and
+real mobile phones). Three changes, all scoped to media queries so desktop (>900px) is
+untouched:
+
+- **Structural breakpoint raised from 780px to 900px** (`.layout { flex-direction: column
+  }`, sidebar stacking, table/column-width tweaks) — 780px left an awkward dead zone
+  (~780-900px) where the sidebar still took its fixed 230px desktop column width
+  alongside content, squeezing everything else into a cramped single column even though
+  the window wasn't really "mobile" by any reasonable definition. 900px comfortably
+  covers that zone without changing behavior for genuine tablet/desktop widths.
+- **The `.content` width bug above** — the actual root cause of the reported look, not
+  just the breakpoint threshold.
+- **Sidebar nav in stacked mode restyled as rounded pill chips** (`.sidebar-link` gets a
+  background + `border-radius: 20px` inside the mobile query) instead of plain wrapped
+  text, so the flex-wrap nav row reads as tappable buttons rather than loose floating
+  words.
+- **New `@media (max-width: 480px)` tier** for real phone widths: tighter padding at every
+  layer (`.layout`, `.sidebar`, `.content`, `.content-inner`, `.header-inner`) so panels
+  sit close to the screen edges instead of floating as small islands surrounded by
+  background art, plus `background-attachment: scroll` (the site-wide fixed background
+  is known to be janky/inconsistent on mobile browsers, and pointless once panels fill
+  nearly the whole viewport anyway).
+
 ## Splash screen (2026-07-13)
 
 A full-viewport gate (`#splash-screen` in `index.html`) shows in front of everything on

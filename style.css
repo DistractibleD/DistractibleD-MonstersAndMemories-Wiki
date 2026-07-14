@@ -1227,15 +1227,46 @@ body:not(.site-entered) .sidebar {
   text-decoration: none;
 }
 
-/* ---------- Mobile ---------- */
-@media (max-width: 780px) {
-  .layout { flex-direction: column; }
+/* ---------- Mobile ----------
+   Threshold raised from 780 to 900 (was leaving an awkward zone — a
+   narrow-but->780px browser window, e.g. ~800px, still got the fixed
+   230px desktop sidebar squeezing content into a cramped single column
+   while background art bled through the leftover space on both sides).
+   900px comfortably covers that zone; iPad portrait (768) and anything
+   narrower already hit this breakpoint the same as before. */
+@media (max-width: 900px) {
+  /* .layout's align-items: flex-start (set for the desktop row layout, so
+     the sidebar column doesn't stretch to match content's height) has a
+     side effect once flex-direction flips to column: width becomes the
+     cross axis, and flex-start means children no longer stretch to fill
+     it. .sidebar already had an explicit width:100% override to compensate
+     — .content never did, so it collapsed to fit-content width instead of
+     filling the screen, leaving the content column narrow and stranding
+     background art in the gap. Restretch the whole column instead of
+     patching each child individually. */
+  .layout { flex-direction: column; align-items: stretch; gap: 18px; padding: 20px 14px 40px; }
   .sidebar {
     width: 100%;
     position: static;
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
+  }
+  /* Nav links read as one-per-line block text in the desktop sidebar;
+     as a wrapped horizontal row they need their own visual boundary
+     (background + rounded pill) so they read as tappable nav chips
+     instead of loose floating words. */
+  .sidebar-link {
+    flex: 0 0 auto;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    background: var(--bg-panel-hover);
+    border-radius: 20px;
+    border-left: none;
+  }
+  .sidebar-link.active {
+    border-left: none;
+    box-shadow: inset 0 0 0 1px var(--accent-dim);
   }
   .content-inner { padding: 24px 22px; }
   #search-box { width: 140px; }
@@ -1308,6 +1339,24 @@ body:not(.site-entered) .sidebar {
   .content-inner .items-table td.cell-empty { display: none; }
   .content-inner .items-table td:first-child { background: var(--bg-panel-hover); }
   .content-inner .items-table td:first-child::before { display: none; }
+}
+
+/* True phone widths: tighten every layer of padding so the sidebar/content
+   panels sit close to the screen edges instead of floating as small islands
+   surrounded by background art, and drop background-attachment: fixed
+   (janky/inconsistent on mobile browsers, and pointless once the panels
+   fill nearly the whole viewport anyway). */
+@media (max-width: 480px) {
+  html, body { background-attachment: scroll; }
+  .header-inner { padding: 12px 14px; gap: 10px; }
+  .site-title { font-size: 1.1rem; }
+  .layout { padding: 14px 10px 32px; gap: 14px; }
+  .sidebar { padding: 10px; border-radius: 8px; }
+  .content { padding: 4px; border-radius: 8px; }
+  .content-inner { padding: 16px 14px; }
+  .content-inner h1 { font-size: 1.5rem; }
+  .items-category-grid { gap: 10px; }
+  .items-category-card { padding: 12px; }
 }
 
 /* ---------- Submit a Screenshot ---------- */

@@ -1,84 +1,17 @@
-Items with possibly missing information
+Items with missing information
 =========================================
 
-This file tracks items where the *data* in items.json might be incomplete — not whether
-the saved screenshot's border/crop is complete. Since 2026-07-04 the site builds its own
-card from items.json and no longer displays the screenshot at all, so a screenshot that's
-visually cut off (missing border, text running to the raw edge) no longer matters on its
-own — only whether the actual stats/text made it into items.json. Screenshots are still
-kept (as .jpg) purely as the reference used to extract that data, per the user's
-2026-07-04 confirmation.
+Tracks items.json entries that are missing data (not screenshot cropping — the site
+renders cards from items.json, not the screenshot, so only missing data matters).
 
-Resolved (2026-07-14):
-
-- Tattered Rawhide Shoulderpads — a full card came in ("a skeletal marksman"'s own
-  loot-window screenshot), completing AC/Weight/Size/Class/Race. Full items.json entry
-  added; now links correctly from every monster's drop list.
-
-Update (2026-07-04, re-check of every item previously flagged in this file):
-
-- Torch — WAS missing data, now fixed. The card (images/items/torch.jpg) has an "Effect:"
-  line ("Torch (Passive. Must Equip. Level: 1)") and a description ("A simple torch.")
-  that had never actually been added to items.json (previous notes here were only about
-  the image's bottom border being cropped, not about the data itself) — both are now
-  added. Two more things on this card don't fit any existing schema field and weren't
-  added: "Fuel: 100%" (looks like a consumable/instance resource level, not a fixed item
-  property — no other item has shown anything like it) and "Right-click to activate."
-  (a green action-flag line, similar to a container's "Right-click to open." but not
-  currently tracked as a field for any item type). Flagging these in case a future card
-  clarifies whether they're worth a schema field.
-- Stained Black Iron Dagger — data is complete (full 14-class list, race, description all
-  present in items.json). The earlier note here was only about the saved screenshot being
-  visually cut off, which no longer matters since the screenshot isn't displayed. No action
-  needed.
-- The Measure Stick — data is complete (effect, description, weight/class/race all present,
-  merged from a two-screenshot capture back when screenshots were still the display). No
-  action needed.
-- Mining Pouch — data is complete; the earlier note was only about the image's cropped
-  border. No action needed.
-
-Nothing else has been flagged as incomplete. This file will be updated only when there's
-a specific reason to believe an item's data (not its screenshot) is missing something.
-
-Resolved (2026-07-07):
-
-- Rusty War Lance's "Skill: STA" — resolved. Three more "a rotting skeleton" loot-window
-  recaptures came in showing the same abbreviated style ("Skill: SLA") on Rusty Battle Axe,
-  Rusty Great Scythe, and the new Rusty Scimitar — all three already had (or could be
-  cross-checked against) a full-word `"skill": "Slashing"`, confirming "SLA" is just an
-  abbreviated rendering of "Slashing" in this particular loot-linked card view, not a
-  different skill. By the same 3-letter pattern, "STA" is "Stabbing" (also consistent with
-  a lance being a stabbing weapon everywhere else in this schema). Updated
-  `Rusty War Lance`'s `skill` to `"Stabbing"` in items.json.
-
-New flag (2026-07-11):
-
-- Corrupted Leather Cap, Mask, Shoulderpads, Cloak, Robe, Bracer, Belt, Gloves, Boots — these
-  9 pieces are recorded as drops on "the corrupted ashira" (monsters.json) but have no
-  items.json entry yet. Source is a fan-wiki-style reference table (Armor Slot/Race/Class/
-  AC/Stats columns only — no Weight or Size column at all), and per this repo's convention
-  every item needs a weight/size (renderItemCardHTML shows them unconditionally, no "not yet
-  known" fallback the way foundAt has). None of these 9 rows should be trusted as exact
-  until a real in-game card confirms them. Add proper items.json entries once screenshots of
-  these 9 pieces come in.
-  (Correction 2026-07-11: "Sand-Blasted Coif"/"Sand-Blasted Boots" were briefly recorded as
-  alternate Head/Feet drops for this same monster — the user has since confirmed those two
-  actually drop in a different zone, unrelated to "the corrupted ashira", so they've been
-  removed from its drop list. Their own items.json entries are unaffected, just the
-  drop-source link.)
-  (Update 2026-07-11: the user confirmed "Corrupted Leather" is a blanket/category term for
-  this exact 12-piece set, not a separate item — matching how it was already recorded. The
-  user also named one more drop from this monster, "Corrupted Leather Scraps", presumably a
-  raw material like Rawhide/Hide/Leather Scraps from Tanning — added to "the corrupted
-  ashira"'s drop list as plain text, no items.json entry yet since no weight/size/stats are
-  known for it.)
-
-New flag (2026-07-06):
-
-- Lunar Festival Trousers — the inbox screenshot shows MAGIC/Slot/AC/stats/SV Magic/
-  description/Weight/Size/Class, then nothing — no "Race:" line at all, unlike every other
-  piece of armor processed so far. Every other card in this batch had one, so this looks
-  more like the screenshot being cut off right at the bottom edge than the item genuinely
-  having no race restriction. Added to items.json without a `race` field for now (rather
-  than guessing `["ALL"]`) — if the user reposts this card (or confirms there's really no
-  Race line on it), update the entry rather than leaving it as a silent gap.
+- Corrupted Leather Cap, Shoulderpads, Cloak, Robe, Bracer, Belt, Gloves, Boots — drops on
+  "the corrupted ashira" (monsters.json), no items.json entry yet. Source table has no
+  Weight/Size column, so these can't be added until a real in-game card comes in.
+- Corrupted Leather Scraps — drop on "the corrupted ashira", no items.json entry yet
+  (no weight/size known).
+- Lunar Festival Trousers — missing `race`. Screenshot cuts off right after Class, no
+  "Race:" line visible; every other armor card in its batch had one, so this is likely a
+  crop issue rather than a real absence. Update if a fuller screenshot comes in.
+- Rusty Throwing Dagger, Rusty Longsword, Rusty Mace — the last 3 of the 18-piece Rusty
+  set with no items.json entry yet (name inferred from the set's naming pattern, no stats
+  confirmed). Every other Rusty piece already has a full card.

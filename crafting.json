@@ -6266,8 +6266,8 @@
       { "item": "Resin", "quantity": 6 }
     ],
     "recipeSkillLevel": 15,
-    "difficultyColor": "Yellow",
-    "observedAtSkill": 1
+    "difficultyColor": "Green",
+    "observedAtSkill": 20
   },
   {
     "name": "Minor Serum of Agility",
@@ -6283,8 +6283,8 @@
       { "item": "Sylvine Powder", "quantity": 2 },
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
-    "difficultyColor": "Orange",
-    "observedAtSkill": 1
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 20
   },
   {
     "name": "Minor Tincture of Wrath",
@@ -6300,8 +6300,8 @@
       { "item": "Snake Skin", "quantity": 1 },
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
-    "difficultyColor": "Orange",
-    "observedAtSkill": 1
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 20
   },
   {
     "name": "Jar of Yellow Paint",
@@ -6317,8 +6317,8 @@
       { "item": "Jar of Egg Whites", "quantity": 1 },
       { "item": "Empty Jar", "quantity": 1 }
     ],
-    "difficultyColor": "Orange",
-    "observedAtSkill": 1
+    "difficultyColor": "Green",
+    "observedAtSkill": 20
   },
   {
     "name": "Minor Serum of Strength",
@@ -6335,8 +6335,8 @@
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
     "recipeSkillLevel": 30,
-    "difficultyColor": "Red",
-    "observedAtSkill": 1
+    "difficultyColor": "White",
+    "observedAtSkill": 20
   },
   {
     "name": "Eltindra's Blessing",
@@ -6369,8 +6369,8 @@
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
     "recipeSkillLevel": 30,
-    "difficultyColor": "Red",
-    "observedAtSkill": 1
+    "difficultyColor": "White",
+    "observedAtSkill": 20
   },
   {
     "name": "Potion of Prickly Barrier",
@@ -6387,8 +6387,8 @@
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
     "recipeSkillLevel": 35,
-    "difficultyColor": "Red",
-    "observedAtSkill": 1
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 20
   },
   {
     "name": "Minor Serum of Intelligence",
@@ -6405,8 +6405,9 @@
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
     "recipeSkillLevel": 40,
-    "difficultyColor": "Red",
-    "observedAtSkill": 1
+    "difficultyColor": "Orange",
+    "observedAtSkill": 20,
+    "note": "This recipe's difficulty read Orange at the bottom of one Alchemy-20 crafting-window screenshot, but the overlapping row at the top of the next screenshot in the same batch (2026-07-14) read closer to Red — pixel-sampled and still genuinely ambiguous between the two shades. Orange was kept since it fits the surrounding color gradient (Yellow before, confirmed Red after), but flag for re-confirmation if a clearer capture comes in."
   },
   {
     "name": "Flux",
@@ -6422,7 +6423,7 @@
     ],
     "recipeSkillLevel": 50,
     "difficultyColor": "Red",
-    "observedAtSkill": 1
+    "observedAtSkill": 20
   },
   {
     "name": "Minor Serum of Stamina",
@@ -6440,13 +6441,14 @@
     ],
     "recipeSkillLevel": 45,
     "difficultyColor": "Red",
-    "observedAtSkill": 1
+    "observedAtSkill": 20
   },
   {
-    "name": "Potion of the Sense Magic",
-    "slug": "potion-of-the-sense-magic",
+    "name": "Potion of Sense Magic",
+    "slug": "potion-of-sense-magic",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
+    "image": "images/crafting/potion-of-sense-magic.jpg",
     "description": "Glaze your eyes with a magical coating, granting you the ability to see magical effects when considering targets for 30 minutes.",
     "effect": "Potion of Sense Magic (On Click. Any Slot. Cast Time: 5s, Level: 1)",
     "weight": 1.0,
@@ -6458,14 +6460,16 @@
     ],
     "recipeSkillLevel": 55,
     "difficultyColor": "Red",
-    "observedAtSkill": 1
+    "observedAtSkill": 20,
+    "note": "Previously recorded as \"Potion of the Sense Magic\" — corrected 2026-07-14 to match the recipe card's actual title (\"Potion of Sense Magic\", no \"the\") once a full card came in."
   },
   {
     "name": "Minor Stoneskin Tincture",
     "slug": "minor-stoneskin-tincture",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
-    "description": "Harden your skin, reducing Physical Damage and Spell Damage received by 15%, and decreasing your Movement Speed by 50% for 20 seconds.",
+    "image": "images/crafting/minor-stoneskin-tincture.jpg",
+    "description": "Harden your skin, reducing all damage received by 10%, and decreasing your Movement Speed by 50% for 20 seconds.",
     "effect": "Minor Stoneskin Tincture (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
     "weight": 1.0,
     "size": "Small",
@@ -6474,15 +6478,18 @@
       { "item": "Lionleaf Powder", "quantity": 1 },
       { "item": "Makeshift Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 55
+    "recipeSkillLevel": 55,
+    "difficultyColor": "Red",
+    "observedAtSkill": 20
   },
   {
     "name": "Minor Elixir of Deadliness",
     "slug": "minor-elixir-of-deadliness",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
+    "image": "images/crafting/minor-elixir-of-deadliness.jpg",
     "description": "Become deadly, granting you a chance to activate Minor Deadliness on melee attacks for 1 hour.",
-    "effect": "Minor Elixir of Deadliness (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
+    "effect": "Minor Elixir of Deadliness (On Click. Any Slot. Cast Time: 5s, Level: 1)",
     "weight": 1.0,
     "size": "Small",
     "components": [
@@ -6491,32 +6498,38 @@
       { "item": "Ghost Poppy Powder", "quantity": 4 },
       { "item": "Enchanted Powder", "quantity": 2 }
     ],
-    "recipeSkillLevel": 55
+    "recipeSkillLevel": 55,
+    "difficultyColor": "Red",
+    "observedAtSkill": 20
   },
   {
     "name": "Minor Elixir of Tenacity",
     "slug": "minor-elixir-of-tenacity",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
+    "image": "images/crafting/minor-elixir-of-tenacity.jpg",
     "description": "Become tenacious, granting you a chance to activate Minor Resolve when hit for 1 hour.",
-    "effect": "Minor Elixir of Tenacity (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
+    "effect": "Minor Elixir of Tenacity (On Click. Any Slot. Cast Time: 5s, Level: 1)",
     "weight": 1.0,
     "size": "Small",
     "components": [
-      { "item": "Lionleaf Powder", "quantity": 6 },
+      { "item": "Lionleaf Powder", "quantity": 5 },
       { "item": "Dryad Sap", "quantity": 2 },
       { "item": "Enchanted Powder", "quantity": 2 },
       { "item": "Crude Flask", "quantity": 1 }
     ],
-    "recipeSkillLevel": 60
+    "recipeSkillLevel": 60,
+    "difficultyColor": "Red",
+    "observedAtSkill": 20
   },
   {
     "name": "Minor Elixir of Concentration",
     "slug": "minor-elixir-of-concentration",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
+    "image": "images/crafting/minor-elixir-of-concentration.jpg",
     "description": "Enter a state of lucidity, granting you a chance to activate Minor Concentration when casting spells for 1 hour.",
-    "effect": "Minor Elixir of Concentration (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
+    "effect": "Minor Elixir of Concentration (On Click. Any Slot. Cast Time: 5s, Level: 1)",
     "weight": 1.0,
     "size": "Small",
     "components": [
@@ -6525,14 +6538,17 @@
       { "item": "Enchanted Powder", "quantity": 1 },
       { "item": "Crude Flask", "quantity": 1 }
     ],
-    "recipeSkillLevel": 60
+    "recipeSkillLevel": 60,
+    "difficultyColor": "Red",
+    "observedAtSkill": 20
   },
   {
     "name": "Lesser Serum of Dexterity",
     "slug": "lesser-serum-of-dexterity",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
-    "description": "Focus yourself, increasing Dexterity by 10 for 1 hour.",
+    "image": "images/crafting/lesser-serum-of-dexterity.jpg",
+    "description": "Balance yourself, increasing your Dexterity by 10 for 1 hour.",
     "effect": "Lesser Serum of Dexterity (On Click. Any Slot. Cast Time: 5s, Level: 15)",
     "weight": 1.0,
     "size": "Small",
@@ -6541,7 +6557,9 @@
       { "item": "Moonveil Powder", "quantity": 1 },
       { "item": "Annealed Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 65
+    "recipeSkillLevel": 65,
+    "difficultyColor": "Red",
+    "observedAtSkill": 20
   },
   {
     "name": "Lesser Serum of Wisdom",
