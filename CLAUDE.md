@@ -27,6 +27,32 @@ user hasn't posted about yet (e.g. the tradeskill difficulty-color wording), but
 one to override, "correct," or second-guess something the user actually posted a screenshot
 of — if the two disagree, say so and ask rather than quietly going with the external source.
 
+## The To-Do folder
+
+`To-Do/` (repo root) is where every gap-tracking / prediction / "things to look for in game"
+list lives — content aimed at the user and future Claude sessions, never linked from the site
+and never loaded by any code (`script.js` doesn't fetch anything from this folder). Consolidated
+here 2026-07-14 (previously scattered: two files sat loose at the repo root, one in `images/`):
+
+- `To-Do/items-needing-text.txt` — items.json entries with missing/incomplete data (not
+  screenshot-cropping issues — see the file's own header). Referenced from "Adding an item
+  to the Item Database" below and occasionally from a monster's own `rumor` text.
+- `To-Do/crafting-skill-estimates.md` — speculative numeric skill-requirement guesses for
+  crafting recipes, kept separate from `crafting.json`'s real `recipeSkillLevel` field
+  (never write a guess into that field — see "Adding a crafting recipe" below).
+- `To-Do/crafting-recipes-missing-components.txt` — crafting.json recipes with no (or a
+  partial) `components` list yet.
+- `To-Do/predicted-missing-items.txt` — items inferred to probably exist from a naming/slot
+  pattern already seen elsewhere in items.json (e.g. a material tier that's missing a piece
+  every sibling tier has), not from any screenshot. Stale as of this writing (last touched
+  2026-07-02) — revisit next time a relevant batch comes through.
+
+**Any future list of this kind — missing data, predicted-but-unconfirmed items, anything
+framed as "watch for this in game" — goes in `To-Do/` too**, not loose at the repo root or
+tucked into `images/`. Update an existing file in place when it already covers the topic
+rather than creating a near-duplicate; only start a new file for a genuinely distinct kind of
+gap.
+
 ## Adding a normal wiki page
 
 1. Write the content as a `.md` file in `pages/`.
@@ -54,7 +80,7 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
    specific races listed on the card if it isn't ALL. If a card is missing its Race line
    entirely where every other card in the batch had one, that's more likely a cropped
    screenshot than a real absence — leave `race` unset and flag it in
-   `images/items-needing-text.txt` rather than guessing `["ALL"]` (see "Lunar Festival
+   `To-Do/items-needing-text.txt` rather than guessing `["ALL"]` (see "Lunar Festival
    Trousers", 2026-07-06).
 2. Check the card for a tag line directly below the item name and above "Slot:" — e.g.
    "MAGIC". Capture every such tag (not just MAGIC) in a `tags` array, e.g. `["MAGIC"]` or
@@ -234,7 +260,7 @@ extending it the same way as new fields show up on future cards, rather than gue
   it to the user rather than guessing a new one. **Still record these fields on every recipe
   (from a recipe card or a crafting-window screenshot) even though the site no longer
   displays them** (removed 2026-07-03, see below) — they're the raw data the skill estimates
-  in `crafting-skill-estimates.md` are calculated from.
+  in `To-Do/crafting-skill-estimates.md` are calculated from.
 - **A recipe card can arrive well after the fact and disagree with the most recent
   crafting-window capture — that's expected, not an error.** E.g. a batch of individual
   Leatherworking recipe cards processed 2026-07-03 showed Red/Yellow/Dark Blue for several
@@ -265,7 +291,7 @@ extending it the same way as new fields show up on future cards, rather than gue
   Blue/Light Blue/Green) still mean it's easier — that relative ordering isn't in question,
   only the idea that White marks an exact single point rather than another band like the
   rest. Keep recording `difficultyColor`/`observedAtSkill` data points as always; see
-  `crafting-skill-estimates.md` (also corrected 2026-07-04) for the speculative-estimate
+  `To-Do/crafting-skill-estimates.md` (also corrected 2026-07-04) for the speculative-estimate
   side of this.
 
   **One narrow exception that *is* safe to set exactly (confirmed 2026-07-04):** a recipe
@@ -287,7 +313,7 @@ extending it the same way as new fields show up on future cards, rather than gue
   Blacksmithing), write it straight into `recipeSkillLevel`. A vague Trivial value (`"?"`, or
   a `"90+"`/`"120+"` floor-only value) still doesn't count — only write in an exact stated
   number. This retroactively upgraded every exact Trivial figure already sitting in
-  `crafting-skill-estimates.md` from Tanning and Leatherworking into `recipeSkillLevel` — see
+  `To-Do/crafting-skill-estimates.md` from Tanning and Leatherworking into `recipeSkillLevel` — see
   those tradeskills' entries in `crafting.json`.
 - `listOrder` — an integer giving the recipe's position in the game's own crafting-window
   list (1 = first/lowest skill requirement). This is what the Crafting page actually sorts
@@ -323,7 +349,7 @@ else, or to the same user later once their skill changes). `difficultyColor`/`di
 bullets above — they're just not rendered anywhere on the site anymore. In the same request,
 the user asked to keep trying to guess/calculate each recipe's real numeric skill
 requirement "in the background." That speculative work lives entirely in
-`crafting-skill-estimates.md` at the repo root (not linked from the site, not loaded by any
+`To-Do/crafting-skill-estimates.md` (not linked from the site, not loaded by any
 code) — read it before adding new estimates, and update it (not `crafting.json`) whenever
 new observations come in, especially a recapture at a different skill level, since that's
 what actually sharpens the estimate. Never write a guessed (or, per the 2026-07-04
@@ -450,7 +476,7 @@ The only source available for the pelt→scrap mapping itself was a screenshot t
 a fan-wiki table (sortable-column styling, hyperlinked names), not the live game or an
 in-game window — per "The user's screenshots are the source of truth" above, that makes it
 weaker than a normal capture for anything *not* stated outright. Its "Trivial" skill column
-was originally recorded only in `crafting-skill-estimates.md` rather than `recipeSkillLevel`,
+was originally recorded only in `To-Do/crafting-skill-estimates.md` rather than `recipeSkillLevel`,
 but per the 2026-07-07 clarification above (Trivial *is* recipeSkillLevel, not a guess), the
 two exact values from that table (25 for Low-Quality, 50 for Medium-Quality) have since been
 promoted into `crafting.json` directly; the `>50` High-Quality value stays a floor-only note
@@ -515,19 +541,39 @@ re-open every existing file in `images/items/`, `images/Maps/`, `images/crafting
 `images/Monsters/` to go looking for problems. If a task requires checking already-processed
 images, say so and ask the user rather than re-scanning everything.
 
+**Move the batch out of the inbox before reading anything (2026-07-14).** The user
+regularly drops new screenshots into `images/inbox/` *while* a previous batch is still
+being processed — earlier this caused a real incident: a session listed the inbox, spent
+several minutes reading/processing that batch, and then cleared the inbox with a wildcard
+delete at the end, which caught screenshots the user had dropped in mid-session that were
+never read at all, permanently deleting them (`images/inbox/` isn't git-tracked, so there
+was no way to recover them). To make this race condition structurally impossible instead of
+just being careful: **before reading any file, `mv` (not copy) every file currently in
+`images/inbox/` into `images/Processing/`** (create it if it doesn't exist), and do all
+reading/processing/deleting from `images/Processing/` for the rest of the task —
+`images/inbox/` is never touched again after that one move. Any screenshot the user drops
+in afterward lands in `images/inbox/`, completely isolated from the batch already being
+worked on, and simply becomes the start of the *next* session's move instead of being
+caught by this one's cleanup. `images/Processing/` should always be empty between sessions
+— a non-empty one when a task starts means a previous session ended mid-batch (crashed,
+was interrupted, etc.); pick up processing those files rather than re-moving from
+`images/inbox/` again.
+
 Workflow when asked to process new items (or "check the inbox"):
 
-1. List `images/inbox/` — each file there is one unprocessed screenshot.
-2. For each one: read the image and figure out whether it's an **item** (the stat-card
+1. Move every file currently in `images/inbox/` into `images/Processing/` (see above) —
+   this is the one and only time `images/inbox/` gets touched during the task.
+2. List `images/Processing/` — each file there is one unprocessed screenshot.
+3. For each one: read the image and figure out whether it's an **item** (the stat-card
    popup style used elsewhere in this doc), a **map** (a game map/zone image, no stat
    card), a **recipe** (a single crafting card, same popup style as an item but with a
    "Components:" list), a **crafting window** (the in-game tradeskill window listing
    many known recipes at once, e.g. titled "Leatherworking" with a skill number at the
    bottom), or a **monster** (a picture of a creature, no stat card at all — see "Adding a
    monster" below) — then follow the matching path below.
-3. Once a file has been moved out (to `images/items/`, `images/Maps/`, `images/crafting/`,
-   or `images/Monsters/`) or deleted as a duplicate, `images/inbox/` should no longer contain
-   it — an empty inbox means everything is processed.
+4. Once a file has been moved out (to `images/items/`, `images/Maps/`, `images/crafting/`,
+   or `images/Monsters/`) or deleted as a duplicate, `images/Processing/` should no longer
+   contain it — an empty `images/Processing/` means everything from this batch is processed.
 
 **Duplicates (items/maps/recipes alike, confirmed 2026-07-04):** if a screenshot's item/map/
 recipe already exists (matched by slug or name), just delete it from the inbox — don't save
@@ -634,7 +680,7 @@ the inbox, don't move them into `images/crafting/`.
    in `script.js`) — the user confirmed 2026-07-03 that the game's own list order is already
    sorted by real skill requirement, low to high, so this position doubles as a difficulty
    ranking without needing the (unreliable) color-based guessing in
-   `crafting-skill-estimates.md`. Capture/update `listOrder` on *every* recipe seen in the
+   `To-Do/crafting-skill-estimates.md`. Capture/update `listOrder` on *every* recipe seen in the
    window, including ones that already have a full card (unlike `difficultyColor` above, this
    field isn't something a real recipe card ever shows, so there's no "actual card" data to
    protect from being overwritten). If a screenshot batch only covers a portion of the full
@@ -1068,7 +1114,7 @@ with no item-card screenshot yet had to borrow the recipe card's picture as a st
 to have something to show) — a card never needs to scroll or borrow another entry's picture,
 since its layout just wraps to fit whatever fields exist. Cut-off/truncated screenshot text
 is now purely a data-completeness question (did the missing text make it into the JSON?),
-not a display problem — see `images/items-needing-text.txt`, which tracks exactly that.
+not a display problem — see `To-Do/items-needing-text.txt`, which tracks exactly that.
 
 **The renderer:** `renderItemCardHTML(item)` (items) and `renderRecipeCardHTML(recipe)`
 (recipes) in `script.js` build the card's HTML from scratch each time it's shown — header

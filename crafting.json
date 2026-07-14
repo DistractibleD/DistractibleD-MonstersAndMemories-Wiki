@@ -597,7 +597,7 @@
       { "item": "Copper Fasteners", "quantity": 3 }
     ],
     "difficultyColor": "Red",
-    "observedAtSkill": 24
+    "observedAtSkill": 35
   },
   {
     "name": "Enchanted Cloth Cap",
@@ -613,7 +613,7 @@
       { "item": "Copper Fasteners", "quantity": 2 }
     ],
     "difficultyColor": "Red",
-    "observedAtSkill": 24
+    "observedAtSkill": 35
   },
   {
     "name": "Enchanted Cloth Pants",
@@ -629,7 +629,7 @@
       { "item": "Copper Fasteners", "quantity": 3 }
     ],
     "difficultyColor": "Red",
-    "observedAtSkill": 24
+    "observedAtSkill": 35
   },
   {
     "name": "Fine Cloth Robe",
@@ -645,7 +645,7 @@
       { "item": "Copper Fasteners", "quantity": 3 }
     ],
     "difficultyColor": "Red",
-    "observedAtSkill": 24
+    "observedAtSkill": 35
   },
   {
     "name": "Fine Cloth Tunic",
@@ -660,8 +660,163 @@
       { "item": "Rough Thread", "quantity": 3 },
       { "item": "Copper Fasteners", "quantity": 3 }
     ],
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 50
+  },
+  {
+    "name": "Enchanted Cloth Tunic",
+    "slug": "enchanted-cloth-tunic",
+    "image": "images/crafting/enchanted-cloth-tunic.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 21,
+    "weight": 1.1,
+    "size": "Medium",
+    "components": [
+      { "item": "Enchanted Bolt of Cloth", "quantity": 4 },
+      { "item": "Rough Thread", "quantity": 3 },
+      { "item": "Copper Fasteners", "quantity": 3 }
+    ],
+    "difficultyColor": "Orange",
+    "observedAtSkill": 50
+  },
+  {
+    "name": "Bolt of Wool",
+    "slug": "bolt-of-wool",
+    "image": "images/crafting/bolt-of-wool.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 22,
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Wool Scraps", "quantity": 6 }
+    ],
+    "difficultyColor": "Orange",
+    "observedAtSkill": 50
+  },
+  {
+    "name": "Wool Padding",
+    "slug": "wool-padding",
+    "image": "images/crafting/wool-padding.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 23,
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Wool Scraps", "quantity": 2 }
+    ],
     "difficultyColor": "Red",
-    "observedAtSkill": 24
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Fine Wool Bracer",
+    "slug": "fine-wool-bracer",
+    "image": "images/crafting/fine-wool-bracer.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 24,
+    "weight": 0.25,
+    "size": "Small",
+    "components": [
+      { "item": "Bolt of Wool", "quantity": 1 },
+      { "item": "Rough Thread", "quantity": 1 },
+      { "item": "Bronze Fasteners", "quantity": 2 }
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Fine Wool Gorget",
+    "slug": "fine-wool-gorget",
+    "image": "images/crafting/fine-wool-gorget.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 25,
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Bolt of Wool", "quantity": 1 },
+      { "item": "Rough Thread", "quantity": 1 },
+      { "item": "Bronze Fasteners", "quantity": 2 }
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Fine Wool Cape",
+    "slug": "fine-wool-cape",
+    "image": "images/crafting/fine-wool-cape.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 26,
+    "weight": 0.25,
+    "size": "Medium",
+    "components": [
+      { "item": "Bolt of Wool", "quantity": 1 },
+      { "item": "Rough Thread", "quantity": 2 },
+      { "item": "Bronze Fasteners", "quantity": 2 }
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Fine Wool Gloves",
+    "slug": "fine-wool-gloves",
+    "image": "images/crafting/fine-wool-gloves.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 27,
+    "weight": 0.25,
+    "size": "Small",
+    "components": [
+      { "item": "Bolt of Wool", "quantity": 1 },
+      { "item": "Rough Thread", "quantity": 2 },
+      { "item": "Bronze Fasteners", "quantity": 2 }
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Wool Pouch",
+    "slug": "wool-pouch",
+    "image": "images/crafting/wool-pouch.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 28,
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Bolt of Wool", "quantity": 3 },
+      { "item": "Rough Thread", "quantity": 3 }
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Fine Wool Belt",
+    "slug": "fine-wool-belt",
+    "image": "images/crafting/fine-wool-belt.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 29,
+    "weight": 0.25,
+    "size": "Small",
+    "components": [
+      { "item": "Bolt of Wool", "quantity": 1 },
+      { "item": "Rough Thread", "quantity": 1 },
+      { "item": "Bronze Fasteners", "quantity": 2 }
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 56
+  },
+  {
+    "name": "Fine Wool Veil",
+    "slug": "fine-wool-veil",
+    "image": "images/crafting/fine-wool-veil.jpg",
+    "tradeskill": "Tailoring",
+    "listOrder": 30,
+    "weight": 0.25,
+    "size": "Small",
+    "components": [
+      { "item": "Bolt of Wool", "quantity": 1 },
+      { "item": "Rough Thread", "quantity": 1 },
+      { "item": "Bronze Fasteners", "quantity": 2 }
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 56
   },
   {
     "name": "Arrow x100",
