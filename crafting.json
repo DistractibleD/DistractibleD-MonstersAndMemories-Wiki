@@ -5875,100 +5875,61 @@
     ]
   },
   {
-    "name": "Magic Powder & Glimmer of Magic (x1-2 each)",
-    "slug": "disenchant-cinder-beetle-shield",
-    "tradeskill": "Disenchanting",
-    "components": [
-      { "item": "Cinder Beetle Shield", "quantity": 1 }
-    ],
-    "note": "Cinder Beetle Shield is no longer tagged MAGIC in-game and can no longer actually be disenchanted — kept here for reference, per the source table's own caveat."
-  },
-  {
-    "name": "Enchanted Powder & Mote of Magic (x1-2 each)",
-    "slug": "disenchant-cinder-beetle-boots",
-    "tradeskill": "Disenchanting",
-    "components": [
-      { "item": "Cinder Beetle Boots", "quantity": 1 }
-    ],
-    "recipeSkillLevel": 30
-  },
-  {
-    "name": "Enchanted Powder & Mote of Magic (x1-2 each)",
-    "slug": "disenchant-penitential-veil",
-    "tradeskill": "Disenchanting",
-    "components": [
-      { "item": "Penitential Veil", "quantity": 1 }
-    ],
-    "recipeSkillLevel": 10
-  },
-  {
-    "name": "Enchanted Powder & Mote of Magic (x1-2 each)",
-    "slug": "disenchant-bloodied-bone",
-    "tradeskill": "Disenchanting",
-    "components": [
-      { "item": "Bloodied Bone", "quantity": 1 }
-    ],
-    "recipeSkillLevel": 10
-  },
-  {
-    "name": "Enchanted Powder & Mote of Magic (x1-2 each)",
-    "slug": "disenchant-mantle-of-night",
-    "tradeskill": "Disenchanting",
-    "components": [
-      { "item": "Mantle of Night", "quantity": 1 }
-    ],
-    "recipeSkillLevel": 10
-  },
-  {
-    "name": "Enchanted Powder (x1-5) & Mote of Magic (x0-2)",
-    "slug": "disenchant-clouded-crystallized-magic",
-    "tradeskill": "Disenchanting",
-    "components": [
-      { "item": "Clouded Crystallized Magic", "quantity": 1 }
-    ],
-    "recipeSkillLevel": 15
-  },
-  {
     "name": "Enchanted Powder (x1-5) & Mote of Magic (x0-2)",
     "slug": "disenchant-magic-frond",
     "tradeskill": "Disenchanting",
+    "listOrder": 1,
     "components": [
       { "item": "Magic Frond", "quantity": 1 }
     ],
     "recipeSkillLevel": 15
   },
   {
+    "name": "Enchanted Powder (x1-5) & Mote of Magic (x0-2)",
+    "slug": "disenchant-clouded-crystallized-magic",
+    "tradeskill": "Disenchanting",
+    "listOrder": 2,
+    "components": [
+      { "item": "Clouded Crystallized Magic", "quantity": 1 }
+    ],
+    "recipeSkillLevel": 15
+  },
+  {
+    "name": "Magic Powder (x1-4) & Glimmer of Magic (x0-2)",
+    "slug": "disenchant-enchanted-frond",
+    "tradeskill": "Disenchanting",
+    "listOrder": 3,
+    "components": [
+      { "item": "Enchanted Frond", "quantity": 1 }
+    ]
+  },
+  {
     "name": "Magic Powder (x1-4) & Glimmer of Magic (x0-2)",
     "slug": "disenchant-glinting-crystallized-magic",
     "tradeskill": "Disenchanting",
+    "listOrder": 4,
     "components": [
       { "item": "Glinting Crystallized Magic", "quantity": 1 }
     ],
     "recipeSkillLevel": 30
   },
   {
-    "name": "Magic Powder (x1-4) & Glimmer of Magic (x0-2)",
-    "slug": "disenchant-enchanted-frond",
-    "tradeskill": "Disenchanting",
-    "components": [
-      { "item": "Enchanted Frond", "quantity": 1 }
-    ]
-  },
-  {
     "name": "Arcane Powder (x1-4) & Spark of Magic (x0-2)",
-    "slug": "disenchant-shining-crystallized-magic",
+    "slug": "disenchant-arcane-frond",
     "tradeskill": "Disenchanting",
+    "listOrder": 5,
     "components": [
-      { "item": "Shining Crystallized Magic", "quantity": 1 }
+      { "item": "Arcane Frond", "quantity": 1 }
     ],
     "recipeSkillLevel": 45
   },
   {
     "name": "Arcane Powder (x1-4) & Spark of Magic (x0-2)",
-    "slug": "disenchant-arcane-frond",
+    "slug": "disenchant-shining-crystallized-magic",
     "tradeskill": "Disenchanting",
+    "listOrder": 6,
     "components": [
-      { "item": "Arcane Frond", "quantity": 1 }
+      { "item": "Shining Crystallized Magic", "quantity": 1 }
     ],
     "recipeSkillLevel": 45
   },
@@ -5976,6 +5937,7 @@
     "name": "Astral Powder (x1-4) & Echo of Magic (x0-2)",
     "slug": "disenchant-brilliant-crystallized-magic",
     "tradeskill": "Disenchanting",
+    "listOrder": 7,
     "components": [
       { "item": "Brilliant Crystallized Magic", "quantity": 1 }
     ],
@@ -7218,5 +7180,61 @@
   { "name": "Iron Scraps", "slug": "iron-scraps-from-tarnished-iron-chain-gloves", "tradeskill": "Blacksmithing", "components": [{ "item": "Tarnished Iron Chain Gloves", "quantity": 1 }, { "item": "Hammer and Chisel", "quantity": 1 }] },
   { "name": "Iron Scraps", "slug": "iron-scraps-from-tarnished-iron-chain-gorget", "tradeskill": "Blacksmithing", "components": [{ "item": "Tarnished Iron Chain Gorget", "quantity": 1 }, { "item": "Hammer and Chisel", "quantity": 1 }] },
   { "name": "Iron Scraps", "slug": "iron-scraps-from-tarnished-iron-plate-cloak", "tradeskill": "Blacksmithing", "components": [{ "item": "Tarnished Iron Plate Cloak", "quantity": 1 }, { "item": "Hammer and Chisel", "quantity": 1 }], "resultQuantity": 2 },
-  { "name": "Iron Scraps", "slug": "iron-scraps-from-tarnished-iron-plate-helm", "tradeskill": "Blacksmithing", "components": [{ "item": "Tarnished Iron Plate Helm", "quantity": 1 }, { "item": "Hammer and Chisel", "quantity": 1 }] }
+  { "name": "Iron Scraps", "slug": "iron-scraps-from-tarnished-iron-plate-helm", "tradeskill": "Blacksmithing", "components": [{ "item": "Tarnished Iron Plate Helm", "quantity": 1 }, { "item": "Hammer and Chisel", "quantity": 1 }] },
+  {
+    "name": "Cloth Bandage",
+    "slug": "cloth-bandage-survival",
+    "tradeskill": "Survival",
+    "difficultyColor": "Green",
+    "observedAtSkill": 6,
+    "needsInfo": true
+  },
+  {
+    "name": "Crude Handmade Torch",
+    "slug": "crude-handmade-torch",
+    "tradeskill": "Survival",
+    "difficultyColor": "Green",
+    "observedAtSkill": 6,
+    "needsInfo": true
+  },
+  {
+    "name": "Heavy Cloth Bandage",
+    "slug": "heavy-cloth-bandage-survival",
+    "tradeskill": "Survival",
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 6,
+    "needsInfo": true
+  },
+  {
+    "name": "Wool Bandage",
+    "slug": "wool-bandage-survival",
+    "tradeskill": "Survival",
+    "difficultyColor": "White",
+    "observedAtSkill": 6,
+    "needsInfo": true
+  },
+  {
+    "name": "Handmade Torch",
+    "slug": "handmade-torch",
+    "tradeskill": "Survival",
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 6,
+    "needsInfo": true
+  },
+  {
+    "name": "Heavy Wool Bandage",
+    "slug": "heavy-wool-bandage-survival",
+    "tradeskill": "Survival",
+    "difficultyColor": "Orange",
+    "observedAtSkill": 6,
+    "needsInfo": true
+  },
+  {
+    "name": "Cotton Bandage",
+    "slug": "cotton-bandage-survival",
+    "tradeskill": "Survival",
+    "difficultyColor": "Red",
+    "observedAtSkill": 6,
+    "needsInfo": true
+  }
 ]

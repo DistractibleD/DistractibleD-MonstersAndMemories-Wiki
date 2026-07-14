@@ -1065,6 +1065,11 @@ function renderItemsCategories(container) {
         <option value="">All max sizes</option>
         ${allMaxSizes.map(s => `<option value="${s}">${s}</option>`).join('')}
       </select>
+      <select id="items-category-filter-needsinfo" class="items-select items-select-needsinfo">
+        <option value="">All items</option>
+        <option value="yes">Needs Info Only</option>
+        <option value="no">Complete Only</option>
+      </select>
     </div>
   `;
 
@@ -1081,15 +1086,17 @@ function renderItemsCategories(container) {
   const categoryRaceFilter = container.querySelector('#items-category-filter-race');
   const categoryTagFilter = container.querySelector('#items-category-filter-tag');
   const categoryMaxSizeFilter = container.querySelector('#items-category-filter-maxsize');
+  const categoryNeedsInfoFilter = container.querySelector('#items-category-filter-needsinfo');
 
-  [categorySlotFilter, categoryClassFilter, categoryRaceFilter, categoryTagFilter, categoryMaxSizeFilter].forEach(el => {
+  [categorySlotFilter, categoryClassFilter, categoryRaceFilter, categoryTagFilter, categoryMaxSizeFilter, categoryNeedsInfoFilter].forEach(el => {
     el.addEventListener('change', () => {
       pendingItemFilters = {
         slot: categorySlotFilter.value,
         cls: categoryClassFilter.value,
         race: categoryRaceFilter.value,
         tag: categoryTagFilter.value,
-        maxSize: categoryMaxSizeFilter.value
+        maxSize: categoryMaxSizeFilter.value,
+        needsInfo: categoryNeedsInfoFilter.value
       };
       renderItemsList(container, null);
     });
@@ -1310,6 +1317,11 @@ function renderItemsList(container, category, scope) {
         <option value="">All max sizes</option>
         ${maxSizes.map(s => `<option value="${s}">${s}</option>`).join('')}
       </select>
+      <select id="items-filter-needsinfo" class="items-select items-select-needsinfo">
+        <option value="">All items</option>
+        <option value="yes">Needs Info Only</option>
+        <option value="no">Complete Only</option>
+      </select>
       <button type="button" id="items-clear-filters" class="items-clear-btn">Clear filters</button>
     </div>
     <p class="items-count" id="items-count"></p>
@@ -1360,6 +1372,7 @@ function renderItemsList(container, category, scope) {
   const raceFilter = container.querySelector('#items-filter-race');
   const tagFilter = container.querySelector('#items-filter-tag');
   const maxSizeFilter = container.querySelector('#items-filter-maxsize');
+  const needsInfoFilter = container.querySelector('#items-filter-needsinfo');
   const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
 
   // Landed here from a header search result — pre-fill the search box with
@@ -1380,6 +1393,7 @@ function renderItemsList(container, category, scope) {
     if (f.race) raceFilter.value = f.race;
     if (f.tag) tagFilter.value = f.tag;
     if (f.maxSize) maxSizeFilter.value = f.maxSize;
+    if (f.needsInfo) needsInfoFilter.value = f.needsInfo;
   }
 
   if (returnToRecipe) {
@@ -1437,6 +1451,7 @@ function renderItemsList(container, category, scope) {
     const race = raceFilter.value;
     const tag = tagFilter.value;
     const maxSize = maxSizeFilter.value;
+    const needsInfo = needsInfoFilter.value;
 
     let filtered = categoryItems.filter(item => {
       if (slot && item.slot !== slot) return false;
@@ -1447,6 +1462,8 @@ function renderItemsList(container, category, scope) {
       if (race && !(item.race || []).includes('ALL') && !(item.race || []).includes(race)) return false;
       if (tag && !(item.tags || []).includes(tag)) return false;
       if (maxSize && item.maxSize !== maxSize) return false;
+      if (needsInfo === 'yes' && !item.needsInfo) return false;
+      if (needsInfo === 'no' && item.needsInfo) return false;
       if (query && !itemSearchHaystack(item).includes(query)) return false;
       return true;
     });
@@ -1468,11 +1485,11 @@ function renderItemsList(container, category, scope) {
   }
 
   [searchBox].forEach(el => el.addEventListener('input', update));
-  [slotFilter, handednessFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].filter(Boolean).forEach(el => el.addEventListener('change', update));
+  [slotFilter, handednessFilter, classFilter, raceFilter, tagFilter, maxSizeFilter, needsInfoFilter].filter(Boolean).forEach(el => el.addEventListener('change', update));
 
   container.querySelector('#items-clear-filters').addEventListener('click', () => {
     searchBox.value = '';
-    [slotFilter, handednessFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].filter(Boolean).forEach(el => el.value = '');
+    [slotFilter, handednessFilter, classFilter, raceFilter, tagFilter, maxSizeFilter, needsInfoFilter].filter(Boolean).forEach(el => el.value = '');
     update();
   });
 
@@ -1536,11 +1553,14 @@ function renderItemRows(tbody, items, showTypeColumn) {
     const ratioCell = ratio != null ? ratio.toFixed(2) : '—';
     const acCell = item.ac != null ? item.ac : '—';
     const capacityCell = formatCapacity(item);
+    const weightSizeCell = (item.weight != null || item.size)
+      ? `${item.weight != null ? item.weight : '—'} / ${item.size || '—'}`
+      : '—';
 
     return `
       <tr data-slug="${escapeAttr(item.slug || '')}">
         <td data-label="Name">
-          <span class="item-name-hover" data-alt="${item.name}">${(item.tags || []).map(t => `<span class="badge-tag">${t}</span> `).join('')}${item.name}</span>
+          <span class="item-name-hover" data-alt="${item.name}">${(item.tags || []).map(t => `<span class="badge-tag">${t}</span> `).join('')}${item.name}</span>${item.needsInfo ? ' <span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}
         </td>
         ${showTypeColumn ? `<td data-label="Type">${escapeAttr(ITEM_TYPE_LABELS[item.type] || item.type)}</td>` : ''}
         <td data-label="Slot"${formatSlot(item) === '—' ? ' class="cell-empty"' : ''}>${formatSlot(item)}</td>
@@ -1549,7 +1569,7 @@ function renderItemRows(tbody, items, showTypeColumn) {
         <td data-label="Damage"${damageCell === '—' ? ' class="cell-empty"' : ''}>${damageCell}</td>
         <td data-label="Delay"${delayCell === '—' ? ' class="cell-empty"' : ''}>${delayCell}</td>
         <td data-label="Ratio"${ratioCell === '—' ? ' class="cell-empty"' : ''}>${ratioCell}</td>
-        <td data-label="Weight / Size">${item.weight} / ${item.size}</td>
+        <td data-label="Weight / Size"${weightSizeCell === '—' ? ' class="cell-empty"' : ''}>${weightSizeCell}</td>
         <td data-label="Capacity / Max Size"${capacityCell === '—' ? ' class="cell-empty"' : ''}>${capacityCell}</td>
         <td data-label="Classes"${formatList(item.classes) === '—' ? ' class="cell-empty"' : ''}>${formatList(item.classes)}</td>
         <td data-label="Race"${formatList(item.race) === '—' ? ' class="cell-empty"' : ''}>${formatList(item.race)}</td>
@@ -1584,8 +1604,8 @@ function renderItemCardHTML(item) {
     fields.push({ label: 'Capacity', value: item.capacity });
     fields.push({ label: 'Max size', value: item.maxSize });
   }
-  fields.push({ label: 'Weight', value: item.weight });
-  fields.push({ label: 'Size', value: item.size });
+  if (item.weight != null) fields.push({ label: 'Weight', value: item.weight });
+  if (item.size) fields.push({ label: 'Size', value: item.size });
 
   const chips = statEntries(item)
     .map(e => `<span class="item-card-chip">${e.label} <span class="item-card-chip-value">${e.value}</span></span>`)
@@ -1604,6 +1624,7 @@ function renderItemCardHTML(item) {
         ${badges ? `<div class="item-card-badges">${badges}</div>` : ''}
       </div>
       <div class="item-card-body">
+        ${item.needsInfo ? `<div class="item-card-section item-card-needs-info">This item needs more info &middot; confirmed to exist, but a full in-game card hasn't been captured yet. <a href="#submit">Submit a screenshot</a> to help fill it in!</div>` : ''}
         <div class="item-card-grid">
           ${fields.map(f => `<div class="item-card-field"><span class="item-card-field-label">${f.label}</span><span>${f.value}</span></div>`).join('')}
         </div>
@@ -2190,9 +2211,10 @@ function renderRecipeCardHTML(recipe) {
       <div class="item-card-header">
         <div class="item-card-icon item-card-icon-recipe">${TRADESKILL_ICON[recipe.tradeskill] ? svgIcon(TRADESKILL_ICON[recipe.tradeskill]) : (recipe.tradeskill || '?').charAt(0)}</div>
         <div class="item-card-name item-card-name-recipe">${nameHtml}</div>
-        <div class="item-card-badges"><span class="badge-tag badge-tag-craft">${escapeAttr(recipe.tradeskill)}</span></div>
+        <div class="item-card-badges"><span class="badge-tag badge-tag-craft">${escapeAttr(recipe.tradeskill)}</span>${recipe.needsInfo ? '<span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}</div>
       </div>
       <div class="item-card-body">
+        ${recipe.needsInfo ? `<div class="item-card-section item-card-needs-info">This recipe needs more info &middot; confirmed to exist, but a full recipe card hasn't been captured yet. <a href="#submit">Submit a screenshot</a> to help fill it in!</div>` : ''}
         ${fields.length ? `<div class="item-card-grid">${fields.map(f => `<div class="item-card-field"><span class="item-card-field-label">${f.label}</span><span>${f.value}</span></div>`).join('')}</div>` : ''}
         ${flavor.length ? `<div class="item-card-section item-card-section-flavor">${flavor.map(escapeAttr).join('<br><br>')}</div>` : ''}
         ${componentsHtml}
@@ -2277,7 +2299,14 @@ async function renderCraftingRecipes(container, tradeskillName) {
         ? '<p>This tradeskill hasn\'t been implemented in the game yet.</p>'
         : allRecipes.length
           ? `
-            <input type="search" id="craft-recipe-search" class="items-search" placeholder="Search ${escapeAttr(tradeskillName)} recipes, ingredients, tools..." autocomplete="off">
+            <div class="items-toolbar">
+              <input type="search" id="craft-recipe-search" class="items-search" placeholder="Search ${escapeAttr(tradeskillName)} recipes, ingredients, tools..." autocomplete="off">
+              <select id="craft-recipe-filter-needsinfo" class="items-select items-select-needsinfo">
+                <option value="">All recipes</option>
+                <option value="yes">Needs Info Only</option>
+                <option value="no">Complete Only</option>
+              </select>
+            </div>
             <p class="items-count" id="craft-recipe-count"></p>
             <div id="craft-recipe-grid"></div>
           `
@@ -2293,6 +2322,7 @@ async function renderCraftingRecipes(container, tradeskillName) {
   if (!allRecipes.length) return;
 
   const searchBox = container.querySelector('#craft-recipe-search');
+  const needsInfoFilter = container.querySelector('#craft-recipe-filter-needsinfo');
   const grid = container.querySelector('#craft-recipe-grid');
   const countEl = container.querySelector('#craft-recipe-count');
 
@@ -2328,7 +2358,11 @@ async function renderCraftingRecipes(container, tradeskillName) {
 
   function updateGrid() {
     const query = searchBox.value.toLowerCase().trim();
-    const filtered = query ? allRecipes.filter(r => recipeSearchHaystack(r).includes(query)) : allRecipes;
+    const needsInfo = needsInfoFilter.value;
+    let filtered = allRecipes;
+    if (needsInfo === 'yes') filtered = filtered.filter(r => r.needsInfo);
+    if (needsInfo === 'no') filtered = filtered.filter(r => !r.needsInfo);
+    if (query) filtered = filtered.filter(r => recipeSearchHaystack(r).includes(query));
 
     if (!filtered.length) {
       grid.innerHTML = '<p class="items-empty">No recipes match your search.</p>';
@@ -2346,12 +2380,13 @@ async function renderCraftingRecipes(container, tradeskillName) {
       grid.innerHTML = `<div class="craft-recipe-grid">${filtered.map(renderRecipeCardHTML).join('')}</div>`;
     }
 
-    countEl.textContent = query ? `Showing ${filtered.length} of ${allRecipes.length} recipes` : '';
+    countEl.textContent = (query || needsInfo) ? `Showing ${filtered.length} of ${allRecipes.length} recipes` : '';
     setupItemTooltip(grid);
     attachRecipeLinkHandlers();
   }
 
   searchBox.addEventListener('input', updateGrid);
+  needsInfoFilter.addEventListener('change', updateGrid);
   updateGrid();
 
   if (pendingHighlightRecipe) {

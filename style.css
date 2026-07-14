@@ -386,6 +386,16 @@ body:not(.site-entered) .sidebar {
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent);
 }
+.items-select-needsinfo {
+  border-color: #ff6b6b;
+  color: #ff8f8f;
+  font-weight: 600;
+  box-shadow: 0 0 0 1px rgba(255, 107, 107, 0.35);
+}
+.items-select-needsinfo:focus {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 1px #ff6b6b;
+}
 .items-clear-btn {
   background: transparent;
   border: 1px solid var(--border);
@@ -745,6 +755,18 @@ body:not(.site-entered) .sidebar {
 .item-card-section-rumor {
   font-style: italic;
   color: #ffe9a8;
+}
+.item-card-needs-info {
+  color: #ff6b6b;
+  font-weight: 600;
+}
+.item-card-needs-info a {
+  color: #ff8f8f;
+  text-decoration: underline;
+}
+.badge-needs-info {
+  background: #5a1f1f;
+  color: #ff8f8f;
 }
 .item-card-section-note {
   font-style: italic;

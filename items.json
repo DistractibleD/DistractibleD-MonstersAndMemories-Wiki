@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "name": "Fine Wool Bracer",
     "slug": "fine-wool-bracer",
@@ -1816,6 +1816,20 @@
     "race": ["ALL"]
   },
   {
+    "name": "Inlaid Black Sapphire Bronze Ring",
+    "slug": "inlaid-black-sapphire-bronze-ring",
+    "image": "images/items/inlaid-black-sapphire-bronze-ring.jpg",
+    "type": "Jewelry",
+    "tags": [],
+    "slot": "Finger",
+    "ac": 1,
+    "stats": { "STR": 2, "AGI": 2 },
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
     "name": "Enchanted Copper Plate Helm",
     "slug": "enchanted-copper-plate-helm",
     "image": "images/items/enchanted-copper-plate-helm.jpg",
@@ -2669,6 +2683,24 @@
     "type": "Misc",
     "tags": [],
     "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Bronze Bar",
+    "slug": "bronze-bar",
+    "image": "images/items/bronze-bar.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Alunite Ore",
+    "slug": "alunite-ore",
+    "image": "images/items/alunite-ore.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.25,
     "size": "Small"
   },
   {
@@ -5048,6 +5080,7 @@
     "type": "Misc",
     "tags": ["NODROP"],
     "description": "A shard of crystallized spectral essence from Timmon Bell.",
+    "foundAt": "Dropped by several named/boss monsters, each with its own flavor text naming the source â€” also confirmed from Jakob Geffrey and High Marshal Fionna.",
     "weight": 0.1,
     "size": "Small"
   },
@@ -5232,5 +5265,2444 @@
     "size": "Small",
     "classes": ["ALL"],
     "race": ["ALL"]
+  },
+{
+    "name": "Tattered Cloth Belt",
+    "slug": "tattered-cloth-belt",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Waist",
+    "needsInfo": true
+  },
+  {
+    "name": "Tattered Cloth Cape",
+    "slug": "tattered-cloth-cape",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true
+  },
+  {
+    "name": "Tattered Cloth Mantle",
+    "slug": "tattered-cloth-mantle",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shoulders",
+    "needsInfo": true
+  },
+  {
+    "name": "Tattered Cloth Tunic",
+    "slug": "tattered-cloth-tunic",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true
+  },
+  {
+    "name": "Fine Cloth Cape",
+    "slug": "fine-cloth-cape",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true
+  },
+  {
+    "name": "Patched Cloth Tunic",
+    "slug": "patched-cloth-tunic",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true
+  },
+  {
+    "name": "Rugged Spider Silk Mantle",
+    "slug": "rugged-spider-silk-mantle",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shoulders",
+    "needsInfo": true
+  },
+  {
+    "name": "Spider Silk",
+    "slug": "spider-silk",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Tough Spider Silk",
+    "slug": "tough-spider-silk",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Sturdy Spider Silk",
+    "slug": "sturdy-spider-silk",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Rugged Spider Silk",
+    "slug": "rugged-spider-silk",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Heavy Thread",
+    "slug": "heavy-thread",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Light Thread",
+    "slug": "light-thread",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Rough Thread",
+    "slug": "rough-thread",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Satin Thread",
+    "slug": "satin-thread",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Cloth Bandage",
+    "slug": "cloth-bandage",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Heavy Cloth Bandage",
+    "slug": "heavy-cloth-bandage",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Wool Bandage",
+    "slug": "wool-bandage",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Heavy Wool Bandage",
+    "slug": "heavy-wool-bandage",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Cotton Bandage",
+    "slug": "cotton-bandage",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Crude Handmade Torch",
+    "slug": "crude-handmade-torch",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Handmade Torch",
+    "slug": "handmade-torch",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Tailoring Kit",
+    "slug": "tailoring-kit",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Axe",
+    "slug": "bronze-axe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Battle Axe",
+    "slug": "bronze-battle-axe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Dagger",
+    "slug": "bronze-dagger",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Great Scythe",
+    "slug": "bronze-great-scythe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Greatsword",
+    "slug": "bronze-greatsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Longsword",
+    "slug": "bronze-longsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Mace",
+    "slug": "bronze-mace",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Maul",
+    "slug": "bronze-maul",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Scimitar",
+    "slug": "bronze-scimitar",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Scythe",
+    "slug": "bronze-scythe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Shortsword",
+    "slug": "bronze-shortsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Trident",
+    "slug": "bronze-trident",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze War Lance",
+    "slug": "bronze-war-lance",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Warhammer",
+    "slug": "bronze-warhammer",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Axe",
+    "slug": "rusty-iron-axe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Battle Axe",
+    "slug": "rusty-iron-battle-axe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Dagger",
+    "slug": "rusty-iron-dagger",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Great Scythe",
+    "slug": "rusty-iron-great-scythe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Greatsword",
+    "slug": "rusty-iron-greatsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Longsword",
+    "slug": "rusty-iron-longsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Mace",
+    "slug": "rusty-iron-mace",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Maul",
+    "slug": "rusty-iron-maul",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Scimitar",
+    "slug": "rusty-iron-scimitar",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Scythe",
+    "slug": "rusty-iron-scythe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Shortsword",
+    "slug": "rusty-iron-shortsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Trident",
+    "slug": "rusty-iron-trident",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron War Lance",
+    "slug": "rusty-iron-war-lance",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Warhammer",
+    "slug": "rusty-iron-warhammer",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Kite Shield",
+    "slug": "rusty-iron-kite-shield",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Secondary",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Long Spear",
+    "slug": "rusty-iron-long-spear",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Spear",
+    "slug": "rusty-iron-spear",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Dagger",
+    "slug": "iron-dagger",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Great Scythe",
+    "slug": "iron-great-scythe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Longsword",
+    "slug": "iron-longsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Mace",
+    "slug": "iron-mace",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Scythe",
+    "slug": "iron-scythe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Shortsword",
+    "slug": "iron-shortsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Spear",
+    "slug": "iron-spear",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Trident",
+    "slug": "iron-trident",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron War Lance",
+    "slug": "iron-war-lance",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Mace",
+    "slug": "corroded-bronze-mace",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Spear",
+    "slug": "corroded-bronze-spear",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze War Lance",
+    "slug": "corroded-bronze-war-lance",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Warhammer",
+    "slug": "corroded-bronze-warhammer",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Copper Greatsword",
+    "slug": "copper-greatsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Copper Tower Shield",
+    "slug": "copper-tower-shield",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Secondary",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Longsword",
+    "slug": "rusty-longsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Mace",
+    "slug": "rusty-mace",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Axe",
+    "slug": "rusty-steel-axe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Battle Axe",
+    "slug": "rusty-steel-battle-axe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Dagger",
+    "slug": "rusty-steel-dagger",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Great Scythe",
+    "slug": "rusty-steel-great-scythe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Greatsword",
+    "slug": "rusty-steel-greatsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Longsword",
+    "slug": "rusty-steel-longsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Mace",
+    "slug": "rusty-steel-mace",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Maul",
+    "slug": "rusty-steel-maul",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Scimitar",
+    "slug": "rusty-steel-scimitar",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Scythe",
+    "slug": "rusty-steel-scythe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Shortsword",
+    "slug": "rusty-steel-shortsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Trident",
+    "slug": "rusty-steel-trident",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel War Lance",
+    "slug": "rusty-steel-war-lance",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Warhammer",
+    "slug": "rusty-steel-warhammer",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Kite Shield",
+    "slug": "rusty-steel-kite-shield",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Secondary",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Long Spear",
+    "slug": "rusty-steel-long-spear",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Spear",
+    "slug": "rusty-steel-spear",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Tower Shield",
+    "slug": "rusty-steel-tower-shield",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Secondary",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Axe",
+    "slug": "tarnished-axe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Battle Axe",
+    "slug": "tarnished-battle-axe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Dagger",
+    "slug": "tarnished-dagger",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Great Scythe",
+    "slug": "tarnished-great-scythe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Greatsword",
+    "slug": "tarnished-greatsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Longsword",
+    "slug": "tarnished-longsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Mace",
+    "slug": "tarnished-mace",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Maul",
+    "slug": "tarnished-maul",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Scimitar",
+    "slug": "tarnished-scimitar",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Scythe",
+    "slug": "tarnished-scythe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Shortsword",
+    "slug": "tarnished-shortsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Trident",
+    "slug": "tarnished-trident",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished War Lance",
+    "slug": "tarnished-war-lance",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Warhammer",
+    "slug": "tarnished-warhammer",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Spear",
+    "slug": "tarnished-spear",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze Longsword",
+    "slug": "tarnished-bronze-longsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze War Lance",
+    "slug": "tarnished-bronze-war-lance",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze Warhammer",
+    "slug": "tarnished-bronze-warhammer",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Iron Greatsword",
+    "slug": "tarnished-iron-greatsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Worn Elderwood Bow",
+    "slug": "worn-elderwood-bow",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Range",
+    "skill": "Archery",
+    "needsInfo": true
+  },
+  {
+    "name": "Worn Elderwood Buckler",
+    "slug": "worn-elderwood-buckler",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Secondary",
+    "needsInfo": true
+  },
+  {
+    "name": "Worn Elderwood Great Staff",
+    "slug": "worn-elderwood-great-staff",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Worn Ironbark Bow",
+    "slug": "worn-ironbark-bow",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Range",
+    "skill": "Archery",
+    "needsInfo": true
+  },
+  {
+    "name": "Worn Ironbark Buckler",
+    "slug": "worn-ironbark-buckler",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Secondary",
+    "needsInfo": true
+  },
+  {
+    "name": "Worn Ironbark Great Staff",
+    "slug": "worn-ironbark-great-staff",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Worn Great Staff",
+    "slug": "worn-great-staff",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Bow",
+    "slug": "bow",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Range",
+    "skill": "Archery",
+    "needsInfo": true
+  },
+  {
+    "name": "Buckler",
+    "slug": "buckler",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Secondary",
+    "needsInfo": true
+  },
+  {
+    "name": "Garrison Bulwark Shield",
+    "slug": "garrison-bulwark-shield",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Secondary",
+    "needsInfo": true
+  },
+  {
+    "name": "Grave Marker",
+    "slug": "grave-marker",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Kite Shield",
+    "slug": "kite-shield",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Secondary",
+    "needsInfo": true
+  },
+  {
+    "name": "Recurve Bow",
+    "slug": "recurve-bow",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Range",
+    "skill": "Archery",
+    "needsInfo": true
+  },
+  {
+    "name": "Salt-Crusted Hammer",
+    "slug": "salt-crusted-hammer",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Skinning Knife",
+    "slug": "skinning-knife",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Hammer and Chisel",
+    "slug": "hammer-and-chisel",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+{
+    "name": "Black Feather Arrow",
+    "slug": "black-feather-arrow",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Ammo",
+    "needsInfo": true
+  },
+  {
+    "name": "Brittle Stone",
+    "slug": "brittle-stone",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Spear",
+    "slug": "bronze-spear",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Wire",
+    "slug": "bronze-wire",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Black Pearl",
+    "slug": "chipped-black-pearl",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Black Sapphire",
+    "slug": "chipped-black-sapphire",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Carnelian",
+    "slug": "chipped-carnelian",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Cat's Eye Agate",
+    "slug": "chipped-cats-eye-agate",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Diamond",
+    "slug": "chipped-diamond",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Emerald",
+    "slug": "chipped-emerald",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Fire Emerald",
+    "slug": "chipped-fire-emerald",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Fire Opal",
+    "slug": "chipped-fire-opal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Hematite",
+    "slug": "chipped-hematite",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Jacinth",
+    "slug": "chipped-jacinth",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+{
+    "name": "Copper War Lance",
+    "slug": "copper-war-lance",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Battle Axe",
+    "slug": "iron-battle-axe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Scimitar",
+    "slug": "iron-scimitar",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Dizzik's Wicked Dagger",
+    "slug": "dizziks-wicked-dagger",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Coal",
+    "slug": "coal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Tread",
+    "slug": "iron-tread",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Wire",
+    "slug": "iron-wire",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Ore",
+    "slug": "iron-ore",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Gold Bar",
+    "slug": "gold-bar",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Gold Ore",
+    "slug": "gold-ore",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Pyrite Ore",
+    "slug": "pyrite-ore",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Rigid Stone",
+    "slug": "rigid-stone",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Jagged Stone",
+    "slug": "jagged-stone",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Rivet Cutters",
+    "slug": "rivet-cutters",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Jade",
+    "slug": "jade",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Jade",
+    "slug": "chipped-jade",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Lapis Lazuli",
+    "slug": "chipped-lapis-lazuli",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Malachite",
+    "slug": "chipped-malachite",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Onyx",
+    "slug": "chipped-onyx",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Opal",
+    "slug": "chipped-opal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Pearl",
+    "slug": "chipped-pearl",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Ruby",
+    "slug": "chipped-ruby",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Sapphire",
+    "slug": "chipped-sapphire",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Star Rose Quartz",
+    "slug": "chipped-star-rose-quartz",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Star Ruby",
+    "slug": "chipped-star-ruby",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Topaz",
+    "slug": "chipped-topaz",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Turquoise",
+    "slug": "chipped-turquoise",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Chipped Wolf's Eye Agate",
+    "slug": "chipped-wolfs-eye-agate",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Black Sapphire",
+    "slug": "flawed-black-sapphire",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Bloodstone",
+    "slug": "flawed-bloodstone",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Blue Diamond",
+    "slug": "flawed-blue-diamond",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Carnelian",
+    "slug": "flawed-carnelian",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Cat's Eye Agate",
+    "slug": "flawed-cats-eye-agate",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Diamond",
+    "slug": "flawed-diamond",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Emerald",
+    "slug": "flawed-emerald",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Fire Opal",
+    "slug": "flawed-fire-opal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Hematite",
+    "slug": "flawed-hematite",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Lapis Lazuli",
+    "slug": "flawed-lapis-lazuli",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Malachite",
+    "slug": "flawed-malachite",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Onyx",
+    "slug": "flawed-onyx",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Opal",
+    "slug": "flawed-opal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Pearl",
+    "slug": "flawed-pearl",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Peridot",
+    "slug": "flawed-peridot",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Ruby",
+    "slug": "flawed-ruby",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Sapphire",
+    "slug": "flawed-sapphire",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Star Rose Quartz",
+    "slug": "flawed-star-rose-quartz",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Star Ruby",
+    "slug": "flawed-star-ruby",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Topaz",
+    "slug": "flawed-topaz",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Turquoise",
+    "slug": "flawed-turquoise",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Imperfect Black Pearl",
+    "slug": "imperfect-black-pearl",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Imperfect Blue Diamond",
+    "slug": "imperfect-blue-diamond",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Imperfect Fire Opal",
+    "slug": "imperfect-fire-opal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Imperfect Jacinth",
+    "slug": "imperfect-jacinth",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Imperfect Jade",
+    "slug": "imperfect-jade",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Imperfect Jasper",
+    "slug": "imperfect-jasper",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Imperfect Malachite",
+    "slug": "imperfect-malachite",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Imperfect Opal",
+    "slug": "imperfect-opal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Imperfect Star Rose Quartz",
+    "slug": "imperfect-star-rose-quartz",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Imperfect Topaz",
+    "slug": "imperfect-topaz",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Imperfect Turquoise",
+    "slug": "imperfect-turquoise",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Imperfect Wolf's Eye Agate",
+    "slug": "imperfect-wolfs-eye-agate",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+{
+    "name": "Tarnished Bronze Axe",
+    "slug": "tarnished-bronze-axe",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze Dagger",
+    "slug": "tarnished-bronze-dagger",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Stabbing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze Greatsword",
+    "slug": "tarnished-bronze-greatsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze Mace",
+    "slug": "tarnished-bronze-mace",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze Shortsword",
+    "slug": "tarnished-bronze-shortsword",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Slashing",
+    "needsInfo": true
+  },
+  {
+    "name": "Smithing Hammer",
+    "slug": "smithing-hammer",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "skill": "Blunt",
+    "needsInfo": true
+  },
+  {
+    "name": "Smithing Pliers",
+    "slug": "smithing-pliers",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Scraps",
+    "slug": "bronze-scraps",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Gold Scraps",
+    "slug": "gold-scraps",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Silver Scraps",
+    "slug": "silver-scraps",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Tin Scraps",
+    "slug": "tin-scraps",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Tin Bar",
+    "slug": "tin-bar",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Silver Bar",
+    "slug": "silver-bar",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Copper Chain Coif",
+    "slug": "copper-chain-coif",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true
+  },
+  {
+    "name": "Copper Chain Shoulderguards",
+    "slug": "copper-chain-shoulderguards",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shoulders",
+    "needsInfo": true
+  },
+  {
+    "name": "Copper Chain Tunic",
+    "slug": "copper-chain-tunic",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Chain Coif",
+    "slug": "bronze-chain-coif",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true
+  },
+  {
+    "name": "Bronze Chain Mask",
+    "slug": "bronze-chain-mask",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Face",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Chain Boots",
+    "slug": "corroded-bronze-chain-boots",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Feet",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Chain Cloak",
+    "slug": "corroded-bronze-chain-cloak",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Chain Coif",
+    "slug": "corroded-bronze-chain-coif",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Chain Gambeson",
+    "slug": "corroded-bronze-chain-gambeson",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shirt",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Chain Gorget",
+    "slug": "corroded-bronze-chain-gorget",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Neck",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Chain Leggings",
+    "slug": "corroded-bronze-chain-leggings",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Legs",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Chain Shoulderguards",
+    "slug": "corroded-bronze-chain-shoulderguards",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shoulders",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Chain Tunic",
+    "slug": "corroded-bronze-chain-tunic",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Chain Wristguard",
+    "slug": "corroded-bronze-chain-wristguard",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Chain Wristguard",
+    "slug": "iron-chain-wristguard",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Chain Boots",
+    "slug": "rusty-iron-chain-boots",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Feet",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Chain Cloak",
+    "slug": "rusty-iron-chain-cloak",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Chain Coif",
+    "slug": "rusty-iron-chain-coif",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Chain Gambeson",
+    "slug": "rusty-iron-chain-gambeson",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shirt",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Chain Gloves",
+    "slug": "rusty-iron-chain-gloves",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Hands",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Chain Gorget",
+    "slug": "rusty-iron-chain-gorget",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Neck",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Chain Leggings",
+    "slug": "rusty-iron-chain-leggings",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Legs",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Chain Mask",
+    "slug": "rusty-iron-chain-mask",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Face",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Chain Shoulderguards",
+    "slug": "rusty-iron-chain-shoulderguards",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shoulders",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Chain Tunic",
+    "slug": "rusty-iron-chain-tunic",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Chain Waistguard",
+    "slug": "rusty-iron-chain-waistguard",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Waist",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Chain Wristguard",
+    "slug": "rusty-iron-chain-wristguard",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Chain Boots",
+    "slug": "rusty-steel-chain-boots",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Feet",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Chain Cloak",
+    "slug": "rusty-steel-chain-cloak",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Chain Coif",
+    "slug": "rusty-steel-chain-coif",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Chain Gloves",
+    "slug": "rusty-steel-chain-gloves",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Hands",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Chain Gorget",
+    "slug": "rusty-steel-chain-gorget",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Neck",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Chain Leggings",
+    "slug": "rusty-steel-chain-leggings",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Legs",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Chain Mask",
+    "slug": "rusty-steel-chain-mask",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Face",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Chain Shoulderguards",
+    "slug": "rusty-steel-chain-shoulderguards",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shoulders",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Chain Tunic",
+    "slug": "rusty-steel-chain-tunic",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Chain Waistguard",
+    "slug": "rusty-steel-chain-waistguard",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Waist",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Chain Wristguard",
+    "slug": "rusty-steel-chain-wristguard",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze Chain Boots",
+    "slug": "tarnished-bronze-chain-boots",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Feet",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze Chain Cloak",
+    "slug": "tarnished-bronze-chain-cloak",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze Chain Gloves",
+    "slug": "tarnished-bronze-chain-gloves",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Hands",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze Chain Mask",
+    "slug": "tarnished-bronze-chain-mask",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Face",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Iron Chain Cloak",
+    "slug": "tarnished-iron-chain-cloak",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true
+  },
+{
+    "name": "Copper Plate Helm",
+    "slug": "copper-plate-helm",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true
+  },
+  {
+    "name": "Copper Plate Greaves",
+    "slug": "copper-plate-greaves",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Legs",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Plate Visor",
+    "slug": "corroded-bronze-plate-visor",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Face",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Plate Cloak",
+    "slug": "corroded-bronze-plate-cloak",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Plate Gauntlets",
+    "slug": "corroded-bronze-plate-gauntlets",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Hands",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Plate Girdle",
+    "slug": "corroded-bronze-plate-girdle",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Waist",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Plate Greaves",
+    "slug": "corroded-bronze-plate-greaves",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Legs",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Plate Helm",
+    "slug": "corroded-bronze-plate-helm",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Plate Pauldrons",
+    "slug": "corroded-bronze-plate-pauldrons",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shoulders",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Plate Arming Doublet",
+    "slug": "corroded-bronze-plate-arming-doublet",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shirt",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Plate Bracer",
+    "slug": "corroded-bronze-plate-bracer",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true
+  },
+  {
+    "name": "Corroded Bronze Plate Breastplate",
+    "slug": "corroded-bronze-plate-breastplate",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Plate Girdle",
+    "slug": "iron-plate-girdle",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Waist",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Plate Visor",
+    "slug": "iron-plate-visor",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Face",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Plate Arming Doublet",
+    "slug": "rusty-iron-plate-arming-doublet",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shirt",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Plate Boots",
+    "slug": "rusty-iron-plate-boots",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Feet",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Plate Bracer",
+    "slug": "rusty-iron-plate-bracer",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Plate Breastplate",
+    "slug": "rusty-iron-plate-breastplate",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Plate Cloak",
+    "slug": "rusty-iron-plate-cloak",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Plate Collar",
+    "slug": "rusty-iron-plate-collar",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Neck",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Plate Gauntlets",
+    "slug": "rusty-iron-plate-gauntlets",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Hands",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Plate Girdle",
+    "slug": "rusty-iron-plate-girdle",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Waist",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Plate Greaves",
+    "slug": "rusty-iron-plate-greaves",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Legs",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Plate Helm",
+    "slug": "rusty-iron-plate-helm",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Plate Pauldrons",
+    "slug": "rusty-iron-plate-pauldrons",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shoulders",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Iron Plate Visor",
+    "slug": "rusty-iron-plate-visor",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Face",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Plate Collar",
+    "slug": "rusty-steel-plate-collar",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Neck",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Plate Gauntlets",
+    "slug": "rusty-steel-plate-gauntlets",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Hands",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Plate Girdle",
+    "slug": "rusty-steel-plate-girdle",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Waist",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Plate Greaves",
+    "slug": "rusty-steel-plate-greaves",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Legs",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Plate Helm",
+    "slug": "rusty-steel-plate-helm",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Plate Pauldrons",
+    "slug": "rusty-steel-plate-pauldrons",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shoulders",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Plate Visor",
+    "slug": "rusty-steel-plate-visor",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Face",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Plate Arming Doublet",
+    "slug": "rusty-steel-plate-arming-doublet",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shirt",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Plate Boots",
+    "slug": "rusty-steel-plate-boots",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Feet",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Plate Bracer",
+    "slug": "rusty-steel-plate-bracer",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Plate Breastplate",
+    "slug": "rusty-steel-plate-breastplate",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Plate Cloak",
+    "slug": "rusty-steel-plate-cloak",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze Plate Boots",
+    "slug": "tarnished-bronze-plate-boots",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Feet",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze Plate Bracer",
+    "slug": "tarnished-bronze-plate-bracer",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze Plate Girdle",
+    "slug": "tarnished-bronze-plate-girdle",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Waist",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Bronze Plate Helm",
+    "slug": "tarnished-bronze-plate-helm",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true
+  },
+  {
+    "name": "Tarnished Iron Plate Helm",
+    "slug": "tarnished-iron-plate-helm",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true
+  },
+  {
+    "name": "Iron Scraps",
+    "slug": "iron-scraps",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Copper Scraps",
+    "slug": "copper-scraps",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
   }
 ]
