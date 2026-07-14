@@ -203,6 +203,17 @@ body.site-entered .splash-screen {
 
 /* ---------- Layout ---------- */
 .layout {
+  /* width:100% is required here, not just max-width+margin:auto — .layout
+     is also a flex item of <body> (the sticky-footer trick, see above),
+     and per the flexbox spec, left/right:auto margins on a flex item
+     suppress the cross-axis stretch that would otherwise fill body's
+     width, falling back to shrink-to-fit sizing based on child content
+     instead. That made .layout's real width unstable — content-dependent,
+     sometimes far narrower than the viewport — most visible after a
+     client-side re-render swapped in different content. width:100% gives
+     it a definite size, restoring max-width+margin:auto's ordinary
+     centering behavior and removing the ambiguity entirely. */
+  width: 100%;
   max-width: 1600px;
   margin: 0 auto;
   display: flex;

@@ -1316,6 +1316,30 @@ column instead of patching each child's width individually. If a future narrow-l
 change adds a new direct child of `.layout`, it gets this stretch behavior for free — no
 per-child width override needed, unlike the sidebar's pre-existing one.
 
+**Third gotcha (found/fixed 2026-07-14, same day) — the real root cause, not just the
+mobile-width symptom above.** A user screenshot at 1080px width (well above the 900px
+mobile breakpoint, desktop row layout, so the second gotcha's fix didn't apply) showed the
+exact same collapsed-content look. Traced to `.layout` itself: it has `margin: 0 auto`
+(for the `max-width: 1600px` desktop-centering trick) — but `.layout` is *also* a flex item
+of `<body>` (the `display:flex; flex-direction:column` sticky-footer trick, see "Sticky
+footer" above `.layout`'s CSS). Per the flexbox spec, **left/right `auto` margins on a flex
+item suppress cross-axis `align-items: stretch`**, even though `body`'s default
+`align-items` is `normal` (= `stretch`). With stretch suppressed, `.layout`'s width falls
+back to shrink-to-fit sizing based on its children's content instead of filling `body`'s
+width — unstable and content-dependent, and most visible right after a client-side
+re-render swapped in different `.content-inner` HTML (clicking through Item Database →
+Armor → Cloth reproduced it reliably; a fresh page load usually looked fine, which is why
+this was hard to pin down and why the second gotcha's mobile-only fix seemed to work at
+first). Fixed by adding `width: 100%` to `.layout` — an explicit, definite width isn't
+subject to the stretch-vs-shrink-to-fit ambiguity at all, so `max-width` + `margin: 0 auto`
+centering works exactly as originally intended. **This fix supersedes the second gotcha's
+`align-items: stretch` mobile-query patch as the actual fix** (that patch is harmless and
+left in place, but was masking the symptom at ≤900px without addressing the same bug at
+wider widths). If any other element ever needs `margin: 0 auto` centering while also being
+a flex item of a flex container, give it an explicit `width: 100%` (or a definite width)
+for the same reason — don't rely on `align-items: stretch` alone once auto margins are
+involved.
+
 ## Mobile / narrow-viewport layout (2026-07-14)
 
 The user reported the site "looks absolutely awful" in a tall/narrow browser window and
