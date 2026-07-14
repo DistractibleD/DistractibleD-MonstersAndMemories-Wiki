@@ -394,6 +394,11 @@ body:not(.site-entered) .sidebar {
   font-size: 0.82rem;
   margin: 6px 0 14px;
 }
+.items-filters-intro {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  margin: 22px 0 8px;
+}
 .items-table-wrap {
   overflow-x: auto;
   max-width: 100%;
@@ -416,6 +421,7 @@ body:not(.site-entered) .sidebar {
 /* Column proportions, tuned so short-but-unbreakable words (e.g. "Medium",
    "Weapon") fit without splitting mid-word. Overridden for mobile below. */
 .col-name { width: 18%; }
+.col-type { width: 8%; }
 .col-slot { width: 10%; }
 .col-ac { width: 6%; }
 .col-stats { width: 13%; }

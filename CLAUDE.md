@@ -128,6 +128,23 @@ directly on that item's category list with the search box pre-filled, instead of
 the category grid. Recipe component/result links into the Item Database go through the same
 `goToItem` path, so they land in the right category too.
 
+**Filter dropdowns on the category grid itself (2026-07-14):** the user asked for a second
+way into the data beyond clicking a category card — filter dropdowns (Slot/Class/Race/Tag/
+Max Size) now sit directly on the category grid too, computed from *all* of `items.json`
+rather than scoped to one type (no category has been picked yet at this point). Picking any
+one of them sets `pendingItemFilters` and calls `renderItemsList(container, null)` — passing
+`category: null` is a new third state (alongside a real type string, and `'Armor'` + a
+material/slot `scope`) meaning "every category, unscoped," consumed the same
+render-then-clear-the-pending-variable way `pendingItemQuery` already was. This *does* bring
+back a "Type" column and a `type` sort key — deliberately, unlike the 2026-07-05 change
+above that removed the flat all-items table's Type column because type was implied by
+category; here there's no category to imply it from, so the column earns its place back,
+but only in this specific unscoped list (`showTypeColumn = category === null` in
+`renderItemsList`/`renderItemRows`) — a normal per-category list (reached by clicking a
+card) is completely unaffected and still has no Type column. Clicking a category card and
+using a filter dropdown are two independent, equally-valid entry points into the data now,
+not a replacement of one by the other.
+
 ## Item screenshot format
 
 Item/recipe screenshots (`images/items/`, `images/crafting/`) are stored as `.jpg` at
@@ -660,6 +677,19 @@ fills in as the user provides it:
   `<img>`, per the existing "everything beyond name/slug is optional" design) so this needed
   no code change, just a data-entry convention. Only prompt for/expect a screenshot when the
   monster is clearly a unique/Named spawn or boss.
+  **Replace-on-better-visibility (2026-07-14):** if a new screenshot comes in for a monster
+  that already has an `image`, and the new one shows the creature more clearly than the
+  existing one (better lighting, less obstructed, less distant/blurry — day-vs-night was the
+  first case of this, see below, but the rule is about visibility generally, not just
+  time-of-day), overwrite the existing `images/Monsters/<slug>.jpg` with the new one rather
+  than discarding it as a duplicate or leaving the worse picture in place. Only replace when
+  the new one is a genuine improvement — don't ask for or expect a better picture proactively,
+  and don't replace a clear picture with a merely-different one. A monster only has one
+  `image` slot, so this is always an overwrite, never a second field. The 2026-07-07
+  day/night case: a night/dark shot gets replaced by a later daytime shot of the same
+  monster, since the user confirmed daytime is always clearer when available — monsters that
+  only spawn at night keep their night picture, since no daytime alternative will ever exist
+  for them.
 - `maps` — array of map names the monster's been seen on (usually one, but kept as an array
   in case the same monster template turns out to spawn in more than one zone). Not
   necessarily tied to a `maps.json` entry — just plain text naming the zone. Must match a
@@ -802,9 +832,14 @@ drops at least one item from a recognized quality-set family.
     Veil. Veil (added 2026-07-12, from "an angered spirit"'s own loot window) was backfilled onto
     every other monster already carrying the full Tattered Cloth roster (a rotting skeleton, a
     Bloodynose quarreler, an ashira warrior, a grave robber, a wererat).
-  - Known Tattered Rawhide pieces (7): Gorget, Belt, Mask, Gloves, Bracer, Boots, Vest. Gloves/
-    Bracer/Boots/Vest were all added 2026-07-12, sourced from Toma the Two-Faced's and "a
-    wererat"'s own loot-window screenshots.
+  - Known Tattered Rawhide pieces (8): Gorget, Belt, Mask, Gloves, Bracer, Boots, Vest,
+    Shoulderpads. Gloves/Bracer/Boots/Vest were all added 2026-07-12, sourced from Toma the
+    Two-Faced's and "a wererat"'s own loot-window screenshots. Shoulderpads was added
+    2026-07-14 from a brand-new monster, "a skeletal cleric" (Tomb of the Last Wyrmsbane),
+    and backfilled onto every other monster already carrying the full Tattered Rawhide roster
+    (an ashira warrior, Toma the Two-Faced, a grave robber, a disgraced friar, a wererat). A
+    full item card came in 2026-07-14 (via "a skeletal marksman"'s own loot window), so it
+    now has a normal `items.json` entry like the rest of the family.
   - Known Corroded Bronze pieces (19): Shortsword, Scythe, Battle Axe, Longsword, Axe, Dagger,
     Trident, Maul, Great Scythe, Scimitar, Greatsword, Long Spear, Tower Shield, Kite Shield,
     Plate Collar, Plate Boots, Chain Gloves, Chain Waistguard, Chain Mask. The first 18 of

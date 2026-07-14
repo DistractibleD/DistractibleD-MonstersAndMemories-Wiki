@@ -9,6 +9,12 @@ own — only whether the actual stats/text made it into items.json. Screenshots 
 kept (as .jpg) purely as the reference used to extract that data, per the user's
 2026-07-04 confirmation.
 
+Resolved (2026-07-14):
+
+- Tattered Rawhide Shoulderpads — a full card came in ("a skeletal marksman"'s own
+  loot-window screenshot), completing AC/Weight/Size/Class/Race. Full items.json entry
+  added; now links correctly from every monster's drop list.
+
 Update (2026-07-04, re-check of every item previously flagged in this file):
 
 - Torch — WAS missing data, now fixed. The card (images/items/torch.jpg) has an "Effect:"

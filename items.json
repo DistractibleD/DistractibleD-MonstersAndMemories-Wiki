@@ -2858,6 +2858,35 @@
     "race": ["ALL"]
   },
   {
+    "name": "Kazessthra's Bane",
+    "slug": "kazessthras-bane",
+    "image": "images/items/kazessthras-bane.jpg",
+    "type": "Weapon",
+    "tags": ["MAGIC", "LORE", "UNIQUE"],
+    "slot": "Primary / Secondary",
+    "damage": 9,
+    "delay": 34,
+    "skill": "Slashing",
+    "stats": { "STR": 2, "STA": 2, "HP": 5, "MANA": 5 },
+    "weight": 6.0,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB", "WIZ"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Words of the Crusader Priest",
+    "slug": "words-of-the-crusader-priest",
+    "image": "images/items/words-of-the-crusader-priest.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC", "LORE"],
+    "slot": "Primary / Secondary",
+    "stats": { "INT": 1, "WIS": 1, "MANA": 5 },
+    "weight": 1.0,
+    "size": "Small",
+    "classes": ["CLR", "DRU", "ELE", "ENC", "INQ", "NEC", "PAL", "RNG", "SHD", "SHM", "WIZ"],
+    "race": ["ALL"]
+  },
+  {
     "name": "Oak Wood Bo Staff",
     "slug": "oak-wood-bo-staff",
     "image": "images/items/oak-wood-bo-staff.jpg",
@@ -3555,6 +3584,19 @@
     "weight": 6.0,
     "size": "Medium",
     "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Tattered Rawhide Shoulderpads",
+    "slug": "tattered-rawhide-shoulderpads",
+    "image": "images/items/tattered-rawhide-shoulderpads.jpg",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shoulders",
+    "ac": 2,
+    "weight": 0.5,
+    "size": "Small",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
     "race": ["ALL"]
   },
   {
@@ -4439,6 +4481,36 @@
     "size": "Small"
   },
   {
+    "name": "Scorched Academy Folio",
+    "slug": "scorched-academy-folio",
+    "image": "images/items/scorched-academy-folio.jpg",
+    "type": "Misc",
+    "tags": ["UNIQUE", "NODROP"],
+    "description": "An academy folio that has seen better days. The letter V is still legible on the cover.",
+    "weight": 1.0,
+    "size": "Small"
+  },
+  {
+    "name": "Eth-ur Arboreal Journal Page",
+    "slug": "eth-ur-arboreal-journal-page",
+    "image": "images/items/eth-ur-arboreal-journal-page.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["DRU"]
+  },
+  {
+    "name": "Apoptosis Journal Page",
+    "slug": "apoptosis-journal-page",
+    "image": "images/items/apoptosis-journal-page.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["DRU"]
+  },
+  {
     "name": "Inlaid Ruby Bronze Ring",
     "slug": "inlaid-ruby-bronze-ring",
     "image": "images/items/inlaid-ruby-bronze-ring.jpg",
@@ -4830,6 +4902,34 @@
     "type": "Misc",
     "tags": ["NODROP"],
     "description": "An oily fruity-smelling residue scraped from a zombie's skin.",
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Spectral Dust",
+    "slug": "spectral-dust",
+    "image": "images/items/spectral-dust.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
+    "name": "Holy Water",
+    "slug": "holy-water",
+    "image": "images/items/holy-water.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.5,
+    "size": "Small"
+  },
+  {
+    "name": "Crystallized Shard",
+    "slug": "crystallized-shard",
+    "image": "images/items/crystallized-shard.jpg",
+    "type": "Misc",
+    "tags": ["NODROP"],
+    "description": "A shard of crystallized spectral essence from Timmon Bell.",
     "weight": 0.1,
     "size": "Small"
   },

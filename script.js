@@ -23,6 +23,11 @@ let pendingCraftingTradeskill = null;
 // Same idea as pendingCraftingTradeskill, but for the separate Gathering
 // page (gathering tradeskills split out from Crafting on 2026-07-13).
 let pendingGatheringTradeskill = null;
+// Set by the Item Database category grid's own filter dropdowns (2026-07-14)
+// so picking a filter there — instead of clicking a category card — jumps
+// straight to the unscoped all-items list with that filter pre-applied.
+// Consumed by renderItemsList the same way pendingItemQuery is.
+let pendingItemFilters = null;
 // Set alongside pendingItemQuery (by goToItem) so the Item Database opens
 // directly on that item's category list instead of the category grid —
 // same idea as pendingCraftingTradeskill jumping past the tradeskill grid.
@@ -1004,6 +1009,17 @@ async function renderItemsPage(container) {
 function renderItemsCategories(container) {
   const types = [...new Set(itemsData.map(i => i.type))].sort();
 
+  // Filter dropdowns (2026-07-14) let someone skip the category-card click
+  // entirely and jump straight to a filtered, unscoped list of matching
+  // items across every category — an alternative to, not a replacement for,
+  // clicking a card. Options are derived from *all* items.json, not scoped
+  // to one type, since no category has been picked yet at this point.
+  const allSlots = [...new Set(itemsData.map(i => i.slot))].filter(Boolean).sort();
+  const allClasses = [...new Set(itemsData.flatMap(i => i.classes || []).filter(c => c !== 'ALL'))].sort();
+  const allRaces = [...new Set(itemsData.flatMap(i => i.race || []).filter(r => r !== 'ALL'))].sort();
+  const allTags = [...new Set(itemsData.flatMap(i => i.tags || []))].sort();
+  const allMaxSizes = [...new Set(itemsData.map(i => i.maxSize).filter(Boolean))].sort();
+
   container.innerHTML = `
     <h1>Item Database</h1>
     <p>Browse items by category, or search below to jump straight to a specific item.</p>
@@ -1027,6 +1043,29 @@ function renderItemsCategories(container) {
         `;
       }).join('')}
     </div>
+    <p class="items-filters-intro">Or jump straight to a filtered list across every category:</p>
+    <div class="items-toolbar">
+      <select id="items-category-filter-slot" class="items-select">
+        <option value="">All slots</option>
+        ${allSlots.map(s => `<option value="${s}">${s}</option>`).join('')}
+      </select>
+      <select id="items-category-filter-class" class="items-select">
+        <option value="">All classes</option>
+        ${allClasses.map(c => `<option value="${c}">${c}</option>`).join('')}
+      </select>
+      <select id="items-category-filter-race" class="items-select">
+        <option value="">All races</option>
+        ${allRaces.map(r => `<option value="${r}">${r}</option>`).join('')}
+      </select>
+      <select id="items-category-filter-tag" class="items-select">
+        <option value="">All tags</option>
+        ${allTags.map(t => `<option value="${t}">${t}</option>`).join('')}
+      </select>
+      <select id="items-category-filter-maxsize" class="items-select">
+        <option value="">All max sizes</option>
+        ${allMaxSizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+      </select>
+    </div>
   `;
 
   container.querySelectorAll('.items-category-card').forEach(card => {
@@ -1035,6 +1074,25 @@ function renderItemsCategories(container) {
     } else {
       card.addEventListener('click', () => renderItemsList(container, card.dataset.type));
     }
+  });
+
+  const categorySlotFilter = container.querySelector('#items-category-filter-slot');
+  const categoryClassFilter = container.querySelector('#items-category-filter-class');
+  const categoryRaceFilter = container.querySelector('#items-category-filter-race');
+  const categoryTagFilter = container.querySelector('#items-category-filter-tag');
+  const categoryMaxSizeFilter = container.querySelector('#items-category-filter-maxsize');
+
+  [categorySlotFilter, categoryClassFilter, categoryRaceFilter, categoryTagFilter, categoryMaxSizeFilter].forEach(el => {
+    el.addEventListener('change', () => {
+      pendingItemFilters = {
+        slot: categorySlotFilter.value,
+        cls: categoryClassFilter.value,
+        race: categoryRaceFilter.value,
+        tag: categoryTagFilter.value,
+        maxSize: categoryMaxSizeFilter.value
+      };
+      renderItemsList(container, null);
+    });
   });
 
   // A shortcut past the whole category → (material →) slot drill-down for
@@ -1165,15 +1223,20 @@ function renderArmorSlots(container, material) {
 // and any Armor list reached via search (see renderItemsPage), leaves it unset
 // and shows the full, unscoped category same as before.
 function renderItemsList(container, category, scope) {
+  // `category === null` means "every category" — reached via the category
+  // grid's own filter dropdowns (2026-07-14) instead of clicking a card, so
+  // there's no single type to scope to. Never paired with `scope`, since
+  // that's only used for the Armor material/slot drill-down.
+  const showTypeColumn = category === null;
   const categoryItems = itemsData.filter(i => {
-    if (i.type !== category) return false;
+    if (!showTypeColumn && i.type !== category) return false;
     if (scope) {
       if (armorIconKey(i) !== scope.material) return false;
       if (i.slot !== scope.slot) return false;
     }
     return true;
   });
-  const categoryLabel = ITEM_TYPE_LABELS[category] || category;
+  const categoryLabel = showTypeColumn ? 'All Items' : (ITEM_TYPE_LABELS[category] || category);
 
   // Scoped Armor lists (material + slot) get their own heading/subtitle and
   // a back link that returns to the slot grid instead of the top category
@@ -1181,7 +1244,10 @@ function renderItemsList(container, category, scope) {
   // reached via search) keeps the original heading/back-link wording.
   const materialLabel = scope ? (ARMOR_MATERIAL_LABELS[scope.material] || scope.material) : null;
   const heading = scope ? `${materialLabel} Armor — ${scope.slot}` : categoryLabel;
+  // "all items" already ends in "items", so it skips the template's own
+  // trailing "items." below (see subtitleSuffix) to avoid "all items items."
   const subtitleLabel = scope ? `${materialLabel.toLowerCase()} ${scope.slot.toLowerCase()}` : categoryLabel.toLowerCase();
+  const subtitleSuffix = showTypeColumn ? '' : ' items';
   const backLabel = scope ? `All ${materialLabel} armor slots` : 'All categories';
 
   // Landed here from a recipe's component list — remember which recipe so
@@ -1214,7 +1280,7 @@ function renderItemsList(container, category, scope) {
     ${returnToMonster ? `<p class="items-back-link"><a href="#" id="items-back-to-monster">&larr; Back to ${escapeAttr(returnToMonster.name)}</a></p>` : ''}
     <p class="items-back-link"><a href="#" id="items-back-to-categories">&larr; ${escapeAttr(backLabel)}</a></p>
     <h1>${escapeAttr(heading)}</h1>
-    <p>Browse, search, filter, and sort ${escapeAttr(subtitleLabel)} items. Hover an item's name to see its full card.</p>
+    <p>Browse, search, filter, and sort ${escapeAttr(subtitleLabel)}${subtitleSuffix}. Hover an item's name to see its full card.</p>
     <div class="items-toolbar">
       <input type="search" id="items-search" class="items-search" placeholder="Search name, stat, class..." autocomplete="off">
       <select id="items-filter-slot" class="items-select">
@@ -1251,6 +1317,7 @@ function renderItemsList(container, category, scope) {
       <table class="items-table">
         <colgroup>
           <col class="col-name">
+          ${showTypeColumn ? '<col class="col-type">' : ''}
           <col class="col-slot">
           <col class="col-ac">
           <col class="col-stats">
@@ -1265,6 +1332,7 @@ function renderItemsList(container, category, scope) {
         <thead>
           <tr>
             <th data-sort-key="name" class="sortable">Name</th>
+            ${showTypeColumn ? '<th data-sort-key="type" class="sortable">Type</th>' : ''}
             <th data-sort-key="slot" class="sortable">Slot</th>
             <th data-sort-key="ac" class="sortable">AC</th>
             <th data-sort-key="stats" class="sortable">Stats</th>
@@ -1299,6 +1367,19 @@ function renderItemsList(container, category, scope) {
   if (pendingItemQuery) {
     searchBox.value = pendingItemQuery;
     pendingItemQuery = null;
+  }
+
+  // Landed here from the category grid's own filter dropdowns (2026-07-14) —
+  // carry the chosen filter(s) over onto this list's own dropdowns so the
+  // jump actually lands pre-filtered, not just on an unfiltered "All Items".
+  if (pendingItemFilters) {
+    const f = pendingItemFilters;
+    pendingItemFilters = null;
+    if (f.slot) slotFilter.value = f.slot;
+    if (f.cls) classFilter.value = f.cls;
+    if (f.race) raceFilter.value = f.race;
+    if (f.tag) tagFilter.value = f.tag;
+    if (f.maxSize) maxSizeFilter.value = f.maxSize;
   }
 
   if (returnToRecipe) {
@@ -1381,7 +1462,7 @@ function renderItemsList(container, category, scope) {
     });
 
     updateSortIndicators();
-    renderItemRows(container.querySelector('#items-tbody'), filtered);
+    renderItemRows(container.querySelector('#items-tbody'), filtered, showTypeColumn);
     container.querySelector('#items-count').textContent =
       `Showing ${filtered.length} of ${categoryItems.length} items`;
   }
@@ -1416,6 +1497,7 @@ const ITEM_SORT_NUMERIC = ['ac', 'damage', 'delay', 'ratio', 'weight', 'capacity
 function itemSortValue(item, key) {
   switch (key) {
     case 'name': return item.name.toLowerCase();
+    case 'type': return (ITEM_TYPE_LABELS[item.type] || item.type || '').toLowerCase();
     case 'slot': return (item.slot || '').toLowerCase();
     case 'ac': return item.ac != null ? item.ac : null;
     case 'stats': return formatStats(item).toLowerCase();
@@ -1434,16 +1516,19 @@ function escapeAttr(str) {
   return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-function renderItemRows(tbody, items) {
+function renderItemRows(tbody, items, showTypeColumn) {
   if (!items.length) {
-    tbody.innerHTML = '<tr><td colspan="11" class="items-empty">No items match your filters.</td></tr>';
+    tbody.innerHTML = `<tr><td colspan="${showTypeColumn ? 12 : 11}" class="items-empty">No items match your filters.</td></tr>`;
     return;
   }
 
   // data-label mirrors each column's header text — read by the narrow-screen
   // stacked-card layout in style.css (each <td> becomes its own labeled row
   // via a ::before). cell-empty marks placeholder "—" cells so that view can
-  // hide them instead of showing a label next to nothing.
+  // hide them instead of showing a label next to nothing. The Type column
+  // (2026-07-14) only appears in the unscoped "All Items" list reached from
+  // the category grid's own filter dropdowns — a normal per-category list
+  // already implies its type, so it stays out of the way there.
   tbody.innerHTML = items.map(item => {
     const ratio = itemRatio(item);
     const damageCell = item.damage != null ? item.damage : '—';
@@ -1457,6 +1542,7 @@ function renderItemRows(tbody, items) {
         <td data-label="Name">
           <span class="item-name-hover" data-alt="${item.name}">${(item.tags || []).map(t => `<span class="badge-tag">${t}</span> `).join('')}${item.name}</span>
         </td>
+        ${showTypeColumn ? `<td data-label="Type">${escapeAttr(ITEM_TYPE_LABELS[item.type] || item.type)}</td>` : ''}
         <td data-label="Slot"${formatSlot(item) === '—' ? ' class="cell-empty"' : ''}>${formatSlot(item)}</td>
         <td data-label="AC"${acCell === '—' ? ' class="cell-empty"' : ''}>${acCell}</td>
         <td data-label="Stats"${formatStats(item) === '—' ? ' class="cell-empty"' : ''}>${formatStats(item)}</td>
