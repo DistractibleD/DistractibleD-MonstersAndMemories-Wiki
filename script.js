@@ -885,14 +885,18 @@ const ITEM_TYPE_LABELS = {
 // Armor's item table gets an extra "Material" filter dropdown (see
 // renderItemsList) built from this list. Reuses armorIconKey's existing
 // material guess (already used for the item card icon) rather than a
-// separate schema field. Fixed display order (light to heavy, Shields/Other
-// last) rather than alphabetical, and only materials that actually have an
-// item show up (same "derive from data" rule as every other filter/dropdown
-// in this file).
-const ARMOR_MATERIAL_ORDER = ['cloth', 'leather', 'chain', 'plate', 'shield', 'armor'];
+// separate schema field. Fixed display order (light to heavy, Other last)
+// rather than alphabetical, and only materials that actually have an item
+// show up (same "derive from data" rule as every other filter/dropdown in
+// this file). Shields are deliberately left out (2026-07-15) — a shield
+// isn't a material tier the way Cloth/Leather/Chain/Plate are, and every
+// shield already has `slot: "Secondary"` (the only item type that does),
+// so the existing Slot dropdown already isolates them without needing a
+// confusing "Shields" bucket sitting next to real materials.
+const ARMOR_MATERIAL_ORDER = ['cloth', 'leather', 'chain', 'plate', 'armor'];
 const ARMOR_MATERIAL_LABELS = {
   cloth: 'Cloth', leather: 'Leather', chain: 'Chain', plate: 'Plate',
-  shield: 'Shields', armor: 'Other',
+  armor: 'Other',
 };
 
 function itemRatio(item) {
