@@ -2932,6 +2932,16 @@
     "race": ["ALL"]
   },
   {
+    "name": "Corrupted Leather Scraps",
+    "slug": "corrupted-leather-scraps",
+    "image": "images/items/corrupted-leather-scraps.jpg",
+    "type": "Misc",
+    "tags": [],
+    "resists": { "CORRUPTION": -5 },
+    "weight": 0.5,
+    "size": "Small"
+  },
+  {
     "name": "Sculpted Vermin Helm",
     "slug": "sculpted-vermin-helm",
     "image": "images/items/sculpted-vermin-helm.jpg",

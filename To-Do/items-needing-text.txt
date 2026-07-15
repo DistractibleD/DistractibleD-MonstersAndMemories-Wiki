@@ -37,8 +37,8 @@ the older notes just means "no full entry with real stats yet," not "not on the 
 - Corrupted Leather Cap, Shoulderpads, Cloak, Robe, Bracer, Belt, Gloves, Boots — drops on
   "the corrupted ashira" (monsters.json), no items.json entry yet. Source table has no
   Weight/Size column, so these can't be added until a real in-game card comes in.
-- Corrupted Leather Scraps — drop on "the corrupted ashira", no items.json entry yet
-  (no weight/size known).
+- Corrupted Leather Scraps — RESOLVED 2026-07-15, added to items.json (SV Corruption: -5,
+  weight 0.5, size Small) once a real card came in.
 - Lunar Festival Trousers — missing `race`. Screenshot cuts off right after Class, no
   "Race:" line visible; every other armor card in its batch had one, so this is likely a
   crop issue rather than a real absence. Update if a fuller screenshot comes in.

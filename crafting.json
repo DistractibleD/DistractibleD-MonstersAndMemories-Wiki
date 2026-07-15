@@ -6616,8 +6616,8 @@
       { "item": "Enchanted Powder", "quantity": 2 }
     ],
     "recipeSkillLevel": 55,
-    "difficultyColor": "Red",
-    "observedAtSkill": 20
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 44
   },
   {
     "name": "Minor Elixir of Tenacity",
@@ -6636,8 +6636,8 @@
       { "item": "Crude Flask", "quantity": 1 }
     ],
     "recipeSkillLevel": 60,
-    "difficultyColor": "Red",
-    "observedAtSkill": 20
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 44
   },
   {
     "name": "Minor Elixir of Concentration",
@@ -6656,8 +6656,8 @@
       { "item": "Crude Flask", "quantity": 1 }
     ],
     "recipeSkillLevel": 60,
-    "difficultyColor": "Red",
-    "observedAtSkill": 20
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 44
   },
   {
     "name": "Lesser Serum of Dexterity",
@@ -6675,15 +6675,16 @@
       { "item": "Annealed Vial", "quantity": 1 }
     ],
     "recipeSkillLevel": 65,
-    "difficultyColor": "Red",
-    "observedAtSkill": 20
+    "difficultyColor": "Orange",
+    "observedAtSkill": 44
   },
   {
     "name": "Lesser Serum of Wisdom",
     "slug": "lesser-serum-of-wisdom",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
-    "description": "Center yourself, increasing Wisdom by 10 for 1 hour.",
+    "image": "images/crafting/lesser-serum-of-wisdom.jpg",
+    "description": "Center yourself, increasing your Wisdom by 10 for 1 hour.",
     "effect": "Lesser Serum of Wisdom (On Click. Any Slot. Cast Time: 5s, Level: 15)",
     "weight": 1.0,
     "size": "Small",
@@ -6692,57 +6693,72 @@
       { "item": "Ironroot Powder", "quantity": 2 },
       { "item": "Annealed Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 70
+    "recipeSkillLevel": 70,
+    "difficultyColor": "Red",
+    "observedAtSkill": 44
   },
   {
     "name": "Lunar Shroud Potion",
     "slug": "lunar-shroud-potion",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
-    "description": "Renders you completely transparent, making you virtually invisible.",
-    "effect": "Invisibility (On Click. Any Slot. Cast Time: Instant, Level: 1)",
+    "image": "images/crafting/lunar-shroud-potion.jpg",
+    "description": "Shroud yourself in a cloak of invisibility, rendering you unseen by the living for 10 minutes.",
+    "effect": "Lunar Shroud (On Click. Any Slot. Cast Time: 5s, Level: 1)",
     "weight": 1.0,
     "size": "Small",
     "components": [
       { "item": "Moonveil Powder", "quantity": 2 },
-      { "item": "Wisp Dust", "quantity": 2 },
-      { "item": "Annealed Vial", "quantity": 2 }
+      { "item": "Wisp Dust", "quantity": 3 },
+      { "item": "Annealed Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 75
+    "recipeSkillLevel": 75,
+    "difficultyColor": "Red",
+    "observedAtSkill": 44,
+    "note": "The description/effect/components here were previously sourced from an external reference table that turned out to differ from the real card in several ways — corrected 2026-07-15 once an actual in-game card came in (description/effect text, and Wisp Dust x2→x3, Annealed Vial x2→1)."
   },
   {
     "name": "Clear Fish Oil",
     "slug": "clear-fish-oil",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
+    "image": "images/crafting/clear-fish-oil.jpg",
     "description": "Fish Oil",
     "weight": 0.0,
     "size": "Small",
     "components": [
-      { "item": "Any Raw Fish", "quantity": 5 },
+      { "item": "Fish", "quantity": 5 },
       { "item": "Annealed Vial", "quantity": 5 }
     ],
     "resultQuantity": 5,
-    "recipeSkillLevel": 80
+    "recipeSkillLevel": 80,
+    "difficultyColor": "Red",
+    "observedAtSkill": 44
   },
   {
     "name": "Clear Wood Finish",
     "slug": "clear-wood-finish",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
+    "image": "images/crafting/clear-wood-finish.jpg",
+    "weight": 0.0,
+    "size": "Small",
     "components": [
       { "item": "Clear Fish Oil", "quantity": 1 },
       { "item": "Resin", "quantity": 6 }
     ],
-    "recipeSkillLevel": 80
+    "recipeSkillLevel": 80,
+    "difficultyColor": "Red",
+    "observedAtSkill": 44
   },
   {
     "name": "Lesser Serum of Agility",
     "slug": "lesser-serum-of-agility",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
-    "description": "Focus yourself, increasing Agility by 10 for 1 hour.",
-    "effect": "Lesser Serum of Intelligence (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "image": "images/crafting/lesser-serum-of-agility.jpg",
+    "description": "Lighten yourself, increasing your Agility by 10 for 1 hour.",
+    "effect": "Lesser Serum of Agility (On Click. Any Slot. Cast Time: 5s, Level: 15)",
     "weight": 1.0,
     "size": "Small",
     "components": [
@@ -6750,13 +6766,17 @@
       { "item": "Dragon's Vigil Powder", "quantity": 1 },
       { "item": "Annealed Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 85
+    "recipeSkillLevel": 85,
+    "difficultyColor": "Red",
+    "observedAtSkill": 44,
+    "note": "The description/effect text here was previously sourced from an external reference table that had a copy-paste error (\"Lesser Serum of Intelligence\", Level 1) — corrected 2026-07-15 once a real in-game card confirmed the actual text (\"Lesser Serum of Agility\", Level 15)."
   },
   {
     "name": "Lesser Tincture of Sagacity",
     "slug": "lesser-tincture-of-sagacity",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
+    "image": "images/crafting/lesser-tincture-of-sagacity.jpg",
     "description": "Free your mind, increasing your Casting Speed by 20% and Spell Damage dealt by 10% for 20 seconds.",
     "effect": "Lesser Tincture of Sagacity (On Click. Any Slot. Cast Time: 5s, Level: 1)",
     "weight": 1.0,
@@ -6765,7 +6785,9 @@
       { "item": "Dragon's Vigil Powder", "quantity": 2 },
       { "item": "Moonveil Powder", "quantity": 2 },
       { "item": "Annealed Vial", "quantity": 1 }
-    ]
+    ],
+    "difficultyColor": "Red",
+    "observedAtSkill": 44
   },
   {
     "name": "Lesser Serum of Charisma",
