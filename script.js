@@ -2092,6 +2092,13 @@ function renderRecipeCardHTML(recipe) {
     : escapeAttr(recipe.name);
 
   const fields = [];
+  // Confirmed recipeSkillLevel shows as a plain number; an interpolated
+  // estimate (see estimateRecipeSkill) is explicitly labeled so it's never
+  // mistaken for a confirmed value.
+  const skillInfo = estimateRecipeSkill(recipe);
+  if (skillInfo) {
+    fields.push({ label: 'Skill', value: skillInfo.estimated ? `~${skillInfo.skill} (estimated)` : skillInfo.skill });
+  }
   if (recipe.weight != null) {
     fields.push({ label: 'Weight', value: recipe.weight });
     fields.push({ label: 'Size', value: recipe.size });
@@ -2195,16 +2202,75 @@ function recipeSearchHaystack(recipe) {
   ].join(' ').toLowerCase();
 }
 
+// Estimates a recipe's real skill requirement from whatever's already known,
+// so the recipe grid can sort by skill required (matching the in-game
+// crafting window's own order) even for recipes whose exact number was never
+// confirmed. Priority: a confirmed `recipeSkillLevel` wins outright (not an
+// estimate). Otherwise, if the recipe has a `listOrder` and the same
+// tradeskill has at least one other recipe with *both* `listOrder` and
+// `recipeSkillLevel` (an "anchor"), linearly interpolate a skill number from
+// the nearest anchor(s) surrounding its listOrder position — flat-extending
+// from a single anchor if only one side is available. With no listOrder, or
+// no anchors at all in that tradeskill, there's nothing to interpolate from
+// and this returns null (that recipe keeps today's listOrder/alphabetical
+// fallback with no fabricated number). Purely a render-time computation,
+// never written back into crafting.json — cached per tradeskill since the
+// underlying data doesn't change during a session. 2026-07-15.
+const recipeSkillEstimateCache = new Map();
+function estimateRecipeSkill(recipe) {
+  if (!recipeSkillEstimateCache.has(recipe.tradeskill)) {
+    const siblings = craftingData.filter(r => r.tradeskill === recipe.tradeskill);
+    const anchors = siblings
+      .filter(r => r.listOrder != null && r.recipeSkillLevel != null)
+      .map(r => ({ order: r.listOrder, skill: r.recipeSkillLevel }))
+      .sort((a, b) => a.order - b.order);
+
+    const map = new Map();
+    siblings.forEach(r => {
+      if (r.recipeSkillLevel != null) {
+        map.set(r, { skill: r.recipeSkillLevel, estimated: false });
+        return;
+      }
+      let skill = null;
+      if (r.listOrder != null && anchors.length) {
+        let before = null, after = null;
+        for (const a of anchors) {
+          if (a.order <= r.listOrder) before = a;
+          if (a.order >= r.listOrder && !after) after = a;
+        }
+        if (before && after && before.order !== after.order) {
+          const t = (r.listOrder - before.order) / (after.order - before.order);
+          skill = before.skill + (after.skill - before.skill) * t;
+        } else if (before) {
+          skill = before.skill;
+        } else if (after) {
+          skill = after.skill;
+        }
+      }
+      map.set(r, skill != null ? { skill: Math.round(skill), estimated: true } : null);
+    });
+    recipeSkillEstimateCache.set(recipe.tradeskill, map);
+  }
+  return recipeSkillEstimateCache.get(recipe.tradeskill).get(recipe) || null;
+}
+
 async function renderCraftingRecipes(container, tradeskillName) {
   const tradeskill = tradeskillsData.find(ts => ts.name === tradeskillName);
   if (tradeskillName === 'Jewelcrafting') await ensureGemstonesData();
-  // Sorted by the recipe's real skill requirement (lowest first), matching the
-  // order the game's own crafting window lists them in — not alphabetically.
-  // Recipes without a known listOrder yet (no crafting-window screenshot seen
-  // for them) sort after all known ones, alphabetically among themselves.
+  // Sorted by the recipe's real skill requirement (lowest first) — a
+  // confirmed `recipeSkillLevel` where one exists, otherwise the
+  // interpolated estimate from estimateRecipeSkill() above, otherwise
+  // (no signal at all) the old listOrder/alphabetical fallback.
   const allRecipes = craftingData
     .filter(r => r.tradeskill === tradeskillName)
     .sort((a, b) => {
+      const ea = estimateRecipeSkill(a);
+      const eb = estimateRecipeSkill(b);
+      const as = ea ? ea.skill : null;
+      const bs = eb ? eb.skill : null;
+      if (as != null && bs != null && as !== bs) return as - bs;
+      if (as != null && bs == null) return -1;
+      if (as == null && bs != null) return 1;
       const ao = a.listOrder ?? Infinity;
       const bo = b.listOrder ?? Infinity;
       if (ao !== bo) return ao - bo;
@@ -2380,7 +2446,7 @@ function gatheringColumns(nodes) {
 function gatheringCellHTML(node, key) {
   switch (key) {
     case 'name':
-      return `<td data-label="Name">${escapeAttr(node.name)}</td>`;
+      return `<td data-label="Name">${node.image ? `<button type="button" class="gathering-node-thumb" data-full="${escapeAttr(node.image)}"><img src="${escapeAttr(node.image)}" alt="${escapeAttr(node.name)}"></button>` : ''}${escapeAttr(node.name)}${node.needsInfo ? ' <span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}</td>`;
     case 'minSkill':
     case 'trivialSkill':
       return `<td data-label="${key === 'minSkill' ? 'Min Skill' : 'Trivial'}"${node[key] == null ? ' class="cell-empty"' : ''}>${node[key] != null ? node[key] : '?'}</td>`;
@@ -2495,6 +2561,7 @@ function renderGatheringNodes(container, tradeskillName) {
         ${columns.map(c => gatheringCellHTML(node, c.key)).join('')}
       </tr>
       ${node.note ? `<tr class="gathering-note-row"><td colspan="${columnCount}"><em>${escapeAttr(node.note)}</em></td></tr>` : ''}
+      ${node.needsInfo ? `<tr class="gathering-note-row"><td colspan="${columnCount}"><div class="item-card-needs-info">This node needs more info &middot; confirmed to exist, but not fully identified yet. <a href="#submit">Submit a screenshot</a> to help fill it in!</div></td></tr>` : ''}
     `).join('');
 
     tbody.querySelectorAll('.gathering-result-link').forEach(link => {
@@ -2503,6 +2570,9 @@ function renderGatheringNodes(container, tradeskillName) {
         const item = findItemByName(link.dataset.item);
         if (item) goToItem(item);
       });
+    });
+    tbody.querySelectorAll('.gathering-node-thumb').forEach(btn => {
+      btn.addEventListener('click', () => openSampleViewer(btn.dataset.full));
     });
     setupItemTooltip(tbody);
   }
@@ -3079,7 +3149,12 @@ const SUBMIT_WORKER_URL = 'https://muddy-bar-88a7.mnm-wiki.workers.dev';
 const SUBMIT_EXAMPLES = [
   { image: 'images/samples/sample-loot.jpg', label: 'Item / loot window' },
   { image: 'images/samples/sample-monster.jpg', label: 'Monster picture' },
-  { image: 'images/samples/sample-companion.jpg', label: 'Companion / ability screenshot' }
+  { image: 'images/samples/sample-companion.jpg', label: 'Companion / ability screenshot' },
+  {
+    image: 'images/samples/sample-gathering-node.jpg',
+    label: 'Gathering node',
+    note: 'Name the file after the node or resource itself (e.g. "Lionleaf.jpg") — that\'s how we match it up.'
+  }
 ];
 
 function renderSubmitPage(container) {
@@ -3094,6 +3169,7 @@ function renderSubmitPage(container) {
           <button type="button" class="submit-example" data-full="${escapeAttr(ex.image)}">
             <img src="${escapeAttr(ex.image)}" alt="Example: ${escapeAttr(ex.label)}">
             <span>${escapeAttr(ex.label)}</span>
+            ${ex.note ? `<small class="submit-example-note">${escapeAttr(ex.note)}</small>` : ''}
           </button>
         `).join('')}
       </div>

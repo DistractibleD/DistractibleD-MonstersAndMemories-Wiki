@@ -342,6 +342,24 @@ extending it the same way as new fields show up on future cards, rather than gue
   list (1 = first/lowest skill requirement). This is what the Crafting page actually sorts
   by now instead of alphabetically — see the "Crafting window screenshots" workflow below
   for how it's derived and kept as one unbroken sequence per tradeskill.
+- **Skill-required sort now fills gaps with a stated estimate (2026-07-15).** The recipe grid
+  sorts by a recipe's real skill requirement, not just `listOrder` — `estimateRecipeSkill()`
+  in `script.js` (computed at render time, cached per tradeskill, never written back into
+  this file) resolves each recipe to a confirmed `recipeSkillLevel` where one exists, or
+  failing that, linearly interpolates from the tradeskill's own "anchors" — recipes that have
+  *both* `listOrder` and a confirmed `recipeSkillLevel` — surrounding that recipe's
+  `listOrder` position. A recipe past the last anchor (or before the first) flat-extends from
+  the nearest one rather than extrapolating a slope. Recipes with no `listOrder` at all, or
+  belonging to a tradeskill with zero anchors (Jewelcrafting/Fletching/Tailoring have 100%
+  `listOrder` coverage but 0% `recipeSkillLevel` — nothing to anchor an estimate to), get no
+  fabricated number and keep the old `listOrder`-then-alphabetical fallback exactly as before
+  — this is additive, not a regression risk for tradeskills that were already fully ordered.
+  `renderRecipeCardHTML` shows the result as a "Skill" field: a plain number when confirmed,
+  or `~N (estimated)` when interpolated, so an estimate is never presented as fact. Nothing
+  here touches `recipeSkillLevel` itself — the strict "never guess into this field" rule
+  earlier in this file is about the *data*; this feature only computes a *display/sort* value
+  on top of it, matching the same never-store-a-computed-value precedent as an item's
+  damage/delay ratio.
 - `resultQuantity` — set only when a recipe produces more than one of its named result (first
   needed 2026-07-06 for Tanning, see below, where a single pelt processes into "24x Rawhide
   Scraps") — shown on the card as a "Yields" field. Every recipe without this field is still
@@ -436,11 +454,26 @@ itself (the actual node table) is unchanged — only how you reach it moved.
   disagrees.
 - **Rendering:** `renderGatheringNodes(container, tradeskillName)` in `script.js` — a
   sortable/searchable table, same structural pattern as `renderMonstersList`'s table rather
-  than the recipe-card grid, since a node has no image/components to justify a card. A node's
+  than the recipe-card grid, since a node has no components to justify a full card. A node's
   `note` (when set) renders as its own small row directly under it. Wired into the Gathering
   page's own navigation paths — its tradeskill grid's card click, the header search box
   (`matchedGatheringNodes`, a "Gathering" results section), and its own quick search box —
   see the "Split into its own top-level page" note above.
+- **Optional `image` + `needsInfo` (2026-07-15):** a node can now carry a picture of the
+  actual plant/vein/etc. — `images/gathering/<slug>.jpg`, same `.jpg` quality-90 convention as
+  everything else, referenced via an `image` field. When set, `gatheringCellHTML`'s Name cell
+  shows a small clickable thumbnail (`.gathering-node-thumb`) that opens the existing
+  `#sample-viewer` lightbox (the same minimal image-only modal the Submit page's examples
+  use — no new viewer built, just reused). `needsInfo: true` is the same flag/meaning as
+  `items.json`/`crafting.json`'s: confirmed to exist but not fully identified/documented yet.
+  It renders a red "NEEDS INFO" badge next to the name and a red note row (reusing the
+  `.item-card-needs-info` styling) linking to `#submit`, exactly like an item or recipe card.
+  First used for a herb spotted in-game but not yet identified at all — no name, no location,
+  just a picture and "skill required is more than 38" — recorded as a placeholder node
+  (`"Unidentified Herb (skill 38+)"`, empty `locations` array, the >38 fact captured in
+  `note` rather than `minSkill` per the floor-only-value rule above) so the picture itself
+  becomes the identifying reference once a real name comes in later, rather than sitting
+  unfiled in the inbox indefinitely.
 - **Columns are derived per-tradeskill from the data, not fixed** (`gatheringColumns()` in
   `script.js`) — Name and Min Skill always show; Trivial/Results/Rarity/Bait Required each
   only appear if at least one node of that tradeskill actually uses that field. This is what
@@ -1572,3 +1605,14 @@ entirely rather than left alongside the new one, to avoid two parallel, confusin
   user's own stated reason for adding these was to cut down on submissions with cropped-off
   text. Add another example the same way (drop a `.jpg` into `images/samples/`, add an entry
   to `SUBMIT_EXAMPLES`) if a new submission type needs its own sample.
+  **A `SUBMIT_EXAMPLES` entry can carry an optional `note`** (2026-07-15, first used for the
+  4th example, "Gathering node") — a short line rendered under the label
+  (`.submit-example-note` in `style.css`) for instructions specific to that one submission
+  type rather than the shared caption below the whole grid. The gathering-node example's note
+  tells submitters to name the file after the node/resource itself (e.g. `"Lionleaf.jpg"`),
+  matching the filename-matching convention `gathering-nodes.json` images already use (see
+  the "Optional `image` + `needsInfo`" note above). Its sample image is a copy of an existing
+  real gathering-node picture (`images/gathering/lionleaf.jpg`) — copied rather than
+  referenced in place, keeping `images/samples/` self-contained the same way its other three
+  examples are, so a future edit/removal of the real Lionleaf entry can't silently break the
+  Submit page's example.

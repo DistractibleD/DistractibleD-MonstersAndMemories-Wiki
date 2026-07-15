@@ -18,6 +18,7 @@
   {
     "name": "Limestone Deposit",
     "slug": "limestone-deposit",
+    "image": "images/gathering/limestone-deposit.jpg",
     "tradeskill": "Mining",
     "minSkill": 40,
     "trivialSkill": 75,
@@ -296,6 +297,7 @@
   {
     "name": "Lionleaf",
     "slug": "lionleaf",
+    "image": "images/gathering/lionleaf.jpg",
     "tradeskill": "Herbalism",
     "minSkill": 1,
     "trivialSkill": 15,
@@ -328,6 +330,7 @@
   {
     "name": "Nomad's Grace",
     "slug": "nomads-grace",
+    "image": "images/gathering/nomads-grace.jpg",
     "tradeskill": "Herbalism",
     "minSkill": 10,
     "trivialSkill": 45,
@@ -344,6 +347,7 @@
   {
     "name": "Ironroot",
     "slug": "ironroot",
+    "image": "images/gathering/ironroot.jpg",
     "tradeskill": "Herbalism",
     "minSkill": 30,
     "trivialSkill": 80,
@@ -455,5 +459,14 @@
     "trivialSkill": 250,
     "locations": ["Vale of Zintar"],
     "note": "In Giant City. Min skill given only as an uncertain value on the source table: \"250?\"."
+  },
+  {
+    "name": "Unidentified Herb (skill 38+)",
+    "slug": "unidentified-herb-skill-38",
+    "image": "images/gathering/unidentified-herb-skill-38.jpg",
+    "tradeskill": "Herbalism",
+    "locations": [],
+    "note": "Spotted in-game but not yet identified — only known fact so far is that it required more than skill 38 to attempt (a floor-only value, so left out of minSkill). The screenshot is the only identifying info until a name/location comes in.",
+    "needsInfo": true
   }
 ]

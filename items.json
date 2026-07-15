@@ -4466,6 +4466,15 @@
     "size": "Small"
   },
   {
+    "name": "Drake Claw",
+    "slug": "drake-claw",
+    "image": "images/items/drake-claw.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
     "name": "Cracked Staff",
     "slug": "cracked-staff",
     "image": "images/items/cracked-staff.jpg",
