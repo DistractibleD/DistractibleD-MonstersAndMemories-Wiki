@@ -171,6 +171,29 @@ card) is completely unaffected and still has no Type column. Clicking a category
 using a filter dropdown are two independent, equally-valid entry points into the data now,
 not a replacement of one by the other.
 
+**Armor's material/slot card drill-down removed, filters moved to the top, persisted across
+one click (2026-07-15):** Armor used to be the one category that didn't go straight from its
+category card to `renderItemsList` — clicking it first showed a `renderArmorMaterials` card
+grid (Cloth/Leather/Chain/Plate/Shields/Other), then `renderArmorSlots` (Head/Chest/...) for
+the chosen material, only reaching the real table on the third click. The user found this
+two-level detour worse than just wanting a dropdown, so both functions are gone entirely —
+clicking Armor now lands directly on `renderItemsList('Armor')` in one click, same as every
+other category. What used to be the material-card level is now a "Material" `<select>` on
+that table's own toolbar (options/labels still come from `ARMOR_MATERIAL_ORDER`/
+`ARMOR_MATERIAL_LABELS`, only shown when `category === 'Armor'`, same conditional-dropdown
+pattern the Weapon category's handedness `<select>` already used) — and what used to be the
+slot-card level is just the existing Slot dropdown every category already has, since Armor
+never needed a bespoke one. The category grid's own filter row (Slot/Class/Race/Tag/Max
+Size/Needs-Info) also moved from below the category-card grid to above it, to match where
+`renderItemsList` has always shown its own toolbar — and now carries over onto whichever
+category you click into, not just onto the unscoped "All Items" jump a filter *change*
+already triggered: clicking a card captures the grid's current filter values into
+`pendingItemFilters` first, same consume-once variable, just also read on a card click now
+instead of only on a dropdown's `change` event. This carry-over is deliberately one hop only
+(grid → the category you land in) — it does not follow you if you then switch to a
+*different* category from inside a scoped list, which has no equivalent "carry my filters
+with me" link back to the grid.
+
 ## Item screenshot format
 
 Item/recipe screenshots (`images/items/`, `images/crafting/`) are stored as `.jpg` at

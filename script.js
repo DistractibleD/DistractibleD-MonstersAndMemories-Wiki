@@ -882,13 +882,13 @@ const ITEM_TYPE_LABELS = {
   Food: 'Food', Drink: 'Drinks', Misc: 'Misc',
 };
 
-// Armor gets one extra level of browsing (material, then slot) before
-// landing on the actual item table — see renderArmorMaterials/renderArmorSlots.
-// Reuses armorIconKey's existing material guess (already used for the item
-// card icon) rather than a separate schema field. Fixed display order (light
-// to heavy, Shields/Other last) rather than alphabetical, and only materials
-// that actually have an item show up (same "derive from data" rule as every
-// other filter/dropdown in this file).
+// Armor's item table gets an extra "Material" filter dropdown (see
+// renderItemsList) built from this list. Reuses armorIconKey's existing
+// material guess (already used for the item card icon) rather than a
+// separate schema field. Fixed display order (light to heavy, Shields/Other
+// last) rather than alphabetical, and only materials that actually have an
+// item show up (same "derive from data" rule as every other filter/dropdown
+// in this file).
 const ARMOR_MATERIAL_ORDER = ['cloth', 'leather', 'chain', 'plate', 'shield', 'armor'];
 const ARMOR_MATERIAL_LABELS = {
   cloth: 'Cloth', leather: 'Leather', chain: 'Chain', plate: 'Plate',
@@ -982,15 +982,6 @@ async function renderItemsPage(container) {
   if (pendingItemCategory) {
     const category = pendingItemCategory;
     pendingItemCategory = null;
-    // A category-only jump (e.g. clicking "Armor" as a search result, with
-    // no specific item) still goes through Armor's material grid, same as
-    // clicking the category card directly. A specific-item jump (pendingItemQuery
-    // set alongside) skips straight to the flat, unscoped list instead — the
-    // point there is to find one item wherever it lives, not to pick a material.
-    if (category === 'Armor' && !pendingItemQuery) {
-      renderArmorMaterials(container);
-      return;
-    }
     renderItemsList(container, category);
     return;
   }
@@ -1002,10 +993,9 @@ async function renderItemsPage(container) {
 // Jewelry, Container, Food, Drink, Misc) with its item count, mirroring the
 // Crafting page's tradeskill grid (see renderCraftingCategories). Clicking a
 // card drills into renderItemsList, which holds the actual search/filter/
-// sort table, scoped to just that category — except Armor, which drills into
-// renderArmorMaterials first (material, then slot) since it has enough items
-// to be worth splitting further; every other category goes straight to the
-// table same as before.
+// sort table, scoped to just that category (Armor included — see
+// renderItemsList's own Material dropdown for what used to be a separate
+// material/slot card drill-down, removed 2026-07-15).
 function renderItemsCategories(container) {
   const types = [...new Set(itemsData.map(i => i.type))].sort();
 
@@ -1014,6 +1004,12 @@ function renderItemsCategories(container) {
   // items across every category — an alternative to, not a replacement for,
   // clicking a card. Options are derived from *all* items.json, not scoped
   // to one type, since no category has been picked yet at this point.
+  // Placed above the category grid (2026-07-15) to match renderItemsList's
+  // own toolbar position, and carried over onto whichever category's list
+  // you land on next — whether that's from changing a filter (jumps straight
+  // to the unscoped "All Items" list) or clicking a category card (jumps
+  // into that one category, same filters applied — see the card click
+  // handler below).
   const allSlots = [...new Set(itemsData.map(i => i.slot))].filter(Boolean).sort();
   const allClasses = [...new Set(itemsData.flatMap(i => i.classes || []).filter(c => c !== 'ALL'))].sort();
   const allRaces = [...new Set(itemsData.flatMap(i => i.race || []).filter(r => r !== 'ALL'))].sort();
@@ -1027,23 +1023,7 @@ function renderItemsCategories(container) {
       <input type="search" id="items-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all items by name, stat, class..." autocomplete="off">
       <div id="items-quick-search-results" class="items-quick-search-results"></div>
     </div>
-    <div class="items-category-grid">
-      ${types.map(type => {
-        const count = itemsData.filter(i => i.type === type).length;
-        const icon = ITEM_TYPE_ICON[type] || 'material';
-        const label = ITEM_TYPE_LABELS[type] || type;
-        return `
-          <div class="items-category-card" data-type="${escapeAttr(type)}">
-            <div class="items-category-card-icon">${svgIcon(icon)}</div>
-            <div class="items-category-card-body">
-              <div class="items-category-card-name">${escapeAttr(label)}</div>
-              <div class="items-category-card-count">${count} item${count === 1 ? '' : 's'}</div>
-            </div>
-          </div>
-        `;
-      }).join('')}
-    </div>
-    <p class="items-filters-intro">Or jump straight to a filtered list across every category:</p>
+    <p class="items-filters-intro">Filter across every category, or click a category card below to browse it directly:</p>
     <div class="items-toolbar">
       <select id="items-category-filter-slot" class="items-select">
         <option value="">All slots</option>
@@ -1065,21 +1045,29 @@ function renderItemsCategories(container) {
         <option value="">All max sizes</option>
         ${allMaxSizes.map(s => `<option value="${s}">${s}</option>`).join('')}
       </select>
-      <select id="items-category-filter-needsinfo" class="items-select items-select-needsinfo">
-        <option value="">All items</option>
-        <option value="yes">Needs Info Only</option>
-        <option value="no">Complete Only</option>
-      </select>
+      <label class="needsinfo-toggle" for="items-category-filter-needsinfo">
+        <input type="checkbox" id="items-category-filter-needsinfo">
+        <span class="needsinfo-toggle-slider"></span>
+        <span>Show only items that need info</span>
+      </label>
+    </div>
+    <div class="items-category-grid">
+      ${types.map(type => {
+        const count = itemsData.filter(i => i.type === type).length;
+        const icon = ITEM_TYPE_ICON[type] || 'material';
+        const label = ITEM_TYPE_LABELS[type] || type;
+        return `
+          <div class="items-category-card" data-type="${escapeAttr(type)}">
+            <div class="items-category-card-icon">${svgIcon(icon)}</div>
+            <div class="items-category-card-body">
+              <div class="items-category-card-name">${escapeAttr(label)}</div>
+              <div class="items-category-card-count">${count} item${count === 1 ? '' : 's'}</div>
+            </div>
+          </div>
+        `;
+      }).join('')}
     </div>
   `;
-
-  container.querySelectorAll('.items-category-card').forEach(card => {
-    if (card.dataset.type === 'Armor') {
-      card.addEventListener('click', () => renderArmorMaterials(container));
-    } else {
-      card.addEventListener('click', () => renderItemsList(container, card.dataset.type));
-    }
-  });
 
   const categorySlotFilter = container.querySelector('#items-category-filter-slot');
   const categoryClassFilter = container.querySelector('#items-category-filter-class');
@@ -1088,16 +1076,27 @@ function renderItemsCategories(container) {
   const categoryMaxSizeFilter = container.querySelector('#items-category-filter-maxsize');
   const categoryNeedsInfoFilter = container.querySelector('#items-category-filter-needsinfo');
 
+  function currentFilters() {
+    return {
+      slot: categorySlotFilter.value,
+      cls: categoryClassFilter.value,
+      race: categoryRaceFilter.value,
+      tag: categoryTagFilter.value,
+      maxSize: categoryMaxSizeFilter.value,
+      needsInfo: categoryNeedsInfoFilter.checked
+    };
+  }
+
+  container.querySelectorAll('.items-category-card').forEach(card => {
+    card.addEventListener('click', () => {
+      pendingItemFilters = currentFilters();
+      renderItemsList(container, card.dataset.type);
+    });
+  });
+
   [categorySlotFilter, categoryClassFilter, categoryRaceFilter, categoryTagFilter, categoryMaxSizeFilter, categoryNeedsInfoFilter].forEach(el => {
     el.addEventListener('change', () => {
-      pendingItemFilters = {
-        slot: categorySlotFilter.value,
-        cls: categoryClassFilter.value,
-        race: categoryRaceFilter.value,
-        tag: categoryTagFilter.value,
-        maxSize: categoryMaxSizeFilter.value,
-        needsInfo: categoryNeedsInfoFilter.value
-      };
+      pendingItemFilters = currentFilters();
       renderItemsList(container, null);
     });
   });
@@ -1143,119 +1142,28 @@ function renderItemsCategories(container) {
   });
 }
 
-// Armor's first drill-down level: one card per material (Cloth/Leather/
-// Chain/Plate/Shields/Other — see ARMOR_MATERIAL_ORDER), each showing how
-// many armor items use that material. Clicking one drills into
-// renderArmorSlots for that material's slot breakdown.
-function renderArmorMaterials(container) {
-  const armorItems = itemsData.filter(i => i.type === 'Armor');
-  const materials = ARMOR_MATERIAL_ORDER.filter(m => armorItems.some(i => armorIconKey(i) === m));
-
-  container.innerHTML = `
-    <p class="items-back-link"><a href="#" id="items-back-to-categories">&larr; All categories</a></p>
-    <h1>Armor</h1>
-    <p>Browse armor by material. Click a material to see its item slots.</p>
-    <div class="items-category-grid">
-      ${materials.map(material => {
-        const count = armorItems.filter(i => armorIconKey(i) === material).length;
-        const label = ARMOR_MATERIAL_LABELS[material] || material;
-        return `
-          <div class="items-category-card" data-material="${escapeAttr(material)}">
-            <div class="items-category-card-icon">${svgIcon(material)}</div>
-            <div class="items-category-card-body">
-              <div class="items-category-card-name">${escapeAttr(label)}</div>
-              <div class="items-category-card-count">${count} item${count === 1 ? '' : 's'}</div>
-            </div>
-          </div>
-        `;
-      }).join('')}
-    </div>
-  `;
-
-  container.querySelector('#items-back-to-categories').addEventListener('click', e => {
-    e.preventDefault();
-    renderItemsCategories(container);
-  });
-
-  container.querySelectorAll('.items-category-card').forEach(card => {
-    card.addEventListener('click', () => renderArmorSlots(container, card.dataset.material));
-  });
-}
-
-// Armor's second drill-down level: one card per item.slot within the chosen
-// material (Chest/Legs/Head/...), derived from the data same as every other
-// slot list in this file. Clicking one finally opens the real item table
-// (renderItemsList), scoped to both the material and the slot.
-function renderArmorSlots(container, material) {
-  const materialItems = itemsData.filter(i => i.type === 'Armor' && armorIconKey(i) === material);
-  const materialLabel = ARMOR_MATERIAL_LABELS[material] || material;
-  const slots = [...new Set(materialItems.map(i => i.slot))].filter(Boolean).sort();
-
-  container.innerHTML = `
-    <p class="items-back-link"><a href="#" id="items-back-to-materials">&larr; All armor materials</a></p>
-    <h1>${escapeAttr(materialLabel)} Armor</h1>
-    <p>Browse ${escapeAttr(materialLabel.toLowerCase())} armor by slot.</p>
-    <div class="items-category-grid">
-      ${slots.map(slot => {
-        const count = materialItems.filter(i => i.slot === slot).length;
-        return `
-          <div class="items-category-card" data-slot="${escapeAttr(slot)}">
-            <div class="items-category-card-body">
-              <div class="items-category-card-name">${escapeAttr(slot)}</div>
-              <div class="items-category-card-count">${count} item${count === 1 ? '' : 's'}</div>
-            </div>
-          </div>
-        `;
-      }).join('')}
-    </div>
-  `;
-
-  container.querySelector('#items-back-to-materials').addEventListener('click', e => {
-    e.preventDefault();
-    renderArmorMaterials(container);
-  });
-
-  container.querySelectorAll('.items-category-card').forEach(card => {
-    card.addEventListener('click', () => renderItemsList(container, 'Armor', { material, slot: card.dataset.slot }));
-  });
-}
-
 // One category's full item table — search box, slot/class/race/tag/max-size
 // filters (options scoped to just this category, so e.g. Weapons doesn't
 // show Jewelry's classes in its dropdown), click-to-sort columns, and the
 // existing hover/click card behavior. The "Type" column/filter from the old
 // flat table is gone since it's now implied by which category you're in.
-// `scope` (optional) further narrows an Armor list down to one material/slot
-// combination, set when arriving via renderArmorSlots — every other category,
-// and any Armor list reached via search (see renderItemsPage), leaves it unset
-// and shows the full, unscoped category same as before.
-function renderItemsList(container, category, scope) {
+// Armor gets one extra dropdown, Material (Cloth/Leather/Chain/Plate/Shield/
+// Other) — this replaced a separate two-level material→slot card drill-down
+// (renderArmorMaterials/renderArmorSlots, removed 2026-07-15) so Armor now
+// reaches its table the same one-click way every other category does.
+function renderItemsList(container, category) {
   // `category === null` means "every category" — reached via the category
   // grid's own filter dropdowns (2026-07-14) instead of clicking a card, so
-  // there's no single type to scope to. Never paired with `scope`, since
-  // that's only used for the Armor material/slot drill-down.
+  // there's no single type to scope to.
   const showTypeColumn = category === null;
-  const categoryItems = itemsData.filter(i => {
-    if (!showTypeColumn && i.type !== category) return false;
-    if (scope) {
-      if (armorIconKey(i) !== scope.material) return false;
-      if (i.slot !== scope.slot) return false;
-    }
-    return true;
-  });
+  const categoryItems = itemsData.filter(i => showTypeColumn || i.type === category);
   const categoryLabel = showTypeColumn ? 'All Items' : (ITEM_TYPE_LABELS[category] || category);
-
-  // Scoped Armor lists (material + slot) get their own heading/subtitle and
-  // a back link that returns to the slot grid instead of the top category
-  // grid — the unscoped case (every other category, plus an Armor list
-  // reached via search) keeps the original heading/back-link wording.
-  const materialLabel = scope ? (ARMOR_MATERIAL_LABELS[scope.material] || scope.material) : null;
-  const heading = scope ? `${materialLabel} Armor — ${scope.slot}` : categoryLabel;
+  const heading = categoryLabel;
+  const subtitleLabel = categoryLabel.toLowerCase();
   // "all items" already ends in "items", so it skips the template's own
-  // trailing "items." below (see subtitleSuffix) to avoid "all items items."
-  const subtitleLabel = scope ? `${materialLabel.toLowerCase()} ${scope.slot.toLowerCase()}` : categoryLabel.toLowerCase();
+  // trailing "items." below to avoid "all items items."
   const subtitleSuffix = showTypeColumn ? '' : ' items';
-  const backLabel = scope ? `All ${materialLabel} armor slots` : 'All categories';
+  const backLabel = 'All categories';
 
   // Landed here from a recipe's component list — remember which recipe so
   // we can show a link back to it, instead of leaving the user stranded.
@@ -1275,8 +1183,13 @@ function renderItemsList(container, category, scope) {
   const slots = [...new Set(categoryItems.map(i => i.slot))].filter(Boolean).sort();
   // Handedness isn't a data value to derive like the dropdowns below (it's a
   // plain boolean, `item.twoHanded`) — only offered on the Weapon category,
-  // where the field is actually meaningful.
+  // where the field is actually meaningful. Material is the same idea, but
+  // for Armor — derived from armorIconKey (already used for the card icon)
+  // rather than a separate schema field, same fixed light-to-heavy order as
+  // the old material drill-down cards.
   const isWeaponCategory = category === 'Weapon';
+  const isArmorCategory = category === 'Armor';
+  const materials = isArmorCategory ? ARMOR_MATERIAL_ORDER.filter(m => categoryItems.some(i => armorIconKey(i) === m)) : [];
   const classes = [...new Set(categoryItems.flatMap(i => i.classes || []).filter(c => c !== 'ALL'))].sort();
   const races = [...new Set(categoryItems.flatMap(i => i.race || []).filter(r => r !== 'ALL'))].sort();
   const tags = [...new Set(categoryItems.flatMap(i => i.tags || []))].sort();
@@ -1301,6 +1214,11 @@ function renderItemsList(container, category, scope) {
         <option value="two">Two Handed</option>
         <option value="bow">Bow</option>
       </select>` : ''}
+      ${isArmorCategory ? `
+      <select id="items-filter-material" class="items-select">
+        <option value="">All materials</option>
+        ${materials.map(m => `<option value="${m}">${escapeAttr(ARMOR_MATERIAL_LABELS[m] || m)}</option>`).join('')}
+      </select>` : ''}
       <select id="items-filter-class" class="items-select">
         <option value="">All classes</option>
         ${classes.map(c => `<option value="${c}">${c}</option>`).join('')}
@@ -1317,11 +1235,11 @@ function renderItemsList(container, category, scope) {
         <option value="">All max sizes</option>
         ${maxSizes.map(s => `<option value="${s}">${s}</option>`).join('')}
       </select>
-      <select id="items-filter-needsinfo" class="items-select items-select-needsinfo">
-        <option value="">All items</option>
-        <option value="yes">Needs Info Only</option>
-        <option value="no">Complete Only</option>
-      </select>
+      <label class="needsinfo-toggle" for="items-filter-needsinfo">
+        <input type="checkbox" id="items-filter-needsinfo">
+        <span class="needsinfo-toggle-slider"></span>
+        <span>Show only items that need info</span>
+      </label>
       <button type="button" id="items-clear-filters" class="items-clear-btn">Clear filters</button>
     </div>
     <p class="items-count" id="items-count"></p>
@@ -1368,6 +1286,7 @@ function renderItemsList(container, category, scope) {
   const searchBox = container.querySelector('#items-search');
   const slotFilter = container.querySelector('#items-filter-slot');
   const handednessFilter = container.querySelector('#items-filter-handedness');
+  const materialFilter = container.querySelector('#items-filter-material');
   const classFilter = container.querySelector('#items-filter-class');
   const raceFilter = container.querySelector('#items-filter-race');
   const tagFilter = container.querySelector('#items-filter-tag');
@@ -1393,7 +1312,7 @@ function renderItemsList(container, category, scope) {
     if (f.race) raceFilter.value = f.race;
     if (f.tag) tagFilter.value = f.tag;
     if (f.maxSize) maxSizeFilter.value = f.maxSize;
-    if (f.needsInfo) needsInfoFilter.value = f.needsInfo;
+    if (f.needsInfo) needsInfoFilter.checked = true;
   }
 
   if (returnToRecipe) {
@@ -1412,8 +1331,7 @@ function renderItemsList(container, category, scope) {
 
   container.querySelector('#items-back-to-categories').addEventListener('click', e => {
     e.preventDefault();
-    if (scope) renderArmorSlots(container, scope.material);
-    else renderItemsCategories(container);
+    renderItemsCategories(container);
   });
 
   // Column headers sort by click — see itemSortValue for what each key reads
@@ -1447,23 +1365,24 @@ function renderItemsList(container, category, scope) {
     const query = searchBox.value.toLowerCase().trim();
     const slot = slotFilter.value;
     const handedness = handednessFilter ? handednessFilter.value : '';
+    const material = materialFilter ? materialFilter.value : '';
     const cls = classFilter.value;
     const race = raceFilter.value;
     const tag = tagFilter.value;
     const maxSize = maxSizeFilter.value;
-    const needsInfo = needsInfoFilter.value;
+    const needsInfo = needsInfoFilter.checked;
 
     let filtered = categoryItems.filter(item => {
       if (slot && item.slot !== slot) return false;
       if (handedness === 'two' && !item.twoHanded) return false;
       if (handedness === 'one' && (item.twoHanded || isBow(item))) return false;
       if (handedness === 'bow' && !isBow(item)) return false;
+      if (material && armorIconKey(item) !== material) return false;
       if (cls && !(item.classes || []).includes('ALL') && !(item.classes || []).includes(cls)) return false;
       if (race && !(item.race || []).includes('ALL') && !(item.race || []).includes(race)) return false;
       if (tag && !(item.tags || []).includes(tag)) return false;
       if (maxSize && item.maxSize !== maxSize) return false;
-      if (needsInfo === 'yes' && !item.needsInfo) return false;
-      if (needsInfo === 'no' && item.needsInfo) return false;
+      if (needsInfo && !item.needsInfo) return false;
       if (query && !itemSearchHaystack(item).includes(query)) return false;
       return true;
     });
@@ -1485,11 +1404,13 @@ function renderItemsList(container, category, scope) {
   }
 
   [searchBox].forEach(el => el.addEventListener('input', update));
-  [slotFilter, handednessFilter, classFilter, raceFilter, tagFilter, maxSizeFilter, needsInfoFilter].filter(Boolean).forEach(el => el.addEventListener('change', update));
+  [slotFilter, handednessFilter, materialFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].filter(Boolean).forEach(el => el.addEventListener('change', update));
+  needsInfoFilter.addEventListener('change', update);
 
   container.querySelector('#items-clear-filters').addEventListener('click', () => {
     searchBox.value = '';
-    [slotFilter, handednessFilter, classFilter, raceFilter, tagFilter, maxSizeFilter, needsInfoFilter].filter(Boolean).forEach(el => el.value = '');
+    [slotFilter, handednessFilter, materialFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].filter(Boolean).forEach(el => el.value = '');
+    needsInfoFilter.checked = false;
     update();
   });
 
@@ -2301,11 +2222,11 @@ async function renderCraftingRecipes(container, tradeskillName) {
           ? `
             <div class="items-toolbar">
               <input type="search" id="craft-recipe-search" class="items-search" placeholder="Search ${escapeAttr(tradeskillName)} recipes, ingredients, tools..." autocomplete="off">
-              <select id="craft-recipe-filter-needsinfo" class="items-select items-select-needsinfo">
-                <option value="">All recipes</option>
-                <option value="yes">Needs Info Only</option>
-                <option value="no">Complete Only</option>
-              </select>
+              <label class="needsinfo-toggle" for="craft-recipe-filter-needsinfo">
+                <input type="checkbox" id="craft-recipe-filter-needsinfo">
+                <span class="needsinfo-toggle-slider"></span>
+                <span>Show only recipes that need info</span>
+              </label>
             </div>
             <p class="items-count" id="craft-recipe-count"></p>
             <div id="craft-recipe-grid"></div>
@@ -2358,10 +2279,9 @@ async function renderCraftingRecipes(container, tradeskillName) {
 
   function updateGrid() {
     const query = searchBox.value.toLowerCase().trim();
-    const needsInfo = needsInfoFilter.value;
+    const needsInfo = needsInfoFilter.checked;
     let filtered = allRecipes;
-    if (needsInfo === 'yes') filtered = filtered.filter(r => r.needsInfo);
-    if (needsInfo === 'no') filtered = filtered.filter(r => !r.needsInfo);
+    if (needsInfo) filtered = filtered.filter(r => r.needsInfo);
     if (query) filtered = filtered.filter(r => recipeSearchHaystack(r).includes(query));
 
     if (!filtered.length) {
