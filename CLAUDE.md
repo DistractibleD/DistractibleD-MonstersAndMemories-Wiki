@@ -473,8 +473,10 @@ Workflow when asked to process new items (or "check the inbox"):
    card), a **recipe** (a single crafting card, same popup style as an item but with a
    "Components:" list), a **crafting window** (the in-game tradeskill window listing
    many known recipes at once, e.g. titled "Leatherworking" with a skill number at the
-   bottom), or a **monster** (a picture of a creature, no stat card at all — see "Adding a
-   monster" below) — then follow the matching path below.
+   bottom), a **vendor screenshot** (an NPC's buy/sell list — item names + prices, no stat
+   card at all — see "Vendor screenshots" below), or a **monster** (a picture of a
+   creature, no stat card at all — see "Adding a monster" below) — then follow the matching
+   path below.
 4. Once a file has been moved out (to `images/items/`, `images/Maps/`, `images/crafting/`,
    or `images/Monsters/`) or deleted as a duplicate, `images/Processing/` should no longer
    contain it — an empty `images/Processing/` means everything from this batch is processed.
@@ -596,6 +598,29 @@ the inbox, don't move them into `images/crafting/`.
    shade — don't silently pick one.
 5. Delete the screenshot(s) from `images/inbox/` once processed — they don't get moved
    anywhere, since nothing about them (aside from the extracted data) belongs on the wiki.
+
+**Vendor screenshots** (an NPC's buy or sell list — item names + prices only, no stat card,
+no components, nothing else): like a crafting window, this is a reference source that
+confirms an item *exists* but reveals none of its real data — process it for names, then
+delete it, don't save it anywhere.
+
+1. For each item name in the list, check whether it already exists in `items.json` (by name
+   or an obvious slug match). Already-exists items need no action; note in
+   `To-Do/predicted-missing-items.txt` if the sighting confirms or contradicts a prediction
+   already tracked there.
+2. For a name that doesn't exist yet, add a minimal `items.json` entry: `name`, `slug`,
+   `type`, `tags: []`, and `"needsInfo": true` (see `needsInfo` under "Item and recipe
+   cards" below for how this renders). Only add fields beyond that when they're safely
+   inferable from the name itself matching an already-established pattern — e.g. a weapon's
+   `skill`/`twoHanded`/`slot` from its type matching every other same-type weapon already in
+   `items.json` (a "Dagger" is always Stabbing/1H in this game's data so far), or an armor
+   piece's `slot` from its piece-type name (every "Chain Coif" across every material tier is
+   Head). **Never** infer `damage`/`delay`/`weight`/`size`/`ac`/`classes`/`race` this way —
+   those actually vary by material/tier and a vendor listing gives no basis to guess them.
+3. The same treatment applies to a recipe name spotted on a vendor list, using
+   `crafting.json`'s equivalent minimal shape (`name`/`slug`/`tradeskill`/`needsInfo: true`).
+4. Delete the screenshot(s) from `images/inbox/` once processed — same as a crafting window,
+   nothing about the image itself belongs on the wiki once its names are extracted.
 
 ## Adding a monster
 
