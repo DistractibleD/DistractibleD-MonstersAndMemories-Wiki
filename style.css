@@ -268,6 +268,27 @@ body:not(.site-entered) .sidebar {
   border-left: 2px solid var(--accent);
   color: var(--accent);
 }
+/* A page can opt into a `group` (pages.json) to nest under a plain,
+   non-clickable heading instead of the flat top-level list — see
+   buildSidebar in script.js. .sidebar-group uses `display: contents` so its
+   child links behave as if they were direct children of #sidebar for layout
+   purposes (needed so the mobile flex-wrap pill row below still wraps them
+   normally instead of stacking the whole group as one flex item). */
+.sidebar-group-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 10px 10px 4px;
+}
+.sidebar-group {
+  display: contents;
+}
+.sidebar-link-nested {
+  padding-left: 22px;
+  font-size: 0.88rem;
+}
 
 /* ---------- Content ---------- */
 .content {
@@ -1409,6 +1430,10 @@ body:not(.site-entered) .sidebar {
     border-left: none;
     box-shadow: inset 0 0 0 1px var(--accent-dim);
   }
+  /* Forces a line break before a group's pills in the wrapped row, instead
+     of the heading sitting inline among them like just another chip. */
+  .sidebar-group-heading { flex-basis: 100%; padding: 4px 4px 0; }
+  .sidebar-link-nested { padding-left: 12px; font-size: inherit; }
   .content-inner { padding: 24px 22px; }
   #search-box { width: 140px; }
   .items-search { flex-basis: 100%; }

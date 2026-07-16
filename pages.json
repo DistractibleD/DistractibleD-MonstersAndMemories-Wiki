@@ -2,8 +2,9 @@
   { "title": "Useful Links", "file": "useful-links.md", "category": "Useful Links" },
   { "title": "Item Database", "file": "items", "category": "Items", "type": "items" },
   { "title": "Maps", "file": "maps", "category": "Maps", "type": "maps" },
-  { "title": "Gathering", "file": "gathering", "category": "Gathering", "type": "gathering" },
-  { "title": "Crafting", "file": "crafting", "category": "Crafting", "type": "crafting" },
+  { "title": "Gathering", "file": "gathering", "category": "Gathering", "type": "gathering", "group": "Tradeskilling" },
+  { "title": "Crafting", "file": "crafting", "category": "Crafting", "type": "crafting", "group": "Tradeskilling" },
+  { "title": "Enchanting and Disenchanting", "file": "enchanting-disenchanting", "category": "Enchanting and Disenchanting", "type": "enchanting", "group": "Tradeskilling" },
   { "title": "Monsters", "file": "monsters", "category": "Monsters", "type": "monsters" },
   { "title": "Companions", "file": "companions", "category": "Companions", "type": "companions" },
   { "title": "Submit a Screenshot", "file": "submit", "category": "Contribute", "type": "submit" }

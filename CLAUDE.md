@@ -321,6 +321,35 @@ same way as new fields show up on future cards, rather than guessing ahead:
    into `images/crafting/`, filename matching the `image` field. Archival only — not
    something the site ever displays.
 
+### The sidebar can nest pages under a group, and Enchanting/Disenchanting use it
+
+`pages.json` entries can carry an optional `"group"` field (e.g. `"Tradeskilling"`) — pages
+sharing the same `group` render nested under one plain, non-clickable heading in the sidebar
+instead of the normal flat top-level list (`buildSidebar` in `script.js`). Currently only
+Gathering, Crafting, and Enchanting and Disenchanting use this, grouped under
+"Tradeskilling". Add a page to an existing group the same way (set the same `group` string);
+start a new group by picking a new `group` string on the pages that should share it — no
+other code changes needed, `buildSidebar` handles any group generically. Consecutive
+same-`group` pages share one heading; a page with no `group` renders exactly as before.
+
+Enchanting and Disenchanting are ordinary tradeskills in `crafting.json`/`tradeskills.json`
+(nothing schema-wise sets them apart from Blacksmithing or Alchemy), but they render on
+their own page (`pages.json`'s `"Enchanting and Disenchanting"` entry, `"type": "enchanting"`,
+`renderEnchantingDisenchantingPage` in `script.js`) instead of being two of the ~30 category
+cards on the main Crafting page — there are only two of them, so showing both tradeskills'
+recipes directly (no card-drilldown step) reads better than a two-card grid would. This is
+driven by `tradeskillsData[].category: "enchanting"` on both their `tradeskills.json`
+entries, the same mechanism `"gathering"` already uses to split Mining/Lumberjacking/
+Herbalism/Fishing out of the main Crafting grid — `renderCraftingCategories` excludes both
+category values from its grid. The actual recipe-list rendering (search box, needs-info
+toggle, station grouping, item link handlers, highlight-on-arrival) is shared with the main
+Crafting page via `renderTradeskillSection`, called once per tradeskill with a unique
+`idSuffix` so the two sections' element ids don't collide on the same page. Every existing
+way of reaching a recipe (header search, an item's "crafted via"/"used to craft" links, a
+recipe search result) still works unchanged — `goToRecipe`/`goToCraftingCategory` check the
+tradeskill and redirect to the Enchanting and Disenchanting page automatically when it's one
+of these two, so nothing that links to a recipe needs to know about the split.
+
 ### Gathering tradeskills are a separate area, not recipes
 
 Mining, Lumberjacking, Herbalism, and Fishing are **gathering** tradeskills — you interact
