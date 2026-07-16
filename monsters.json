@@ -1235,12 +1235,62 @@
     "name": "Lieutenant Gregan Snyde",
     "slug": "lieutenant-gregan-snyde",
     "named": true,
+    "maps": ["Tomb of the Last Wyrmsbane"],
     "drops": [
       { "item": "Great Sword of the Dragon Crusader" },
       { "item": "Spectral Dust" },
       { "item": "Crystallized Shard" },
       { "item": "Rawhide Scraps" }
     ],
-    "rumor": "Directly confirmed via loot-window screenshot: Great Sword of the Dragon Crusader, Spectral Dust, Crystallized Shard (whose own flavor text names Gregan Snyde directly), and Rawhide Scraps. Not confirmed which map/zone this is from, but the military title and the shared Crystallized Shard drop convention (also used by Timmon Bell, from Tomb of the Last Wyrmsbane) suggest it may be the same dungeon."
+    "rumor": "Directly confirmed via loot-window screenshot: Great Sword of the Dragon Crusader, Spectral Dust, Crystallized Shard (whose own flavor text names Gregan Snyde directly), and Rawhide Scraps."
+  },
+  {
+    "name": "Quartermaster Boothroy",
+    "slug": "quartermaster-boothroy",
+    "named": true,
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "rumor": "Named as one of the dungeon's boss encounters on both Tomb of the Last Wyrmsbane maps (the top-down map by Walabus and the isometric map by chazsolo). No loot-window screenshot yet, so drops aren't known."
+  },
+  {
+    "name": "Jakob Geffrey",
+    "slug": "jakob-geffrey",
+    "named": true,
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "rumor": "Named as one of the dungeon's boss encounters on both Tomb of the Last Wyrmsbane maps. The top-down map (by Walabus) tags this boss \"Cloth\", suggesting a Cloth-tier armor drop theme for this part of the dungeon — not a confirmed drop, just the map's own labeling. No loot-window screenshot yet."
+  },
+  {
+    "name": "Bone Construct",
+    "slug": "bone-construct",
+    "named": true,
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "rumor": "Named as one of the dungeon's boss encounters on both Tomb of the Last Wyrmsbane maps — appears to be a construct rather than a named individual, consistent with it being the only boss on the top-down map (by Walabus) with no armor-material tag. No loot-window screenshot yet."
+  },
+  {
+    "name": "Dario Numas",
+    "slug": "dario-numas",
+    "named": true,
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "rumor": "Named as one of the dungeon's boss encounters on both Tomb of the Last Wyrmsbane maps. The top-down map (by Walabus) tags this boss \"Chain\", suggesting a Chain-tier armor drop theme for this part of the dungeon — not a confirmed drop, just the map's own labeling. No loot-window screenshot yet."
+  },
+  {
+    "name": "Ariblast the Wicked",
+    "slug": "ariblast-the-wicked",
+    "named": true,
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "rumor": "Named as one of the dungeon's boss encounters on both Tomb of the Last Wyrmsbane maps. No armor-material tag on the top-down map (by Walabus) and no loot-window screenshot yet, so drops aren't known."
+  },
+  {
+    "name": "Grandmaster Gildas",
+    "slug": "grandmaster-gildas",
+    "named": true,
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "rumor": "Named as one of the dungeon's boss encounters on both Tomb of the Last Wyrmsbane maps. The top-down map (by Walabus) tags this boss \"Leather\", suggesting a Leather-tier armor drop theme for this part of the dungeon — not a confirmed drop, just the map's own labeling. No loot-window screenshot yet."
+  },
+  {
+    "name": "Grandmaster Obadiah",
+    "slug": "grandmaster-obadiah",
+    "named": true,
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "rumor": "Named as one of the dungeon's boss encounters on both Tomb of the Last Wyrmsbane maps. The top-down map (by Walabus) tags this boss \"Leather\", suggesting a Leather-tier armor drop theme for this part of the dungeon — not a confirmed drop, just the map's own labeling. No loot-window screenshot yet."
   }
 ]
