@@ -1205,5 +1205,42 @@
       { "item": "Crystallized Shard" }
     ],
     "rumor": "Directly confirmed via loot-window screenshot: Holy Water, Words of the Crusader Priest, and Crystallized Shard (whose own flavor text names Timmon Bell directly). No picture provided yet."
+  },
+  {
+    "name": "a skeletal knight",
+    "slug": "a-skeletal-knight",
+    "image": "images/Monsters/a-skeletal-knight.jpg"
+  },
+  {
+    "name": "a skeletal monk",
+    "slug": "a-skeletal-monk",
+    "image": "images/Monsters/a-skeletal-monk.jpg",
+    "drops": [
+      { "item": "Torch" },
+      { "item": "Cloth Scraps" },
+      { "item": "Rawhide Scraps" },
+      { "item": "Tattered Cloth Robe" },
+      { "item": "Tattered Cloth Cap" },
+      { "item": "Tattered Cloth Gorget" },
+      { "item": "Tattered Cloth Pantaloons" },
+      { "item": "Tattered Cloth Shirt" },
+      { "item": "Tattered Cloth Gloves" },
+      { "item": "Tattered Cloth Bracer" },
+      { "item": "Tattered Cloth Boots" },
+      { "item": "Tattered Cloth Veil" }
+    ],
+    "rumor": "Directly confirmed via loot-window screenshot: Torch, Cloth Scraps, Rawhide Scraps, Tattered Cloth Robe. The rest of the Tattered Cloth armor set (Cap, Gorget, Pantaloons, Shirt, Gloves, Bracer, Boots, Veil) is inferred from the standing quality-set drop rule, not personally confirmed on this monster yet."
+  },
+  {
+    "name": "Lieutenant Gregan Snyde",
+    "slug": "lieutenant-gregan-snyde",
+    "named": true,
+    "drops": [
+      { "item": "Great Sword of the Dragon Crusader" },
+      { "item": "Spectral Dust" },
+      { "item": "Crystallized Shard" },
+      { "item": "Rawhide Scraps" }
+    ],
+    "rumor": "Directly confirmed via loot-window screenshot: Great Sword of the Dragon Crusader, Spectral Dust, Crystallized Shard (whose own flavor text names Gregan Snyde directly), and Rawhide Scraps. Not confirmed which map/zone this is from, but the military title and the shared Crystallized Shard drop convention (also used by Timmon Bell, from Tomb of the Last Wyrmsbane) suggest it may be the same dungeon."
   }
 ]

@@ -5099,7 +5099,7 @@
     "type": "Misc",
     "tags": ["NODROP"],
     "description": "A shard of crystallized spectral essence from Timmon Bell.",
-    "foundAt": "Dropped by several named/boss monsters, each with its own flavor text naming the source â€” also confirmed from Jakob Geffrey and High Marshal Fionna.",
+    "foundAt": "Dropped by several named/boss monsters, each with its own flavor text naming the source - also confirmed from Jakob Geffrey, High Marshal Fionna, and Gregan Snyde.",
     "weight": 0.1,
     "size": "Small"
   },
@@ -7723,5 +7723,23 @@
     "type": "Misc",
     "tags": [],
     "needsInfo": true
+  },
+  {
+    "name": "Great Sword of the Dragon Crusader",
+    "slug": "great-sword-of-the-dragon-crusader",
+    "image": "images/items/great-sword-of-the-dragon-crusader.jpg",
+    "type": "Weapon",
+    "tags": ["MAGIC"],
+    "slot": "Primary",
+    "twoHanded": true,
+    "damage": 14,
+    "delay": 45,
+    "skill": "Slashing",
+    "stats": { "STR": 2, "DEX": 2, "HP": 20 },
+    "resists": { "FIRE": 3 },
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "SHD", "SPB"],
+    "race": ["ALL"]
   }
 ]
