@@ -192,6 +192,18 @@ thumbnails, each entry has *two* images: `image` (full-size, opened in the viewe
    System.Drawing`) to resize to ~480px wide and save as JPEG quality ~80-85. This gets a
    ~40MB map down to well under 100KB with no visible loss at thumbnail size.
 
+**Multiple maps of the same area are grouped automatically — no extra field needed.**
+`groupMapsByArea` in `script.js` strips a trailing `" (...)"` from each map's `name` to get
+its shared base (e.g. `"Infested Crypt"` from both `"Infested Crypt"` and `"Infested Crypt
+(Isometric)"`), so this falls directly out of the disambiguated-naming convention in step 1
+above — nothing to set explicitly when adding the second-or-later entry for an area. The
+grid shows one card per group: the *first* entry added (maps.json order, not alphabetical)
+as the thumbnail, with any others listed as small text links underneath (labeled with just
+their parenthetical, e.g. "Isometric") that jump straight to that variant in the viewer.
+Inside the viewer, prev/next buttons (and left/right arrow keys) step through every map in
+the group — they only render when the group has more than one map, so a plain single-map
+area shows no navigation arrows at all.
+
 ## Adding a crafting recipe
 
 The Crafting page (`pages.json` entry with `"type": "crafting"`) shows a grid of tradeskill

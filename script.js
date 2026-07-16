@@ -1710,7 +1710,48 @@ function closeItemViewer() {
    (source maps can be tens of MB each). To add a map, add an entry,
    drop the full-size image in images/Maps/, and generate a thumbnail
    (see CLAUDE.md) — no code changes needed.
+
+   Maps sharing a base name (e.g. "Vale of Zintar" / "Vale of Zintar
+   (Spawns)") are grouped into a single grid card showing just the first
+   one as a thumbnail, with the rest listed as links underneath — see
+   groupMapsByArea. Opening any of them lets prev/next buttons in the
+   viewer step between the whole group.
    ============================================ */
+
+// Maps whose names share the same base (e.g. "Vale of Zintar" and "Vale of
+// Zintar (Spawns)", the "(Variant)" naming convention documented in
+// CLAUDE.md) are the same in-game area rendered more than once. Strip a
+// trailing "(...)" to get that shared base name.
+function mapBaseName(name) {
+  return name.replace(/\s*\([^)]*\)\s*$/, '').trim();
+}
+
+// The bit inside a variant's trailing parentheses (e.g. "Isometric",
+// "Spawns"), used as the short link label under a grouped card's thumbnail.
+function mapVariantLabel(name) {
+  const m = name.match(/\(([^)]*)\)\s*$/);
+  return m ? m[1] : name;
+}
+
+// Groups maps by base name, keeping each group's own entries in maps.json's
+// original order (so "the first one" — the primary thumbnail — means the
+// first one added, not an alphabetical pick), then sorts the groups
+// themselves alphabetically for the grid.
+function groupMapsByArea(maps) {
+  const order = [];
+  const byBase = new Map();
+  maps.forEach(m => {
+    const base = mapBaseName(m.name);
+    if (!byBase.has(base)) {
+      byBase.set(base, []);
+      order.push(base);
+    }
+    byBase.get(base).push(m);
+  });
+  return order
+    .map(base => ({ base, entries: byBase.get(base) }))
+    .sort((a, b) => a.base.localeCompare(b.base));
+}
 
 async function renderMapsPage(container) {
   if (!mapsData) {
@@ -1719,9 +1760,9 @@ async function renderMapsPage(container) {
     mapsData = await res.json();
   }
 
-  const sorted = [...mapsData].sort((a, b) => a.name.localeCompare(b.name));
+  const groups = groupMapsByArea(mapsData);
 
-  if (!sorted.length) {
+  if (!groups.length) {
     container.innerHTML = '<h1>Maps</h1><p>No maps yet.</p>';
     return;
   }
@@ -1730,17 +1771,36 @@ async function renderMapsPage(container) {
     <h1>Maps</h1>
     <p>Click a map to view it full size. Scroll to zoom, click and drag to pan.</p>
     <div class="maps-grid">
-      ${sorted.map(m => `
-        <div class="map-card" data-img="${m.image}" data-thumb="${m.thumbnail || m.image}" data-name="${m.name}">
-          <img class="map-card-thumb" src="${m.thumbnail || m.image}" alt="${m.name}" loading="lazy">
-          <div class="map-card-name">${m.name}</div>
-        </div>
-      `).join('')}
+      ${groups.map((g, gi) => {
+        const primary = g.entries[0];
+        const variants = g.entries.slice(1);
+        return `
+        <div class="map-card" data-group-index="${gi}">
+          <img class="map-card-thumb" src="${primary.thumbnail || primary.image}" alt="${g.base}" loading="lazy">
+          <div class="map-card-name">${g.base}</div>
+          ${variants.length ? `
+            <div class="map-card-variants">
+              ${variants.map((v, vi) => `<a href="#" class="map-card-variant-link" data-group-index="${gi}" data-variant-index="${vi + 1}">${mapVariantLabel(v.name)}</a>`).join('')}
+            </div>
+          ` : ''}
+        </div>`;
+      }).join('')}
     </div>
   `;
 
   container.querySelectorAll('.map-card').forEach(card => {
-    card.addEventListener('click', () => openMapViewer(card.dataset.img, card.dataset.name, card.dataset.thumb));
+    const gi = Number(card.dataset.groupIndex);
+    card.addEventListener('click', () => openMapViewer(groups[gi].entries, 0));
+  });
+
+  container.querySelectorAll('.map-card-variant-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      const gi = Number(link.dataset.groupIndex);
+      const vi = Number(link.dataset.variantIndex);
+      openMapViewer(groups[gi].entries, vi);
+    });
   });
 }
 
@@ -1759,6 +1819,12 @@ let mapViewerDragging = false;
 let mapViewerMoved = false;
 let mapViewerStartX = 0;
 let mapViewerStartY = 0;
+
+// The group of maps (same area, per groupMapsByArea) currently open in the
+// viewer, and which one of them is showing — lets the prev/next buttons
+// step through other renderings of the same area.
+let mapViewerGroup = [];
+let mapViewerIndex = 0;
 
 // The scale at which the image's natural size exactly fits inside the
 // viewer (minus a small margin) — used as both the initial view and the
@@ -1784,7 +1850,9 @@ function setupMapViewer() {
   viewer.id = 'map-viewer';
   viewer.innerHTML = `
     <button id="map-viewer-close" aria-label="Close">&times;</button>
+    <button id="map-viewer-prev" aria-label="Previous map of this area">&#8249;</button>
     <img id="map-viewer-img" alt="">
+    <button id="map-viewer-next" aria-label="Next map of this area">&#8250;</button>
     <div id="map-viewer-hint">Scroll to zoom &middot; drag to pan</div>
   `;
   document.body.appendChild(viewer);
@@ -1827,19 +1895,28 @@ function setupMapViewer() {
   });
 
   viewer.querySelector('#map-viewer-close').addEventListener('click', closeMapViewer);
+  viewer.querySelector('#map-viewer-prev').addEventListener('click', e => {
+    e.stopPropagation();
+    navigateMapViewer(-1);
+  });
+  viewer.querySelector('#map-viewer-next').addEventListener('click', e => {
+    e.stopPropagation();
+    navigateMapViewer(1);
+  });
 
   document.addEventListener('keydown', e => {
+    if (!viewer.classList.contains('open')) return;
     if (e.key === 'Escape') closeMapViewer();
+    else if (e.key === 'ArrowLeft') navigateMapViewer(-1);
+    else if (e.key === 'ArrowRight') navigateMapViewer(1);
   });
 }
 
-function openMapViewer(fullSrc, name, thumbSrc) {
-  setupMapViewer();
-  const viewer = document.getElementById('map-viewer');
+// Loads one map entry into the already-open viewer — shared by the initial
+// open and by prev/next navigation between maps of the same area.
+function showMapViewerEntry(entry) {
   const img = document.getElementById('map-viewer-img');
-  img.alt = name;
-  viewer.classList.add('open');
-  document.body.style.overflow = 'hidden';
+  img.alt = entry.name;
 
   const fitToViewer = () => {
     const fitScale = computeMapViewerFitScale(img);
@@ -1863,6 +1940,8 @@ function openMapViewer(fullSrc, name, thumbSrc) {
   // (already-cached) small thumbnail immediately so the correct map
   // appears right away, then swap in the full-quality image once it's
   // done loading in the background.
+  const thumbSrc = entry.thumbnail;
+  const fullSrc = entry.image;
   const hasThumb = thumbSrc && thumbSrc !== fullSrc;
   showAndFit(hasThumb ? thumbSrc : fullSrc);
 
@@ -1871,6 +1950,32 @@ function openMapViewer(fullSrc, name, thumbSrc) {
     fullImg.onload = () => showAndFit(fullSrc);
     fullImg.src = fullSrc;
   }
+}
+
+// Only shown when the current map has siblings (other renderings of the
+// same area, per groupMapsByArea) to step between.
+function updateMapViewerNav() {
+  const viewer = document.getElementById('map-viewer');
+  const showNav = mapViewerGroup.length > 1;
+  viewer.querySelector('#map-viewer-prev').style.display = showNav ? 'flex' : 'none';
+  viewer.querySelector('#map-viewer-next').style.display = showNav ? 'flex' : 'none';
+}
+
+function navigateMapViewer(delta) {
+  if (mapViewerGroup.length < 2) return;
+  mapViewerIndex = (mapViewerIndex + delta + mapViewerGroup.length) % mapViewerGroup.length;
+  showMapViewerEntry(mapViewerGroup[mapViewerIndex]);
+}
+
+function openMapViewer(group, index) {
+  setupMapViewer();
+  mapViewerGroup = group;
+  mapViewerIndex = index;
+  const viewer = document.getElementById('map-viewer');
+  viewer.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  updateMapViewerNav();
+  showMapViewerEntry(mapViewerGroup[mapViewerIndex]);
 }
 
 function closeMapViewer() {
