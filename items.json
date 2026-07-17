@@ -7849,5 +7849,142 @@
     "size": "Large",
     "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "SHD", "SPB"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Amethystine Serpent Mace",
+    "slug": "amethystine-serpent-mace",
+    "image": "images/items/amethystine-serpent-mace.jpg",
+    "type": "Weapon",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Primary / Secondary",
+    "damage": 22,
+    "delay": 35,
+    "skill": "Blunt",
+    "stats": { "STA": 4, "WIS": 10, "HP": 5, "MANA": 15 },
+    "description": "A mace veined with patterns reminiscent of a serpent winding through shadows. Its handle is crafted from a deep amethyst crystal.",
+    "weight": 6.0,
+    "size": "Large",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Sand Giant's Napkin",
+    "slug": "sand-giants-napkin",
+    "image": "images/items/sand-giants-napkin.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Back",
+    "ac": 8,
+    "stats": { "INT": 5, "WIS": 5, "HP": 10 },
+    "description": "An impressively sized napkin that serves as a resilient cloak.",
+    "weight": 0.25,
+    "size": "Medium",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Inlaid Fire Emerald Iron Earring",
+    "slug": "inlaid-fire-emerald-iron-earring",
+    "image": "images/items/inlaid-fire-emerald-iron-earring.jpg",
+    "type": "Jewelry",
+    "tags": [],
+    "slot": "Ear",
+    "ac": 2,
+    "stats": { "STR": 4, "DEX": 4 },
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Inlaid Amber Iron Earring",
+    "slug": "inlaid-amber-iron-earring",
+    "image": "images/items/inlaid-amber-iron-earring.jpg",
+    "type": "Jewelry",
+    "tags": [],
+    "slot": "Ear",
+    "ac": 2,
+    "stats": { "STR": 4, "STA": 4 },
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Corrupted Leather Cap",
+    "slug": "corrupted-leather-cap",
+    "image": "images/items/corrupted-leather-cap.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Head",
+    "ac": 11,
+    "stats": { "INT": 5, "MANA": 5 },
+    "resists": { "CORRUPTION": -5 },
+    "weight": 0.5,
+    "size": "Small",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Corrupted Leather Shoulderpads",
+    "slug": "corrupted-leather-shoulderpads",
+    "image": "images/items/corrupted-leather-shoulderpads.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Shoulders",
+    "ac": 13,
+    "stats": { "STR": 5, "HP": 5 },
+    "resists": { "CORRUPTION": -5 },
+    "weight": 0.5,
+    "size": "Small",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Corrupted Leather Cloak",
+    "slug": "corrupted-leather-cloak",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true
+  },
+  {
+    "name": "Corrupted Leather Robe",
+    "slug": "corrupted-leather-robe",
+    "type": "Armor",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Corrupted Leather Bracer",
+    "slug": "corrupted-leather-bracer",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true
+  },
+  {
+    "name": "Corrupted Leather Belt",
+    "slug": "corrupted-leather-belt",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Waist",
+    "needsInfo": true
+  },
+  {
+    "name": "Corrupted Leather Gloves",
+    "slug": "corrupted-leather-gloves",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Hands",
+    "needsInfo": true
+  },
+  {
+    "name": "Corrupted Leather Boots",
+    "slug": "corrupted-leather-boots",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Feet",
+    "needsInfo": true
   }
 ]

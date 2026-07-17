@@ -34,9 +34,12 @@ searchable on the site, just visibly flagged as incomplete. The entries below ar
 correct list of exactly which items need a real screenshot; "no items.json entry yet" in
 the older notes just means "no full entry with real stats yet," not "not on the site at all."
 
-- Corrupted Leather Cap, Shoulderpads, Cloak, Robe, Bracer, Belt, Gloves, Boots — drops on
-  "the corrupted ashira" (monsters.json), no items.json entry yet. Source table has no
-  Weight/Size column, so these can't be added until a real in-game card comes in.
+- Corrupted Leather Cloak, Robe, Bracer, Belt, Gloves, Boots — drops on "the corrupted
+  ashira" (monsters.json). Only minimal needsInfo:true stubs in items.json (name/slug/type/
+  tags, plus slot where the piece-type name made it safe to infer — Robe's slot varies too
+  much across other tiers to guess) — no real card has come in yet with Weight/Size/AC/
+  stats. Cap and Shoulderpads (also from this drop list) got real cards on 2026-07-17 and
+  now have full entries, so they're off this list.
 - Corrupted Leather Scraps — RESOLVED 2026-07-15, added to items.json (SV Corruption: -5,
   weight 0.5, size Small) once a real card came in.
 - Lunar Festival Trousers — missing `race`. Screenshot cuts off right after Class, no

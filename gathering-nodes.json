@@ -11,6 +11,7 @@
   {
     "name": "Rich Copper Vein",
     "slug": "rich-copper-vein",
+    "image": "images/gathering/rich-copper-vein.jpg",
     "tradeskill": "Mining",
     "minSkill": 1,
     "trivialSkill": 65,
@@ -346,6 +347,7 @@
   {
     "name": "Whispering Sage",
     "slug": "whispering-sage",
+    "image": "images/gathering/whispering-sage.jpg",
     "tradeskill": "Herbalism",
     "minSkill": 15,
     "trivialSkill": 65,
@@ -474,6 +476,15 @@
     "tradeskill": "Herbalism",
     "locations": [],
     "note": "Spotted in-game but not yet identified — only known fact so far is that it required more than skill 38 to attempt (a floor-only value, so left out of minSkill). The screenshot is the only identifying info until a name/location comes in.",
+    "needsInfo": true
+  },
+  {
+    "name": "Unidentified Herb (Blue Lily)",
+    "slug": "unidentified-herb-blue-lily",
+    "image": "images/gathering/unidentified-herb-blue-lily.jpg",
+    "tradeskill": "Herbalism",
+    "locations": [],
+    "note": "Spotted in-game but not yet identified — no other details (skill, location) recorded yet. The screenshot is the only identifying info until a name/location/skill comes in.",
     "needsInfo": true
   }
 ]
