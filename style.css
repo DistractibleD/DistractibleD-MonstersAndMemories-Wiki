@@ -137,6 +137,9 @@ body.site-entered .splash-screen {
 }
 .header-search {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 #search-box {
   background: var(--bg);
@@ -260,6 +263,18 @@ body:not(.site-entered) .sidebar {
   margin-bottom: 2px;
   border-left: 2px solid transparent;
 }
+/* Top-level nav links (Item Database, Maps, ...) aren't nested under a
+   group, so plain .sidebar-link (without .sidebar-link-nested) always
+   means "top-level" — match them to .sidebar-group-heading's weight/size/
+   letter-spacing/uppercase treatment so every first-level category reads
+   at the same visual weight (2026-07-17, user's own call: these should be
+   "easier to see"). */
+.sidebar-link:not(.sidebar-link-nested) {
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
 .sidebar-link:hover {
   background: var(--bg-panel-hover);
 }
@@ -308,8 +323,27 @@ body:not(.site-entered) .sidebar {
 }
 /* "Recently Visited"/"Most Visited" (#sidebar-visits-wrapper in script.js) —
    reuses .sidebar-group-heading/.sidebar-group/.sidebar-link-nested as-is for
-   the same tree-line look as the "Tradeskilling" group; only the small
-   disclosure note below both lists needs its own style. */
+   the same tree-line look as the "Tradeskilling" group, but pushed further
+   down from the main nav list and wrapped in its own subtle border so it
+   reads as a separate, secondary area rather than more top-level categories
+   (2026-07-17, user's own call) — the "stored only in this browser" note
+   lives inside that same bordered box, as its last child. Headings/links
+   inside are also shrunk slightly from their main-nav sizes for the same
+   reason. */
+#sidebar-visits-wrapper {
+  margin-top: 28px;
+  padding: 8px 10px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+#sidebar-visits-wrapper .sidebar-group-heading {
+  font-size: 0.72rem;
+  padding: 8px 8px 4px;
+}
+#sidebar-visits-wrapper .sidebar-link-nested {
+  font-size: 0.84rem;
+  padding: 5px 8px;
+}
 .sidebar-visits-note {
   font-size: 0.72rem;
   font-style: italic;
@@ -500,6 +534,15 @@ body:not(.site-entered) .sidebar {
   border-color: var(--accent-dim);
   color: var(--accent);
 }
+/* .search-clear-btn (reuses .items-clear-btn's look everywhere it's used —
+   header search, quick-search boxes, per-category/tradeskill search fields)
+   is only a JS hook: a single delegated click handler in script.js reads
+   data-clear-target to know which input to empty, so no per-page wiring is
+   needed when a new search bar adds this button. */
+.search-clear-btn {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
 .items-count {
   color: var(--text-dim);
   font-size: 0.82rem;
@@ -608,6 +651,12 @@ body:not(.site-entered) .sidebar {
   position: relative;
   margin: 18px 0 0;
 }
+.items-quick-search-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 480px;
+}
 .items-quick-search-box {
   width: 100%;
   max-width: 420px;
@@ -626,6 +675,20 @@ body:not(.site-entered) .sidebar {
 }
 .items-quick-search-results.open {
   display: block;
+}
+/* The Item Database's own quick search (renderItemsCategories) renders real
+   results as a full live-filter item table instead of a small dropdown of
+   name links (2026-07-17, user's own call — see the "instead of links in
+   the search window" note in script.js), so it needs the full page width
+   and no scroll clipping, unlike the Crafting/Gathering/Monsters quick
+   searches which still use the plain dropdown-of-links shape above. */
+.items-quick-search-results-wide {
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  background: none;
+  border: none;
+  padding: 0;
 }
 .items-quick-search-type {
   float: right;
@@ -1526,6 +1589,11 @@ body:not(.site-entered) .sidebar {
 .site-footer a:hover {
   text-decoration: none;
 }
+.site-footer-note {
+  font-style: italic;
+  font-size: 0.78rem;
+  margin-top: 6px;
+}
 
 /* ---------- Mobile ----------
    Threshold raised from 780 to 900 (was leaving an awkward zone — a
@@ -1581,6 +1649,7 @@ body:not(.site-entered) .sidebar {
   .sidebar-visits-note { flex-basis: 100%; }
   .content-inner { padding: 24px 22px; }
   #search-box { width: 140px; }
+  .header-search .search-clear-btn { padding: 8px 10px; font-size: 0.8rem; }
   .items-search { flex-basis: 100%; }
   .content-inner .items-table { font-size: 0.78rem; }
   .content-inner .items-table th, .content-inner .items-table td { padding: 6px 6px; }

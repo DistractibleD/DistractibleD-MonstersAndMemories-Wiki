@@ -175,6 +175,23 @@ async function init() {
     if (page) loadPage(file);
   });
 
+  // A single delegated handler for every "Clear" button next to a search
+  // field on the site (header search, quick-search boxes, per-category/
+  // tradeskill search fields) — each button just carries
+  // data-clear-target="<input id>", so a new search bar gets working Clear
+  // behavior for free just by adding the button markup, no per-page JS
+  // wiring needed. Dispatching a real 'input' event re-runs whatever filter
+  // logic is already listening on that field.
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.search-clear-btn');
+    if (!btn) return;
+    const input = document.getElementById(btn.dataset.clearTarget);
+    if (!input) return;
+    input.value = '';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.focus();
+  });
+
   // Clicking anywhere outside the search box/dropdown closes the dropdown.
   document.addEventListener('click', e => {
     if (!e.target.closest('.header-search')) closeSearchResults();
@@ -1196,54 +1213,59 @@ function renderItemsCategories(container) {
 
   container.innerHTML = `
     <h1>Item Database</h1>
-    <p>Browse items by category, or search below to jump straight to a specific item.</p>
+    <p>Browse items by category, or search below to filter across every item as you type.</p>
     <div class="items-quick-search">
-      <input type="search" id="items-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all items by name, stat, class..." autocomplete="off">
-      <div id="items-quick-search-results" class="items-quick-search-results"></div>
+      <div class="items-quick-search-row">
+        <input type="search" id="items-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all items by name, stat, class..." autocomplete="off">
+        <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="items-quick-search-box">Clear</button>
+      </div>
+      <div id="items-quick-search-results" class="items-quick-search-results items-quick-search-results-wide"></div>
     </div>
-    <p class="items-filters-intro">Filter across every category, or click a category card below to browse it directly:</p>
-    <div class="items-toolbar">
-      <select id="items-category-filter-slot" class="items-select">
-        <option value="">All slots</option>
-        ${allSlots.map(s => `<option value="${s}">${s}</option>`).join('')}
-      </select>
-      <select id="items-category-filter-class" class="items-select">
-        <option value="">All classes</option>
-        ${allClasses.map(c => `<option value="${c}">${c}</option>`).join('')}
-      </select>
-      <select id="items-category-filter-race" class="items-select">
-        <option value="">All races</option>
-        ${allRaces.map(r => `<option value="${r}">${r}</option>`).join('')}
-      </select>
-      <select id="items-category-filter-tag" class="items-select">
-        <option value="">All tags</option>
-        ${allTags.map(t => `<option value="${t}">${t}</option>`).join('')}
-      </select>
-      <select id="items-category-filter-maxsize" class="items-select">
-        <option value="">All max sizes</option>
-        ${allMaxSizes.map(s => `<option value="${s}">${s}</option>`).join('')}
-      </select>
-      <label class="needsinfo-toggle" for="items-category-filter-needsinfo">
-        <input type="checkbox" id="items-category-filter-needsinfo">
-        <span class="needsinfo-toggle-slider"></span>
-        <span>Show only items that need info</span>
-      </label>
-    </div>
-    <div class="items-category-grid">
-      ${types.map(type => {
-        const count = itemsData.filter(i => i.type === type).length;
-        const icon = ITEM_TYPE_ICON[type] || 'material';
-        const label = ITEM_TYPE_LABELS[type] || type;
-        return `
-          <div class="items-category-card" data-type="${escapeAttr(type)}">
-            <div class="items-category-card-icon">${svgIcon(icon)}</div>
-            <div class="items-category-card-body">
-              <div class="items-category-card-name">${escapeAttr(label)}</div>
-              <div class="items-category-card-count">${count} item${count === 1 ? '' : 's'}</div>
+    <div id="items-category-browse">
+      <p class="items-filters-intro">Filter across every category, or click a category card below to browse it directly:</p>
+      <div class="items-toolbar">
+        <select id="items-category-filter-slot" class="items-select">
+          <option value="">All slots</option>
+          ${allSlots.map(s => `<option value="${s}">${s}</option>`).join('')}
+        </select>
+        <select id="items-category-filter-class" class="items-select">
+          <option value="">All classes</option>
+          ${allClasses.map(c => `<option value="${c}">${c}</option>`).join('')}
+        </select>
+        <select id="items-category-filter-race" class="items-select">
+          <option value="">All races</option>
+          ${allRaces.map(r => `<option value="${r}">${r}</option>`).join('')}
+        </select>
+        <select id="items-category-filter-tag" class="items-select">
+          <option value="">All tags</option>
+          ${allTags.map(t => `<option value="${t}">${t}</option>`).join('')}
+        </select>
+        <select id="items-category-filter-maxsize" class="items-select">
+          <option value="">All max sizes</option>
+          ${allMaxSizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+        </select>
+        <label class="needsinfo-toggle" for="items-category-filter-needsinfo">
+          <input type="checkbox" id="items-category-filter-needsinfo">
+          <span class="needsinfo-toggle-slider"></span>
+          <span>Show only items that need info</span>
+        </label>
+      </div>
+      <div class="items-category-grid">
+        ${types.map(type => {
+          const count = itemsData.filter(i => i.type === type).length;
+          const icon = ITEM_TYPE_ICON[type] || 'material';
+          const label = ITEM_TYPE_LABELS[type] || type;
+          return `
+            <div class="items-category-card" data-type="${escapeAttr(type)}">
+              <div class="items-category-card-icon">${svgIcon(icon)}</div>
+              <div class="items-category-card-body">
+                <div class="items-category-card-name">${escapeAttr(label)}</div>
+                <div class="items-category-card-count">${count} item${count === 1 ? '' : 's'}</div>
+              </div>
             </div>
-          </div>
-        `;
-      }).join('')}
+          `;
+        }).join('')}
+      </div>
     </div>
   `;
 
@@ -1281,42 +1303,81 @@ function renderItemsCategories(container) {
 
   // A shortcut past the whole category → (material →) slot drill-down for
   // anyone who already knows what they're looking for. Scoped to items.json
-  // only (unlike the header search box, which also covers pages/recipes) so
-  // results stay relevant to this page. Clicking a result reuses goToItem —
-  // same category-jump + row-flash behavior as a header search result.
+  // only (unlike the header search box, which also covers pages/recipes).
+  // Rather than a dropdown of clickable name links (the original shape —
+  // "click one, hit Back, click the next" for a broad term like "Rawhide"
+  // or "Corrupted"), this renders every match directly under the search box
+  // as the same live item table/rows used everywhere else in the Item
+  // Database (renderItemRows + setupItemTooltip/setupItemClickToView), so
+  // hovering any result shows its full card without leaving this page
+  // (2026-07-17, user's own call). The category grid hides itself while a
+  // query is active and comes back once the box is cleared.
   const quickSearchBox = container.querySelector('#items-quick-search-box');
   const quickSearchResults = container.querySelector('#items-quick-search-results');
+  const categoryBrowse = container.querySelector('#items-category-browse');
 
   quickSearchBox.addEventListener('input', () => {
     const query = quickSearchBox.value.toLowerCase().trim();
     if (!query) {
       quickSearchResults.classList.remove('open');
       quickSearchResults.innerHTML = '';
+      categoryBrowse.style.display = '';
       return;
     }
+    categoryBrowse.style.display = 'none';
 
     const matches = itemsData
       .filter(item => itemSearchHaystack(item).includes(query))
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .slice(0, 20);
+      .sort((a, b) => a.name.localeCompare(b.name));
 
     quickSearchResults.innerHTML = matches.length
-      ? matches.map(item => `
-          <a href="#" class="search-result-link items-quick-search-result" data-slug="${escapeAttr(item.slug)}">
-            ${escapeAttr(item.name)}
-            <span class="items-quick-search-type">${escapeAttr(ITEM_TYPE_LABELS[item.type] || item.type)}</span>
-          </a>
-        `).join('')
-      : '<p class="search-results-empty">No items match.</p>';
+      ? `
+        <p class="items-count">Showing ${matches.length} item${matches.length === 1 ? '' : 's'} matching your search. Hover a name to see its full card.</p>
+        <div class="items-table-wrap">
+          <table class="items-table">
+            <colgroup>
+              <col class="col-name">
+              <col class="col-type">
+              <col class="col-slot">
+              <col class="col-ac">
+              <col class="col-stats">
+              <col class="col-damage">
+              <col class="col-delay">
+              <col class="col-ratio">
+              <col class="col-weight">
+              <col class="col-capacity">
+              <col class="col-classes">
+              <col class="col-race">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Slot</th>
+                <th>AC</th>
+                <th>Stats</th>
+                <th>Damage</th>
+                <th>Delay</th>
+                <th>Ratio</th>
+                <th>Weight / Size</th>
+                <th>Capacity / Max Size</th>
+                <th>Classes</th>
+                <th>Race</th>
+              </tr>
+            </thead>
+            <tbody id="items-quick-search-tbody"></tbody>
+          </table>
+        </div>
+      `
+      : '<p class="search-results-empty">No items match your search.</p>';
     quickSearchResults.classList.add('open');
 
-    quickSearchResults.querySelectorAll('.items-quick-search-result').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const item = itemsData.find(i => i.slug === link.dataset.slug);
-        if (item) goToItem(item);
-      });
-    });
+    const tbody = quickSearchResults.querySelector('#items-quick-search-tbody');
+    if (tbody) {
+      renderItemRows(tbody, matches, true);
+      setupItemTooltip(tbody);
+      setupItemClickToView(tbody);
+    }
   });
 }
 
@@ -1381,6 +1442,7 @@ function renderItemsList(container, category) {
     <p>Browse, search, filter, and sort ${escapeAttr(subtitleLabel)}${subtitleSuffix}. Hover an item's name to see its full card.</p>
     <div class="items-toolbar">
       <input type="search" id="items-search" class="items-search" placeholder="Search name, stat, class..." autocomplete="off">
+      <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="items-search">Clear</button>
       <select id="items-filter-slot" class="items-select">
         <option value="">All slots</option>
         ${slots.map(s => `<option value="${s}">${s}</option>`).join('')}
@@ -2230,7 +2292,10 @@ function renderCraftingCategories(container) {
     <p>Browse recipes by tradeskill, or search below to jump straight to a specific recipe.
     "Planned" tradeskills exist in the game's design but aren't usable yet.</p>
     <div class="items-quick-search">
-      <input type="search" id="craft-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all recipes by name or tradeskill..." autocomplete="off">
+      <div class="items-quick-search-row">
+        <input type="search" id="craft-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all recipes by name or tradeskill..." autocomplete="off">
+        <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="craft-quick-search-box">Clear</button>
+      </div>
       <div id="craft-quick-search-results" class="items-quick-search-results"></div>
     </div>
     ${tradeskillGridHTML(crafted, false)}
@@ -2314,7 +2379,10 @@ function renderGatheringCategories(container) {
     each one has a minimum skill to attempt it and a trivial skill where it stops giving skill-ups.
     Search below to jump straight to a specific node.</p>
     <div class="items-quick-search">
-      <input type="search" id="gathering-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all gathering nodes by name or tradeskill..." autocomplete="off">
+      <div class="items-quick-search-row">
+        <input type="search" id="gathering-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all gathering nodes by name or tradeskill..." autocomplete="off">
+        <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="gathering-quick-search-box">Clear</button>
+      </div>
       <div id="gathering-quick-search-results" class="items-quick-search-results"></div>
     </div>
     ${tradeskillGridHTML(gathering, true)}
@@ -2770,6 +2838,7 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
           ? `
             <div class="items-toolbar">
               <input type="search" id="${searchId}" class="items-search" placeholder="Search ${escapeAttr(tradeskillName)} recipes, ingredients, tools..." autocomplete="off">
+              <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="${searchId}">Clear</button>
               ${isEnchanting ? `
                 <select id="${slotFilterId}" class="items-select">
                   <option value="">All Slots</option>
@@ -3035,7 +3104,10 @@ function renderGatheringNodes(container, tradeskillName) {
         ? '<p>This tradeskill hasn\'t been implemented in the game yet.</p>'
         : allNodes.length
           ? `
-            <input type="search" id="gathering-search" class="items-search" placeholder="Search ${escapeAttr(tradeskillName)} nodes, results, locations..." autocomplete="off">
+            <div class="items-toolbar">
+              <input type="search" id="gathering-search" class="items-search" placeholder="Search ${escapeAttr(tradeskillName)} nodes, results, locations..." autocomplete="off">
+              <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="gathering-search">Clear</button>
+            </div>
             <p class="items-count" id="gathering-count"></p>
             <div class="items-table-wrap">
               <table class="items-table">
@@ -3237,7 +3309,10 @@ function renderMonstersCategories(container) {
     <p>Browse named (boss) or regular monsters by zone, or search below to jump straight to a
     specific monster.</p>
     <div class="items-quick-search">
-      <input type="search" id="monsters-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all monsters by name, map, drop..." autocomplete="off">
+      <div class="items-quick-search-row">
+        <input type="search" id="monsters-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all monsters by name, map, drop..." autocomplete="off">
+        <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="monsters-quick-search-box">Clear</button>
+      </div>
       <div id="monsters-quick-search-results" class="items-quick-search-results"></div>
     </div>
     <h2 class="monsters-section-heading">${svgIcon('boss')} Named Monsters (Bosses)</h2>
@@ -3307,7 +3382,7 @@ function renderMonstersList(container, scope) {
     ${escapeAttr(scope.map)}. Click a monster's name to see its picture and drop table.</p>
     <div class="items-toolbar">
       <input type="search" id="monsters-search" class="items-search" placeholder="Search name, drop..." autocomplete="off">
-      <button type="button" id="monsters-clear-filters" class="items-clear-btn">Clear filters</button>
+      <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="monsters-search">Clear</button>
     </div>
     <p class="items-count" id="monsters-count"></p>
     <div class="items-table-wrap">
@@ -3401,11 +3476,6 @@ function renderMonstersList(container, scope) {
   }
 
   searchBox.addEventListener('input', update);
-
-  container.querySelector('#monsters-clear-filters').addEventListener('click', () => {
-    searchBox.value = '';
-    update();
-  });
 
   update();
   setupMonsterClickToView(container.querySelector('#monsters-tbody'));
@@ -3636,7 +3706,10 @@ async function renderCompanionsPage(container) {
         ${companionSkillsData.map(renderCompanionSkillHTML).join('')}
       </div>
     </div>
-    <input type="search" id="companion-search" class="items-search" placeholder="Search companions, abilities..." autocomplete="off">
+    <div class="items-toolbar">
+      <input type="search" id="companion-search" class="items-search" placeholder="Search companions, abilities..." autocomplete="off">
+      <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="companion-search">Clear</button>
+    </div>
     <p class="items-count" id="companion-count"></p>
     <div class="companion-grid" id="companion-grid"></div>
   `;
