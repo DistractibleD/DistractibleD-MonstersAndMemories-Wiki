@@ -240,6 +240,84 @@ function buildSidebar(pages) {
     link.addEventListener('click', () => loadPage(page.file));
     (groupContainer || sidebar).appendChild(link);
   }
+
+  // "Recently Visited" / "Most Visited" — see recordPageVisit/updateVisitedSidebarSections.
+  // Hidden until there's at least one recorded visit (id="sidebar-visits-wrapper" toggles
+  // display), reusing the exact same group-heading + tree-line-nested-list markup as the
+  // "Tradeskilling" group above so it looks like a natural extension of the nav rather than
+  // a bolted-on widget.
+  const visitsWrapper = document.createElement('div');
+  visitsWrapper.id = 'sidebar-visits-wrapper';
+  visitsWrapper.innerHTML = `
+    <div class="sidebar-group-heading">Recently Visited</div>
+    <div class="sidebar-group" id="sidebar-recent-visits"></div>
+    <div class="sidebar-group-heading">Most Visited</div>
+    <div class="sidebar-group" id="sidebar-most-visited"></div>
+    <p class="sidebar-visits-note">Stored only in this browser — not saved anywhere else.</p>
+  `;
+  sidebar.appendChild(visitsWrapper);
+  updateVisitedSidebarSections();
+}
+
+// Page-visit tracking for the sidebar's "Recently Visited"/"Most Visited" sections — purely
+// client-side (localStorage), no server involved, so it only ever reflects this one browser.
+// Keyed by top-level page file (pages.json), same granularity as the sidebar itself — a
+// Monsters sub-route (e.g. "monsters/named/Vale of Zintar") still just counts as a visit to
+// "Monsters", not tracked at the individual-monster level.
+const PAGE_VISITS_KEY = 'mnmwiki-page-visits';
+
+function getPageVisits() {
+  try {
+    return JSON.parse(localStorage.getItem(PAGE_VISITS_KEY) || '{}');
+  } catch {
+    return {};
+  }
+}
+
+function recordPageVisit(file) {
+  const visits = getPageVisits();
+  const existing = visits[file] || { count: 0 };
+  visits[file] = { count: existing.count + 1, lastVisited: Date.now() };
+  try {
+    localStorage.setItem(PAGE_VISITS_KEY, JSON.stringify(visits));
+  } catch {
+    // Storage unavailable (private browsing, quota, etc.) — the feature just
+    // won't persist this session; nothing else depends on it succeeding.
+  }
+}
+
+function updateVisitedSidebarSections() {
+  const wrapper = document.getElementById('sidebar-visits-wrapper');
+  if (!wrapper) return;
+
+  // Drop any visit recorded against a page that no longer exists in pages.json.
+  const entries = Object.entries(getPageVisits())
+    .map(([file, v]) => ({ file, count: v.count, lastVisited: v.lastVisited, page: allPages.find(p => p.file === file) }))
+    .filter(e => e.page);
+
+  if (!entries.length) {
+    wrapper.style.display = 'none';
+    return;
+  }
+  wrapper.style.display = '';
+
+  const renderInto = (container, list) => {
+    container.innerHTML = '';
+    list.forEach(e => {
+      const link = document.createElement('a');
+      link.href = '#' + e.file;
+      link.className = 'sidebar-link sidebar-link-nested';
+      link.textContent = e.page.title;
+      link.dataset.file = e.file;
+      link.addEventListener('click', () => loadPage(e.file));
+      container.appendChild(link);
+    });
+  };
+
+  const recent = [...entries].sort((a, b) => b.lastVisited - a.lastVisited).slice(0, 5);
+  const most = [...entries].sort((a, b) => b.count - a.count || b.lastVisited - a.lastVisited).slice(0, 5);
+  renderInto(document.getElementById('sidebar-recent-visits'), recent);
+  renderInto(document.getElementById('sidebar-most-visited'), most);
 }
 
 async function loadPage(file) {
@@ -282,6 +360,15 @@ async function loadPage(file) {
     }
   } catch (err) {
     contentInner.innerHTML = '<h1>Page not found</h1><p>That page could not be loaded.</p>';
+  }
+
+  // Record this as a visit for the "Recently Visited"/"Most Visited" sidebar
+  // sections (only for a real top-level page, not a 404) and refresh them —
+  // must happen before the active-link highlighting below, since it can add
+  // new .sidebar-link elements for this same file.
+  if (page) {
+    recordPageVisit(baseFile);
+    updateVisitedSidebarSections();
   }
 
   // Highlight the active link in the sidebar

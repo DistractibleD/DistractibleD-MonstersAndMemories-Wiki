@@ -306,6 +306,17 @@ body:not(.site-entered) .sidebar {
   height: 1px;
   background: var(--border);
 }
+/* "Recently Visited"/"Most Visited" (#sidebar-visits-wrapper in script.js) —
+   reuses .sidebar-group-heading/.sidebar-group/.sidebar-link-nested as-is for
+   the same tree-line look as the "Tradeskilling" group; only the small
+   disclosure note below both lists needs its own style. */
+.sidebar-visits-note {
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--text-dim);
+  padding: 6px 10px 2px;
+  line-height: 1.3;
+}
 
 /* ---------- Content ---------- */
 .content {
@@ -1532,6 +1543,8 @@ body:not(.site-entered) .sidebar {
   .sidebar-group-heading { flex-basis: 100%; padding: 4px 4px 0; }
   .sidebar-group { display: contents; }
   .sidebar-link-nested::before { display: none; }
+  #sidebar-visits-wrapper { display: contents; }
+  .sidebar-visits-note { flex-basis: 100%; }
   .content-inner { padding: 24px 22px; }
   #search-box { width: 140px; }
   .items-search { flex-basis: 100%; }
