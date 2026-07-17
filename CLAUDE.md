@@ -761,15 +761,22 @@ delete it, don't save it anywhere.
 
 ## Adding a monster
 
-The Monsters page (`pages.json` entry with `"type": "monsters"`) is a two-level drill-down —
-a top-level category grid (`renderMonstersCategories`) split into Named (boss) vs. Regular,
-each subdivided by zone, then a sortable/searchable table (`renderMonstersList`) scoped to
-one area + zone at a time. Zone drill-down uses a hash sub-route (`#monsters/named/<zone>`
-or `#monsters/regular/<zone>`, not a pending variable) so the browser's Back button can pop
-out of a zone list to the category grid — `loadPage`/the `hashchange` listener and `init()`'s
-startup routing all match pages by the part of the hash *before* the first `/`. This is the
-pattern to reuse if a future drill-down needs the same "should be Back-button-navigable"
-behavior.
+**Named and Regular monsters are two separate top-level pages** (`pages.json` entries
+`"Named Monsters"`/`"Regular Monsters"`, both `"type": "monsters"`, sharing `"group":
+"Monsters"` so they nest under one "Monsters" sidebar heading) — split apart 2026-07-17
+(user's own call) the same way Gathering/Crafting/Enchanting/Disenchanting are split under
+"Tradeskilling", rather than one shared page with both sections stacked on it. Each page is
+its own one-level drill-down: a category grid of zones (`renderMonstersCategories(container,
+named)`, scoped to just that page's named/regular subset — including its own quick search
+box) drilling into a sortable/searchable table (`renderMonstersList`) scoped to one zone at a
+time. Zone drill-down uses a hash sub-route (`#monsters-named/<zone>` or
+`#monsters-regular/<zone>`, not a pending variable) so the browser's Back button can pop out
+of a zone list to that page's own category grid — `loadPage`/the `hashchange` listener and
+`init()`'s startup routing all match pages by the part of the hash *before* the first `/`.
+This is the pattern to reuse if a future drill-down needs the same "should be
+Back-button-navigable" behavior. `goToMonster` picks `monsters-named`/`monsters-regular`
+based on the monster's own `named` field when routing to a specific monster (e.g. from header
+search or an item's "Back to `<Monster>`" link).
 
 `monsters.json` schema — only `name`/`slug` are required, everything else is optional and
 fills in as the user provides it:

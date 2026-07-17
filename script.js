@@ -143,12 +143,12 @@ async function init() {
   buildSidebar(allPages);
 
   // Load a page based on the URL (e.g. index.html#stone-golem), or the first
-  // page by default. The Monsters page uses a sub-route within its own hash
-  // (e.g. #monsters/named/Vale%20of%20Zintar — see goToMonster) to make the
-  // browser Back button pop from a zone list to the category grid instead of
-  // leaving the page entirely, so the page lookup only matches on the part
-  // before the first "/", while the full hash (with sub-route) is what
-  // actually gets loaded.
+  // page by default. The Named/Regular Monsters pages use a sub-route within
+  // their own hash (e.g. #monsters-named/Vale%20of%20Zintar — see goToMonster)
+  // to make the browser Back button pop from a zone list to that page's own
+  // category grid instead of leaving the page entirely, so the page lookup
+  // only matches on the part before the first "/", while the full hash (with
+  // sub-route) is what actually gets loaded.
   const requested = location.hash.replace('#', '');
   const requestedBase = requested.split('/')[0];
   const matchedPage = allPages.find(p => p.file === requestedBase);
@@ -285,9 +285,9 @@ function buildSidebar(pages) {
 // Alchemy records that tradeskill specifically — Gathering/Crafting themselves are never
 // recorded as a visit in their own right (see the CATEGORY_TRACKED_PAGES check in loadPage,
 // and the recordVisit calls in renderTradeskillSection/renderGatheringNodes). Every other
-// top-level page (Item Database, Maps, Monsters, Companions, etc.) still just tracks itself,
-// same as before — a Monsters sub-route (e.g. "monsters/named/Vale of Zintar") still counts
-// as a visit to "Monsters" as a whole, not the individual zone/monster.
+// top-level page (Item Database, Maps, Named/Regular Monsters, Companions, etc.) still just
+// tracks itself, same as before — a Monsters sub-route (e.g. "monsters-named/Vale of Zintar")
+// still counts as a visit to "Named Monsters" as a whole, not the individual zone/monster.
 //
 // Each entry is keyed `${kind}:${id}` and stores `{kind, id, count, lastVisited}`:
 //   - kind "page": id is a pages.json `file` — resolved via allPages, opened with loadPage.
@@ -379,9 +379,10 @@ function updateVisitedSidebarSections() {
 async function loadPage(file) {
   const contentInner = document.getElementById('content-inner');
   contentInner.innerHTML = '<p>Loading...</p>';
-  // The Monsters page's own zone sub-route (e.g. "monsters/named/Vale of
-  // Zintar") lives after the first "/" — strip it for the page-type lookup,
-  // but keep the full `file` around to hand to renderMonstersPage below.
+  // The Named/Regular Monsters pages' own zone sub-route (e.g.
+  // "monsters-named/Vale of Zintar") lives after the first "/" — strip it for
+  // the page-type lookup, but keep the full `file` around to hand to
+  // renderMonstersPage below.
   const baseFile = file.split('/')[0];
   const page = allPages.find(p => p.file === baseFile);
 
@@ -614,7 +615,7 @@ function renderSearchResults(query) {
 
   addSection('Monsters', matchedMonsters, monster => {
     const link = document.createElement('a');
-    link.href = '#monsters';
+    link.href = '#' + (monster.named ? 'monsters-named' : 'monsters-regular');
     link.className = 'search-result-link';
     link.textContent = monster.name;
     link.addEventListener('click', e => {
@@ -716,8 +717,11 @@ function goToGatheringCategory(tradeskillName) {
   if (alreadyThere) loadPage('gathering');
 }
 
-// Jumps to the Monsters page and flashes one monster's row — from a header
-// search result, the Monsters page's own quick search, or an item's "Back to
+// Jumps to the Named or Regular Monsters page (whichever the monster
+// actually belongs to — split into two top-level pages the same way
+// Gathering/Crafting/Enchanting/Disenchanting are split under "Tradeskilling",
+// 2026-07-17) and flashes one monster's row. Called from a header search
+// result, a Monsters page's own quick search, or an item's "Back to
 // <Monster>" link (see pendingReturnToMonster). Works with either a full
 // monster object or the minimal `{ name, slug }` shape goToItem stores for
 // the return-to case, since only those two fields are needed here.
@@ -731,8 +735,8 @@ function goToMonster(monster) {
   // The named/zone scope is encoded directly in the hash (see
   // renderMonstersPage) rather than a pending variable, so that landing on a
   // specific monster also creates a proper browser-history entry — pressing
-  // Back then pops to the category grid instead of leaving the page.
-  const targetHash = `monsters/${full.named ? 'named' : 'regular'}/${encodeURIComponent(monsterZone(full))}`;
+  // Back then pops to that page's own zone grid instead of leaving the page.
+  const targetHash = `${full.named ? 'monsters-named' : 'monsters-regular'}/${encodeURIComponent(monsterZone(full))}`;
   const alreadyThere = location.hash.replace('#', '') === targetHash;
   location.hash = targetHash;
   if (alreadyThere) loadPage(targetHash);
@@ -3269,29 +3273,39 @@ function monsterZone(monster) {
   return (monster.maps && monster.maps[0]) || 'Unknown Zone';
 }
 
+// Named and Regular monsters are two separate top-level pages (pages.json,
+// both "monsters"-typed, grouped under "Monsters" in the sidebar) — split the
+// same way Gathering/Crafting/Enchanting/Disenchanting are split under
+// "Tradeskilling" (2026-07-17, user's own call), rather than one shared page
+// with both sections stacked on it. `file` is "monsters-named" or
+// "monsters-regular", telling renderMonstersPage which one it's rendering.
 async function renderMonstersPage(container, file) {
   await ensureMonstersData();
 
   // A zone-scoped view is encoded as a sub-route in the hash itself —
-  // "monsters/named/<map>" or "monsters/regular/<map>" (see goToMonster and
+  // "monsters-named/<map>" or "monsters-regular/<map>" (see goToMonster and
   // the zone-card click handler in renderMonstersCategories) — rather than a
   // pending variable, so that drilling into a zone creates a real
-  // browser-history entry: pressing Back pops to the category grid instead
-  // of leaving the Monsters page entirely.
-  const parts = (file || 'monsters').split('/');
-  if (parts.length >= 3) {
-    renderMonstersList(container, { named: parts[1] === 'named', map: decodeURIComponent(parts[2]) });
+  // browser-history entry: pressing Back pops to that page's own zone grid
+  // instead of leaving the page entirely.
+  const parts = (file || 'monsters-named').split('/');
+  const named = parts[0] === 'monsters-named';
+
+  if (parts.length >= 2) {
+    renderMonstersList(container, { named, map: decodeURIComponent(parts[1]) });
     return;
   }
 
-  renderMonstersCategories(container);
+  renderMonstersCategories(container, named);
 }
 
-function renderMonstersCategories(container) {
-  const named = monstersData.filter(m => m.named);
-  const regular = monstersData.filter(m => !m.named);
+function renderMonstersCategories(container, named) {
+  const list = monstersData.filter(m => !!m.named === named);
+  const icon = named ? 'boss' : 'paw';
+  const heading = named ? 'Named Monsters (Bosses)' : 'Regular Monsters';
+  const baseHash = named ? 'monsters-named' : 'monsters-regular';
 
-  function zoneCards(list, icon) {
+  function zoneCards() {
     if (!list.length) return '<p class="items-empty">None recorded yet.</p>';
     const zones = [...new Set(list.map(monsterZone))].sort();
     return `
@@ -3313,35 +3327,33 @@ function renderMonstersCategories(container) {
   }
 
   container.innerHTML = `
-    <h1>Monsters</h1>
-    <p>Browse named (boss) or regular monsters by zone, or search below to jump straight to a
-    specific monster.</p>
+    <h1 class="monsters-section-heading">${svgIcon(icon)} ${escapeAttr(heading)}</h1>
+    <p>Browse ${named ? 'named (boss)' : 'regular'} monsters by zone, or search below to jump
+    straight to a specific monster.</p>
     <div class="items-quick-search">
       <div class="items-quick-search-row">
-        <input type="search" id="monsters-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all monsters by name, map, drop..." autocomplete="off">
+        <input type="search" id="monsters-quick-search-box" class="items-search items-quick-search-box" placeholder="Search ${named ? 'named' : 'regular'} monsters by name, map, drop..." autocomplete="off">
         <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="monsters-quick-search-box">Clear</button>
       </div>
       <div id="monsters-quick-search-results" class="items-quick-search-results"></div>
     </div>
-    <h2 class="monsters-section-heading">${svgIcon('boss')} Named Monsters (Bosses)</h2>
-    <div data-named="true">${zoneCards(named, 'boss')}</div>
-    <h2 class="monsters-section-heading">${svgIcon('paw')} Regular Monsters</h2>
-    <div data-named="false">${zoneCards(regular, 'paw')}</div>
+    ${zoneCards()}
   `;
 
   container.querySelectorAll('.items-category-card').forEach(card => {
     card.addEventListener('click', () => {
-      const isNamed = card.closest('[data-named]').dataset.named === 'true';
       // Navigate via the hash (rather than calling renderMonstersList
       // directly) so this creates a browser-history entry — pressing Back
       // from the zone list returns here instead of leaving the page.
-      location.hash = `monsters/${isNamed ? 'named' : 'regular'}/${encodeURIComponent(card.dataset.zone)}`;
+      location.hash = `${baseHash}/${encodeURIComponent(card.dataset.zone)}`;
     });
   });
 
-  // A shortcut past the (named/regular →) zone drill-down for anyone who
-  // already knows what they're looking for — same pattern as the Item
-  // Database's own quick search (see renderItemsCategories).
+  // A shortcut past the zone drill-down for anyone who already knows what
+  // they're looking for — same pattern as the Item Database's own quick
+  // search (see renderItemsCategories). Scoped to just this page's own
+  // named/regular subset, same as Crafting/Gathering's quick searches are
+  // scoped to their own data.
   const quickSearchBox = container.querySelector('#monsters-quick-search-box');
   const quickSearchResults = container.querySelector('#monsters-quick-search-results');
 
@@ -3353,7 +3365,7 @@ function renderMonstersCategories(container) {
       return;
     }
 
-    const matches = monstersData
+    const matches = list
       .filter(monster => monsterSearchHaystack(monster).includes(query))
       .sort((a, b) => a.name.localeCompare(b.name))
       .slice(0, 20);
@@ -3414,8 +3426,9 @@ function renderMonstersList(container, scope) {
     e.preventDefault();
     // Set via the hash (not a direct renderMonstersCategories call) so this
     // stays consistent with the browser's history — matches whatever the
-    // Back button would already do from here.
-    location.hash = 'monsters';
+    // Back button would already do from here. Routes back to whichever of
+    // the two Monsters pages this zone list belongs to.
+    location.hash = scope.named ? 'monsters-named' : 'monsters-regular';
   });
 
   const searchBox = container.querySelector('#monsters-search');
