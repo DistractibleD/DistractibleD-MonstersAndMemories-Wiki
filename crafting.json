@@ -6694,8 +6694,8 @@
       { "item": "Annealed Vial", "quantity": 1 }
     ],
     "recipeSkillLevel": 70,
-    "difficultyColor": "Red",
-    "observedAtSkill": 44
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 50
   },
   {
     "name": "Lunar Shroud Potion",
@@ -6714,7 +6714,7 @@
     ],
     "recipeSkillLevel": 75,
     "difficultyColor": "Red",
-    "observedAtSkill": 44,
+    "observedAtSkill": 50,
     "note": "The description/effect/components here were previously sourced from an external reference table that turned out to differ from the real card in several ways â€” corrected 2026-07-15 once an actual in-game card came in (description/effect text, and Wisp Dust x2â†’x3, Annealed Vial x2â†’1)."
   },
   {
@@ -6733,7 +6733,7 @@
     "resultQuantity": 5,
     "recipeSkillLevel": 80,
     "difficultyColor": "Red",
-    "observedAtSkill": 44
+    "observedAtSkill": 50
   },
   {
     "name": "Clear Wood Finish",
@@ -6749,7 +6749,7 @@
     ],
     "recipeSkillLevel": 80,
     "difficultyColor": "Red",
-    "observedAtSkill": 44
+    "observedAtSkill": 50
   },
   {
     "name": "Lesser Serum of Agility",
@@ -6768,7 +6768,7 @@
     ],
     "recipeSkillLevel": 85,
     "difficultyColor": "Red",
-    "observedAtSkill": 44,
+    "observedAtSkill": 50,
     "note": "The description/effect text here was previously sourced from an external reference table that had a copy-paste error (\"Lesser Serum of Intelligence\", Level 1) â€” corrected 2026-07-15 once a real in-game card confirmed the actual text (\"Lesser Serum of Agility\", Level 15)."
   },
   {
@@ -6787,15 +6787,16 @@
       { "item": "Annealed Vial", "quantity": 1 }
     ],
     "difficultyColor": "Red",
-    "observedAtSkill": 44
+    "observedAtSkill": 50
   },
   {
     "name": "Lesser Serum of Charisma",
     "slug": "lesser-serum-of-charisma",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
+    "image": "images/crafting/lesser-serum-of-charisma.jpg",
     "description": "Inspire yourself, increasing your Charisma by 10 for 1 hour.",
-    "effect": "Lesser Serum of Charisma (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "effect": "Lesser Serum of Charisma (On Click. Any Slot. Cast Time: 5s, Level: 15)",
     "weight": 1.0,
     "size": "Small",
     "components": [
@@ -6803,15 +6804,18 @@
       { "item": "Stranglevine Powder", "quantity": 2 },
       { "item": "Annealed Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 90
+    "recipeSkillLevel": 90,
+    "difficultyColor": "Red",
+    "observedAtSkill": 50
   },
   {
     "name": "Lesser Serum of Strength",
     "slug": "lesser-serum-of-strength",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
+    "image": "images/crafting/lesser-serum-of-strength.jpg",
     "description": "Empower yourself, increasing your Strength by 10 for 1 hour.",
-    "effect": "Lesser Serum of Strength (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "effect": "Lesser Serum of Strength (On Click. Any Slot. Cast Time: 5s, Level: 15)",
     "weight": 1.0,
     "size": "Small",
     "components": [
@@ -6819,7 +6823,9 @@
       { "item": "Ironroot Powder", "quantity": 2 },
       { "item": "Annealed Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 90
+    "recipeSkillLevel": 90,
+    "difficultyColor": "Red",
+    "observedAtSkill": 50
   },
   {
     "name": "Lesser Tincture of Wrath",
