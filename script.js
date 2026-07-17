@@ -2359,6 +2359,84 @@ function renderGatheringCategories(container) {
   });
 }
 
+// Disenchanting recipes are structurally backwards from every other
+// tradeskill: `components` holds the single MAGIC item fed into the cube
+// (the thing a reader is actually looking up), while `name` holds the
+// resulting dust output — so the normal card layout (name at top, inputs at
+// the bottom under "Components:") reads backwards for this one tradeskill.
+// This flips it (user's own call, 2026-07-17): the source item leads the
+// card, with its own thumbnail, and the dust results it produces are listed
+// at the bottom instead. A source item's thumbnail is `findItemByName(...).
+// image` when that item has a card yet, or a dashed placeholder otherwise —
+// most of these source items don't have a screenshot yet, so the placeholder
+// is the common case, not an error (same convention as
+// dustTierThumbHTML/.dust-tier-placeholder for Disenchanting's own tier
+// chart, just sized for a card header instead of a small chart thumbnail).
+function renderDisenchantCardHTML(recipe) {
+  const sourceComponent = (recipe.components && recipe.components[0]) || null;
+  const sourceName = sourceComponent ? sourceComponent.item : recipe.name;
+  const sourceItem = sourceComponent ? findItemByName(sourceComponent.item) : null;
+
+  const thumbHtml = sourceItem && sourceItem.image
+    ? `<img src="${escapeAttr(sourceItem.image)}" alt="${escapeAttr(sourceName)}">`
+    : `<div class="item-card-icon-thumb-placeholder">No image yet</div>`;
+
+  const nameHtml = sourceItem
+    ? `<a href="#" class="craft-component-link item-name-hover" data-alt="${escapeAttr(sourceItem.name)}" data-recipe="${escapeAttr(recipe.name)}" data-item="${escapeAttr(sourceItem.name)}">${escapeAttr(sourceName)}</a>`
+    : escapeAttr(sourceName);
+
+  const fields = [];
+  const skillInfo = estimateRecipeSkill(recipe);
+  if (skillInfo) {
+    fields.push({ label: 'Skill', value: skillInfo.estimated ? `~${skillInfo.skill} (estimated)` : skillInfo.skill });
+  }
+  if (sourceComponent && sourceComponent.quantity !== 1) {
+    fields.push({ label: 'Quantity', value: `${sourceComponent.quantity}x` });
+  }
+
+  // The recipe's own `name` (e.g. "Enchanted Powder (x1-5) & Mote of Magic
+  // (x0-2)") names the dust tier's two possible outputs — same parsing as
+  // disenchantingDustTiers(), just kept local here since this also needs
+  // each piece's quantity range (the tier chart deliberately doesn't, see
+  // CLAUDE.md). Falls back to the whole name as one unlabeled result if it
+  // doesn't match that two-part shape.
+  const resultMatch = recipe.name.match(/^(.*?)\s*\(x([\d-]+)\)\s*&\s*(.*?)\s*\(x([\d-]+)\)$/);
+  const results = resultMatch
+    ? [{ name: resultMatch[1].trim(), range: resultMatch[2] }, { name: resultMatch[3].trim(), range: resultMatch[4] }]
+    : [{ name: recipe.name, range: null }];
+
+  const resultsHtml = `
+    <div class="item-card-section">
+      Produces:
+      <ul class="item-card-components">
+        ${results.map(r => {
+          const m = findItemByName(r.name);
+          const label = r.range ? `${escapeAttr(r.name)} &times;${escapeAttr(r.range)}` : escapeAttr(r.name);
+          return m
+            ? `<li><a href="#" class="craft-result-link item-name-hover" data-alt="${escapeAttr(m.name)}" data-recipe="${escapeAttr(r.name)}">${label}</a></li>`
+            : `<li>${label}</li>`;
+        }).join('')}
+      </ul>
+    </div>
+  `;
+
+  return `
+    <div class="item-card item-card-recipe" data-recipe-slug="${escapeAttr(recipe.slug)}">
+      <div class="item-card-header">
+        <div class="item-card-icon item-card-icon-recipe item-card-icon-thumb">${thumbHtml}</div>
+        <div class="item-card-name item-card-name-recipe">${nameHtml}</div>
+        <div class="item-card-badges"><span class="badge-tag badge-tag-craft">${escapeAttr(recipe.tradeskill)}</span>${recipe.needsInfo ? '<span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}</div>
+      </div>
+      <div class="item-card-body">
+        ${recipe.needsInfo ? `<div class="item-card-section item-card-needs-info">This recipe needs more info &middot; confirmed to exist, but a full recipe card hasn't been captured yet. <a href="#submit">Submit a screenshot</a> to help fill it in!</div>` : ''}
+        ${fields.length ? `<div class="item-card-grid">${fields.map(f => `<div class="item-card-field"><span class="item-card-field-label">${f.label}</span><span>${f.value}</span></div>`).join('')}</div>` : ''}
+        ${resultsHtml}
+        ${recipe.note ? `<div class="item-card-section"><em>${escapeAttr(recipe.note)}</em></div>` : ''}
+      </div>
+    </div>
+  `;
+}
+
 // Renders a recipe's card — same structural language as renderItemCardHTML
 // (icon square, header badges, body sections) but in the teal "craft" accent
 // with the tradeskill name as its badge, so a recipe is never mistaken for
@@ -2367,7 +2445,12 @@ function renderGatheringCategories(container) {
 // if a matching item exists there yet, with a hover preview of that item's
 // own card — the recipe card itself only shows what the recipe card shows
 // (weight/size/components), not the crafted result's full stats.
+// Disenchanting is the one exception — see renderDisenchantCardHTML — since
+// its "components"/"name" are the reverse of what every other recipe means
+// by those fields (source item vs. crafted result).
 function renderRecipeCardHTML(recipe) {
+  if (recipe.tradeskill === 'Disenchanting') return renderDisenchantCardHTML(recipe);
+
   const matched = findItemByName(recipe.name);
   const nameHtml = matched
     ? `<a href="#" class="craft-result-link item-name-hover" data-alt="${escapeAttr(matched.name)}" data-recipe="${escapeAttr(recipe.name)}">${escapeAttr(recipe.name)}</a>`

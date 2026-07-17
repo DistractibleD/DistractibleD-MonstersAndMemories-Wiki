@@ -777,6 +777,40 @@ body:not(.site-entered) .sidebar {
   flex: 0 0 auto;
   fill: currentColor;
 }
+/* Disenchanting's flipped card (renderDisenchantCardHTML) shows the source
+   item's own picture instead of the usual tradeskill-icon badge — sized up
+   from the normal 28px icon so it actually reads as a picture, with a dashed
+   placeholder box (most source items don't have a screenshot yet) matching
+   .dust-tier-placeholder's look, just resized for a card header. */
+.item-card-icon-thumb {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  padding: 0;
+  overflow: hidden;
+}
+.item-card-icon-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.item-card-icon-thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-panel-hover);
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: var(--text-dim);
+  font-size: 0.5rem;
+  line-height: 1.15;
+  text-align: center;
+  padding: 2px;
+}
 .item-card-titles {
   flex: 1;
   min-width: 0;

@@ -3217,6 +3217,14 @@
     "size": "Tiny"
   },
   {
+    "name": "Magic Powder",
+    "slug": "magic-powder",
+    "image": "images/items/magic-powder.jpg",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
     "name": "Muurtu Shield",
     "slug": "muurtu-shield",
     "image": "images/items/muurtu-shield.jpg",

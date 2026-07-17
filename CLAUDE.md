@@ -498,6 +498,23 @@ entry, `"type": "gathering"`, above "Crafting" in the sidebar) and data file,
   `recipe.note` (when set) as an italic line at the bottom of the card, right after
   Components — extend this same field to any other recipe that needs a similar caveat.
 
+**Disenchanting's own card layout is flipped from every other tradeskill's**
+(`renderDisenchantCardHTML` in `script.js`, dispatched to from `renderRecipeCardHTML` when
+`recipe.tradeskill === 'Disenchanting'` — 2026-07-17, user's own call). Every other recipe
+puts the crafted result (`name`) at the top and its inputs (`components`) at the bottom, but
+for Disenchanting that reads backwards: `components` holds the single MAGIC item actually fed
+into the cube — the thing someone's actually looking up — while `name` holds the resulting
+dust output. So the flipped card leads with the *source item*, including its own thumbnail
+(`findItemByName(sourceItem).image` when that item has a card yet, a dashed "No image yet"
+placeholder otherwise — most of these source items don't have a screenshot yet, so the
+placeholder is the common case), and lists the dust tier it produces — parsed from `name`
+into its two "Powder"/"of Magic" parts with their quantity ranges kept intact this time
+(unlike the tier chart's own parsing in `disenchantingDustTiers()`, which deliberately drops
+the ranges since they'd be redundant there — here on the actual recipe card they're the
+whole point) — under a "Produces:" section at the bottom instead of "Components:". Both the
+source item and each produced dust link to the Item Database the same dynamic-if-a-card-
+exists way component/result links already do everywhere else.
+
 ### Tanning is different: no recipes, just vat processing
 
 Confirmed by the user: Tanning has no crafting-window entries or recipe cards at all —
