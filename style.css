@@ -330,26 +330,37 @@ body:not(.site-entered) .sidebar {
    (2026-07-17, user's own call) — the "stored only in this browser" note
    lives inside that same bordered box, as its last child. Headings/links
    inside are also shrunk slightly from their main-nav sizes for the same
-   reason. */
+   reason. A "Quick Navigation" title (.sidebar-visits-title) labels the box
+   as a whole, distinct from (and above) its own "Recently Visited"/"Most
+   Visited" sub-headings. */
 #sidebar-visits-wrapper {
-  margin-top: 28px;
-  padding: 8px 10px 10px;
+  margin-top: 44px;
+  padding: 6px 8px 8px;
   border: 1px solid var(--border-light);
   border-radius: 8px;
 }
+.sidebar-visits-title {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 4px 6px 2px;
+}
 #sidebar-visits-wrapper .sidebar-group-heading {
-  font-size: 0.72rem;
-  padding: 8px 8px 4px;
+  font-size: 0.64rem;
+  padding: 6px 6px 3px;
 }
 #sidebar-visits-wrapper .sidebar-link-nested {
-  font-size: 0.84rem;
-  padding: 5px 8px;
+  font-size: 0.76rem;
+  padding: 4px 6px;
 }
 .sidebar-visits-note {
-  font-size: 0.72rem;
+  font-size: 0.66rem;
   font-style: italic;
   color: var(--text-dim);
-  padding: 6px 10px 2px;
+  padding: 5px 8px 1px;
   line-height: 1.3;
 }
 
