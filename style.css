@@ -230,8 +230,34 @@ body.site-entered .splash-screen {
 .sidebar {
   width: 230px;
   flex-shrink: 0;
+  align-self: flex-start;
   position: sticky;
   top: 76px;
+  /* Investigated a 2026-07-17 tester report ("sidebar doesn't follow along
+     when scrolling, unlike the header") by directly reproducing part of it:
+     sticky positioning can only keep an element pinned for as long as its
+     containing block (.layout, a flex row with align-items: flex-start, so
+     its own height = the taller of its two children) is taller than the
+     sticky element itself by at least `top`'s offset. The sidebar has grown
+     tall over time (the Tradeskilling group, the Named/Regular Monsters
+     split, the whole History box) — confirmed on the Crafting *category
+     grid* specifically (short content, ~983px) at 1920x1080 that the
+     uncapped sidebar (1011px) left ~zero room to stick, and it scrolled
+     away from pixel 1 exactly like the report describes. On taller pages
+     (e.g. the Maps grid) sticky kept working fine even *before* this
+     change, both capped and uncapped, so this fix is confirmed to help the
+     short-content case but is not confirmed to be the tester's *whole*
+     story if they were scrolling on pages with substantially more content
+     than that — worth confirming with them after this ships. Fixed by
+     capping the sidebar to the viewport with its own scrollbar, so it can
+     never exceed viewport height and run low on "room" again no matter how
+     much taller it gets in the future. align-self is a harmless, unrelated
+     addition alongside this in case the sidebar ever gets pulled out of the
+     flex layout — it wasn't itself shown to matter here. */
+  max-height: calc(100vh - 76px - 20px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
   /* Semi-transparent (not solid like .content) — just enough to separate
      the nav text from the site-wide background image behind it, without
      fully hiding the art the way .site-header/.content's opaque panels do. */
@@ -240,6 +266,16 @@ body.site-entered .splash-screen {
   border-radius: 10px;
   padding: 14px;
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+}
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
 }
 /* Held off-screen to the left until .site-entered is added to <body> (see
    #splash-screen above and the Enter button handler in script.js), so it
@@ -1720,6 +1756,12 @@ body:not(.site-entered) .sidebar {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
+    /* The desktop rule's viewport-height cap (there to guarantee sticky has
+       room to work) makes no sense once .sidebar is static and wrapping as
+       pill chips — reset it so a tall wrapped chip row is never clipped
+       into an unwanted internal scrollbar here. */
+    max-height: none;
+    overflow-y: visible;
   }
   /* Nav links read as one-per-line block text in the desktop sidebar;
      as a wrapped horizontal row they need their own visual boundary

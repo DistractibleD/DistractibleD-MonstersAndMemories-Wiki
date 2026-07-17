@@ -1211,6 +1211,28 @@ mobile media query only — masked the symptom at ≤900px without addressing th
 wider widths; it's harmless and still in place, but the `width: 100%` fix above is what
 actually matters.)
 
+**A sticky sidebar needs its own height capped to the viewport, not just `position: sticky`.**
+`.layout`'s height (as a flex row with `align-items: flex-start`) is the *taller* of
+`.sidebar` and `.content` — it does not grow to accommodate the sidebar on top of content's
+own height. `position: sticky` can only keep an element pinned for as long as its containing
+block (`.layout` here) is taller than the element itself by at least its `top` offset,
+so whenever the sidebar's own height gets close to (or exceeds) `.content`'s height on a
+given page, that "room to travel" shrinks toward zero and the sidebar stops sticking almost
+immediately, scrolling away with the page instead — reported by a tester 2026-07-17 ("panel
+disappears off the top instead of following along"), reproduced directly on the Crafting
+page's short category grid (sidebar taller than that page's content left ~zero sticky room
+at 1920x1080), though *not* reproduced on taller-content pages like the Maps grid, where
+sticky already worked fine both before and after this fix — so if a similar report ever comes
+back for a page with substantially more content than that, there's likely a second cause
+still to find. Fixed by giving `.sidebar` `max-height: calc(100vh - 76px - 20px)` (76px
+matches its own `top` offset) plus `overflow-y: auto` (with a themed scrollbar via
+`scrollbar-color`/`::-webkit-scrollbar-*`) — this guarantees the sidebar itself can never
+exceed viewport height, which is the one thing that's fully within this element's own
+control regardless of how tall it keeps growing (Tradeskilling group, the Named/Regular
+Monsters split, the History box) or how short a given page's content is. `align-self:
+flex-start` was added alongside this as a harmless, unrelated hardening measure — it wasn't
+shown to be part of the actual cause.
+
 ## Mobile / narrow-viewport layout
 
 Three changes, all scoped to media queries so desktop (>900px) is untouched:
