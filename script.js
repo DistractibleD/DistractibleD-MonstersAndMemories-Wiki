@@ -149,12 +149,42 @@ function setupSplashScreen() {
   });
 }
 
+// Keeps the sticky sidebar's own height capped to whatever room is actually
+// available — viewport height minus its own `top` offset (76px, must match
+// style.css) minus the footer's real rendered height minus a small safety
+// margin — rather than the flat calc() in style.css, which only knew about
+// `top` and couldn't account for the footer sitting below .layout. See the
+// long comment on .sidebar in style.css for the full "why": on a short page
+// the flat calc() left the sidebar taller than the room actually left once
+// the footer's own height is subtracted, so it could end up scrolled
+// entirely above the viewport once you reached the bottom of the page. Runs
+// on load and on resize, since both the viewport and (rarely) the footer's
+// own wrapped height can change. No-ops on mobile (matches the CSS
+// breakpoint) and clears any inline value there instead of setting one, so
+// it doesn't fight the mobile rule's own `max-height: none`.
+function updateSidebarMaxHeight() {
+  const sidebar = document.getElementById('sidebar');
+  if (!sidebar) return;
+  if (window.innerWidth <= 900) {
+    sidebar.style.maxHeight = '';
+    return;
+  }
+  const footer = document.querySelector('.site-footer');
+  const footerHeight = footer ? footer.getBoundingClientRect().height : 0;
+  const topOffset = 76;
+  const safetyMargin = 20;
+  const maxHeight = window.innerHeight - topOffset - footerHeight - safetyMargin;
+  sidebar.style.maxHeight = Math.max(200, maxHeight) + 'px';
+}
+
 async function init() {
   setupSplashScreen();
 
   const res = await fetch('pages.json');
   allPages = await res.json();
   buildSidebar(allPages);
+  updateSidebarMaxHeight();
+  window.addEventListener('resize', updateSidebarMaxHeight);
 
   // Load a page based on the URL (e.g. index.html#stone-golem), or the first
   // page by default. The Named/Regular Monsters pages use a sub-route within
@@ -2186,7 +2216,6 @@ function setupMapViewer() {
       <span class="map-viewer-nav-label">Alternate Map</span>
     </button>
     <div id="map-viewer-hint">Scroll to zoom &middot; drag to pan</div>
-    <div id="map-viewer-nav-hint">&#8249; &#8250; More views of this area &mdash; use the arrows</div>
   `;
   document.body.appendChild(viewer);
 
@@ -2289,24 +2318,31 @@ function showMapViewerEntry(entry) {
 // same area, per groupMapsByArea) to step between. Only called once per
 // viewer-open (from openMapViewer) since mapViewerGroup doesn't change while
 // stepping between siblings with prev/next — so this is also the one place
-// that (re)starts the nav-hint's blink-then-fade animation, once per fresh
-// map opened rather than on every arrow click.
+// that (re)starts the buttons' own blink-then-settle animation, once per
+// fresh map opened rather than on every arrow click. This used to be a
+// separate hint pill at the top of the screen (2026-07-17 first pass), but
+// the user found it "not very effective" up there — the arrows themselves
+// blinking draws the eye straight to the thing you're supposed to click,
+// so the standalone hint was dropped in favor of this (2026-07-17, second
+// pass).
 function updateMapViewerNav() {
   const viewer = document.getElementById('map-viewer');
   const showNav = mapViewerGroup.length > 1;
-  viewer.querySelector('#map-viewer-prev').style.display = showNav ? 'flex' : 'none';
-  viewer.querySelector('#map-viewer-next').style.display = showNav ? 'flex' : 'none';
+  const prev = viewer.querySelector('#map-viewer-prev');
+  const next = viewer.querySelector('#map-viewer-next');
+  prev.style.display = showNav ? 'flex' : 'none';
+  next.style.display = showNav ? 'flex' : 'none';
 
-  const navHint = viewer.querySelector('#map-viewer-nav-hint');
-  navHint.style.display = showNav ? 'block' : 'none';
   if (showNav) {
     // Restart the CSS animation from scratch even if it's already run once
     // for a previous map this session — removing the class, forcing a
     // reflow, then re-adding it is the standard way to replay a CSS
     // animation that isn't already looping.
-    navHint.classList.remove('map-viewer-nav-hint-play');
-    void navHint.offsetWidth;
-    navHint.classList.add('map-viewer-nav-hint-play');
+    [prev, next].forEach(btn => {
+      btn.classList.remove('map-viewer-nav-btn-play');
+      void btn.offsetWidth;
+      btn.classList.add('map-viewer-nav-btn-play');
+    });
   }
 }
 
