@@ -430,8 +430,15 @@ async function loadPage(file) {
     updateVisitedSidebarSections();
   }
 
-  // Highlight the active link in the sidebar
+  // Highlight the active link in the sidebar — the History box (Recently/
+  // Most Visited) is explicitly excluded (2026-07-17, user's own call):
+  // clicking an entry there just navigates, it never shows the "you're
+  // here" highlight, which stays reserved for the normal nav list above it.
   document.querySelectorAll('.sidebar-link').forEach(link => {
+    if (link.closest('#sidebar-visits-wrapper')) {
+      link.classList.remove('active');
+      return;
+    }
     link.classList.toggle('active', link.dataset.file === baseFile);
   });
 
