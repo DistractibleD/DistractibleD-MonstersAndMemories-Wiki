@@ -8,6 +8,7 @@
   --bg-panel: #1b1d24;
   --bg-panel-hover: #23262f;
   --border: #2c2f3a;
+  --border-light: #4b5063; /* lighter than --border for thin lines that need to stay visible against the dark sidebar/panel backgrounds (tree-line ticks, the visits box) */
   --text: #e7e6e2;
   --text-dim: #9a9ba3;
   --accent: #e0a640;       /* <- change this hex to retheme the site */
@@ -307,7 +308,7 @@ body:not(.site-entered) .sidebar {
   position: relative;
   margin-left: 20px;
   padding-left: 10px;
-  border-left: 1px solid var(--border);
+  border-left: 1px solid var(--border-light);
 }
 .sidebar-link-nested {
   position: relative;
@@ -319,7 +320,7 @@ body:not(.site-entered) .sidebar {
   top: 50%;
   width: 10px;
   height: 1px;
-  background: var(--border);
+  background: var(--border-light);
 }
 /* "Recently Visited"/"Most Visited" (#sidebar-visits-wrapper in script.js) —
    reuses .sidebar-group-heading/.sidebar-group/.sidebar-link-nested as-is for
@@ -333,7 +334,7 @@ body:not(.site-entered) .sidebar {
 #sidebar-visits-wrapper {
   margin-top: 28px;
   padding: 8px 10px 10px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-light);
   border-radius: 8px;
 }
 #sidebar-visits-wrapper .sidebar-group-heading {
