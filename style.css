@@ -1591,24 +1591,29 @@ body:not(.site-entered) .sidebar {
 #map-viewer-close:hover {
   color: var(--accent);
 }
+/* Made more visible (2026-07-17, user's own call — a tester didn't notice
+   these existed) via a brighter accent border/glow and a bigger size,
+   instead of blending into the dark overlay the same way #map-viewer-close
+   does. */
 #map-viewer-prev,
 #map-viewer-next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   background: var(--bg-panel);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-size: 1.6rem;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-size: 1.8rem;
   line-height: 1;
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   cursor: pointer;
   display: none;
   align-items: center;
   justify-content: center;
   z-index: 1;
+  box-shadow: 0 0 18px rgba(224, 166, 64, 0.45);
 }
 #map-viewer-prev {
   left: 24px;
@@ -1618,7 +1623,8 @@ body:not(.site-entered) .sidebar {
 }
 #map-viewer-prev:hover,
 #map-viewer-next:hover {
-  color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
 }
 #map-viewer-hint {
   position: absolute;
@@ -1632,6 +1638,36 @@ body:not(.site-entered) .sidebar {
   padding: 6px 14px;
   border-radius: 20px;
   pointer-events: none;
+}
+/* Calls out the prev/next arrows the first time a multi-map area opens —
+   blinks a few times, then fades out and stays gone (animation-fill-mode:
+   forwards from the shorthand below) rather than lingering forever.
+   Restarted per fresh map opened via updateMapViewerNav's remove/reflow/
+   re-add class dance, not on every arrow click. */
+#map-viewer-nav-hint {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.88rem;
+  background: var(--bg-panel);
+  border: 1px solid var(--accent-dim);
+  padding: 7px 16px;
+  border-radius: 20px;
+  pointer-events: none;
+  display: none;
+  opacity: 0;
+}
+#map-viewer-nav-hint.map-viewer-nav-hint-play {
+  animation: map-viewer-nav-hint-blink 3.5s ease-in-out 1 forwards;
+}
+@keyframes map-viewer-nav-hint-blink {
+  0%, 18%, 36%, 54% { opacity: 1; }
+  9%, 27%, 45% { opacity: 0.25; }
+  65% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 /* ---------- Footer ---------- */
@@ -1734,9 +1770,10 @@ body:not(.site-entered) .sidebar {
   .maps-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
   .map-card img.map-card-thumb { height: 110px; }
   #map-viewer-close { top: 10px; right: 12px; width: 34px; height: 34px; font-size: 1.2rem; }
-  #map-viewer-prev, #map-viewer-next { width: 34px; height: 34px; font-size: 1.2rem; }
+  #map-viewer-prev, #map-viewer-next { width: 40px; height: 40px; font-size: 1.4rem; }
   #map-viewer-prev { left: 8px; }
   #map-viewer-next { right: 8px; }
+  #map-viewer-nav-hint { top: 10px; font-size: 0.76rem; padding: 5px 12px; max-width: 84vw; }
 }
 
 /* On narrow/vertical screens a fixed multi-column table (Item Database has

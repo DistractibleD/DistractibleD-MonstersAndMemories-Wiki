@@ -2136,6 +2136,7 @@ function setupMapViewer() {
     <img id="map-viewer-img" alt="">
     <button id="map-viewer-next" aria-label="Next map of this area">&#8250;</button>
     <div id="map-viewer-hint">Scroll to zoom &middot; drag to pan</div>
+    <div id="map-viewer-nav-hint">&#8249; &#8250; More views of this area &mdash; use the arrows</div>
   `;
   document.body.appendChild(viewer);
 
@@ -2235,12 +2236,28 @@ function showMapViewerEntry(entry) {
 }
 
 // Only shown when the current map has siblings (other renderings of the
-// same area, per groupMapsByArea) to step between.
+// same area, per groupMapsByArea) to step between. Only called once per
+// viewer-open (from openMapViewer) since mapViewerGroup doesn't change while
+// stepping between siblings with prev/next — so this is also the one place
+// that (re)starts the nav-hint's blink-then-fade animation, once per fresh
+// map opened rather than on every arrow click.
 function updateMapViewerNav() {
   const viewer = document.getElementById('map-viewer');
   const showNav = mapViewerGroup.length > 1;
   viewer.querySelector('#map-viewer-prev').style.display = showNav ? 'flex' : 'none';
   viewer.querySelector('#map-viewer-next').style.display = showNav ? 'flex' : 'none';
+
+  const navHint = viewer.querySelector('#map-viewer-nav-hint');
+  navHint.style.display = showNav ? 'block' : 'none';
+  if (showNav) {
+    // Restart the CSS animation from scratch even if it's already run once
+    // for a previous map this session — removing the class, forcing a
+    // reflow, then re-adding it is the standard way to replay a CSS
+    // animation that isn't already looping.
+    navHint.classList.remove('map-viewer-nav-hint-play');
+    void navHint.offsetWidth;
+    navHint.classList.add('map-viewer-nav-hint-play');
+  }
 }
 
 function navigateMapViewer(delta) {
