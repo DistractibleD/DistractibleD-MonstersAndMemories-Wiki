@@ -88,8 +88,7 @@
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" },
       { "item": "Shattered Skeleton Femur" }
-    ],
-    "rumor": "\"Shattered Skeleton Femur\" comes from a community reference table the user described as rumored drops, not confirmed via an in-game screenshot like the rest of this monster's drop list — treat it as less certain than the other entries above. \"Tattered Cloth Cap\" and \"Tattered Cloth Gorget\" are inferred, not directly screenshot-confirmed for this monster — per the user's 2026-07-12 rule, a monster confirmed dropping one piece of a quality set (this one already had 4 other Tattered Cloth pieces) is assumed to be able to drop any other known piece of that same set."
+    ]
   },
   {
     "name": "a Bloodynose quarreler",
@@ -106,8 +105,7 @@
       { "item": "Tattered Cloth Boots" },
       { "item": "Tattered Cloth Robe" },
       { "item": "Tattered Cloth Veil" }
-    ],
-    "rumor": "The Tattered Cloth pieces beyond Gorget are inferred, not directly screenshot-confirmed for this monster — per the user's 2026-07-12 rule, a monster confirmed dropping one piece of a quality set is assumed to be able to drop any other known piece of that same set."
+    ]
   },
   {
     "name": "a Bloodynose sergeant",
@@ -129,8 +127,7 @@
     ],
     "relatedMonsters": [
       { "label": "Desert Bat", "slug": "a-desert-bat" }
-    ],
-    "rumor": "Spawns in The Concourse of Souls, a spot within the Necropolis area, only at night, after one of the Desert Bat placeholder mobs there is killed - seemingly random which one triggers it, not all of them."
+    ]
   },
   {
     "name": "a sly farmhand",
@@ -139,8 +136,7 @@
     "maps": ["Sungreet Strand"],
     "drops": [
       { "item": "Corroded Bronze Kite Shield" }
-    ],
-    "rumor": "Map inferred from batch timing — this screenshot arrived right after a run of other Sungreet Strand monster pictures, but no filename/chat text explicitly named the zone for this one specifically."
+    ]
   },
   {
     "name": "a bone carver",
@@ -198,8 +194,7 @@
       { "item": "Rusty Maul" },
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" }
-    ],
-    "rumor": "Directly confirmed via loot-window screenshots: Raw Ashira Meat, Tattered Cloth Cap, Tattered Cloth Pantaloons, Tattered Cloth Boots, Ashira Warrior Pelt, Ashira Warrior Necklace, Ashira Warrior Bracer, Onion, Garlic, Cabbage, Tattered Rawhide Gorget, Tattered Rawhide Belt, Worn Buckler, Worn Bow, Torch, Rusty Warhammer, and Rusty Axe. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Rusty weapons via Warhammer/Axe, Tattered Cloth via Cap/Pantaloons/Boots, Tattered Rawhide via Gorget/Belt), it's assumed to be able to drop any other known piece of that same set. Tattered Rawhide Gloves/Bracer/Boots/Vest, Rusty Long Spear, and Tattered Cloth Veil are newly-discovered pieces of those quality sets (via a smuggler/a wererat/an angered spirit's own loot windows, 2026-07-12) backfilled in here too. Tattered Rawhide Shoulderpads (a skeletal cleric's own loot window, 2026-07-14) has since been backfilled here too."
+    ]
   },
   {
     "name": "an ashira lookout",
@@ -229,8 +224,7 @@
       { "item": "Rusty Maul" },
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" }
-    ],
-    "rumor": "Directly confirmed via loot-window screenshots: Ashira Scout Necklace, Ashira Tail, Cloth Scraps, Rawhide Scraps, Raw Ashira Meat, Bell Pepper, and Rusty Trident. Every other Rusty weapon/shield in this list (including Rusty Long Spear, a newly-discovered Rusty piece as of 2026-07-12) is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set, it's assumed to be able to drop any other known piece of that same set. No map confirmed yet for this monster."
+    ]
   },
   {
     "name": "a snake",
@@ -271,8 +265,7 @@
       { "item": "Mace of Malice" },
       { "item": "Ashira War Tooth" },
       { "item": "Ashira Hunter Tooth" }
-    ],
-    "rumor": "A fan-wiki-style reference table listed a full \"Corrupted Leather\" armor set for this monster, including \"Corrupted Leather Cap\" (Head) and \"Corrupted Leather Boots\" (Feet). \"Sand-Blasted Coif\"/\"Sand-Blasted Boots\" were previously (incorrectly) recorded here too, assumed to be alternate Head/Feet drops — the user has since confirmed those two actually drop in a different zone, not from this monster, so they've been removed from this drop list. Cap and Shoulderpads got full item cards on 2026-07-17 (added to items.json with real stats), joining Mask/Gorget/Tunic/Leggings/Scraps, which already had full data. The remaining 6 (Cloak, Robe, Bracer, Belt, Gloves, Boots) are still minimal needsInfo stubs in items.json since no card/Weight/Size data has come in for them yet — see To-Do/items-needing-text.txt. A separate \"named monsters (bosses) in Vale of Zintar\" reference table lists a boss named \"a corrupted ashira\" (note the \"a\" instead of \"the\") dropping only \"Ashira War Tooth\" and \"Ashira Hunter Tooth\" (both Primary/Secondary weapons, no stats known yet) — assumed to be this same boss and merged in here, but neither of those two sources mentions the other's drops at all, so this identification isn't fully confirmed. Flag for correction if \"a corrupted ashira\" turns out to be a different monster than this one."
+    ]
   },
   {
     "name": "Fernic the Cur",
@@ -409,8 +402,7 @@
       { "item": "Tattered Rawhide Boots" },
       { "item": "Tattered Rawhide Vest" },
       { "item": "Tattered Rawhide Shoulderpads" }
-    ],
-    "rumor": "\"Smuggler's Greaves\" is attributed to this Toma based on the item's own name — no monster thumbnail was visible in that screenshot, but it matches the same \"Smuggler's\" naming already confirmed here via \"Smuggler's Damaged Logbook\" (Toma's location, Smugglers Camp). Toma's Signet Ring, Cloth Scraps, Torch, and Tattered Rawhide Gloves are directly confirmed via a loot-window screenshot (2026-07-12). The rest of the Tattered Rawhide family (Gorget, Belt, Mask, Bracer, Boots, Vest) is inferred per the user's 2026-07-12 quality-set rule, now that Toma is confirmed dropping one piece (Gloves). Tattered Rawhide Shoulderpads (a skeletal cleric's own loot window, 2026-07-14) has since been backfilled here too."
+    ]
   },
   {
     "name": "Yezkiel the Gatekeeper",
@@ -450,8 +442,7 @@
       { "item": "Moonwhisper Knot" },
       { "item": "Shimmering Scimtar" },
       { "item": "Umbracast Greaves" }
-    ],
-    "rumor": "\"Shimmering Shaow Veil\" and \"Shimmering Scimtar\" are recorded exactly as spelled on the source reference table — likely \"Shadow Veil\"/\"Scimitar\" typos, but left unchanged pending a real in-game screenshot to confirm the actual names rather than silently correcting them."
+    ]
   },
   {
     "name": "Noel Klares",
@@ -460,8 +451,7 @@
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Noel Klares' Ring" }
-    ],
-    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+    ]
   },
   {
     "name": "a pale lieutenant",
@@ -470,8 +460,7 @@
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Ironhide Girdle" }
-    ],
-    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+    ]
   },
   {
     "name": "Captain Caspian",
@@ -481,8 +470,7 @@
     "drops": [
       { "item": "Moonveil Bracer" },
       { "item": "Thirstbound Grips" }
-    ],
-    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+    ]
   },
   {
     "name": "Manciple Daphne",
@@ -491,8 +479,7 @@
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Charmweaver Robe" }
-    ],
-    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+    ]
   },
   {
     "name": "a cunning privateer",
@@ -501,8 +488,7 @@
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Dirty Pirate Earring" }
-    ],
-    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+    ]
   },
   {
     "name": "Grubbfist",
@@ -512,8 +498,7 @@
     "drops": [
       { "item": "Grubbfist's Smasher" },
       { "item": "Grubbfist's Filthy Mantle" }
-    ],
-    "rumor": "\"Grubbfist's Smasher\" is sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot. \"Grubbfist's Filthy Mantle\" is directly confirmed via a real item card — attributed to this Grubbfist based on the item's own name (no monster thumbnail was visible in that screenshot, but the naming makes the source unambiguous)."
+    ]
   },
   {
     "name": "Victualler Veera",
@@ -522,8 +507,7 @@
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Phantom Stein" }
-    ],
-    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+    ]
   },
   {
     "name": "Cormac Renshaw",
@@ -533,8 +517,7 @@
     "drops": [
       { "item": "Ragged Leather Gloves" },
       { "item": "Seafarer's Shroud" }
-    ],
-    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+    ]
   },
   {
     "name": "Eamon Kassir",
@@ -543,8 +526,7 @@
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Savage Heartplate" }
-    ],
-    "rumor": "Drops sourced from a community reference table the user described as rumored, not yet confirmed via an in-game screenshot."
+    ]
   },
   {
     "name": "an ashira scout",
@@ -604,8 +586,7 @@
       { "item": "Rusty Maul" },
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" }
-    ],
-    "rumor": "Found at the Grave Robber camp within North Gate. Directly confirmed via loot-window screenshots: Rusty Great Scythe and Chipped Bloodstone. Every other Rusty weapon/shield here (including Rusty Long Spear, a newly-discovered Rusty piece as of 2026-07-12) is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set, it's assumed to be able to drop any other known piece of that same set."
+    ]
   },
   {
     "name": "a grave robber",
@@ -655,8 +636,7 @@
       { "item": "Rusty Maul" },
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" }
-    ],
-    "rumor": "Found at the Grave Robber camp within North Gate. Directly confirmed via loot-window screenshots: Cracked Staff, Tattered Cloth Robe, Garlic, Rawhide Scraps, Torch, Tattered Rawhide Belt, Rusty Shortsword, Raw Human Meat, Cloth Scraps, Tattered Rawhide Mask, and Rusty Greatsword. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Tattered Cloth via Robe, Tattered Rawhide via Belt/Mask, Rusty weapons via Shortsword/Greatsword), it's assumed to be able to drop any other known piece of that same set. Tattered Rawhide Gloves/Bracer/Boots/Vest, Rusty Long Spear, and Tattered Cloth Veil are newly-discovered pieces of those quality sets (2026-07-12) backfilled in here too. Tattered Rawhide Shoulderpads (a skeletal cleric's own loot window, 2026-07-14) has since been backfilled here too."
+    ]
   },
   {
     "name": "a spiderling",
@@ -704,8 +684,7 @@
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" },
       { "item": "Tattered Rawhide Shoulderpads" }
-    ],
-    "rumor": "Found at the Grave Robber camp within North Gate. Directly confirmed via loot-window screenshots: Rusty Kite Shield, Potato, Tattered Rawhide Belt, Rusty Shortsword, Raw Human Meat, Note from Ariblast, Cheese, and Worn Buckler. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Tattered Rawhide via Belt, Rusty weapons via Shortsword), it's assumed to be able to drop any other known piece of that same set. Tattered Rawhide Gloves/Bracer/Boots/Vest and Rusty Long Spear are newly-discovered pieces of those quality sets (2026-07-12) backfilled in here too. Tattered Rawhide Shoulderpads (a skeletal cleric's own loot window, 2026-07-14) has since been backfilled here too."
+    ]
   },
   {
     "name": "a cultist",
@@ -714,15 +693,13 @@
     "drops": [
       { "item": "Aashir's Journal Page 42" },
       { "item": "Mushroom" }
-    ],
-    "rumor": "Found outside the Ancient Crypt."
+    ]
   },
   {
     "name": "a risen commander",
     "slug": "a-risen-commander",
     "image": "images/Monsters/a-risen-commander.jpg",
-    "maps": ["Shaded Dunes"],
-    "rumor": "Found outside the Ancient Crypt."
+    "maps": ["Shaded Dunes"]
   },
   {
     "name": "a risen thaumaturgist",
@@ -733,8 +710,7 @@
       { "item": "Worn Fine Wood Bow" },
       { "item": "Corroded Bronze Shortsword" },
       { "item": "Wool Scraps" }
-    ],
-    "rumor": "Found outside the Ancient Crypt."
+    ]
   },
   {
     "name": "a rattlesnake",
@@ -773,8 +749,7 @@
     "named": true,
     "image": "images/Monsters/a-large-crypt-broodmatron.jpg",
     "maps": ["Ancient Crypt"],
-    "areas": ["Infected Crypt"],
-    "rumor": "\"Infected Crypt\" is assumed to be an area within the Ancient Crypt map (the same relationship as Necropolis within Night Harbor) rather than its own map, since no separate \"Infected Crypt\" map exists — flag for correction if that turns out to be wrong. This monster's orange nameplate and \"large\"/boss-style naming are why it's marked as named/boss; note the very similar name to \"a crypt broodmother\" (seen in a separate loot-window screenshot the same day) — these may turn out to be the same creature, but each is recorded exactly as its own screenshot displayed it rather than merged on a guess."
+    "areas": ["Infected Crypt"]
   },
   {
     "name": "a crypt broodmother",
@@ -784,8 +759,7 @@
     "areas": ["Infected Crypt"],
     "drops": [
       { "item": "Broodwarden Carapace" }
-    ],
-    "rumor": "\"Infected Crypt\" is assumed to be an area within the Ancient Crypt map (the same relationship as Necropolis within Night Harbor) rather than its own map — flag for correction if that turns out to be wrong. No full creature picture available yet, only a small loot-window inventory icon. Note the very similar name to \"a large crypt broodmatron\" (seen in a separate screenshot the same day, filename called it a \"boss\") — these may turn out to be the same creature, but each is recorded exactly as its own screenshot displayed it rather than merged on a guess."
+    ]
   },
   {
     "name": "a stumbling zombie",
@@ -822,8 +796,7 @@
       { "item": "Rusty Greatsword" },
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" }
-    ],
-    "rumor": "Directly confirmed via a loot-window screenshot: Rusty Long Spear (a newly-discovered Rusty piece as of 2026-07-12). Every other Rusty weapon/shield here is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set, it's assumed to be able to drop any other known piece of that same set."
+    ]
   },
   {
     "name": "a wererat",
@@ -873,8 +846,7 @@
       { "item": "Rusty Greatsword" },
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" }
-    ],
-    "rumor": "Directly confirmed via loot-window screenshots: Rusty Dagger, Rawhide Scraps, Wererat Pelt, Rusty Scythe, Tattered Rawhide Bracer, Worn Bow, Tattered Rawhide Boots, Rusty Tower Shield, Tattered Rawhide Vest, Cloth Scraps, Severed Ring Finger, Spirit World Ch. 1, Rusty Warhammer, and Tattered Cloth Pantaloons. Everything else in this drop list is inferred — per the user's 2026-07-12 rule, once a monster is confirmed dropping one piece of a quality set (Rusty weapons, Tattered Rawhide, Tattered Cloth), it's assumed to be able to drop any other known piece of that same set. Tattered Rawhide Gloves/Bracer/Boots/Vest are newly-discovered additions to that quality-set roster from this monster's (and Toma the Two-Faced's) screenshots, and have been backfilled onto every other monster already known to drop other Tattered Rawhide pieces. Tattered Cloth Veil (from an angered spirit's own loot window) has similarly been backfilled here. Tattered Rawhide Shoulderpads (a skeletal cleric's own loot window, 2026-07-14) has since been backfilled here too."
+    ]
   },
   {
     "name": "a crocodile",
@@ -986,8 +958,7 @@
       { "item": "Tattered Cloth Robe" },
       { "item": "Worn Bow" },
       { "item": "Onion" }
-    ],
-    "rumor": "Map inferred from batch timing (arrived amid a run of Sungreet Strand screenshots), not explicitly named in the filename/chat. Directly confirmed via a loot-window screenshot: Tattered Cloth Veil, Worn Bow, and Onion. The rest of the Tattered Cloth family is inferred per the user's 2026-07-12 quality-set rule, and Tattered Cloth Veil (a newly-discovered 9th piece of that family) has been backfilled onto every other monster already known to drop other Tattered Cloth pieces."
+    ]
   },
   {
     "name": "a bandit",
@@ -1026,8 +997,7 @@
       { "item": "Corroded Bronze Chain Gloves" },
       { "item": "Corroded Bronze Chain Waistguard" },
       { "item": "Corroded Bronze Chain Mask" }
-    ],
-    "rumor": "Directly confirmed via loot-window screenshots: Corroded Bronze Axe and Corroded Bronze Scythe. Everything else in this drop list is inferred — per the user's 2026-07-12 quality-set rule, once a monster is confirmed dropping one piece of a quality set (here, the Corroded Bronze weapon/armor tier), it's assumed to be able to drop any other known piece of that same set. This is the first monster confirmed dropping any Corroded Bronze piece, even though the full 18-piece set was already in items.json from an earlier reference table."
+    ]
   },
   {
     "name": "a Dustrend foot soldier",
@@ -1055,8 +1025,7 @@
       { "item": "Corroded Bronze Plate Boots" },
       { "item": "Corroded Bronze Chain Gloves" },
       { "item": "Corroded Bronze Chain Waistguard" }
-    ],
-    "rumor": "Directly confirmed via loot-window screenshots: Corroded Bronze Longsword, Corroded Bronze Chain Mask (a newly-discovered 19th piece of the Corroded Bronze set, backfilled onto a Dustrend priest above too), Corroded Bronze Kite Shield, Worn Fine Wood Bow, and Cooked Orc Meat. Everything else in this drop list is inferred per the user's 2026-07-12 quality-set rule."
+    ]
   },
   {
     "name": "a skeletal priest",
@@ -1067,8 +1036,7 @@
       { "item": "Bone Chips" },
       { "item": "Eth-ur Arboreal Journal Page" },
       { "item": "Cloth Scraps" }
-    ],
-    "rumor": "Drops (Bone Chips x2, Eth-ur Arboreal Journal Page x2, Cloth Scraps) are directly confirmed via this monster's own loot-window screenshot."
+    ]
   },
   {
     "name": "a skeletal warrior",
@@ -1105,8 +1073,7 @@
       { "item": "Tattered Rawhide Bracer" },
       { "item": "Tattered Rawhide Boots" },
       { "item": "Tattered Rawhide Vest" }
-    ],
-    "rumor": "Directly confirmed via loot-window screenshot: Tattered Cloth Bracer, Worn Bow, and Tattered Rawhide Shoulderpads (a brand-new 8th piece of the Tattered Rawhide set, backfilled onto every other monster already known to drop that set). Everything else in this drop list is inferred per the user's 2026-07-12 quality-set rule, now that this monster is confirmed dropping one piece each of Tattered Cloth and Tattered Rawhide. No picture yet — not confirmed as a Named/boss spawn."
+    ]
   },
   {
     "name": "a skeletal marksman",
@@ -1134,8 +1101,7 @@
       { "item": "Tattered Rawhide Bracer" },
       { "item": "Tattered Rawhide Boots" },
       { "item": "Tattered Rawhide Vest" }
-    ],
-    "rumor": "Directly confirmed via loot-window screenshot: Scorched Academy Folio, Tattered Cloth Cap, Worn Bow, Worn Buckler, and Tattered Rawhide Shoulderpads (2026-07-14 — completed this piece's full item card). Everything else in this drop list is inferred per the user's 2026-07-12 quality-set rule, now that this monster is confirmed dropping one piece each of Tattered Cloth (Cap) and Tattered Rawhide (Shoulderpads)."
+    ]
   },
   {
     "name": "Gherhart Graves",
@@ -1144,8 +1110,7 @@
     "maps": ["Tomb of the Last Wyrmsbane"],
     "drops": [
       { "item": "Suede Leather Mask" }
-    ],
-    "rumor": "Directly confirmed via loot-window screenshot: Suede Leather Mask. No picture provided yet."
+    ]
   },
   {
     "name": "a risen zombie",
@@ -1172,8 +1137,7 @@
       { "item": "Rusty Greatsword" },
       { "item": "Rusty Maul" },
       { "item": "Rusty Tower Shield" }
-    ],
-    "rumor": "Directly confirmed via loot-window screenshot: Vibroplasmic Residue, Rusty Dagger, and Apoptosis Journal Page. The rest of the Rusty weapon/shield family is inferred per the user's 2026-07-12 quality-set rule, now that this monster is confirmed dropping one Rusty piece (Dagger)."
+    ]
   },
   {
     "name": "High Marshal Fionna Bromm",
@@ -1182,8 +1146,7 @@
     "maps": ["Tomb of the Last Wyrmsbane"],
     "drops": [
       { "item": "Kazessthra's Bane" }
-    ],
-    "rumor": "Directly confirmed via loot-window screenshot: Kazessthra's Bane. No picture provided yet."
+    ]
   },
   {
     "name": "a Wyrmsbane crusader",
@@ -1192,8 +1155,7 @@
     "drops": [
       { "item": "Spectral Dust" },
       { "item": "Cloth Scraps" }
-    ],
-    "rumor": "Directly confirmed via loot-window screenshot: Spectral Dust and Cloth Scraps."
+    ]
   },
   {
     "name": "Timmon Bell",
@@ -1204,8 +1166,7 @@
       { "item": "Holy Water" },
       { "item": "Words of the Crusader Priest" },
       { "item": "Crystallized Shard" }
-    ],
-    "rumor": "Directly confirmed via loot-window screenshot: Holy Water, Words of the Crusader Priest, and Crystallized Shard (whose own flavor text names Timmon Bell directly). No picture provided yet."
+    ]
   },
   {
     "name": "a skeletal knight",
@@ -1229,8 +1190,7 @@
       { "item": "Tattered Cloth Bracer" },
       { "item": "Tattered Cloth Boots" },
       { "item": "Tattered Cloth Veil" }
-    ],
-    "rumor": "Directly confirmed via loot-window screenshot: Torch, Cloth Scraps, Rawhide Scraps, Tattered Cloth Robe. The rest of the Tattered Cloth armor set (Cap, Gorget, Pantaloons, Shirt, Gloves, Bracer, Boots, Veil) is inferred from the standing quality-set drop rule, not personally confirmed on this monster yet."
+    ]
   },
   {
     "name": "Lieutenant Gregan Snyde",
@@ -1242,56 +1202,48 @@
       { "item": "Spectral Dust" },
       { "item": "Crystallized Shard" },
       { "item": "Rawhide Scraps" }
-    ],
-    "rumor": "Directly confirmed via loot-window screenshot: Great Sword of the Dragon Crusader, Spectral Dust, Crystallized Shard (whose own flavor text names Gregan Snyde directly), and Rawhide Scraps."
+    ]
   },
   {
     "name": "Quartermaster Boothroy",
     "slug": "quartermaster-boothroy",
     "named": true,
-    "maps": ["Tomb of the Last Wyrmsbane"],
-    "rumor": "Named as one of the dungeon's boss encounters on both Tomb of the Last Wyrmsbane maps (the top-down map by Walabus and the isometric map by chazsolo). No loot-window screenshot yet, so drops aren't known."
+    "maps": ["Tomb of the Last Wyrmsbane"]
   },
   {
     "name": "Jakob Geffrey",
     "slug": "jakob-geffrey",
     "named": true,
-    "maps": ["Tomb of the Last Wyrmsbane"],
-    "rumor": "Named as one of the dungeon's boss encounters on both Tomb of the Last Wyrmsbane maps. The top-down map (by Walabus) tags this boss \"Cloth\", suggesting a Cloth-tier armor drop theme for this part of the dungeon — not a confirmed drop, just the map's own labeling. No loot-window screenshot yet."
+    "maps": ["Tomb of the Last Wyrmsbane"]
   },
   {
     "name": "Bone Construct",
     "slug": "bone-construct",
     "named": true,
-    "maps": ["Tomb of the Last Wyrmsbane"],
-    "rumor": "Named as one of the dungeon's boss encounters on both Tomb of the Last Wyrmsbane maps — appears to be a construct rather than a named individual, consistent with it being the only boss on the top-down map (by Walabus) with no armor-material tag. No loot-window screenshot yet."
+    "maps": ["Tomb of the Last Wyrmsbane"]
   },
   {
     "name": "Dario Numas",
     "slug": "dario-numas",
     "named": true,
-    "maps": ["Tomb of the Last Wyrmsbane"],
-    "rumor": "Named as one of the dungeon's boss encounters on both Tomb of the Last Wyrmsbane maps. The top-down map (by Walabus) tags this boss \"Chain\", suggesting a Chain-tier armor drop theme for this part of the dungeon — not a confirmed drop, just the map's own labeling. No loot-window screenshot yet."
+    "maps": ["Tomb of the Last Wyrmsbane"]
   },
   {
     "name": "Ariblast the Wicked",
     "slug": "ariblast-the-wicked",
     "named": true,
-    "maps": ["Tomb of the Last Wyrmsbane"],
-    "rumor": "Named as one of the dungeon's boss encounters on both Tomb of the Last Wyrmsbane maps. No armor-material tag on the top-down map (by Walabus) and no loot-window screenshot yet, so drops aren't known."
+    "maps": ["Tomb of the Last Wyrmsbane"]
   },
   {
     "name": "Grandmaster Gildas",
     "slug": "grandmaster-gildas",
     "named": true,
-    "maps": ["Tomb of the Last Wyrmsbane"],
-    "rumor": "Named as one of the dungeon's boss encounters on both Tomb of the Last Wyrmsbane maps. The top-down map (by Walabus) tags this boss \"Leather\", suggesting a Leather-tier armor drop theme for this part of the dungeon — not a confirmed drop, just the map's own labeling. No loot-window screenshot yet."
+    "maps": ["Tomb of the Last Wyrmsbane"]
   },
   {
     "name": "Grandmaster Obadiah",
     "slug": "grandmaster-obadiah",
     "named": true,
-    "maps": ["Tomb of the Last Wyrmsbane"],
-    "rumor": "Named as one of the dungeon's boss encounters on both Tomb of the Last Wyrmsbane maps. The top-down map (by Walabus) tags this boss \"Leather\", suggesting a Leather-tier armor drop theme for this part of the dungeon — not a confirmed drop, just the map's own labeling. No loot-window screenshot yet."
+    "maps": ["Tomb of the Last Wyrmsbane"]
   }
 ]

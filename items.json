@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "name": "Fine Wool Bracer",
     "slug": "fine-wool-bracer",
@@ -3320,8 +3320,7 @@
     "weight": 0.1,
     "size": "Small",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"],
-    "rumor": "Drops from \"Bloodynose Trainer\" in Tel Ekir."
+    "race": ["ALL"]
   },
   {
     "name": "Runner's Chain Tunic",

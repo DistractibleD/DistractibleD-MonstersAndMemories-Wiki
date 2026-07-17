@@ -34,7 +34,7 @@ and never loaded by any code (`script.js` doesn't fetch anything from this folde
 
 - `To-Do/items-needing-text.txt` — items.json entries with missing/incomplete data (not
   screenshot-cropping issues — see the file's own header). Referenced from "Adding an item
-  to the Item Database" below and occasionally from a monster's own `rumor` text.
+  to the Item Database" below.
 - `To-Do/crafting-skill-estimates.md` — speculative numeric skill-requirement guesses for
   crafting recipes, kept separate from `crafting.json`'s real `recipeSkillLevel` field
   (never write a guess into that field — see "Adding a crafting recipe" below).
@@ -801,12 +801,11 @@ fills in as the user provides it:
   string (e.g. `"maps": ["Night Harbor"], "areas": ["Necropolis"]`, not `"Necropolis (Night
   Harbor)"`).
 - `areas` — optional array of confirmed sub-area names within the monster's `maps` (e.g.
-  `["Necropolis", "North Gate"]` for a monster seen in more than one). A more specific
-  single-spot callout is finer-grained still and belongs in `rumor`/prose instead — `areas`
-  is for the coarser, confirmed subdivision the user actually names. Treated as confirmed
-  (the user states it directly, same authority as a screenshot), so it's its own field
-  rather than folded into the unverified-styled `rumor` text. Rendered on the monster card
-  as an "Area" field right below "Map", and included in `monsterSearchHaystack` so it's
+  `["Necropolis", "North Gate"]` for a monster seen in more than one) — `areas` is for the
+  coarser, confirmed subdivision the user actually names; a more specific single-spot
+  callout belongs in prose on some other field instead. Treated as confirmed (the user
+  states it directly, same authority as a screenshot). Rendered on the monster card as an
+  "Area" field right below "Map", and included in `monsterSearchHaystack` so it's
   searchable. Does not affect zone-grid grouping on the Monsters page — that's still driven
   by `maps` (specifically `monsterZone()`, which reads `maps[0]`), not `areas`.
 - `levelRange` — a plain string like `"5-8"`, not a structured min/max, since every level
@@ -843,13 +842,6 @@ fills in as the user provides it:
   viewer, same dynamic-resolves-at-render-time convention as `drops`/`components` (via
   `findMonsterBySlug`) — renders as plain text if the referenced slug doesn't exist yet.
   Optional; most monsters won't have this.
-- `rumor` — same field/semantics as `item.rumor` (see "Item and recipe cards" below): a
-  free-text, explicitly unverified note (spawn conditions, believed source, anything the
-  user *thinks* but hasn't confirmed). Rendered only when set, in the same amber/italic
-  `.item-card-section-rumor` style as an item's rumor line, labeled "Rumor (unverified)" so
-  it's never confused with confirmed fields like `maps`/`levelRange`/`drops`. Never promote a
-  monster's `rumor` into a confirmed field yourself — only the user saying it's confirmed
-  does that.
 - **`needsInfo`** — boolean, same meaning/rendering as `items.json`/`crafting.json`'s: a red
   "NEEDS INFO" badge next to the name in a zone's list, a red note-plus-Submit-link on the
   card (tooltip and modal both), and a "Show only monsters that need info" toggle in a zone
@@ -889,9 +881,14 @@ each time.
   retroactively: an existing monster that already dropped some pieces of a family gets any
   newly-discovered pieces backfilled too, once those pieces become known via a different
   monster's screenshot.
-- Every monster with inferred drops gets a `rumor` note listing exactly which of its drops
-  were directly screenshot-confirmed vs. inferred by this rule, so the distinction stays
-  visible on the page (not silently blended into the confirmed drop list).
+- **The confirmed-vs-inferred distinction is no longer tracked anywhere (2026-07-17)** — it
+  used to be recorded in a `rumor` note listing which drops were directly screenshot-confirmed
+  vs. backfilled by this rule, but the `rumor` field was removed site-wide (user's own call,
+  once the "Submit a Screenshot" form's drop/spawn suggestion links gave visitors a real
+  channel for this kind of unconfirmed info instead of it living on the card itself). The
+  backfill rule above still applies exactly the same — inferred pieces still get added to
+  `drops` — there's just no longer a way to tell, from the data alone, which of a monster's
+  drops were confirmed firsthand vs. assumed from the family roster.
 - Items still need a real screenshot before getting a full `items.json` entry (stats aren't
   guessed) — an inferred drop with no matching item just renders as unlinked plain text
   until a card comes in, same as any other not-yet-added item name.
@@ -909,7 +906,7 @@ true })` — the modal omits the hint, since it IS the destination the hint poin
 Both the tooltip and the modal render the exact same markup via the shared
 `renderMonsterCardHTML(monster, opts)` (picture — or a dashed "No image yet" placeholder
 when the monster has none, same visual language as an item's — Map/Area/"Place Holder"/
-Drops/Rumor/needsInfo fields). The tooltip is a DOM singleton reused across every zone list
+Drops/needsInfo fields). The tooltip is a DOM singleton reused across every zone list
 (like `#item-tooltip`), so which monster it's currently showing is tracked as a property on
 the element itself (`tooltip._monster`) rather than a variable closed over by
 `setupMonsterTooltip` — a local would go stale the moment a second zone list calls that
@@ -1165,15 +1162,16 @@ reward: \<quest name\>") shown as a "Found at" line on every item card — prese
 line always renders (as "not yet known" when absent), so the field's existence is visible
 and the layout doesn't shift once it's filled in.
 
-**`item.rumor`** is a separate optional free-text field for where the user *thinks* an item
-comes from, before it's confirmed — a guess, someone else's claim, or a hunch, as opposed to
-`foundAt` which is only ever set once the user has confirmed the source themselves.
-Explicitly **not** the same field and never conflated: don't write a guess into `foundAt`,
-and don't promote `rumor` into `foundAt` unless the user explicitly says it's now confirmed.
-Unlike `foundAt`, an item card only shows the rumor line at all when `rumor` is actually set
-(no "not yet known" placeholder), rendered in a distinct italic/amber style
-(`.item-card-section-rumor`) labeled "Rumor (unverified)" so it can never be mistaken for a
-confirmed `foundAt` line at a glance.
+**There is no `rumor` field anymore (removed site-wide 2026-07-17, user's own call)** — it
+used to hold unconfirmed guesses (where an item might drop, where a monster might spawn,
+data-provenance caveats) separately from confirmed fields like `foundAt`, rendered in an
+amber "Rumor (unverified)" line. Once the "Submit a Screenshot" form grew a proper
+drop/spawn suggestion path (an item's "Know where this drops?" link, a named monster's
+"Know where this spawns?" link — see "Community submissions" below), that on-card unverified
+note became redundant with it, so it was dropped entirely: don't add a `rumor` field to a
+new item/monster, and don't reintroduce `.item-card-section-rumor` styling if this area gets
+touched again. Genuinely unconfirmed info now belongs in a submission through that form, not
+written directly onto the item/monster's own card.
 
 **`item.readText`** is the full text of a readable note/letter item, distinct from
 `description` (the card's own short flavor line) — `readText` is the longer content revealed
@@ -1362,12 +1360,15 @@ account.
   Item — <name>` or `Regarding: Monster — <name>` line (set automatically when the
   submission came from an item's/monster's "suggest" link — see below), that tells you
   which entry it's about, otherwise read the rest of the note to figure that out; a
-  `Zone/Map: <name>` line (if present) is the visitor's answer to "which map/zone". Since
-  this is anonymous, unverified visitor input — nobody's screenshot, nobody confirmed it —
-  anything usable from it goes into that item's/monster's `rumor` field (never `foundAt` or
-  any other confirmed field), same as any other unverified community info on this wiki (see
-  `item.rumor`/`monster.rumor` elsewhere in this file). Delete the file once processed,
-  same as a crafting-window or vendor screenshot once its data's been extracted.
+  `Zone/Map: <name>` line (if present) is the visitor's answer to "which map/zone". This is
+  anonymous, unverified visitor input — nobody's screenshot, nobody confirmed it — and there
+  is no "unverified" field to park it in anymore (`rumor` was removed site-wide, see "Item
+  and recipe cards" below): either the user directly confirms it (in which case it goes
+  straight into a real confirmed field — `foundAt`, `maps`, `drops`, etc., same as any other
+  user-stated fact) or it doesn't get written into the data at all. Ask the user before
+  treating a visitor's note as confirmed rather than assuming; when in doubt, leave the note
+  file alone (don't delete unconfirmed leads) until it's actually resolved one way or the
+  other.
 - **`SUBMIT_WORKER_URL`** (top of the Submit-a-Screenshot section in `script.js`) holds the
   real deployed `workers.dev` URL now (set once the one-time Cloudflare setup below was
   done) — the page only shows the plain "not set up yet" notice when this is empty. Don't

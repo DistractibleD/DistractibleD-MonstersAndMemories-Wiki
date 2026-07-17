@@ -1843,7 +1843,6 @@ function renderItemCardHTML(item, opts = {}) {
         <div class="item-card-section${item.foundAt ? '' : ' item-card-muted'}">
           Found at &middot; ${item.foundAt ? escapeAttr(item.foundAt) : 'not yet known'}
         </div>
-        ${item.rumor ? `<div class="item-card-section item-card-section-rumor">Rumor (unverified) &middot; ${escapeAttr(item.rumor)}</div>` : ''}
         ${opts.interactive ? `<div class="item-card-section item-card-suggest"><a href="#" class="item-suggest-link" data-name="${escapeAttr(item.name)}">Know where this drops? Suggest it</a></div>` : ''}
       </div>
     </div>
@@ -3778,7 +3777,6 @@ function renderMonsterCardHTML(monster, opts = {}) {
             </ul>
           ` : '<p class="monster-card-no-drops">No known drops yet.</p>'}
         </div>
-        ${monster.rumor ? `<div class="item-card-section item-card-section-rumor">Rumor (unverified) &middot; ${escapeAttr(monster.rumor)}</div>` : ''}
         ${monster.needsInfo ? `<div class="item-card-section item-card-needs-info">This monster needs more info &middot; confirmed to exist, but a full picture/details haven't been captured yet. <a href="#submit">Submit a screenshot</a> to help fill it in!</div>` : ''}
         ${monster.named ? `<div class="item-card-section item-card-suggest"><a href="#" class="monster-suggest-link" data-name="${escapeAttr(monster.name)}">Know where this spawns? Suggest it</a></div>` : ''}
         ${opts.isTooltip ? '<p class="monster-card-tooltip-hint">Click for more info</p>' : ''}

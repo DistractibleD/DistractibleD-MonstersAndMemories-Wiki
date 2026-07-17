@@ -12,7 +12,8 @@ instead of `images/Inbox/`. See CLAUDE.md ("Community submissions" and
 "New items/maps/recipes/monsters come in via `images/inbox/`") for the full
 processing workflow once a submission is merged.
 
-Every note here is unverified visitor input — anything confirmed from one
-should go into a `rumor` field (not `foundAt` or any other confirmed field)
-unless the site owner has independently confirmed it, same as any other
-community-sourced info on this wiki.
+Every note here is unverified visitor input. There's no "unverified" field to
+park a suggestion in (the site's old `rumor` field was removed) — either the
+site owner independently confirms it, in which case it goes straight into a
+real confirmed field (`foundAt`, `maps`, `drops`, etc.), or it doesn't get
+written into the data at all.
