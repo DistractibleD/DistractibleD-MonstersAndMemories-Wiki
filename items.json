@@ -3208,6 +3208,15 @@
     "size": "Tiny"
   },
   {
+    "name": "Mote of Magic",
+    "slug": "mote-of-magic",
+    "image": "images/items/mote-of-magic.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
     "name": "Muurtu Shield",
     "slug": "muurtu-shield",
     "image": "images/items/muurtu-shield.jpg",
@@ -6667,9 +6676,11 @@
   {
     "name": "Jagged Stone",
     "slug": "jagged-stone",
+    "image": "images/items/jagged-stone.jpg",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.25,
+    "size": "Small"
   },
   {
     "name": "Rivet Cutters",
