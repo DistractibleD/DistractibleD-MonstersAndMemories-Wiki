@@ -7,7 +7,7 @@
   { "name": "Carpentry", "status": "live" },
   { "name": "Cooking", "status": "live" },
   { "name": "Disenchanting", "status": "live", "category": "enchanting" },
-  { "name": "Enchanting", "status": "live", "category": "enchanting" },
+  { "name": "Enchanting", "status": "live", "category": "enchanting", "note": "Enchanting applies a permanent buff directly onto an existing item — not a temporary spell effect, it stays with that item once applied." },
   { "name": "Farming", "status": "planned" },
   { "name": "Fermenting", "status": "planned" },
   { "name": "First Aid", "status": "live" },

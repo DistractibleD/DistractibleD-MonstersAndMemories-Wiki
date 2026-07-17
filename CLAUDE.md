@@ -103,11 +103,15 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
    itself, so the saved file is never shown to a visitor — it exists purely so the data can
    be re-verified against the original card later if something's ever in doubt.
 5. A green line starting with "Enchant" (e.g. "Enchant Boots: Minor Agility +1 AGI") is
-   **not** part of the item's own description or effect — it's a temporary buff applied to
-   that specific item by an Enchanter-tradeskill scroll, not a fixed property of the base
-   item. Leave it out of `description`/`effect` entirely; record the item's other stats as
-   normal. Revisit only if/when enchantment scrolls themselves become their own trackable
-   thing (e.g. Enchanter recipes in `crafting.json`).
+   **not** part of the item's own description or effect — it's a permanent buff an
+   Enchanting-tradeskill scroll applied to that one specific item (confirmed 2026-07-17;
+   an earlier version of this rule wrongly called it "temporary" — it isn't, it stays with
+   the item once applied), not a fixed property of every item of that base type. Leave it
+   out of `description`/`effect` entirely; record the item's other stats as normal.
+   Enchanting scrolls themselves are tracked as their own recipes in `crafting.json` (see
+   "Enchanting recipes carry a slot/type filter no other tradeskill uses" below) — that
+   doesn't change this rule, since a scroll's own recipe entry is a separate thing from the
+   enchant line showing up on an unrelated item it was later used on.
 6. Food and drink use `"type": "Food"` or `"Drink"` — there's no on-card tag for either, only
    the flavor text ("This is a modest meal."/"...modest drink."), so that's the signal to
    use. These cards never show Slot/Class/Race at all (they're not equippable), so leave
@@ -325,37 +329,38 @@ same way as new fields show up on future cards, rather than guessing ahead:
 
 `pages.json` entries can carry an optional `"group"` field (e.g. `"Tradeskilling"`) — pages
 sharing the same `group` render nested under one plain, non-clickable heading in the sidebar
-instead of the normal flat top-level list (`buildSidebar` in `script.js`). Currently only
-Gathering, Crafting, and Enchanting and Disenchanting use this, grouped under
-"Tradeskilling". Add a page to an existing group the same way (set the same `group` string);
-start a new group by picking a new `group` string on the pages that should share it — no
-other code changes needed, `buildSidebar` handles any group generically. Consecutive
-same-`group` pages share one heading; a page with no `group` renders exactly as before.
+instead of the normal flat top-level list (`buildSidebar` in `script.js`). Currently
+Gathering, Crafting, Enchanting, and Disenchanting all use this, grouped under
+"Tradeskilling" (four separate sidebar links under one heading). Add a page to an existing
+group the same way (set the same `group` string); start a new group by picking a new `group`
+string on the pages that should share it — no other code changes needed, `buildSidebar`
+handles any group generically. Consecutive same-`group` pages share one heading; a page with
+no `group` renders exactly as before.
 
 Enchanting and Disenchanting are ordinary tradeskills in `crafting.json`/`tradeskills.json`
-(nothing schema-wise sets them apart from Blacksmithing or Alchemy), but they render on
-their own page (`pages.json`'s `"Enchanting and Disenchanting"` entry, `"type": "enchanting"`)
-instead of being two of the ~30 category cards on the main Crafting page. This is driven by
-`tradeskillsData[].category: "enchanting"` on both their `tradeskills.json` entries, the same
-mechanism `"gathering"` already uses to split Mining/Lumberjacking/Herbalism/Fishing out of
-the main Crafting grid — `renderCraftingCategories` excludes both category values from its
-grid. The page itself (`renderEnchantingDisenchantingPage` in `script.js`) still shows a
-2-card tradeskill grid (`renderEnchantingDisenchantingCategories`, reusing `tradeskillGridHTML`
-— the exact same card markup as the main Crafting page) rather than dumping both
-tradeskills' recipes directly on one page — an earlier version did that and was reverted
-2026-07-16 because it meant scrolling past all of one tradeskill's recipes to reach the
-other. Clicking a card shows just that tradeskill's own recipe list
-(`renderEnchantingDisenchantingRecipes`), with a "back" link returning to the 2-card grid.
-The actual recipe-list rendering (search box, needs-info toggle, station grouping, item link
-handlers, highlight-on-arrival) is shared with the main Crafting page via
-`renderTradeskillSection` — both pages' "show one tradeskill's recipes" views are just
-different callers of the same function. Every existing way of reaching a recipe (header
-search, an item's "crafted via"/"used to craft" links, a recipe search result) still works
-unchanged — `goToRecipe`/`goToCraftingCategory` check the tradeskill and redirect to the
-Enchanting and Disenchanting page automatically when it's one of these two (setting
-`pendingEnchantingTradeskill`, the same "jump straight past the grid" pattern
-`pendingCraftingTradeskill` uses on the main Crafting page), so nothing that links to a
-recipe needs to know about the split.
+(nothing schema-wise sets them apart from Blacksmithing or Alchemy), but each renders on its
+own top-level page (`pages.json`'s `"Enchanting"`/`"Disenchanting"` entries, `"type":
+"enchanting"`/`"disenchanting"`) instead of being two of the ~30 category cards on the main
+Crafting page. This is driven by `tradeskillsData[].category: "enchanting"` on both their
+`tradeskills.json` entries, the same mechanism `"gathering"` already uses to split Mining/
+Lumberjacking/Herbalism/Fishing out of the main Crafting grid — `renderCraftingCategories`
+excludes both category values from its grid. Each page (`renderEnchantingPage`/
+`renderDisenchantingPage` in `script.js`) is a thin wrapper handing straight off to
+`renderTradeskillSection` with no back link and no category-card grid to land on first —
+since a page covers exactly one tradeskill, there's nothing to drill down through. This
+split went through two earlier shapes before landing here, both worth knowing about if this
+area gets touched again: first both tradeskills were stacked on one shared page (meant
+scrolling past all of one tradeskill's recipes to reach the other), then that page put a
+2-card grid in front of them instead (an unnecessary click for something with only two
+options) — the user asked for them fully separated into their own pages on 2026-07-17,
+which is the current shape. `craftPageHash(tradeskillName)` is the one place that decides
+which hash a tradeskill's recipes live at (`'enchanting'`/`'disenchanting'`/`'crafting'`) —
+`goToRecipe`, `goToCraftingCategory`, and the header search's category/recipe links all call
+it rather than hard-coding a hash, so nothing that links to a recipe needs to know about the
+split. The actual recipe-list rendering (search box, needs-info toggle, station grouping,
+item link handlers, highlight-on-arrival) is still shared with the main Crafting page via
+`renderTradeskillSection` — all three "show one tradeskill's recipes" call sites (Crafting's
+own drill-down, Enchanting, Disenchanting) are just different callers of the same function.
 
 **Disenchanting's magic-dust tier chart:** rather than the lengthy explanatory `note` this
 tradeskill used to carry (removed 2026-07-16 — the user found it too much to read on the

@@ -23,11 +23,6 @@ let pendingCraftingTradeskill = null;
 // Same idea as pendingCraftingTradeskill, but for the separate Gathering
 // page (gathering tradeskills split out from Crafting on 2026-07-13).
 let pendingGatheringTradeskill = null;
-// Same idea again, but for the separate Enchanting and Disenchanting page
-// (split from Crafting on 2026-07-16) — lets a search result or recipe link
-// jump straight to Enchanting's or Disenchanting's own recipe list instead of
-// that page's own 2-card tradeskill grid.
-let pendingEnchantingTradeskill = null;
 // Set by the Item Database category grid's own filter dropdowns (2026-07-14)
 // so picking a filter there — instead of clicking a category card — jumps
 // straight to the unscoped all-items list with that filter pre-applied.
@@ -258,7 +253,7 @@ async function loadPage(file) {
 
   // Data-driven pages (Item Database, Maps, Crafting, Monsters) use the full
   // content width instead of the narrower reading width used for prose pages.
-  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'gathering' || page.type === 'crafting' || page.type === 'enchanting' || page.type === 'monsters' || page.type === 'companions')));
+  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'gathering' || page.type === 'crafting' || page.type === 'enchanting' || page.type === 'disenchanting' || page.type === 'monsters' || page.type === 'companions')));
 
   try {
     if (page && page.type === 'items') {
@@ -270,7 +265,9 @@ async function loadPage(file) {
     } else if (page && page.type === 'crafting') {
       await renderCraftingPage(contentInner);
     } else if (page && page.type === 'enchanting') {
-      await renderEnchantingDisenchantingPage(contentInner);
+      await renderEnchantingPage(contentInner);
+    } else if (page && page.type === 'disenchanting') {
+      await renderDisenchantingPage(contentInner);
     } else if (page && page.type === 'monsters') {
       await renderMonstersPage(contentInner, file);
     } else if (page && page.type === 'companions') {
@@ -345,11 +342,7 @@ function renderSearchResults(query) {
     .map(type => ({ kind: 'item', type, label: ITEM_TYPE_LABELS[type] || type }));
   const matchedCraftCategories = (tradeskillsData || [])
     .filter(ts => ts.name.toLowerCase().includes(query))
-    .map(ts => ({
-      kind: ts.category === 'gathering' ? 'gathering' : (ts.category === 'enchanting' ? 'enchanting' : 'craft'),
-      tradeskill: ts.name,
-      label: ts.name
-    }));
+    .map(ts => ({ kind: ts.category === 'gathering' ? 'gathering' : 'craft', tradeskill: ts.name, label: ts.name }));
   const matchedCategories = [...matchedItemCategories, ...matchedCraftCategories]
     .sort((a, b) => a.label.localeCompare(b.label));
 
@@ -393,20 +386,24 @@ function renderSearchResults(query) {
 
   addSection('Categories', matchedCategories, category => {
     const link = document.createElement('a');
+    // Enchanting and Disenchanting are each their own top-level page (see
+    // craftPageHash), so their category result needs no "(Crafting)" suffix
+    // — the page name alone is already unambiguous, unlike every other
+    // tradeskill which lands on a category card inside the shared Crafting page.
+    const isSoloTradeskillPage = category.kind === 'craft' && (category.tradeskill === 'Enchanting' || category.tradeskill === 'Disenchanting');
     link.href = category.kind === 'item' ? '#items'
       : category.kind === 'gathering' ? '#gathering'
-      : category.kind === 'enchanting' ? '#enchanting-disenchanting'
-      : '#crafting';
+      : `#${craftPageHash(category.tradeskill)}`;
     link.className = 'search-result-link';
-    link.textContent = category.kind === 'item'
+    link.textContent = category.kind === 'item' || isSoloTradeskillPage
       ? category.label
-      : `${category.label} (${category.kind === 'gathering' ? 'Gathering' : category.kind === 'enchanting' ? 'Enchanting & Disenchanting' : 'Crafting'})`;
+      : `${category.label} (${category.kind === 'gathering' ? 'Gathering' : 'Crafting'})`;
     link.addEventListener('click', e => {
       e.preventDefault();
       clearSearch();
       if (category.kind === 'item') goToItemCategory(category.type);
       else if (category.kind === 'gathering') goToGatheringCategory(category.tradeskill);
-      else goToCraftingCategory(category.tradeskill); // handles both 'craft' and 'enchanting' via its own internal redirect
+      else goToCraftingCategory(category.tradeskill);
     });
     return link;
   });
@@ -438,7 +435,7 @@ function renderSearchResults(query) {
 
   addSection('Crafting', matchedRecipes, recipe => {
     const link = document.createElement('a');
-    link.href = (recipe.tradeskill === 'Enchanting' || recipe.tradeskill === 'Disenchanting') ? '#enchanting-disenchanting' : '#crafting';
+    link.href = `#${craftPageHash(recipe.tradeskill)}`;
     link.className = 'search-result-link';
     link.textContent = `${recipe.name} (${recipe.tradeskill})`;
     link.addEventListener('click', e => {
@@ -527,47 +524,35 @@ function goToItemCategory(type) {
 }
 
 // Enchanting and Disenchanting recipes live in crafting.json like any other
-// tradeskill, but render on their own page (see renderEnchantingDisenchantingPage)
-// instead of the main Crafting grid — goToRecipe/goToCraftingCategory below
-// redirect here automatically whenever the tradeskill involved is one of the two,
-// so every existing call site (search results, item "used to craft"/"crafted
-// via" links, etc.) reaches the right page without having to know about the split.
-function goToEnchantingRecipe(recipe) {
-  pendingEnchantingTradeskill = recipe.tradeskill;
-  pendingHighlightRecipe = recipe.slug;
-  const alreadyThere = location.hash.replace('#', '') === 'enchanting-disenchanting';
-  location.hash = 'enchanting-disenchanting';
-  if (alreadyThere) loadPage('enchanting-disenchanting');
+// tradeskill, but Enchanting and Disenchanting are each their own top-level
+// page (#enchanting / #disenchanting) rather than a category card on the
+// main Crafting page — this resolves which hash a given tradeskill's recipes
+// actually live at, so goToRecipe/goToCraftingCategory below don't need to
+// know about the split themselves.
+function craftPageHash(tradeskillName) {
+  if (tradeskillName === 'Enchanting') return 'enchanting';
+  if (tradeskillName === 'Disenchanting') return 'disenchanting';
+  return 'crafting';
 }
 
 function goToRecipe(recipe) {
-  if (recipe.tradeskill === 'Enchanting' || recipe.tradeskill === 'Disenchanting') {
-    goToEnchantingRecipe(recipe);
-    return;
-  }
-  pendingCraftingTradeskill = recipe.tradeskill;
+  const hash = craftPageHash(recipe.tradeskill);
+  if (hash === 'crafting') pendingCraftingTradeskill = recipe.tradeskill;
   pendingHighlightRecipe = recipe.slug;
-  const alreadyThere = location.hash.replace('#', '') === 'crafting';
-  location.hash = 'crafting';
-  if (alreadyThere) loadPage('crafting');
+  const alreadyThere = location.hash.replace('#', '') === hash;
+  location.hash = hash;
+  if (alreadyThere) loadPage(hash);
 }
 
 // Same idea as goToItemCategory but for a whole tradeskill (e.g. from a
 // "Jewelcrafting" category search result) — no specific recipe to highlight.
 function goToCraftingCategory(tradeskillName) {
-  if (tradeskillName === 'Enchanting' || tradeskillName === 'Disenchanting') {
-    pendingEnchantingTradeskill = tradeskillName;
-    pendingHighlightRecipe = null;
-    const alreadyThere = location.hash.replace('#', '') === 'enchanting-disenchanting';
-    location.hash = 'enchanting-disenchanting';
-    if (alreadyThere) loadPage('enchanting-disenchanting');
-    return;
-  }
-  pendingCraftingTradeskill = tradeskillName;
+  const hash = craftPageHash(tradeskillName);
+  if (hash === 'crafting') pendingCraftingTradeskill = tradeskillName;
   pendingHighlightRecipe = null;
-  const alreadyThere = location.hash.replace('#', '') === 'crafting';
-  location.hash = 'crafting';
-  if (alreadyThere) loadPage('crafting');
+  const alreadyThere = location.hash.replace('#', '') === hash;
+  location.hash = hash;
+  if (alreadyThere) loadPage(hash);
 }
 
 // Same idea as goToCraftingCategory, but for the separate Gathering page.
@@ -2106,9 +2091,9 @@ function tradeskillGridHTML(list, isGathering) {
 // Ordinary crafted-goods tradeskills only — see renderGatheringCategories for
 // the resource-node tradeskills (Mining, Lumberjacking, Herbalism, Fishing),
 // which moved to their own Gathering page on 2026-07-13, and
-// renderEnchantingDisenchantingPage for Enchanting/Disenchanting, which moved
-// to their own page (nested under "Tradeskilling" alongside Crafting and
-// Gathering in the sidebar) on 2026-07-16.
+// renderEnchantingPage/renderDisenchantingPage for Enchanting/Disenchanting,
+// each of which moved to its own top-level page (nested under "Tradeskilling"
+// alongside Crafting and Gathering in the sidebar) on 2026-07-17.
 function renderCraftingCategories(container) {
   const crafted = tradeskillsData.filter(ts => ts.category !== 'gathering' && ts.category !== 'enchanting').sort((a, b) => a.name.localeCompare(b.name));
 
@@ -2491,9 +2476,11 @@ function renderDisenchantingDustTiersHTML() {
 // count, station-grouped grid, item/recipe link handlers, highlight-on-
 // arrival) into `rootEl`. Shared by the main Crafting page — a single
 // tradeskill filling the whole page, with a "back to all tradeskills" link —
-// and the dedicated Enchanting and Disenchanting page, which stacks two of
-// these on one page with no back link. `idSuffix` keeps element ids unique
-// when more than one of these sections exists on the page at once.
+// and the standalone Enchanting/Disenchanting pages, which render directly
+// with no back link since each page covers only that one tradeskill.
+// `idSuffix` keeps element ids unique on the rare page that renders more than
+// one of these sections at once (none currently do, but the option remains
+// from when Enchanting and Disenchanting briefly shared a page).
 async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   const { showBackLink = false, onBack = null, idSuffix = '', headingTag = 'h1', highlightSlug = null } = opts;
   const tradeskill = tradeskillsData.find(ts => ts.name === tradeskillName);
@@ -2701,97 +2688,26 @@ async function renderCraftingRecipes(container, tradeskillName) {
 
 // Enchanting and Disenchanting recipes live in crafting.json exactly like any
 // other tradeskill (see tradeskills.json's "enchanting" category, which keeps
-// them out of the main Crafting grid — renderCraftingCategories above). They
-// get their own page, nested under "Tradeskilling" in the sidebar alongside
-// Crafting and Gathering — a small 2-card tradeskill grid (same card markup
-// as the main Crafting page, via tradeskillGridHTML), click through to one
-// tradeskill's own recipe list at a time. Originally this page showed both
-// tradeskills' recipes stacked on one page at once, but that meant scrolling
-// past all of one tradeskill's recipes to reach the other — the 2-card grid
-// avoids that (2026-07-16).
-async function renderEnchantingDisenchantingPage(container) {
+// them out of the main Crafting grid — renderCraftingCategories above). Each
+// gets its own top-level page, nested under "Tradeskilling" in the sidebar
+// alongside Crafting and Gathering, rather than sharing one combined page —
+// an earlier version put them on one page (first stacked, then behind a
+// 2-card grid) but the user asked for them fully separated (2026-07-17).
+// Since each page covers exactly one tradeskill, both just hand straight off
+// to renderTradeskillSection with no back link and no card grid to land on.
+async function renderEnchantingPage(container) {
+  await ensureCraftingData();
+  const highlightSlug = pendingHighlightRecipe;
+  pendingHighlightRecipe = null;
+  await renderTradeskillSection(container, 'Enchanting', { highlightSlug });
+}
+
+async function renderDisenchantingPage(container) {
   await ensureCraftingData();
   await ensureItemsData(); // Disenchanting's dust-tier thumbnails look items up by name
-
-  // Landed here from a header search result for a specific recipe or
-  // tradeskill — jump straight to that tradeskill's own recipe list instead
-  // of the 2-card grid, same idea as pendingCraftingTradeskill on the main
-  // Crafting page.
-  if (pendingEnchantingTradeskill) {
-    const target = pendingEnchantingTradeskill;
-    pendingEnchantingTradeskill = null;
-    await renderEnchantingDisenchantingRecipes(container, target);
-    return;
-  }
-
-  renderEnchantingDisenchantingCategories(container);
-}
-
-function renderEnchantingDisenchantingCategories(container) {
-  const list = tradeskillsData.filter(ts => ts.category === 'enchanting').sort((a, b) => a.name.localeCompare(b.name));
-
-  container.innerHTML = `
-    <h1>Enchanting and Disenchanting</h1>
-    <p>Enchanting applies a temporary buff onto an existing item; Disenchanting breaks a MAGIC
-    item back down into raw magic essence. Browse by tradeskill, or search below to jump
-    straight to a specific recipe.</p>
-    <div class="items-quick-search">
-      <input type="search" id="enchanting-quick-search-box" class="items-search items-quick-search-box" placeholder="Search Enchanting and Disenchanting recipes..." autocomplete="off">
-      <div id="enchanting-quick-search-results" class="items-quick-search-results"></div>
-    </div>
-    ${tradeskillGridHTML(list, false)}
-  `;
-
-  container.querySelectorAll('.craft-card').forEach(card => {
-    card.addEventListener('click', () => renderEnchantingDisenchantingRecipes(container, card.dataset.tradeskill));
-  });
-
-  // Quick search across both tradeskills together, same pattern as the
-  // Crafting/Gathering pages' own quick search boxes.
-  const quickSearchBox = container.querySelector('#enchanting-quick-search-box');
-  const quickSearchResults = container.querySelector('#enchanting-quick-search-results');
-
-  quickSearchBox.addEventListener('input', () => {
-    const query = quickSearchBox.value.toLowerCase().trim();
-    if (!query) {
-      quickSearchResults.classList.remove('open');
-      quickSearchResults.innerHTML = '';
-      return;
-    }
-
-    const matches = craftingData
-      .filter(r => (r.tradeskill === 'Enchanting' || r.tradeskill === 'Disenchanting') && `${r.name} ${r.tradeskill}`.toLowerCase().includes(query))
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .slice(0, 20);
-
-    quickSearchResults.innerHTML = matches.length
-      ? matches.map(m => `
-          <a href="#" class="search-result-link items-quick-search-result" data-slug="${escapeAttr(m.slug)}">
-            ${escapeAttr(m.name)}
-            <span class="items-quick-search-type">${escapeAttr(m.tradeskill)}</span>
-          </a>
-        `).join('')
-      : '<p class="search-results-empty">No recipes match.</p>';
-    quickSearchResults.classList.add('open');
-
-    quickSearchResults.querySelectorAll('.items-quick-search-result').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const recipe = craftingData.find(r => r.slug === link.dataset.slug);
-        if (recipe) renderEnchantingDisenchantingRecipes(container, recipe.tradeskill, recipe.slug);
-      });
-    });
-  });
-}
-
-async function renderEnchantingDisenchantingRecipes(container, tradeskillName, highlightSlugOverride) {
-  const highlightSlug = highlightSlugOverride ?? pendingHighlightRecipe;
+  const highlightSlug = pendingHighlightRecipe;
   pendingHighlightRecipe = null;
-  await renderTradeskillSection(container, tradeskillName, {
-    showBackLink: true,
-    onBack: () => renderEnchantingDisenchantingCategories(container),
-    highlightSlug
-  });
+  await renderTradeskillSection(container, 'Disenchanting', { highlightSlug });
 }
 
 // Matched against a gathering node's own search box — name plus its results
