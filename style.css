@@ -1023,6 +1023,22 @@ body:not(.site-entered) .sidebar {
   border-radius: 8px;
   pointer-events: none;
 }
+/* Hover-to-preview a monster's card (.monster-name-hover, setupMonsterTooltip)
+   — same shell as #item-tooltip, just sized for .monster-card's own layout
+   (picture + body) instead of an item card. */
+#monster-tooltip {
+  display: none;
+  position: fixed;
+  z-index: 200;
+  width: 320px;
+  max-width: 90vw;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  pointer-events: none;
+}
 
 /* Full item-card viewer (click an item's name in the Item Database) */
 #item-viewer {

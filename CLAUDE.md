@@ -888,11 +888,16 @@ each time.
   guessed) — an inferred drop with no matching item just renders as unlinked plain text
   until a card comes in, same as any other not-yet-added item name.
 
-Clicking a monster's name (`.monster-name-hover`, `setupMonsterClickToView`) opens
-`#monster-viewer`, a modal built by `openMonsterViewer`/`setupMonsterViewer` — same modal
-shell/close-button pattern as `#item-viewer`, just showing the real screenshot (`<img>`)
-instead of a data-rendered card, since a monster's picture has no card fields it could be
-rebuilt from the way an item's can. Clicking a drop that links to an item sets
+Hovering a monster's name (`.monster-name-hover`, `setupMonsterTooltip`) shows its card in a
+floating, non-interactive preview (`#monster-tooltip`) — same flip-above-if-no-room-below
+positioning as an item's own hover tooltip (`setupItemTooltip`). Clicking the name instead
+opens `#monster-viewer`, a modal built by `openMonsterViewer`/`setupMonsterViewer` — same
+modal shell/close-button pattern as `#item-viewer`, just clickable (its drop links actually
+navigate) where the tooltip is a static preview. Both render the exact same markup via the
+shared `renderMonsterCardHTML(monster)` (picture when the monster has one, Map/Area/"Place
+Holder"/Drops/Rumor fields) — there's no separate "screenshot-only" mode; a monster's
+picture is just one field alongside the others on the same data-rendered card an item gets.
+Clicking a drop that links to an item sets
 `pendingReturnToMonster` before navigating to the Item Database (mirroring
 `pendingReturnToRecipe`) so that item's page shows a "&larr; Back to &lt;monster name&gt;"
 link; `goToItem`'s second argument takes either a recipe object (untagged, the original

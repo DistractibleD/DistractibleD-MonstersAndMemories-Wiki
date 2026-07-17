@@ -3500,6 +3500,7 @@ function renderMonstersList(container, scope) {
 
   update();
   setupMonsterClickToView(container.querySelector('#monsters-tbody'));
+  setupMonsterTooltip(container.querySelector('#monsters-tbody'));
 
   if (pendingHighlightMonster) {
     const slug = pendingHighlightMonster;
@@ -3538,6 +3539,46 @@ function setupMonsterClickToView(tbody) {
     if (!span) return;
     const monster = findMonsterBySlug(span.dataset.slug);
     if (monster) openMonsterViewer(monster);
+  });
+}
+
+// Hover-to-preview a monster's card, same idea and positioning logic as
+// setupItemTooltip (flip-above-if-no-room-below) — a plain non-interactive
+// preview (pointer-events: none), not the full clickable viewer modal.
+function setupMonsterTooltip(container) {
+  let tooltip = document.getElementById('monster-tooltip');
+  if (!tooltip) {
+    tooltip = document.createElement('div');
+    tooltip.id = 'monster-tooltip';
+    document.body.appendChild(tooltip);
+  }
+
+  container.addEventListener('mouseover', e => {
+    const span = e.target.closest('.monster-name-hover');
+    if (!span) return;
+    const monster = findMonsterBySlug(span.dataset.slug);
+    if (!monster) return;
+    const rect = span.getBoundingClientRect();
+    tooltip.innerHTML = renderMonsterCardHTML(monster);
+    tooltip.style.display = 'block';
+
+    const left = Math.min(rect.left, window.innerWidth - 336);
+    const spaceBelow = window.innerHeight - rect.bottom;
+    if (spaceBelow < 260 && rect.top > spaceBelow) {
+      tooltip.style.top = '';
+      tooltip.style.bottom = (window.innerHeight - rect.top + 8) + 'px';
+    } else {
+      tooltip.style.bottom = '';
+      tooltip.style.top = (rect.bottom + 8) + 'px';
+    }
+    tooltip.style.left = Math.max(left, 8) + 'px';
+  });
+
+  container.addEventListener('mouseout', e => {
+    const span = e.target.closest('.monster-name-hover');
+    if (!span) return;
+    if (span.contains(e.relatedTarget)) return;
+    tooltip.style.display = 'none';
   });
 }
 
@@ -3592,14 +3633,15 @@ function setupMonsterViewer() {
   });
 }
 
-function openMonsterViewer(monster) {
-  setupMonsterViewer();
-
-  const viewer = document.getElementById('monster-viewer');
+// Shared by the full monster viewer modal and the lightweight hover tooltip
+// (setupMonsterTooltip) — same card markup either way, just shown at a
+// different size/interactivity level (the modal is clickable/interactive,
+// the tooltip is a plain non-interactive preview like an item's).
+function renderMonsterCardHTML(monster) {
   const drops = monster.drops || [];
   const related = monster.relatedMonsters || [];
 
-  viewer.querySelector('#monster-viewer-card').innerHTML = `
+  return `
     <div class="monster-card">
       ${monster.image ? `<img class="monster-card-image" src="${escapeAttr(monster.image)}" alt="${escapeAttr(monster.name)}">` : ''}
       <div class="monster-card-body">
@@ -3633,7 +3675,13 @@ function openMonsterViewer(monster) {
       </div>
     </div>
   `;
+}
 
+function openMonsterViewer(monster) {
+  setupMonsterViewer();
+
+  const viewer = document.getElementById('monster-viewer');
+  viewer.querySelector('#monster-viewer-card').innerHTML = renderMonsterCardHTML(monster);
   setupItemTooltip(viewer.querySelector('#monster-viewer-card'));
 
   viewer.classList.add('open');
