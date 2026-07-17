@@ -929,6 +929,57 @@ The Companions page has its own local search box and is wired into the header se
 same way Monsters is (`goToCompanion`, `pendingHighlightCompanion`, `.card-flash` — a
 gold-accent flash animation, since `.recipe-flash`'s teal doesn't match a plain `.item-card`).
 
+## Sidebar "Recently Visited" / "Most Visited"
+
+Below the main nav, the sidebar shows up to 5 pages by recency and up to 5 by visit count
+(`#sidebar-visits-wrapper`, built once in `buildSidebar` and refreshed by
+`updateVisitedSidebarSections` in `script.js`). Purely client-side — visits are recorded to
+`localStorage` (`PAGE_VISITS_KEY = 'mnmwiki-page-visits'`), never sent anywhere, so it only
+ever reflects the one browser it's running in (a small note under both lists says as much).
+The whole block stays hidden (`display: none`) until at least one visit is recorded, and
+reuses the exact same group-heading + tree-line-nested-list markup as the "Tradeskilling"
+sidebar group so it reads as a natural part of the nav rather than a bolted-on widget.
+
+**Tracks the deepest thing actually reached, not the top-level page passed through to get
+there** (user's own call, 2026-07-17) — browsing the Gathering or Crafting category grid
+without picking a tradeskill records nothing at all; drilling into e.g. Mining or Alchemy
+records that tradeskill specifically, never "Gathering"/"Crafting" themselves. Concretely:
+
+- `CATEGORY_TRACKED_PAGES` (`['crafting', 'gathering', 'enchanting', 'disenchanting']`) is
+  checked in `loadPage` — a page in this list is skipped by the normal top-level `recordVisit
+  ('page', baseFile)` call, since something deeper in that page's own render path records the
+  *real* visit instead.
+- `renderTradeskillSection` (shared by the Crafting category grid's drill-down *and* by
+  Enchanting's/Disenchanting's own dedicated pages, since those reach it directly with no
+  grid in front) calls `recordVisit('craft', tradeskillName)` — this is the single choke
+  point for "landing on one tradeskill's own recipe list" regardless of which route got you
+  there.
+- `renderGatheringNodes` calls `recordVisit('gathering', tradeskillName)` the same way, for
+  Mining/Lumberjacking/Herbalism/Fishing.
+- Every other top-level page (Item Database, Maps, Monsters, Companions, Useful Links,
+  Submit a Screenshot) still just tracks itself via `recordVisit('page', file)` inside
+  `loadPage`, unchanged — a Monsters sub-route (e.g. `monsters/named/Vale of Zintar`) still
+  counts as a visit to "Monsters" as a whole, not the individual zone/monster. This wasn't
+  extended to Monsters' zone drill-down or the Item Database's category drill-down even
+  though they have a similar grid-then-detail shape — only Gathering/Crafting were asked for.
+
+Each stored entry is `{kind, id, count, lastVisited}` keyed by `` `${kind}:${id}` ``:
+`kind: "page"` (`id` = a `pages.json` file, resolved via `allPages`, opened with `loadPage`),
+`kind: "craft"` (`id` = a tradeskill name — including Enchanting/Disenchanting, opened with
+`goToCraftingCategory`, which already knows how to route each tradeskill to its own page via
+`craftPageHash`), or `kind: "gathering"` (`id` = a gathering tradeskill name, opened with
+`goToGatheringCategory`). `resolveVisitEntry` is the one place that turns a stored entry into
+a display title + click action per its kind, and returns `null` for a "page" entry whose file
+no longer exists in `pages.json` (filtered out rather than shown as a dead link) — "craft"/
+"gathering" entries aren't validated the same way, since tradeskills essentially never get
+renamed/removed here and a stale one would just land on an empty tradeskill page, not error.
+
+Active-link highlighting (`loadPage`'s `link.dataset.file === baseFile` check) only works
+for `kind: "page"` entries, which set `dataset.file`. A "craft"/"gathering" entry's link is
+left permanently non-active instead of approximated — there's no single top-level `baseFile`
+that would correctly highlight just *one* tradeskill's link without also lighting up every
+other tradeskill sharing that same hash page (`#crafting`/`#gathering`).
+
 ## Header search box
 
 The search box in the header (`#search-box`, wired up in `init()`) searches everything on

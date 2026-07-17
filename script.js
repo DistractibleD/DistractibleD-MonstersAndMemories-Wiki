@@ -259,12 +259,28 @@ function buildSidebar(pages) {
   updateVisitedSidebarSections();
 }
 
-// Page-visit tracking for the sidebar's "Recently Visited"/"Most Visited" sections — purely
+// Visit tracking for the sidebar's "Recently Visited"/"Most Visited" sections — purely
 // client-side (localStorage), no server involved, so it only ever reflects this one browser.
-// Keyed by top-level page file (pages.json), same granularity as the sidebar itself — a
-// Monsters sub-route (e.g. "monsters/named/Vale of Zintar") still just counts as a visit to
-// "Monsters", not tracked at the individual-monster level.
+// Tracks the *deepest* thing actually reached, not just the top-level sidebar page you
+// passed through to get there (2026-07-17, user's own call): browsing Gathering or Crafting
+// just to look at the category grid records nothing, but drilling into e.g. Mining or
+// Alchemy records that tradeskill specifically — Gathering/Crafting themselves are never
+// recorded as a visit in their own right (see the CATEGORY_TRACKED_PAGES check in loadPage,
+// and the recordVisit calls in renderTradeskillSection/renderGatheringNodes). Every other
+// top-level page (Item Database, Maps, Monsters, Companions, etc.) still just tracks itself,
+// same as before — a Monsters sub-route (e.g. "monsters/named/Vale of Zintar") still counts
+// as a visit to "Monsters" as a whole, not the individual zone/monster.
+//
+// Each entry is keyed `${kind}:${id}` and stores `{kind, id, count, lastVisited}`:
+//   - kind "page": id is a pages.json `file` — resolved via allPages, opened with loadPage.
+//   - kind "craft": id is a tradeskill name (Alchemy, Cooking, ... — also Enchanting and
+//     Disenchanting, which reach renderTradeskillSection directly since they have no grid in
+//     front of them) — opened with goToCraftingCategory, which already knows how to route
+//     each of those tradeskills to its own page.
+//   - kind "gathering": id is a gathering tradeskill name (Mining, Lumberjacking, Herbalism,
+//     Fishing) — opened with goToGatheringCategory.
 const PAGE_VISITS_KEY = 'mnmwiki-page-visits';
+const CATEGORY_TRACKED_PAGES = ['crafting', 'gathering', 'enchanting', 'disenchanting'];
 
 function getPageVisits() {
   try {
@@ -274,10 +290,11 @@ function getPageVisits() {
   }
 }
 
-function recordPageVisit(file) {
+function recordVisit(kind, id) {
   const visits = getPageVisits();
-  const existing = visits[file] || { count: 0 };
-  visits[file] = { count: existing.count + 1, lastVisited: Date.now() };
+  const key = `${kind}:${id}`;
+  const existing = visits[key] || { count: 0 };
+  visits[key] = { kind, id, count: existing.count + 1, lastVisited: Date.now() };
   try {
     localStorage.setItem(PAGE_VISITS_KEY, JSON.stringify(visits));
   } catch {
@@ -286,14 +303,26 @@ function recordPageVisit(file) {
   }
 }
 
+// Resolves one stored visit entry to a display title and a "go there" action, per its kind —
+// returns null for an entry that no longer resolves to anything real (e.g. a "page" entry
+// whose file was removed from pages.json), so it can be filtered out rather than shown as a
+// dead link. "craft"/"gathering" entries aren't validated against tradeskills.json the same
+// way — tradeskills essentially never get renamed/removed in this wiki's history, and a
+// stale one would just land on an empty tradeskill page rather than error.
+function resolveVisitEntry(v) {
+  if (v.kind === 'craft') return { title: v.id, go: () => goToCraftingCategory(v.id) };
+  if (v.kind === 'gathering') return { title: v.id, go: () => goToGatheringCategory(v.id) };
+  const page = allPages.find(p => p.file === v.id);
+  return page ? { title: page.title, go: () => loadPage(v.id) } : null;
+}
+
 function updateVisitedSidebarSections() {
   const wrapper = document.getElementById('sidebar-visits-wrapper');
   if (!wrapper) return;
 
-  // Drop any visit recorded against a page that no longer exists in pages.json.
-  const entries = Object.entries(getPageVisits())
-    .map(([file, v]) => ({ file, count: v.count, lastVisited: v.lastVisited, page: allPages.find(p => p.file === file) }))
-    .filter(e => e.page);
+  const entries = Object.values(getPageVisits())
+    .map(v => ({ ...v, resolved: resolveVisitEntry(v) }))
+    .filter(e => e.resolved);
 
   if (!entries.length) {
     wrapper.style.display = 'none';
@@ -305,11 +334,20 @@ function updateVisitedSidebarSections() {
     container.innerHTML = '';
     list.forEach(e => {
       const link = document.createElement('a');
-      link.href = '#' + e.file;
+      link.href = '#';
       link.className = 'sidebar-link sidebar-link-nested';
-      link.textContent = e.page.title;
-      link.dataset.file = e.file;
-      link.addEventListener('click', () => loadPage(e.file));
+      link.textContent = e.resolved.title;
+      // Only a "page" entry maps cleanly onto the existing file-based active-link
+      // highlighting (loadPage's `link.dataset.file === baseFile` check) — a "craft"/
+      // "gathering" entry lives inside a shared hash page (#crafting, #gathering) that
+      // every tradeskill shares, so there's no single baseFile that would correctly
+      // highlight just this one tradeskill's link without also lighting up every other
+      // tradeskill's link at the same time. Left non-active rather than approximated.
+      if (e.kind === 'page') link.dataset.file = e.id;
+      link.addEventListener('click', ev => {
+        ev.preventDefault();
+        e.resolved.go();
+      });
       container.appendChild(link);
     });
   };
@@ -363,11 +401,14 @@ async function loadPage(file) {
   }
 
   // Record this as a visit for the "Recently Visited"/"Most Visited" sidebar
-  // sections (only for a real top-level page, not a 404) and refresh them —
-  // must happen before the active-link highlighting below, since it can add
-  // new .sidebar-link elements for this same file.
-  if (page) {
-    recordPageVisit(baseFile);
+  // sections and refresh them — must happen before the active-link
+  // highlighting below, since it can add new .sidebar-link elements for this
+  // same file. Skipped for a 404, and for the tradeskill-grid pages
+  // (CATEGORY_TRACKED_PAGES) — those track the specific tradeskill reached
+  // instead, via recordVisit('craft'/'gathering', ...) in
+  // renderTradeskillSection/renderGatheringNodes, not the grid page itself.
+  if (page && !CATEGORY_TRACKED_PAGES.includes(baseFile)) {
+    recordVisit('page', baseFile);
     updateVisitedSidebarSections();
   }
 
@@ -2575,6 +2616,15 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   const tradeskill = tradeskillsData.find(ts => ts.name === tradeskillName);
   if (tradeskillName === 'Jewelcrafting') await ensureGemstonesData();
 
+  // This is the single choke point for "landing on one tradeskill's own
+  // recipe list" — reached from the Crafting grid, from Enchanting's/
+  // Disenchanting's own page, or from a pending-tradeskill jump — so it's
+  // where a "Recently Visited"/"Most Visited" visit gets recorded for the
+  // tradeskill itself, per CATEGORY_TRACKED_PAGES in loadPage skipping the
+  // Crafting/Enchanting/Disenchanting grid pages in favor of this.
+  recordVisit('craft', tradeskillName);
+  updateVisitedSidebarSections();
+
   const backLinkId = `craft-back-link${idSuffix}`;
   const searchId = `craft-recipe-search${idSuffix}`;
   const needsInfoId = `craft-recipe-filter-needsinfo${idSuffix}`;
@@ -2881,6 +2931,14 @@ function renderGatheringNodes(container, tradeskillName) {
   const tradeskill = tradeskillsData.find(ts => ts.name === tradeskillName);
   const allNodes = gatheringData.filter(n => n.tradeskill === tradeskillName);
   const columns = gatheringColumns(allNodes);
+
+  // Same idea as the recordVisit call in renderTradeskillSection — this is
+  // the choke point for "landing on one gathering tradeskill's own node
+  // table", so the Gathering grid page itself is skipped (see
+  // CATEGORY_TRACKED_PAGES in loadPage) in favor of tracking the specific
+  // tradeskill reached.
+  recordVisit('gathering', tradeskillName);
+  updateVisitedSidebarSections();
 
   container.innerHTML = `
     <p><a href="#" id="gathering-back-link">&larr; All tradeskills</a></p>
