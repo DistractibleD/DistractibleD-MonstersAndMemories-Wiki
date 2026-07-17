@@ -2415,19 +2415,22 @@ function estimateRecipeSkill(recipe) {
 // Tier order comes from the shared recipeSkillLevel/listOrder those recipes
 // already carry (lowest first). The exact formula for which source item
 // yields which tier isn't confirmed yet, so this only shows what a tier
-// produces, not what feeds into it.
+// produces, not what feeds into it. Just the dust names are pulled out here
+// (not the "(x1-4)" quantity ranges) — this chart is only meant to show which
+// items belong to which tier, since the actual quantities are already shown
+// on each recipe card further down the page.
 function disenchantingDustTiers() {
   const seen = new Map();
   craftingData
     .filter(r => r.tradeskill === 'Disenchanting')
     .forEach(r => {
       if (seen.has(r.name)) return;
-      const m = r.name.match(/^(.*?)\s*\(x([\d-]+)\)\s*&\s*(.*?)\s*\(x([\d-]+)\)$/);
+      const m = r.name.match(/^(.*?)\s*\(x[\d-]+\)\s*&\s*(.*?)\s*\(x[\d-]+\)$/);
       if (!m) return;
       seen.set(r.name, {
         tierOrder: r.listOrder ?? Infinity,
-        powder: { name: m[1].trim(), range: m[2] },
-        essence: { name: m[3].trim(), range: m[4] }
+        powder: m[1].trim(),
+        essence: m[2].trim()
       });
     });
   return [...seen.values()].sort((a, b) => a.tierOrder - b.tierOrder);
@@ -2436,7 +2439,7 @@ function disenchantingDustTiers() {
 // One dust's thumbnail — the real item image when items.json has one, a
 // dashed placeholder box otherwise (item not added yet, or added but with no
 // image uploaded yet) so the tier chart's layout stays stable either way.
-function dustTierThumbHTML(dustName, range) {
+function dustTierThumbHTML(dustName) {
   const item = findItemByName(dustName);
   const thumb = item && item.image
     ? `<img src="${escapeAttr(item.image)}" alt="${escapeAttr(dustName)}">`
@@ -2445,7 +2448,6 @@ function dustTierThumbHTML(dustName, range) {
     <div class="dust-tier-thumb">
       ${thumb}
       <div class="dust-tier-thumb-name">${escapeAttr(dustName)}</div>
-      <div class="dust-tier-thumb-range">&times;${escapeAttr(range)}</div>
     </div>
   `;
 }
@@ -2462,8 +2464,8 @@ function renderDisenchantingDustTiersHTML() {
           <div class="dust-tier">
             <div class="dust-tier-label">Tier ${i + 1}</div>
             <div class="dust-tier-pair">
-              ${dustTierThumbHTML(t.powder.name, t.powder.range)}
-              ${dustTierThumbHTML(t.essence.name, t.essence.range)}
+              ${dustTierThumbHTML(t.powder)}
+              ${dustTierThumbHTML(t.essence)}
             </div>
           </div>
         `).join('')}

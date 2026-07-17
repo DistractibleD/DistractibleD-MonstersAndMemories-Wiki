@@ -1258,10 +1258,6 @@ body:not(.site-entered) .sidebar {
   font-size: 0.78rem;
   color: var(--text);
 }
-.dust-tier-thumb-range {
-  font-size: 0.72rem;
-  color: var(--text-dim);
-}
 .gem-reference-tables {
   display: flex;
   flex-wrap: wrap;
