@@ -171,15 +171,6 @@ viewed zoomed-in in the map viewer (see below) where JPEG artifacts would actual
 visible, and they're few enough in number that file size isn't a concern. Do not apply any
 JPEG conversion to anything in `images/Maps/`.
 
-**One narrow exception to "save the full card":** an item whose `image` is going to be shown
-directly and small — currently just Disenchanting's magic-dust tier chart (see
-`renderDisenchantingDustTiersHTML` above), which renders `item.image` raw at ~56px rather
-than through a JSON-built card — gets the icon *cropped out* of the card instead of the full
-card screenshot, since a whole text-heavy card crammed into a 56px thumbnail is illegible.
-`images/items/mote-of-magic.jpg` is the first example of this (2026-07-17, user's explicit
-request). Only do this when the user asks for it for a specific item; the default for every
-other item stays the full uncropped card, per above.
-
 ## Adding a map to the Maps page
 
 The Maps page (`pages.json` entry with `"type": "maps"`) works the same way as the Item
