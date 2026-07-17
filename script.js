@@ -272,17 +272,18 @@ function buildSidebar(pages) {
     (groupContainer || sidebar).appendChild(link);
   }
 
-  // "Recently Visited" / "Most Visited" — see recordPageVisit/updateVisitedSidebarSections.
-  // Hidden until there's at least one recorded visit (id="sidebar-visits-wrapper" toggles
-  // display), reusing the exact same group-heading + tree-line-nested-list markup as the
+  // "Most Visited" — see recordPageVisit/updateVisitedSidebarSections. Hidden until
+  // there's at least one recorded visit (id="sidebar-visits-wrapper" toggles display),
+  // reusing the exact same group-heading + tree-line-nested-list markup as the
   // "Tradeskilling" group above so it looks like a natural extension of the nav rather than
-  // a bolted-on widget.
+  // a bolted-on widget. "Recently Visited" used to sit here too (removed from display
+  // 2026-07-17, user's own call) — visit data for it is still recorded (see
+  // updateVisitedSidebarSections/recordVisit below) in case it's ever brought back, it's
+  // just not rendered anywhere right now.
   const visitsWrapper = document.createElement('div');
   visitsWrapper.id = 'sidebar-visits-wrapper';
   visitsWrapper.innerHTML = `
     <div class="sidebar-visits-title">History</div>
-    <div class="sidebar-group-heading">Recently Visited</div>
-    <div class="sidebar-group" id="sidebar-recent-visits"></div>
     <div class="sidebar-group-heading">Most Visited</div>
     <div class="sidebar-group" id="sidebar-most-visited"></div>
     <p class="sidebar-visits-note">Stored only in this browser — not saved anywhere else.</p>
@@ -291,8 +292,11 @@ function buildSidebar(pages) {
   updateVisitedSidebarSections();
 }
 
-// Visit tracking for the sidebar's "Recently Visited"/"Most Visited" sections — purely
-// client-side (localStorage), no server involved, so it only ever reflects this one browser.
+// Visit tracking for the sidebar's "Most Visited" section — purely client-side
+// (localStorage), no server involved, so it only ever reflects this one browser. Also still
+// records `lastVisited` even though "Recently Visited" itself isn't rendered anymore
+// (2026-07-17) — it's cheap to keep, doubles as the tiebreaker for equally-visited pages in
+// "Most Visited", and means the data's already there if "Recently Visited" ever comes back.
 // Tracks the *deepest* thing actually reached, not just the top-level sidebar page you
 // passed through to get there (2026-07-17, user's own call): browsing Gathering or Crafting
 // just to look at the category grid records nothing, but drilling into e.g. Mining or
@@ -384,9 +388,7 @@ function updateVisitedSidebarSections() {
     });
   };
 
-  const recent = [...entries].sort((a, b) => b.lastVisited - a.lastVisited).slice(0, 5);
   const most = [...entries].sort((a, b) => b.count - a.count || b.lastVisited - a.lastVisited).slice(0, 5);
-  renderInto(document.getElementById('sidebar-recent-visits'), recent);
   renderInto(document.getElementById('sidebar-most-visited'), most);
 }
 
@@ -433,8 +435,9 @@ async function loadPage(file) {
     contentInner.innerHTML = '<h1>Page not found</h1><p>That page could not be loaded.</p>';
   }
 
-  // Record this as a visit for the "Recently Visited"/"Most Visited" sidebar
-  // sections and refresh them — must happen before the active-link
+  // Record this as a visit for the "Most Visited" sidebar section (and
+  // "Recently Visited" data, even though it isn't displayed) and refresh it
+  // — must happen before the active-link
   // highlighting below, since it can add new .sidebar-link elements for this
   // same file. Skipped for a 404, and for the tradeskill-grid pages
   // (CATEGORY_TRACKED_PAGES) — those track the specific tradeskill reached
@@ -445,8 +448,8 @@ async function loadPage(file) {
     updateVisitedSidebarSections();
   }
 
-  // Highlight the active link in the sidebar — the History box (Recently/
-  // Most Visited) is explicitly excluded (2026-07-17, user's own call):
+  // Highlight the active link in the sidebar — the History box (Most
+  // Visited) is explicitly excluded (2026-07-17, user's own call):
   // clicking an entry there just navigates, it never shows the "you're
   // here" highlight, which stays reserved for the normal nav list above it.
   document.querySelectorAll('.sidebar-link').forEach(link => {
@@ -2132,9 +2135,15 @@ function setupMapViewer() {
   viewer.id = 'map-viewer';
   viewer.innerHTML = `
     <button id="map-viewer-close" aria-label="Close">&times;</button>
-    <button id="map-viewer-prev" aria-label="Previous map of this area">&#8249;</button>
+    <button id="map-viewer-prev" aria-label="Previous map of this area">
+      <span class="map-viewer-nav-arrow map-viewer-nav-arrow-left"></span>
+      <span class="map-viewer-nav-label">Alternate Map</span>
+    </button>
     <img id="map-viewer-img" alt="">
-    <button id="map-viewer-next" aria-label="Next map of this area">&#8250;</button>
+    <button id="map-viewer-next" aria-label="Next map of this area">
+      <span class="map-viewer-nav-arrow map-viewer-nav-arrow-right"></span>
+      <span class="map-viewer-nav-label">Alternate Map</span>
+    </button>
     <div id="map-viewer-hint">Scroll to zoom &middot; drag to pan</div>
     <div id="map-viewer-nav-hint">&#8249; &#8250; More views of this area &mdash; use the arrows</div>
   `;

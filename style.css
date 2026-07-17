@@ -1628,9 +1628,12 @@ body:not(.site-entered) .sidebar {
   color: var(--accent);
 }
 /* Made more visible (2026-07-17, user's own call — a tester didn't notice
-   these existed) via a brighter accent border/glow and a bigger size,
-   instead of blending into the dark overlay the same way #map-viewer-close
-   does. */
+   these existed), then reshaped from a circle-with-a-glyph into a tall
+   rectangle with a vertical "ALTERNATE MAP" label and a CSS-drawn triangle
+   (2026-07-17, second pass — the Unicode ‹/› glyph used before looked
+   off-center, since angle-quote glyphs aren't vertically symmetric in most
+   fonts; a border-triangle has no such ambiguity, it's geometry, not a
+   font's own optical metrics). */
 #map-viewer-prev,
 #map-viewer-next {
   position: absolute;
@@ -1639,17 +1642,19 @@ body:not(.site-entered) .sidebar {
   background: var(--bg-panel);
   border: 2px solid var(--accent);
   color: var(--accent);
-  font-size: 1.8rem;
-  line-height: 1;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
+  width: 48px;
+  height: 168px;
+  border-radius: 10px;
   cursor: pointer;
   display: none;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 14px;
+  padding: 14px 0;
   z-index: 1;
   box-shadow: 0 0 18px rgba(224, 166, 64, 0.45);
+  transition: background 0.15s ease, color 0.15s ease;
 }
 #map-viewer-prev {
   left: 24px;
@@ -1661,6 +1666,40 @@ body:not(.site-entered) .sidebar {
 #map-viewer-next:hover {
   background: var(--accent);
   color: var(--bg);
+}
+/* A pure CSS border-triangle instead of a text glyph — perfectly centered
+   by construction, no font-metric guesswork. */
+.map-viewer-nav-arrow {
+  flex: 0 0 auto;
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+}
+.map-viewer-nav-arrow-left {
+  border-right: 12px solid var(--accent);
+}
+.map-viewer-nav-arrow-right {
+  border-left: 12px solid var(--accent);
+}
+#map-viewer-prev:hover .map-viewer-nav-arrow-left {
+  border-right-color: var(--bg);
+}
+#map-viewer-next:hover .map-viewer-nav-arrow-right {
+  border-left-color: var(--bg);
+}
+.map-viewer-nav-label {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+#map-viewer-next .map-viewer-nav-label {
+  transform: rotate(180deg);
 }
 #map-viewer-hint {
   position: absolute;
@@ -1812,7 +1851,11 @@ body:not(.site-entered) .sidebar {
   .maps-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
   .map-card img.map-card-thumb { height: 110px; }
   #map-viewer-close { top: 10px; right: 12px; width: 34px; height: 34px; font-size: 1.2rem; }
-  #map-viewer-prev, #map-viewer-next { width: 40px; height: 40px; font-size: 1.4rem; }
+  #map-viewer-prev, #map-viewer-next { width: 38px; height: 120px; gap: 10px; }
+  .map-viewer-nav-arrow { border-top-width: 7px; border-bottom-width: 7px; }
+  .map-viewer-nav-arrow-left { border-right-width: 10px; }
+  .map-viewer-nav-arrow-right { border-left-width: 10px; }
+  .map-viewer-nav-label { font-size: 0.62rem; }
   #map-viewer-prev { left: 8px; }
   #map-viewer-next { right: 8px; }
   #map-viewer-nav-hint { top: 10px; font-size: 0.76rem; padding: 5px 12px; max-width: 84vw; }
