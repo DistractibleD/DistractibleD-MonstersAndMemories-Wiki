@@ -270,24 +270,41 @@ body:not(.site-entered) .sidebar {
 }
 /* A page can opt into a `group` (pages.json) to nest under a plain,
    non-clickable heading instead of the flat top-level list — see
-   buildSidebar in script.js. .sidebar-group uses `display: contents` so its
-   child links behave as if they were direct children of #sidebar for layout
-   purposes (needed so the mobile flex-wrap pill row below still wraps them
-   normally instead of stacking the whole group as one flex item). */
+   buildSidebar in script.js. On desktop, .sidebar-group gets a real box with
+   a left border acting as a folder-tree "trunk" line, and each nested link
+   gets a short horizontal "branch" tick (::before) connecting it back to
+   that trunk, so the group reads visually as a set of items under one
+   parent. On mobile (see the max-width: 900px query below), .sidebar-group
+   switches to `display: contents` instead so its child links behave as if
+   they were direct children of #sidebar for layout purposes — needed so the
+   flex-wrap pill row wraps them normally instead of stacking the whole group
+   as one flex item — and the tree-line ticks are hidden, since they don't
+   make sense among wrapped horizontal pills. */
 .sidebar-group-heading {
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--text-dim);
-  padding: 10px 10px 4px;
+  color: var(--text);
+  padding: 10px 10px 6px;
 }
 .sidebar-group {
-  display: contents;
+  position: relative;
+  margin-left: 20px;
+  padding-left: 10px;
+  border-left: 1px solid var(--border);
 }
 .sidebar-link-nested {
-  padding-left: 22px;
-  font-size: 0.88rem;
+  position: relative;
+}
+.sidebar-link-nested::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  width: 10px;
+  height: 1px;
+  background: var(--border);
 }
 
 /* ---------- Content ---------- */
@@ -1165,6 +1182,86 @@ body:not(.site-entered) .sidebar {
   color: var(--text-dim);
   font-size: 0.88rem;
 }
+/* Disenchanting's magic-dust tier chart (renderDisenchantingDustTiersHTML) —
+   styled after .gem-reference, the same "reference panel above the recipe
+   grid" pattern Jewelcrafting's gemstone tables already use. */
+.dust-tiers {
+  margin: 0 0 20px;
+  padding: 14px 16px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.dust-tiers h2 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  color: var(--accent-craft);
+}
+.dust-tiers-intro {
+  margin: 0 0 14px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+.dust-tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+.dust-tier {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+.dust-tier-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.dust-tier-pair {
+  display: flex;
+  gap: 12px;
+}
+.dust-tier-thumb {
+  flex: 1;
+  text-align: center;
+}
+.dust-tier-thumb img,
+.dust-tier-placeholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 6px;
+  margin: 0 auto 6px;
+}
+.dust-tier-thumb img {
+  border: 1px solid var(--border);
+  object-fit: cover;
+  display: block;
+}
+.dust-tier-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-panel-hover);
+  border: 1px dashed var(--border);
+  color: var(--text-dim);
+  font-size: 0.6rem;
+  text-align: center;
+  line-height: 1.2;
+  padding: 4px;
+  box-sizing: border-box;
+}
+.dust-tier-thumb-name {
+  font-size: 0.78rem;
+  color: var(--text);
+}
+.dust-tier-thumb-range {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
 .gem-reference-tables {
   display: flex;
   flex-wrap: wrap;
@@ -1431,9 +1528,14 @@ body:not(.site-entered) .sidebar {
     box-shadow: inset 0 0 0 1px var(--accent-dim);
   }
   /* Forces a line break before a group's pills in the wrapped row, instead
-     of the heading sitting inline among them like just another chip. */
+     of the heading sitting inline among them like just another chip. The
+     desktop tree-line box (.sidebar-group's border-left) and its ticks
+     (.sidebar-link-nested::before) are switched off here — they don't make
+     sense once the group's links are wrapped-row pills instead of a
+     vertical indented list. */
   .sidebar-group-heading { flex-basis: 100%; padding: 4px 4px 0; }
-  .sidebar-link-nested { padding-left: 12px; font-size: inherit; }
+  .sidebar-group { display: contents; }
+  .sidebar-link-nested::before { display: none; }
   .content-inner { padding: 24px 22px; }
   #search-box { width: 140px; }
   .items-search { flex-basis: 100%; }

@@ -7,12 +7,19 @@ seeded from a crafting-window screenshot (name/tradeskill/difficulty/listOrder o
 per CLAUDE.md, a real recipe card fills in weight/size/components/image later. This file
 exists so a future recipe-card screenshot can be matched back to what's still missing.
 
-Full card but components still missing (2):
+Full card but components still missing (1):
 
 - Tailoring — Cloth Satchel (has image, weight 0.5, size Medium)
-- Enchanting — Enchant Chest: Minor Health (has image, weight 0.0, size Small)
 
-Stub entries — no card at all yet (name/tradeskill/difficulty only), 94:
+(Enchanting's "Enchant Chest: Minor Health" was in this list until 2026-07-16, when a
+recipe-card screenshot from the large Enchanting batch confirmed its components:
+7x Enchanted Powder, 1x Mote of Magic.)
+
+Stub entries — no card at all yet (name/tradeskill/difficulty only), 95:
+
+Enchanting (1): Enchant Belt: Minor Electric Resistance — name/color/skill confirmed via a
+crafting-window screenshot from the same 2026-07-16 batch, but no recipe card has come in
+for it yet.
 
 Tailoring (13): Bolt of Cloth, Cloth Padding, Bat Fur Braid, Fine Cloth Bracer, Fine Cloth
 Gorget, Fine Cloth Cape, Fine Cloth Gloves, Cloth Pouch, Fine Cloth Belt, Fine Cloth Veil,

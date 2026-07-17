@@ -6,7 +6,7 @@
   { "name": "Brewing", "status": "planned" },
   { "name": "Carpentry", "status": "live" },
   { "name": "Cooking", "status": "live" },
-  { "name": "Disenchanting", "status": "live", "category": "enchanting", "note": "Disenchanting runs backwards from a normal recipe: you feed in a MAGIC item (the card's \"Components\") and get a variable amount of magic powder/essence back, not a fixed crafted result. Since the output is a range rather than a single fixed item+quantity, each card's name describes both possible outputs and their ranges instead of naming one crafted item. You'll need a Disenchanting Cube (placed in a bag slot) to actually do this — put the MAGIC item in the cube and click Combine. As with any tradeskill there's a chance to fail, which destroys the item with no powder/essence gained. The quality of the powder produced seems tied to the item being disenchanted, though it's unclear whether that's the number of attributes on the item, its \"item level\", or something else. Any item tagged MAGIC can be fed into the cube this way — the recipes below aren't a specific checklist of disenchantable armor/weapons (that would be almost every MAGIC item in the game), they're the raw magic-essence materials (the Frond and Crystallized Magic tiers) that can also be disenchanted the same way, sorted here by tier from lowest to highest." },
+  { "name": "Disenchanting", "status": "live", "category": "enchanting" },
   { "name": "Enchanting", "status": "live", "category": "enchanting" },
   { "name": "Farming", "status": "planned" },
   { "name": "Fermenting", "status": "planned" },

@@ -334,21 +334,95 @@ same-`group` pages share one heading; a page with no `group` renders exactly as 
 
 Enchanting and Disenchanting are ordinary tradeskills in `crafting.json`/`tradeskills.json`
 (nothing schema-wise sets them apart from Blacksmithing or Alchemy), but they render on
-their own page (`pages.json`'s `"Enchanting and Disenchanting"` entry, `"type": "enchanting"`,
-`renderEnchantingDisenchantingPage` in `script.js`) instead of being two of the ~30 category
-cards on the main Crafting page — there are only two of them, so showing both tradeskills'
-recipes directly (no card-drilldown step) reads better than a two-card grid would. This is
-driven by `tradeskillsData[].category: "enchanting"` on both their `tradeskills.json`
-entries, the same mechanism `"gathering"` already uses to split Mining/Lumberjacking/
-Herbalism/Fishing out of the main Crafting grid — `renderCraftingCategories` excludes both
-category values from its grid. The actual recipe-list rendering (search box, needs-info
-toggle, station grouping, item link handlers, highlight-on-arrival) is shared with the main
-Crafting page via `renderTradeskillSection`, called once per tradeskill with a unique
-`idSuffix` so the two sections' element ids don't collide on the same page. Every existing
-way of reaching a recipe (header search, an item's "crafted via"/"used to craft" links, a
-recipe search result) still works unchanged — `goToRecipe`/`goToCraftingCategory` check the
-tradeskill and redirect to the Enchanting and Disenchanting page automatically when it's one
-of these two, so nothing that links to a recipe needs to know about the split.
+their own page (`pages.json`'s `"Enchanting and Disenchanting"` entry, `"type": "enchanting"`)
+instead of being two of the ~30 category cards on the main Crafting page. This is driven by
+`tradeskillsData[].category: "enchanting"` on both their `tradeskills.json` entries, the same
+mechanism `"gathering"` already uses to split Mining/Lumberjacking/Herbalism/Fishing out of
+the main Crafting grid — `renderCraftingCategories` excludes both category values from its
+grid. The page itself (`renderEnchantingDisenchantingPage` in `script.js`) still shows a
+2-card tradeskill grid (`renderEnchantingDisenchantingCategories`, reusing `tradeskillGridHTML`
+— the exact same card markup as the main Crafting page) rather than dumping both
+tradeskills' recipes directly on one page — an earlier version did that and was reverted
+2026-07-16 because it meant scrolling past all of one tradeskill's recipes to reach the
+other. Clicking a card shows just that tradeskill's own recipe list
+(`renderEnchantingDisenchantingRecipes`), with a "back" link returning to the 2-card grid.
+The actual recipe-list rendering (search box, needs-info toggle, station grouping, item link
+handlers, highlight-on-arrival) is shared with the main Crafting page via
+`renderTradeskillSection` — both pages' "show one tradeskill's recipes" views are just
+different callers of the same function. Every existing way of reaching a recipe (header
+search, an item's "crafted via"/"used to craft" links, a recipe search result) still works
+unchanged — `goToRecipe`/`goToCraftingCategory` check the tradeskill and redirect to the
+Enchanting and Disenchanting page automatically when it's one of these two (setting
+`pendingEnchantingTradeskill`, the same "jump straight past the grid" pattern
+`pendingCraftingTradeskill` uses on the main Crafting page), so nothing that links to a
+recipe needs to know about the split.
+
+**Disenchanting's magic-dust tier chart:** rather than the lengthy explanatory `note` this
+tradeskill used to carry (removed 2026-07-16 — the user found it too much to read on the
+page), Disenchanting's own recipe view shows a small reference chart of its magic-dust tiers
+at the top, above the recipe grid (`renderDisenchantingDustTiersHTML`, styled like the
+`.gem-reference` panel Jewelcrafting's gemstone tables already use). This is derived
+straight from `crafting.json`'s existing Disenchanting recipes (`disenchantingDustTiers()`)
+rather than a new schema field: each distinct recipe result name (e.g. "Enchanted Powder
+(x1-5) & Mote of Magic (x0-2)") names one tier's two possible outputs — a common "Powder"
+and a rarer "of Magic" essence — and tiers are ordered lowest-to-highest by the same
+`listOrder`/`recipeSkillLevel` the recipes already carry. Each dust shows its real
+`items.json` image via `findItemByName` when one exists, or a dashed "No image yet"
+placeholder (`.dust-tier-placeholder`) otherwise — most of these 8 dust items don't have a
+card yet (only "Enchanted Powder" does so far), so the placeholder is the common case, not
+an error state; add the item normally (see "Adding an item to the Item Database" above) once
+a screenshot comes in and it'll start showing automatically, no code change needed. **What
+source item yields which tier isn't confirmed** (the user is unsure of the exact formula), so
+the chart only shows what a tier produces, not what feeds into it — don't guess or add a
+source-item mapping without the user confirming one first.
+
+### Enchanting recipes carry a slot/type filter no other tradeskill uses
+
+A large batch of ~160 Enchanting recipe-card screenshots (2026-07-16) established two extra
+fields, both `Enchanting`-only:
+
+- **`enchantSlot`** — the equipment slot a scroll recipe's buff applies to, parsed straight
+  from the recipe's own name (`"Enchant <Slot>: <Effect>"` → `<Slot>`, e.g. `"Gloves"`).
+  Unset for a raw enchanted-material recipe (e.g. `"Enchanted Hide"`), which has no slot.
+- **`craftType`** — `"Scroll"` for a buff-scroll recipe, or a category describing which
+  other tradeskill actually uses a raw enchanted-material recipe's output: `"Armor"` for
+  materials that only ever go into armor (Enchanted Hide/Rawhide/Wool/Cloth — Leatherworking/
+  Tailoring make armor exclusively in this game), or `"Armor / Weapon"` for materials
+  Blacksmithing uses for both (Enchanted Bronze/Tin/Silver/Copper Bar — this game's metal
+  bars aren't earmarked for one or the other, see "Blacksmithing was populated from
+  reference tables too" below). No enchanted material has surfaced yet that's Jewelry-only;
+  add a `"Jewelry"` value the same way (by which tradeskill actually consumes it) if one
+  ever does — don't force an existing material into that bucket without real evidence.
+
+Both fields drive dropdown filters shown only on the Enchanting tradeskill view
+(`renderTradeskillSection` in `script.js`, gated on `tradeskillName === 'Enchanting'`) —
+values are derived from whatever's actually in the data, same "no code change needed for a
+new value" convention as every other filter dropdown on the site. A third dropdown lets the
+recipe grid switch from the default skill-required sort to alphabetical; every other
+tradeskill still only ever sorts by skill-required, with no user-facing override.
+
+**Enchanting's own crafting-window list is not sorted by skill requirement** — unlike every
+other tradeskill (whose window list order the site relies on for `listOrder`, see "Crafting
+window screenshots" below), Enchanting's window groups recipes by difficulty *color* first,
+alphabetically within each color group second. Position within a color band carries no
+finer-grained skill signal beyond the color itself, so `listOrder` was deliberately **not**
+set on any Enchanting recipe from this batch — recording it would misrepresent relative
+skill ordering to `estimateRecipeSkill()`'s interpolation. `observedAtSkill: 25` (the skill
+shown at the bottom of every window screenshot in this batch) was still recorded on every
+recipe, same as any other tradeskill.
+
+One name — `"Enchant Belt: Minor Electric Resistance"` — turned up only in a window
+screenshot, no card yet; it got the usual minimal stub shape (`name`/`slug`/`tradeskill`/
+`enchantSlot`/`craftType`/`difficultyColor`/`observedAtSkill`/`needsInfo: true`, no image/
+weight/components — see "Crafting window screenshots" below). Most of the ~160 source
+screenshots were cropped (missing the tail of the Effect line and/or part of the Components
+list) — the boilerplate effect suffix (`"(On Click. Any Slot. Cast Time: 5s. Level: 1)"`)
+and cut-off resistance-type words (e.g. completing `"SV Elect…"` to `"SV Electric"`) were
+safely reconstructed since they're 100% invariant/redundantly confirmed by the recipe's own
+name on every fully-visible card seen — but no stat **bonus number** was ever invented; where
+no screenshot of a given recipe showed the actual number, the recipe was left without one
+rather than guessed from a "Minor = +1 / Lesser = +2" pattern that only looked consistent by
+coincidence.
 
 ### Gathering tradeskills are a separate area, not recipes
 
@@ -408,12 +482,14 @@ entry, `"type": "gathering"`, above "Crafting" in the sidebar) and data file,
   gathering node consumes a resource — the distinction: a gathering node consumes nothing
   and only gates on skill, while Disenchanting consumes a specific MAGIC item (its card's own
   "Components" list) to produce output, which is structurally an ordinary recipe just
-  running "backwards." It lives in `crafting.json` as ordinary recipes (see `tradeskills.json`'s
-  Disenchanting note for the mechanic itself: requires a Disenchanting Cube placed in a bag
-  slot, can fail and destroy the item with nothing gained, and the output powder's quality
-  depends on the item disenchanted in some not-yet-understood way). One flagged
-  inconsistency worth knowing: "Cinder Beetle Shield" is no longer tagged MAGIC in-game and
-  can't actually be disenchanted anymore — recorded as a `note` field on that one
+  running "backwards" (requires a Disenchanting Cube placed in a bag slot, can fail and
+  destroy the item with nothing gained, and the output powder's quality depends on the item
+  disenchanted in some not-yet-understood way). It lives in `crafting.json` as ordinary
+  recipes — `tradeskills.json`'s own Disenchanting entry no longer carries an explanatory
+  `note` (a lengthy one covering this same mechanic was removed 2026-07-16 as too much to
+  read on the page; see "Disenchanting's magic-dust tier chart" below for what replaced it).
+  One flagged inconsistency worth knowing: "Cinder Beetle Shield" is no longer tagged MAGIC
+  in-game and can't actually be disenchanted anymore — recorded as a `note` field on that one
   `crafting.json` entry (`disenchant-cinder-beetle-shield`) rather than removing the recipe,
   since it's still useful historical/reference data. `renderRecipeCardHTML` renders
   `recipe.note` (when set) as an italic line at the bottom of the card, right after

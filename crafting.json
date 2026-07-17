@@ -6524,7 +6524,7 @@
     "recipeSkillLevel": 40,
     "difficultyColor": "Orange",
     "observedAtSkill": 20,
-    "note": "This recipe's difficulty read Orange at the bottom of one Alchemy-20 crafting-window screenshot, but the overlapping row at the top of the next screenshot in the same batch (2026-07-14) read closer to Red — pixel-sampled and still genuinely ambiguous between the two shades. Orange was kept since it fits the surrounding color gradient (Yellow before, confirmed Red after), but flag for re-confirmation if a clearer capture comes in."
+    "note": "This recipe's difficulty read Orange at the bottom of one Alchemy-20 crafting-window screenshot, but the overlapping row at the top of the next screenshot in the same batch (2026-07-14) read closer to Red â€” pixel-sampled and still genuinely ambiguous between the two shades. Orange was kept since it fits the surrounding color gradient (Yellow before, confirmed Red after), but flag for re-confirmation if a clearer capture comes in."
   },
   {
     "name": "Flux",
@@ -6578,7 +6578,7 @@
     "recipeSkillLevel": 55,
     "difficultyColor": "Red",
     "observedAtSkill": 20,
-    "note": "Previously recorded as \"Potion of the Sense Magic\" — corrected 2026-07-14 to match the recipe card's actual title (\"Potion of Sense Magic\", no \"the\") once a full card came in."
+    "note": "Previously recorded as \"Potion of the Sense Magic\" â€” corrected 2026-07-14 to match the recipe card's actual title (\"Potion of Sense Magic\", no \"the\") once a full card came in."
   },
   {
     "name": "Minor Stoneskin Tincture",
@@ -6715,7 +6715,7 @@
     "recipeSkillLevel": 75,
     "difficultyColor": "Red",
     "observedAtSkill": 44,
-    "note": "The description/effect/components here were previously sourced from an external reference table that turned out to differ from the real card in several ways — corrected 2026-07-15 once an actual in-game card came in (description/effect text, and Wisp Dust x2→x3, Annealed Vial x2→1)."
+    "note": "The description/effect/components here were previously sourced from an external reference table that turned out to differ from the real card in several ways â€” corrected 2026-07-15 once an actual in-game card came in (description/effect text, and Wisp Dust x2â†’x3, Annealed Vial x2â†’1)."
   },
   {
     "name": "Clear Fish Oil",
@@ -6769,7 +6769,7 @@
     "recipeSkillLevel": 85,
     "difficultyColor": "Red",
     "observedAtSkill": 44,
-    "note": "The description/effect text here was previously sourced from an external reference table that had a copy-paste error (\"Lesser Serum of Intelligence\", Level 1) — corrected 2026-07-15 once a real in-game card confirmed the actual text (\"Lesser Serum of Agility\", Level 15)."
+    "note": "The description/effect text here was previously sourced from an external reference table that had a copy-paste error (\"Lesser Serum of Intelligence\", Level 1) â€” corrected 2026-07-15 once a real in-game card confirmed the actual text (\"Lesser Serum of Agility\", Level 15)."
   },
   {
     "name": "Lesser Tincture of Sagacity",
@@ -7052,7 +7052,7 @@
     "station": "Cauldron",
     "description": "Free your mind, increasing your Casting Speed by 25% and Spell Damage dealt by 15% for 20 seconds.",
     "effect": "Lesser Tincture of Sagacity (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
-    "note": "The effect line reads \"Lesser Tincture of Sagacity\" on the source table even though this recipe (unlike Minor/Lesser tier) has no \"Lesser\" in its own name — recorded verbatim rather than corrected, since the table may just be reusing the wrong tooltip text.",
+    "note": "The effect line reads \"Lesser Tincture of Sagacity\" on the source table even though this recipe (unlike Minor/Lesser tier) has no \"Lesser\" in its own name â€” recorded verbatim rather than corrected, since the table may just be reusing the wrong tooltip text.",
     "weight": 1.0,
     "size": "Small",
     "components": [
@@ -7106,9 +7106,1296 @@
     "slug": "enchant-chest-minor-health",
     "image": "images/crafting/enchant-chest-minor-health.jpg",
     "tradeskill": "Enchanting",
+    "enchantSlot": "Chest",
+    "craftType": "Scroll",
     "effect": "Enchant Chest: Minor Health +5 HP (On Click. Any Slot. Cast Time: 5s. Level: 1)",
     "weight": 0.0,
-    "size": "Small"
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Gloves: Minor Electric Resistance",
+    "slug": "enchant-gloves-minor-electric-resistance",
+    "image": "images/crafting/enchant-gloves-minor-electric-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Gloves",
+    "craftType": "Scroll",
+    "effect": "Enchant Gloves: Minor Electric Resistance +2 SV Electric (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 5 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Bracer: Minor Stamina",
+    "slug": "enchant-bracer-minor-stamina",
+    "image": "images/crafting/enchant-bracer-minor-stamina.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Bracer",
+    "craftType": "Scroll",
+    "effect": "Enchant Bracer: Minor Stamina +1 STA (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 8 },
+      { "item": "Mote of Magic", "quantity": 2 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Helm: Minor Stamina",
+    "slug": "enchant-helm-minor-stamina",
+    "image": "images/crafting/enchant-helm-minor-stamina.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Helm",
+    "craftType": "Scroll",
+    "effect": "Enchant Helm: Minor Stamina +1 STA (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Yellow",
+    "difficultyText": "Your skills make this a daunting task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Cloak: Minor Cold Resistance",
+    "slug": "enchant-cloak-minor-cold-resistance",
+    "image": "images/crafting/enchant-cloak-minor-cold-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Cloak",
+    "craftType": "Scroll",
+    "effect": "Enchant Cloak: Minor Cold Resistance +2 SV Cold (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Cloak: Minor Poison Resistance",
+    "slug": "enchant-cloak-minor-poison-resistance",
+    "image": "images/crafting/enchant-cloak-minor-poison-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Cloak",
+    "craftType": "Scroll",
+    "effect": "Enchant Cloak: Minor Poison Resistance +2 SV Poison (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Belt: Minor Holy Resistance",
+    "slug": "enchant-belt-minor-holy-resistance",
+    "image": "images/crafting/enchant-belt-minor-holy-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Belt",
+    "craftType": "Scroll",
+    "effect": "Enchant Belt: Minor Holy Resistance +2 SV Holy (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 5 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchanted Wool",
+    "slug": "enchanted-wool",
+    "image": "images/crafting/enchanted-wool.jpg",
+    "tradeskill": "Enchanting",
+    "craftType": "Armor",
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Wool Scraps", "quantity": 1 },
+      { "item": "Magic Powder", "quantity": 1 }
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Legs: Minor Stamina",
+    "slug": "enchant-legs-minor-stamina",
+    "image": "images/crafting/enchant-legs-minor-stamina.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Legs",
+    "craftType": "Scroll",
+    "effect": "Enchant Legs: Minor Stamina +1 STA (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Helm: Minor Disease Resistance",
+    "slug": "enchant-helm-minor-disease-resistance",
+    "image": "images/crafting/enchant-helm-minor-disease-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Helm",
+    "craftType": "Scroll",
+    "effect": "Enchant Helm: Minor Disease Resistance +2 SV Disease (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Yellow",
+    "difficultyText": "Your skills make this a daunting task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Legs: Minor Fire Resistance",
+    "slug": "enchant-legs-minor-fire-resistance",
+    "image": "images/crafting/enchant-legs-minor-fire-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Legs",
+    "craftType": "Scroll",
+    "effect": "Enchant Legs: Minor Fire Resistance +2 SV Fire (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Chest: Minor Magic Resistance",
+    "slug": "enchant-chest-minor-magic-resistance",
+    "image": "images/crafting/enchant-chest-minor-magic-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Chest",
+    "craftType": "Scroll",
+    "effect": "Enchant Chest: Minor Magic Resistance +2 SV Magic (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Boots: Minor Dexterity",
+    "slug": "enchant-boots-minor-dexterity",
+    "image": "images/crafting/enchant-boots-minor-dexterity.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Boots",
+    "craftType": "Scroll",
+    "effect": "Enchant Boots: Minor Dexterity +1 DEX (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 5 }
+    ],
+    "difficultyColor": "Dark Blue",
+    "difficultyText": "Your skills make this a moderate task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Bracer: Lesser Stamina",
+    "slug": "enchant-bracer-lesser-stamina",
+    "image": "images/crafting/enchant-bracer-lesser-stamina.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Bracer",
+    "craftType": "Scroll",
+    "effect": "Enchant Bracer: Lesser Stamina +2 STA (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Magic Powder", "quantity": 8 },
+      { "item": "Glimmer of Magic", "quantity": 2 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Belt: Minor Agility",
+    "slug": "enchant-belt-minor-agility",
+    "image": "images/crafting/enchant-belt-minor-agility.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Belt",
+    "craftType": "Scroll",
+    "effect": "Enchant Belt: Minor Agility +1 AGI (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 5 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Legs: Minor Electric Resistance",
+    "slug": "enchant-legs-minor-electric-resistance",
+    "image": "images/crafting/enchant-legs-minor-electric-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Legs",
+    "craftType": "Scroll",
+    "effect": "Enchant Legs: Minor Electric Resistance +2 SV Electric (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Gloves: Minor Cold Resistance",
+    "slug": "enchant-gloves-minor-cold-resistance",
+    "image": "images/crafting/enchant-gloves-minor-cold-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Gloves",
+    "craftType": "Scroll",
+    "effect": "Enchant Gloves: Minor Cold Resistance +2 SV Cold (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 5 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Legs: Minor Cold Resistance",
+    "slug": "enchant-legs-minor-cold-resistance",
+    "image": "images/crafting/enchant-legs-minor-cold-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Legs",
+    "craftType": "Scroll",
+    "effect": "Enchant Legs: Minor Cold Resistance +2 SV Cold (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Boots: Minor Fire Resistance",
+    "slug": "enchant-boots-minor-fire-resistance",
+    "image": "images/crafting/enchant-boots-minor-fire-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Boots",
+    "craftType": "Scroll",
+    "effect": "Enchant Boots: Minor Fire Resistance +2 SV Fire (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 5 }
+    ],
+    "difficultyColor": "Dark Blue",
+    "difficultyText": "Your skills make this a moderate task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Chest: Minor Mana",
+    "slug": "enchant-chest-minor-mana",
+    "image": "images/crafting/enchant-chest-minor-mana.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Chest",
+    "craftType": "Scroll",
+    "effect": "Enchant Chest: Minor Mana +5 Mana (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Legs: Minor Poison Resistance",
+    "slug": "enchant-legs-minor-poison-resistance",
+    "image": "images/crafting/enchant-legs-minor-poison-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Legs",
+    "craftType": "Scroll",
+    "effect": "Enchant Legs: Minor Poison Resistance +2 SV Poison (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchanted Bronze Bar",
+    "slug": "enchanted-bronze-bar",
+    "image": "images/crafting/enchanted-bronze-bar.jpg",
+    "tradeskill": "Enchanting",
+    "craftType": "Armor / Weapon",
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Bronze Bar", "quantity": 1 },
+      { "item": "Magic Powder", "quantity": 1 }
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Helm: Minor Intelligence",
+    "slug": "enchant-helm-minor-intelligence",
+    "image": "images/crafting/enchant-helm-minor-intelligence.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Helm",
+    "craftType": "Scroll",
+    "effect": "Enchant Helm: Minor Intelligence +1 INT (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Yellow",
+    "difficultyText": "Your skills make this a daunting task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Necklace: Minor Charisma",
+    "slug": "enchant-necklace-minor-charisma",
+    "image": "images/crafting/enchant-necklace-minor-charisma.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Necklace",
+    "craftType": "Scroll",
+    "effect": "Enchant Necklace: Minor Charisma +1 CHA (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Legs: Minor Holy Resistance",
+    "slug": "enchant-legs-minor-holy-resistance",
+    "image": "images/crafting/enchant-legs-minor-holy-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Legs",
+    "craftType": "Scroll",
+    "effect": "Enchant Legs: Minor Holy Resistance +2 SV Holy (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Necklace: Minor Wisdom",
+    "slug": "enchant-necklace-minor-wisdom",
+    "image": "images/crafting/enchant-necklace-minor-wisdom.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Necklace",
+    "craftType": "Scroll",
+    "effect": "Enchant Necklace: Minor Wisdom +1 WIS (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Boots: Minor Agility",
+    "slug": "enchant-boots-minor-agility",
+    "image": "images/crafting/enchant-boots-minor-agility.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Boots",
+    "craftType": "Scroll",
+    "effect": "Enchant Boots: Minor Agility +1 AGI (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 5 }
+    ],
+    "difficultyColor": "Dark Blue",
+    "difficultyText": "Your skills make this a moderate task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Shoulder: Minor Disease Resistance",
+    "slug": "enchant-shoulder-minor-disease-resistance",
+    "image": "images/crafting/enchant-shoulder-minor-disease-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Shoulder",
+    "craftType": "Scroll",
+    "effect": "Enchant Shoulder: Minor Disease Resistance +2 SV Disease (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Gloves: Minor Agility",
+    "slug": "enchant-gloves-minor-agility",
+    "image": "images/crafting/enchant-gloves-minor-agility.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Gloves",
+    "craftType": "Scroll",
+    "effect": "Enchant Gloves: Minor Agility +1 AGI (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 5 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Shoulder: Minor Cold Resistance",
+    "slug": "enchant-shoulder-minor-cold-resistance",
+    "image": "images/crafting/enchant-shoulder-minor-cold-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Shoulder",
+    "craftType": "Scroll",
+    "effect": "Enchant Shoulder: Minor Cold Resistance +2 SV Cold (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Cloak: Minor Magic Resistance",
+    "slug": "enchant-cloak-minor-magic-resistance",
+    "image": "images/crafting/enchant-cloak-minor-magic-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Cloak",
+    "craftType": "Scroll",
+    "effect": "Enchant Cloak: Minor Magic Resistance +2 SV Magic (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Shoulder: Minor Strength",
+    "slug": "enchant-shoulder-minor-strength",
+    "image": "images/crafting/enchant-shoulder-minor-strength.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Shoulder",
+    "craftType": "Scroll",
+    "effect": "Enchant Shoulder: Minor Strength +1 STR (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Necklace: Lesser Charisma",
+    "slug": "enchant-necklace-lesser-charisma",
+    "image": "images/crafting/enchant-necklace-lesser-charisma.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Necklace",
+    "craftType": "Scroll",
+    "effect": "Enchant Necklace: Lesser Charisma +2 CHA (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Magic Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Bracer: Minor Wisdom",
+    "slug": "enchant-bracer-minor-wisdom",
+    "image": "images/crafting/enchant-bracer-minor-wisdom.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Bracer",
+    "craftType": "Scroll",
+    "effect": "Enchant Bracer: Minor Wisdom +1 WIS (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 8 },
+      { "item": "Mote of Magic", "quantity": 2 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Shoulder: Minor Poison Resistance",
+    "slug": "enchant-shoulder-minor-poison-resistance",
+    "image": "images/crafting/enchant-shoulder-minor-poison-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Shoulder",
+    "craftType": "Scroll",
+    "effect": "Enchant Shoulder: Minor Poison Resistance +2 SV Poison (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchanted Cloth",
+    "slug": "enchanted-cloth",
+    "image": "images/crafting/enchanted-cloth.jpg",
+    "tradeskill": "Enchanting",
+    "craftType": "Armor",
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Cloth Scraps", "quantity": 1 },
+      { "item": "Enchanted Powder", "quantity": 1 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Shoulder: Minor Corruption Resistance",
+    "slug": "enchant-shoulder-minor-corruption-resistance",
+    "image": "images/crafting/enchant-shoulder-minor-corruption-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Shoulder",
+    "craftType": "Scroll",
+    "effect": "Enchant Shoulder: Minor Corruption Resistance +2 SV Corruption (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Helm: Minor Wisdom",
+    "slug": "enchant-helm-minor-wisdom",
+    "image": "images/crafting/enchant-helm-minor-wisdom.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Helm",
+    "craftType": "Scroll",
+    "effect": "Enchant Helm: Minor Wisdom +1 WIS (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Yellow",
+    "difficultyText": "Your skills make this a daunting task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Ring: Minor Charisma",
+    "slug": "enchant-ring-minor-charisma",
+    "image": "images/crafting/enchant-ring-minor-charisma.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Ring",
+    "craftType": "Scroll",
+    "effect": "Enchant Ring: Minor Charisma +1 CHA (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 8 },
+      { "item": "Mote of Magic", "quantity": 2 }
+    ],
+    "difficultyColor": "Light Blue",
+    "difficultyText": "Your skills make this a simple task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Necklace: Minor Intelligence",
+    "slug": "enchant-necklace-minor-intelligence",
+    "image": "images/crafting/enchant-necklace-minor-intelligence.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Necklace",
+    "craftType": "Scroll",
+    "effect": "Enchant Necklace: Minor Intelligence +1 INT (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Boots: Minor Cold Resistance",
+    "slug": "enchant-boots-minor-cold-resistance",
+    "image": "images/crafting/enchant-boots-minor-cold-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Boots",
+    "craftType": "Scroll",
+    "effect": "Enchant Boots: Minor Cold Resistance +2 SV Cold (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 5 }
+    ],
+    "difficultyColor": "Dark Blue",
+    "difficultyText": "Your skills make this a moderate task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Cloak: Minor Agility",
+    "slug": "enchant-cloak-minor-agility",
+    "image": "images/crafting/enchant-cloak-minor-agility.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Cloak",
+    "craftType": "Scroll",
+    "effect": "Enchant Cloak: Minor Agility +1 AGI (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Bracer: Minor Strength",
+    "slug": "enchant-bracer-minor-strength",
+    "image": "images/crafting/enchant-bracer-minor-strength.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Bracer",
+    "craftType": "Scroll",
+    "effect": "Enchant Bracer: Minor Strength +1 STR (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 8 },
+      { "item": "Mote of Magic", "quantity": 2 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Necklace: Lesser Intelligence",
+    "slug": "enchant-necklace-lesser-intelligence",
+    "image": "images/crafting/enchant-necklace-lesser-intelligence.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Necklace",
+    "craftType": "Scroll",
+    "effect": "Enchant Necklace: Lesser Intelligence +2 INT (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Magic Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Legs: Minor Corruption Resistance",
+    "slug": "enchant-legs-minor-corruption-resistance",
+    "image": "images/crafting/enchant-legs-minor-corruption-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Legs",
+    "craftType": "Scroll",
+    "effect": "Enchant Legs: Minor Corruption Resistance +2 SV Corruption (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Mask: Minor Disease Resistance",
+    "slug": "enchant-mask-minor-disease-resistance",
+    "image": "images/crafting/enchant-mask-minor-disease-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Mask",
+    "craftType": "Scroll",
+    "effect": "Enchant Mask: Minor Disease Resistance +2 SV Disease (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Light Blue",
+    "difficultyText": "Your skills make this a simple task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Shoulder: Minor Magic Resistance",
+    "slug": "enchant-shoulder-minor-magic-resistance",
+    "image": "images/crafting/enchant-shoulder-minor-magic-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Shoulder",
+    "craftType": "Scroll",
+    "effect": "Enchant Shoulder: Minor Magic Resistance +2 SV Magic (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Earring: Minor Charisma",
+    "slug": "enchant-earring-minor-charisma",
+    "image": "images/crafting/enchant-earring-minor-charisma.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Earring",
+    "craftType": "Scroll",
+    "effect": "Enchant Earring: Minor Charisma +1 CHA (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 8 },
+      { "item": "Mote of Magic", "quantity": 2 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Mask: Minor Poison Resistance",
+    "slug": "enchant-mask-minor-poison-resistance",
+    "image": "images/crafting/enchant-mask-minor-poison-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Mask",
+    "craftType": "Scroll",
+    "effect": "Enchant Mask: Minor Poison Resistance +2 SV Poison (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Light Blue",
+    "difficultyText": "Your skills make this a simple task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchanted Rawhide",
+    "slug": "enchanted-rawhide",
+    "image": "images/crafting/enchanted-rawhide.jpg",
+    "tradeskill": "Enchanting",
+    "craftType": "Armor",
+    "weight": 0.2,
+    "size": "Small",
+    "components": [
+      { "item": "Rawhide Scraps", "quantity": 1 },
+      { "item": "Enchanted Powder", "quantity": 1 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Belt: Minor Strength",
+    "slug": "enchant-belt-minor-strength",
+    "image": "images/crafting/enchant-belt-minor-strength.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Belt",
+    "craftType": "Scroll",
+    "effect": "Enchant Belt: Minor Strength +1 STR (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 5 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Mask: Minor Dexterity",
+    "slug": "enchant-mask-minor-dexterity",
+    "image": "images/crafting/enchant-mask-minor-dexterity.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Mask",
+    "craftType": "Scroll",
+    "effect": "Enchant Mask: Minor Dexterity +1 DEX (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Light Blue",
+    "difficultyText": "Your skills make this a simple task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Shoulder: Minor Electric Resistance",
+    "slug": "enchant-shoulder-minor-electric-resistance",
+    "image": "images/crafting/enchant-shoulder-minor-electric-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Shoulder",
+    "craftType": "Scroll",
+    "effect": "Enchant Shoulder: Minor Electric Resistance +2 SV Electric (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Gloves: Minor Dexterity",
+    "slug": "enchant-gloves-minor-dexterity",
+    "image": "images/crafting/enchant-gloves-minor-dexterity.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Gloves",
+    "craftType": "Scroll",
+    "effect": "Enchant Gloves: Minor Dexterity +1 DEX (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 5 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Necklace: Lesser Wisdom",
+    "slug": "enchant-necklace-lesser-wisdom",
+    "image": "images/crafting/enchant-necklace-lesser-wisdom.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Necklace",
+    "craftType": "Scroll",
+    "effect": "Enchant Necklace: Lesser Wisdom +2 WIS (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Magic Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Bracer: Lesser Strength",
+    "slug": "enchant-bracer-lesser-strength",
+    "image": "images/crafting/enchant-bracer-lesser-strength.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Bracer",
+    "craftType": "Scroll",
+    "effect": "Enchant Bracer: Lesser Strength +2 STR (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Magic Powder", "quantity": 8 },
+      { "item": "Glimmer of Magic", "quantity": 2 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Bracer: Lesser Intelligence",
+    "slug": "enchant-bracer-lesser-intelligence",
+    "image": "images/crafting/enchant-bracer-lesser-intelligence.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Bracer",
+    "craftType": "Scroll",
+    "effect": "Enchant Bracer: Lesser Intelligence +2 INT (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Magic Powder", "quantity": 8 },
+      { "item": "Glimmer of Magic", "quantity": 2 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Mask: Minor Charisma",
+    "slug": "enchant-mask-minor-charisma",
+    "image": "images/crafting/enchant-mask-minor-charisma.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Mask",
+    "craftType": "Scroll",
+    "effect": "Enchant Mask: Minor Charisma +1 CHA (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Light Blue",
+    "difficultyText": "Your skills make this a simple task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Bracer: Lesser Wisdom",
+    "slug": "enchant-bracer-lesser-wisdom",
+    "image": "images/crafting/enchant-bracer-lesser-wisdom.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Bracer",
+    "craftType": "Scroll",
+    "effect": "Enchant Bracer: Lesser Wisdom +2 WIS (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Magic Powder", "quantity": 8 },
+      { "item": "Glimmer of Magic", "quantity": 2 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchanted Tin Bar",
+    "slug": "enchanted-tin-bar",
+    "image": "images/crafting/enchanted-tin-bar.jpg",
+    "tradeskill": "Enchanting",
+    "craftType": "Armor / Weapon",
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Tin Bar", "quantity": 1 },
+      { "item": "Magic Powder", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Shoulder: Minor Dexterity",
+    "slug": "enchant-shoulder-minor-dexterity",
+    "image": "images/crafting/enchant-shoulder-minor-dexterity.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Shoulder",
+    "craftType": "Scroll",
+    "effect": "Enchant Shoulder: Minor Dexterity +1 DEX (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Chest: Minor Fire Resistance",
+    "slug": "enchant-chest-minor-fire-resistance",
+    "image": "images/crafting/enchant-chest-minor-fire-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Chest",
+    "craftType": "Scroll",
+    "effect": "Enchant Chest: Minor Fire Resistance +2 SV Fire (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Legs: Minor Disease Resistance",
+    "slug": "enchant-legs-minor-disease-resistance",
+    "image": "images/crafting/enchant-legs-minor-disease-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Legs",
+    "craftType": "Scroll",
+    "effect": "Enchant Legs: Minor Disease Resistance +2 SV Disease (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Shoulder: Minor Fire Resistance",
+    "slug": "enchant-shoulder-minor-fire-resistance",
+    "image": "images/crafting/enchant-shoulder-minor-fire-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Shoulder",
+    "craftType": "Scroll",
+    "effect": "Enchant Shoulder: Minor Fire Resistance +2 SV Fire (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Cloak: Minor Corruption Resistance",
+    "slug": "enchant-cloak-minor-corruption-resistance",
+    "image": "images/crafting/enchant-cloak-minor-corruption-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Cloak",
+    "craftType": "Scroll",
+    "effect": "Enchant Cloak: Minor Corruption Resistance +2 SV Corruption (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 6 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Legs: Minor Magic Resistance",
+    "slug": "enchant-legs-minor-magic-resistance",
+    "image": "images/crafting/enchant-legs-minor-magic-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Legs",
+    "craftType": "Scroll",
+    "effect": "Enchant Legs: Minor Magic Resistance +2 SV Magic (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Bracer: Minor Intelligence",
+    "slug": "enchant-bracer-minor-intelligence",
+    "image": "images/crafting/enchant-bracer-minor-intelligence.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Bracer",
+    "craftType": "Scroll",
+    "effect": "Enchant Bracer: Minor Intelligence +1 INT (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 8 },
+      { "item": "Mote of Magic", "quantity": 2 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Shoulder: Minor Holy Resistance",
+    "slug": "enchant-shoulder-minor-holy-resistance",
+    "image": "images/crafting/enchant-shoulder-minor-holy-resistance.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Shoulder",
+    "craftType": "Scroll",
+    "effect": "Enchant Shoulder: Minor Holy Resistance +2 SV Holy (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Legs: Minor Strength",
+    "slug": "enchant-legs-minor-strength",
+    "image": "images/crafting/enchant-legs-minor-strength.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Legs",
+    "craftType": "Scroll",
+    "effect": "Enchant Legs: Minor Strength +1 STR (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 7 },
+      { "item": "Mote of Magic", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchanted Silver Bar",
+    "slug": "enchanted-silver-bar",
+    "image": "images/crafting/enchanted-silver-bar.jpg",
+    "tradeskill": "Enchanting",
+    "craftType": "Armor / Weapon",
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Silver Bar", "quantity": 1 },
+      { "item": "Magic Powder", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Earring: Minor Mana",
+    "slug": "enchant-earring-minor-mana",
+    "image": "images/crafting/enchant-earring-minor-mana.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Earring",
+    "craftType": "Scroll",
+    "effect": "Enchant Earring: Minor Mana +5 Mana (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 8 },
+      { "item": "Mote of Magic", "quantity": 2 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchanted Copper Bar",
+    "slug": "enchanted-copper-bar",
+    "image": "images/crafting/enchanted-copper-bar.jpg",
+    "tradeskill": "Enchanting",
+    "craftType": "Armor / Weapon",
+    "weight": 0.1,
+    "size": "Small",
+    "components": [
+      { "item": "Copper Bar", "quantity": 1 },
+      { "item": "Enchanted Powder", "quantity": 1 }
+    ],
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchanted Hide",
+    "slug": "enchanted-hide",
+    "image": "images/crafting/enchanted-hide.jpg",
+    "tradeskill": "Enchanting",
+    "craftType": "Armor",
+    "weight": 0.2,
+    "size": "Small",
+    "components": [
+      { "item": "Hide Scraps", "quantity": 1 },
+      { "item": "Magic Powder", "quantity": 1 }
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Ring: Minor Health",
+    "slug": "enchant-ring-minor-health",
+    "image": "images/crafting/enchant-ring-minor-health.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Ring",
+    "craftType": "Scroll",
+    "effect": "Enchant Ring: Minor Health +5 HP (On Click. Any Slot. Cast Time: 5s. Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [
+      { "item": "Enchanted Powder", "quantity": 8 },
+      { "item": "Mote of Magic", "quantity": 2 }
+    ],
+    "difficultyColor": "Light Blue",
+    "difficultyText": "Your skills make this a simple task.",
+    "observedAtSkill": 25
+  },
+  {
+    "name": "Enchant Belt: Minor Electric Resistance",
+    "slug": "enchant-belt-minor-electric-resistance",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Belt",
+    "craftType": "Scroll",
+    "difficultyColor": "Green",
+    "observedAtSkill": 25,
+    "needsInfo": true
   },
   { "name": "Bronze Scraps", "slug": "bronze-scraps-from-corroded-bronze-plate-greaves", "tradeskill": "Blacksmithing", "components": [{ "item": "Corroded Bronze Plate Greaves", "quantity": 1 }, { "item": "Hammer and Chisel", "quantity": 1 }], "resultQuantity": 2 },
   { "name": "Bronze Scraps", "slug": "bronze-scraps-from-corroded-bronze-plate-helm", "tradeskill": "Blacksmithing", "components": [{ "item": "Corroded Bronze Plate Helm", "quantity": 1 }, { "item": "Hammer and Chisel", "quantity": 1 }] },

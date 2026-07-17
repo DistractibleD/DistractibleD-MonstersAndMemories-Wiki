@@ -23,6 +23,11 @@ let pendingCraftingTradeskill = null;
 // Same idea as pendingCraftingTradeskill, but for the separate Gathering
 // page (gathering tradeskills split out from Crafting on 2026-07-13).
 let pendingGatheringTradeskill = null;
+// Same idea again, but for the separate Enchanting and Disenchanting page
+// (split from Crafting on 2026-07-16) — lets a search result or recipe link
+// jump straight to Enchanting's or Disenchanting's own recipe list instead of
+// that page's own 2-card tradeskill grid.
+let pendingEnchantingTradeskill = null;
 // Set by the Item Database category grid's own filter dropdowns (2026-07-14)
 // so picking a filter there — instead of clicking a category card — jumps
 // straight to the unscoped all-items list with that filter pre-applied.
@@ -528,6 +533,7 @@ function goToItemCategory(type) {
 // so every existing call site (search results, item "used to craft"/"crafted
 // via" links, etc.) reaches the right page without having to know about the split.
 function goToEnchantingRecipe(recipe) {
+  pendingEnchantingTradeskill = recipe.tradeskill;
   pendingHighlightRecipe = recipe.slug;
   const alreadyThere = location.hash.replace('#', '') === 'enchanting-disenchanting';
   location.hash = 'enchanting-disenchanting';
@@ -550,6 +556,7 @@ function goToRecipe(recipe) {
 // "Jewelcrafting" category search result) — no specific recipe to highlight.
 function goToCraftingCategory(tradeskillName) {
   if (tradeskillName === 'Enchanting' || tradeskillName === 'Disenchanting') {
+    pendingEnchantingTradeskill = tradeskillName;
     pendingHighlightRecipe = null;
     const alreadyThere = location.hash.replace('#', '') === 'enchanting-disenchanting';
     location.hash = 'enchanting-disenchanting';
@@ -2416,6 +2423,70 @@ function estimateRecipeSkill(recipe) {
   return recipeSkillEstimateCache.get(recipe.tradeskill).get(recipe) || null;
 }
 
+// Disenchanting's own recipes double as the data source for its magic-dust
+// tiers instead of a separate schema field: each distinct recipe result name
+// (e.g. "Enchanted Powder (x1-5) & Mote of Magic (x0-2)") names one tier's
+// two possible outputs — a common "Powder" and a rarer "of Magic" essence.
+// Tier order comes from the shared recipeSkillLevel/listOrder those recipes
+// already carry (lowest first). The exact formula for which source item
+// yields which tier isn't confirmed yet, so this only shows what a tier
+// produces, not what feeds into it.
+function disenchantingDustTiers() {
+  const seen = new Map();
+  craftingData
+    .filter(r => r.tradeskill === 'Disenchanting')
+    .forEach(r => {
+      if (seen.has(r.name)) return;
+      const m = r.name.match(/^(.*?)\s*\(x([\d-]+)\)\s*&\s*(.*?)\s*\(x([\d-]+)\)$/);
+      if (!m) return;
+      seen.set(r.name, {
+        tierOrder: r.listOrder ?? Infinity,
+        powder: { name: m[1].trim(), range: m[2] },
+        essence: { name: m[3].trim(), range: m[4] }
+      });
+    });
+  return [...seen.values()].sort((a, b) => a.tierOrder - b.tierOrder);
+}
+
+// One dust's thumbnail — the real item image when items.json has one, a
+// dashed placeholder box otherwise (item not added yet, or added but with no
+// image uploaded yet) so the tier chart's layout stays stable either way.
+function dustTierThumbHTML(dustName, range) {
+  const item = findItemByName(dustName);
+  const thumb = item && item.image
+    ? `<img src="${escapeAttr(item.image)}" alt="${escapeAttr(dustName)}">`
+    : `<div class="dust-tier-placeholder">No image yet</div>`;
+  return `
+    <div class="dust-tier-thumb">
+      ${thumb}
+      <div class="dust-tier-thumb-name">${escapeAttr(dustName)}</div>
+      <div class="dust-tier-thumb-range">&times;${escapeAttr(range)}</div>
+    </div>
+  `;
+}
+
+function renderDisenchantingDustTiersHTML() {
+  const tiers = disenchantingDustTiers();
+  if (!tiers.length) return '';
+  return `
+    <div class="dust-tiers">
+      <h2>Magic Dust Tiers</h2>
+      <p class="dust-tiers-intro">Lowest to highest tier. The exact formula for which source item yields which tier isn't confirmed yet.</p>
+      <div class="dust-tiers-grid">
+        ${tiers.map((t, i) => `
+          <div class="dust-tier">
+            <div class="dust-tier-label">Tier ${i + 1}</div>
+            <div class="dust-tier-pair">
+              ${dustTierThumbHTML(t.powder.name, t.powder.range)}
+              ${dustTierThumbHTML(t.essence.name, t.essence.range)}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
 // Renders one tradeskill's full recipe list (search box, needs-info toggle,
 // count, station-grouped grid, item/recipe link handlers, highlight-on-
 // arrival) into `rootEl`. Shared by the main Crafting page — a single
@@ -2433,11 +2504,17 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   const needsInfoId = `craft-recipe-filter-needsinfo${idSuffix}`;
   const countId = `craft-recipe-count${idSuffix}`;
   const gridId = `craft-recipe-grid${idSuffix}`;
+  const slotFilterId = `craft-recipe-filter-slot${idSuffix}`;
+  const typeFilterId = `craft-recipe-filter-type${idSuffix}`;
+  const sortId = `craft-recipe-sort${idSuffix}`;
 
   // Sorted by the recipe's real skill requirement (lowest first) — a
   // confirmed `recipeSkillLevel` where one exists, otherwise the
   // interpolated estimate from estimateRecipeSkill() above, otherwise
-  // (no signal at all) the old listOrder/alphabetical fallback.
+  // (no signal at all) the old listOrder/alphabetical fallback. This is the
+  // default order every tradeskill uses; Enchanting's own sort dropdown
+  // (below) can switch the displayed order to alphabetical without touching
+  // this base array.
   const allRecipes = craftingData
     .filter(r => r.tradeskill === tradeskillName)
     .sort((a, b) => {
@@ -2454,6 +2531,20 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
       return a.name.localeCompare(b.name);
     });
 
+  // Enchanting recipes carry two extra fields no other tradeskill uses:
+  // `enchantSlot` (the equipment slot a scroll's buff applies to, e.g.
+  // "Gloves" — unset for a raw enchanted-material recipe, which has no
+  // slot) and `craftType` ("Scroll" for a buff scroll, or "Armor"/"Weapon"/
+  // "Jewelry" for a raw material recipe, categorized by which other
+  // tradeskill actually uses that material). Both dropdowns are derived from
+  // whatever values actually exist in the data (same "no code change needed
+  // for a new value" philosophy as every other filter dropdown on the site),
+  // and only rendered at all for Enchanting — no other tradeskill has this
+  // slot/type shape.
+  const isEnchanting = tradeskillName === 'Enchanting';
+  const enchantSlots = isEnchanting ? [...new Set(allRecipes.map(r => r.enchantSlot).filter(Boolean))].sort() : [];
+  const enchantTypes = isEnchanting ? [...new Set(allRecipes.map(r => r.craftType).filter(Boolean))].sort() : [];
+
   rootEl.innerHTML = `
     ${showBackLink ? `<p><a href="#" id="${backLinkId}">&larr; All tradeskills</a></p>` : ''}
     <${headingTag}>
@@ -2461,6 +2552,7 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
       ${tradeskill && tradeskill.status === 'planned' ? '<span class="badge-planned">Planned</span>' : ''}
     </${headingTag}>
     ${tradeskill && tradeskill.note ? `<p class="craft-tradeskill-note">${escapeAttr(tradeskill.note)}</p>` : ''}
+    ${tradeskillName === 'Disenchanting' ? renderDisenchantingDustTiersHTML() : ''}
     ${renderGemstoneTablesHTML(tradeskillName)}
     ${
       tradeskill && tradeskill.status === 'planned'
@@ -2469,6 +2561,20 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
           ? `
             <div class="items-toolbar">
               <input type="search" id="${searchId}" class="items-search" placeholder="Search ${escapeAttr(tradeskillName)} recipes, ingredients, tools..." autocomplete="off">
+              ${isEnchanting ? `
+                <select id="${slotFilterId}" class="items-select">
+                  <option value="">All Slots</option>
+                  ${enchantSlots.map(s => `<option value="${escapeAttr(s)}">${escapeAttr(s)}</option>`).join('')}
+                </select>
+                <select id="${typeFilterId}" class="items-select">
+                  <option value="">All Types</option>
+                  ${enchantTypes.map(t => `<option value="${escapeAttr(t)}">${escapeAttr(t)}</option>`).join('')}
+                </select>
+                <select id="${sortId}" class="items-select">
+                  <option value="skill">Sort: Skill Required</option>
+                  <option value="alpha">Sort: Alphabetical</option>
+                </select>
+              ` : ''}
               <label class="needsinfo-toggle" for="${needsInfoId}">
                 <input type="checkbox" id="${needsInfoId}">
                 <span class="needsinfo-toggle-slider"></span>
@@ -2495,6 +2601,9 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   const needsInfoFilter = rootEl.querySelector(`#${needsInfoId}`);
   const grid = rootEl.querySelector(`#${gridId}`);
   const countEl = rootEl.querySelector(`#${countId}`);
+  const slotFilter = isEnchanting ? rootEl.querySelector(`#${slotFilterId}`) : null;
+  const typeFilter = isEnchanting ? rootEl.querySelector(`#${typeFilterId}`) : null;
+  const sortSelect = isEnchanting ? rootEl.querySelector(`#${sortId}`) : null;
 
   function attachRecipeLinkHandlers() {
     grid.querySelectorAll('.craft-result-link').forEach(link => {
@@ -2529,9 +2638,17 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   function updateGrid() {
     const query = searchBox.value.toLowerCase().trim();
     const needsInfo = needsInfoFilter.checked;
+    const slotValue = slotFilter ? slotFilter.value : '';
+    const typeValue = typeFilter ? typeFilter.value : '';
     let filtered = allRecipes;
     if (needsInfo) filtered = filtered.filter(r => r.needsInfo);
+    if (slotValue) filtered = filtered.filter(r => r.enchantSlot === slotValue);
+    if (typeValue) filtered = filtered.filter(r => r.craftType === typeValue);
     if (query) filtered = filtered.filter(r => recipeSearchHaystack(r).includes(query));
+    // Alphabetical is the one non-default sort option (Enchanting only) —
+    // everything else always displays in the same skill-required order
+    // `allRecipes` was already sorted into above.
+    if (sortSelect && sortSelect.value === 'alpha') filtered = [...filtered].sort((a, b) => a.name.localeCompare(b.name));
 
     if (!filtered.length) {
       grid.innerHTML = '<p class="items-empty">No recipes match your search.</p>';
@@ -2549,13 +2666,16 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
       grid.innerHTML = `<div class="craft-recipe-grid">${filtered.map(renderRecipeCardHTML).join('')}</div>`;
     }
 
-    countEl.textContent = (query || needsInfo) ? `Showing ${filtered.length} of ${allRecipes.length} recipes` : '';
+    countEl.textContent = (query || needsInfo || slotValue || typeValue) ? `Showing ${filtered.length} of ${allRecipes.length} recipes` : '';
     setupItemTooltip(grid);
     attachRecipeLinkHandlers();
   }
 
   searchBox.addEventListener('input', updateGrid);
   needsInfoFilter.addEventListener('change', updateGrid);
+  slotFilter && slotFilter.addEventListener('change', updateGrid);
+  typeFilter && typeFilter.addEventListener('change', updateGrid);
+  sortSelect && sortSelect.addEventListener('change', updateGrid);
   updateGrid();
 
   if (highlightSlug) {
@@ -2582,36 +2702,48 @@ async function renderCraftingRecipes(container, tradeskillName) {
 // Enchanting and Disenchanting recipes live in crafting.json exactly like any
 // other tradeskill (see tradeskills.json's "enchanting" category, which keeps
 // them out of the main Crafting grid — renderCraftingCategories above). They
-// get their own page instead of a category-card drill-down since there are
-// only two of them: both tradeskills' recipes render directly, stacked,
-// nested under "Tradeskilling" in the sidebar alongside Crafting and Gathering.
+// get their own page, nested under "Tradeskilling" in the sidebar alongside
+// Crafting and Gathering — a small 2-card tradeskill grid (same card markup
+// as the main Crafting page, via tradeskillGridHTML), click through to one
+// tradeskill's own recipe list at a time. Originally this page showed both
+// tradeskills' recipes stacked on one page at once, but that meant scrolling
+// past all of one tradeskill's recipes to reach the other — the 2-card grid
+// avoids that (2026-07-16).
 async function renderEnchantingDisenchantingPage(container) {
   await ensureCraftingData();
+  await ensureItemsData(); // Disenchanting's dust-tier thumbnails look items up by name
 
-  const highlightSlug = pendingHighlightRecipe;
-  pendingHighlightRecipe = null;
+  // Landed here from a header search result for a specific recipe or
+  // tradeskill — jump straight to that tradeskill's own recipe list instead
+  // of the 2-card grid, same idea as pendingCraftingTradeskill on the main
+  // Crafting page.
+  if (pendingEnchantingTradeskill) {
+    const target = pendingEnchantingTradeskill;
+    pendingEnchantingTradeskill = null;
+    await renderEnchantingDisenchantingRecipes(container, target);
+    return;
+  }
+
+  renderEnchantingDisenchantingCategories(container);
+}
+
+function renderEnchantingDisenchantingCategories(container) {
+  const list = tradeskillsData.filter(ts => ts.category === 'enchanting').sort((a, b) => a.name.localeCompare(b.name));
 
   container.innerHTML = `
     <h1>Enchanting and Disenchanting</h1>
     <p>Enchanting applies a temporary buff onto an existing item; Disenchanting breaks a MAGIC
-    item back down into raw magic essence. Search below to jump straight to a specific recipe.</p>
+    item back down into raw magic essence. Browse by tradeskill, or search below to jump
+    straight to a specific recipe.</p>
     <div class="items-quick-search">
       <input type="search" id="enchanting-quick-search-box" class="items-search items-quick-search-box" placeholder="Search Enchanting and Disenchanting recipes..." autocomplete="off">
       <div id="enchanting-quick-search-results" class="items-quick-search-results"></div>
     </div>
-    <div id="enchanting-section"></div>
-    <div id="disenchanting-section"></div>
+    ${tradeskillGridHTML(list, false)}
   `;
 
-  await renderTradeskillSection(container.querySelector('#enchanting-section'), 'Enchanting', {
-    idSuffix: '-enchanting',
-    headingTag: 'h2',
-    highlightSlug
-  });
-  await renderTradeskillSection(container.querySelector('#disenchanting-section'), 'Disenchanting', {
-    idSuffix: '-disenchanting',
-    headingTag: 'h2',
-    highlightSlug
+  container.querySelectorAll('.craft-card').forEach(card => {
+    card.addEventListener('click', () => renderEnchantingDisenchantingRecipes(container, card.dataset.tradeskill));
   });
 
   // Quick search across both tradeskills together, same pattern as the
@@ -2646,9 +2778,19 @@ async function renderEnchantingDisenchantingPage(container) {
       link.addEventListener('click', e => {
         e.preventDefault();
         const recipe = craftingData.find(r => r.slug === link.dataset.slug);
-        if (recipe) goToEnchantingRecipe(recipe);
+        if (recipe) renderEnchantingDisenchantingRecipes(container, recipe.tradeskill, recipe.slug);
       });
     });
+  });
+}
+
+async function renderEnchantingDisenchantingRecipes(container, tradeskillName, highlightSlugOverride) {
+  const highlightSlug = highlightSlugOverride ?? pendingHighlightRecipe;
+  pendingHighlightRecipe = null;
+  await renderTradeskillSection(container, tradeskillName, {
+    showBackLink: true,
+    onBack: () => renderEnchantingDisenchantingCategories(container),
+    highlightSlug
   });
 }
 
