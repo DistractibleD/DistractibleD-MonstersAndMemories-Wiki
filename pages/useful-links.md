@@ -5,4 +5,4 @@
 - **[MnM Quest](https://mnmquest.com/)** — a very good resource for quest information and quest dialogue. This site is AI-powered, using information pulled from the unofficial wiki above and from Reddit.
 - **[MnM Classes Map](https://mnmclasses.com/map)** — a good place for game maps. It also has other nice features like class guides and an item database, but those sections are outdated.
 - **[MnM Drops](https://mnmdrops.com/)** — a fan-run item and drop database, organized by zone and mob, with in-game item card screenshots.
-- **[Stories of MnM](https://storiesofmnm.com)** — a site made by DHew from the official MnM Discord, with all kinds of useful information about the game.
+- **[Stories of MnM](https://storiesofmnm.com)** — a site made by DHew from the official MnM Discord.

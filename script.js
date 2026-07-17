@@ -3491,11 +3491,12 @@ function renderSubmitPage(container) {
           </button>
         `).join('')}
       </div>
-      <p class="submit-examples-note">Click an example to see it full-size. Notice how each one
-      captures the <strong>entire</strong> card or window, with nothing cut off at the edges —
-      that's the most important thing to get right. A screenshot missing part of the text (a
-      stat, a name, a component) is much less useful than one that's a little messy but
-      complete.</p>
+      <p class="submit-examples-note">Click an example to see it full-size. What matters most
+      isn't a perfectly framed screenshot — it's making sure every bit of <strong>text</strong>
+      is readable and nothing gets cut off. If a card or window has too much text to fit in one
+      screenshot, just take two instead of cropping anything out. A screenshot missing part of
+      the text (a stat, a name, a component) is much less useful than a couple of slightly messy
+      ones that show everything.</p>
     </div>
     ${!SUBMIT_WORKER_URL ? `
       <p class="submit-form-notice">This form isn't finished being set up yet (no Worker URL

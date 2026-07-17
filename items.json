@@ -3864,6 +3864,95 @@
     "size": "Tiny"
   },
   {
+    "name": "Ironroot",
+    "slug": "ironroot",
+    "image": "images/items/ironroot.jpg",
+    "type": "Misc",
+    "tags": [],
+    "description": "A sturdy herb found growing near cliffsides.",
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
+    "name": "Nomad's Grace",
+    "slug": "nomads-grace",
+    "image": "images/items/nomads-grace.jpg",
+    "type": "Misc",
+    "tags": [],
+    "description": "A herb commonly found along well-traveled paths, a welcome sight to those who are lost.",
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
+    "name": "Whispering Sage",
+    "slug": "whispering-sage",
+    "image": "images/items/whispering-sage.jpg",
+    "type": "Misc",
+    "tags": [],
+    "description": "A herb with rustling fronds that sound like hushed whispers.",
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
+    "name": "Ghost Poppy Powder",
+    "slug": "ghost-poppy-powder",
+    "image": "images/items/ghost-poppy-powder.jpg",
+    "type": "Misc",
+    "tags": [],
+    "description": "A fine powder made from ghost poppies.",
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
+    "name": "Lionleaf Powder",
+    "slug": "lionleaf-powder",
+    "image": "images/items/lionleaf-powder.jpg",
+    "type": "Misc",
+    "tags": [],
+    "description": "A fine powder made from lionleaf.",
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
+    "name": "Ironroot Powder",
+    "slug": "ironroot-powder",
+    "image": "images/items/ironroot-powder.jpg",
+    "type": "Misc",
+    "tags": [],
+    "description": "A fine powder made from ironroot.",
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
+    "name": "Nomad's Grace Powder",
+    "slug": "nomads-grace-powder",
+    "image": "images/items/nomads-grace-powder.jpg",
+    "type": "Misc",
+    "tags": [],
+    "description": "A fine powder made from nomad's grace.",
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
+    "name": "Whispering Sage Powder",
+    "slug": "whispering-sage-powder",
+    "image": "images/items/whispering-sage-powder.jpg",
+    "type": "Misc",
+    "tags": [],
+    "description": "A fine powder made from whispering sage.",
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
+    "name": "Magic Frond",
+    "slug": "magic-frond",
+    "image": "images/items/magic-frond.jpg",
+    "type": "Misc",
+    "tags": ["MAGIC"],
+    "weight": 0.25,
+    "size": "Small"
+  },
+  {
     "name": "Skri'Var Silkstrand",
     "slug": "skrivar-silkstrand",
     "image": "images/items/skrivar-silkstrand.jpg",

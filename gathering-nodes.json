@@ -2,6 +2,7 @@
   {
     "name": "Copper Vein",
     "slug": "copper-vein",
+    "image": "images/gathering/copper-vein.jpg",
     "tradeskill": "Mining",
     "minSkill": 1,
     "trivialSkill": 50,
@@ -306,6 +307,7 @@
   {
     "name": "Ghost Poppy",
     "slug": "ghost-poppy",
+    "image": "images/gathering/ghost-poppy.jpg",
     "tradeskill": "Herbalism",
     "minSkill": 1,
     "trivialSkill": 20,
