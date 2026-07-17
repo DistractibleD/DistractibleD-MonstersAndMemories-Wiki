@@ -989,6 +989,18 @@ body:not(.site-entered) .sidebar {
   background: #5a1f1f;
   color: #ff8f8f;
 }
+/* "Know where this drops?"/"Know where this spawns?" link — item viewer
+   (opts.interactive) and named-monster cards only, see renderItemCardHTML/
+   renderMonsterCardHTML. */
+.item-card-suggest a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent-dim);
+  cursor: pointer;
+}
+.item-card-suggest a:hover {
+  text-decoration: none;
+}
 .item-card-section-note {
   font-style: italic;
   color: var(--text);
@@ -1807,6 +1819,40 @@ body:not(.site-entered) .sidebar {
   padding: 14px 16px;
   color: var(--text-dim);
 }
+/* Shown when arriving via an item's "Know where this drops?" or a named
+   monster's "Know where this spawns?" link (goToSubmit) — see
+   renderSubmitPage's pendingSubmitContext handling. */
+.submit-context-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--bg-panel);
+  border: 1px solid var(--accent-dim);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 14px 0;
+  max-width: 480px;
+  font-size: 0.88rem;
+}
+.submit-context-banner strong {
+  color: var(--accent);
+}
+#submit-context-clear {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+#submit-context-clear:hover {
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
 .submit-form {
   display: flex;
   flex-direction: column;
@@ -1864,7 +1910,21 @@ body:not(.site-entered) .sidebar {
   color: var(--text-dim);
   font-size: 0.8rem;
 }
-.submit-form textarea {
+#submit-preview-clear {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+#submit-preview-clear:hover {
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
+.submit-form textarea, .submit-form select {
   background: var(--bg);
   border: 1px solid var(--border);
   color: var(--text);
@@ -1874,7 +1934,7 @@ body:not(.site-entered) .sidebar {
   font-family: inherit;
   resize: vertical;
 }
-.submit-form textarea:focus {
+.submit-form textarea:focus, .submit-form select:focus {
   outline: none;
   border-color: var(--accent-dim);
 }

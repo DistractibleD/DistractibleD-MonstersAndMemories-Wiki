@@ -60,6 +60,11 @@ let pendingHighlightCompanion = null;
 // loadPage's normal "reset scroll to top on navigation" doesn't immediately
 // cancel that scroll.
 let suppressScrollReset = false;
+// Set by goToSubmit (from an item/monster card's "suggest" link) so the
+// Submit page can show a "Regarding: <name>" banner and fold it into the
+// submitted notes — consumed (and cleared) by renderSubmitPage the same
+// consume-once pattern as pendingItemQuery.
+let pendingSubmitContext = null;
 
 async function ensureItemsData() {
   if (!itemsData) {
@@ -119,6 +124,15 @@ async function ensureCompanionsData() {
     companionsData = await res.json();
   }
   return companionsData;
+}
+
+async function ensureMapsData() {
+  if (!mapsData) {
+    const res = await fetch('maps.json');
+    if (!res.ok) throw new Error('Could not load maps.json');
+    mapsData = await res.json();
+  }
+  return mapsData;
 }
 
 // Splash screen shown on every fresh load (see #splash-screen in
@@ -408,7 +422,7 @@ async function loadPage(file) {
     } else if (page && page.type === 'companions') {
       await renderCompanionsPage(contentInner);
     } else if (page && page.type === 'submit') {
-      renderSubmitPage(contentInner);
+      await renderSubmitPage(contentInner);
     } else {
       const res = await fetch('pages/' + file);
       if (!res.ok) throw new Error('Page not found');
@@ -747,6 +761,19 @@ function goToCompanion(companion) {
   const alreadyThere = location.hash.replace('#', '') === 'companions';
   location.hash = 'companions';
   if (alreadyThere) loadPage('companions');
+}
+
+// Jumps to the Submit page, optionally carrying "what this is about" context
+// from an item's "Know where this drops?" link or a named monster's "Know
+// where this spawns?" link (context is { kind: 'item'|'monster', name }).
+// renderSubmitPage shows this as a dismissible "Regarding: <name>" banner and
+// folds it into the notes actually sent, so the Cloudflare Worker itself
+// doesn't need to know anything about items/monsters at all.
+function goToSubmit(context) {
+  pendingSubmitContext = context || null;
+  const alreadyThere = location.hash.replace('#', '') === 'submit';
+  location.hash = 'submit';
+  if (alreadyThere) loadPage('submit');
 }
 
 // Case-insensitive lookup used to decide whether a recipe component name
@@ -1757,7 +1784,11 @@ function renderItemRows(tbody, items, showTypeColumn) {
 // viewer modal. A gold accent + type icon (weapon/armor sub-type, jewelry
 // slot, or tradeskill for materials — see itemIconHTML) marks it as an ITEM
 // card, as opposed to the teal recipe cards below.
-function renderItemCardHTML(item) {
+// `opts.interactive` adds a "Know where this drops? Suggest it" link after
+// the Found at line — only passed true from the full item viewer
+// (openItemViewer), never the hover tooltip (#item-tooltip is
+// pointer-events: none, so a link there would be visible but unclickable).
+function renderItemCardHTML(item, opts = {}) {
   const iconHtml = itemIconHTML(item);
   const categoryLabel = itemCategoryLabel(item);
   const badges = (item.tags || []).map(t => `<span class="badge-tag">${t}</span>`).join('')
@@ -1813,6 +1844,7 @@ function renderItemCardHTML(item) {
           Found at &middot; ${item.foundAt ? escapeAttr(item.foundAt) : 'not yet known'}
         </div>
         ${item.rumor ? `<div class="item-card-section item-card-section-rumor">Rumor (unverified) &middot; ${escapeAttr(item.rumor)}</div>` : ''}
+        ${opts.interactive ? `<div class="item-card-section item-card-suggest"><a href="#" class="item-suggest-link" data-name="${escapeAttr(item.name)}">Know where this drops? Suggest it</a></div>` : ''}
       </div>
     </div>
   `;
@@ -1904,6 +1936,13 @@ function setupItemViewer() {
         closeItemViewer();
         goToRecipe(recipe);
       }
+      return;
+    }
+    const suggestLink = e.target.closest('.item-suggest-link');
+    if (suggestLink) {
+      e.preventDefault();
+      closeItemViewer();
+      goToSubmit({ kind: 'item', name: suggestLink.dataset.name });
     }
   });
 
@@ -1919,7 +1958,7 @@ async function openItemViewer(item) {
   setupItemViewer();
 
   const viewer = document.getElementById('item-viewer');
-  viewer.querySelector('#item-viewer-card').innerHTML = renderItemCardHTML(item);
+  viewer.querySelector('#item-viewer-card').innerHTML = renderItemCardHTML(item, { interactive: true });
 
   const resultRecipe = findRecipeForItem(item.name);
   const usedIn = findRecipesUsingItem(item.name);
@@ -2002,11 +2041,7 @@ function groupMapsByArea(maps) {
 }
 
 async function renderMapsPage(container) {
-  if (!mapsData) {
-    const res = await fetch('maps.json');
-    if (!res.ok) throw new Error('Could not load maps.json');
-    mapsData = await res.json();
-  }
+  await ensureMapsData();
 
   const groups = groupMapsByArea(mapsData);
 
@@ -3596,6 +3631,13 @@ function setupMonsterTooltip(container) {
         if (related) openMonsterViewer(related);
         return;
       }
+      const suggestLink = e.target.closest('.monster-suggest-link');
+      if (suggestLink) {
+        e.preventDefault();
+        hideTooltip();
+        goToSubmit({ kind: 'monster', name: suggestLink.dataset.name });
+        return;
+      }
       // Anywhere else on the card — the "click for more info" affordance.
       const monster = tooltip._monster;
       hideTooltip();
@@ -3678,6 +3720,13 @@ function setupMonsterViewer() {
         closeMonsterViewer();
         openMonsterViewer(related);
       }
+      return;
+    }
+    const suggestLink = e.target.closest('.monster-suggest-link');
+    if (suggestLink) {
+      e.preventDefault();
+      closeMonsterViewer();
+      goToSubmit({ kind: 'monster', name: suggestLink.dataset.name });
     }
   });
 
@@ -3731,6 +3780,7 @@ function renderMonsterCardHTML(monster, opts = {}) {
         </div>
         ${monster.rumor ? `<div class="item-card-section item-card-section-rumor">Rumor (unverified) &middot; ${escapeAttr(monster.rumor)}</div>` : ''}
         ${monster.needsInfo ? `<div class="item-card-section item-card-needs-info">This monster needs more info &middot; confirmed to exist, but a full picture/details haven't been captured yet. <a href="#submit">Submit a screenshot</a> to help fill it in!</div>` : ''}
+        ${monster.named ? `<div class="item-card-section item-card-suggest"><a href="#" class="monster-suggest-link" data-name="${escapeAttr(monster.name)}">Know where this spawns? Suggest it</a></div>` : ''}
         ${opts.isTooltip ? '<p class="monster-card-tooltip-hint">Click for more info</p>' : ''}
       </div>
     </div>
@@ -3907,12 +3957,27 @@ const SUBMIT_EXAMPLES = [
   }
 ];
 
-function renderSubmitPage(container) {
+// Set by an item's "Know where this drops?" link or a named monster's "Know
+// where this spawns?" link (goToSubmit) — consumed once here and shown as a
+// dismissible "Regarding: <name>" banner, folded into the notes actually
+// sent rather than passed to the Worker as its own field, so the Worker's
+// own logic doesn't need to know anything about items/monsters at all.
+async function renderSubmitPage(container) {
+  const context = pendingSubmitContext;
+  pendingSubmitContext = null;
+
+  // Powers the optional "Which map/zone is this about?" dropdown — maps.json
+  // failing to load shouldn't block the rest of the page, just leave that
+  // dropdown empty.
+  await ensureMapsData().catch(() => null);
+  const zoneGroups = mapsData ? groupMapsByArea(mapsData) : [];
+
   container.innerHTML = `
     <h1>Submit a Screenshot</h1>
-    <p>Found something not on the wiki yet? Attach one screenshot below — an item card, a
-    monster picture, a map, a recipe card, anything from the game. It won't appear on the
-    wiki automatically; every submission is reviewed first.</p>
+    <p>Found something not on the wiki yet? Attach a screenshot below — an item card, a
+    monster picture, a map, a recipe card, anything from the game — or, if you don't have
+    one, just write in what you know. It won't appear on the wiki automatically; every
+    submission is reviewed first.</p>
     <div class="submit-examples">
       <div class="submit-examples-grid">
         ${SUBMIT_EXAMPLES.map(ex => `
@@ -3934,21 +3999,34 @@ function renderSubmitPage(container) {
       <p class="submit-form-notice">This form isn't finished being set up yet (no Worker URL
       configured), so submissions can't be sent right now. Come back soon!</p>
     ` : `
+      ${context ? `
+        <div class="submit-context-banner" id="submit-context-banner">
+          Regarding: <strong>${escapeAttr(context.name)}</strong>
+          <button type="button" id="submit-context-clear">&times; Not about this</button>
+        </div>
+      ` : ''}
       <form id="submit-form" class="submit-form">
         <label class="submit-drop-zone" id="submit-drop-zone" for="submit-file-input">
           <div id="submit-drop-zone-empty">
-            <strong>Click to choose a screenshot</strong>
-            <span>or drag and drop it here</span>
+            <strong>Click to choose a screenshot (optional)</strong>
+            <span>or drag and drop it here — or skip this and just write in the notes below</span>
           </div>
           <div id="submit-drop-zone-preview" class="submit-drop-zone-preview" hidden>
             <img id="submit-preview-img" alt="Selected screenshot preview">
             <span id="submit-preview-name"></span>
+            <button type="button" id="submit-preview-clear">&times; Remove</button>
           </div>
         </label>
         <input type="file" id="submit-file-input" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
 
-        <label for="submit-notes">Notes (optional)</label>
-        <textarea id="submit-notes" rows="3" placeholder="Which map/zone is this from? What's the monster's name if it's not shown? Anything else worth knowing." maxlength="2000"></textarea>
+        <label for="submit-zone">Which map/zone is this about? (optional)</label>
+        <select id="submit-zone">
+          <option value="">&mdash; not sure / not applicable &mdash;</option>
+          ${zoneGroups.map(g => `<option value="${escapeAttr(g.base)}">${escapeAttr(g.base)}</option>`).join('')}
+        </select>
+
+        <label for="submit-notes">Notes ${context ? '' : '(optional if you attach a screenshot)'}</label>
+        <textarea id="submit-notes" rows="3" placeholder="Don't have a screenshot? Describe what you know here — where something drops, where a boss spawns, which map/zone, anything else worth recording." maxlength="2000"></textarea>
 
         <!-- Honeypot: hidden from real visitors via CSS, so anything that fills it in is a bot. -->
         <div class="submit-honeypot" aria-hidden="true">
@@ -3968,6 +4046,17 @@ function renderSubmitPage(container) {
 
   if (!SUBMIT_WORKER_URL) return;
 
+  // Mutable copy — the "Not about this" button clears it without needing
+  // another render pass.
+  let activeContext = context;
+  const contextBanner = container.querySelector('#submit-context-banner');
+  if (contextBanner) {
+    container.querySelector('#submit-context-clear').addEventListener('click', () => {
+      activeContext = null;
+      contextBanner.remove();
+    });
+  }
+
   const form = container.querySelector('#submit-form');
   const dropZone = container.querySelector('#submit-drop-zone');
   const fileInput = container.querySelector('#submit-file-input');
@@ -3975,9 +4064,20 @@ function renderSubmitPage(container) {
   const previewState = container.querySelector('#submit-drop-zone-preview');
   const previewImg = container.querySelector('#submit-preview-img');
   const previewName = container.querySelector('#submit-preview-name');
+  const zoneSelect = container.querySelector('#submit-zone');
   const notesBox = container.querySelector('#submit-notes');
   const button = container.querySelector('#submit-button');
   const status = container.querySelector('#submit-status');
+
+  function clearFile() {
+    fileInput.value = '';
+    emptyState.hidden = false;
+    previewState.hidden = true;
+  }
+  container.querySelector('#submit-preview-clear').addEventListener('click', e => {
+    e.preventDefault();
+    clearFile();
+  });
 
   function showPreview(file) {
     const url = URL.createObjectURL(file);
@@ -4008,15 +4108,26 @@ function renderSubmitPage(container) {
   form.addEventListener('submit', async e => {
     e.preventDefault();
     const file = fileInput.files[0];
-    if (!file) {
-      status.textContent = 'Please choose a screenshot first.';
+    const userNotes = notesBox.value.trim();
+    if (!file && !userNotes) {
+      status.textContent = 'Please attach a screenshot or write a note.';
       status.className = 'submit-status submit-status-error';
       return;
     }
 
+    // The Worker itself doesn't need to know anything about items/monsters/
+    // maps — the "regarding" context and chosen zone are just folded into
+    // the plain notes text it already handles, as their own labeled lines.
+    const notesParts = [];
+    if (activeContext) {
+      notesParts.push(`Regarding: ${activeContext.kind === 'item' ? 'Item' : 'Monster'} — ${activeContext.name}`);
+    }
+    if (zoneSelect.value) notesParts.push(`Zone/Map: ${zoneSelect.value}`);
+    if (userNotes) notesParts.push(userNotes);
+
     const formData = new FormData();
-    formData.append('screenshot', file);
-    formData.append('notes', notesBox.value);
+    if (file) formData.append('screenshot', file);
+    formData.append('notes', notesParts.join('\n'));
     formData.append('website', container.querySelector('#submit-website').value);
 
     button.disabled = true;
@@ -4037,7 +4148,9 @@ function renderSubmitPage(container) {
         form.hidden = true;
         const thanks = document.createElement('p');
         thanks.className = 'submit-status submit-status-success';
-        thanks.textContent = 'Thanks! Your screenshot has been submitted for review.';
+        thanks.textContent = file
+          ? 'Thanks! Your screenshot has been submitted for review.'
+          : 'Thanks! Your note has been submitted for review.';
         form.insertAdjacentElement('afterend', thanks);
         return;
       }

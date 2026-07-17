@@ -1298,14 +1298,40 @@ account.
   Monsters/Companions (`loadPage` in `script.js`), just narrower reading-width rather than
   `content-wide` since a form doesn't need the full page.
 - **`renderSubmitPage(container)`** in `script.js` builds the actual form: a drag-and-drop/
-  click-to-browse screenshot field with a live preview, an optional notes textarea, a
-  honeypot field hidden via CSS (`.submit-honeypot`, off-screen rather than
-  `display:none` — a real bot-filtering technique, not just a stray unused field), and a
-  submit button that POSTs a `FormData` (image + notes + honeypot value) straight to a
+  click-to-browse screenshot field (now **optional**, 2026-07-17 — see below) with a live
+  preview and a "Remove" button (`#submit-preview-clear`), a notes textarea, a honeypot
+  field hidden via CSS (`.submit-honeypot`, off-screen rather than `display:none` — a real
+  bot-filtering technique, not just a stray unused field), and a submit button that POSTs a
+  `FormData` (screenshot if one was chosen + notes + honeypot value) straight to a
   Cloudflare Worker via `fetch`. Client-side error handling distinguishes a real API-
   provided error message from a raw network/fetch failure — the latter never shows the
   browser's own wording (e.g. "Failed to fetch") to a non-technical visitor, always a
   friendly fallback instead.
+- **A screenshot is no longer required (2026-07-17, user's own call)** — someone with
+  info but no picture (e.g. "I don't have a card, but I know this drops off X") can submit
+  notes alone. Client-side validation requires at least one of screenshot/notes before
+  allowing submit; the Worker enforces the same rule server-side (defense in depth, since a
+  direct script/curl call bypasses client JS entirely — see the security note below).
+- **Two more optional fields feed into the same notes text, not separate form fields the
+  Worker has to know about:** a "Which map/zone is this about?" `<select>` (`#submit-zone`,
+  options built from `ensureMapsData()` + `groupMapsByArea` — the same area-name-grouping
+  the Maps page itself uses, so "Infested Crypt" and "Infested Crypt (Isometric)" collapse
+  to one option) and a "Regarding: `<name>`" banner (`#submit-context-banner`, dismissible
+  via "&times; Not about this") that appears when arriving from an item's "Know where this
+  drops?" link or a named monster's "Know where this spawns?" link. On submit, both get
+  folded into the `notes` string as their own labeled lines (`Regarding: Item — <name>` /
+  `Zone/Map: <name>`) ahead of whatever the visitor actually typed — the Worker itself never
+  receives "regarding" or "zone" as distinct fields, so it needed no new field-parsing logic
+  to support this, only the optional-screenshot change below.
+- **"Know where this drops?" (items) / "Know where this spawns?" (named monsters only)**
+  links jump to the Submit page with that context pre-filled, via `goToSubmit(context)`
+  (sets `pendingSubmitContext`, same consume-once pattern as `pendingItemQuery`) — see
+  `renderItemCardHTML`'s `opts.interactive` (only passed `true` from `openItemViewer`, never
+  the hover tooltip, since `#item-tooltip` is `pointer-events: none` and a link there would
+  be visible but unclickable) and `renderMonsterCardHTML`'s `monster.named` check (shown in
+  both the tooltip and the modal, since a monster's tooltip is already fully interactive —
+  see "Adding a monster" above). Regular monsters don't get this link — a common mob's
+  spawn zones are rarely a mystery worth crowdsourcing the way a boss's is.
 - **Why a Worker at all:** GitHub Pages only serves static files — it cannot run any code,
   so it can't hold the GitHub token needed to open a pull request. A token embedded in the
   page's own JavaScript would be visible to anyone via dev tools, which would let a
@@ -1315,25 +1341,49 @@ account.
 - **`cloudflare-worker/submit-worker.js`** is that function — not deployed by GitHub Pages
   at all (kept in the repo purely for reference/version history/diffing). To actually
   deploy or update it, its contents get pasted into the Worker's own editor in the
-  Cloudflare dashboard. It receives the form's `FormData`, validates the file (type/size)
-  and checks the honeypot, then uses the GitHub REST API (with a `GITHUB_TOKEN` stored as a
-  Worker *secret*, never a plain variable) to create a branch, commit the screenshot into
-  `images/Inbox/`, and open a pull request — it never commits to `main` directly. **Merging
-  that PR is the accept, closing it (without merging) is the deny** — either way nothing on
-  the live site changes until a human decides, and a merged submission still just lands in
-  the inbox to go through the normal "check inbox" workflow above, exactly like a
-  screenshot the user posts directly.
-- **`SUBMIT_WORKER_URL`** (top of the Submit-a-Screenshot section in `script.js`) is left
-  empty (`''`) until the Worker is actually deployed — the page detects this and shows a
-  plain "not set up yet" notice instead of a broken/silently-failing form. This is a
-  one-line edit once the real `workers.dev` URL exists; don't guess or invent a URL here.
+  Cloudflare dashboard. **This is a manual step only the site owner can do (requires their
+  Cloudflare login) — Claude cannot deploy or redeploy the Worker itself, only edit this
+  file in the repo.** It receives the form's `FormData`, checks the honeypot, and — as long
+  as at least a screenshot or notes text was sent — uses the GitHub REST API (with a
+  `GITHUB_TOKEN` stored as a Worker *secret*, never a plain variable) to create a branch,
+  commit either the screenshot into `images/Inbox/` (validating type/size first) or, for a
+  notes-only submission, a small `note-<timestamp>.md` into `community-notes/` (see below),
+  then open a pull request — it never commits to `main` directly. **Merging that PR is the
+  accept, closing it (without merging) is the deny** — either way nothing on the live site
+  changes until a human decides. A merged screenshot submission lands in the inbox to go
+  through the normal "check inbox" workflow above, exactly like a screenshot the user posts
+  directly; a merged notes-only submission needs its own, different next step — see
+  `community-notes/` below.
+- **`community-notes/`** holds notes-only submissions (each its own `note-<timestamp>.md`,
+  same one-new-file-per-PR pattern as an image submission, never edits an existing file, so
+  concurrent submissions can never conflict with each other). **Not** covered by the
+  `images/inbox/` workflow above (that one's specifically for screenshots) — processing a
+  merged note is its own small workflow: read the file; if it starts with a `Regarding:
+  Item — <name>` or `Regarding: Monster — <name>` line (set automatically when the
+  submission came from an item's/monster's "suggest" link — see below), that tells you
+  which entry it's about, otherwise read the rest of the note to figure that out; a
+  `Zone/Map: <name>` line (if present) is the visitor's answer to "which map/zone". Since
+  this is anonymous, unverified visitor input — nobody's screenshot, nobody confirmed it —
+  anything usable from it goes into that item's/monster's `rumor` field (never `foundAt` or
+  any other confirmed field), same as any other unverified community info on this wiki (see
+  `item.rumor`/`monster.rumor` elsewhere in this file). Delete the file once processed,
+  same as a crafting-window or vendor screenshot once its data's been extracted.
+- **`SUBMIT_WORKER_URL`** (top of the Submit-a-Screenshot section in `script.js`) holds the
+  real deployed `workers.dev` URL now (set once the one-time Cloudflare setup below was
+  done) — the page only shows the plain "not set up yet" notice when this is empty. Don't
+  guess or invent a URL here if it ever needs changing (e.g. the Worker gets redeployed
+  under a new name).
 - **Setup that has to happen outside this repo** (the site owner's one-time cost, not
   something to build here): a free Cloudflare account, pasting the Worker script in via
   their dashboard, minting a GitHub fine-grained Personal Access Token scoped to *only* this
   repo (Contents + Pull requests, read/write) and saving it as the Worker's `GITHUB_TOKEN`
   secret, then copying the deployed Worker's URL into `SUBMIT_WORKER_URL`. None of this is
   something Claude can do on the user's behalf — creating third-party accounts and minting
-  auth tokens are both outside what an assistant should do unattended.
+  auth tokens are both outside what an assistant should do unattended. **The same
+  paste-into-the-dashboard-and-deploy step is needed again any time
+  `cloudflare-worker/submit-worker.js` changes** (e.g. the 2026-07-17 optional-screenshot/
+  `community-notes/` update above) — editing the file in this repo alone does not affect the
+  live Worker until the site owner redeploys it themselves.
 - Kept deliberately mechanical — no LLM call, no auto-generated JSON, just moving the
   screenshot into the repo safely. Extending it to also draft the actual
   `items.json`/`monsters.json` entry automatically would be a future, separate step if ever
@@ -1341,7 +1391,10 @@ account.
 - **Confirmed working end to end** with a real test submission (a plain curl POST straight
   to the deployed Worker, bypassing the browser entirely, since CORS only restricts
   *browser* callers — see the security note below) that successfully created a real pull
-  request on the repo.
+  request on the repo. That test predates the 2026-07-17 optional-screenshot/
+  `community-notes/` update — the *deployed* Worker won't behave that new way until it's
+  redeployed (see above), and the notes-only path hasn't had its own live end-to-end test
+  yet, so treat it as unverified against the real GitHub API until someone tries it for real.
 - **Security posture, in case it's asked about again later:** the `GITHUB_TOKEN` never
   leaves the Worker (not logged, not returned in any response), and it's scoped to only
   Contents+PRs on this one repo, so worst-case token exposure can't touch other repos or

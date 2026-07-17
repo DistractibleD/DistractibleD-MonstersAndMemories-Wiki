@@ -14,12 +14,20 @@
 // this token anywhere except that one secret field.
 //
 // What this does, end to end: a visitor fills out the on-wiki form and
-// submits. The browser POSTs the screenshot + notes here. This Worker then
-// uses the GitHub API (with the token above) to create a new branch, commit
-// the screenshot into images/Inbox/ on that branch, and open a pull request
-// — it never commits to main directly. The site owner accepts a submission
-// by merging that PR, or denies it by closing the PR without merging;
-// either way nothing on the live site changes until that decision is made.
+// submits. The browser POSTs a screenshot and/or notes here (at least one is
+// required — the form also lets someone submit notes alone, e.g. "know
+// where this drops?" suggestions with no screenshot to attach). This Worker
+// then uses the GitHub API (with the token above) to create a new branch,
+// commit either the screenshot (into images/Inbox/) or a small text file
+// (into community-notes/, for a notes-only submission) on that branch, and
+// open a pull request — it never commits to main directly. The site owner
+// accepts a submission by merging that PR, or denies it by closing the PR
+// without merging; either way nothing on the live site changes until that
+// decision is made. Note that "regarding" context (which item/monster a
+// suggestion is about) and a chosen zone/map are never separate fields here
+// — the client folds them into the plain `notes` text as their own labeled
+// lines before it ever reaches this Worker (see renderSubmitPage), so this
+// file doesn't need to know anything about items/monsters/maps at all.
 
 const OWNER = 'DistractibleD';
 const REPO = 'DistractibleD-MonstersAndMemories-Wiki';
@@ -60,22 +68,34 @@ export default {
       return json({ ok: true });
     }
 
-    const file = form.get('screenshot');
-    const notes = (form.get('notes') || '').toString().slice(0, 2000);
+    const rawFile = form.get('screenshot');
+    const hasFile = rawFile && typeof rawFile !== 'string';
+    // Slightly higher than the client's own 2000-char textarea limit, since
+    // the client prepends its own short "Regarding: ..."/"Zone/Map: ..."
+    // lines onto whatever the visitor typed (see renderSubmitPage).
+    const notes = (form.get('notes') || '').toString().slice(0, 2200);
 
-    if (!file || typeof file === 'string') {
-      return json({ error: 'No screenshot was attached.' }, 400);
-    }
-    if (file.size > MAX_BYTES) {
-      return json({ error: 'That screenshot is too large (8MB max).' }, 400);
-    }
-    const ext = ALLOWED_TYPES[file.type];
-    if (!ext) {
-      return json({ error: 'Please attach an image file (PNG, JPG, WEBP, or GIF).' }, 400);
+    if (!hasFile && !notes) {
+      return json({ error: 'Please attach a screenshot or write a note.' }, 400);
     }
 
-    const bytes = new Uint8Array(await file.arrayBuffer());
-    const base64 = bytesToBase64(bytes);
+    let ext, base64;
+    if (hasFile) {
+      const file = rawFile;
+      if (file.size > MAX_BYTES) {
+        return json({ error: 'That screenshot is too large (8MB max).' }, 400);
+      }
+      ext = ALLOWED_TYPES[file.type];
+      if (!ext) {
+        return json({ error: 'Please attach an image file (PNG, JPG, WEBP, or GIF).' }, 400);
+      }
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      base64 = bytesToBase64(bytes);
+    } else {
+      // Notes-only submission — encode the note text itself as the "file"
+      // content, same base64 helper used for image bytes.
+      base64 = bytesToBase64(new TextEncoder().encode(`# Wiki text submission\n\n${notes}\n`));
+    }
 
     const gh = (path, opts = {}) => fetch(`https://api.github.com/repos/${OWNER}/${REPO}${path}`, {
       ...opts,
@@ -102,9 +122,14 @@ export default {
       });
       if (!createRefRes.ok) throw new Error('create-branch');
 
-      // 3. Commit the screenshot into images/Inbox/ on that branch.
-      const filename = `submission-${stamp}.${ext}`;
-      const putRes = await gh(`/contents/images/Inbox/${filename}`, {
+      // 3. Commit the screenshot into images/Inbox/, or (notes-only) a small
+      //    text file into community-notes/, on that branch. Either way it's
+      //    always exactly one new file — never edits an existing one — so
+      //    concurrent submissions from different visitors can never conflict
+      //    with each other.
+      const filePath = hasFile ? 'images/Inbox' : 'community-notes';
+      const filename = hasFile ? `submission-${stamp}.${ext}` : `note-${stamp}.md`;
+      const putRes = await gh(`/contents/${filePath}/${filename}`, {
         method: 'PUT',
         body: JSON.stringify({
           message: `Add wiki submission (${filename})`,
@@ -118,9 +143,13 @@ export default {
       const prBody = [
         'Submitted through the wiki\'s "Submit a Screenshot" form.',
         '',
-        'This only adds the screenshot to `images/Inbox/` — nothing else changes, and ' +
-          'nothing is live until this PR is merged. **Merge to accept, close (without ' +
-          'merging) to deny.**',
+        hasFile
+          ? 'This only adds the screenshot to `images/Inbox/` — nothing else changes, and ' +
+            'nothing is live until this PR is merged. **Merge to accept, close (without ' +
+            'merging) to deny.**'
+          : 'This is a text-only submission (no screenshot attached) — it only adds a small ' +
+            'note file to `community-notes/`. Nothing else changes, and nothing is live ' +
+            'until this PR is merged. **Merge to accept, close (without merging) to deny.**',
         '',
         notes ? `Submitter's notes:\n\n${notes}` : '(No notes were included.)'
       ].join('\n');
