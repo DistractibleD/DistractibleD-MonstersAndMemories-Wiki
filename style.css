@@ -291,7 +291,9 @@ body:not(.site-entered) .sidebar {
   font-size: 0.9rem;
 }
 .sidebar-link {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 7px 10px;
   border-radius: 6px;
   color: var(--text);
@@ -299,6 +301,21 @@ body:not(.site-entered) .sidebar {
   font-size: 0.92rem;
   margin-bottom: 2px;
   border-left: 2px solid transparent;
+}
+/* Small icon before each nav link's name (2026-07-17, user's own call — "makes
+   it easier to instantly spot the place you want to go"), see NAV_ICON in
+   script.js. Reuses the same colored-badge .type-icon svgIcon() draws
+   everywhere else on the site, just shrunk down to nav-link scale — a link
+   with no icon (NAV_ICON has no entry for it) simply has none, no gap left
+   behind since the icon element itself doesn't render at all in that case. */
+.sidebar-link .type-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+.sidebar-link-text {
+  min-width: 0;
+  flex: 1 1 auto;
 }
 /* Top-level nav links (Item Database, Maps, ...) aren't nested under a
    group, so plain .sidebar-link (without .sidebar-link-nested) always
@@ -391,6 +408,11 @@ body:not(.site-entered) .sidebar {
 #sidebar-visits-wrapper .sidebar-link-nested {
   font-size: 0.76rem;
   padding: 4px 6px;
+  gap: 6px;
+}
+#sidebar-visits-wrapper .sidebar-link-nested .type-icon {
+  width: 13px;
+  height: 13px;
 }
 .sidebar-visits-note {
   font-size: 0.66rem;

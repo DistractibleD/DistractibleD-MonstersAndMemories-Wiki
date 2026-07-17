@@ -1117,6 +1117,18 @@ already have (no new schema field to keep in sync):
 - **`TRADESKILL_ICON`** covers every tradeskill in `tradeskills.json` (all 38) — recipe
   cards' own header icon uses the same lookup keyed by the recipe's tradeskill, falling back
   to the tradeskill's initial letter if a tradeskill somehow has no dedicated icon.
+- **`NAV_ICON`** (2026-07-17, user's own call — "makes it easier to instantly spot the place
+  you want to go") maps a `pages.json` `file` to one of the icons above, shown at a shrunk-down
+  16px via `svgIcon()` before each sidebar nav link's name (`buildSidebar`) and before each
+  "Most Visited" entry (`updateVisitedSidebarSections` — a "craft"/"gathering" kind entry
+  there looks itself up in `TRADESKILL_ICON` instead, by tradeskill name, since its `id` is a
+  tradeskill rather than a page file). Most entries reuse an icon already built for something
+  else (Maps → `navigation`; Enchanting/Disenchanting/Crafting → their own tradeskill glyphs;
+  Named/Regular Monsters → the same `boss`/`paw` already used on their own category cards;
+  Companions → `wolf`) rather than needing a new one — `links`/`itemdb`/`gatheringicon`/
+  `submiticon` are the only four glyphs that had to be drawn from scratch, for Useful Links/
+  Item Database/Gathering/Submit a Screenshot respectively. A page with no `NAV_ICON` entry
+  just renders without an icon (no gap left behind) rather than erroring.
 
 The icon set went through four visual redesign passes (silhouette → outline → solid →
 colored-badge, chasing a series of increasingly precise reference sheets the user provided)

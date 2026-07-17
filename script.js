@@ -266,7 +266,8 @@ function buildSidebar(pages) {
     const link = document.createElement('a');
     link.href = '#' + page.file;
     link.className = 'sidebar-link' + (page.group ? ' sidebar-link-nested' : '');
-    link.textContent = page.title;
+    const navIcon = NAV_ICON[page.file];
+    link.innerHTML = (navIcon ? svgIcon(navIcon) : '') + `<span class="sidebar-link-text">${escapeAttr(page.title)}</span>`;
     link.dataset.file = page.file;
     link.addEventListener('click', () => loadPage(page.file));
     (groupContainer || sidebar).appendChild(link);
@@ -372,7 +373,11 @@ function updateVisitedSidebarSections() {
       const link = document.createElement('a');
       link.href = '#';
       link.className = 'sidebar-link sidebar-link-nested';
-      link.textContent = e.resolved.title;
+      // "page" entries use the same NAV_ICON lookup as the main nav list;
+      // "craft"/"gathering" entries are a tradeskill name, so they use the
+      // same TRADESKILL_ICON lookup as the Crafting/Gathering category grids.
+      const navIcon = e.kind === 'page' ? NAV_ICON[e.id] : TRADESKILL_ICON[e.id];
+      link.innerHTML = (navIcon ? svgIcon(navIcon) : '') + `<span class="sidebar-link-text">${escapeAttr(e.resolved.title)}</span>`;
       // Only a "page" entry maps cleanly onto the existing file-based active-link
       // highlighting (loadPage's `link.dataset.file === baseFile` check) — a "craft"/
       // "gathering" entry lives inside a shared hash page (#crafting, #gathering) that
@@ -904,6 +909,16 @@ const ICON_DEFS = {
   // used on the zone-grid cards in each section (see renderMonstersCategories).
   boss: `<path d="M12 3 C7 3 4 6.5 4 11 C4 13.5 5 15.5 6.5 17 L6.5 19.5 C6.5 20.3 7.1 21 8 21 L9 21 L9 19 L10 19 L10 21 L14 21 L14 19 L15 19 L15 21 L16 21 C16.9 21 17.5 20.3 17.5 19.5 L17.5 17 C19 15.5 20 13.5 20 11 C20 6.5 17 3 12 3 Z"/><circle cx="8.7" cy="11" r="1.8"/><circle cx="15.3" cy="11" r="1.8"/><path d="M11.3 12.7 L12.7 12.7 L12 15.2 Z"/>`,
   paw: `<ellipse cx="12" cy="16" rx="5" ry="4"/><circle cx="6.5" cy="9" r="2"/><circle cx="10.5" cy="6.5" r="2"/><circle cx="14.5" cy="6.5" r="2"/><circle cx="18" cy="9" r="2"/>`,
+  // Sidebar nav icons (2026-07-17) — one per top-level/nested destination,
+  // see NAV_ICON. Several destinations reuse an icon already defined above
+  // (navigation for Maps, enchanting/disenchanting/blacksmithing for their
+  // matching tradeskill pages, boss/paw for Named/Regular Monsters, wolf for
+  // Companions) rather than needing a new glyph; these four are the ones
+  // with no existing equivalent.
+  links: `<path fill-rule="evenodd" d="M4 12 A4 4 0 0 1 8 8 L11 8 L11 10 L8 10 A2 2 0 1 0 8 14 L11 14 L11 16 L8 16 A4 4 0 0 1 4 12 Z M20 12 A4 4 0 0 0 16 8 L13 8 L13 10 L16 10 A2 2 0 1 1 16 14 L13 14 L13 16 L16 16 A4 4 0 0 0 20 12 Z"/>`,
+  itemdb: `<path d="M4 9 L20 9 L20 19 C20 20.1 19.1 21 18 21 L6 21 C4.9 21 4 20.1 4 19 Z"/><path fill-rule="evenodd" d="M4 9 C4 6 6.5 4 12 4 C17.5 4 20 6 20 9 Z M7 9 C7 7.2 8.5 6.3 12 6.3 C15.5 6.3 17 7.2 17 9 Z"/><rect x="10.7" y="12" width="2.6" height="2.6" rx="0.6"/>`,
+  gatheringicon: `<path d="M5 10 L19 10 L17 20 C16.9 20.6 16.3 21 15.6 21 L8.4 21 C7.7 21 7.1 20.6 7 20 Z"/><path fill-rule="evenodd" d="M8.3 10 C8.3 6.5 9.9 4.3 12 4.3 C14.1 4.3 15.7 6.5 15.7 10 L14.3 10 C14.3 7.3 13.2 5.7 12 5.7 C10.8 5.7 9.7 7.3 9.7 10 Z"/><rect x="7.6" y="13" width="8.8" height="1" rx="0.4"/><rect x="7.9" y="16" width="8.2" height="1" rx="0.4"/>`,
+  submiticon: `<path fill-rule="evenodd" d="M3 8 C3 6.9 3.9 6 5 6 L8 6 L9 4 L15 4 L16 6 L19 6 C20.1 6 21 6.9 21 8 L21 18 C21 19.1 20.1 20 19 20 L5 20 C3.9 20 3 19.1 3 18 Z M12 8.5 A5 5 0 1 0 12.01 8.5 Z M12 10.3 A3.2 3.2 0 1 1 11.99 10.3 Z"/><circle cx="18" cy="8.5" r="0.7"/>`,
 };
 
 // Background circle color per icon key — approximated from the reference
@@ -937,6 +952,7 @@ const ICON_BG = {
   bear: '#4a3323', rat: '#5c5347', crocodile: '#33472c', spider: '#241f30',
   wolf: '#3a3f47',
   boss: '#5a1f1f', paw: '#3f4f30',
+  links: '#455060', itemdb: '#7a5a2a', gatheringicon: '#455a2e', submiticon: '#3a3a45',
 };
 
 // Maps a tradeskill name (tradeskills.json) to one of the icons above — used
@@ -986,6 +1002,31 @@ const TRADESKILL_ICON = {
   Wagoneering: 'wagoneering',
   Wilderness: 'wilderness',
   Woodworking: 'woodworking',
+};
+
+// Maps a pages.json `file` to one of the icons above, for the small icon
+// shown before each sidebar nav link (2026-07-17, user's own call — "makes
+// it easier to instantly spot the place you want to go"). Most entries here
+// reuse an icon already built for something else on the site (Maps gets the
+// same compass used for gathering-node location context; Enchanting/
+// Disenchanting/Crafting reuse their own tradeskill glyphs; Named/Regular
+// Monsters reuse the same boss/paw icons already shown on their own category
+// cards; Companions reuses the wolf glyph) rather than needing a new one —
+// only Useful Links, Item Database, Gathering, and Submit a Screenshot
+// needed a dedicated glyph (links/itemdb/gatheringicon/submiticon above). A
+// page with no entry here just renders without an icon rather than erroring.
+const NAV_ICON = {
+  'useful-links.md': 'links',
+  items: 'itemdb',
+  maps: 'navigation',
+  gathering: 'gatheringicon',
+  crafting: 'blacksmithing',
+  enchanting: 'enchanting',
+  disenchanting: 'disenchanting',
+  'monsters-named': 'boss',
+  'monsters-regular': 'paw',
+  companions: 'wolf',
+  submit: 'submiticon',
 };
 
 function svgIcon(key) {
