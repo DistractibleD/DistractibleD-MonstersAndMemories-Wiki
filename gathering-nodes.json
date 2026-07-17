@@ -36,6 +36,7 @@
   {
     "name": "Tin Vein",
     "slug": "tin-vein",
+    "image": "images/gathering/tin-vein.jpg",
     "tradeskill": "Mining",
     "minSkill": 75,
     "trivialSkill": 125,
@@ -148,6 +149,7 @@
   {
     "name": "Wood Pile",
     "slug": "wood-pile",
+    "image": "images/gathering/wood-pile.jpg",
     "tradeskill": "Lumberjacking",
     "minSkill": 1,
     "trivialSkill": 35,
@@ -157,6 +159,7 @@
   {
     "name": "Rich Wood Pile",
     "slug": "rich-wood-pile",
+    "image": "images/gathering/rich-wood-pile.jpg",
     "tradeskill": "Lumberjacking",
     "minSkill": 1,
     "trivialSkill": 50,
