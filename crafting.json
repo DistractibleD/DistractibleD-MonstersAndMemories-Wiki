@@ -7227,7 +7227,7 @@
     "slug": "enchanted-wool",
     "image": "images/crafting/enchanted-wool.jpg",
     "tradeskill": "Enchanting",
-    "craftType": "Armor",
+    "craftType": "Crafting Material",
     "weight": 0.1,
     "size": "Small",
     "components": [
@@ -7472,7 +7472,7 @@
     "slug": "enchanted-bronze-bar",
     "image": "images/crafting/enchanted-bronze-bar.jpg",
     "tradeskill": "Enchanting",
-    "craftType": "Armor / Weapon",
+    "craftType": "Crafting Material",
     "weight": 0.1,
     "size": "Small",
     "components": [
@@ -7715,7 +7715,7 @@
     "slug": "enchanted-cloth",
     "image": "images/crafting/enchanted-cloth.jpg",
     "tradeskill": "Enchanting",
-    "craftType": "Armor",
+    "craftType": "Crafting Material",
     "weight": 0.1,
     "size": "Small",
     "components": [
@@ -7958,7 +7958,7 @@
     "slug": "enchanted-rawhide",
     "image": "images/crafting/enchanted-rawhide.jpg",
     "tradeskill": "Enchanting",
-    "craftType": "Armor",
+    "craftType": "Crafting Material",
     "weight": 0.2,
     "size": "Small",
     "components": [
@@ -8131,7 +8131,7 @@
     "slug": "enchanted-tin-bar",
     "image": "images/crafting/enchanted-tin-bar.jpg",
     "tradeskill": "Enchanting",
-    "craftType": "Armor / Weapon",
+    "craftType": "Crafting Material",
     "weight": 0.1,
     "size": "Small",
     "components": [
@@ -8308,7 +8308,7 @@
     "slug": "enchanted-silver-bar",
     "image": "images/crafting/enchanted-silver-bar.jpg",
     "tradeskill": "Enchanting",
-    "craftType": "Armor / Weapon",
+    "craftType": "Crafting Material",
     "weight": 0.1,
     "size": "Small",
     "components": [
@@ -8342,7 +8342,7 @@
     "slug": "enchanted-copper-bar",
     "image": "images/crafting/enchanted-copper-bar.jpg",
     "tradeskill": "Enchanting",
-    "craftType": "Armor / Weapon",
+    "craftType": "Crafting Material",
     "weight": 0.1,
     "size": "Small",
     "components": [
@@ -8358,7 +8358,7 @@
     "slug": "enchanted-hide",
     "image": "images/crafting/enchanted-hide.jpg",
     "tradeskill": "Enchanting",
-    "craftType": "Armor",
+    "craftType": "Crafting Material",
     "weight": 0.2,
     "size": "Small",
     "components": [

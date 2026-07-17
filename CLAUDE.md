@@ -389,15 +389,13 @@ fields, both `Enchanting`-only:
 - **`enchantSlot`** — the equipment slot a scroll recipe's buff applies to, parsed straight
   from the recipe's own name (`"Enchant <Slot>: <Effect>"` → `<Slot>`, e.g. `"Gloves"`).
   Unset for a raw enchanted-material recipe (e.g. `"Enchanted Hide"`), which has no slot.
-- **`craftType`** — `"Scroll"` for a buff-scroll recipe, or a category describing which
-  other tradeskill actually uses a raw enchanted-material recipe's output: `"Armor"` for
-  materials that only ever go into armor (Enchanted Hide/Rawhide/Wool/Cloth — Leatherworking/
-  Tailoring make armor exclusively in this game), or `"Armor / Weapon"` for materials
-  Blacksmithing uses for both (Enchanted Bronze/Tin/Silver/Copper Bar — this game's metal
-  bars aren't earmarked for one or the other, see "Blacksmithing was populated from
-  reference tables too" below). No enchanted material has surfaced yet that's Jewelry-only;
-  add a `"Jewelry"` value the same way (by which tradeskill actually consumes it) if one
-  ever does — don't force an existing material into that bucket without real evidence.
+- **`craftType`** — `"Scroll"` for a buff-scroll recipe, or `"Crafting Material"` for a raw
+  enchanted-material recipe (Enchanted Hide/Rawhide/Wool/Cloth/Bronze/Tin/Silver/Copper Bar
+  — fed into another tradeskill, e.g. Leatherworking/Tailoring/Blacksmithing, to make actual
+  enchanted gear). An earlier version tried splitting the material side into `"Armor"` vs
+  `"Armor / Weapon"` by which other tradeskill consumes it, but collapsed back to one
+  `"Crafting Material"` value (2026-07-17, user's own call) since that split wasn't reliably
+  knowable anyway (Blacksmithing's metal bars serve both armor and weapon recipes).
 
 Both fields drive dropdown filters shown only on the Enchanting tradeskill view
 (`renderTradeskillSection` in `script.js`, gated on `tradeskillName === 'Enchanting'`) —
