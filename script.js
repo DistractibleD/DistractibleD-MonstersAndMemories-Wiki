@@ -266,7 +266,7 @@ function buildSidebar(pages) {
   const visitsWrapper = document.createElement('div');
   visitsWrapper.id = 'sidebar-visits-wrapper';
   visitsWrapper.innerHTML = `
-    <div class="sidebar-visits-title">Quick Navigation</div>
+    <div class="sidebar-visits-title">History</div>
     <div class="sidebar-group-heading">Recently Visited</div>
     <div class="sidebar-group" id="sidebar-recent-visits"></div>
     <div class="sidebar-group-heading">Most Visited</div>
