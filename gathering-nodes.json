@@ -44,6 +44,7 @@
   {
     "name": "Rich Tin Vein",
     "slug": "rich-tin-vein",
+    "image": "images/gathering/rich-tin-vein.jpg",
     "tradeskill": "Mining",
     "minSkill": 85,
     "trivialSkill": 135,
@@ -52,6 +53,7 @@
   {
     "name": "Silver Vein",
     "slug": "silver-vein",
+    "image": "images/gathering/silver-vein.jpg",
     "tradeskill": "Mining",
     "minSkill": 110,
     "trivialSkill": 150,
