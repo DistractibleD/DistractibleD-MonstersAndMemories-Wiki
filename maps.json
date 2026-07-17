@@ -11,13 +11,15 @@
   { "name": "Keeper's Bight", "slug": "keepers-bight", "image": "images/Maps/keepers-bight.png", "thumbnail": "images/Maps/thumbs/keepers-bight.jpg" },
   { "name": "Night Harbor", "slug": "night-harbor", "image": "images/Maps/night-harbor.jpg", "thumbnail": "images/Maps/thumbs/night-harbor.jpg" },
   { "name": "Scarwood", "slug": "scarwood", "image": "images/Maps/scarwood.png", "thumbnail": "images/Maps/thumbs/scarwood.jpg" },
+  { "name": "Scarwood (Spawns)", "slug": "scarwood-spawns", "image": "images/Maps/scarwood-spawns.jpg", "thumbnail": "images/Maps/thumbs/scarwood-spawns.jpg" },
   { "name": "Shaded Dunes", "slug": "shaded-dunes", "image": "images/Maps/shaded-dunes.jpg", "thumbnail": "images/Maps/thumbs/shaded-dunes.jpg" },
   { "name": "Shallow Shoals", "slug": "shallow-shoals", "image": "images/Maps/shallow-shoals.png", "thumbnail": "images/Maps/thumbs/shallow-shoals.jpg" },
   { "name": "Sungreet Strand", "slug": "sungreet-strand", "image": "images/Maps/sungreet-strand.jpg", "thumbnail": "images/Maps/thumbs/sungreet-strand.jpg" },
   { "name": "Tel Ekir", "slug": "tel-ekir", "image": "images/Maps/tel-ekir.jpg", "thumbnail": "images/Maps/thumbs/tel-ekir.jpg" },
   { "name": "The Grain Cellar", "slug": "the-grain-cellar", "image": "images/Maps/the-grain-cellar.png", "thumbnail": "images/Maps/thumbs/the-grain-cellar.jpg" },
-  { "name": "Tomb of the Last Wyrmsbane", "slug": "tomb-of-the-last-wyrmsbane", "image": "images/Maps/tomb-of-the-last-wyrmsbane.png", "thumbnail": "images/Maps/thumbs/tomb-of-the-last-wyrmsbane.jpg" },
   { "name": "Tomb of the Last Wyrmsbane (Isometric)", "slug": "tomb-of-the-last-wyrmsbane-isometric", "image": "images/Maps/tomb-of-the-last-wyrmsbane-isometric.jpg", "thumbnail": "images/Maps/thumbs/tomb-of-the-last-wyrmsbane-isometric.jpg" },
+  { "name": "Tomb of the Last Wyrmsbane (Top-Down)", "slug": "tomb-of-the-last-wyrmsbane", "image": "images/Maps/tomb-of-the-last-wyrmsbane.png", "thumbnail": "images/Maps/thumbs/tomb-of-the-last-wyrmsbane.jpg" },
   { "name": "Vale of Zintar", "slug": "vale-of-zintar", "image": "images/Maps/vale-of-zintar.png", "thumbnail": "images/Maps/thumbs/vale-of-zintar.jpg" },
-  { "name": "Vale of Zintar (Spawns)", "slug": "vale-of-zintar-spawns", "image": "images/Maps/vale-of-zintar-spawns.jpg", "thumbnail": "images/Maps/thumbs/vale-of-zintar-spawns.jpg" }
+  { "name": "Vale of Zintar (Spawns)", "slug": "vale-of-zintar-spawns", "image": "images/Maps/vale-of-zintar-spawns.jpg", "thumbnail": "images/Maps/thumbs/vale-of-zintar-spawns.jpg" },
+  { "name": "Vale of Zintar (Numbered)", "slug": "vale-of-zintar-numbered", "image": "images/Maps/vale-of-zintar-numbered.jpg", "thumbnail": "images/Maps/thumbs/vale-of-zintar-numbered.jpg" }
 ]
