@@ -144,7 +144,8 @@
   },
   {
     "name": "a bone carver",
-    "slug": "a-bone-carver"
+    "slug": "a-bone-carver",
+    "needsInfo": true
   },
   {
     "name": "an ashira warrior",

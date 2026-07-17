@@ -3403,6 +3403,11 @@ function renderMonstersList(container, scope) {
     <div class="items-toolbar">
       <input type="search" id="monsters-search" class="items-search" placeholder="Search name, drop..." autocomplete="off">
       <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="monsters-search">Clear</button>
+      <label class="needsinfo-toggle" for="monsters-filter-needsinfo">
+        <input type="checkbox" id="monsters-filter-needsinfo">
+        <span class="needsinfo-toggle-slider"></span>
+        <span>Show only monsters that need info</span>
+      </label>
     </div>
     <p class="items-count" id="monsters-count"></p>
     <div class="items-table-wrap">
@@ -3432,6 +3437,7 @@ function renderMonstersList(container, scope) {
   });
 
   const searchBox = container.querySelector('#monsters-search');
+  const needsInfoFilter = container.querySelector('#monsters-filter-needsinfo');
   const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
 
   // Landed here from a header search result — pre-fill the search box with
@@ -3474,8 +3480,10 @@ function renderMonstersList(container, scope) {
 
   function update() {
     const query = searchBox.value.toLowerCase().trim();
+    const needsInfo = needsInfoFilter.checked;
 
     let filtered = scopedMonsters.filter(monster => {
+      if (needsInfo && !monster.needsInfo) return false;
       if (query && !monsterSearchHaystack(monster).includes(query)) return false;
       return true;
     });
@@ -3497,6 +3505,7 @@ function renderMonstersList(container, scope) {
   }
 
   searchBox.addEventListener('input', update);
+  needsInfoFilter.addEventListener('change', update);
 
   update();
   setupMonsterClickToView(container.querySelector('#monsters-tbody'));
@@ -3523,7 +3532,7 @@ function renderMonsterRows(tbody, monsters) {
 
   tbody.innerHTML = monsters.map(monster => `
     <tr data-slug="${escapeAttr(monster.slug)}">
-      <td data-label="Name"><span class="item-name-hover monster-name-hover" data-slug="${escapeAttr(monster.slug)}">${escapeAttr(monster.name)}</span></td>
+      <td data-label="Name"><span class="item-name-hover monster-name-hover" data-slug="${escapeAttr(monster.slug)}">${escapeAttr(monster.name)}</span>${monster.needsInfo ? ' <span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}</td>
       <td data-label="Map"${formatMonsterMaps(monster) === '—' ? ' class="cell-empty"' : ''}>${escapeAttr(formatMonsterMaps(monster))}</td>
     </tr>
   `).join('');
@@ -3543,14 +3552,55 @@ function setupMonsterClickToView(tbody) {
 }
 
 // Hover-to-preview a monster's card, same idea and positioning logic as
-// setupItemTooltip (flip-above-if-no-room-below) — a plain non-interactive
-// preview (pointer-events: none), not the full clickable viewer modal.
+// setupItemTooltip (flip-above-if-no-room-below) — but unlike an item's
+// tooltip, this one is clickable (2026-07-17, user's own call: clicking the
+// card itself should open the full viewer with its screenshot and
+// clickable drops, not just the underlying table row). The tooltip element
+// is a singleton (like #item-tooltip) reused across every call to this
+// function, so the monster it's currently showing is tracked as a property
+// on the element itself (tooltip._monster) rather than a closed-over local
+// — a local would go stale the moment a second page calls this function
+// again with a new closure, while the click/mouseleave listeners registered
+// on the first call are still the ones attached to the shared element.
 function setupMonsterTooltip(container) {
   let tooltip = document.getElementById('monster-tooltip');
   if (!tooltip) {
     tooltip = document.createElement('div');
     tooltip.id = 'monster-tooltip';
     document.body.appendChild(tooltip);
+    // Lets hovering a drop-link's item name inside the preview show that
+    // item's own hover card on top, same as it would in the full viewer.
+    setupItemTooltip(tooltip);
+
+    const hideTooltip = () => {
+      tooltip.style.display = 'none';
+      tooltip._monster = null;
+    };
+    tooltip.addEventListener('mouseleave', hideTooltip);
+
+    tooltip.addEventListener('click', e => {
+      const dropLink = e.target.closest('.monster-drop-link');
+      if (dropLink) {
+        e.preventDefault();
+        const item = findItemByName(dropLink.dataset.item);
+        const monster = findMonsterBySlug(dropLink.dataset.monster);
+        hideTooltip();
+        if (item && monster) goToItem(item, { kind: 'monster', name: monster.name, slug: monster.slug });
+        return;
+      }
+      const relatedLink = e.target.closest('.monster-related-link');
+      if (relatedLink) {
+        e.preventDefault();
+        const related = findMonsterBySlug(relatedLink.dataset.slug);
+        hideTooltip();
+        if (related) openMonsterViewer(related);
+        return;
+      }
+      // Anywhere else on the card — the "click for more info" affordance.
+      const monster = tooltip._monster;
+      hideTooltip();
+      if (monster) openMonsterViewer(monster);
+    });
   }
 
   container.addEventListener('mouseover', e => {
@@ -3559,7 +3609,8 @@ function setupMonsterTooltip(container) {
     const monster = findMonsterBySlug(span.dataset.slug);
     if (!monster) return;
     const rect = span.getBoundingClientRect();
-    tooltip.innerHTML = renderMonsterCardHTML(monster);
+    tooltip.innerHTML = renderMonsterCardHTML(monster, { isTooltip: true });
+    tooltip._monster = monster;
     tooltip.style.display = 'block';
 
     const left = Math.min(rect.left, window.innerWidth - 336);
@@ -3577,8 +3628,12 @@ function setupMonsterTooltip(container) {
   container.addEventListener('mouseout', e => {
     const span = e.target.closest('.monster-name-hover');
     if (!span) return;
-    if (span.contains(e.relatedTarget)) return;
+    // Moving the mouse into the tooltip itself (to click something in it)
+    // shouldn't hide it — only mouseleave on the tooltip (registered above)
+    // does that.
+    if (span.contains(e.relatedTarget) || tooltip.contains(e.relatedTarget)) return;
     tooltip.style.display = 'none';
+    tooltip._monster = null;
   });
 }
 
@@ -3633,17 +3688,20 @@ function setupMonsterViewer() {
   });
 }
 
-// Shared by the full monster viewer modal and the lightweight hover tooltip
-// (setupMonsterTooltip) — same card markup either way, just shown at a
-// different size/interactivity level (the modal is clickable/interactive,
-// the tooltip is a plain non-interactive preview like an item's).
-function renderMonsterCardHTML(monster) {
+// Shared by the full monster viewer modal and the hover tooltip
+// (setupMonsterTooltip) — same card markup either way. `opts.isTooltip` adds
+// a small "Click for more info" hint at the bottom, shown only in the
+// tooltip (the modal IS the "more info" destination, so it doesn't need the
+// hint pointing at itself).
+function renderMonsterCardHTML(monster, opts = {}) {
   const drops = monster.drops || [];
   const related = monster.relatedMonsters || [];
 
   return `
     <div class="monster-card">
-      ${monster.image ? `<img class="monster-card-image" src="${escapeAttr(monster.image)}" alt="${escapeAttr(monster.name)}">` : ''}
+      ${monster.image
+        ? `<img class="monster-card-image" src="${escapeAttr(monster.image)}" alt="${escapeAttr(monster.name)}">`
+        : '<div class="monster-card-image-placeholder">No image yet</div>'}
       <div class="monster-card-body">
         <h2 class="monster-card-name">${escapeAttr(monster.name)}</h2>
         <div class="monster-card-field"><span class="item-card-field-label">Map</span><span>${escapeAttr(formatMonsterMaps(monster))}</span></div>
@@ -3672,6 +3730,8 @@ function renderMonsterCardHTML(monster) {
           ` : '<p class="monster-card-no-drops">No known drops yet.</p>'}
         </div>
         ${monster.rumor ? `<div class="item-card-section item-card-section-rumor">Rumor (unverified) &middot; ${escapeAttr(monster.rumor)}</div>` : ''}
+        ${monster.needsInfo ? `<div class="item-card-section item-card-needs-info">This monster needs more info &middot; confirmed to exist, but a full picture/details haven't been captured yet. <a href="#submit">Submit a screenshot</a> to help fill it in!</div>` : ''}
+        ${opts.isTooltip ? '<p class="monster-card-tooltip-hint">Click for more info</p>' : ''}
       </div>
     </div>
   `;

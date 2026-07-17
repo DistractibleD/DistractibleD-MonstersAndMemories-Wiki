@@ -850,6 +850,14 @@ fills in as the user provides it:
   it's never confused with confirmed fields like `maps`/`levelRange`/`drops`. Never promote a
   monster's `rumor` into a confirmed field yourself — only the user saying it's confirmed
   does that.
+- **`needsInfo`** — boolean, same meaning/rendering as `items.json`/`crafting.json`'s: a red
+  "NEEDS INFO" badge next to the name in a zone's list, a red note-plus-Submit-link on the
+  card (tooltip and modal both), and a "Show only monsters that need info" toggle in a zone
+  list's toolbar. **Not** about a missing *picture* specifically — a generic monster with no
+  `image` is the normal case per the Named-only picture policy above, not something to flag.
+  This is for a monster barely known at all yet: confirmed to exist (a name), with nothing
+  else recorded — no map, no drops, nothing. First used for "a bone carver", which had
+  nothing beyond `name`/`slug`.
 
 ### Quality-set drop inference
 
@@ -889,15 +897,24 @@ each time.
   until a card comes in, same as any other not-yet-added item name.
 
 Hovering a monster's name (`.monster-name-hover`, `setupMonsterTooltip`) shows its card in a
-floating, non-interactive preview (`#monster-tooltip`) — same flip-above-if-no-room-below
-positioning as an item's own hover tooltip (`setupItemTooltip`). Clicking the name instead
-opens `#monster-viewer`, a modal built by `openMonsterViewer`/`setupMonsterViewer` — same
-modal shell/close-button pattern as `#item-viewer`, just clickable (its drop links actually
-navigate) where the tooltip is a static preview. Both render the exact same markup via the
-shared `renderMonsterCardHTML(monster)` (picture when the monster has one, Map/Area/"Place
-Holder"/Drops/Rumor fields) — there's no separate "screenshot-only" mode; a monster's
-picture is just one field alongside the others on the same data-rendered card an item gets.
-Clicking a drop that links to an item sets
+floating preview (`#monster-tooltip`) — same flip-above-if-no-room-below positioning as an
+item's own hover tooltip (`setupItemTooltip`). Unlike an item's tooltip, this one is
+clickable (2026-07-17, user's own call): clicking anywhere on the card opens the full
+`#monster-viewer` modal (built by `openMonsterViewer`/`setupMonsterViewer`, same shell/
+close-button pattern as `#item-viewer`) for a bigger picture and a clickable drop table;
+clicking a drop or "Place Holder" link inside the tooltip instead jumps straight there,
+same as it would from the modal. The tooltip also carries a small "Click for more info"
+hint at the bottom so this is discoverable (`renderMonsterCardHTML(monster, { isTooltip:
+true })` — the modal omits the hint, since it IS the destination the hint points to).
+Both the tooltip and the modal render the exact same markup via the shared
+`renderMonsterCardHTML(monster, opts)` (picture — or a dashed "No image yet" placeholder
+when the monster has none, same visual language as an item's — Map/Area/"Place Holder"/
+Drops/Rumor/needsInfo fields). The tooltip is a DOM singleton reused across every zone list
+(like `#item-tooltip`), so which monster it's currently showing is tracked as a property on
+the element itself (`tooltip._monster`) rather than a variable closed over by
+`setupMonsterTooltip` — a local would go stale the moment a second zone list calls that
+function again with a fresh closure, while the click/mouseleave listeners registered the
+first time stay attached to the one shared element. Clicking a drop that links to an item sets
 `pendingReturnToMonster` before navigating to the Item Database (mirroring
 `pendingReturnToRecipe`) so that item's page shows a "&larr; Back to &lt;monster name&gt;"
 link; `goToItem`'s second argument takes either a recipe object (untagged, the original

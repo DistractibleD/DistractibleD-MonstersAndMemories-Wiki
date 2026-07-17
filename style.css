@@ -1025,7 +1025,10 @@ body:not(.site-entered) .sidebar {
 }
 /* Hover-to-preview a monster's card (.monster-name-hover, setupMonsterTooltip)
    — same shell as #item-tooltip, just sized for .monster-card's own layout
-   (picture + body) instead of an item card. */
+   (picture + body) instead of an item card. Unlike #item-tooltip, this one is
+   clickable (pointer-events left at its default 'auto') — clicking it opens
+   the full monster viewer, or navigates straight to a drop/related-monster
+   link if that's what was clicked (see setupMonsterTooltip). */
 #monster-tooltip {
   display: none;
   position: fixed;
@@ -1037,7 +1040,7 @@ body:not(.site-entered) .sidebar {
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
   overflow: hidden;
-  pointer-events: none;
+  cursor: pointer;
 }
 
 /* Full item-card viewer (click an item's name in the Item Database) */
@@ -1151,6 +1154,20 @@ body:not(.site-entered) .sidebar {
   max-height: 260px;
   object-fit: cover;
 }
+/* Shown instead of .monster-card-image when the monster has no picture yet
+   (most Regular/generic monsters, per the "Named/boss only" picture policy) —
+   same dashed-box "No image yet" language as .item-card-icon-thumb-placeholder/
+   .dust-tier-placeholder elsewhere on the site. */
+.monster-card-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  background: var(--bg-panel-hover);
+  border-bottom: 1px dashed var(--border);
+  color: var(--text-dim);
+  font-size: 0.82rem;
+}
 .monster-card-body {
   padding: 16px;
   font-size: 0.9rem;
@@ -1178,6 +1195,18 @@ body:not(.site-entered) .sidebar {
 }
 .monster-related-link:hover {
   text-decoration: none;
+}
+/* Only shown in the hover tooltip (see renderMonsterCardHTML's isTooltip
+   option), not the full viewer modal — a small nudge that the card itself is
+   clickable for the full picture/drop-table view. */
+.monster-card-tooltip-hint {
+  margin: 10px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.76rem;
+  font-style: italic;
+  text-align: center;
 }
 
 /* ---------- Maps ---------- */
