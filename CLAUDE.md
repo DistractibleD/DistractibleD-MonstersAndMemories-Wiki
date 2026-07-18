@@ -417,8 +417,10 @@ Both fields drive dropdown filters shown only on the Enchanting tradeskill view
 (`renderTradeskillSection` in `script.js`, gated on `tradeskillName === 'Enchanting'`) —
 values are derived from whatever's actually in the data, same "no code change needed for a
 new value" convention as every other filter dropdown on the site. A third dropdown lets the
-recipe grid switch from the default skill-required sort to alphabetical; every other
-tradeskill still only ever sorts by skill-required, with no user-facing override.
+recipe grid switch from the default skill-required sort to alphabetical; every tradeskill's
+own recipe view has this sort dropdown (not just Enchanting's — extended to all of them
+2026-07-19, user's own request), it's only the Slot/Type filters above it that stay
+Enchanting-only.
 
 **Enchanting's own crafting-window list is not sorted by skill requirement** — unlike every
 other tradeskill (whose window list order the site relies on for `listOrder`, see "Crafting

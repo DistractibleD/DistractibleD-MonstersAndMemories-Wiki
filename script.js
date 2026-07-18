@@ -2937,9 +2937,9 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   // confirmed `recipeSkillLevel` where one exists, otherwise the
   // interpolated estimate from estimateRecipeSkill() above, otherwise
   // (no signal at all) the old listOrder/alphabetical fallback. This is the
-  // default order every tradeskill uses; Enchanting's own sort dropdown
-  // (below) can switch the displayed order to alphabetical without touching
-  // this base array.
+  // default order every tradeskill uses; the sort dropdown (below) can
+  // switch the displayed order to alphabetical without touching this base
+  // array.
   const allRecipes = craftingData
     .filter(r => r.tradeskill === tradeskillName)
     .sort((a, b) => {
@@ -2996,11 +2996,11 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
                   <option value="">All Types</option>
                   ${enchantTypes.map(t => `<option value="${escapeAttr(t)}">${escapeAttr(t)}</option>`).join('')}
                 </select>
-                <select id="${sortId}" class="items-select">
-                  <option value="skill">Sort: Skill Required</option>
-                  <option value="alpha">Sort: Alphabetical</option>
-                </select>
               ` : ''}
+              <select id="${sortId}" class="items-select">
+                <option value="skill">Sort: Skill Required</option>
+                <option value="alpha">Sort: Alphabetical</option>
+              </select>
               <label class="needsinfo-toggle" for="${needsInfoId}">
                 <input type="checkbox" id="${needsInfoId}">
                 <span class="needsinfo-toggle-slider"></span>
@@ -3029,7 +3029,7 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   const countEl = rootEl.querySelector(`#${countId}`);
   const slotFilter = isEnchanting ? rootEl.querySelector(`#${slotFilterId}`) : null;
   const typeFilter = isEnchanting ? rootEl.querySelector(`#${typeFilterId}`) : null;
-  const sortSelect = isEnchanting ? rootEl.querySelector(`#${sortId}`) : null;
+  const sortSelect = rootEl.querySelector(`#${sortId}`);
 
   function attachRecipeLinkHandlers() {
     grid.querySelectorAll('.craft-result-link').forEach(link => {
@@ -3071,10 +3071,10 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
     if (slotValue) filtered = filtered.filter(r => r.enchantSlot === slotValue);
     if (typeValue) filtered = filtered.filter(r => r.craftType === typeValue);
     if (query) filtered = filtered.filter(r => recipeSearchHaystack(r).includes(query));
-    // Alphabetical is the one non-default sort option (Enchanting only) —
-    // everything else always displays in the same skill-required order
-    // `allRecipes` was already sorted into above.
-    if (sortSelect && sortSelect.value === 'alpha') filtered = [...filtered].sort((a, b) => a.name.localeCompare(b.name));
+    // Alphabetical is the one non-default sort option, available for every
+    // tradeskill — the default otherwise displays in the same skill-required
+    // order `allRecipes` was already sorted into above.
+    if (sortSelect.value === 'alpha') filtered = [...filtered].sort((a, b) => a.name.localeCompare(b.name));
 
     if (!filtered.length) {
       grid.innerHTML = '<p class="items-empty">No recipes match your search.</p>';
@@ -3101,7 +3101,7 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   needsInfoFilter.addEventListener('change', updateGrid);
   slotFilter && slotFilter.addEventListener('change', updateGrid);
   typeFilter && typeFilter.addEventListener('change', updateGrid);
-  sortSelect && sortSelect.addEventListener('change', updateGrid);
+  sortSelect.addEventListener('change', updateGrid);
   updateGrid();
 
   if (highlightSlug) {
