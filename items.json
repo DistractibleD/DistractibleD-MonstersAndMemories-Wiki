@@ -7985,5 +7985,18 @@
     "tags": [],
     "slot": "Feet",
     "needsInfo": true
+  },
+  {
+    "name": "Dusk Devotee Skull",
+    "slug": "dusk-devotee-skull",
+    "image": "images/items/dusk-devotee-skull.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC", "LORE"],
+    "slot": "Waist",
+    "stats": { "STA": 4, "INT": 5, "WIS": 5, "MANA": 20 },
+    "weight": 0.8,
+    "size": "Medium",
+    "classes": ["ALL"],
+    "race": ["ALL"]
   }
 ]

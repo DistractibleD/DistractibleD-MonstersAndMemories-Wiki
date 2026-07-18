@@ -376,7 +376,8 @@
     "tradeskill": "Herbalism",
     "minSkill": 55,
     "trivialSkill": 105,
-    "locations": ["Fallen Pass"]
+    "locations": ["Fallen Pass"],
+    "image": "images/gathering/stranglevine.jpg"
   },
   {
     "name": "Duneleaf",
