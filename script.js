@@ -2403,14 +2403,12 @@ function setupMapViewer() {
   viewer.id = 'map-viewer';
   viewer.innerHTML = `
     <button id="map-viewer-close" aria-label="Close">&times;</button>
-    <button id="map-viewer-prev" aria-label="Previous map of this area">
-      <span class="map-viewer-nav-arrow map-viewer-nav-arrow-left"></span>
-      <span class="map-viewer-nav-label">Alternate Map</span>
+    <button id="map-viewer-prev" aria-label="Previous map of this area" title="Previous map of this area">
+      <svg class="map-viewer-nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19"/></svg>
     </button>
     <img id="map-viewer-img" alt="">
-    <button id="map-viewer-next" aria-label="Next map of this area">
-      <span class="map-viewer-nav-arrow map-viewer-nav-arrow-right"></span>
-      <span class="map-viewer-nav-label">Alternate Map</span>
+    <button id="map-viewer-next" aria-label="Next map of this area" title="Next map of this area">
+      <svg class="map-viewer-nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 L16 12 L9 19"/></svg>
     </button>
     <div id="map-viewer-hint">Scroll to zoom &middot; drag to pan</div>
   `;

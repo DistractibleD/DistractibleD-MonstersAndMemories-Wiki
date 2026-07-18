@@ -1780,12 +1780,16 @@ body:not(.site-entered) .sidebar {
   color: var(--accent);
 }
 /* Made more visible (2026-07-17, user's own call — a tester didn't notice
-   these existed), then reshaped from a circle-with-a-glyph into a tall
-   rectangle with a vertical "ALTERNATE MAP" label and a CSS-drawn triangle
-   (2026-07-17, second pass — the Unicode ‹/› glyph used before looked
-   off-center, since angle-quote glyphs aren't vertically symmetric in most
-   fonts; a border-triangle has no such ambiguity, it's geometry, not a
-   font's own optical metrics). */
+   these existed), then reshaped into a tall rectangle with a vertical
+   "ALTERNATE MAP" text label and a CSS-drawn border-triangle (2026-07-17,
+   second pass). Redesigned again (2026-07-19, user's own call — the label
+   text read as "jagged"/clunky at that size in vertical-rl orientation) to
+   drop the text label entirely and use a plain SVG chevron instead of the
+   border-triangle, in a taller/slimmer button — a chevron drawn with
+   rounded stroke caps/joins reads as noticeably smoother than a hard-edged
+   border-triangle at small sizes. The button keeps its aria-label/title for
+   anyone relying on a screen reader or a hover tooltip now that there's no
+   visible text. */
 #map-viewer-prev,
 #map-viewer-next {
   position: absolute;
@@ -1794,16 +1798,13 @@ body:not(.site-entered) .sidebar {
   background: var(--bg-panel);
   border: 2px solid var(--accent);
   color: var(--accent);
-  width: 48px;
-  height: 168px;
-  border-radius: 10px;
+  width: 38px;
+  height: 210px;
+  border-radius: 19px;
   cursor: pointer;
   display: none;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  padding: 14px 0;
   z-index: 1;
   box-shadow: 0 0 18px rgba(224, 166, 64, 0.45);
   transition: background 0.15s ease, color 0.15s ease;
@@ -1819,39 +1820,18 @@ body:not(.site-entered) .sidebar {
   background: var(--accent);
   color: var(--bg);
 }
-/* A pure CSS border-triangle instead of a text glyph — perfectly centered
-   by construction, no font-metric guesswork. */
-.map-viewer-nav-arrow {
-  flex: 0 0 auto;
-  width: 0;
-  height: 0;
-  border-top: 9px solid transparent;
-  border-bottom: 9px solid transparent;
-}
-.map-viewer-nav-arrow-left {
-  border-right: 12px solid var(--accent);
-}
-.map-viewer-nav-arrow-right {
-  border-left: 12px solid var(--accent);
-}
-#map-viewer-prev:hover .map-viewer-nav-arrow-left {
-  border-right-color: var(--bg);
-}
-#map-viewer-next:hover .map-viewer-nav-arrow-right {
-  border-left-color: var(--bg);
-}
-.map-viewer-nav-label {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  font-family: 'Sora', sans-serif;
-  font-weight: 700;
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-#map-viewer-next .map-viewer-nav-label {
-  transform: rotate(180deg);
+/* stroke: currentColor means the icon recolors for free whenever the
+   button's own `color` changes — on :hover, and frame-by-frame during the
+   blink animation below, with no separate icon-targeted rule needed. */
+.map-viewer-nav-icon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
 }
 #map-viewer-hint {
   position: absolute;
@@ -1873,33 +1853,18 @@ body:not(.site-entered) .sidebar {
    there; blinking the actual clickable buttons draws the eye straight to
    them instead (2026-07-17, second pass). Restarted per fresh map opened
    via updateMapViewerNav's remove/reflow/re-add class dance, not on every
-   arrow click. The arrow's border-color is animated on its own matching
-   keyframes (border-color isn't inherited, so it needs its own rule) kept
-   in sync with the button's keyframes by using identical percentages. */
+   arrow click. Only the button itself needs an animation rule — the SVG
+   chevron's `stroke: currentColor` (see .map-viewer-nav-icon above) follows
+   the button's animated `color` automatically, so there's no separate
+   icon-targeted keyframes to keep in sync with this one. */
 #map-viewer-prev.map-viewer-nav-btn-play,
 #map-viewer-next.map-viewer-nav-btn-play {
   animation: map-viewer-nav-btn-blink 2.4s ease-in-out 1;
-}
-#map-viewer-prev.map-viewer-nav-btn-play .map-viewer-nav-arrow-left {
-  animation: map-viewer-nav-arrow-left-blink 2.4s ease-in-out 1;
-}
-#map-viewer-next.map-viewer-nav-btn-play .map-viewer-nav-arrow-right {
-  animation: map-viewer-nav-arrow-right-blink 2.4s ease-in-out 1;
 }
 @keyframes map-viewer-nav-btn-blink {
   0%, 100% { background: var(--bg-panel); color: var(--accent); box-shadow: 0 0 18px rgba(224, 166, 64, 0.45); }
   20%, 55% { background: var(--accent); color: var(--bg); box-shadow: 0 0 30px rgba(224, 166, 64, 0.9); }
   35%, 70% { background: var(--bg-panel); color: var(--accent); box-shadow: 0 0 18px rgba(224, 166, 64, 0.45); }
-}
-@keyframes map-viewer-nav-arrow-left-blink {
-  0%, 100% { border-right-color: var(--accent); }
-  20%, 55% { border-right-color: var(--bg); }
-  35%, 70% { border-right-color: var(--accent); }
-}
-@keyframes map-viewer-nav-arrow-right-blink {
-  0%, 100% { border-left-color: var(--accent); }
-  20%, 55% { border-left-color: var(--bg); }
-  35%, 70% { border-left-color: var(--accent); }
 }
 
 /* ---------- Footer ---------- */
@@ -2011,11 +1976,8 @@ body:not(.site-entered) .sidebar {
   .maps-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
   .map-card img.map-card-thumb { height: 110px; }
   #map-viewer-close { top: 10px; right: 12px; width: 34px; height: 34px; font-size: 1.2rem; }
-  #map-viewer-prev, #map-viewer-next { width: 38px; height: 120px; gap: 10px; }
-  .map-viewer-nav-arrow { border-top-width: 7px; border-bottom-width: 7px; }
-  .map-viewer-nav-arrow-left { border-right-width: 10px; }
-  .map-viewer-nav-arrow-right { border-left-width: 10px; }
-  .map-viewer-nav-label { font-size: 0.62rem; }
+  #map-viewer-prev, #map-viewer-next { width: 30px; height: 140px; }
+  .map-viewer-nav-icon { width: 13px; height: 13px; }
   #map-viewer-prev { left: 8px; }
   #map-viewer-next { right: 8px; }
 }
