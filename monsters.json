@@ -1654,5 +1654,76 @@
       { "item": "Thornbark Bracer" },
       { "item": "Thornbark Mantle" }
     ]
+  },
+  {
+    "name": "Bloatbelly",
+    "slug": "bloatbelly",
+    "named": true,
+    "maps": ["Grimtide Sanctum"],
+    "drops": [
+      { "item": "Bloated Seal" },
+      { "item": "Mask of the Drowned" }
+    ]
+  },
+  {
+    "name": "Braggla The Spawnkeeper",
+    "slug": "braggla-the-spawnkeeper",
+    "named": true,
+    "maps": ["Grimtide Sanctum"],
+    "drops": [
+      { "item": "Mantle of the Sharkmother" },
+      { "item": "Ring of the Razobrood" },
+      { "item": "Sharkmother Trousers" },
+      { "item": "Stitched Scrap Vambraces" }
+    ]
+  },
+  {
+    "name": "Devourhymn Glomenda",
+    "slug": "devourhymn-glomenda",
+    "named": true,
+    "maps": ["Grimtide Sanctum"],
+    "drops": [
+      { "item": "Hydrophone Drum" },
+      { "item": "Mawchant Leather Mantle" },
+      { "item": "Mawchant Rite Vest" }
+    ]
+  },
+  {
+    "name": "Silent Nirra",
+    "slug": "silent-nirra",
+    "named": true,
+    "maps": ["Grimtide Sanctum"],
+    "drops": [
+      { "item": "Echoless Leggings" },
+      { "item": "Whisperless Veil" }
+    ]
+  },
+  {
+    "name": "Tidecaller Selka",
+    "slug": "tidecaller-selka",
+    "named": true,
+    "maps": ["Grimtide Sanctum"],
+    "drops": [
+      { "item": "Spear of The Drowned" },
+      { "item": "Tidecaller's Rituals" }
+    ]
+  },
+  {
+    "name": "Venomfang",
+    "slug": "venomfang",
+    "named": true,
+    "maps": ["Grimtide Sanctum"],
+    "drops": [{ "item": "Serpentscale Belt" }]
+  },
+  {
+    "name": "Vesska The Bloodbound",
+    "slug": "vesska-the-bloodbound",
+    "named": true,
+    "maps": ["Grimtide Sanctum"],
+    "drops": [
+      { "item": "Faceguard of the Torturer" },
+      { "item": "Torturer's Thorn Shoulders" },
+      { "item": "Vesska's Thorn" }
+    ]
   }
 ]

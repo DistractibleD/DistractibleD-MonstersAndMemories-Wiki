@@ -1347,6 +1347,9 @@ function statEntries(item) {
   if (item.spellHaste) entries.push({ label: 'Spell Haste', value: `${formatSigned(item.spellHaste)}%` });
   if (item.hpRegen) entries.push({ label: 'HP Regen', value: formatSigned(item.hpRegen) });
   if (item.manaRegen) entries.push({ label: 'Mana Regen', value: formatSigned(item.manaRegen) });
+  // percussion added 2026-07-19 — first seen on Hydrophone Drum ("Percussion: +28%"),
+  // a Bard instrument-skill bonus distinct from the flat `haste` field.
+  if (item.percussion) entries.push({ label: 'Percussion', value: `${formatSigned(item.percussion)}%` });
   return entries;
 }
 

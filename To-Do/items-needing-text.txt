@@ -139,3 +139,12 @@ user-submitted screenshot, not the site's own rendered item-card image the other
 this page used) — `race` left unset rather than assumed ALL. Barkweave Mask (dropped by
 Thornbark, same zone) similarly showed no AC line on its card at all — `ac` left unset
 rather than guessed at 0.
+
+2026-07-19, mnmdrops.com scrape: Ring of the Razobrood (dropped by Braggla The Spawnkeeper,
+Grimtide Sanctum) — same cropped-card situation, Class line visible but no Race line —
+`race` left unset. Note also: two items on this same zone's mob pages were listed under a
+misspelled/wrong name on the mob's own drop-table page but the item's own card title (the
+authoritative source) gave the real name — recorded under the card's name, not the mob
+page's: "Stiched Scrap Vambraces" -> Stitched Scrap Vambraces, "Hyrdophone Drum" ->
+Hydrophone Drum, "Staff of the Drowned" -> Spear of The Drowned, "Whispering Veil" ->
+Whisperless Veil.
