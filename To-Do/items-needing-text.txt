@@ -156,3 +156,16 @@ it plural) — card shows no Class/Race section at all despite having a real equ
 (Primary/Secondary/Belt), unlike the usual "no slot at all" case that skips these fields —
 `needsInfo: true` set instead of guessing ALL. Also two more mob-page-vs-card-title name
 mismatches, recorded under the card's own name: "Hunting Longow" -> Hunting Longbow.
+
+2026-07-19, mnmdrops.com scrape, Evershade Weald zone: three item cards (Grips of the Deep
+Enchantress / dropped by Misteress Naelira, Wanderer's Leggings / dropped by Scout Grimgaze,
+Encrusted Heartleaf Spangenhelm / dropped by A Small River Elemental) start their visible
+text right at the "Slot:" line with no MAGIC tag line above it — most likely cropped off the
+top of the screenshot rather than genuinely untagged, but left `tags: []` rather than
+assuming MAGIC since every other card in this same batch did show the tag clearly. Krindor's
+Wristguard (dropped by Scout Leader Krindor) and Black Widow Sickle (dropped by Tearesh
+Deathcharmer) both show a scrollbar with no Race line — `race` left unset on both; Krindor's
+Wristguard's Class line also looked one line short compared to the usual 14-class "everyone
+but casters" roster (missing RNG/ROG specifically) which may just be more of the same crop,
+so treat that class list as unconfirmed-complete too. Also one more mob-page-vs-card-title
+name mismatch: "Pranker's Briarbinds" -> Prankster's Briarbinds.

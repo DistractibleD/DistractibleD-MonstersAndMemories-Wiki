@@ -1804,5 +1804,96 @@
       { "item": "Rootrender's Stave" },
       { "item": "Voice of the Land Sabatons" }
     ]
+  },
+  {
+    "name": "Kyros Emeraldscale",
+    "slug": "kyros-emeraldscale",
+    "named": true,
+    "maps": ["Evershade Weald"],
+    "drops": [
+      { "item": "Drakeling Cuffs" },
+      { "item": "Emeraldscale Talonboots" }
+    ]
+  },
+  {
+    "name": "Meluli Dawnglow",
+    "slug": "meluli-dawnglow",
+    "named": true,
+    "maps": ["Evershade Weald"],
+    "drops": [{ "item": "Dawnglow Gossamer Vest" }]
+  },
+  {
+    "name": "Misteress Naelira",
+    "slug": "misteress-naelira",
+    "named": true,
+    "maps": ["Evershade Weald"],
+    "drops": [
+      { "item": "Beguiler's Tunic" },
+      { "item": "Grips of the Deep Enchantress" },
+      { "item": "Mask of the Mistress" }
+    ]
+  },
+  {
+    "name": "Rotmuzzle",
+    "slug": "rotmuzzle",
+    "named": true,
+    "maps": ["Evershade Weald"],
+    "drops": [
+      { "item": "Foamstalker's Trinket" },
+      { "item": "Frostmaw" },
+      { "item": "Gloves of the Rotting Hound" },
+      { "item": "Moonlit Scruff" },
+      { "item": "Rabid Hide Wristguards" }
+    ]
+  },
+  {
+    "name": "Scout Grimgaze",
+    "slug": "scout-grimgaze",
+    "named": true,
+    "maps": ["Evershade Weald"],
+    "drops": [
+      { "item": "Ironbind Gauntlets" },
+      { "item": "Luminous Runestaff" },
+      { "item": "Ridgeland Stud" },
+      { "item": "Tanned Redstalker Hide" },
+      { "item": "Wanderer's Leggings" }
+    ]
+  },
+  {
+    "name": "Scout Leader Krindor",
+    "slug": "scout-leader-krindor",
+    "named": true,
+    "maps": ["Evershade Weald"],
+    "drops": [
+      { "item": "Krindor's Hunting Bow" },
+      { "item": "Krindor's Wristguard" }
+    ]
+  },
+  {
+    "name": "Tearesh Deathcharmer",
+    "slug": "tearesh-deathcharmer",
+    "named": true,
+    "maps": ["Evershade Weald"],
+    "drops": [
+      { "item": "Black Widow Sickle" },
+      { "item": "Deathcharmer's Masquerade" },
+      { "item": "Mana Bloodstone" },
+      { "item": "Necrostar Cape" },
+      { "item": "The Wrekronomicon" }
+    ]
+  },
+  {
+    "name": "Vorkuul Blighteye",
+    "slug": "vorkuul-blighteye",
+    "named": true,
+    "maps": ["Evershade Weald"],
+    "drops": [{ "item": "Diseased Wolf Mantle" }]
+  },
+  {
+    "name": "Wavecaller Hydronysa",
+    "slug": "wavecaller-hydronysa",
+    "named": true,
+    "maps": ["Evershade Weald"],
+    "drops": [{ "item": "Wavecaller's Pendant" }]
   }
 ]
