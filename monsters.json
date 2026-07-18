@@ -1245,5 +1245,21 @@
     "slug": "grandmaster-obadiah",
     "named": true,
     "maps": ["Tomb of the Last Wyrmsbane"]
+  },
+  {
+    "name": "Zakariah Shriki",
+    "slug": "zakariah-shriki",
+    "named": true,
+    "maps": ["The Grain Cellar"],
+    "levelRange": "31",
+    "drops": [
+      { "item": "Grain Cellar Key" },
+      { "item": "Skeletal Mantle" },
+      { "item": "Shriki's Rivet-Boots" },
+      { "item": "Cotton Scraps" },
+      { "item": "Leather Scraps" },
+      { "item": "Rusty Iron Plate" },
+      { "item": "Tattered Cotton" }
+    ]
   }
 ]

@@ -8052,5 +8052,48 @@
     "size": "Large",
     "classes": ["ALL"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Steward's Coif",
+    "slug": "stewards-coif",
+    "image": "images/items/stewards-coif.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Head",
+    "ac": 16,
+    "stats": { "INT": 7, "MANA": 30 },
+    "description": "A stitched linen cap worn by a steward of one of the noble houses of Upper Saman.",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Eggspinner's Cuff",
+    "slug": "eggspinners-cuff",
+    "image": "images/items/eggspinners-cuff.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Wrist",
+    "ac": 13,
+    "stats": { "WIS": 4, "HP": 10 },
+    "weight": 1.4,
+    "size": "Small",
+    "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Cowl of the Arch Lich",
+    "slug": "cowl-of-the-arch-lich",
+    "image": "images/items/cowl-of-the-arch-lich.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Head",
+    "ac": 16,
+    "stats": { "STA": 4, "INT": 6, "HP": 10, "MANA": 10 },
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ELE", "ENC", "NEC", "WIZ"],
+    "race": ["ALL"]
   }
 ]
