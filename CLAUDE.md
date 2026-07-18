@@ -131,30 +131,36 @@ runtime — no other file needs to change when items are added, including when a
 slot, or max-size value shows up for the first time (those dropdowns are populated from
 whatever values exist in the data).
 
-**Item Database browsing:** the page opens on a category grid, one card per `item.type`
-(Weapon/Armor/Jewelry/Container/Food/Drink/Misc) with its item count — `renderItemsCategories`
-in `script.js`, same pattern as the Crafting page's tradeskill grid. A filter row (Slot/
-Class/Race/Tag/Max Size/a "Show only items that need info" toggle — see `needsInfo` note
-under "Item and recipe cards" below — computed from all of `items.json`) sits above the
-category grid. Picking a filter jumps straight to a filtered, unscoped "All Items" list
-(`renderItemsList(container, null)` — the one case that shows a "Type" column, since there's
-no single category to imply it from). Clicking a category card instead carries the grid's
-*current* filter values into that category's own scoped list (`pendingItemFilters`,
-consume-once-on-render, same pattern as `pendingItemQuery`) — this carry-over is one hop
-only (grid → the category you land in), it doesn't follow you again if you then switch to a
-different category from inside a scoped list.
+**Item Database browsing:** one view, `renderItemsList` in `script.js` — a search box, a
+"Type" dropdown (Weapon/Armor/Jewelry/Container/Food/Drink/Misc, or "All Types"), Slot/Class/
+Race/Tag/Max Size dropdowns, the stat/buff checkbox dropdown, and a "Show only items that
+need info" toggle (see `needsInfo` note under "Item and recipe cards" below), all above the
+sortable table. The page used to open on a separate category grid of clickable cards
+(`renderItemsCategories`) that you drilled into; the user asked to drop that in favor of just
+filtering (2026-07-19) since a dropdown reaches the same place in one fewer click — Type is
+now just one more dropdown in the same toolbar as everything else, not a distinct page.
+`renderItemsList(container, null)` (Type = "All Types") is the default landing state and the
+one case that shows a "Type" column, since there's no single category to imply it from.
+Picking a Type re-renders the whole function scoped to that type (Slot/Class/Race/Tag/Max
+Size options all narrow to just that type's items, same as before), carrying the *other*
+filter values the user already had set across that re-render via `pendingItemFilters`
+(consume-once-on-render, same pattern as `pendingItemQuery` — which the Type dropdown's own
+change handler also sets, from the search box's current value, so a typed search survives
+switching Type too) — this carry-over is one hop only (the type you're switching *from* → the
+type you land in), it doesn't keep following you through a second switch.
 
-Every category (including Armor) goes straight from its card to `renderItemsList`, scoped to
-just that type, with slot/class/race/tag/max-size dropdowns scoped to just that category's
-items. Armor additionally gets a "Material" dropdown (Cloth/Leather/Chain/Plate/Other,
-derived from `armorIconKey`/`ARMOR_MATERIAL_ORDER`/`ARMOR_MATERIAL_LABELS`) — same
-conditional-dropdown pattern the Weapon category's handedness dropdown uses. (Armor used to
-force a two-level material→slot card drill-down before reaching this table; removed
-2026-07-15 since a dropdown does the same job in one click.) The header search box (global,
-searches everything regardless of category) still works the same — clicking an item result
-calls `goToItem`, which sets `pendingItemCategory` (alongside `pendingItemQuery`) so the Item
-Database opens directly on that item's category list with the search box pre-filled. Recipe
-component/result links into the Item Database go through the same `goToItem` path.
+Every type (including Armor) uses the same `renderItemsList`, with slot/class/race/tag/
+max-size dropdowns scoped to just that type's items. Armor additionally gets a "Material"
+dropdown (Cloth/Leather/Chain/Plate/Other, derived from `armorIconKey`/`ARMOR_MATERIAL_ORDER`/
+`ARMOR_MATERIAL_LABELS`) — same conditional-dropdown pattern the Weapon type's handedness
+dropdown uses. (Armor used to force a two-level material→slot card drill-down before reaching
+this table; removed 2026-07-15 since a dropdown does the same job in one click — the whole
+category-grid-of-cards approach it belonged to was later dropped the same way, 2026-07-19.)
+The header search box (global, searches everything regardless of type) still works the same —
+clicking an item result calls `goToItem`, which sets `pendingItemCategory` (alongside
+`pendingItemQuery`) so the Item Database opens directly on that item's type with the search
+box pre-filled and the Type dropdown set accordingly. Recipe component/result links into the
+Item Database go through the same `goToItem` path.
 
 ## Item screenshot format
 
@@ -1003,8 +1009,12 @@ records that tradeskill specifically, never "Gathering"/"Crafting" themselves. C
   Submit a Screenshot) still just tracks itself via `recordVisit('page', file)` inside
   `loadPage`, unchanged — a Monsters sub-route (e.g. `monsters/named/Vale of Zintar`) still
   counts as a visit to "Monsters" as a whole, not the individual zone/monster. This wasn't
-  extended to Monsters' zone drill-down or the Item Database's category drill-down even
-  though they have a similar grid-then-detail shape — only Gathering/Crafting were asked for.
+  extended to Monsters' zone drill-down even though it has a similar grid-then-detail shape
+  to Gathering/Crafting — only Gathering/Crafting were asked for. (The Item Database used to
+  have a comparable grid-then-detail shape too, back when it opened on a category grid of
+  cards; that grid was dropped 2026-07-19 in favor of a plain Type filter dropdown, so this
+  no-longer-applies to it at all now — it was never more than a single `page`-kind visit
+  either way.)
 
 Each stored entry is `{kind, id, count, lastVisited}` keyed by `` `${kind}:${id}` ``:
 `kind: "page"` (`id` = a `pages.json` file, resolved via `allPages`, opened with `loadPage`),

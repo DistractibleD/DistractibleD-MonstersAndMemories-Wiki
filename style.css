@@ -737,11 +737,6 @@ body:not(.site-entered) .sidebar {
   font-size: 0.82rem;
   margin: 6px 0 14px;
 }
-.items-filters-intro {
-  color: var(--text-dim);
-  font-size: 0.88rem;
-  margin: 22px 0 8px;
-}
 .items-table-wrap {
   overflow-x: auto;
   max-width: 100%;
@@ -864,20 +859,6 @@ body:not(.site-entered) .sidebar {
 }
 .items-quick-search-results.open {
   display: block;
-}
-/* The Item Database's own quick search (renderItemsCategories) renders real
-   results as a full live-filter item table instead of a small dropdown of
-   name links (2026-07-17, user's own call — see the "instead of links in
-   the search window" note in script.js), so it needs the full page width
-   and no scroll clipping, unlike the Crafting/Gathering/Monsters quick
-   searches which still use the plain dropdown-of-links shape above. */
-.items-quick-search-results-wide {
-  max-width: none;
-  max-height: none;
-  overflow: visible;
-  background: none;
-  border: none;
-  padding: 0;
 }
 .items-quick-search-type {
   float: right;
@@ -1847,7 +1828,9 @@ body:not(.site-entered) .sidebar {
   pointer-events: none;
 }
 /* Calls out the prev/next buttons themselves the first time a multi-map
-   area opens, by briefly pulsing to their hover colors a couple of times
+   area opens, by briefly pulsing to their hover colors three times (2026-07-19:
+   raised from two — same per-blink speed, just one more cycle, so the
+   overall duration grew from 2.4s to 3.6s to fit it in without rushing)
    before settling back to normal — replaces an earlier top-of-screen hint
    pill (2026-07-17, first pass) the user found "not very effective" up
    there; blinking the actual clickable buttons draws the eye straight to
@@ -1859,12 +1842,12 @@ body:not(.site-entered) .sidebar {
    icon-targeted keyframes to keep in sync with this one. */
 #map-viewer-prev.map-viewer-nav-btn-play,
 #map-viewer-next.map-viewer-nav-btn-play {
-  animation: map-viewer-nav-btn-blink 2.4s ease-in-out 1;
+  animation: map-viewer-nav-btn-blink 3.6s ease-in-out 1;
 }
 @keyframes map-viewer-nav-btn-blink {
   0%, 100% { background: var(--bg-panel); color: var(--accent); box-shadow: 0 0 18px rgba(224, 166, 64, 0.45); }
-  20%, 55% { background: var(--accent); color: var(--bg); box-shadow: 0 0 30px rgba(224, 166, 64, 0.9); }
-  35%, 70% { background: var(--bg-panel); color: var(--accent); box-shadow: 0 0 18px rgba(224, 166, 64, 0.45); }
+  13%, 37%, 60% { background: var(--accent); color: var(--bg); box-shadow: 0 0 30px rgba(224, 166, 64, 0.9); }
+  23%, 47%, 70% { background: var(--bg-panel); color: var(--accent); box-shadow: 0 0 18px rgba(224, 166, 64, 0.45); }
 }
 
 /* ---------- Footer ---------- */

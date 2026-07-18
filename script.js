@@ -23,22 +23,16 @@ let pendingCraftingTradeskill = null;
 // Same idea as pendingCraftingTradeskill, but for the separate Gathering
 // page (gathering tradeskills split out from Crafting on 2026-07-13).
 let pendingGatheringTradeskill = null;
-// Set by the Item Database category grid's own filter dropdowns (2026-07-14)
-// so picking a filter there — instead of clicking a category card — jumps
-// straight to the unscoped all-items list with that filter pre-applied.
+// Set by renderItemsList's own "Type" filter dropdown (2026-07-19 — the
+// Item Database used to open on a separate category grid of clickable
+// cards; the user asked to drop that in favor of just filtering, so Type is
+// now one more dropdown in the same toolbar as Slot/Class/Race/etc.) right
+// before it re-renders itself scoped to the newly-picked type, so the
+// other filters the user had already set carry over instead of resetting.
 // Consumed by renderItemsList the same way pendingItemQuery is.
 let pendingItemFilters = null;
-// Set alongside pendingItemFilters specifically when the category grid's
-// buff checkbox grid (not one of the plain <select> filters) is what
-// triggered the jump to renderItemsList — tells that page to immediately
-// reopen its own buff dropdown (see setupBuffDropdown's `open`) so ticking
-// a box on the category grid feels like the same panel stayed open the
-// whole time, live-filtering, rather than closing when the page swaps out
-// from under it (2026-07-19, user's own follow-up request).
-let pendingOpenBuffDropdown = false;
 // Set alongside pendingItemQuery (by goToItem) so the Item Database opens
-// directly on that item's category list instead of the category grid —
-// same idea as pendingCraftingTradeskill jumping past the tradeskill grid.
+// directly on that item's own type instead of "All Types".
 let pendingItemCategory = null;
 // Set when jumping to an item from a recipe's component list, so the Item
 // Database can show a "back to that recipe" link. Same consume-once pattern.
@@ -867,10 +861,9 @@ const ITEM_BUFF_OPTIONS = [
 // 3-dropdown version at the user's request) — a single toggle button that
 // opens a small checkbox grid of every stat/resist/haste value, so someone
 // can tick any number at once (AND logic — an item must match every one
-// that's checked) to answer things like "what gives both STA and HP".
-// Shared markup/wiring since the category grid's toolbar and a scoped
-// category list's toolbar (renderItemsCategories/renderItemsList) both need
-// an identical control, just under a different id prefix.
+// that's checked) to answer things like "what gives both STA and HP". Used
+// by renderItemsList's own toolbar; takes an id prefix so a page with more
+// than one instance of this control (none currently) wouldn't collide.
 function buffDropdownHTML(idPrefix) {
   const optionsHTML = ITEM_BUFF_OPTIONS.map(o => `
           <label class="buff-filter-option"><input type="checkbox" value="${o.value}"><span>${escapeAttr(o.label)}</span></label>`).join('');
@@ -892,9 +885,9 @@ function buffDropdownHTML(idPrefix) {
 }
 
 // Closes any open buff dropdown when a click lands outside it — registered
-// once (guarded) rather than per-render, since renderItemsCategories/
-// renderItemsList tear down and rebuild their whole container on every
-// visit and a fresh document-level listener each time would just pile up.
+// once (guarded) rather than per-render, since renderItemsList tears down
+// and rebuilds its whole container on every visit (and every category
+// switch) and a fresh document-level listener each time would just pile up.
 // Uses live querySelectorAll at click time instead of a captured reference,
 // so it never touches a stale/detached node from a previous render.
 let buffDropdownGlobalCloseSetup = false;
@@ -915,9 +908,9 @@ function ensureBuffDropdownGlobalClose() {
 // outside it (never as a side effect of a tick — see the `open` note below
 // for how the one page that fully re-renders on a filter change stays
 // seamless despite that).
-// Returns { getSelected, setSelected, clear, open } for the caller's own
-// filter logic (e.g. building a full filters object that also includes
-// other, non-buff dropdowns).
+// Returns { getSelected, setSelected, clear } for the caller's own filter
+// logic (e.g. building a full filters object that also includes other,
+// non-buff dropdowns).
 function setupBuffDropdown(container, idPrefix, { onChange } = {}) {
   ensureBuffDropdownGlobalClose();
   const root = container.querySelector(`#${idPrefix}-buffdropdown`);
@@ -932,12 +925,6 @@ function setupBuffDropdown(container, idPrefix, { onChange } = {}) {
     countEl.textContent = n ? `(${n})` : '';
   }
 
-  // Exposed as the returned `open` so a caller whose onChange fully
-  // re-renders `container` (the category grid — see renderItemsCategories,
-  // which sets pendingOpenBuffDropdown before doing so) can reopen the
-  // brand-new panel that replaces this one immediately after that render,
-  // making the swap feel like the same panel stayed open the whole time
-  // rather than closing the instant you tick a box.
   function openPanel() {
     root.classList.add('open');
     // Clamp the panel to stay fully inside the viewport (8px margin),
@@ -989,8 +976,7 @@ function setupBuffDropdown(container, idPrefix, { onChange } = {}) {
     clear: () => {
       checkboxes.forEach(cb => { cb.checked = false; });
       updateCount();
-    },
-    open: openPanel
+    }
   };
 }
 
@@ -1323,14 +1309,8 @@ function itemCategoryLabel(item) {
   return itemIconKeys(item).map(k => ICON_LABELS[k] || 'Item').join(', ');
 }
 
-// Generic icon + plural display label per item.type, used one level up from
-// the per-item sub-type icons above (itemIconKeys) — the Item Database's
-// category grid (see renderItemsCategories) just needs "this card is
-// Weapons", not "this card is a Two-Handed Sword".
-const ITEM_TYPE_ICON = {
-  Weapon: 'slashing1h', Armor: 'armor', Jewelry: 'ring', Container: 'container',
-  Food: 'food', Drink: 'drink', Misc: 'material',
-};
+// Plural display label per item.type — used for the Type filter dropdown's
+// option text and the page heading/Type column in renderItemsList.
 const ITEM_TYPE_LABELS = {
   Weapon: 'Weapons', Armor: 'Armor', Jewelry: 'Jewelry', Container: 'Containers',
   Food: 'Food', Drink: 'Drinks', Misc: 'Misc',
@@ -1447,8 +1427,8 @@ async function renderItemsPage(container) {
   await ensureItemsData();
 
   // Landed here from a header search result for a specific item — jump
-  // straight to that item's category instead of the category grid (same
-  // pattern as pendingCraftingTradeskill on the Crafting page).
+  // straight to that item's own type instead of "All Types" (same pattern
+  // as pendingCraftingTradeskill on the Crafting page).
   if (pendingItemCategory) {
     const category = pendingItemCategory;
     pendingItemCategory = null;
@@ -1456,243 +1436,41 @@ async function renderItemsPage(container) {
     return;
   }
 
-  renderItemsCategories(container);
+  renderItemsList(container, null);
 }
 
-// Top-level Item Database view: one card per item.type (Weapon, Armor,
-// Jewelry, Container, Food, Drink, Misc) with its item count, mirroring the
-// Crafting page's tradeskill grid (see renderCraftingCategories). Clicking a
-// card drills into renderItemsList, which holds the actual search/filter/
-// sort table, scoped to just that category (Armor included — see
-// renderItemsList's own Material dropdown for what used to be a separate
-// material/slot card drill-down, removed 2026-07-15).
-function renderItemsCategories(container) {
-  const types = [...new Set(itemsData.map(i => i.type))].sort();
-
-  // Filter dropdowns (2026-07-14) let someone skip the category-card click
-  // entirely and jump straight to a filtered, unscoped list of matching
-  // items across every category — an alternative to, not a replacement for,
-  // clicking a card. Options are derived from *all* items.json, not scoped
-  // to one type, since no category has been picked yet at this point.
-  // Placed above the category grid (2026-07-15) to match renderItemsList's
-  // own toolbar position, and carried over onto whichever category's list
-  // you land on next — whether that's from changing a filter (jumps straight
-  // to the unscoped "All Items" list) or clicking a category card (jumps
-  // into that one category, same filters applied — see the card click
-  // handler below).
-  const allSlots = [...new Set(itemsData.map(i => i.slot))].filter(Boolean).sort();
-  const allClasses = [...new Set(itemsData.flatMap(i => i.classes || []).filter(c => c !== 'ALL'))].sort();
-  const allRaces = [...new Set(itemsData.flatMap(i => i.race || []).filter(r => r !== 'ALL'))].sort();
-  const allTags = [...new Set(itemsData.flatMap(i => i.tags || []))].sort();
-  const allMaxSizes = [...new Set(itemsData.map(i => i.maxSize).filter(Boolean))].sort();
-
-  container.innerHTML = `
-    <h1>Item Database</h1>
-    <p>Browse items by category, or search below to filter across every item as you type.</p>
-    <div class="items-quick-search">
-      <div class="items-quick-search-row">
-        <input type="search" id="items-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all items by name, stat, class..." autocomplete="off">
-        <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="items-quick-search-box">Clear</button>
-      </div>
-      <div id="items-quick-search-results" class="items-quick-search-results items-quick-search-results-wide"></div>
-    </div>
-    <div id="items-category-browse">
-      <p class="items-filters-intro">Filter across every category, or click a category card below to browse it directly:</p>
-      <div class="items-toolbar">
-        <select id="items-category-filter-slot" class="items-select">
-          <option value="">All slots</option>
-          ${allSlots.map(s => `<option value="${s}">${s}</option>`).join('')}
-        </select>
-        <select id="items-category-filter-class" class="items-select">
-          <option value="">All classes</option>
-          ${allClasses.map(c => `<option value="${c}">${c}</option>`).join('')}
-        </select>
-        <select id="items-category-filter-race" class="items-select">
-          <option value="">All races</option>
-          ${allRaces.map(r => `<option value="${r}">${r}</option>`).join('')}
-        </select>
-        <select id="items-category-filter-tag" class="items-select">
-          <option value="">All tags</option>
-          ${allTags.map(t => `<option value="${t}">${t}</option>`).join('')}
-        </select>
-        <select id="items-category-filter-maxsize" class="items-select">
-          <option value="">All max sizes</option>
-          ${allMaxSizes.map(s => `<option value="${s}">${s}</option>`).join('')}
-        </select>
-        ${buffDropdownHTML('items-category-filter')}
-        <label class="needsinfo-toggle" for="items-category-filter-needsinfo">
-          <input type="checkbox" id="items-category-filter-needsinfo">
-          <span class="needsinfo-toggle-slider"></span>
-          <span>Show only items that need info</span>
-        </label>
-      </div>
-      <div class="items-category-grid">
-        ${types.map(type => {
-          const count = itemsData.filter(i => i.type === type).length;
-          const icon = ITEM_TYPE_ICON[type] || 'material';
-          const label = ITEM_TYPE_LABELS[type] || type;
-          return `
-            <div class="items-category-card" data-type="${escapeAttr(type)}">
-              <div class="items-category-card-icon">${svgIcon(icon)}</div>
-              <div class="items-category-card-body">
-                <div class="items-category-card-name">${escapeAttr(label)}</div>
-                <div class="items-category-card-count">${count} item${count === 1 ? '' : 's'}</div>
-              </div>
-            </div>
-          `;
-        }).join('')}
-      </div>
-    </div>
-  `;
-
-  const categorySlotFilter = container.querySelector('#items-category-filter-slot');
-  const categoryClassFilter = container.querySelector('#items-category-filter-class');
-  const categoryRaceFilter = container.querySelector('#items-category-filter-race');
-  const categoryTagFilter = container.querySelector('#items-category-filter-tag');
-  const categoryMaxSizeFilter = container.querySelector('#items-category-filter-maxsize');
-  const categoryNeedsInfoFilter = container.querySelector('#items-category-filter-needsinfo');
-
-  function currentFilters() {
-    return {
-      slot: categorySlotFilter.value,
-      cls: categoryClassFilter.value,
-      race: categoryRaceFilter.value,
-      tag: categoryTagFilter.value,
-      maxSize: categoryMaxSizeFilter.value,
-      needsInfo: categoryNeedsInfoFilter.checked,
-      buffs: categoryBuffDropdown.getSelected()
-    };
-  }
-
-  const categoryBuffDropdown = setupBuffDropdown(container, 'items-category-filter', {
-    // Live, same as every other filter on this page — jumps to the
-    // unscoped all-items list on every tick. pendingOpenBuffDropdown tells
-    // that page's own buff dropdown to reopen itself immediately, since the
-    // jump fully re-renders `container` and would otherwise silently close
-    // the panel out from under the very tick that triggered it.
-    onChange: () => {
-      pendingItemFilters = currentFilters();
-      pendingOpenBuffDropdown = true;
-      renderItemsList(container, null);
-    }
-  });
-
-  container.querySelectorAll('.items-category-card').forEach(card => {
-    card.addEventListener('click', () => {
-      pendingItemFilters = currentFilters();
-      renderItemsList(container, card.dataset.type);
-    });
-  });
-
-  [categorySlotFilter, categoryClassFilter, categoryRaceFilter, categoryTagFilter, categoryMaxSizeFilter, categoryNeedsInfoFilter].forEach(el => {
-    el.addEventListener('change', () => {
-      pendingItemFilters = currentFilters();
-      renderItemsList(container, null);
-    });
-  });
-
-  // A shortcut past the whole category → (material →) slot drill-down for
-  // anyone who already knows what they're looking for. Scoped to items.json
-  // only (unlike the header search box, which also covers pages/recipes).
-  // Rather than a dropdown of clickable name links (the original shape —
-  // "click one, hit Back, click the next" for a broad term like "Rawhide"
-  // or "Corrupted"), this renders every match directly under the search box
-  // as the same live item table/rows used everywhere else in the Item
-  // Database (renderItemRows + setupItemTooltip/setupItemClickToView), so
-  // hovering any result shows its full card without leaving this page
-  // (2026-07-17, user's own call). The category grid hides itself while a
-  // query is active and comes back once the box is cleared.
-  const quickSearchBox = container.querySelector('#items-quick-search-box');
-  const quickSearchResults = container.querySelector('#items-quick-search-results');
-  const categoryBrowse = container.querySelector('#items-category-browse');
-
-  quickSearchBox.addEventListener('input', () => {
-    const query = quickSearchBox.value.toLowerCase().trim();
-    if (!query) {
-      quickSearchResults.classList.remove('open');
-      quickSearchResults.innerHTML = '';
-      categoryBrowse.style.display = '';
-      return;
-    }
-    categoryBrowse.style.display = 'none';
-
-    const matches = itemsData
-      .filter(item => itemSearchHaystack(item).includes(query))
-      .sort((a, b) => a.name.localeCompare(b.name));
-
-    quickSearchResults.innerHTML = matches.length
-      ? `
-        <p class="items-count">Showing ${matches.length} item${matches.length === 1 ? '' : 's'} matching your search. Hover a name to see its full card.</p>
-        <div class="items-table-wrap">
-          <table class="items-table">
-            <colgroup>
-              <col class="col-name">
-              <col class="col-type">
-              <col class="col-slot">
-              <col class="col-ac">
-              <col class="col-stats">
-              <col class="col-damage">
-              <col class="col-delay">
-              <col class="col-ratio">
-              <col class="col-weight">
-              <col class="col-capacity">
-              <col class="col-classes">
-              <col class="col-race">
-            </colgroup>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Slot</th>
-                <th>AC</th>
-                <th>Stats</th>
-                <th>Damage</th>
-                <th>Delay</th>
-                <th>Ratio</th>
-                <th>Weight / Size</th>
-                <th>Capacity / Max Size</th>
-                <th>Classes</th>
-                <th>Race</th>
-              </tr>
-            </thead>
-            <tbody id="items-quick-search-tbody"></tbody>
-          </table>
-        </div>
-      `
-      : '<p class="search-results-empty">No items match your search.</p>';
-    quickSearchResults.classList.add('open');
-
-    const tbody = quickSearchResults.querySelector('#items-quick-search-tbody');
-    if (tbody) {
-      renderItemRows(tbody, matches, true);
-      setupItemTooltip(tbody);
-      setupItemClickToView(tbody);
-    }
-  });
-}
-
-// One category's full item table — search box, slot/class/race/tag/max-size
-// filters (options scoped to just this category, so e.g. Weapons doesn't
-// show Jewelry's classes in its dropdown), click-to-sort columns, and the
-// existing hover/click card behavior. The "Type" column/filter from the old
-// flat table is gone since it's now implied by which category you're in.
+// The Item Database's one and only view — search box, a Type dropdown
+// (Weapon/Armor/Jewelry/etc., or "All Types") plus Slot/Class/Race/Tag/
+// Max Size/buff filters, click-to-sort columns, and the existing hover/
+// click card behavior. Used to be a two-step flow (a category grid of
+// clickable cards, drilling into this table) — the user asked to drop the
+// grid entirely (2026-07-19) in favor of just filtering, since a dropdown
+// gets you to the same place in one fewer click and doesn't need its own
+// separate quick-search. Picking a Type from the dropdown re-renders this
+// same function scoped to that type (see the Type filter's own change
+// handler below) — the "category" parameter/argument is unchanged from
+// before, just now driven by a dropdown instead of a card click or the
+// header search box (pendingItemCategory, still used by goToItem).
 // Armor gets one extra dropdown, Material (Cloth/Leather/Chain/Plate/Shield/
 // Other) — this replaced a separate two-level material→slot card drill-down
 // (renderArmorMaterials/renderArmorSlots, removed 2026-07-15) so Armor now
 // reaches its table the same one-click way every other category does.
 function renderItemsList(container, category) {
-  // `category === null` means "every category" — reached via the category
-  // grid's own filter dropdowns (2026-07-14) instead of clicking a card, so
-  // there's no single type to scope to.
+  // `category === null` means "every type" — the default landing state,
+  // and also reachable any time via the Type dropdown's own "All Types"
+  // option.
   const showTypeColumn = category === null;
   const categoryItems = itemsData.filter(i => showTypeColumn || i.type === category);
   const categoryLabel = showTypeColumn ? 'All Items' : (ITEM_TYPE_LABELS[category] || category);
-  const heading = categoryLabel;
   const subtitleLabel = categoryLabel.toLowerCase();
   // "all items" already ends in "items", so it skips the template's own
   // trailing "items." below to avoid "all items items."
   const subtitleSuffix = showTypeColumn ? '' : ' items';
-  const backLabel = 'All categories';
+  // Options for the Type dropdown always list every type regardless of
+  // which one is currently selected — unlike Slot/Class/etc. below, which
+  // are scoped to categoryItems, this one has to stay unscoped so switching
+  // away from the current type is always possible.
+  const allTypes = [...new Set(itemsData.map(i => i.type))].sort();
 
   // Landed here from a recipe's component list — remember which recipe so
   // we can show a link back to it, instead of leaving the user stranded.
@@ -1727,12 +1505,15 @@ function renderItemsList(container, category) {
   container.innerHTML = `
     ${returnToRecipe ? `<p class="items-back-link"><a href="#" id="items-back-to-recipe">&larr; Back to ${escapeAttr(returnToRecipe.name)}</a></p>` : ''}
     ${returnToMonster ? `<p class="items-back-link"><a href="#" id="items-back-to-monster">&larr; Back to ${escapeAttr(returnToMonster.name)}</a></p>` : ''}
-    <p class="items-back-link"><a href="#" id="items-back-to-categories">&larr; ${escapeAttr(backLabel)}</a></p>
-    <h1>${escapeAttr(heading)}</h1>
+    <h1>Item Database</h1>
     <p>Browse, search, filter, and sort ${escapeAttr(subtitleLabel)}${subtitleSuffix}. Hover an item's name to see its full card.</p>
     <div class="items-toolbar">
       <input type="search" id="items-search" class="items-search" placeholder="Search name, stat, class..." autocomplete="off">
       <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="items-search">Clear</button>
+      <select id="items-filter-type" class="items-select">
+        <option value="">All Types</option>
+        ${allTypes.map(t => `<option value="${escapeAttr(t)}"${t === category ? ' selected' : ''}>${escapeAttr(ITEM_TYPE_LABELS[t] || t)}</option>`).join('')}
+      </select>
       <select id="items-filter-slot" class="items-select">
         <option value="">All slots</option>
         ${slots.map(s => `<option value="${s}">${s}</option>`).join('')}
@@ -1815,6 +1596,7 @@ function renderItemsList(container, category) {
   setupItemClickToView(container.querySelector('#items-tbody'));
 
   const searchBox = container.querySelector('#items-search');
+  const typeFilter = container.querySelector('#items-filter-type');
   const slotFilter = container.querySelector('#items-filter-slot');
   const handednessFilter = container.querySelector('#items-filter-handedness');
   const materialFilter = container.querySelector('#items-filter-material');
@@ -1836,9 +1618,11 @@ function renderItemsList(container, category) {
     pendingItemQuery = null;
   }
 
-  // Landed here from the category grid's own filter dropdowns (2026-07-14) —
-  // carry the chosen filter(s) over onto this list's own dropdowns so the
-  // jump actually lands pre-filtered, not just on an unfiltered "All Items".
+  // Set right before this render by the Type dropdown's own change handler
+  // below (switching type re-renders this whole function scoped to the new
+  // type) — carries the other filters the user had already set over onto
+  // the new render so they don't silently reset just from picking a
+  // different type.
   if (pendingItemFilters) {
     const f = pendingItemFilters;
     pendingItemFilters = null;
@@ -1849,16 +1633,6 @@ function renderItemsList(container, category) {
     if (f.maxSize) maxSizeFilter.value = f.maxSize;
     if (f.needsInfo) needsInfoFilter.checked = true;
     buffDropdown.setSelected(f.buffs);
-  }
-
-  // Set right before this render by the category grid's own buff dropdown
-  // (see renderItemsCategories) when a tick there is what triggered this
-  // jump — reopen the fresh copy of the panel immediately so it reads as
-  // the same panel staying open, not one closing and a different one
-  // appearing already-filled-in.
-  if (pendingOpenBuffDropdown) {
-    pendingOpenBuffDropdown = false;
-    buffDropdown.open();
   }
 
   if (returnToRecipe) {
@@ -1875,9 +1649,26 @@ function renderItemsList(container, category) {
     });
   }
 
-  container.querySelector('#items-back-to-categories').addEventListener('click', e => {
-    e.preventDefault();
-    renderItemsCategories(container);
+  // Switching Type re-renders this whole function scoped to the new type —
+  // Slot/Class/Material/etc. options and the Type column's visibility all
+  // depend on which type (if any) is selected, so a full re-render is
+  // simplest here (same as a category card click used to do), rather than
+  // trying to patch all of that in place the way update() does for the
+  // other filters. Carries the other current filter values across via
+  // pendingItemFilters (see above), and the typed search query via
+  // pendingItemQuery (already used the same way for header-search landings).
+  typeFilter.addEventListener('change', () => {
+    pendingItemFilters = {
+      slot: slotFilter.value,
+      cls: classFilter.value,
+      race: raceFilter.value,
+      tag: tagFilter.value,
+      maxSize: maxSizeFilter.value,
+      needsInfo: needsInfoFilter.checked,
+      buffs: buffDropdown.getSelected()
+    };
+    if (searchBox.value) pendingItemQuery = searchBox.value;
+    renderItemsList(container, typeFilter.value || null);
   });
 
   // Column headers sort by click — see itemSortValue for what each key reads
@@ -2650,10 +2441,9 @@ function renderCraftingCategories(container) {
   });
 
   // A shortcut past the tradeskill grid for anyone who already knows which
-  // recipe they want — same pattern as the Item Database's quick search
-  // (renderItemsCategories): scoped to crafting.json only, clicking a result
-  // reuses goToRecipe for the same tradeskill-jump + card-flash behavior as
-  // a header search result.
+  // recipe they want: scoped to crafting.json only, clicking a result reuses
+  // goToRecipe for the same tradeskill-jump + card-flash behavior as a
+  // header search result.
   const quickSearchBox = container.querySelector('#craft-quick-search-box');
   const quickSearchResults = container.querySelector('#craft-quick-search-results');
 
@@ -3682,10 +3472,9 @@ function renderMonstersCategories(container, named) {
   });
 
   // A shortcut past the zone drill-down for anyone who already knows what
-  // they're looking for — same pattern as the Item Database's own quick
-  // search (see renderItemsCategories). Scoped to just this page's own
-  // named/regular subset, same as Crafting/Gathering's quick searches are
-  // scoped to their own data.
+  // they're looking for — same live-inline-results pattern as Crafting/
+  // Gathering's own quick searches, scoped to just this page's own named/
+  // regular subset.
   const quickSearchBox = container.querySelector('#monsters-quick-search-box');
   const quickSearchResults = container.querySelector('#monsters-quick-search-results');
 
