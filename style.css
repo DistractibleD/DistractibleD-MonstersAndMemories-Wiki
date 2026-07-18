@@ -555,14 +555,108 @@ body:not(.site-entered) .sidebar {
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent);
 }
-.items-buff-toolbar {
-  align-items: center;
-  margin: 0 0 6px;
+/* "Search by stat/buff" control (see buffDropdownHTML/setupBuffDropdown in
+   script.js) — a toggle button + an absolutely-positioned checkbox-grid
+   panel, rather than plain <select>s, so someone can tick any number of
+   stats/resists/haste at once instead of picking one-at-a-time per dropdown.
+   Redesigned 2026-07-18 from an earlier 3-dropdown version at the user's
+   request. Small font throughout the panel (user's own ask, "to save
+   space") while staying comfortably readable. */
+.buff-filter-dropdown {
+  position: relative;
+  display: inline-block;
 }
-.items-buff-toolbar-label {
+.buff-filter-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-panel-hover);
+  border: 1px solid var(--accent-dim);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+.buff-filter-toggle:hover {
+  border-color: var(--accent);
+}
+.buff-filter-dropdown.open .buff-filter-toggle {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.buff-filter-count {
+  color: var(--accent);
+  font-weight: 600;
+}
+.buff-filter-caret {
   color: var(--text-dim);
-  font-size: 0.85rem;
+  font-size: 0.75em;
+}
+.buff-filter-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 30;
+  background: var(--bg-panel);
+  border: 1px solid var(--accent-dim);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  width: max-content;
+  max-width: min(360px, calc(100vw - 32px));
+}
+.buff-filter-dropdown.open .buff-filter-panel {
+  display: block;
+}
+.buff-filter-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 0 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.72rem;
+}
+.buff-filter-clear {
+  color: var(--accent);
+  text-decoration: none;
   white-space: nowrap;
+}
+.buff-filter-clear:hover {
+  text-decoration: underline;
+}
+.buff-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(84px, 1fr));
+  gap: 2px 8px;
+}
+.buff-filter-option {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 4px;
+  border-radius: 4px;
+  font-size: 0.74rem;
+  line-height: 1.2;
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+}
+.buff-filter-option:hover {
+  background: var(--bg-panel-hover);
+}
+.buff-filter-option input {
+  width: 13px;
+  height: 13px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--accent);
+  flex-shrink: 0;
 }
 .needsinfo-toggle {
   display: inline-flex;

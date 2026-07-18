@@ -855,19 +855,116 @@ const ITEM_BUFF_OPTIONS = [
   { value: 'haste', label: 'Haste' },
 ];
 
-// Three "has buff" dropdowns (2026-07-18) — lets someone stack up to 3
-// stat/resist/haste filters at once (AND logic — an item must match every
-// one that's set) to answer things like "what gives both STA and HP".
-// Shared markup builder since the category grid's toolbar and a scoped
+// "Search by stat/buff" control (2026-07-18, redesigned from an earlier
+// 3-dropdown version at the user's request) — a single toggle button that
+// opens a small checkbox grid of every stat/resist/haste value, so someone
+// can tick any number at once (AND logic — an item must match every one
+// that's checked) to answer things like "what gives both STA and HP".
+// Shared markup/wiring since the category grid's toolbar and a scoped
 // category list's toolbar (renderItemsCategories/renderItemsList) both need
-// the identical 3-select block, just under a different id prefix.
-function buffFilterSelectsHTML(idPrefix) {
-  const optionsHTML = ITEM_BUFF_OPTIONS.map(o => `<option value="${o.value}">${escapeAttr(o.label)}</option>`).join('');
-  return [1, 2, 3].map(n => `
-        <select id="${idPrefix}-buff${n}" class="items-select">
-          <option value="">${n === 1 ? 'Has buff...' : '+ another buff...'}</option>
-          ${optionsHTML}
-        </select>`).join('');
+// an identical control, just under a different id prefix.
+function buffDropdownHTML(idPrefix) {
+  const optionsHTML = ITEM_BUFF_OPTIONS.map(o => `
+          <label class="buff-filter-option"><input type="checkbox" value="${o.value}"><span>${escapeAttr(o.label)}</span></label>`).join('');
+  return `
+      <div class="buff-filter-dropdown" id="${idPrefix}-buffdropdown">
+        <button type="button" class="buff-filter-toggle" id="${idPrefix}-buffdropdown-toggle">
+          <span>Search by stat/buff</span>
+          <span class="buff-filter-count" id="${idPrefix}-buffdropdown-count"></span>
+          <span class="buff-filter-caret">&#9662;</span>
+        </button>
+        <div class="buff-filter-panel" id="${idPrefix}-buffdropdown-panel">
+          <div class="buff-filter-panel-head">
+            <span>Item must have all checked:</span>
+            <a href="#" class="buff-filter-clear" id="${idPrefix}-buffdropdown-clear">Clear</a>
+          </div>
+          <div class="buff-filter-grid">${optionsHTML}</div>
+        </div>
+      </div>`;
+}
+
+// Closes any open buff dropdown when a click lands outside it — registered
+// once (guarded) rather than per-render, since renderItemsCategories/
+// renderItemsList tear down and rebuild their whole container on every
+// visit and a fresh document-level listener each time would just pile up.
+// Uses live querySelectorAll at click time instead of a captured reference,
+// so it never touches a stale/detached node from a previous render.
+let buffDropdownGlobalCloseSetup = false;
+function ensureBuffDropdownGlobalClose() {
+  if (buffDropdownGlobalCloseSetup) return;
+  buffDropdownGlobalCloseSetup = true;
+  document.addEventListener('click', e => {
+    document.querySelectorAll('.buff-filter-dropdown.open').forEach(d => {
+      if (!d.contains(e.target)) d.classList.remove('open');
+    });
+  });
+}
+
+// Wires up one buffDropdownHTML(idPrefix) instance inside `container`.
+// `onChange` fires whenever a checkbox is (un)checked. Returns
+// { getSelected, setSelected, clear } for the caller's own filter logic.
+function setupBuffDropdown(container, idPrefix, onChange) {
+  ensureBuffDropdownGlobalClose();
+  const root = container.querySelector(`#${idPrefix}-buffdropdown`);
+  const toggle = container.querySelector(`#${idPrefix}-buffdropdown-toggle`);
+  const panel = container.querySelector(`#${idPrefix}-buffdropdown-panel`);
+  const countEl = container.querySelector(`#${idPrefix}-buffdropdown-count`);
+  const clearLink = container.querySelector(`#${idPrefix}-buffdropdown-clear`);
+  const checkboxes = [...panel.querySelectorAll('input[type="checkbox"]')];
+
+  function updateCount() {
+    const n = checkboxes.filter(cb => cb.checked).length;
+    countEl.textContent = n ? `(${n})` : '';
+  }
+
+  toggle.addEventListener('click', e => {
+    e.stopPropagation();
+    const opening = !root.classList.contains('open');
+    root.classList.toggle('open');
+    if (opening) {
+      // Clamp the panel to stay fully inside the viewport (8px margin),
+      // sliding it left of the button when a plain left-aligned panel would
+      // run off the right edge, and never letting it run off the left edge
+      // either — the button can sit anywhere in a wrapped toolbar, and on a
+      // narrow phone viewport the panel can be nearly as wide as the screen,
+      // so a simple two-way left/right flip (like setupItemTooltip's
+      // flip-above-if-no-room-below) isn't enough on its own; this instead
+      // computes the panel's desired left edge in viewport coordinates,
+      // clamps it between the two margins, then converts back to a `left`
+      // value relative to the wrapper (its positioned containing block).
+      panel.style.right = 'auto';
+      const rect = toggle.getBoundingClientRect();
+      const margin = 8;
+      const maxViewportLeft = window.innerWidth - margin - panel.offsetWidth;
+      const desiredViewportLeft = Math.max(margin, Math.min(rect.left, maxViewportLeft));
+      panel.style.left = (desiredViewportLeft - rect.left) + 'px';
+    }
+  });
+  panel.addEventListener('click', e => e.stopPropagation());
+
+  clearLink.addEventListener('click', e => {
+    e.preventDefault();
+    checkboxes.forEach(cb => { cb.checked = false; });
+    updateCount();
+    onChange();
+  });
+
+  checkboxes.forEach(cb => cb.addEventListener('change', () => {
+    updateCount();
+    onChange();
+  }));
+
+  return {
+    getSelected: () => checkboxes.filter(cb => cb.checked).map(cb => cb.value),
+    setSelected: values => {
+      checkboxes.forEach(cb => { cb.checked = (values || []).includes(cb.value); });
+      updateCount();
+    },
+    clear: () => {
+      checkboxes.forEach(cb => { cb.checked = false; });
+      updateCount();
+    }
+  };
 }
 
 /* ============================================
@@ -1395,15 +1492,12 @@ function renderItemsCategories(container) {
           <option value="">All max sizes</option>
           ${allMaxSizes.map(s => `<option value="${s}">${s}</option>`).join('')}
         </select>
+        ${buffDropdownHTML('items-category-filter')}
         <label class="needsinfo-toggle" for="items-category-filter-needsinfo">
           <input type="checkbox" id="items-category-filter-needsinfo">
           <span class="needsinfo-toggle-slider"></span>
           <span>Show only items that need info</span>
         </label>
-      </div>
-      <div class="items-toolbar items-buff-toolbar">
-        <span class="items-buff-toolbar-label">Search by stat/buff (e.g. STA + HP):</span>
-        ${buffFilterSelectsHTML('items-category-filter')}
       </div>
       <div class="items-category-grid">
         ${types.map(type => {
@@ -1430,7 +1524,6 @@ function renderItemsCategories(container) {
   const categoryTagFilter = container.querySelector('#items-category-filter-tag');
   const categoryMaxSizeFilter = container.querySelector('#items-category-filter-maxsize');
   const categoryNeedsInfoFilter = container.querySelector('#items-category-filter-needsinfo');
-  const categoryBuffFilters = [1, 2, 3].map(n => container.querySelector(`#items-category-filter-buff${n}`));
 
   function currentFilters() {
     return {
@@ -1440,9 +1533,14 @@ function renderItemsCategories(container) {
       tag: categoryTagFilter.value,
       maxSize: categoryMaxSizeFilter.value,
       needsInfo: categoryNeedsInfoFilter.checked,
-      buffs: categoryBuffFilters.map(el => el.value).filter(Boolean)
+      buffs: categoryBuffDropdown.getSelected()
     };
   }
+
+  const categoryBuffDropdown = setupBuffDropdown(container, 'items-category-filter', () => {
+    pendingItemFilters = currentFilters();
+    renderItemsList(container, null);
+  });
 
   container.querySelectorAll('.items-category-card').forEach(card => {
     card.addEventListener('click', () => {
@@ -1451,7 +1549,7 @@ function renderItemsCategories(container) {
     });
   });
 
-  [categorySlotFilter, categoryClassFilter, categoryRaceFilter, categoryTagFilter, categoryMaxSizeFilter, categoryNeedsInfoFilter, ...categoryBuffFilters].forEach(el => {
+  [categorySlotFilter, categoryClassFilter, categoryRaceFilter, categoryTagFilter, categoryMaxSizeFilter, categoryNeedsInfoFilter].forEach(el => {
     el.addEventListener('change', () => {
       pendingItemFilters = currentFilters();
       renderItemsList(container, null);
@@ -1632,16 +1730,13 @@ function renderItemsList(container, category) {
         <option value="">All max sizes</option>
         ${maxSizes.map(s => `<option value="${s}">${s}</option>`).join('')}
       </select>
+      ${buffDropdownHTML('items-filter')}
       <label class="needsinfo-toggle" for="items-filter-needsinfo">
         <input type="checkbox" id="items-filter-needsinfo">
         <span class="needsinfo-toggle-slider"></span>
         <span>Show only items that need info</span>
       </label>
       <button type="button" id="items-clear-filters" class="items-clear-btn">Clear filters</button>
-    </div>
-    <div class="items-toolbar items-buff-toolbar">
-      <span class="items-buff-toolbar-label">Search by stat/buff (e.g. STA + HP):</span>
-      ${buffFilterSelectsHTML('items-filter')}
     </div>
     <p class="items-count" id="items-count"></p>
     <div class="items-table-wrap">
@@ -1693,7 +1788,7 @@ function renderItemsList(container, category) {
   const tagFilter = container.querySelector('#items-filter-tag');
   const maxSizeFilter = container.querySelector('#items-filter-maxsize');
   const needsInfoFilter = container.querySelector('#items-filter-needsinfo');
-  const buffFilters = [1, 2, 3].map(n => container.querySelector(`#items-filter-buff${n}`));
+  const buffDropdown = setupBuffDropdown(container, 'items-filter', update);
   const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
 
   // Landed here from a header search result — pre-fill the search box with
@@ -1715,7 +1810,7 @@ function renderItemsList(container, category) {
     if (f.tag) tagFilter.value = f.tag;
     if (f.maxSize) maxSizeFilter.value = f.maxSize;
     if (f.needsInfo) needsInfoFilter.checked = true;
-    (f.buffs || []).forEach((buff, i) => { if (buffFilters[i]) buffFilters[i].value = buff; });
+    buffDropdown.setSelected(f.buffs);
   }
 
   if (returnToRecipe) {
@@ -1774,7 +1869,7 @@ function renderItemsList(container, category) {
     const tag = tagFilter.value;
     const maxSize = maxSizeFilter.value;
     const needsInfo = needsInfoFilter.checked;
-    const buffs = buffFilters.map(el => el.value).filter(Boolean);
+    const buffs = buffDropdown.getSelected();
 
     let filtered = categoryItems.filter(item => {
       if (slot && item.slot !== slot) return false;
@@ -1809,13 +1904,14 @@ function renderItemsList(container, category) {
   }
 
   [searchBox].forEach(el => el.addEventListener('input', update));
-  [slotFilter, handednessFilter, materialFilter, classFilter, raceFilter, tagFilter, maxSizeFilter, ...buffFilters].filter(Boolean).forEach(el => el.addEventListener('change', update));
+  [slotFilter, handednessFilter, materialFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].filter(Boolean).forEach(el => el.addEventListener('change', update));
   needsInfoFilter.addEventListener('change', update);
 
   container.querySelector('#items-clear-filters').addEventListener('click', () => {
     searchBox.value = '';
-    [slotFilter, handednessFilter, materialFilter, classFilter, raceFilter, tagFilter, maxSizeFilter, ...buffFilters].filter(Boolean).forEach(el => el.value = '');
+    [slotFilter, handednessFilter, materialFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].filter(Boolean).forEach(el => el.value = '');
     needsInfoFilter.checked = false;
+    buffDropdown.clear();
     update();
   });
 
