@@ -269,7 +269,7 @@ function buildSidebar(pages) {
   // 2026-07-14 note this replaced: splitting every page into its own
   // per-category heading looked arbitrary once every category held exactly
   // one page). A page can opt into a `group` (pages.json) — e.g.
-  // "Tradeskilling" for Crafting/Gathering/Enchanting and Disenchanting —
+  // "Tradeskilling" for Gathering and Crafting —
   // which nests it under a plain, non-clickable group heading instead,
   // indented, so real hierarchy can still show up without reintroducing a
   // heading over every single page. Consecutive pages sharing the same
@@ -342,14 +342,16 @@ function buildSidebar(pages) {
 //
 // Each entry is keyed `${kind}:${id}` and stores `{kind, id, count, lastVisited}`:
 //   - kind "page": id is a pages.json `file` — resolved via allPages, opened with loadPage.
-//   - kind "craft": id is a tradeskill name (Alchemy, Cooking, ... — also Enchanting and
-//     Disenchanting, which reach renderTradeskillSection directly since they have no grid in
-//     front of them) — opened with goToCraftingCategory, which already knows how to route
-//     each of those tradeskills to its own page.
+//   - kind "craft": id is a tradeskill name (Alchemy, Cooking, Enchanting, ...) reached via
+//     the Crafting grid — opened with goToCraftingCategory, which uses craftPageHash to know
+//     which page a given tradeskill's recipes actually live on (Disenchanting routes to
+//     Gathering — see craftPageHash — even though its own visit is still recorded under this
+//     "craft" kind, since it still reaches renderTradeskillSection the same way every other
+//     tradeskill does).
 //   - kind "gathering": id is a gathering tradeskill name (Mining, Lumberjacking, Herbalism,
 //     Fishing) — opened with goToGatheringCategory.
 const PAGE_VISITS_KEY = 'mnmwiki-page-visits';
-const CATEGORY_TRACKED_PAGES = ['crafting', 'gathering', 'enchanting', 'disenchanting'];
+const CATEGORY_TRACKED_PAGES = ['crafting', 'gathering'];
 
 function getPageVisits() {
   try {
@@ -441,7 +443,7 @@ async function loadPage(file) {
 
   // Data-driven pages (Item Database, Maps, Crafting, Monsters) use the full
   // content width instead of the narrower reading width used for prose pages.
-  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'gathering' || page.type === 'crafting' || page.type === 'enchanting' || page.type === 'disenchanting' || page.type === 'monsters' || page.type === 'companions')));
+  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'gathering' || page.type === 'crafting' || page.type === 'monsters' || page.type === 'companions')));
 
   try {
     if (page && page.type === 'items') {
@@ -452,10 +454,6 @@ async function loadPage(file) {
       await renderGatheringPage(contentInner);
     } else if (page && page.type === 'crafting') {
       await renderCraftingPage(contentInner);
-    } else if (page && page.type === 'enchanting') {
-      await renderEnchantingPage(contentInner);
-    } else if (page && page.type === 'disenchanting') {
-      await renderDisenchantingPage(contentInner);
     } else if (page && page.type === 'monsters') {
       await renderMonstersPage(contentInner, file);
     } else if (page && page.type === 'companions') {
@@ -594,16 +592,11 @@ function renderSearchResults(query) {
 
   addSection('Categories', matchedCategories, category => {
     const link = document.createElement('a');
-    // Enchanting and Disenchanting are each their own top-level page (see
-    // craftPageHash), so their category result needs no "(Crafting)" suffix
-    // — the page name alone is already unambiguous, unlike every other
-    // tradeskill which lands on a category card inside the shared Crafting page.
-    const isSoloTradeskillPage = category.kind === 'craft' && (category.tradeskill === 'Enchanting' || category.tradeskill === 'Disenchanting');
     link.href = category.kind === 'item' ? '#items'
       : category.kind === 'gathering' ? '#gathering'
       : `#${craftPageHash(category.tradeskill)}`;
     link.className = 'search-result-link';
-    link.textContent = category.kind === 'item' || isSoloTradeskillPage
+    link.textContent = category.kind === 'item'
       ? category.label
       : `${category.label} (${category.kind === 'gathering' ? 'Gathering' : 'Crafting'})`;
     link.addEventListener('click', e => {
@@ -731,21 +724,23 @@ function goToItemCategory(type) {
   if (alreadyThere) loadPage('items');
 }
 
-// Enchanting and Disenchanting recipes live in crafting.json like any other
-// tradeskill, but Enchanting and Disenchanting are each their own top-level
-// page (#enchanting / #disenchanting) rather than a category card on the
-// main Crafting page — this resolves which hash a given tradeskill's recipes
-// actually live at, so goToRecipe/goToCraftingCategory below don't need to
-// know about the split themselves.
+// Every tradeskill's recipes live in crafting.json and render via
+// renderTradeskillSection, but which top-level page hosts that view isn't
+// always "Crafting" — Disenchanting was moved onto the Gathering page
+// instead (2026-07-19, user's own call), even though it's still
+// recipe-based under the hood (see renderGatheringCategories/
+// renderGatheringPage). This resolves which hash a given tradeskill's
+// recipes actually live at, so goToRecipe/goToCraftingCategory below don't
+// need to know about that exception themselves.
 function craftPageHash(tradeskillName) {
-  if (tradeskillName === 'Enchanting') return 'enchanting';
-  if (tradeskillName === 'Disenchanting') return 'disenchanting';
+  if (tradeskillName === 'Disenchanting') return 'gathering';
   return 'crafting';
 }
 
 function goToRecipe(recipe) {
   const hash = craftPageHash(recipe.tradeskill);
   if (hash === 'crafting') pendingCraftingTradeskill = recipe.tradeskill;
+  else if (hash === 'gathering') pendingGatheringTradeskill = recipe.tradeskill;
   pendingHighlightRecipe = recipe.slug;
   const alreadyThere = location.hash.replace('#', '') === hash;
   location.hash = hash;
@@ -757,6 +752,7 @@ function goToRecipe(recipe) {
 function goToCraftingCategory(tradeskillName) {
   const hash = craftPageHash(tradeskillName);
   if (hash === 'crafting') pendingCraftingTradeskill = tradeskillName;
+  else if (hash === 'gathering') pendingGatheringTradeskill = tradeskillName;
   pendingHighlightRecipe = null;
   const alreadyThere = location.hash.replace('#', '') === hash;
   location.hash = hash;
@@ -773,8 +769,8 @@ function goToGatheringCategory(tradeskillName) {
 
 // Jumps to the Named or Regular Monsters page (whichever the monster
 // actually belongs to — split into two top-level pages the same way
-// Gathering/Crafting/Enchanting/Disenchanting are split under "Tradeskilling",
-// 2026-07-17) and flashes one monster's row. Called from a header search
+// Gathering/Crafting are split under "Tradeskilling", 2026-07-17) and
+// flashes one monster's row. Called from a header search
 // result, a Monsters page's own quick search, or an item's "Back to
 // <Monster>" link (see pendingReturnToMonster). Works with either a full
 // monster object or the minimal `{ name, slug }` shape goToItem stores for
@@ -1174,21 +1170,23 @@ const TRADESKILL_ICON = {
 // shown before each sidebar nav link (2026-07-17, user's own call — "makes
 // it easier to instantly spot the place you want to go"). Most entries here
 // reuse an icon already built for something else on the site (Maps gets the
-// same compass used for gathering-node location context; Enchanting/
-// Disenchanting/Crafting reuse their own tradeskill glyphs; Named/Regular
-// Monsters reuse the same boss/paw icons already shown on their own category
-// cards; Companions reuses the wolf glyph) rather than needing a new one —
-// only Useful Links, Item Database, Gathering, and Submit a Screenshot
-// needed a dedicated glyph (links/itemdb/gatheringicon/submiticon above). A
-// page with no entry here just renders without an icon rather than erroring.
+// same compass used for gathering-node location context; Crafting reuses
+// its own tradeskill glyph; Named/Regular Monsters reuse the same boss/paw
+// icons already shown on their own category cards; Companions reuses the
+// wolf glyph) rather than needing a new one — only Useful Links, Item
+// Database, Gathering, and Submit a Screenshot needed a dedicated glyph
+// (links/itemdb/gatheringicon/submiticon above). A page with no entry here
+// just renders without an icon rather than erroring — true for Enchanting/
+// Disenchanting now that they're cards inside Crafting/Gathering rather than
+// their own pages.json entries; their icon still shows up correctly on
+// their own tradeskill card and in "Most Visited" via TRADESKILL_ICON,
+// which is keyed by tradeskill name rather than page file.
 const NAV_ICON = {
   'useful-links.md': 'links',
   items: 'itemdb',
   maps: 'navigation',
   gathering: 'gatheringicon',
   crafting: 'blacksmithing',
-  enchanting: 'enchanting',
-  disenchanting: 'disenchanting',
   'monsters-named': 'boss',
   'monsters-regular': 'paw',
   companions: 'wolf',
@@ -2387,24 +2385,35 @@ async function renderCraftingPage(container) {
 // Shared by the Crafting and Gathering category grids (split into separate
 // top-level pages on 2026-07-13, Gathering placed above Crafting in the
 // sidebar) — same card markup either way, just a different count label and
-// click target depending on `isGathering`.
+// click target depending on whether a given card is node-based.
+// `isGathering` is the page-level default (Gathering's grid passes true,
+// Crafting's passes false), but a card's own node-based-ness is actually
+// derived per-card from whether gathering-nodes.json has any entries for
+// it — Disenchanting sits in Gathering's grid (2026-07-19, user's own call)
+// while still being an ordinary recipe-based tradeskill under the hood, so
+// its card needs the "recipe" count/label and the recipe click target even
+// though every other card on that page is node-based. Deriving this
+// structurally (rather than hardcoding "Disenchanting" by name here) means
+// any future recipe-based tradeskill added to the Gathering grid the same
+// way would automatically get this right too.
 function tradeskillGridHTML(list, isGathering) {
   return `
     <div class="craft-grid">
       ${list.map(ts => {
-        const count = isGathering
+        const isNodeBased = isGathering && gatheringData.some(n => n.tradeskill === ts.name);
+        const count = isNodeBased
           ? gatheringData.filter(n => n.tradeskill === ts.name).length
           : craftingData.filter(r => r.tradeskill === ts.name).length;
         const icon = TRADESKILL_ICON[ts.name] || 'material';
         return `
-          <div class="craft-card" data-tradeskill="${escapeAttr(ts.name)}" data-gathering="${isGathering}">
+          <div class="craft-card" data-tradeskill="${escapeAttr(ts.name)}" data-node-based="${isNodeBased}">
             <div class="craft-card-icon">${svgIcon(icon)}</div>
             <div class="craft-card-body">
               <div class="craft-card-name">
                 ${ts.name}
                 ${ts.status === 'planned' ? '<span class="badge-planned">Planned</span>' : ''}
               </div>
-              <div class="craft-card-count">${count} ${isGathering ? 'node' : 'recipe'}${count === 1 ? '' : 's'}</div>
+              <div class="craft-card-count">${count} ${isNodeBased ? 'node' : 'recipe'}${count === 1 ? '' : 's'}</div>
             </div>
           </div>
         `;
@@ -2415,12 +2424,13 @@ function tradeskillGridHTML(list, isGathering) {
 
 // Ordinary crafted-goods tradeskills only — see renderGatheringCategories for
 // the resource-node tradeskills (Mining, Lumberjacking, Herbalism, Fishing),
-// which moved to their own Gathering page on 2026-07-13, and
-// renderEnchantingPage/renderDisenchantingPage for Enchanting/Disenchanting,
-// each of which moved to its own top-level page (nested under "Tradeskilling"
-// alongside Crafting and Gathering in the sidebar) on 2026-07-17.
+// which moved to their own Gathering page on 2026-07-13 (Disenchanting
+// joined them there 2026-07-19, despite being recipe-based, at the user's
+// own request — see renderGatheringCategories). Enchanting briefly had its
+// own top-level page too (2026-07-17–2026-07-19) before being folded back
+// into this grid as an ordinary tradeskill card.
 function renderCraftingCategories(container) {
-  const crafted = tradeskillsData.filter(ts => ts.category !== 'gathering' && ts.category !== 'enchanting').sort((a, b) => a.name.localeCompare(b.name));
+  const crafted = tradeskillsData.filter(ts => ts.category !== 'gathering').sort((a, b) => a.name.localeCompare(b.name));
 
   container.innerHTML = `
     <h1>Crafting</h1>
@@ -2483,13 +2493,20 @@ function renderCraftingCategories(container) {
 async function renderGatheringPage(container) {
   await ensureCraftingData();
 
-  // Landed here from a header search result for a specific gathering node —
-  // jump straight to that tradeskill's node table instead of the category
-  // grid, same idea as pendingCraftingTradeskill on the Crafting page.
+  // Landed here from a header search result for a specific tradeskill —
+  // jump straight to it instead of the category grid, same idea as
+  // pendingCraftingTradeskill on the Crafting page. Disenchanting is the one
+  // exception on this page: it's recipe-based, not node-based (see
+  // renderGatheringCategories below), so it needs the recipe view rather
+  // than renderGatheringNodes's table.
   if (pendingGatheringTradeskill) {
     const target = pendingGatheringTradeskill;
     pendingGatheringTradeskill = null;
-    renderGatheringNodes(container, target);
+    if (target === 'Disenchanting') {
+      await renderGatheringDisenchantingRecipes(container);
+    } else {
+      renderGatheringNodes(container, target);
+    }
     return;
   }
 
@@ -2504,6 +2521,15 @@ async function renderGatheringPage(container) {
 // interacting with a world resource node is a different activity from
 // combining components into a crafted result even though both are tracked
 // under a "tradeskill" in-game.
+//
+// Disenchanting joined this grid too (2026-07-19, user's own call), despite
+// being recipe-based rather than node-based under the hood — it still
+// consumes a specific item to produce something (much closer to gathering's
+// "get material from world state" flavor than a typical multi-component
+// recipe), so it reads as a better fit here than on the Crafting page. Its
+// card is still built from tradeskillGridHTML's generic node-based check
+// (see there) and routed to the recipe view by both the click handler below
+// and renderGatheringPage's own pendingGatheringTradeskill handling above.
 function renderGatheringCategories(container) {
   const gathering = tradeskillsData.filter(ts => ts.category === 'gathering').sort((a, b) => a.name.localeCompare(b.name));
 
@@ -2523,7 +2549,10 @@ function renderGatheringCategories(container) {
   `;
 
   container.querySelectorAll('.craft-card').forEach(card => {
-    card.addEventListener('click', () => renderGatheringNodes(container, card.dataset.tradeskill));
+    card.addEventListener('click', () => {
+      if (card.dataset.nodeBased === 'true') renderGatheringNodes(container, card.dataset.tradeskill);
+      else renderGatheringDisenchantingRecipes(container);
+    });
   });
 
   const quickSearchBox = container.querySelector('#gathering-quick-search-box');
@@ -2889,24 +2918,27 @@ function renderDisenchantingDustTiersHTML() {
 
 // Renders one tradeskill's full recipe list (search box, needs-info toggle,
 // count, station-grouped grid, item/recipe link handlers, highlight-on-
-// arrival) into `rootEl`. Shared by the main Crafting page — a single
-// tradeskill filling the whole page, with a "back to all tradeskills" link —
-// and the standalone Enchanting/Disenchanting pages, which render directly
-// with no back link since each page covers only that one tradeskill.
+// arrival) into `rootEl`. Shared by every tradeskill reached from either
+// grid — the Crafting page for ordinary tradeskills (including Enchanting)
+// and the Gathering page for Disenchanting (see
+// renderCraftingRecipes/renderGatheringDisenchantingRecipes, both of which
+// pass `showBackLink: true` and their own grid's `onBack`).
 // `idSuffix` keeps element ids unique on the rare page that renders more than
 // one of these sections at once (none currently do, but the option remains
-// from when Enchanting and Disenchanting briefly shared a page).
+// from when Enchanting and Disenchanting briefly shared a page, before each
+// got its own top-level page, before that idea was dropped too — see
+// CLAUDE.md for the full history if this area gets touched again).
 async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   const { showBackLink = false, onBack = null, idSuffix = '', headingTag = 'h1', highlightSlug = null } = opts;
   const tradeskill = tradeskillsData.find(ts => ts.name === tradeskillName);
   if (tradeskillName === 'Jewelcrafting') await ensureGemstonesData();
 
   // This is the single choke point for "landing on one tradeskill's own
-  // recipe list" — reached from the Crafting grid, from Enchanting's/
-  // Disenchanting's own page, or from a pending-tradeskill jump — so it's
-  // where a "Recently Visited"/"Most Visited" visit gets recorded for the
+  // recipe list" — reached from the Crafting grid or the Gathering grid
+  // (Disenchanting only), or from a pending-tradeskill jump — so it's where
+  // a "Recently Visited"/"Most Visited" visit gets recorded for the
   // tradeskill itself, per CATEGORY_TRACKED_PAGES in loadPage skipping the
-  // Crafting/Enchanting/Disenchanting grid pages in favor of this.
+  // Crafting/Gathering grid pages in favor of this.
   recordVisit('craft', tradeskillName);
   updateVisitedSidebarSections();
 
@@ -3111,28 +3143,21 @@ async function renderCraftingRecipes(container, tradeskillName) {
   });
 }
 
-// Enchanting and Disenchanting recipes live in crafting.json exactly like any
-// other tradeskill (see tradeskills.json's "enchanting" category, which keeps
-// them out of the main Crafting grid — renderCraftingCategories above). Each
-// gets its own top-level page, nested under "Tradeskilling" in the sidebar
-// alongside Crafting and Gathering, rather than sharing one combined page —
-// an earlier version put them on one page (first stacked, then behind a
-// 2-card grid) but the user asked for them fully separated (2026-07-17).
-// Since each page covers exactly one tradeskill, both just hand straight off
-// to renderTradeskillSection with no back link and no card grid to land on.
-async function renderEnchantingPage(container) {
-  await ensureCraftingData();
+// Same idea as renderCraftingRecipes, but for Disenchanting specifically —
+// its card lives in the Gathering grid instead (2026-07-19, user's own
+// call — see renderGatheringCategories), so its "back" link needs to return
+// there instead of to the Crafting grid, and its dust-tier thumbnails need
+// itemsData loaded (findItemByName lookups) the same way the old dedicated
+// Disenchanting page used to ensure.
+async function renderGatheringDisenchantingRecipes(container) {
+  await ensureItemsData();
   const highlightSlug = pendingHighlightRecipe;
   pendingHighlightRecipe = null;
-  await renderTradeskillSection(container, 'Enchanting', { highlightSlug });
-}
-
-async function renderDisenchantingPage(container) {
-  await ensureCraftingData();
-  await ensureItemsData(); // Disenchanting's dust-tier thumbnails look items up by name
-  const highlightSlug = pendingHighlightRecipe;
-  pendingHighlightRecipe = null;
-  await renderTradeskillSection(container, 'Disenchanting', { highlightSlug });
+  await renderTradeskillSection(container, 'Disenchanting', {
+    showBackLink: true,
+    onBack: () => renderGatheringCategories(container),
+    highlightSlug
+  });
 }
 
 // Matched against a gathering node's own search box — name plus its results
@@ -3397,10 +3422,10 @@ function monsterZone(monster) {
 
 // Named and Regular monsters are two separate top-level pages (pages.json,
 // both "monsters"-typed, grouped under "Monsters" in the sidebar) — split the
-// same way Gathering/Crafting/Enchanting/Disenchanting are split under
-// "Tradeskilling" (2026-07-17, user's own call), rather than one shared page
-// with both sections stacked on it. `file` is "monsters-named" or
-// "monsters-regular", telling renderMonstersPage which one it's rendering.
+// same way Gathering/Crafting are split under "Tradeskilling" (2026-07-17,
+// user's own call), rather than one shared page with both sections stacked
+// on it. `file` is "monsters-named" or "monsters-regular", telling
+// renderMonstersPage which one it's rendering.
 async function renderMonstersPage(container, file) {
   await ensureMonstersData();
 

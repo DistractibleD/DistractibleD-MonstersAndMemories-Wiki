@@ -331,42 +331,52 @@ same way as new fields show up on future cards, rather than guessing ahead:
    into `images/crafting/`, filename matching the `image` field. Archival only — not
    something the site ever displays.
 
-### The sidebar can nest pages under a group, and Enchanting/Disenchanting use it
+### The sidebar can nest pages under a group
 
 `pages.json` entries can carry an optional `"group"` field (e.g. `"Tradeskilling"`) — pages
 sharing the same `group` render nested under one plain, non-clickable heading in the sidebar
 instead of the normal flat top-level list (`buildSidebar` in `script.js`). Currently
-Gathering, Crafting, Enchanting, and Disenchanting all use this, grouped under
-"Tradeskilling" (four separate sidebar links under one heading). Add a page to an existing
-group the same way (set the same `group` string); start a new group by picking a new `group`
-string on the pages that should share it — no other code changes needed, `buildSidebar`
-handles any group generically. Consecutive same-`group` pages share one heading; a page with
-no `group` renders exactly as before.
+Gathering and Crafting use this, grouped under "Tradeskilling" (two separate sidebar links
+under one heading). Add a page to an existing group the same way (set the same `group`
+string); start a new group by picking a new `group` string on the pages that should share
+it — no other code changes needed, `buildSidebar` handles any group generically. Consecutive
+same-`group` pages share one heading; a page with no `group` renders exactly as before.
 
-Enchanting and Disenchanting are ordinary tradeskills in `crafting.json`/`tradeskills.json`
-(nothing schema-wise sets them apart from Blacksmithing or Alchemy), but each renders on its
-own top-level page (`pages.json`'s `"Enchanting"`/`"Disenchanting"` entries, `"type":
-"enchanting"`/`"disenchanting"`) instead of being two of the ~30 category cards on the main
-Crafting page. This is driven by `tradeskillsData[].category: "enchanting"` on both their
-`tradeskills.json` entries, the same mechanism `"gathering"` already uses to split Mining/
-Lumberjacking/Herbalism/Fishing out of the main Crafting grid — `renderCraftingCategories`
-excludes both category values from its grid. Each page (`renderEnchantingPage`/
-`renderDisenchantingPage` in `script.js`) is a thin wrapper handing straight off to
-`renderTradeskillSection` with no back link and no category-card grid to land on first —
-since a page covers exactly one tradeskill, there's nothing to drill down through. This
-split went through two earlier shapes before landing here, both worth knowing about if this
-area gets touched again: first both tradeskills were stacked on one shared page (meant
-scrolling past all of one tradeskill's recipes to reach the other), then that page put a
-2-card grid in front of them instead (an unnecessary click for something with only two
-options) — the user asked for them fully separated into their own pages on 2026-07-17,
-which is the current shape. `craftPageHash(tradeskillName)` is the one place that decides
-which hash a tradeskill's recipes live at (`'enchanting'`/`'disenchanting'`/`'crafting'`) —
-`goToRecipe`, `goToCraftingCategory`, and the header search's category/recipe links all call
-it rather than hard-coding a hash, so nothing that links to a recipe needs to know about the
-split. The actual recipe-list rendering (search box, needs-info toggle, station grouping,
-item link handlers, highlight-on-arrival) is still shared with the main Crafting page via
-`renderTradeskillSection` — all three "show one tradeskill's recipes" call sites (Crafting's
-own drill-down, Enchanting, Disenchanting) are just different callers of the same function.
+**Enchanting and Disenchanting are ordinary tradeskills in `crafting.json`/`tradeskills.json`**
+(nothing schema-wise sets Enchanting apart from Blacksmithing or Alchemy), each reached as an
+ordinary category card rather than a page of its own — Enchanting on the Crafting grid,
+Disenchanting on the Gathering grid. This is the *third* shape this pair has been through
+(worth knowing the history if this area gets touched again): first both tradeskills were
+stacked on one shared page, then each got its own 2-card-grid page, then each got fully
+separated into its own top-level `pages.json` entry (2026-07-17) — before finally being
+folded back into the two main grids as ordinary cards (2026-07-19, user's own request: "move
+Enchanting into Crafting, and Disenchanting into Gathering"). Concretely:
+
+- Enchanting has no `category` in `tradeskills.json` at all now, so it's picked up by
+  `renderCraftingCategories`'s normal filter (`ts.category !== 'gathering'`) exactly like
+  Blacksmithing or Alchemy — no special-casing needed anywhere for it to show up there.
+- Disenchanting has `"category": "gathering"` — the same value Mining/Lumberjacking/
+  Herbalism/Fishing use to land on the Gathering grid — even though it's still recipe-based
+  under the hood, not node-based. `tradeskillGridHTML` (shared by both grids) derives each
+  card's actual node-based-ness *structurally*, by checking whether `gathering-nodes.json`
+  has any entries for that tradeskill name (`data-node-based` on the card), rather than
+  trusting the page-level "is this the Gathering grid" flag — so Disenchanting's card
+  correctly shows a recipe count/label and routes to the recipe view
+  (`renderGatheringDisenchantingRecipes`) while every other card on that page shows a node
+  count/label and routes to `renderGatheringNodes`. This also means any future recipe-based
+  tradeskill added to the Gathering grid the same way would automatically get this right too,
+  without needing to hardcode its name anywhere.
+- `craftPageHash(tradeskillName)` is the one place that decides which hash a tradeskill's
+  recipes actually live at — `'gathering'` for Disenchanting, `'crafting'` for everything
+  else (including Enchanting, now that it has no special case at all). `goToRecipe`,
+  `goToCraftingCategory`, and the header search's category/recipe links all call it rather
+  than hard-coding a hash, so nothing that links to a recipe needs to special-case
+  Disenchanting itself.
+- The actual recipe-list rendering (search box, needs-info toggle, station grouping, item
+  link handlers, highlight-on-arrival) is still shared with every other tradeskill via
+  `renderTradeskillSection` — `renderCraftingRecipes` (Crafting grid) and
+  `renderGatheringDisenchantingRecipes` (Gathering grid, Disenchanting only) are both just
+  thin wrappers passing their own grid's `onBack`.
 
 **Disenchanting's magic-dust tier chart:** rather than the lengthy explanatory `note` this
 tradeskill used to carry (removed 2026-07-16 — the user found it too much to read on the
@@ -487,16 +497,20 @@ entry, `"type": "gathering"`, above "Crafting" in the sidebar) and data file,
 - **Herbalism**'s tradeskill `note` (in `tradeskills.json`) is the source page's own "Getting
   Started" paragraph (trainer location, early-leveling herbs) — general how-to info rather
   than a specific node's data, same idea as Lumberjacking's equip-axe-and-right-click note.
-- **Disenchanting is *not* a gathering tradeskill**, despite consuming a specific item like a
-  gathering node consumes a resource — the distinction: a gathering node consumes nothing
-  and only gates on skill, while Disenchanting consumes a specific MAGIC item (its card's own
-  "Components" list) to produce output, which is structurally an ordinary recipe just
-  running "backwards" (requires a Disenchanting Cube placed in a bag slot, can fail and
-  destroy the item with nothing gained, and the output powder's quality depends on the item
-  disenchanted in some not-yet-understood way). It lives in `crafting.json` as ordinary
-  recipes — `tradeskills.json`'s own Disenchanting entry no longer carries an explanatory
-  `note` (a lengthy one covering this same mechanic was removed 2026-07-16 as too much to
-  read on the page; see "Disenchanting's magic-dust tier chart" below for what replaced it).
+- **Disenchanting is *not* a node-based gathering tradeskill**, despite its card living on the
+  Gathering page (see "The sidebar can nest pages under a group" above) and consuming a
+  specific item somewhat like a gathering node consumes a resource — the distinction: a
+  gathering node consumes nothing and only gates on skill, while Disenchanting consumes a
+  specific MAGIC item (its card's own "Components" list) to produce output, which is
+  structurally an ordinary recipe just running "backwards" (requires a Disenchanting Cube
+  placed in a bag slot, can fail and destroy the item with nothing gained, and the output
+  powder's quality depends on the item disenchanted in some not-yet-understood way). It lives
+  in `crafting.json` as ordinary recipes, schema-wise identical to any other tradeskill's —
+  its Gathering-page placement is purely a display/navigation choice (see `tradeskillGridHTML`'s
+  structural node-based check), not a change to its underlying data shape. `tradeskills.json`'s
+  own Disenchanting entry no longer carries an explanatory `note` (a lengthy one covering this
+  same mechanic was removed 2026-07-16 as too much to read on the page; see "Disenchanting's
+  magic-dust tier chart" below for what replaced it).
   One flagged inconsistency worth knowing: "Cinder Beetle Shield" is no longer tagged MAGIC
   in-game and can't actually be disenchanted anymore — recorded as a `note` field on that one
   `crafting.json` entry (`disenchant-cinder-beetle-shield`) rather than removing the recipe,
@@ -770,8 +784,8 @@ delete it, don't save it anywhere.
 **Named and Regular monsters are two separate top-level pages** (`pages.json` entries
 `"Named Monsters"`/`"Regular Monsters"`, both `"type": "monsters"`, sharing `"group":
 "Monsters"` so they nest under one "Monsters" sidebar heading) — split apart 2026-07-17
-(user's own call) the same way Gathering/Crafting/Enchanting/Disenchanting are split under
-"Tradeskilling", rather than one shared page with both sections stacked on it. Each page is
+(user's own call) the same way Gathering/Crafting are split under "Tradeskilling", rather
+than one shared page with both sections stacked on it. Each page is
 its own one-level drill-down: a category grid of zones (`renderMonstersCategories(container,
 named)`, scoped to just that page's named/regular subset — including its own quick search
 box) drilling into a sortable/searchable table (`renderMonstersList`) scoped to one zone at a
@@ -994,15 +1008,14 @@ there** (user's own call, 2026-07-17) — browsing the Gathering or Crafting cat
 without picking a tradeskill records nothing at all; drilling into e.g. Mining or Alchemy
 records that tradeskill specifically, never "Gathering"/"Crafting" themselves. Concretely:
 
-- `CATEGORY_TRACKED_PAGES` (`['crafting', 'gathering', 'enchanting', 'disenchanting']`) is
-  checked in `loadPage` — a page in this list is skipped by the normal top-level `recordVisit
-  ('page', baseFile)` call, since something deeper in that page's own render path records the
-  *real* visit instead.
-- `renderTradeskillSection` (shared by the Crafting category grid's drill-down *and* by
-  Enchanting's/Disenchanting's own dedicated pages, since those reach it directly with no
-  grid in front) calls `recordVisit('craft', tradeskillName)` — this is the single choke
-  point for "landing on one tradeskill's own recipe list" regardless of which route got you
-  there.
+- `CATEGORY_TRACKED_PAGES` (`['crafting', 'gathering']`) is checked in `loadPage` — a page in
+  this list is skipped by the normal top-level `recordVisit('page', baseFile)` call, since
+  something deeper in that page's own render path records the *real* visit instead.
+- `renderTradeskillSection` (shared by every tradeskill reached from either grid — the
+  Crafting grid's drill-down for ordinary tradeskills including Enchanting, the Gathering
+  grid's for Disenchanting) calls `recordVisit('craft', tradeskillName)` — this is the single
+  choke point for "landing on one tradeskill's own recipe list" regardless of which route got
+  you there.
 - `renderGatheringNodes` calls `recordVisit('gathering', tradeskillName)` the same way, for
   Mining/Lumberjacking/Herbalism/Fishing.
 - Every other top-level page (Item Database, Maps, Monsters, Companions, Useful Links,
@@ -1018,9 +1031,11 @@ records that tradeskill specifically, never "Gathering"/"Crafting" themselves. C
 
 Each stored entry is `{kind, id, count, lastVisited}` keyed by `` `${kind}:${id}` ``:
 `kind: "page"` (`id` = a `pages.json` file, resolved via `allPages`, opened with `loadPage`),
-`kind: "craft"` (`id` = a tradeskill name — including Enchanting/Disenchanting, opened with
-`goToCraftingCategory`, which already knows how to route each tradeskill to its own page via
-`craftPageHash`), or `kind: "gathering"` (`id` = a gathering tradeskill name, opened with
+`kind: "craft"` (`id` = a tradeskill name — including Enchanting, opened with
+`goToCraftingCategory`, which already knows how to route each tradeskill to its actual page
+via `craftPageHash` — Disenchanting also stores as `"craft"`, since it still reaches
+`renderTradeskillSection` the normal way, even though `craftPageHash` sends it to the
+Gathering page), or `kind: "gathering"` (`id` = a gathering tradeskill name, opened with
 `goToGatheringCategory`). `resolveVisitEntry` is the one place that turns a stored entry into
 a display title + click action per its kind, and returns `null` for a "page" entry whose file
 no longer exists in `pages.json` (filtered out rather than shown as a dead link) — "craft"/
@@ -1133,12 +1148,14 @@ already have (no new schema field to keep in sync):
   "Most Visited" entry (`updateVisitedSidebarSections` — a "craft"/"gathering" kind entry
   there looks itself up in `TRADESKILL_ICON` instead, by tradeskill name, since its `id` is a
   tradeskill rather than a page file). Most entries reuse an icon already built for something
-  else (Maps → `navigation`; Enchanting/Disenchanting/Crafting → their own tradeskill glyphs;
-  Named/Regular Monsters → the same `boss`/`paw` already used on their own category cards;
-  Companions → `wolf`) rather than needing a new one — `links`/`itemdb`/`gatheringicon`/
-  `submiticon` are the only four glyphs that had to be drawn from scratch, for Useful Links/
-  Item Database/Gathering/Submit a Screenshot respectively. A page with no `NAV_ICON` entry
-  just renders without an icon (no gap left behind) rather than erroring.
+  else (Maps → `navigation`; Crafting → its own tradeskill glyph; Named/Regular Monsters → the
+  same `boss`/`paw` already used on their own category cards; Companions → `wolf`) rather than
+  needing a new one — `links`/`itemdb`/`gatheringicon`/`submiticon` are the only four glyphs
+  that had to be drawn from scratch, for Useful Links/Item Database/Gathering/Submit a
+  Screenshot respectively. A page with no `NAV_ICON` entry just renders without an icon (no
+  gap left behind) rather than erroring — true for Enchanting/Disenchanting now that they're
+  cards inside Crafting/Gathering rather than their own `pages.json` entries; their icon still
+  shows up correctly on their own tradeskill card and in "Most Visited" via `TRADESKILL_ICON`.
 
 The icon set went through four visual redesign passes (silhouette → outline → solid →
 colored-badge, chasing a series of increasingly precise reference sheets the user provided)
