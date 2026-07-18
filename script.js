@@ -28,6 +28,14 @@ let pendingGatheringTradeskill = null;
 // straight to the unscoped all-items list with that filter pre-applied.
 // Consumed by renderItemsList the same way pendingItemQuery is.
 let pendingItemFilters = null;
+// Set alongside pendingItemFilters specifically when the category grid's
+// buff checkbox grid (not one of the plain <select> filters) is what
+// triggered the jump to renderItemsList — tells that page to immediately
+// reopen its own buff dropdown (see setupBuffDropdown's `open`) so ticking
+// a box on the category grid feels like the same panel stayed open the
+// whole time, live-filtering, rather than closing when the page swaps out
+// from under it (2026-07-19, user's own follow-up request).
+let pendingOpenBuffDropdown = false;
 // Set alongside pendingItemQuery (by goToItem) so the Item Database opens
 // directly on that item's category list instead of the category grid —
 // same idea as pendingCraftingTradeskill jumping past the tradeskill grid.
@@ -888,45 +896,29 @@ function buffDropdownHTML(idPrefix) {
 // renderItemsList tear down and rebuild their whole container on every
 // visit and a fresh document-level listener each time would just pile up.
 // Uses live querySelectorAll at click time instead of a captured reference,
-// so it never touches a stale/detached node from a previous render. Routes
-// through each dropdown's own closePanel() (see setupBuffDropdown) rather
-// than just stripping the 'open' class directly, so an outside click still
-// fires that instance's onClose the same as any other close. A WeakMap
-// (not a plain Map) holds the root→closer link so old entries from a torn-
-// down render are garbage-collected instead of accumulating forever.
-const buffDropdownClosers = new WeakMap();
+// so it never touches a stale/detached node from a previous render.
 let buffDropdownGlobalCloseSetup = false;
 function ensureBuffDropdownGlobalClose() {
   if (buffDropdownGlobalCloseSetup) return;
   buffDropdownGlobalCloseSetup = true;
   document.addEventListener('click', e => {
     document.querySelectorAll('.buff-filter-dropdown.open').forEach(d => {
-      if (d.contains(e.target)) return;
-      const closer = buffDropdownClosers.get(d);
-      if (closer) closer();
-      else d.classList.remove('open');
+      if (!d.contains(e.target)) d.classList.remove('open');
     });
   });
 }
 
 // Wires up one buffDropdownHTML(idPrefix) instance inside `container`.
-// Two separate callbacks, since the two pages that use this need different
-// timing:
-//   - `onChange` fires on every single tick, live — safe for a page like
-//     renderItemsList where reacting to it only touches the results table,
-//     never the dropdown itself.
-//   - `onClose` fires once, only when the panel actually closes (and only
-//     if the checked set actually changed since it was last opened) — for
-//     a page like renderItemsCategories, where reacting to a filter change
-//     means fully re-rendering the container the dropdown lives in. Firing
-//     that on every tick would tear down and rebuild the panel mid-click,
-//     which is exactly the "closes instantly, can't tick more than one"
-//     bug reported 2026-07-18 — deferring to close-time lets someone tick
-//     several boxes first and only navigates once they're done.
-// Returns { getSelected, setSelected, clear } for the caller's own filter
-// logic (e.g. building a full filters object that also includes other,
-// non-buff dropdowns).
-function setupBuffDropdown(container, idPrefix, { onChange, onClose } = {}) {
+// `onChange` fires live on every single tick (and on Clear) — ticking a box
+// filters immediately, same as every other Item Database filter, and the
+// panel only ever closes on an explicit toggle-button click or a click
+// outside it (never as a side effect of a tick — see the `open` note below
+// for how the one page that fully re-renders on a filter change stays
+// seamless despite that).
+// Returns { getSelected, setSelected, clear, open } for the caller's own
+// filter logic (e.g. building a full filters object that also includes
+// other, non-buff dropdowns).
+function setupBuffDropdown(container, idPrefix, { onChange } = {}) {
   ensureBuffDropdownGlobalClose();
   const root = container.querySelector(`#${idPrefix}-buffdropdown`);
   const toggle = container.querySelector(`#${idPrefix}-buffdropdown-toggle`);
@@ -935,20 +927,17 @@ function setupBuffDropdown(container, idPrefix, { onChange, onClose } = {}) {
   const clearLink = container.querySelector(`#${idPrefix}-buffdropdown-clear`);
   const checkboxes = [...panel.querySelectorAll('input[type="checkbox"]')];
 
-  function selectedKey() {
-    return checkboxes.filter(cb => cb.checked).map(cb => cb.value).sort().join(',');
-  }
-  // Tracks the selection as of the last time it was actually committed
-  // (applied via onClose, or set programmatically via setSelected/clear) —
-  // compared against the live selection at close time so an open-then-
-  // close with no actual change doesn't fire a redundant onClose.
-  let committedKey = selectedKey();
-
   function updateCount() {
     const n = checkboxes.filter(cb => cb.checked).length;
     countEl.textContent = n ? `(${n})` : '';
   }
 
+  // Exposed as the returned `open` so a caller whose onChange fully
+  // re-renders `container` (the category grid — see renderItemsCategories,
+  // which sets pendingOpenBuffDropdown before doing so) can reopen the
+  // brand-new panel that replaces this one immediately after that render,
+  // making the swap feel like the same panel stayed open the whole time
+  // rather than closing the instant you tick a box.
   function openPanel() {
     root.classList.add('open');
     // Clamp the panel to stay fully inside the viewport (8px margin),
@@ -969,20 +958,9 @@ function setupBuffDropdown(container, idPrefix, { onChange, onClose } = {}) {
     panel.style.left = (desiredViewportLeft - rect.left) + 'px';
   }
 
-  function closePanel() {
-    if (!root.classList.contains('open')) return;
-    root.classList.remove('open');
-    const key = selectedKey();
-    if (key !== committedKey) {
-      committedKey = key;
-      if (onClose) onClose();
-    }
-  }
-  buffDropdownClosers.set(root, closePanel);
-
   toggle.addEventListener('click', e => {
     e.stopPropagation();
-    if (root.classList.contains('open')) closePanel();
+    if (root.classList.contains('open')) root.classList.remove('open');
     else openPanel();
   });
   // Ticking a checkbox (or clicking Clear) must never bubble up to the
@@ -1007,13 +985,12 @@ function setupBuffDropdown(container, idPrefix, { onChange, onClose } = {}) {
     setSelected: values => {
       checkboxes.forEach(cb => { cb.checked = (values || []).includes(cb.value); });
       updateCount();
-      committedKey = selectedKey();
     },
     clear: () => {
       checkboxes.forEach(cb => { cb.checked = false; });
       updateCount();
-      committedKey = selectedKey();
-    }
+    },
+    open: openPanel
   };
 }
 
@@ -1588,12 +1565,14 @@ function renderItemsCategories(container) {
   }
 
   const categoryBuffDropdown = setupBuffDropdown(container, 'items-category-filter', {
-    // onClose, not onChange — this page's own filter-change handler fully
-    // re-renders `container` (see below), which would otherwise tear the
-    // buff panel down on the very first tick instead of letting several be
-    // ticked before jumping to the filtered list.
-    onClose: () => {
+    // Live, same as every other filter on this page — jumps to the
+    // unscoped all-items list on every tick. pendingOpenBuffDropdown tells
+    // that page's own buff dropdown to reopen itself immediately, since the
+    // jump fully re-renders `container` and would otherwise silently close
+    // the panel out from under the very tick that triggered it.
+    onChange: () => {
       pendingItemFilters = currentFilters();
+      pendingOpenBuffDropdown = true;
       renderItemsList(container, null);
     }
   });
@@ -1870,6 +1849,16 @@ function renderItemsList(container, category) {
     if (f.maxSize) maxSizeFilter.value = f.maxSize;
     if (f.needsInfo) needsInfoFilter.checked = true;
     buffDropdown.setSelected(f.buffs);
+  }
+
+  // Set right before this render by the category grid's own buff dropdown
+  // (see renderItemsCategories) when a tick there is what triggered this
+  // jump — reopen the fresh copy of the panel immediately so it reads as
+  // the same panel staying open, not one closing and a different one
+  // appearing already-filled-in.
+  if (pendingOpenBuffDropdown) {
+    pendingOpenBuffDropdown = false;
+    buffDropdown.open();
   }
 
   if (returnToRecipe) {
