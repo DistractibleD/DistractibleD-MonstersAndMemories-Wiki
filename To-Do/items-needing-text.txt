@@ -148,3 +148,11 @@ authoritative source) gave the real name — recorded under the card's name, not
 page's: "Stiched Scrap Vambraces" -> Stitched Scrap Vambraces, "Hyrdophone Drum" ->
 Hydrophone Drum, "Staff of the Drowned" -> Spear of The Drowned, "Whispering Veil" ->
 Whisperless Veil.
+
+2026-07-19, mnmdrops.com scrape, Scarwood zone: Voice of the Land Sabatons (dropped by Yurl
+Rootrender) — card shows a scrollbar with no Race line visible, `race` left unset. Thistlefire
+Lantern (dropped by Garran Grinholdt, real card title is singular though the mob page listed
+it plural) — card shows no Class/Race section at all despite having a real equip slot
+(Primary/Secondary/Belt), unlike the usual "no slot at all" case that skips these fields —
+`needsInfo: true` set instead of guessing ALL. Also two more mob-page-vs-card-title name
+mismatches, recorded under the card's own name: "Hunting Longow" -> Hunting Longbow.

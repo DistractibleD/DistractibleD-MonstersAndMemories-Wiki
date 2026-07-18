@@ -1725,5 +1725,84 @@
       { "item": "Torturer's Thorn Shoulders" },
       { "item": "Vesska's Thorn" }
     ]
+  },
+  {
+    "name": "Dregath Warwake",
+    "slug": "dregath-warwake",
+    "named": true,
+    "maps": ["Scarwood"],
+    "drops": [
+      { "item": "Giant's Chain" },
+      { "item": "Mireguard" },
+      { "item": "Obscure Broadsword" },
+      { "item": "Rimeflesh Spaulders" }
+    ]
+  },
+  {
+    "name": "Garran Grinholdt",
+    "slug": "garran-grinholdt",
+    "named": true,
+    "maps": ["Scarwood"],
+    "drops": [
+      { "item": "Bracer of the Redmark Pact" },
+      { "item": "Grinholdt's Showpiece" },
+      { "item": "Ravine-Woven Bracers" },
+      { "item": "Redmark Spaulders" },
+      { "item": "Thistlefire Lantern" }
+    ]
+  },
+  {
+    "name": "Krev Thistlehook",
+    "slug": "krev-thistlehook",
+    "named": true,
+    "maps": ["Scarwood"],
+    "drops": [
+      { "item": "Hunting Longbow" },
+      { "item": "Pocket Knife" }
+    ]
+  },
+  {
+    "name": "Krothun Veincarver",
+    "slug": "krothun-veincarver",
+    "named": true,
+    "maps": ["Scarwood"],
+    "drops": [{ "item": "Giant's Loincloth" }]
+  },
+  {
+    "name": "Teyla Beastbound",
+    "slug": "teyla-beastbound",
+    "named": true,
+    "maps": ["Scarwood"],
+    "drops": [{ "item": "Wildbinder's Spear" }]
+  },
+  {
+    "name": "Thorne Grindholdt",
+    "slug": "thorne-grindholdt",
+    "named": true,
+    "maps": ["Scarwood"],
+    "drops": [
+      { "item": "Bandit Chain Boots" },
+      { "item": "Raiders' Rimeplates" },
+      { "item": "Tanned Sinew Bracers" }
+    ]
+  },
+  {
+    "name": "Witherwood",
+    "slug": "witherwood",
+    "named": true,
+    "maps": ["Scarwood"],
+    "drops": [{ "item": "Ghostlimb Staff" }]
+  },
+  {
+    "name": "Yurl Rootrender",
+    "slug": "yurl-rootrender",
+    "named": true,
+    "maps": ["Scarwood"],
+    "drops": [
+      { "item": "Corrupted Scout Gloves" },
+      { "item": "Mirebloom Choker" },
+      { "item": "Rootrender's Stave" },
+      { "item": "Voice of the Land Sabatons" }
+    ]
   }
 ]
