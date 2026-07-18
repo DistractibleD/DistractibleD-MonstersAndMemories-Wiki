@@ -438,9 +438,9 @@
     "maps": ["Shaded Dunes"],
     "levelRange": "~30",
     "drops": [
-      { "item": "Shimmering Shaow Veil" },
+      { "item": "Shimmering Shadow Veil" },
       { "item": "Moonwhisper Knot" },
-      { "item": "Shimmering Scimtar" },
+      { "item": "Shimmering Scimitar" },
       { "item": "Umbracast Greaves" }
     ]
   },
@@ -1165,7 +1165,11 @@
     "drops": [
       { "item": "Holy Water" },
       { "item": "Words of the Crusader Priest" },
-      { "item": "Crystallized Shard" }
+      { "item": "Crystallized Shard" },
+      { "item": "Bellkeeper's Sash" },
+      { "item": "Enchanted Battleworn Mace" },
+      { "item": "Knucklehide Chausses" },
+      { "item": "Wyrmsbane Clergy Rosary" }
     ]
   },
   {
@@ -1201,7 +1205,10 @@
       { "item": "Great Sword of the Dragon Crusader" },
       { "item": "Spectral Dust" },
       { "item": "Crystallized Shard" },
-      { "item": "Rawhide Scraps" }
+      { "item": "Rawhide Scraps" },
+      { "item": "Lieutenant's Hunting Pants" },
+      { "item": "Lieutenant's Legplates" },
+      { "item": "Wyrmsbane Lieutenant's Medallion" }
     ]
   },
   {
@@ -1214,37 +1221,69 @@
     "name": "Jakob Geffrey",
     "slug": "jakob-geffrey",
     "named": true,
-    "maps": ["Tomb of the Last Wyrmsbane"]
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "drops": [
+      { "item": "Penitential Veil" },
+      { "item": "Ring of the Deacon" },
+      { "item": "Whispering Hours Pendant" }
+    ]
   },
   {
     "name": "Bone Construct",
     "slug": "bone-construct",
     "named": true,
-    "maps": ["Tomb of the Last Wyrmsbane"]
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "drops": [
+      { "item": "Chain of the Construct" },
+      { "item": "Giant Femur" },
+      { "item": "Idol of Bone" }
+    ]
   },
   {
     "name": "Dario Numas",
     "slug": "dario-numas",
     "named": true,
-    "maps": ["Tomb of the Last Wyrmsbane"]
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "drops": [
+      { "item": "Bow of the Fallen Ranger" },
+      { "item": "Dagger of the Damned" },
+      { "item": "Fallen Ranger Hide Bracers" }
+    ]
   },
   {
     "name": "Ariblast the Wicked",
     "slug": "ariblast-the-wicked",
     "named": true,
-    "maps": ["Tomb of the Last Wyrmsbane"]
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "drops": [
+      { "item": "Graverobber's Hood" },
+      { "item": "Moldering Robes" },
+      { "item": "Skeletal Sight" },
+      { "item": "Wicked Longbow" }
+    ]
   },
   {
     "name": "Grandmaster Gildas",
     "slug": "grandmaster-gildas",
     "named": true,
-    "maps": ["Tomb of the Last Wyrmsbane"]
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "drops": [
+      { "item": "Grandmaster's Dark Leather Hood" },
+      { "item": "Oak Wood Bo Staff" },
+      { "item": "Swift Brawler's Cloak" },
+      { "item": "Wyrmsbane Grandmaster's Earring" }
+    ]
   },
   {
     "name": "Grandmaster Obadiah",
     "slug": "grandmaster-obadiah",
     "named": true,
-    "maps": ["Tomb of the Last Wyrmsbane"]
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "drops": [
+      { "item": "Obadiah's Marchers" },
+      { "item": "Shawl of Piety" },
+      { "item": "Swift Brawler's Cloak" }
+    ]
   },
   {
     "name": "Zakariah Shriki",
@@ -1397,5 +1436,160 @@
     "slug": "a-wandering-skeleton",
     "maps": ["The Grain Cellar"],
     "levelRange": "31-32"
+  },
+  {
+    "name": "Researcher Harseal",
+    "slug": "researcher-harseal",
+    "named": true,
+    "maps": ["Ancient Crypt"],
+    "drops": [{ "item": "Researcher's Protective Mitts" }]
+  },
+  {
+    "name": "Orbilis the Overseer",
+    "slug": "orbilis-the-overseer",
+    "named": true,
+    "maps": ["Blacktide Bay"],
+    "drops": [
+      { "item": "Black Greaves of the Eye" },
+      { "item": "Overseer's Gaze" }
+    ]
+  },
+  {
+    "name": "Gore",
+    "slug": "gore",
+    "named": true,
+    "maps": ["Blacktide Bay"],
+    "drops": [{ "item": "Gore's Stompers" }]
+  },
+  {
+    "name": "Taskmaster Murkraal",
+    "slug": "taskmaster-murkraal",
+    "named": true,
+    "maps": ["Blacktide Bay"],
+    "drops": [
+      { "item": "Drillmaster's Tread" },
+      { "item": "Filth-Covered Slaver's Boots" },
+      { "item": "Korgar's Fury" },
+      { "item": "Murkraal's Legwraps" },
+      { "item": "Quillcuff Wraps" },
+      { "item": "The Taskmaster's Leggings" }
+    ]
+  },
+  {
+    "name": "Commander Mangles",
+    "slug": "commander-mangles",
+    "named": true,
+    "maps": ["Ancient Crypt"],
+    "levelRange": "20",
+    "drops": [
+      { "item": "Commander's Cloak" },
+      { "item": "The Mangler" }
+    ]
+  },
+  {
+    "name": "Acolyte of Visru",
+    "slug": "acolyte-of-visru",
+    "named": true,
+    "maps": ["Blacktide Bay"],
+    "drops": [{ "item": "Visru's Chain" }]
+  },
+  {
+    "name": "Skyseer Illya",
+    "slug": "skyseer-illya",
+    "named": true,
+    "maps": ["Ancient Crypt"],
+    "levelRange": "25",
+    "drops": [{ "item": "Orb of the Fading Flame" }]
+  },
+  {
+    "name": "Blood Puppet",
+    "slug": "blood-puppet",
+    "named": true,
+    "maps": ["Shaded Dunes"],
+    "drops": [
+      { "item": "Seal of Blood Magic" },
+      { "item": "Still-Beating Heart" }
+    ]
+  },
+  {
+    "name": "a Dustrend legionary",
+    "slug": "a-dustrend-legionary",
+    "drops": [{ "item": "Rusty Iron Plate Collar" }]
+  },
+  {
+    "name": "Librarian Gallier",
+    "slug": "librarian-gallier",
+    "named": true,
+    "maps": ["Ancient Crypt"],
+    "levelRange": "16",
+    "drops": [
+      { "item": "Charred Transcripts" },
+      { "item": "Medallion of the Ninth Flame" },
+      { "item": "Robe of the Undying Scholar" }
+    ]
+  },
+  {
+    "name": "Gerhardt Graves",
+    "slug": "gerhardt-graves",
+    "named": true,
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "drops": [
+      { "item": "Drakeling Skewer" },
+      { "item": "Suede Leather Mask" }
+    ]
+  },
+  {
+    "name": "Admiral Blacktide",
+    "slug": "admiral-blacktide",
+    "named": true,
+    "maps": ["Blacktide Bay"],
+    "drops": [
+      { "item": "Admiral's Cuirass" },
+      { "item": "Blacktide Sabatons" },
+      { "item": "Tidewalker Slippers" }
+    ]
+  },
+  {
+    "name": "Enraged Fire Elemental",
+    "slug": "enraged-fire-elemental",
+    "named": true,
+    "maps": ["Ancient Crypt"],
+    "drops": [
+      { "item": "Acolyte Mantle of Ashes" },
+      { "item": "Acolyte Robe of Ashes" },
+      { "item": "Burnt Rune Staff" },
+      { "item": "Scapular Acolyte Hood of Ashes" }
+    ]
+  },
+  {
+    "name": "Captain Kruush",
+    "slug": "captain-kruush",
+    "named": true,
+    "maps": ["Blacktide Bay"],
+    "drops": [
+      { "item": "Military Cuff" },
+      { "item": "Scarburn Clip" }
+    ]
+  },
+  {
+    "name": "Prince Mali'tik",
+    "slug": "prince-malitik",
+    "named": true,
+    "maps": ["Blacktide Bay"],
+    "drops": [{ "item": "Skri'Var Treads" }]
+  },
+  {
+    "name": "Commander Rursk",
+    "slug": "commander-rursk",
+    "named": true,
+    "maps": ["Blacktide Bay"],
+    "drops": [{ "item": "Duskswamp Wraps" }]
+  },
+  {
+    "name": "Brahson the Butcher",
+    "slug": "brahson-the-butcher",
+    "named": true,
+    "maps": ["Ancient Crypt"],
+    "drops": [{ "item": "Brahson's Cleaver" }]
   }
 ]

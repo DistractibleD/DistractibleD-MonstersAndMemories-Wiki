@@ -823,7 +823,9 @@ function findRecipesUsingItem(itemName) {
    ============================================ */
 
 const ITEM_STAT_ORDER = ['STR', 'STA', 'AGI', 'DEX', 'WIS', 'INT', 'CHA', 'HP', 'MANA'];
-const ITEM_RESIST_ORDER = ['FIRE', 'COLD', 'MAGIC', 'POISON', 'DISEASE', 'CORRUPTION'];
+// HOLY added 2026-07-19 — first seen on a real recipe/item card ("SV Holy: +2"),
+// same "extend as new values show up" convention as every other resist.
+const ITEM_RESIST_ORDER = ['FIRE', 'COLD', 'MAGIC', 'POISON', 'DISEASE', 'CORRUPTION', 'HOLY'];
 
 // Options for the "search by buff" dropdowns (see itemHasBuff) — every stat,
 // resist, and haste an item card can carry, in the same order as their own
@@ -1338,6 +1340,12 @@ function statEntries(item) {
     if (item.resists && item.resists[res]) entries.push({ label: `SV ${res}`, value: formatSigned(item.resists[res]) });
   });
   if (item.haste) entries.push({ label: 'Haste', value: `${formatSigned(item.haste)}%` });
+  // spellHaste/hpRegen/manaRegen added 2026-07-19 — first seen on real cards
+  // ("Spell Haste: +7%", "HP Regeneration: +3", "Mana Regeneration: +1"),
+  // distinct from the flat `haste`/`stats.HP`/`stats.MANA` fields above.
+  if (item.spellHaste) entries.push({ label: 'Spell Haste', value: `${formatSigned(item.spellHaste)}%` });
+  if (item.hpRegen) entries.push({ label: 'HP Regen', value: formatSigned(item.hpRegen) });
+  if (item.manaRegen) entries.push({ label: 'Mana Regen', value: formatSigned(item.manaRegen) });
   return entries;
 }
 
