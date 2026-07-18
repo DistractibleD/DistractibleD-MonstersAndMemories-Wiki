@@ -844,6 +844,32 @@ function findRecipesUsingItem(itemName) {
 const ITEM_STAT_ORDER = ['STR', 'STA', 'AGI', 'DEX', 'WIS', 'INT', 'CHA', 'HP', 'MANA'];
 const ITEM_RESIST_ORDER = ['FIRE', 'COLD', 'MAGIC', 'POISON', 'DISEASE', 'CORRUPTION'];
 
+// Options for the "search by buff" dropdowns (see itemHasBuff) — every stat,
+// resist, and haste an item card can carry, in the same order as their own
+// stat chips (statEntries below) so the dropdown list and the card read the
+// same way. Prefixed by kind so a value round-trips unambiguously even
+// though no stat/resist name actually collides today.
+const ITEM_BUFF_OPTIONS = [
+  ...ITEM_STAT_ORDER.map(s => ({ value: `stat:${s}`, label: s })),
+  ...ITEM_RESIST_ORDER.map(r => ({ value: `resist:${r}`, label: `SV ${r}` })),
+  { value: 'haste', label: 'Haste' },
+];
+
+// Three "has buff" dropdowns (2026-07-18) — lets someone stack up to 3
+// stat/resist/haste filters at once (AND logic — an item must match every
+// one that's set) to answer things like "what gives both STA and HP".
+// Shared markup builder since the category grid's toolbar and a scoped
+// category list's toolbar (renderItemsCategories/renderItemsList) both need
+// the identical 3-select block, just under a different id prefix.
+function buffFilterSelectsHTML(idPrefix) {
+  const optionsHTML = ITEM_BUFF_OPTIONS.map(o => `<option value="${o.value}">${escapeAttr(o.label)}</option>`).join('');
+  return [1, 2, 3].map(n => `
+        <select id="${idPrefix}-buff${n}" class="items-select">
+          <option value="">${n === 1 ? 'Has buff...' : '+ another buff...'}</option>
+          ${optionsHTML}
+        </select>`).join('');
+}
+
 /* ============================================
    Item type icons
    Shown in the item card header instead of a plain type-initial letter.
@@ -1235,6 +1261,18 @@ function formatStats(item) {
   return entries.length ? entries.map(e => `${e.label} ${e.value}`).join(', ') : '—';
 }
 
+// Does this item carry a given buff (an ITEM_BUFF_OPTIONS value)? Used by
+// the Item Database's "search by buff" dropdowns so someone can find e.g.
+// "every item with both STA and HP" without knowing exact bonus numbers.
+function itemHasBuff(item, buffValue) {
+  if (!buffValue) return true;
+  if (buffValue === 'haste') return !!item.haste;
+  const [kind, key] = buffValue.split(':');
+  if (kind === 'stat') return !!(item.stats && item.stats[key]);
+  if (kind === 'resist') return !!(item.resists && item.resists[key]);
+  return true;
+}
+
 function formatCapacity(item) {
   return item.capacity != null ? `${item.capacity} / ${item.maxSize}` : '—';
 }
@@ -1363,6 +1401,10 @@ function renderItemsCategories(container) {
           <span>Show only items that need info</span>
         </label>
       </div>
+      <div class="items-toolbar items-buff-toolbar">
+        <span class="items-buff-toolbar-label">Search by stat/buff (e.g. STA + HP):</span>
+        ${buffFilterSelectsHTML('items-category-filter')}
+      </div>
       <div class="items-category-grid">
         ${types.map(type => {
           const count = itemsData.filter(i => i.type === type).length;
@@ -1388,6 +1430,7 @@ function renderItemsCategories(container) {
   const categoryTagFilter = container.querySelector('#items-category-filter-tag');
   const categoryMaxSizeFilter = container.querySelector('#items-category-filter-maxsize');
   const categoryNeedsInfoFilter = container.querySelector('#items-category-filter-needsinfo');
+  const categoryBuffFilters = [1, 2, 3].map(n => container.querySelector(`#items-category-filter-buff${n}`));
 
   function currentFilters() {
     return {
@@ -1396,7 +1439,8 @@ function renderItemsCategories(container) {
       race: categoryRaceFilter.value,
       tag: categoryTagFilter.value,
       maxSize: categoryMaxSizeFilter.value,
-      needsInfo: categoryNeedsInfoFilter.checked
+      needsInfo: categoryNeedsInfoFilter.checked,
+      buffs: categoryBuffFilters.map(el => el.value).filter(Boolean)
     };
   }
 
@@ -1407,7 +1451,7 @@ function renderItemsCategories(container) {
     });
   });
 
-  [categorySlotFilter, categoryClassFilter, categoryRaceFilter, categoryTagFilter, categoryMaxSizeFilter, categoryNeedsInfoFilter].forEach(el => {
+  [categorySlotFilter, categoryClassFilter, categoryRaceFilter, categoryTagFilter, categoryMaxSizeFilter, categoryNeedsInfoFilter, ...categoryBuffFilters].forEach(el => {
     el.addEventListener('change', () => {
       pendingItemFilters = currentFilters();
       renderItemsList(container, null);
@@ -1595,6 +1639,10 @@ function renderItemsList(container, category) {
       </label>
       <button type="button" id="items-clear-filters" class="items-clear-btn">Clear filters</button>
     </div>
+    <div class="items-toolbar items-buff-toolbar">
+      <span class="items-buff-toolbar-label">Search by stat/buff (e.g. STA + HP):</span>
+      ${buffFilterSelectsHTML('items-filter')}
+    </div>
     <p class="items-count" id="items-count"></p>
     <div class="items-table-wrap">
       <table class="items-table">
@@ -1645,6 +1693,7 @@ function renderItemsList(container, category) {
   const tagFilter = container.querySelector('#items-filter-tag');
   const maxSizeFilter = container.querySelector('#items-filter-maxsize');
   const needsInfoFilter = container.querySelector('#items-filter-needsinfo');
+  const buffFilters = [1, 2, 3].map(n => container.querySelector(`#items-filter-buff${n}`));
   const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
 
   // Landed here from a header search result — pre-fill the search box with
@@ -1666,6 +1715,7 @@ function renderItemsList(container, category) {
     if (f.tag) tagFilter.value = f.tag;
     if (f.maxSize) maxSizeFilter.value = f.maxSize;
     if (f.needsInfo) needsInfoFilter.checked = true;
+    (f.buffs || []).forEach((buff, i) => { if (buffFilters[i]) buffFilters[i].value = buff; });
   }
 
   if (returnToRecipe) {
@@ -1724,6 +1774,7 @@ function renderItemsList(container, category) {
     const tag = tagFilter.value;
     const maxSize = maxSizeFilter.value;
     const needsInfo = needsInfoFilter.checked;
+    const buffs = buffFilters.map(el => el.value).filter(Boolean);
 
     let filtered = categoryItems.filter(item => {
       if (slot && item.slot !== slot) return false;
@@ -1736,6 +1787,7 @@ function renderItemsList(container, category) {
       if (tag && !(item.tags || []).includes(tag)) return false;
       if (maxSize && item.maxSize !== maxSize) return false;
       if (needsInfo && !item.needsInfo) return false;
+      if (buffs.length && !buffs.every(b => itemHasBuff(item, b))) return false;
       if (query && !itemSearchHaystack(item).includes(query)) return false;
       return true;
     });
@@ -1757,12 +1809,12 @@ function renderItemsList(container, category) {
   }
 
   [searchBox].forEach(el => el.addEventListener('input', update));
-  [slotFilter, handednessFilter, materialFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].filter(Boolean).forEach(el => el.addEventListener('change', update));
+  [slotFilter, handednessFilter, materialFilter, classFilter, raceFilter, tagFilter, maxSizeFilter, ...buffFilters].filter(Boolean).forEach(el => el.addEventListener('change', update));
   needsInfoFilter.addEventListener('change', update);
 
   container.querySelector('#items-clear-filters').addEventListener('click', () => {
     searchBox.value = '';
-    [slotFilter, handednessFilter, materialFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].filter(Boolean).forEach(el => el.value = '');
+    [slotFilter, handednessFilter, materialFilter, classFilter, raceFilter, tagFilter, maxSizeFilter, ...buffFilters].filter(Boolean).forEach(el => el.value = '');
     needsInfoFilter.checked = false;
     update();
   });
@@ -1918,6 +1970,7 @@ function renderItemCardHTML(item, opts = {}) {
           Found at &middot; ${item.foundAt ? escapeAttr(item.foundAt) : 'not yet known'}
         </div>
         ${opts.interactive ? `<div class="item-card-section item-card-suggest"><a href="#" class="item-suggest-link" data-name="${escapeAttr(item.name)}">Know where this drops? Suggest it</a></div>` : ''}
+        ${opts.isTooltip ? '<p class="item-card-tooltip-hint">Click for more info</p>' : ''}
       </div>
     </div>
   `;
@@ -1942,7 +1995,7 @@ function setupItemTooltip(container) {
     const item = findItemByName(span.dataset.alt);
     if (!item) return;
     const rect = span.getBoundingClientRect();
-    tooltip.innerHTML = renderItemCardHTML(item);
+    tooltip.innerHTML = renderItemCardHTML(item, { isTooltip: true });
     tooltip.style.display = 'block';
 
     const left = Math.min(rect.left, window.innerWidth - 336);

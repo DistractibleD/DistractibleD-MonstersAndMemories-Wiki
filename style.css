@@ -555,6 +555,15 @@ body:not(.site-entered) .sidebar {
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent);
 }
+.items-buff-toolbar {
+  align-items: center;
+  margin: 0 0 6px;
+}
+.items-buff-toolbar-label {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
 .needsinfo-toggle {
   display: inline-flex;
   align-items: center;
@@ -1076,6 +1085,17 @@ body:not(.site-entered) .sidebar {
   color: var(--text);
   border-left: 2px solid var(--accent-dim);
   padding-left: 8px;
+}
+/* Shown on every item card (see renderItemCardHTML) as a reminder that
+   hovering is only a preview — click the name for the full viewer. */
+.item-card-tooltip-hint {
+  margin: 10px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.76rem;
+  font-style: italic;
+  text-align: center;
 }
 .item-card-components {
   list-style: none;
