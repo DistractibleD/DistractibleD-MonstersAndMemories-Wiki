@@ -825,7 +825,8 @@ function findRecipesUsingItem(itemName) {
 const ITEM_STAT_ORDER = ['STR', 'STA', 'AGI', 'DEX', 'WIS', 'INT', 'CHA', 'HP', 'MANA'];
 // HOLY added 2026-07-19 — first seen on a real recipe/item card ("SV Holy: +2"),
 // same "extend as new values show up" convention as every other resist.
-const ITEM_RESIST_ORDER = ['FIRE', 'COLD', 'MAGIC', 'POISON', 'DISEASE', 'CORRUPTION', 'HOLY'];
+// ELECTRIC added 2026-07-19 — first seen on an item card ("SV Electricity: +1").
+const ITEM_RESIST_ORDER = ['FIRE', 'COLD', 'MAGIC', 'POISON', 'DISEASE', 'CORRUPTION', 'HOLY', 'ELECTRIC'];
 
 // Options for the "search by buff" dropdowns (see itemHasBuff) — every stat,
 // resist, and haste an item card can carry, in the same order as their own

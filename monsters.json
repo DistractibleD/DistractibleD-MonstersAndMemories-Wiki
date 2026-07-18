@@ -246,7 +246,6 @@
   {
     "name": "the corrupted ashira",
     "slug": "the-corrupted-ashira",
-    "named": true,
     "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Corrupted Leather Cap" },
@@ -1591,5 +1590,69 @@
     "named": true,
     "maps": ["Ancient Crypt"],
     "drops": [{ "item": "Brahson's Cleaver" }]
+  },
+  {
+    "name": "Waterlord Lin'xa",
+    "slug": "waterlord-linxa",
+    "named": true,
+    "maps": ["Sunken Resort"],
+    "drops": [{ "item": "Boots of Elemental Mastery" }]
+  },
+  {
+    "name": "Brightspark",
+    "slug": "brightspark",
+    "named": true,
+    "maps": ["Glinting Hollow"],
+    "drops": [{ "item": "Sparkfall Mantle" }]
+  },
+  {
+    "name": "Gazer",
+    "slug": "gazer",
+    "named": true,
+    "maps": ["Glinting Hollow"],
+    "drops": [{ "item": "Inquisitive Pendant" }]
+  },
+  {
+    "name": "Hrask",
+    "slug": "hrask",
+    "named": true,
+    "maps": ["Glinting Hollow"],
+    "drops": [{ "item": "Glacial Fists" }]
+  },
+  {
+    "name": "Softpaws",
+    "slug": "softpaws",
+    "named": true,
+    "maps": ["Glinting Hollow"],
+    "drops": [{ "item": "Wolfclaws" }]
+  },
+  {
+    "name": "Strig",
+    "slug": "strig",
+    "named": true,
+    "maps": ["Glinting Hollow"],
+    "drops": [
+      { "item": "Goblin Fang" },
+      { "item": "Grinning Mask" },
+      { "item": "Strig's Cuirass" }
+    ]
+  },
+  {
+    "name": "Sylvara Winterveil",
+    "slug": "sylvara-winterveil",
+    "named": true,
+    "maps": ["Glinting Hollow"],
+    "drops": [{ "item": "Dryadic Pendant" }]
+  },
+  {
+    "name": "Thornbark",
+    "slug": "thornbark",
+    "named": true,
+    "maps": ["Glinting Hollow"],
+    "drops": [
+      { "item": "Barkweave Mask" },
+      { "item": "Thornbark Bracer" },
+      { "item": "Thornbark Mantle" }
+    ]
   }
 ]

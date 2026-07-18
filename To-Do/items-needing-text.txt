@@ -126,3 +126,16 @@ the older notes just means "no full entry with real stats yet," not "not on the 
     (plain, Fine Wood, Elderwood, Ironbark).
   - Salt-Crusted Hammer, Skinning Knife — new tool items, confirmed to exist, no items.json
     entry yet. ("Scarab Shell Shield," also on this list, already has an entry.)
+
+2026-07-19, mnmdrops.com scrape: Broodmother Spider Fang (dropped by A Crypt Broodmother,
+Infested Crypt) — its source item-card image cuts off after the Class line (scrollbar
+visible, same cropped-card situation as items.json's earlier Maleq's Toothpick note), so
+`race` was left unset rather than guessed. Every other field on the card was fully visible
+and recorded.
+
+2026-07-19, mnmdrops.com scrape: Strig's Cuirass (dropped by Strig, Glinting Hollow) — its
+source card image ends right after the Class line with no Race shown at all (a directly
+user-submitted screenshot, not the site's own rendered item-card image the other drops on
+this page used) — `race` left unset rather than assumed ALL. Barkweave Mask (dropped by
+Thornbark, same zone) similarly showed no AC line on its card at all — `ac` left unset
+rather than guessed at 0.
