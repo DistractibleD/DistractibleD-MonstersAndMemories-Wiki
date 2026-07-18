@@ -711,7 +711,10 @@ body:not(.site-entered) .sidebar {
 }
 .items-clear-btn {
   background: transparent;
-  border: 1px solid var(--border);
+  /* A muted red border (2026-07-19, user's own request) makes this button
+     stand out a bit more against the toolbar's other plain-bordered
+     dropdowns/inputs, without looking like an error state. */
+  border: 1px solid #a04a4a;
   color: var(--text-dim);
   padding: 8px 12px;
   border-radius: 6px;
@@ -720,8 +723,8 @@ body:not(.site-entered) .sidebar {
   cursor: pointer;
 }
 .items-clear-btn:hover {
-  border-color: var(--accent-dim);
-  color: var(--accent);
+  border-color: #ff6b6b;
+  color: #ff6b6b;
 }
 /* .search-clear-btn (reuses .items-clear-btn's look everywhere it's used —
    header search, quick-search boxes, per-category/tradeskill search fields)
