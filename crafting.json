@@ -6832,13 +6832,18 @@
     "slug": "lesser-tincture-of-wrath",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
-    "description": "Enrage yourself, increasing Physical Damage dealt by 15% and Physical Damage received by 20% for 20 seconds.",
+    "image": "images/crafting/lesser-tincture-of-wrath.jpg",
+    "description": "Enrage yourself, increasing your Physical Damage dealt by 15% and Physical Damage received by 20% for 20 seconds.",
+    "effect": "Lesser Tincture of Wrath (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
     "components": [
       { "item": "Stranglevine Powder", "quantity": 2 },
       { "item": "Fire Beetle Eye", "quantity": 1 },
       { "item": "Annealed Vial", "quantity": 1 }
     ],
-    "recipeSkillLevel": 105
+    "recipeSkillLevel": 105,
+    "difficultyColor": "Red"
   },
   {
     "name": "Lesser Serum of Intelligence",
