@@ -888,22 +888,45 @@ function buffDropdownHTML(idPrefix) {
 // renderItemsList tear down and rebuild their whole container on every
 // visit and a fresh document-level listener each time would just pile up.
 // Uses live querySelectorAll at click time instead of a captured reference,
-// so it never touches a stale/detached node from a previous render.
+// so it never touches a stale/detached node from a previous render. Routes
+// through each dropdown's own closePanel() (see setupBuffDropdown) rather
+// than just stripping the 'open' class directly, so an outside click still
+// fires that instance's onClose the same as any other close. A WeakMap
+// (not a plain Map) holds the root→closer link so old entries from a torn-
+// down render are garbage-collected instead of accumulating forever.
+const buffDropdownClosers = new WeakMap();
 let buffDropdownGlobalCloseSetup = false;
 function ensureBuffDropdownGlobalClose() {
   if (buffDropdownGlobalCloseSetup) return;
   buffDropdownGlobalCloseSetup = true;
   document.addEventListener('click', e => {
     document.querySelectorAll('.buff-filter-dropdown.open').forEach(d => {
-      if (!d.contains(e.target)) d.classList.remove('open');
+      if (d.contains(e.target)) return;
+      const closer = buffDropdownClosers.get(d);
+      if (closer) closer();
+      else d.classList.remove('open');
     });
   });
 }
 
 // Wires up one buffDropdownHTML(idPrefix) instance inside `container`.
-// `onChange` fires whenever a checkbox is (un)checked. Returns
-// { getSelected, setSelected, clear } for the caller's own filter logic.
-function setupBuffDropdown(container, idPrefix, onChange) {
+// Two separate callbacks, since the two pages that use this need different
+// timing:
+//   - `onChange` fires on every single tick, live — safe for a page like
+//     renderItemsList where reacting to it only touches the results table,
+//     never the dropdown itself.
+//   - `onClose` fires once, only when the panel actually closes (and only
+//     if the checked set actually changed since it was last opened) — for
+//     a page like renderItemsCategories, where reacting to a filter change
+//     means fully re-rendering the container the dropdown lives in. Firing
+//     that on every tick would tear down and rebuild the panel mid-click,
+//     which is exactly the "closes instantly, can't tick more than one"
+//     bug reported 2026-07-18 — deferring to close-time lets someone tick
+//     several boxes first and only navigates once they're done.
+// Returns { getSelected, setSelected, clear } for the caller's own filter
+// logic (e.g. building a full filters object that also includes other,
+// non-buff dropdowns).
+function setupBuffDropdown(container, idPrefix, { onChange, onClose } = {}) {
   ensureBuffDropdownGlobalClose();
   const root = container.querySelector(`#${idPrefix}-buffdropdown`);
   const toggle = container.querySelector(`#${idPrefix}-buffdropdown-toggle`);
@@ -912,46 +935,71 @@ function setupBuffDropdown(container, idPrefix, onChange) {
   const clearLink = container.querySelector(`#${idPrefix}-buffdropdown-clear`);
   const checkboxes = [...panel.querySelectorAll('input[type="checkbox"]')];
 
+  function selectedKey() {
+    return checkboxes.filter(cb => cb.checked).map(cb => cb.value).sort().join(',');
+  }
+  // Tracks the selection as of the last time it was actually committed
+  // (applied via onClose, or set programmatically via setSelected/clear) —
+  // compared against the live selection at close time so an open-then-
+  // close with no actual change doesn't fire a redundant onClose.
+  let committedKey = selectedKey();
+
   function updateCount() {
     const n = checkboxes.filter(cb => cb.checked).length;
     countEl.textContent = n ? `(${n})` : '';
   }
 
+  function openPanel() {
+    root.classList.add('open');
+    // Clamp the panel to stay fully inside the viewport (8px margin),
+    // sliding it left of the button when a plain left-aligned panel would
+    // run off the right edge, and never letting it run off the left edge
+    // either — the button can sit anywhere in a wrapped toolbar, and on a
+    // narrow phone viewport the panel can be nearly as wide as the screen,
+    // so a simple two-way left/right flip (like setupItemTooltip's
+    // flip-above-if-no-room-below) isn't enough on its own; this instead
+    // computes the panel's desired left edge in viewport coordinates,
+    // clamps it between the two margins, then converts back to a `left`
+    // value relative to the wrapper (its positioned containing block).
+    panel.style.right = 'auto';
+    const rect = toggle.getBoundingClientRect();
+    const margin = 8;
+    const maxViewportLeft = window.innerWidth - margin - panel.offsetWidth;
+    const desiredViewportLeft = Math.max(margin, Math.min(rect.left, maxViewportLeft));
+    panel.style.left = (desiredViewportLeft - rect.left) + 'px';
+  }
+
+  function closePanel() {
+    if (!root.classList.contains('open')) return;
+    root.classList.remove('open');
+    const key = selectedKey();
+    if (key !== committedKey) {
+      committedKey = key;
+      if (onClose) onClose();
+    }
+  }
+  buffDropdownClosers.set(root, closePanel);
+
   toggle.addEventListener('click', e => {
     e.stopPropagation();
-    const opening = !root.classList.contains('open');
-    root.classList.toggle('open');
-    if (opening) {
-      // Clamp the panel to stay fully inside the viewport (8px margin),
-      // sliding it left of the button when a plain left-aligned panel would
-      // run off the right edge, and never letting it run off the left edge
-      // either — the button can sit anywhere in a wrapped toolbar, and on a
-      // narrow phone viewport the panel can be nearly as wide as the screen,
-      // so a simple two-way left/right flip (like setupItemTooltip's
-      // flip-above-if-no-room-below) isn't enough on its own; this instead
-      // computes the panel's desired left edge in viewport coordinates,
-      // clamps it between the two margins, then converts back to a `left`
-      // value relative to the wrapper (its positioned containing block).
-      panel.style.right = 'auto';
-      const rect = toggle.getBoundingClientRect();
-      const margin = 8;
-      const maxViewportLeft = window.innerWidth - margin - panel.offsetWidth;
-      const desiredViewportLeft = Math.max(margin, Math.min(rect.left, maxViewportLeft));
-      panel.style.left = (desiredViewportLeft - rect.left) + 'px';
-    }
+    if (root.classList.contains('open')) closePanel();
+    else openPanel();
   });
+  // Ticking a checkbox (or clicking Clear) must never bubble up to the
+  // document-level outside-click closer above — without this, checking a
+  // box would immediately close the very panel it's inside.
   panel.addEventListener('click', e => e.stopPropagation());
 
   clearLink.addEventListener('click', e => {
     e.preventDefault();
     checkboxes.forEach(cb => { cb.checked = false; });
     updateCount();
-    onChange();
+    if (onChange) onChange();
   });
 
   checkboxes.forEach(cb => cb.addEventListener('change', () => {
     updateCount();
-    onChange();
+    if (onChange) onChange();
   }));
 
   return {
@@ -959,10 +1007,12 @@ function setupBuffDropdown(container, idPrefix, onChange) {
     setSelected: values => {
       checkboxes.forEach(cb => { cb.checked = (values || []).includes(cb.value); });
       updateCount();
+      committedKey = selectedKey();
     },
     clear: () => {
       checkboxes.forEach(cb => { cb.checked = false; });
       updateCount();
+      committedKey = selectedKey();
     }
   };
 }
@@ -1537,9 +1587,15 @@ function renderItemsCategories(container) {
     };
   }
 
-  const categoryBuffDropdown = setupBuffDropdown(container, 'items-category-filter', () => {
-    pendingItemFilters = currentFilters();
-    renderItemsList(container, null);
+  const categoryBuffDropdown = setupBuffDropdown(container, 'items-category-filter', {
+    // onClose, not onChange — this page's own filter-change handler fully
+    // re-renders `container` (see below), which would otherwise tear the
+    // buff panel down on the very first tick instead of letting several be
+    // ticked before jumping to the filtered list.
+    onClose: () => {
+      pendingItemFilters = currentFilters();
+      renderItemsList(container, null);
+    }
   });
 
   container.querySelectorAll('.items-category-card').forEach(card => {
@@ -1788,7 +1844,10 @@ function renderItemsList(container, category) {
   const tagFilter = container.querySelector('#items-filter-tag');
   const maxSizeFilter = container.querySelector('#items-filter-maxsize');
   const needsInfoFilter = container.querySelector('#items-filter-needsinfo');
-  const buffDropdown = setupBuffDropdown(container, 'items-filter', update);
+  // onChange (live), not onClose — this page's own update() only touches
+  // the results table/count, so the panel itself is never torn down and
+  // there's no reason to wait for close to re-filter.
+  const buffDropdown = setupBuffDropdown(container, 'items-filter', { onChange: update });
   const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
 
   // Landed here from a header search result — pre-fill the search box with
