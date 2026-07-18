@@ -992,25 +992,34 @@ The Companions page has its own local search box and is wired into the header se
 same way Monsters is (`goToCompanion`, `pendingHighlightCompanion`, `.card-flash` — a
 gold-accent flash animation, since `.recipe-flash`'s teal doesn't match a plain `.item-card`).
 
-## Sidebar "Recently Visited" / "Most Visited"
+## Sidebar "Most Visited Tradeskills"
 
-Below the main nav, the sidebar shows up to 5 pages by recency and up to 5 by visit count
+Below the main nav, the sidebar shows up to 5 tradeskills by visit count
 (`#sidebar-visits-wrapper`, built once in `buildSidebar` and refreshed by
 `updateVisitedSidebarSections` in `script.js`). Purely client-side — visits are recorded to
 `localStorage` (`PAGE_VISITS_KEY = 'mnmwiki-page-visits'`), never sent anywhere, so it only
-ever reflects the one browser it's running in (a small note under both lists says as much).
+ever reflects the one browser it's running in (a small note under the list says as much).
 The whole block stays hidden (`display: none`) until at least one visit is recorded, and
 reuses the exact same group-heading + tree-line-nested-list markup as the "Tradeskilling"
 sidebar group so it reads as a natural part of the nav rather than a bolted-on widget.
 
+**Tradeskills only — every other top-level page was dropped from tracking entirely
+(2026-07-19, user's own follow-up request).** An earlier version also tracked ordinary page
+visits (Item Database, Maps, Monsters, etc.) under a `"page"` kind, alongside "Recently
+Visited" (by last-visited-time) as a second list next to "Most Visited" (by count). Both were
+removed: "Recently Visited" was dropped from display first (2026-07-17, though its data kept
+being recorded in case it came back), then page-tracking itself was dropped entirely
+(2026-07-19) after the user reported visiting Herbalism a lot but never seeing it show up —
+diagnosed by actually reproducing it: everyday page browsing (Item Database, Maps, etc.)
+racks up counts fast enough to crowd tradeskills out of a shared top-5 list, which defeated
+the point of a *tradeskill* shortlist. Since only tradeskills are tracked now, they no longer
+compete with page visits for a slot at all.
+
 **Tracks the deepest thing actually reached, not the top-level page passed through to get
 there** (user's own call, 2026-07-17) — browsing the Gathering or Crafting category grid
 without picking a tradeskill records nothing at all; drilling into e.g. Mining or Alchemy
-records that tradeskill specifically, never "Gathering"/"Crafting" themselves. Concretely:
+records that tradeskill specifically, never "Gathering"/"Crafting" themselves:
 
-- `CATEGORY_TRACKED_PAGES` (`['crafting', 'gathering']`) is checked in `loadPage` — a page in
-  this list is skipped by the normal top-level `recordVisit('page', baseFile)` call, since
-  something deeper in that page's own render path records the *real* visit instead.
 - `renderTradeskillSection` (shared by every tradeskill reached from either grid — the
   Crafting grid's drill-down for ordinary tradeskills including Enchanting, the Gathering
   grid's for Disenchanting) calls `recordVisit('craft', tradeskillName)` — this is the single
@@ -1018,33 +1027,27 @@ records that tradeskill specifically, never "Gathering"/"Crafting" themselves. C
   you there.
 - `renderGatheringNodes` calls `recordVisit('gathering', tradeskillName)` the same way, for
   Mining/Lumberjacking/Herbalism/Fishing.
-- Every other top-level page (Item Database, Maps, Monsters, Companions, Useful Links,
-  Submit a Screenshot) still just tracks itself via `recordVisit('page', file)` inside
-  `loadPage`, unchanged — a Monsters sub-route (e.g. `monsters/named/Vale of Zintar`) still
-  counts as a visit to "Monsters" as a whole, not the individual zone/monster. This wasn't
-  extended to Monsters' zone drill-down even though it has a similar grid-then-detail shape
-  to Gathering/Crafting — only Gathering/Crafting were asked for. (The Item Database used to
-  have a comparable grid-then-detail shape too, back when it opened on a category grid of
-  cards; that grid was dropped 2026-07-19 in favor of a plain Type filter dropdown, so this
-  no-longer-applies to it at all now — it was never more than a single `page`-kind visit
-  either way.)
+- `loadPage` itself no longer calls `recordVisit` at all — no page (Item Database, Maps,
+  Monsters, Companions, Useful Links, Submit a Screenshot, or the Crafting/Gathering grids
+  themselves) is tracked as a visit in its own right anymore.
 
 Each stored entry is `{kind, id, count, lastVisited}` keyed by `` `${kind}:${id}` ``:
-`kind: "page"` (`id` = a `pages.json` file, resolved via `allPages`, opened with `loadPage`),
 `kind: "craft"` (`id` = a tradeskill name — including Enchanting, opened with
 `goToCraftingCategory`, which already knows how to route each tradeskill to its actual page
 via `craftPageHash` — Disenchanting also stores as `"craft"`, since it still reaches
 `renderTradeskillSection` the normal way, even though `craftPageHash` sends it to the
 Gathering page), or `kind: "gathering"` (`id` = a gathering tradeskill name, opened with
 `goToGatheringCategory`). `resolveVisitEntry` is the one place that turns a stored entry into
-a display title + click action per its kind, and returns `null` for a "page" entry whose file
-no longer exists in `pages.json` (filtered out rather than shown as a dead link) — "craft"/
-"gathering" entries aren't validated the same way, since tradeskills essentially never get
+a display title + click action per its kind, and returns `null` for anything else — this is
+also what transparently drops any leftover `"page"`-kind entry still sitting in a returning
+visitor's `localStorage` from before 2026-07-19, with no separate migration/cleanup needed,
+since it simply stops resolving to anything and gets filtered out. `"craft"`/`"gathering"`
+entries aren't validated against `tradeskills.json`, since tradeskills essentially never get
 renamed/removed here and a stale one would just land on an empty tradeskill page, not error.
 
-Active-link highlighting (`loadPage`'s `link.dataset.file === baseFile` check) only works
-for `kind: "page"` entries, which set `dataset.file`. A "craft"/"gathering" entry's link is
-left permanently non-active instead of approximated — there's no single top-level `baseFile`
+Active-link highlighting (`loadPage`'s `link.dataset.file === baseFile` check) doesn't apply
+here at all anymore now that every tracked kind is a tradeskill — a tradeskill's link is left
+permanently non-active rather than approximated, since there's no single top-level `baseFile`
 that would correctly highlight just *one* tradeskill's link without also lighting up every
 other tradeskill sharing that same hash page (`#crafting`/`#gathering`).
 

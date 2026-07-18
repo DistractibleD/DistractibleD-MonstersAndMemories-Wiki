@@ -305,19 +305,16 @@ function buildSidebar(pages) {
     (groupContainer || sidebar).appendChild(link);
   }
 
-  // "Most Visited" — see recordPageVisit/updateVisitedSidebarSections. Hidden until
+  // "Most Visited Tradeskills" — see recordVisit/updateVisitedSidebarSections. Hidden until
   // there's at least one recorded visit (id="sidebar-visits-wrapper" toggles display),
   // reusing the exact same group-heading + tree-line-nested-list markup as the
   // "Tradeskilling" group above so it looks like a natural extension of the nav rather than
-  // a bolted-on widget. "Recently Visited" used to sit here too (removed from display
-  // 2026-07-17, user's own call) — visit data for it is still recorded (see
-  // updateVisitedSidebarSections/recordVisit below) in case it's ever brought back, it's
-  // just not rendered anywhere right now.
+  // a bolted-on widget.
   const visitsWrapper = document.createElement('div');
   visitsWrapper.id = 'sidebar-visits-wrapper';
   visitsWrapper.innerHTML = `
     <div class="sidebar-visits-title">History</div>
-    <div class="sidebar-group-heading">Most Visited</div>
+    <div class="sidebar-group-heading">Most Visited Tradeskills</div>
     <div class="sidebar-group" id="sidebar-most-visited"></div>
     <p class="sidebar-visits-note">Stored only in this browser — not saved anywhere else.</p>
   `;
@@ -325,23 +322,19 @@ function buildSidebar(pages) {
   updateVisitedSidebarSections();
 }
 
-// Visit tracking for the sidebar's "Most Visited" section — purely client-side
-// (localStorage), no server involved, so it only ever reflects this one browser. Also still
-// records `lastVisited` even though "Recently Visited" itself isn't rendered anymore
-// (2026-07-17) — it's cheap to keep, doubles as the tiebreaker for equally-visited pages in
-// "Most Visited", and means the data's already there if "Recently Visited" ever comes back.
-// Tracks the *deepest* thing actually reached, not just the top-level sidebar page you
-// passed through to get there (2026-07-17, user's own call): browsing Gathering or Crafting
-// just to look at the category grid records nothing, but drilling into e.g. Mining or
-// Alchemy records that tradeskill specifically — Gathering/Crafting themselves are never
-// recorded as a visit in their own right (see the CATEGORY_TRACKED_PAGES check in loadPage,
-// and the recordVisit calls in renderTradeskillSection/renderGatheringNodes). Every other
-// top-level page (Item Database, Maps, Named/Regular Monsters, Companions, etc.) still just
-// tracks itself, same as before — a Monsters sub-route (e.g. "monsters-named/Vale of Zintar")
-// still counts as a visit to "Named Monsters" as a whole, not the individual zone/monster.
+// Visit tracking for the sidebar's "Most Visited Tradeskills" section — purely client-side
+// (localStorage), no server involved, so it only ever reflects this one browser.
+// Tradeskills only (2026-07-19, user's own follow-up request) — an earlier version also
+// tracked every top-level page (Item Database, Maps, Monsters, etc.) under a "page" kind,
+// but everyday page browsing racked up counts fast enough to crowd tradeskills out of the
+// top-5 display entirely (reported by the user: visiting Herbalism a lot still never showed
+// it in "Most Visited"), which defeated the point of a *tradeskill* shortlist. Tracks the
+// *deepest* thing actually reached, not just the top-level Gathering/Crafting page passed
+// through to get there (2026-07-17, user's own call): browsing Gathering or Crafting just to
+// look at the category grid records nothing, but drilling into e.g. Mining or Alchemy records
+// that tradeskill specifically.
 //
 // Each entry is keyed `${kind}:${id}` and stores `{kind, id, count, lastVisited}`:
-//   - kind "page": id is a pages.json `file` — resolved via allPages, opened with loadPage.
 //   - kind "craft": id is a tradeskill name (Alchemy, Cooking, Enchanting, ...) reached via
 //     the Crafting grid — opened with goToCraftingCategory, which uses craftPageHash to know
 //     which page a given tradeskill's recipes actually live on (Disenchanting routes to
@@ -351,7 +344,6 @@ function buildSidebar(pages) {
 //   - kind "gathering": id is a gathering tradeskill name (Mining, Lumberjacking, Herbalism,
 //     Fishing) — opened with goToGatheringCategory.
 const PAGE_VISITS_KEY = 'mnmwiki-page-visits';
-const CATEGORY_TRACKED_PAGES = ['crafting', 'gathering'];
 
 function getPageVisits() {
   try {
@@ -375,16 +367,17 @@ function recordVisit(kind, id) {
 }
 
 // Resolves one stored visit entry to a display title and a "go there" action, per its kind —
-// returns null for an entry that no longer resolves to anything real (e.g. a "page" entry
-// whose file was removed from pages.json), so it can be filtered out rather than shown as a
-// dead link. "craft"/"gathering" entries aren't validated against tradeskills.json the same
-// way — tradeskills essentially never get renamed/removed in this wiki's history, and a
-// stale one would just land on an empty tradeskill page rather than error.
+// returns null for anything that isn't a tradeskill kind, so it can be filtered out rather
+// than shown as a dead link. This also transparently drops any leftover "page"-kind entries
+// still sitting in a returning visitor's localStorage from before page-tracking was removed
+// (2026-07-19) — no separate migration/cleanup needed, they just stop resolving to anything.
+// "craft"/"gathering" entries aren't validated against tradeskills.json — tradeskills
+// essentially never get renamed/removed in this wiki's history, and a stale one would just
+// land on an empty tradeskill page rather than error.
 function resolveVisitEntry(v) {
   if (v.kind === 'craft') return { title: v.id, go: () => goToCraftingCategory(v.id) };
   if (v.kind === 'gathering') return { title: v.id, go: () => goToGatheringCategory(v.id) };
-  const page = allPages.find(p => p.file === v.id);
-  return page ? { title: page.title, go: () => loadPage(v.id) } : null;
+  return null;
 }
 
 function updateVisitedSidebarSections() {
@@ -407,18 +400,17 @@ function updateVisitedSidebarSections() {
       const link = document.createElement('a');
       link.href = '#';
       link.className = 'sidebar-link sidebar-link-nested';
-      // "page" entries use the same NAV_ICON lookup as the main nav list;
-      // "craft"/"gathering" entries are a tradeskill name, so they use the
-      // same TRADESKILL_ICON lookup as the Crafting/Gathering category grids.
-      const navIcon = e.kind === 'page' ? NAV_ICON[e.id] : TRADESKILL_ICON[e.id];
+      // Every entry here is a tradeskill name (kind "craft"/"gathering" only —
+      // see resolveVisitEntry), so it always uses the same TRADESKILL_ICON
+      // lookup the Crafting/Gathering category grids use.
+      const navIcon = TRADESKILL_ICON[e.id];
       link.innerHTML = (navIcon ? svgIcon(navIcon) : '') + `<span class="sidebar-link-text">${escapeAttr(e.resolved.title)}</span>`;
-      // Only a "page" entry maps cleanly onto the existing file-based active-link
-      // highlighting (loadPage's `link.dataset.file === baseFile` check) — a "craft"/
-      // "gathering" entry lives inside a shared hash page (#crafting, #gathering) that
-      // every tradeskill shares, so there's no single baseFile that would correctly
-      // highlight just this one tradeskill's link without also lighting up every other
-      // tradeskill's link at the same time. Left non-active rather than approximated.
-      if (e.kind === 'page') link.dataset.file = e.id;
+      // A tradeskill entry lives inside a shared hash page (#crafting,
+      // #gathering) that every tradeskill shares, so there's no single
+      // baseFile that would correctly highlight just this one tradeskill's
+      // link without also lighting up every other tradeskill's link at the
+      // same time — left non-active rather than approximated (unlike the
+      // main nav list above, whose links map 1:1 to a baseFile).
       link.addEventListener('click', ev => {
         ev.preventDefault();
         e.resolved.go();
@@ -470,18 +462,9 @@ async function loadPage(file) {
     contentInner.innerHTML = '<h1>Page not found</h1><p>That page could not be loaded.</p>';
   }
 
-  // Record this as a visit for the "Most Visited" sidebar section (and
-  // "Recently Visited" data, even though it isn't displayed) and refresh it
-  // — must happen before the active-link
-  // highlighting below, since it can add new .sidebar-link elements for this
-  // same file. Skipped for a 404, and for the tradeskill-grid pages
-  // (CATEGORY_TRACKED_PAGES) — those track the specific tradeskill reached
-  // instead, via recordVisit('craft'/'gathering', ...) in
-  // renderTradeskillSection/renderGatheringNodes, not the grid page itself.
-  if (page && !CATEGORY_TRACKED_PAGES.includes(baseFile)) {
-    recordVisit('page', baseFile);
-    updateVisitedSidebarSections();
-  }
+  // Visits are only recorded for tradeskills now (2026-07-19) — see
+  // recordVisit's own comment above — via recordVisit('craft'/'gathering',
+  // ...) in renderTradeskillSection/renderGatheringNodes, not here.
 
   // Highlight the active link in the sidebar — the History box (Most
   // Visited) is explicitly excluded (2026-07-17, user's own call):
@@ -2936,9 +2919,8 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   // This is the single choke point for "landing on one tradeskill's own
   // recipe list" — reached from the Crafting grid or the Gathering grid
   // (Disenchanting only), or from a pending-tradeskill jump — so it's where
-  // a "Recently Visited"/"Most Visited" visit gets recorded for the
-  // tradeskill itself, per CATEGORY_TRACKED_PAGES in loadPage skipping the
-  // Crafting/Gathering grid pages in favor of this.
+  // a "Most Visited Tradeskills" visit gets recorded for the tradeskill
+  // itself (see recordVisit's own comment for why only tradeskills track).
   recordVisit('craft', tradeskillName);
   updateVisitedSidebarSections();
 
@@ -3245,9 +3227,8 @@ function renderGatheringNodes(container, tradeskillName) {
 
   // Same idea as the recordVisit call in renderTradeskillSection — this is
   // the choke point for "landing on one gathering tradeskill's own node
-  // table", so the Gathering grid page itself is skipped (see
-  // CATEGORY_TRACKED_PAGES in loadPage) in favor of tracking the specific
-  // tradeskill reached.
+  // table", tracking the specific tradeskill reached rather than the
+  // Gathering grid page itself.
   recordVisit('gathering', tradeskillName);
   updateVisitedSidebarSections();
 
