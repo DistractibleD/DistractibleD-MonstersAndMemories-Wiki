@@ -8095,5 +8095,27 @@
     "size": "Small",
     "classes": ["ELE", "ENC", "NEC", "WIZ"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Inlaid Star Rose Quartz Steel Earring",
+    "slug": "inlaid-star-rose-quartz-steel-earring",
+    "image": "images/items/inlaid-star-rose-quartz-steel-earring.jpg",
+    "type": "Jewelry",
+    "tags": [],
+    "slot": "Ear",
+    "ac": 3,
+    "stats": { "INT": 6, "WIS": 6 },
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Grain Cellar Key",
+    "slug": "grain-cellar-key",
+    "image": "images/items/grain-cellar-key.jpg",
+    "type": "Misc",
+    "tags": ["MAGIC", "UNIQUE", "NODROP"],
+    "description": "A key found in the grain cellar of a farm in Sungreet Strand."
   }
 ]
