@@ -1210,8 +1210,8 @@ and the layout doesn't shift once it's filled in.
 used to hold unconfirmed guesses (where an item might drop, where a monster might spawn,
 data-provenance caveats) separately from confirmed fields like `foundAt`, rendered in an
 amber "Rumor (unverified)" line. Once the "Submit a Screenshot" form grew a proper
-drop/spawn suggestion path (an item's "Know where this drops?" link, a named monster's
-"Know where this spawns?" link — see "Community submissions" below), that on-card unverified
+drop/spawn suggestion path (an item's or a named monster's "Wrong or missing info?" link —
+see "Community submissions" below), that on-card unverified
 note became redundant with it, so it was dropped entirely: don't add a `rumor` field to a
 new item/monster, and don't reintroduce `.item-card-section-rumor` styling if this area gets
 touched again. Genuinely unconfirmed info now belongs in a submission through that form, not
@@ -1381,14 +1381,17 @@ account.
   options built from `ensureMapsData()` + `groupMapsByArea` — the same area-name-grouping
   the Maps page itself uses, so "Infested Crypt" and "Infested Crypt (Isometric)" collapse
   to one option) and a "Regarding: `<name>`" banner (`#submit-context-banner`, dismissible
-  via "&times; Not about this") that appears when arriving from an item's "Know where this
-  drops?" link or a named monster's "Know where this spawns?" link. On submit, both get
+  via "&times; Not about this") that appears when arriving from an item's or a named
+  monster's "Wrong or missing info?" link. On submit, both get
   folded into the `notes` string as their own labeled lines (`Regarding: Item — <name>` /
   `Zone/Map: <name>`) ahead of whatever the visitor actually typed — the Worker itself never
   receives "regarding" or "zone" as distinct fields, so it needed no new field-parsing logic
   to support this, only the optional-screenshot change below.
-- **"Know where this drops?" (items) / "Know where this spawns?" (named monsters only)**
-  links jump to the Submit page with that context pre-filled, via `goToSubmit(context)`
+- **"Wrong or missing info?" (items and named monsters both — reworded 2026-07-19 from the
+  original "Know where this drops?"/"Know where this spawns?" wording, since the user felt
+  it undersold the link's purpose: a card can already be fully correct today and still need
+  this escape hatch if the data turns out wrong later)** links jump to the Submit page with
+  that context pre-filled, via `goToSubmit(context)`
   (sets `pendingSubmitContext`, same consume-once pattern as `pendingItemQuery`) — see
   `renderItemCardHTML`'s `opts.interactive` (only passed `true` from `openItemViewer`, never
   the hover tooltip, since `#item-tooltip` is `pointer-events: none` and a link there would

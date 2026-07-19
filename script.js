@@ -783,8 +783,8 @@ function goToCompanion(companion) {
 }
 
 // Jumps to the Submit page, optionally carrying "what this is about" context
-// from an item's "Know where this drops?" link or a named monster's "Know
-// where this spawns?" link (context is { kind: 'item'|'monster', name }).
+// from an item's or a named monster's "Wrong or missing info?" link (context
+// is { kind: 'item'|'monster', name }).
 // renderSubmitPage shows this as a dismissible "Regarding: <name>" banner and
 // folds it into the notes actually sent, so the Cloudflare Worker itself
 // doesn't need to know anything about items/monsters at all.
@@ -1841,7 +1841,7 @@ function renderItemRows(tbody, items, showTypeColumn) {
 // viewer modal. A gold accent + type icon (weapon/armor sub-type, jewelry
 // slot, or tradeskill for materials — see itemIconHTML) marks it as an ITEM
 // card, as opposed to the teal recipe cards below.
-// `opts.interactive` adds a "Know where this drops? Suggest it" link after
+// `opts.interactive` adds a "Wrong or missing info?" link after
 // the Found at line — only passed true from the full item viewer
 // (openItemViewer), never the hover tooltip (#item-tooltip is
 // pointer-events: none, so a link there would be visible but unclickable).
@@ -1900,7 +1900,7 @@ function renderItemCardHTML(item, opts = {}) {
         <div class="item-card-section${item.foundAt ? '' : ' item-card-muted'}">
           Found at &middot; ${item.foundAt ? escapeAttr(item.foundAt) : 'not yet known'}
         </div>
-        ${opts.interactive ? `<div class="item-card-section item-card-suggest"><a href="#" class="item-suggest-link" data-name="${escapeAttr(item.name)}">Know where this drops? Suggest it</a></div>` : ''}
+        ${opts.interactive ? `<div class="item-card-section item-card-suggest"><a href="#" class="item-suggest-link" data-name="${escapeAttr(item.name)}">Wrong or missing info?</a></div>` : ''}
         ${opts.isTooltip ? '<p class="item-card-tooltip-hint">Click for more info</p>' : ''}
       </div>
     </div>
@@ -4063,8 +4063,8 @@ const SUBMIT_EXAMPLES = [
   }
 ];
 
-// Set by an item's "Know where this drops?" link or a named monster's "Know
-// where this spawns?" link (goToSubmit) — consumed once here and shown as a
+// Set by an item's or a named monster's "Wrong or missing info?" link
+// (goToSubmit) — consumed once here and shown as a
 // dismissible "Regarding: <name>" banner, folded into the notes actually
 // sent rather than passed to the Worker as its own field, so the Worker's
 // own logic doesn't need to know anything about items/monsters at all.
