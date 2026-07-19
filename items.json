@@ -11217,5 +11217,33 @@
     "size": "Large",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Dougal's Chain Britches",
+    "slug": "dougals-chain-britches",
+    "image": "images/items/dougals-chain-britches.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Legs",
+    "ac": 42,
+    "stats": { "STR": 7, "STA": 1, "DEX": 7 },
+    "weight": 2.0,
+    "size": "Medium",
+    "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Mercenary's Hood",
+    "slug": "mercenarys-hood",
+    "image": "images/items/mercenarys-hood.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Head",
+    "ac": 25,
+    "stats": { "STR": 9, "DEX": 1, "HP": 15 },
+    "weight": 0.5,
+    "size": "Small",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   }
 ]
