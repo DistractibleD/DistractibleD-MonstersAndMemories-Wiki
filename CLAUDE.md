@@ -214,6 +214,12 @@ Inside the viewer, prev/next buttons (and left/right arrow keys) step through ev
 the group — they only render when the group has more than one map, so a plain single-map
 area shows no navigation arrows at all.
 
+**`goToMap(mapName)`** (2026-07-19) jumps to the Maps page and opens a specific area's viewer
+directly, same `pendingMapOpen`-then-consume-once pattern as `pendingItemQuery` — matched
+against `groupMapsByArea`'s base names, case-insensitively. Currently only called from the
+Named/Regular Monsters quick search's own clickable zone link (see "Adding a monster" above)
+— extend the same way if another page ever needs a "jump straight to this area's map" link.
+
 ## Adding a crafting recipe
 
 The Crafting page (`pages.json` entry with `"type": "crafting"`) shows a grid of tradeskill
@@ -821,15 +827,28 @@ fills in as the user provides it:
   `maps.json` entry) — a named sub-area within a map (e.g. "Necropolis" within "Night
   Harbor") is **not** a map of its own and goes in `areas` instead, not appended into the map
   string (e.g. `"maps": ["Night Harbor"], "areas": ["Necropolis"]`, not `"Necropolis (Night
-  Harbor)"`).
+  Harbor)"`). **The "Map" field is no longer shown on the monster card or in the zone-scoped
+  table's own column** (removed 2026-07-19, user's own call: by the time you're looking at a
+  monster's card, you got there by drilling into that exact zone already, so repeating the
+  same map name on every row/card was pure redundant restating — same "display-only removal,
+  data stays as before" precedent as `levelRange` below). `maps`/`monsterZone()` still drive
+  everything structural (which zone bucket a monster's card renders under, `goToMonster`'s
+  routing, `monsterSearchHaystack`) — only the redundant on-card/on-row *display* of the
+  current zone's own name was dropped. The one place a monster's zone still shows as text is
+  the **top-level quick search** (`renderMonstersCategories`, before drilling into any zone
+  folder) — there it's still genuinely useful information (you don't know the zone yet), and
+  it's now a clickable link of its own (`goToMap`, see "Adding a map" below) that opens that
+  area straight in the Maps viewer, separate from the result's own name-link to the monster
+  (2026-07-19, user's own request).
 - `areas` — optional array of confirmed sub-area names within the monster's `maps` (e.g.
   `["Necropolis", "North Gate"]` for a monster seen in more than one) — `areas` is for the
   coarser, confirmed subdivision the user actually names; a more specific single-spot
   callout belongs in prose on some other field instead. Treated as confirmed (the user
   states it directly, same authority as a screenshot). Rendered on the monster card as an
-  "Area" field right below "Map", and included in `monsterSearchHaystack` so it's
-  searchable. Does not affect zone-grid grouping on the Monsters page — that's still driven
-  by `maps` (specifically `monsterZone()`, which reads `maps[0]`), not `areas`.
+  "Area" field (the first field on the card now that "Map" itself is no longer shown — see
+  above), and included in `monsterSearchHaystack` so it's searchable. Does not affect
+  zone-grid grouping on the Monsters page — that's still driven by `maps` (specifically
+  `monsterZone()`, which reads `maps[0]`), not `areas`.
 - `levelRange` — a plain string like `"5-8"`, not a structured min/max, since every level
   range the user adds is a guess, not a confirmed in-game value — kept as a free string
   rather than numeric fields. **Con color reference:** in this game a White con means the
@@ -1227,6 +1246,51 @@ by embedding literal `\n` characters in the JSON string — `renderItemCardHTML`
 `itemSearchHaystack` so note contents are searchable. Use this same field for any future
 readable book/letter/scroll item.
 
+### `lastUpdated` — a "Last updated" badge, plus a site-wide "Recently Updated" list
+
+Added 2026-07-19 (user's own request: "a small but visible 'last updated' on any entry, item
+or crafting", plus a sidebar list of what's recently changed). `lastUpdated` is an optional
+plain `"YYYY-MM-DD"` string (same date-string convention used elsewhere in this file, e.g.
+`observedAtSkill`'s screenshot dates) on an entry in `items.json`, `monsters.json`,
+`crafting.json`, or `companions.json`.
+
+- **Whenever you add a new entry, or edit an existing one's real data** (stats, drops,
+  components, description, image, — anything that isn't purely this field itself), **set
+  `lastUpdated` to today's date.** This applies across the normal add-a-new-entry workflows
+  above and to any inbox-batch processing. It's the one field that's expected to change on an
+  edit rather than only be set once at creation.
+- **Don't** set/bump it for a change that isn't about the entry's own content — e.g.
+  reformatting, or a schema-wide script.js/CSS change that happens to touch how every card
+  renders. It tracks "when was this entry's information last updated," not "when was this
+  JSON file last touched."
+- Rendered as a small muted "Last updated: \<date\>" line via `formatLastUpdated()` in
+  `script.js` (`.last-updated-badge` in `style.css`) on every item/recipe/monster/companion
+  card, right under the name — present or entirely absent, same as `item.foundAt`'s
+  "not yet known" pattern elsewhere, except here an unset value just renders nothing at all
+  rather than a placeholder, since most pre-2026-07-19 entries don't have one and won't
+  ever get a real backfilled date (see below) — showing a placeholder on all of them would
+  be more misleading than showing nothing.
+- **The sidebar's "Recently Updated" box** (`updateRecentlyUpdatedSidebar()` in `script.js`,
+  its own bordered box right below "History" — a *separate* box, not a section nested inside
+  it, since History is the visitor's own per-browser visit tracking while this is site-wide
+  content freshness, the same for every visitor) lists the 10 entries across all four files
+  with the newest `lastUpdated`, each a clickable link (via the existing `goToItem`/
+  `goToMonster`/`goToRecipe`/`goToCompanion`) straight to that entry. Ties (common, since a
+  whole inbox batch usually shares one date) break on the entry's position within its own
+  data file, later = more recent. Hidden entirely if nothing has a `lastUpdated` yet.
+- **Backfilled once, retroactively, for recent history only — not attempted for the whole
+  site.** Mining exact "last touched" dates per entry from git history is only cheaply
+  reliable for a commit that actually added the entry (new `"slug"` line in the diff) — an
+  edit to an already-existing entry's other fields doesn't necessarily touch its `slug` line,
+  so it can't be found the same way without expensive/unreliable heuristics. The initial
+  rollout backfilled every entry touched by commits from 2026-07-18 and 2026-07-19 (the
+  session immediately preceding this feature) by matching added `"slug"` lines per commit to
+  that commit's date; everything older simply has no `lastUpdated` at all rather than a
+  guessed one. This is intentionally the same "starts fresh, builds up over time" precedent
+  as the "Most Visited Tradeskills" visit tracking — don't try to backfill further into
+  history if this area gets touched again; just keep setting the field going forward per the
+  rule above.
+
 ## Known CSS gotchas
 
 `.content-inner img` (in `style.css`) sets `display: block` on every image rendered inside
@@ -1399,6 +1463,11 @@ account.
   both the tooltip and the modal, since a monster's tooltip is already fully interactive —
   see "Adding a monster" above). Regular monsters don't get this link — a common mob's
   spawn zones are rarely a mystery worth crowdsourcing the way a boss's is.
+  **The clickable part is now just "Click here" (2026-07-19, same-day follow-up)** — "Wrong
+  or missing info?" itself is plain text (the question), with a separate "Click here" `<a>`
+  right after it ("Wrong or missing info? Click here to let us know."), instead of the whole
+  question being the link — the user felt the link needed its own explicit call-to-action
+  text rather than making the reader infer that the question itself was clickable.
 - **Why a Worker at all:** GitHub Pages only serves static files — it cannot run any code,
   so it can't hold the GitHub token needed to open a pull request. A token embedded in the
   page's own JavaScript would be visible to anyone via dev tools, which would let a

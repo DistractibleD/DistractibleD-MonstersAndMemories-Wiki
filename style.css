@@ -408,6 +408,16 @@ body:not(.site-entered) .sidebar {
   border: 1px solid var(--border-light);
   border-radius: 8px;
 }
+/* "Recently Updated" (#sidebar-recent-wrapper) — a separate box of its own
+   right below History, same bordered-box look but a smaller top margin
+   since it's separating from another box rather than from the main nav
+   list. See updateRecentlyUpdatedSidebar in script.js. */
+#sidebar-recent-wrapper {
+  margin-top: 14px;
+  padding: 6px 8px 8px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+}
 .sidebar-visits-title {
   font-family: 'Sora', sans-serif;
   font-weight: 700;
@@ -421,7 +431,8 @@ body:not(.site-entered) .sidebar {
   font-size: 0.64rem;
   padding: 6px 6px 3px;
 }
-#sidebar-visits-wrapper .sidebar-link-nested {
+#sidebar-visits-wrapper .sidebar-link-nested,
+#sidebar-recent-wrapper .sidebar-link-nested {
   font-size: 0.76rem;
   padding: 4px 6px;
   gap: 6px;
@@ -773,8 +784,7 @@ body:not(.site-entered) .sidebar {
 .col-capacity { width: 10%; }
 .col-classes { width: 15%; }
 .col-race { width: 8%; }
-.col-monster-name { width: 50%; }
-.col-monster-map { width: 50%; }
+.col-monster-name { width: 100%; }
 .col-gathering-name { width: 22%; }
 .col-gathering-skill { width: 10%; }
 .col-gathering-results { width: 23%; }
@@ -867,6 +877,38 @@ body:not(.site-entered) .sidebar {
   float: right;
   color: var(--text-dim);
   font-size: 0.78rem;
+}
+/* Named/Regular Monsters' own quick search (renderMonstersCategories) shows
+   each result as two separate clickable things — the monster name (goes to
+   the monster) and its zone (opens that area's map) — rather than the zone
+   being plain text nested inside one big link, since anchors can't nest.
+   Flex row instead of .search-result-link's own block+float-right layout
+   (used as-is by every other quick search's plain-text type/tradeskill
+   label) so both stay on one line and both get their own click target. */
+.monster-quick-search-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-radius: 6px;
+}
+.monster-quick-search-row:hover {
+  background: var(--bg-panel-hover);
+}
+.monster-quick-search-row .search-result-link {
+  flex: 1;
+  min-width: 0;
+}
+.monster-quick-search-zone-link {
+  float: none;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 7px 10px 7px 0;
+  flex: 0 0 auto;
+}
+.monster-quick-search-zone-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
 }
 .items-category-grid {
   display: grid;
@@ -1063,6 +1105,20 @@ body:not(.site-entered) .sidebar {
   font-size: 0.72rem;
   color: var(--text-dim);
   margin-top: 1px;
+}
+/* Small "Last updated: <date>" line — see CLAUDE.md's `lastUpdated` note.
+   Shared by item/recipe/companion cards (nested in .item-card-titles, right
+   under the name/category) and the monster card (its own h2 has no titles
+   wrapper, so it renders directly below the name there instead). Absent
+   entirely when the field isn't set (formatLastUpdated returns ''). */
+.last-updated-badge {
+  font-size: 0.68rem;
+  color: #6b6c72;
+  margin-top: 2px;
+}
+.monster-card-name + .last-updated-badge {
+  margin-top: -8px;
+  margin-bottom: 10px;
 }
 .item-card-name a {
   color: inherit;
@@ -1939,6 +1995,7 @@ body:not(.site-entered) .sidebar {
   .sidebar-group { display: contents; }
   .sidebar-link-nested::before { display: none; }
   #sidebar-visits-wrapper { display: contents; }
+  #sidebar-recent-wrapper { display: contents; }
   .sidebar-visits-note { flex-basis: 100%; }
   .content-inner { padding: 24px 22px; }
   #search-box { width: 140px; }

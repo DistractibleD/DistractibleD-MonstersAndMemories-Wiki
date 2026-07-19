@@ -721,6 +721,7 @@
   {
     "name": "Hunting Longbow",
     "slug": "hunting-longbow",
+    "lastUpdated": "2026-07-19",
     "image": "images/items/hunting-longbow.jpg",
     "type": "Weapon",
     "tags": ["MAGIC"],
@@ -7999,6 +8000,7 @@
   {
     "name": "Dusk Devotee Skull",
     "slug": "dusk-devotee-skull",
+    "lastUpdated": "2026-07-18",
     "image": "images/items/dusk-devotee-skull.jpg",
     "type": "Armor",
     "tags": ["MAGIC", "LORE"],
@@ -8012,6 +8014,7 @@
   {
     "name": "Blade of the Witchguard",
     "slug": "blade-of-the-witchguard",
+    "lastUpdated": "2026-07-18",
     "image": "images/items/blade-of-the-witchguard.jpg",
     "type": "Weapon",
     "tags": ["MAGIC", "UNIQUE"],
@@ -8031,6 +8034,7 @@
   {
     "name": "Whalebone Spear",
     "slug": "whalebone-spear",
+    "lastUpdated": "2026-07-18",
     "image": "images/items/whalebone-spear.jpg",
     "type": "Weapon",
     "tags": ["MAGIC", "UNIQUE"],
@@ -8049,6 +8053,7 @@
   {
     "name": "Deeproot Cudgel",
     "slug": "deeproot-cudgel",
+    "lastUpdated": "2026-07-18",
     "image": "images/items/deeproot-cudgel.jpg",
     "type": "Weapon",
     "tags": ["MAGIC"],
@@ -8066,6 +8071,7 @@
   {
     "name": "Steward's Coif",
     "slug": "stewards-coif",
+    "lastUpdated": "2026-07-18",
     "image": "images/items/stewards-coif.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
@@ -8081,6 +8087,7 @@
   {
     "name": "Eggspinner's Cuff",
     "slug": "eggspinners-cuff",
+    "lastUpdated": "2026-07-18",
     "image": "images/items/eggspinners-cuff.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
@@ -8095,6 +8102,7 @@
   {
     "name": "Cowl of the Arch Lich",
     "slug": "cowl-of-the-arch-lich",
+    "lastUpdated": "2026-07-18",
     "image": "images/items/cowl-of-the-arch-lich.jpg",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
@@ -8109,6 +8117,7 @@
   {
     "name": "Inlaid Star Rose Quartz Steel Earring",
     "slug": "inlaid-star-rose-quartz-steel-earring",
+    "lastUpdated": "2026-07-18",
     "image": "images/items/inlaid-star-rose-quartz-steel-earring.jpg",
     "type": "Jewelry",
     "tags": [],
@@ -8123,6 +8132,7 @@
   {
     "name": "Grain Cellar Key",
     "slug": "grain-cellar-key",
+    "lastUpdated": "2026-07-18",
     "image": "images/items/grain-cellar-key.jpg",
     "type": "Misc",
     "tags": ["MAGIC", "UNIQUE", "NODROP"],
@@ -8131,6 +8141,7 @@
   {
     "name": "Duneshaper Gauntlets",
     "slug": "duneshaper-gauntlets",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Hands",
@@ -8144,6 +8155,7 @@
   {
     "name": "Giant Fire Wedding Ring",
     "slug": "giant-fire-wedding-ring",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Waist",
@@ -8159,6 +8171,7 @@
   {
     "name": "Maleq's Toothpick",
     "slug": "maleqs-toothpick",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
@@ -8178,6 +8191,7 @@
   {
     "name": "Researcher's Protective Mitts",
     "slug": "researchers-protective-mitts",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Hands",
@@ -8191,6 +8205,7 @@
   {
     "name": "Black Greaves of the Eye",
     "slug": "black-greaves-of-the-eye",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Legs",
@@ -8204,6 +8219,7 @@
   {
     "name": "Overseer's Gaze",
     "slug": "overseers-gaze",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Range",
@@ -8219,6 +8235,7 @@
   {
     "name": "Gore's Stompers",
     "slug": "gores-stompers",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Feet",
@@ -8233,6 +8250,7 @@
   {
     "name": "Drillmaster's Tread",
     "slug": "drillmasters-tread",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Feet",
@@ -8246,6 +8264,7 @@
   {
     "name": "Filth-Covered Slaver's Boots",
     "slug": "filth-covered-slavers-boots",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Feet",
@@ -8260,6 +8279,7 @@
   {
     "name": "Korgar's Fury",
     "slug": "korgars-fury",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
@@ -8277,6 +8297,7 @@
   {
     "name": "Murkraal's Legwraps",
     "slug": "murkraals-legwraps",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Legs",
@@ -8290,6 +8311,7 @@
   {
     "name": "Quillcuff Wraps",
     "slug": "quillcuff-wraps",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Hands",
@@ -8303,6 +8325,7 @@
   {
     "name": "The Taskmaster's Leggings",
     "slug": "the-taskmasters-leggings",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Legs",
@@ -8317,6 +8340,7 @@
   {
     "name": "The Mangler",
     "slug": "the-mangler",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary / Secondary",
@@ -8332,6 +8356,7 @@
   {
     "name": "Visru's Chain",
     "slug": "visrus-chain",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": [],
     "slot": "Head",
@@ -8346,6 +8371,7 @@
   {
     "name": "Orb of the Fading Flame",
     "slug": "orb-of-the-fading-flame",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Primary / Secondary / Range",
@@ -8360,6 +8386,7 @@
   {
     "name": "Chain of the Construct",
     "slug": "chain-of-the-construct",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": [],
     "slot": "Waist",
@@ -8374,6 +8401,7 @@
   {
     "name": "Giant Femur",
     "slug": "giant-femur",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary",
@@ -8392,6 +8420,7 @@
   {
     "name": "Idol of Bone",
     "slug": "idol-of-bone",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "LORE"],
     "slot": "Secondary / Range",
@@ -8406,6 +8435,7 @@
   {
     "name": "Seal of Blood Magic",
     "slug": "seal-of-blood-magic",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "UNIQUE", "NODROP"],
     "slot": "Range / Neck",
@@ -8420,6 +8450,7 @@
   {
     "name": "Still-Beating Heart",
     "slug": "still-beating-heart",
+    "lastUpdated": "2026-07-19",
     "type": "Misc",
     "tags": [],
     "resists": { "DISEASE": -10, "MAGIC": 10, "POISON": -10 },
@@ -8430,6 +8461,7 @@
   {
     "name": "Charred Transcripts",
     "slug": "charred-transcripts",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "LORE"],
     "slot": "Primary / Secondary",
@@ -8442,6 +8474,7 @@
   {
     "name": "Medallion of the Ninth Flame",
     "slug": "medallion-of-the-ninth-flame",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Neck",
@@ -8456,6 +8489,7 @@
   {
     "name": "Robe of the Undying Scholar",
     "slug": "robe-of-the-undying-scholar",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -8470,6 +8504,7 @@
   {
     "name": "Bow of the Fallen Ranger",
     "slug": "bow-of-the-fallen-ranger",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Range",
@@ -8485,6 +8520,7 @@
   {
     "name": "Fallen Ranger Hide Bracers",
     "slug": "fallen-ranger-hide-bracers",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -8498,6 +8534,7 @@
   {
     "name": "Drakeling Skewer",
     "slug": "drakeling-skewer",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
@@ -8514,6 +8551,7 @@
   {
     "name": "Spitemaw's Ring",
     "slug": "spitemaws-ring",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "LORE"],
     "slot": "Finger",
@@ -8526,6 +8564,7 @@
   {
     "name": "Admiral's Cuirass",
     "slug": "admirals-cuirass",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -8539,6 +8578,7 @@
   {
     "name": "Blacktide Sabatons",
     "slug": "blacktide-sabatons",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Feet",
@@ -8552,6 +8592,7 @@
   {
     "name": "Tidewalker Slippers",
     "slug": "tidewalker-slippers",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Feet",
@@ -8565,6 +8606,7 @@
   {
     "name": "Acolyte Mantle of Ashes",
     "slug": "acolyte-mantle-of-ashes",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -8579,6 +8621,7 @@
   {
     "name": "Acolyte Robe of Ashes",
     "slug": "acolyte-robe-of-ashes",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE", "NODROP"],
     "slot": "Chest",
@@ -8593,6 +8636,7 @@
   {
     "name": "Burnt Rune Staff",
     "slug": "burnt-rune-staff",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Primary",
@@ -8609,6 +8653,7 @@
   {
     "name": "Military Cuff",
     "slug": "military-cuff",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -8622,6 +8667,7 @@
   {
     "name": "Scarburn Clip",
     "slug": "scarburn-clip",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Ear",
@@ -8635,6 +8681,7 @@
   {
     "name": "Skri'Var Treads",
     "slug": "skrivar-treads",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Feet",
@@ -8648,6 +8695,7 @@
   {
     "name": "Ring of the Deacon",
     "slug": "ring-of-the-deacon",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "LORE"],
     "slot": "Finger",
@@ -8660,6 +8708,7 @@
   {
     "name": "Duskswamp Wraps",
     "slug": "duskswamp-wraps",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Hands",
@@ -8673,6 +8722,7 @@
   {
     "name": "Graverobber's Hood",
     "slug": "graverobbers-hood",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": [],
     "slot": "Head",
@@ -8686,6 +8736,7 @@
   {
     "name": "Moldering Robes",
     "slug": "moldering-robes",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -8699,6 +8750,7 @@
   {
     "name": "Skeletal Sight",
     "slug": "skeletal-sight",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Face",
@@ -8711,6 +8763,7 @@
   {
     "name": "Wicked Longbow",
     "slug": "wicked-longbow",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Range",
@@ -8727,6 +8780,7 @@
   {
     "name": "Bellkeeper's Sash",
     "slug": "bellkeepers-sash",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Waist",
@@ -8739,6 +8793,7 @@
   {
     "name": "Enchanted Battleworn Mace",
     "slug": "enchanted-battleworn-mace",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary / Secondary",
@@ -8755,6 +8810,7 @@
   {
     "name": "Wyrmsbane Clergy Rosary",
     "slug": "wyrmsbane-clergy-rosary",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Neck",
@@ -8767,6 +8823,7 @@
   {
     "name": "Wyrmsbane Grandmaster's Earring",
     "slug": "wyrmsbane-grandmasters-earring",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "LORE"],
     "slot": "Ear",
@@ -8781,6 +8838,7 @@
   {
     "name": "Shawl of Piety",
     "slug": "shawl-of-piety",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -8794,6 +8852,7 @@
   {
     "name": "Toma's Signet Ring",
     "slug": "tomas-signet-ring",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["LORE"],
     "slot": "Finger",
@@ -8808,6 +8867,7 @@
   {
     "name": "Dark Buckler",
     "slug": "dark-buckler",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": [],
     "slot": "Secondary",
@@ -8820,6 +8880,7 @@
   {
     "name": "Brahson's Cleaver",
     "slug": "brahsons-cleaver",
+    "lastUpdated": "2026-07-19",
     "image": "images/items/brahsons-cleaver.jpg",
     "type": "Weapon",
     "tags": ["MAGIC"],
@@ -8836,6 +8897,7 @@
   {
     "name": "Butcher's Cap",
     "slug": "butchers-cap",
+    "lastUpdated": "2026-07-19",
     "image": "images/items/butchers-cap.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
@@ -8850,6 +8912,7 @@
   {
     "name": "Amber",
     "slug": "amber",
+    "lastUpdated": "2026-07-19",
     "image": "images/items/amber.jpg",
     "type": "Misc",
     "tags": [],
@@ -8859,6 +8922,7 @@
   {
     "name": "Bloodstone",
     "slug": "bloodstone",
+    "lastUpdated": "2026-07-19",
     "image": "images/items/bloodstone.jpg",
     "type": "Misc",
     "tags": [],
@@ -8868,6 +8932,7 @@
   {
     "name": "Jasper",
     "slug": "jasper",
+    "lastUpdated": "2026-07-19",
     "image": "images/items/jasper.jpg",
     "type": "Misc",
     "tags": [],
@@ -8877,6 +8942,7 @@
   {
     "name": "Lieutenant's Hunting Pants",
     "slug": "lieutenants-hunting-pants",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Legs",
@@ -8890,6 +8956,7 @@
   {
     "name": "Lieutenant's Legplates",
     "slug": "lieutenants-legplates",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Legs",
@@ -8903,6 +8970,7 @@
   {
     "name": "Wyrmsbane Lieutenant's Medallion",
     "slug": "wyrmsbane-lieutenants-medallion",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Neck",
@@ -8916,6 +8984,7 @@
   {
     "name": "Huntleader's Visage",
     "slug": "huntleaders-visage",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Face",
@@ -8929,6 +8998,7 @@
   {
     "name": "Boots of Elemental Mastery",
     "slug": "boots-of-elemental-mastery",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Feet",
@@ -8942,6 +9012,7 @@
   {
     "name": "Broodmother Spider Fang",
     "slug": "broodmother-spider-fang",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC", "LORE"],
     "slot": "Primary / Secondary",
@@ -8957,6 +9028,7 @@
   {
     "name": "Barbute of the Frenzied Watch",
     "slug": "barbute-of-the-frenzied-watch",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Head",
@@ -8970,6 +9042,7 @@
   {
     "name": "Sparkfall Mantle",
     "slug": "sparkfall-mantle",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Back",
@@ -8984,6 +9057,7 @@
   {
     "name": "Inquisitive Pendant",
     "slug": "inquisitive-pendant",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Neck",
@@ -8997,6 +9071,7 @@
   {
     "name": "Wolfclaws",
     "slug": "wolfclaws",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary / Secondary",
@@ -9013,6 +9088,7 @@
   {
     "name": "Goblin Fang",
     "slug": "goblin-fang",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary",
@@ -9029,6 +9105,7 @@
   {
     "name": "Grinning Mask",
     "slug": "grinning-mask",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Face",
@@ -9042,6 +9119,7 @@
   {
     "name": "Strig's Cuirass",
     "slug": "strigs-cuirass",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -9055,6 +9133,7 @@
   {
     "name": "Dryadic Pendant",
     "slug": "dryadic-pendant",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Neck",
@@ -9068,6 +9147,7 @@
   {
     "name": "Barkweave Mask",
     "slug": "barkweave-mask",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Face",
@@ -9081,6 +9161,7 @@
   {
     "name": "Thornbark Bracer",
     "slug": "thornbark-bracer",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -9094,6 +9175,7 @@
   {
     "name": "Umbracuff",
     "slug": "umbracuff",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Hands",
@@ -9107,6 +9189,7 @@
   {
     "name": "Bloated Seal",
     "slug": "bloated-seal",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Finger",
@@ -9119,6 +9202,7 @@
   {
     "name": "Mask of the Drowned",
     "slug": "mask-of-the-drowned",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Face",
@@ -9134,6 +9218,7 @@
   {
     "name": "Mantle of the Sharkmother",
     "slug": "mantle-of-the-sharkmother",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Shoulders",
@@ -9148,6 +9233,7 @@
   {
     "name": "Ring of the Razobrood",
     "slug": "ring-of-the-razobrood",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Finger",
@@ -9161,6 +9247,7 @@
   {
     "name": "Sharkmother Trousers",
     "slug": "sharkmother-trousers",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Legs",
@@ -9174,6 +9261,7 @@
   {
     "name": "Stitched Scrap Vambraces",
     "slug": "stitched-scrap-vambraces",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -9187,6 +9275,7 @@
   {
     "name": "Hydrophone Drum",
     "slug": "hydrophone-drum",
+    "lastUpdated": "2026-07-19",
     "type": "Misc",
     "tags": ["MAGIC"],
     "slot": "Secondary",
@@ -9200,6 +9289,7 @@
   {
     "name": "Mawchant Leather Mantle",
     "slug": "mawchant-leather-mantle",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -9213,6 +9303,7 @@
   {
     "name": "Mawchant Rite Vest",
     "slug": "mawchant-rite-vest",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -9227,6 +9318,7 @@
   {
     "name": "Echoless Leggings",
     "slug": "echoless-leggings",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Legs",
@@ -9241,6 +9333,7 @@
   {
     "name": "Whisperless Veil",
     "slug": "whisperless-veil",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Face",
@@ -9255,6 +9348,7 @@
   {
     "name": "Spear of The Drowned",
     "slug": "spear-of-the-drowned",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Primary / Secondary",
@@ -9270,6 +9364,7 @@
   {
     "name": "Tidecaller's Rituals",
     "slug": "tidecallers-rituals",
+    "lastUpdated": "2026-07-19",
     "type": "Misc",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Primary / Secondary",
@@ -9283,6 +9378,7 @@
   {
     "name": "Serpentscale Belt",
     "slug": "serpentscale-belt",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Waist",
@@ -9297,6 +9393,7 @@
   {
     "name": "Faceguard of the Torturer",
     "slug": "faceguard-of-the-torturer",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Face",
@@ -9312,6 +9409,7 @@
   {
     "name": "Torturer's Thorn Shoulders",
     "slug": "torturers-thorn-shoulders",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -9325,6 +9423,7 @@
   {
     "name": "Vesska's Thorn",
     "slug": "vesskas-thorn",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Ear",
@@ -9339,6 +9438,7 @@
   {
     "name": "Giant's Chain",
     "slug": "giants-chain",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Neck",
@@ -9352,6 +9452,7 @@
   {
     "name": "Mireguard",
     "slug": "mireguard",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Secondary",
@@ -9366,6 +9467,7 @@
   {
     "name": "Rimeflesh Spaulders",
     "slug": "rimeflesh-spaulders",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -9379,6 +9481,7 @@
   {
     "name": "Bracer of the Redmark Pact",
     "slug": "bracer-of-the-redmark-pact",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Wrist",
@@ -9393,6 +9496,7 @@
   {
     "name": "Ravine-Woven Bracers",
     "slug": "ravine-woven-bracers",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -9406,6 +9510,7 @@
   {
     "name": "Redmark Spaulders",
     "slug": "redmark-spaulders",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -9420,6 +9525,7 @@
   {
     "name": "Thistlefire Lantern",
     "slug": "thistlefire-lantern",
+    "lastUpdated": "2026-07-19",
     "type": "Misc",
     "tags": ["MAGIC"],
     "slot": "Primary / Secondary / Belt",
@@ -9432,6 +9538,7 @@
   {
     "name": "Hunting Longbow",
     "slug": "hunting-longbow",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Range",
@@ -9447,6 +9554,7 @@
   {
     "name": "Pocket Knife",
     "slug": "pocket-knife",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary / Secondary / Range",
@@ -9463,6 +9571,7 @@
   {
     "name": "Giant's Loincloth",
     "slug": "giants-loincloth",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Back",
@@ -9478,6 +9587,7 @@
   {
     "name": "Wildbinder's Spear",
     "slug": "wildbinders-spear",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary / Secondary",
@@ -9494,6 +9604,7 @@
   {
     "name": "Bandit Chain Boots",
     "slug": "bandit-chain-boots",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Feet",
@@ -9507,6 +9618,7 @@
   {
     "name": "Raiders' Rimeplates",
     "slug": "raiders-rimeplates",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -9520,6 +9632,7 @@
   {
     "name": "Tanned Sinew Bracers",
     "slug": "tanned-sinew-bracers",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -9533,6 +9646,7 @@
   {
     "name": "Ghostlimb Staff",
     "slug": "ghostlimb-staff",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Primary",
@@ -9551,6 +9665,7 @@
   {
     "name": "Corrupted Scout Gloves",
     "slug": "corrupted-scout-gloves",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Hands",
@@ -9564,6 +9679,7 @@
   {
     "name": "Mirebloom Choker",
     "slug": "mirebloom-choker",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Neck",
@@ -9577,6 +9693,7 @@
   {
     "name": "Rootrender's Stave",
     "slug": "rootrenders-stave",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary",
@@ -9594,6 +9711,7 @@
   {
     "name": "Voice of the Land Sabatons",
     "slug": "voice-of-the-land-sabatons",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Feet",
@@ -9607,6 +9725,7 @@
   {
     "name": "Drakeling Cuffs",
     "slug": "drakeling-cuffs",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -9621,6 +9740,7 @@
   {
     "name": "Emeraldscale Talonboots",
     "slug": "emeraldscale-talonboots",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Feet",
@@ -9635,6 +9755,7 @@
   {
     "name": "Dawnglow Gossamer Vest",
     "slug": "dawnglow-gossamer-vest",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -9649,6 +9770,7 @@
   {
     "name": "Beguiler's Tunic",
     "slug": "beguilers-tunic",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -9663,6 +9785,7 @@
   {
     "name": "Grips of the Deep Enchantress",
     "slug": "grips-of-the-deep-enchantress",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": [],
     "slot": "Hands",
@@ -9676,6 +9799,7 @@
   {
     "name": "Mask of the Mistress",
     "slug": "mask-of-the-mistress",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Face",
@@ -9690,6 +9814,7 @@
   {
     "name": "Foamstalker's Trinket",
     "slug": "foamstalkers-trinket",
+    "lastUpdated": "2026-07-19",
     "type": "Misc",
     "tags": ["MAGIC"],
     "slot": "Range",
@@ -9702,6 +9827,7 @@
   {
     "name": "Frostmaw",
     "slug": "frostmaw",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary",
@@ -9717,6 +9843,7 @@
   {
     "name": "Gloves of the Rotting Hound",
     "slug": "gloves-of-the-rotting-hound",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Hands",
@@ -9731,6 +9858,7 @@
   {
     "name": "Moonlit Scruff",
     "slug": "moonlit-scruff",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Back",
@@ -9744,6 +9872,7 @@
   {
     "name": "Rabid Hide Wristguards",
     "slug": "rabid-hide-wristguards",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -9757,6 +9886,7 @@
   {
     "name": "Ironbind Gauntlets",
     "slug": "ironbind-gauntlets",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Hands",
@@ -9770,6 +9900,7 @@
   {
     "name": "Luminous Runestaff",
     "slug": "luminous-runestaff",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary",
@@ -9785,6 +9916,7 @@
   {
     "name": "Ridgeland Stud",
     "slug": "ridgeland-stud",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Ear",
@@ -9797,6 +9929,7 @@
   {
     "name": "Tanned Redstalker Hide",
     "slug": "tanned-redstalker-hide",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -9810,6 +9943,7 @@
   {
     "name": "Wanderer's Leggings",
     "slug": "wanderers-leggings",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": [],
     "slot": "Legs",
@@ -9824,6 +9958,7 @@
   {
     "name": "Krindor's Wristguard",
     "slug": "krindors-wristguard",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "LORE"],
     "slot": "Wrist",
@@ -9838,6 +9973,7 @@
   {
     "name": "Black Widow Sickle",
     "slug": "black-widow-sickle",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Primary / Secondary",
@@ -9853,6 +9989,7 @@
   {
     "name": "Deathcharmer's Masquerade",
     "slug": "deathcharmers-masquerade",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Face",
@@ -9865,6 +10002,7 @@
   {
     "name": "Mana Bloodstone",
     "slug": "mana-bloodstone",
+    "lastUpdated": "2026-07-19",
     "type": "Misc",
     "tags": ["MAGIC", "LORE", "UNIQUE"],
     "slot": "Ammo",
@@ -9878,6 +10016,7 @@
   {
     "name": "Necrostar Cape",
     "slug": "necrostar-cape",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Back",
@@ -9890,6 +10029,7 @@
   {
     "name": "The Wrekronomicon",
     "slug": "the-wrekronomicon",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC", "LORE", "UNIQUE", "NODROP"],
     "slot": "Primary / Secondary / Waist",
@@ -9907,6 +10047,7 @@
   {
     "name": "Diseased Wolf Mantle",
     "slug": "diseased-wolf-mantle",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -9922,6 +10063,7 @@
   {
     "name": "Wavecaller's Pendant",
     "slug": "wavecallers-pendant",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Neck",
@@ -9935,6 +10077,7 @@
   {
     "name": "Leafcaller Earring",
     "slug": "leafcaller-earring",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Ear",
@@ -9948,6 +10091,7 @@
   {
     "name": "Prankster's Briarbinds",
     "slug": "pranksters-briarbinds",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -9961,6 +10105,7 @@
   {
     "name": "Encrusted Heartleaf Spangenhelm",
     "slug": "encrusted-heartleaf-spangenhelm",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": [],
     "slot": "Head",
@@ -9974,6 +10119,7 @@
   {
     "name": "Girdle of the Dunecaller",
     "slug": "girdle-of-the-dunecaller",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Waist",
@@ -9988,6 +10134,7 @@
   {
     "name": "Mantle of the Windcaller",
     "slug": "mantle-of-the-windcaller",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Back",
@@ -10004,6 +10151,7 @@
   {
     "name": "Sandstorm Seal",
     "slug": "sandstorm-seal",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Finger",
@@ -10016,6 +10164,7 @@
   {
     "name": "Brazier Visor",
     "slug": "brazier-visor",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Head",
@@ -10030,6 +10179,7 @@
   {
     "name": "Butcher's Shoulder Cloth",
     "slug": "butchers-shoulder-cloth",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -10044,6 +10194,7 @@
   {
     "name": "Boulderbreaker Axe",
     "slug": "boulderbreaker-axe",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary",
@@ -10061,6 +10212,7 @@
   {
     "name": "Boulderbreaker Scythe",
     "slug": "boulderbreaker-scythe",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary",
@@ -10077,6 +10229,7 @@
   {
     "name": "Goldgut Harness",
     "slug": "goldgut-harness",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -10090,6 +10243,7 @@
   {
     "name": "Oiled Tracker Shoulders",
     "slug": "oiled-tracker-shoulders",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -10104,6 +10258,7 @@
   {
     "name": "Templar Iron Fists",
     "slug": "templar-iron-fists",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Hands",
@@ -10118,6 +10273,7 @@
   {
     "name": "Temple-Forged Aegis",
     "slug": "temple-forged-aegis",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Secondary",
@@ -10131,6 +10287,7 @@
   {
     "name": "Debtcarver",
     "slug": "debtcarver",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC", "UNIQUE", "NODROP"],
     "slot": "Primary / Secondary",
@@ -10148,6 +10305,7 @@
   {
     "name": "Leggings of Reckoning",
     "slug": "leggings-of-reckoning",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE", "NODROP"],
     "slot": "Legs",
@@ -10162,6 +10320,7 @@
   {
     "name": "Vest of Shattered Duty",
     "slug": "vest-of-shattered-duty",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE", "NODROP"],
     "slot": "Chest",
@@ -10175,6 +10334,7 @@
   {
     "name": "Darkened Chain Shawl",
     "slug": "darkened-chain-shawl",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -10189,6 +10349,7 @@
   {
     "name": "Nighthorn's Shadowmantle",
     "slug": "nighthorns-shadowmantle",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -10203,6 +10364,7 @@
   {
     "name": "Nighthorn's Thimbleguard",
     "slug": "nighthorns-thimbleguard",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Finger",
@@ -10215,6 +10377,7 @@
   {
     "name": "Runed Spellward Shield",
     "slug": "runed-spellward-shield",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Secondary",
@@ -10228,6 +10391,7 @@
   {
     "name": "Boots of Vengeful Resolve",
     "slug": "boots-of-vengeful-resolve",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE", "NODROP"],
     "slot": "Feet",
@@ -10241,6 +10405,7 @@
   {
     "name": "Wilna's Ring",
     "slug": "wilnas-ring",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["UNIQUE", "NODROP"],
     "slot": "Finger",
@@ -10254,6 +10419,7 @@
   {
     "name": "High Keeper's Vambrace",
     "slug": "high-keepers-vambrace",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "NODROP"],
     "slot": "Wrist",
@@ -10268,6 +10434,7 @@
   {
     "name": "Cloak of the Last Stand",
     "slug": "cloak-of-the-last-stand",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Back",
@@ -10282,6 +10449,7 @@
   {
     "name": "Darkened Iron Greaves",
     "slug": "darkened-iron-greaves",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Legs",
@@ -10297,6 +10465,7 @@
   {
     "name": "Wartide Gauntlets",
     "slug": "wartide-gauntlets",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Hands",
@@ -10311,6 +10480,7 @@
   {
     "name": "Den Dweller's Boots",
     "slug": "den-dwellers-boots",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Feet",
@@ -10325,6 +10495,7 @@
   {
     "name": "Furrowed Mask",
     "slug": "furrowed-mask",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Face",
@@ -10337,6 +10508,7 @@
   {
     "name": "Mantle of the Untamed Beast",
     "slug": "mantle-of-the-untamed-beast",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -10351,6 +10523,7 @@
   {
     "name": "Redpaw Battle Drum",
     "slug": "redpaw-battle-drum",
+    "lastUpdated": "2026-07-19",
     "type": "Misc",
     "tags": ["MAGIC"],
     "slot": "Secondary",
@@ -10365,6 +10538,7 @@
   {
     "name": "Sangrel Ring of the Arcanist",
     "slug": "sangrel-ring-of-the-arcanist",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Finger",
@@ -10378,6 +10552,7 @@
   {
     "name": "Sangrel Ring of the Entangler",
     "slug": "sangrel-ring-of-the-entangler",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Finger",
@@ -10391,6 +10566,7 @@
   {
     "name": "Sangrel Ring of the Shadowblade",
     "slug": "sangrel-ring-of-the-shadowblade",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Finger",
@@ -10404,6 +10580,7 @@
   {
     "name": "Sangrel Ring of the Striker",
     "slug": "sangrel-ring-of-the-striker",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Finger",
@@ -10417,6 +10594,7 @@
   {
     "name": "Blackwood Plating",
     "slug": "blackwood-plating",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -10431,6 +10609,7 @@
   {
     "name": "Bloodstained Cloak",
     "slug": "bloodstained-cloak",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "LORE", "UNIQUE"],
     "slot": "Back",
@@ -10445,6 +10624,7 @@
   {
     "name": "Darla's Heirloom Pendant",
     "slug": "darlas-heirloom-pendant",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "LORE", "UNIQUE"],
     "slot": "Neck",
@@ -10459,6 +10639,7 @@
   {
     "name": "Cinch of the Forest Howler",
     "slug": "cinch-of-the-forest-howler",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Waist",
@@ -10473,6 +10654,7 @@
   {
     "name": "Fangbite Dirk",
     "slug": "fangbite-dirk",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary",
@@ -10488,6 +10670,7 @@
   {
     "name": "Fur-Lined Gloves",
     "slug": "fur-lined-gloves",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Hands",
@@ -10501,6 +10684,7 @@
   {
     "name": "Deadwood Silk Bracer",
     "slug": "deadwood-silk-bracer",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Wrist",
@@ -10514,6 +10698,7 @@
   {
     "name": "Eggshell Greaves",
     "slug": "eggshell-greaves",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Legs",
@@ -10527,6 +10712,7 @@
   {
     "name": "Ring of the Pauper",
     "slug": "ring-of-the-pauper",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["UNIQUE", "NODROP"],
     "slot": "Finger",
@@ -10540,6 +10726,7 @@
   {
     "name": "Bight-Coil Shoulderguards",
     "slug": "bight-coil-shoulderguards",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -10554,6 +10741,7 @@
   {
     "name": "Skintaker Ritual Dagger",
     "slug": "skintaker-ritual-dagger",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary / Secondary",
@@ -10569,6 +10757,7 @@
   {
     "name": "Skintaker Spiritist Ring",
     "slug": "skintaker-spiritist-ring",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "LORE"],
     "slot": "Finger",
@@ -10581,6 +10770,7 @@
   {
     "name": "Eggspinner's Cuffs",
     "slug": "eggspinners-cuffs",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -10594,6 +10784,7 @@
   {
     "name": "Frightweaver Robe",
     "slug": "frightweaver-robe",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -10608,6 +10799,7 @@
   {
     "name": "Frightwoven Cape",
     "slug": "frightwoven-cape",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Back",
@@ -10622,6 +10814,7 @@
   {
     "name": "Sphalerite Spider Figurine",
     "slug": "sphalerite-spider-figurine",
+    "lastUpdated": "2026-07-19",
     "type": "Misc",
     "tags": ["MAGIC", "UNIQUE", "NORENT"],
     "slot": "Ammo",
@@ -10634,6 +10827,7 @@
   {
     "name": "Bracer of the Fallen Foe",
     "slug": "bracer-of-the-fallen-foe",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Wrist",
@@ -10648,6 +10842,7 @@
   {
     "name": "Broken Bone Earring",
     "slug": "broken-bone-earring",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Ear",
@@ -10662,6 +10857,7 @@
   {
     "name": "Vindicator Breastplate",
     "slug": "vindicator-breastplate",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Chest",
@@ -10674,6 +10870,7 @@
   {
     "name": "Vindicator Greaves",
     "slug": "vindicator-greaves",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Legs",
@@ -10687,6 +10884,7 @@
   {
     "name": "Hillcrest Cuffs",
     "slug": "hillcrest-cuffs",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -10700,6 +10898,7 @@
   {
     "name": "Captain's Ring",
     "slug": "captains-ring",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "LORE"],
     "slot": "Finger",
@@ -10712,6 +10911,7 @@
   {
     "name": "River Pirate Sash",
     "slug": "river-pirate-sash",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Waist",
@@ -10724,6 +10924,7 @@
   {
     "name": "Bangled Bracer of Importance",
     "slug": "bangled-bracer-of-importance",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Wrist",
@@ -10738,6 +10939,7 @@
   {
     "name": "Boots of Certainty",
     "slug": "boots-of-certainty",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Feet",
@@ -10752,6 +10954,7 @@
   {
     "name": "Very Powerful Hammer",
     "slug": "very-powerful-hammer",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Primary / Secondary",
@@ -10769,6 +10972,7 @@
   {
     "name": "Sandshroud Staff",
     "slug": "sandshroud-staff",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary",
@@ -10785,6 +10989,7 @@
   {
     "name": "Cinder Beetle Serrated Mandible",
     "slug": "cinder-beetle-serrated-mandible",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary / Secondary",
@@ -10802,6 +11007,7 @@
   {
     "name": "Condottiere's Faceguard",
     "slug": "condottieres-faceguard",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Face",
@@ -10815,6 +11021,7 @@
   {
     "name": "Hrrush's Ring",
     "slug": "hrrushs-ring",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "LORE"],
     "slot": "Finger",
@@ -10828,6 +11035,7 @@
   {
     "name": "Mindmesh Mail",
     "slug": "mindmesh-mail",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -10841,6 +11049,7 @@
   {
     "name": "Pyrmos Browguard",
     "slug": "pyrmos-browguard",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Head",
@@ -10855,6 +11064,7 @@
   {
     "name": "Heartwood Buckler",
     "slug": "heartwood-buckler",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Secondary",
@@ -10868,6 +11078,7 @@
   {
     "name": "Heartwood Root",
     "slug": "heartwood-root",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary / Secondary",
@@ -10883,6 +11094,7 @@
   {
     "name": "Dented Platinum Coin Pendant",
     "slug": "dented-platinum-coin-pendant",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC", "LORE", "UNIQUE"],
     "slot": "Neck",
@@ -10898,6 +11110,7 @@
   {
     "name": "Muggrah's Brazier Torc",
     "slug": "muggrahs-brazier-torc",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Neck",
@@ -10910,6 +11123,7 @@
   {
     "name": "Bandit's Wristplates",
     "slug": "bandits-wristplates",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -10923,6 +11137,7 @@
   {
     "name": "Bent Staff of Nerguk",
     "slug": "bent-staff-of-nerguk",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
@@ -10940,6 +11155,7 @@
   {
     "name": "Nerguk's Onyx Studs",
     "slug": "nerguks-onyx-studs",
+    "lastUpdated": "2026-07-19",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Ear",
@@ -10952,6 +11168,7 @@
   {
     "name": "Cinder Beetle Horn",
     "slug": "cinder-beetle-horn",
+    "lastUpdated": "2026-07-19",
     "type": "Misc",
     "tags": ["UNIQUE"],
     "slot": "Primary",
@@ -10969,6 +11186,7 @@
   {
     "name": "Favor of the Queen",
     "slug": "favor-of-the-queen",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE", "NODROP"],
     "slot": "Back",
@@ -10983,6 +11201,7 @@
   {
     "name": "Bonebreakers",
     "slug": "bonebreakers",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary / Secondary",
@@ -10998,6 +11217,7 @@
   {
     "name": "Riverwatch Mantle",
     "slug": "riverwatch-mantle",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
@@ -11012,6 +11232,7 @@
   {
     "name": "Blued Steel Long Sword",
     "slug": "blued-steel-long-sword",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary / Secondary",
@@ -11027,6 +11248,7 @@
   {
     "name": "Ashira Sandstride Slippers",
     "slug": "ashira-sandstride-slippers",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Feet",
@@ -11040,6 +11262,7 @@
   {
     "name": "Sand-Scored Leggings",
     "slug": "sand-scored-leggings",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Legs",
@@ -11053,6 +11276,7 @@
   {
     "name": "Vexfang Hood",
     "slug": "vexfang-hood",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Head",
@@ -11067,6 +11291,7 @@
   {
     "name": "Vexfang Visor",
     "slug": "vexfang-visor",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Face",
@@ -11080,6 +11305,7 @@
   {
     "name": "Highwayman Wristraps",
     "slug": "highwayman-wristraps",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Wrist",
@@ -11093,6 +11319,7 @@
   {
     "name": "Ravine Hauberk",
     "slug": "ravine-hauberk",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -11106,6 +11333,7 @@
   {
     "name": "Sneed's Ambush Treads",
     "slug": "sneeds-ambush-treads",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Feet",
@@ -11119,6 +11347,7 @@
   {
     "name": "Sneed's Bauble",
     "slug": "sneeds-bauble",
+    "lastUpdated": "2026-07-19",
     "type": "Misc",
     "tags": ["MAGIC"],
     "slot": "Range",
@@ -11131,6 +11360,7 @@
   {
     "name": "Sneed's Cudgel",
     "slug": "sneeds-cudgel",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC"],
     "slot": "Primary",
@@ -11147,6 +11377,7 @@
   {
     "name": "Sneed's Cunning Gauntlets",
     "slug": "sneeds-cunning-gauntlets",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Hands",
@@ -11161,6 +11392,7 @@
   {
     "name": "Bloodied Sickle",
     "slug": "bloodied-sickle",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Primary / Secondary",
@@ -11177,6 +11409,7 @@
   {
     "name": "Spectral Coif",
     "slug": "spectral-coif",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Head",
@@ -11190,6 +11423,7 @@
   {
     "name": "Grudgeheft",
     "slug": "grudgeheft",
+    "lastUpdated": "2026-07-19",
     "type": "Weapon",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Primary",
@@ -11208,6 +11442,7 @@
   {
     "name": "Colorful Leather Vest",
     "slug": "colorful-leather-vest",
+    "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -11221,6 +11456,7 @@
   {
     "name": "Dougal's Chain Britches",
     "slug": "dougals-chain-britches",
+    "lastUpdated": "2026-07-19",
     "image": "images/items/dougals-chain-britches.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
@@ -11235,6 +11471,7 @@
   {
     "name": "Mercenary's Hood",
     "slug": "mercenarys-hood",
+    "lastUpdated": "2026-07-19",
     "image": "images/items/mercenarys-hood.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
@@ -11244,6 +11481,114 @@
     "weight": 0.5,
     "size": "Small",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Vestments of Vakraar",
+    "slug": "vestments-of-vakraar",
+    "lastUpdated": "2026-07-19",
+    "image": "images/items/vestments-of-vakraar.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Chest",
+    "ac": 40,
+    "stats": { "STR": 5, "STA": 1, "HP": 5 },
+    "resists": { "MAGIC": 2 },
+    "description": "Vestments fashioned from hammered brass and interlocking bronze links, clattering with the restless fury of Vakraar, the Chosen.",
+    "weight": 6.0,
+    "size": "Large",
+    "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"]
+  },
+  {
+    "name": "Dustmaul Sash",
+    "slug": "dustmaul-sash",
+    "lastUpdated": "2026-07-19",
+    "image": "images/items/dustmaul-sash.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Waist",
+    "ac": 8,
+    "stats": { "CHA": 3 },
+    "resists": { "COLD": 3, "ELECTRIC": 2, "FIRE": 1 },
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Dustmaul Pauldrons",
+    "slug": "dustmaul-pauldrons",
+    "lastUpdated": "2026-07-19",
+    "image": "images/items/dustmaul-pauldrons.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Shoulders",
+    "ac": 35,
+    "stats": { "STA": 7, "WIS": 4 },
+    "description": "Twin sheep skulls hammered from beaten brass, their hollow eyes staring defiantly into every battle.",
+    "weight": 3.0,
+    "size": "Small",
+    "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Mask of the Gladiator",
+    "slug": "mask-of-the-gladiator",
+    "lastUpdated": "2026-07-19",
+    "image": "images/items/mask-of-the-gladiator.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC", "NODROP"],
+    "slot": "Face",
+    "ac": 6,
+    "stats": { "STR": 4, "STA": 3, "AGI": 2 },
+    "weight": 0.25,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Gilded Spellbook",
+    "slug": "gilded-spellbook",
+    "lastUpdated": "2026-07-19",
+    "image": "images/items/gilded-spellbook.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Waist",
+    "stats": { "INT": 4, "WIS": 2, "CHA": 2, "MANA": 15 },
+    "description": "A high-quality spellbook gilded with gold thread.",
+    "weight": 0.0,
+    "size": "Small",
+    "classes": ["BST", "CLR", "DRU", "ELE", "ENC", "INQ", "NEC", "PAL", "RNG", "SHD", "SHM", "SPB", "WIZ"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Grub",
+    "slug": "grub",
+    "lastUpdated": "2026-07-19",
+    "image": "images/items/grub.jpg",
+    "type": "Misc",
+    "tags": [],
+    "slot": "Ammo",
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Fishing Pole",
+    "slug": "fishing-pole",
+    "lastUpdated": "2026-07-19",
+    "image": "images/items/fishing-pole.jpg",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary",
+    "twoHanded": true,
+    "damage": 0,
+    "delay": 25,
+    "skill": "Bludgeoning",
+    "weight": 0.5,
+    "size": "Large",
+    "classes": ["ALL"],
     "race": ["ALL"]
   }
 ]

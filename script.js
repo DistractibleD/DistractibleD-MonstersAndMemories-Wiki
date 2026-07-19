@@ -67,6 +67,11 @@ let suppressScrollReset = false;
 // submitted notes — consumed (and cleared) by renderSubmitPage the same
 // consume-once pattern as pendingItemQuery.
 let pendingSubmitContext = null;
+// Set by goToMap (e.g. a monster search result's clickable zone link) so the
+// Maps page opens straight into that area's viewer instead of just the grid
+// — consumed (and cleared) by renderMapsPage, same consume-once pattern as
+// pendingItemQuery.
+let pendingMapOpen = null;
 
 async function ensureItemsData() {
   if (!itemsData) {
@@ -320,6 +325,87 @@ function buildSidebar(pages) {
   `;
   sidebar.appendChild(visitsWrapper);
   updateVisitedSidebarSections();
+
+  // "Recently Updated" — its own separate box below "History" (same bordered-
+  // box visual treatment, own title), not nested inside it: History is the
+  // visitor's own browsing activity (localStorage-only, per-browser), while
+  // this is site-wide content freshness that's the same for every visitor —
+  // conceptually a different thing sharing a similar look, not a sub-section
+  // of History. Starts hidden (inline style) so there's no flash of an empty
+  // box while items/monsters/crafting/companions data loads in the
+  // background — updateRecentlyUpdatedSidebar unhides it once it actually
+  // has entries to show.
+  const recentWrapper = document.createElement('div');
+  recentWrapper.id = 'sidebar-recent-wrapper';
+  recentWrapper.style.display = 'none';
+  recentWrapper.innerHTML = `
+    <div class="sidebar-visits-title">Recently Updated</div>
+    <div class="sidebar-group" id="sidebar-recent-list"></div>
+  `;
+  sidebar.appendChild(recentWrapper);
+  updateRecentlyUpdatedSidebar();
+}
+
+// Combines items/monsters/crafting recipes/companions into one newest-first
+// list via each entry's `lastUpdated` field (see CLAUDE.md) — a site-wide
+// "what's new" list, distinct from the History box's per-browser visit
+// tracking above. Entries added before `lastUpdated` existed simply have no
+// value for it and are excluded, same graceful-omission handling as the
+// per-card "Last updated" badge (formatLastUpdated). Async because the
+// underlying data isn't fetched yet when buildSidebar runs (see init()) —
+// reuses the exact same ensure*Data() caches the header search box already
+// prefetches in the background, so this costs nothing extra once those
+// resolve, and re-running it (e.g. on a later buildSidebar call) is free
+// since ensure*Data() only fetches once.
+async function updateRecentlyUpdatedSidebar() {
+  const wrapper = document.getElementById('sidebar-recent-wrapper');
+  if (!wrapper) return;
+
+  await Promise.allSettled([
+    ensureItemsData(), ensureMonstersData(), ensureCraftingData(), ensureCompanionsData()
+  ]);
+
+  const entries = [];
+  (itemsData || []).forEach((item, idx) => {
+    if (item.lastUpdated) entries.push({ date: item.lastUpdated, idx, title: item.name, go: () => goToItem(item) });
+  });
+  (monstersData || []).forEach((monster, idx) => {
+    if (monster.lastUpdated) entries.push({ date: monster.lastUpdated, idx, title: monster.name, go: () => goToMonster(monster) });
+  });
+  (craftingData || []).forEach((recipe, idx) => {
+    if (recipe.lastUpdated) entries.push({ date: recipe.lastUpdated, idx, title: recipe.name, go: () => goToRecipe(recipe) });
+  });
+  (companionsData || []).forEach((companion, idx) => {
+    if (companion.lastUpdated) entries.push({ date: companion.lastUpdated, idx, title: companion.name, go: () => goToCompanion(companion) });
+  });
+
+  if (!entries.length) {
+    wrapper.style.display = 'none';
+    return;
+  }
+
+  // Same date string ("YYYY-MM-DD") sorts correctly with plain comparison;
+  // ties (very common here — whole inbox batches share one date) break on
+  // array position, since later entries in a data file are almost always
+  // the ones added most recently within that same batch.
+  const top = entries
+    .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : b.idx - a.idx))
+    .slice(0, 10);
+
+  const list = document.getElementById('sidebar-recent-list');
+  list.innerHTML = '';
+  top.forEach(e => {
+    const link = document.createElement('a');
+    link.href = '#';
+    link.className = 'sidebar-link sidebar-link-nested';
+    link.innerHTML = `<span class="sidebar-link-text">${escapeAttr(e.title)}</span>`;
+    link.addEventListener('click', ev => {
+      ev.preventDefault();
+      e.go();
+    });
+    list.appendChild(link);
+  });
+  wrapper.style.display = '';
 }
 
 // Visit tracking for the sidebar's "Most Visited Tradeskills" section — purely client-side
@@ -780,6 +866,18 @@ function goToCompanion(companion) {
   const alreadyThere = location.hash.replace('#', '') === 'companions';
   location.hash = 'companions';
   if (alreadyThere) loadPage('companions');
+}
+
+// Jumps to the Maps page and opens a specific area's viewer directly —
+// e.g. the clickable zone name next to a monster in the Named/Regular
+// Monsters quick search results (see renderMonstersCategories). `mapName` is
+// matched against groupMapsByArea's base names (case-insensitive), same base
+// name a monster's own `maps` entries are expected to match per CLAUDE.md.
+function goToMap(mapName) {
+  pendingMapOpen = mapName;
+  const alreadyThere = location.hash.replace('#', '') === 'maps';
+  location.hash = 'maps';
+  if (alreadyThere) loadPage('maps');
 }
 
 // Jumps to the Submit page, optionally carrying "what this is about" context
@@ -1395,6 +1493,20 @@ function formatList(values) {
   return values.join(', ');
 }
 
+// Shared "Last updated" convention for items/monsters/recipes/companions —
+// see CLAUDE.md's `lastUpdated` note. Plain "YYYY-MM-DD" in the data (same
+// date-string style used elsewhere in this codebase), rendered as a short
+// human date. Entries added before this field existed simply have no
+// `lastUpdated` at all, so every call site only renders this when present
+// rather than showing a misleading fallback.
+function formatLastUpdated(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  if (isNaN(d)) return '';
+  const text = d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  return `<div class="last-updated-badge">Last updated: ${text}</div>`;
+}
+
 function itemSearchHaystack(item) {
   const ratio = itemRatio(item);
   return [
@@ -1881,6 +1993,7 @@ function renderItemCardHTML(item, opts = {}) {
         <div class="item-card-titles">
           <div class="item-card-name">${escapeAttr(item.name)}</div>
           <div class="item-card-category">${escapeAttr(categoryLabel)}</div>
+          ${formatLastUpdated(item.lastUpdated)}
         </div>
         ${badges ? `<div class="item-card-badges">${badges}</div>` : ''}
       </div>
@@ -1900,7 +2013,7 @@ function renderItemCardHTML(item, opts = {}) {
         <div class="item-card-section${item.foundAt ? '' : ' item-card-muted'}">
           Found at &middot; ${item.foundAt ? escapeAttr(item.foundAt) : 'not yet known'}
         </div>
-        ${opts.interactive ? `<div class="item-card-section item-card-suggest"><a href="#" class="item-suggest-link" data-name="${escapeAttr(item.name)}">Wrong or missing info?</a></div>` : ''}
+        ${opts.interactive ? `<div class="item-card-section item-card-suggest">Wrong or missing info? <a href="#" class="item-suggest-link" data-name="${escapeAttr(item.name)}">Click here</a> to let us know.</div>` : ''}
         ${opts.isTooltip ? '<p class="item-card-tooltip-hint">Click for more info</p>' : ''}
       </div>
     </div>
@@ -2103,6 +2216,7 @@ async function renderMapsPage(container) {
   const groups = groupMapsByArea(mapsData);
 
   if (!groups.length) {
+    pendingMapOpen = null;
     container.innerHTML = '<h1>Maps</h1><p>No maps yet.</p>';
     return;
   }
@@ -2142,6 +2256,17 @@ async function renderMapsPage(container) {
       openMapViewer(groups[gi].entries, vi);
     });
   });
+
+  // Landed here via goToMap (e.g. a monster search result's clickable zone
+  // link) — jump straight into that area's viewer instead of leaving the
+  // visitor on the plain grid. Matched by base name (case-insensitive), same
+  // name a monster's own `maps` entries are expected to match.
+  if (pendingMapOpen) {
+    const name = pendingMapOpen;
+    pendingMapOpen = null;
+    const group = groups.find(g => g.base.toLowerCase() === name.toLowerCase());
+    if (group) openMapViewer(group.entries, 0);
+  }
 }
 
 // Full-size map viewer with scroll-to-zoom and click-and-drag panning.
@@ -2653,7 +2778,10 @@ function renderDisenchantCardHTML(recipe) {
     <div class="item-card item-card-recipe" data-recipe-slug="${escapeAttr(recipe.slug)}">
       <div class="item-card-header">
         <div class="item-card-icon item-card-icon-recipe item-card-icon-thumb">${thumbHtml}</div>
-        <div class="item-card-name item-card-name-recipe">${nameHtml}</div>
+        <div class="item-card-titles">
+          <div class="item-card-name item-card-name-recipe">${nameHtml}</div>
+          ${formatLastUpdated(recipe.lastUpdated)}
+        </div>
         <div class="item-card-badges"><span class="badge-tag badge-tag-craft">${escapeAttr(recipe.tradeskill)}</span>${recipe.needsInfo ? '<span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}</div>
       </div>
       <div class="item-card-body">
@@ -2736,7 +2864,10 @@ function renderRecipeCardHTML(recipe) {
     <div class="item-card item-card-recipe" data-recipe-slug="${escapeAttr(recipe.slug)}">
       <div class="item-card-header">
         <div class="item-card-icon item-card-icon-recipe">${TRADESKILL_ICON[recipe.tradeskill] ? svgIcon(TRADESKILL_ICON[recipe.tradeskill]) : (recipe.tradeskill || '?').charAt(0)}</div>
-        <div class="item-card-name item-card-name-recipe">${nameHtml}</div>
+        <div class="item-card-titles">
+          <div class="item-card-name item-card-name-recipe">${nameHtml}</div>
+          ${formatLastUpdated(recipe.lastUpdated)}
+        </div>
         <div class="item-card-badges"><span class="badge-tag badge-tag-craft">${escapeAttr(recipe.tradeskill)}</span>${recipe.needsInfo ? '<span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}</div>
       </div>
       <div class="item-card-body">
@@ -3405,10 +3536,6 @@ function monsterSearchHaystack(monster) {
   ].join(' ').toLowerCase();
 }
 
-function formatMonsterMaps(monster) {
-  return (monster.maps && monster.maps.length) ? monster.maps.join(', ') : '—';
-}
-
 // The zone a monster is filed under for the category-grid browsing view —
 // its first map, or a fallback bucket for the handful of monsters with no
 // map recorded yet.
@@ -3512,13 +3639,26 @@ function renderMonstersCategories(container, named) {
       .sort((a, b) => a.name.localeCompare(b.name))
       .slice(0, 20);
 
+    // The zone name is its own separate link (not nested inside the monster
+    // link — anchors can't nest) so it can jump straight to that area's map
+    // instead of the monster, per the user's own request: searching here
+    // (without having drilled into a zone folder first) should let the zone
+    // itself open the Maps viewer. Only linked when the monster actually has
+    // a real map recorded — the "Unknown Zone" fallback bucket (monsterZone)
+    // has no matching maps.json entry to open, so it stays plain text.
     quickSearchResults.innerHTML = matches.length
-      ? matches.map(monster => `
-          <a href="#" class="search-result-link items-quick-search-result" data-slug="${escapeAttr(monster.slug)}">
-            ${escapeAttr(monster.name)}
-            <span class="items-quick-search-type">${escapeAttr(monsterZone(monster))}</span>
-          </a>
-        `).join('')
+      ? matches.map(monster => {
+          const zone = monsterZone(monster);
+          const zoneHtml = (monster.maps && monster.maps.length)
+            ? `<a href="#" class="items-quick-search-type monster-quick-search-zone-link" data-zone="${escapeAttr(zone)}">${escapeAttr(zone)}</a>`
+            : `<span class="items-quick-search-type">${escapeAttr(zone)}</span>`;
+          return `
+          <div class="monster-quick-search-row">
+            <a href="#" class="search-result-link items-quick-search-result" data-slug="${escapeAttr(monster.slug)}">${escapeAttr(monster.name)}</a>
+            ${zoneHtml}
+          </div>
+        `;
+        }).join('')
       : '<p class="search-results-empty">No monsters match.</p>';
     quickSearchResults.classList.add('open');
 
@@ -3527,6 +3667,14 @@ function renderMonstersCategories(container, named) {
         e.preventDefault();
         const monster = findMonsterBySlug(link.dataset.slug);
         if (monster) goToMonster(monster);
+      });
+    });
+
+    quickSearchResults.querySelectorAll('.monster-quick-search-zone-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        goToMap(link.dataset.zone);
       });
     });
   });
@@ -3556,12 +3704,10 @@ function renderMonstersList(container, scope) {
       <table class="items-table">
         <colgroup>
           <col class="col-monster-name">
-          <col class="col-monster-map">
         </colgroup>
         <thead>
           <tr>
             <th data-sort-key="name" class="sortable">Name</th>
-            <th data-sort-key="maps" class="sortable">Map</th>
           </tr>
         </thead>
         <tbody id="monsters-tbody"></tbody>
@@ -3615,7 +3761,6 @@ function renderMonstersList(container, scope) {
   function monsterSortValue(monster, key) {
     switch (key) {
       case 'name': return monster.name.toLowerCase();
-      case 'maps': return (monster.maps && monster.maps[0] || '').toLowerCase();
       default: return '';
     }
   }
@@ -3668,14 +3813,13 @@ function renderMonstersList(container, scope) {
 
 function renderMonsterRows(tbody, monsters) {
   if (!monsters.length) {
-    tbody.innerHTML = `<tr><td colspan="2" class="items-empty">${monstersData.length ? 'No monsters match your filters.' : 'No monsters yet.'}</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="1" class="items-empty">${monstersData.length ? 'No monsters match your filters.' : 'No monsters yet.'}</td></tr>`;
     return;
   }
 
   tbody.innerHTML = monsters.map(monster => `
     <tr data-slug="${escapeAttr(monster.slug)}">
       <td data-label="Name"><span class="item-name-hover monster-name-hover" data-slug="${escapeAttr(monster.slug)}">${escapeAttr(monster.name)}</span>${monster.needsInfo ? ' <span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}</td>
-      <td data-label="Map"${formatMonsterMaps(monster) === '—' ? ' class="cell-empty"' : ''}>${escapeAttr(formatMonsterMaps(monster))}</td>
     </tr>
   `).join('');
 }
@@ -3860,7 +4004,7 @@ function renderMonsterCardHTML(monster, opts = {}) {
         : '<div class="monster-card-image-placeholder">No image yet</div>'}
       <div class="monster-card-body">
         <h2 class="monster-card-name">${escapeAttr(monster.name)}</h2>
-        <div class="monster-card-field"><span class="item-card-field-label">Map</span><span>${escapeAttr(formatMonsterMaps(monster))}</span></div>
+        ${formatLastUpdated(monster.lastUpdated)}
         ${(monster.areas && monster.areas.length) ? `<div class="monster-card-field"><span class="item-card-field-label">Area</span><span>${escapeAttr(monster.areas.join(', '))}</span></div>` : ''}
         ${related.length ? `
         <div class="monster-card-field">
@@ -3886,7 +4030,7 @@ function renderMonsterCardHTML(monster, opts = {}) {
           ` : '<p class="monster-card-no-drops">No known drops yet.</p>'}
         </div>
         ${monster.needsInfo ? `<div class="item-card-section item-card-needs-info">This monster needs more info &middot; confirmed to exist, but a full picture/details haven't been captured yet. <a href="#submit">Submit a screenshot</a> to help fill it in!</div>` : ''}
-        ${monster.named ? `<div class="item-card-section item-card-suggest"><a href="#" class="monster-suggest-link" data-name="${escapeAttr(monster.name)}">Wrong or missing info?</a></div>` : ''}
+        ${monster.named ? `<div class="item-card-section item-card-suggest">Wrong or missing info? <a href="#" class="monster-suggest-link" data-name="${escapeAttr(monster.name)}">Click here</a> to let us know.</div>` : ''}
         ${opts.isTooltip ? '<p class="monster-card-tooltip-hint">Click for more info</p>' : ''}
       </div>
     </div>
@@ -3960,6 +4104,7 @@ function renderCompanionCardHTML(companion) {
         <div class="item-card-titles">
           <div class="item-card-name">${escapeAttr(companion.name)}</div>
           <div class="item-card-category">Beastmaster Companion</div>
+          ${formatLastUpdated(companion.lastUpdated)}
         </div>
       </div>
       <div class="item-card-body">
