@@ -169,3 +169,15 @@ Wristguard's Class line also looked one line short compared to the usual 14-clas
 but casters" roster (missing RNG/ROG specifically) which may just be more of the same crop,
 so treat that class list as unconfirmed-complete too. Also one more mob-page-vs-card-title
 name mismatch: "Pranker's Briarbinds" -> Prankster's Briarbinds.
+
+2026-07-19, mnmdrops.com scrape, Keeper's Bight zone: several cards had a scrollbar cutting
+off the Race line (and in a few cases part of the Class line too) — `race` left unset on
+Leggings of Reckoning, Vest of Shattered Duty, Boots of Vengeful Resolve, Den Dweller's
+Boots, Cinch of the Forest Howler, Fur-Lined Gloves, and Ring of the Pauper (dropped by
+Fendris The Forsaken / Fendris The Forsaken / Poacher Garrus / Redpaw / Timberfang / Timberfang
+/ Widow Vethra respectively); Leggings of Reckoning and Cinch of the Forest Howler's Class
+lists may also be missing a trailing SHD/SHM/SPB that got cut off with the scrollbar. Also:
+Timberfang is the first mob in this whole scrape with a level actually given by mnmdrops.com
+("LEVEL 26" on its own drop page) — recorded as `levelRange: "26"` even though it's a
+community-submitted "suggested level" rather than the user's own con-color observation, so
+treat it as weaker than a normal levelRange entry if it's ever asked about.

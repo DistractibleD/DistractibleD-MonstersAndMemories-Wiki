@@ -1350,6 +1350,9 @@ function statEntries(item) {
   // percussion added 2026-07-19 — first seen on Hydrophone Drum ("Percussion: +28%"),
   // a Bard instrument-skill bonus distinct from the flat `haste` field.
   if (item.percussion) entries.push({ label: 'Percussion', value: `${formatSigned(item.percussion)}%` });
+  // wind added 2026-07-19 — first seen on Mantle of the Windcaller ("Wind: +5%"),
+  // presumably a Bard wind-instrument-skill bonus paralleling `percussion`.
+  if (item.wind) entries.push({ label: 'Wind', value: `${formatSigned(item.wind)}%` });
   return entries;
 }
 
@@ -3883,7 +3886,7 @@ function renderMonsterCardHTML(monster, opts = {}) {
           ` : '<p class="monster-card-no-drops">No known drops yet.</p>'}
         </div>
         ${monster.needsInfo ? `<div class="item-card-section item-card-needs-info">This monster needs more info &middot; confirmed to exist, but a full picture/details haven't been captured yet. <a href="#submit">Submit a screenshot</a> to help fill it in!</div>` : ''}
-        ${monster.named ? `<div class="item-card-section item-card-suggest"><a href="#" class="monster-suggest-link" data-name="${escapeAttr(monster.name)}">Know where this spawns? Suggest it</a></div>` : ''}
+        ${monster.named ? `<div class="item-card-section item-card-suggest"><a href="#" class="monster-suggest-link" data-name="${escapeAttr(monster.name)}">Wrong or missing info?</a></div>` : ''}
         ${opts.isTooltip ? '<p class="monster-card-tooltip-hint">Click for more info</p>' : ''}
       </div>
     </div>

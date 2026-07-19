@@ -1895,5 +1895,183 @@
     "named": true,
     "maps": ["Evershade Weald"],
     "drops": [{ "item": "Wavecaller's Pendant" }]
+  },
+  {
+    "name": "Belthakar Dunecaller",
+    "slug": "belthakar-dunecaller",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [
+      { "item": "Desert Trinket" },
+      { "item": "Girdle of the Dunecaller" },
+      { "item": "Mantle of the Windcaller" },
+      { "item": "Saltworn Sabatons" },
+      { "item": "Sandstorm Seal" }
+    ]
+  },
+  {
+    "name": "Brak'zul Bonecarver",
+    "slug": "brakzul-bonecarver",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [
+      { "item": "Bonecarver's Shank" },
+      { "item": "Brazier Visor" },
+      { "item": "Butcher's Shoulder Cloth" }
+    ]
+  },
+  {
+    "name": "Brukk Goldgut",
+    "slug": "brukk-goldgut",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [
+      { "item": "Boulderbreaker Axe" },
+      { "item": "Boulderbreaker Scythe" },
+      { "item": "Goldgut Harness" }
+    ]
+  },
+  {
+    "name": "Darvok Skullbender",
+    "slug": "darvok-skullbender",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [
+      { "item": "Oiled Tracker Shoulders" },
+      { "item": "Templar Iron Fists" },
+      { "item": "Temple-Forged Aegis" }
+    ]
+  },
+  {
+    "name": "Fendris The Forsaken",
+    "slug": "fendris-the-forsaken",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [
+      { "item": "Debtcarver" },
+      { "item": "Leggings of Reckoning" },
+      { "item": "Vest of Shattered Duty" }
+    ]
+  },
+  {
+    "name": "Mirella Nighthorn",
+    "slug": "mirella-nighthorn",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [
+      { "item": "Darkened Chain Shawl" },
+      { "item": "Nighthorn's Shadowmantle" },
+      { "item": "Nighthorn's Thimbleguard" },
+      { "item": "Runed Spellward Shield" }
+    ]
+  },
+  {
+    "name": "Poacher Garrus",
+    "slug": "poacher-garrus",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [{ "item": "Boots of Vengeful Resolve" }]
+  },
+  {
+    "name": "Poacher Wilna",
+    "slug": "poacher-wilna",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [{ "item": "Wilna's Ring" }]
+  },
+  {
+    "name": "Ranger Rylin",
+    "slug": "ranger-rylin",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [{ "item": "High Keeper's Vambrace" }]
+  },
+  {
+    "name": "Rarthan Wartide",
+    "slug": "rarthan-wartide",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [
+      { "item": "Cloak of the Last Stand" },
+      { "item": "Darkened Iron Greaves" },
+      { "item": "Wartide Gauntlets" }
+    ]
+  },
+  {
+    "name": "Redpaw",
+    "slug": "redpaw",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [
+      { "item": "Den Dweller's Boots" },
+      { "item": "Furrowed Mask" },
+      { "item": "Mantle of the Untamed Beast" },
+      { "item": "Redpaw Battle Drum" }
+    ]
+  },
+  {
+    "name": "Sangrel Arcanist",
+    "slug": "sangrel-arcanist",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [{ "item": "Sangrel Ring of the Arcanist" }]
+  },
+  {
+    "name": "Sangrel Entangler",
+    "slug": "sangrel-entangler",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [{ "item": "Sangrel Ring of the Entangler" }]
+  },
+  {
+    "name": "Sangrel Shadowblade",
+    "slug": "sangrel-shadowblade",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [{ "item": "Sangrel Ring of the Shadowblade" }]
+  },
+  {
+    "name": "Sangrel Striker",
+    "slug": "sangrel-striker",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [{ "item": "Sangrel Ring of the Striker" }]
+  },
+  {
+    "name": "Thoren Blackwood",
+    "slug": "thoren-blackwood",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [
+      { "item": "Blackwood Plating" },
+      { "item": "Bloodstained Cloak" },
+      { "item": "Darla's Heirloom Pendant" }
+    ]
+  },
+  {
+    "name": "Timberfang",
+    "slug": "timberfang",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "levelRange": "26",
+    "drops": [
+      { "item": "Cinch of the Forest Howler" },
+      { "item": "Fangbite Dirk" },
+      { "item": "Fur-Lined Gloves" }
+    ]
+  },
+  {
+    "name": "Widow Vethra",
+    "slug": "widow-vethra",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "drops": [
+      { "item": "Deadwood Silk Bracer" },
+      { "item": "Eggshell Greaves" },
+      { "item": "Fang of the Recluse" },
+      { "item": "Ring of the Pauper" },
+      { "item": "Vethra's Figurine" },
+      { "item": "Widow's Veil" }
+    ]
   }
 ]
