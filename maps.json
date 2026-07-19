@@ -1,5 +1,5 @@
 [
-  { "name": "AethorilTransparent", "slug": "aethoril-transparent", "image": "images/Maps/aethoril-transparent.webp", "thumbnail": "images/Maps/thumbs/aethoril-transparent.jpg" },
+  { "name": "Aethoril", "slug": "aethoril", "image": "images/Maps/aethoril.webp", "thumbnail": "images/Maps/thumbs/aethoril.jpg" },
   { "name": "Ancient Crypt", "slug": "ancient-crypt", "image": "images/Maps/ancient-crypt.png", "thumbnail": "images/Maps/thumbs/ancient-crypt.jpg" },
   { "name": "Blacktide Bay", "slug": "blacktide-bay", "image": "images/Maps/blacktide-bay.jpg", "thumbnail": "images/Maps/thumbs/blacktide-bay.jpg" },
   { "name": "Deep Dunes", "slug": "deep-dunes", "image": "images/Maps/deep-dunes.png", "thumbnail": "images/Maps/thumbs/deep-dunes.jpg" },
