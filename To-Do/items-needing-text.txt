@@ -181,3 +181,43 @@ Timberfang is the first mob in this whole scrape with a level actually given by 
 ("LEVEL 26" on its own drop page) — recorded as `levelRange: "26"` even though it's a
 community-submitted "suggested level" rather than the user's own con-color observation, so
 treat it as weaker than a normal levelRange entry if it's ever asked about.
+
+2026-07-19, images/inbox batch (Sungreet Strand, mnmdrops.com screenshots the user dropped
+in directly rather than direct navigation): several cards were cropped by the page's own
+layout (grid columns cut off at the right/bottom edge of the screenshot) rather than a
+scrollbar this time — `classes`/`race` left unset entirely (rather than guessed) on:
+Frightweaver Robe, Frightwoven Cape, Sphalerite Spider Figurine (all dropped by Frightweaver),
+Vindicator Breastplate (dropped by Balindor Silvertrowel — also missing weight/size),
+Vindicator Greaves (`race` only, dropped by Balindor Silvertrowel), River Pirate Sash
+(dropped by River Pirate Captain), Bent Staff of Nerguk / Cinder Beetle Horn (both dropped
+by their respective mobs — also missing `race` only), Blued Steel Long Sword (dropped by
+Elias Messing), Sneed's Ambush Treads (dropped by Tolman Sneed — `classes`/`race` unset,
+`needsInfo: true` set since the Class line itself was fully cut off this time, unlike the
+race-only cases). Sphalerite Spider Figurine's tags include "NORENT" — a tag not seen
+before on any other card in this wiki, recorded verbatim rather than assumed to be a typo
+for NODROP since the card image showed it clearly. Grudgeheft and Colorful Leather Vest
+arrived in the same screenshot batch with no monster-page header visible at all (cropped
+out) — both have full stats but **no known source monster or zone**; not linked from any
+monster's `drops` array — ask the user or wait for a fuller screenshot before assuming
+either one's source. Tolman Sneed's own zone page states "7 known drops" but only 6 distinct
+item names actually appeared on the card grid (mnmdrops.com's own site double-listed
+"Sneed's Ambush Treads" once under a apparently-mistyped second header "SNEER'S AMBUSH
+TREADS" showing the identical card) — treated as a site-side duplicate, not a real missing
+7th item, but flagging in case a real 7th item turns up later.
+
+Two items already in items.json got a fuller/corrected re-read from a cleaner screenshot in
+this same batch: Maleq's Toothpick (Shaded Dunes) had its damage (15->21), STR (+5->+6),
+added STA+2/HP+10, and resists (+3/+3->+5/+5) corrected, plus `race: ["ALL"]` added — the
+original entry came from an early, admittedly-cut-off scratchpad reading of the same card;
+this new screenshot showed the whole card cleanly with no scrollbar. Dizzik's Wicked Dagger
+(Sungreet Strand) was a bare `needsInfo` stub from an old vendor-listing sighting — filled in
+with damage/delay/skill/stats/resists/effect/description from this batch's card, `needsInfo`
+removed since it's now substantially documented, but `weight`/`size`/`classes`/`race` are
+still unknown (the card was cropped before those lines) — still worth a fuller capture later.
+
+One likely-real stat conflict, left unresolved per the "existing screenshot wins" rule:
+Bibic's Hunt Wraps already has a real saved screenshot (`images/items/bibics-hunt-wraps.jpg`)
+recording DEX+2/STA+2, but this batch's mnmdrops.com card showed STA+1 instead of STA+2 —
+kept the existing screenshot-sourced value untouched since it's a stronger source than an
+external wiki capture, but flagging the discrepancy in case the existing screenshot is ever
+worth re-checking.

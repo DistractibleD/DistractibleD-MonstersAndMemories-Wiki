@@ -2073,5 +2073,193 @@
       { "item": "Vethra's Figurine" },
       { "item": "Widow's Veil" }
     ]
+  },
+  {
+    "name": "Aquarris The River Watcher",
+    "slug": "aquarris-the-river-watcher",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [{ "item": "Riverwatch Mantle" }]
+  },
+  {
+    "name": "Balindor Silvertrowel",
+    "slug": "balindor-silvertrowel",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Vindicator Breastplate" },
+      { "item": "Vindicator Greaves" }
+    ]
+  },
+  {
+    "name": "Best Appraiser Bibic",
+    "slug": "best-appraiser-bibic",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Bangled Bracer of Importance" },
+      { "item": "Bibic's Hunt Wraps" },
+      { "item": "Boots of Certainty" },
+      { "item": "Very Powerful Hammer" }
+    ]
+  },
+  {
+    "name": "Bree Weatherstoll",
+    "slug": "bree-weatherstoll",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Heartwood Buckler" },
+      { "item": "Heartwood Root" }
+    ]
+  },
+  {
+    "name": "Cinder Herald",
+    "slug": "cinder-herald",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Cinder Beetle Horn" },
+      { "item": "Favor of the Queen" }
+    ]
+  },
+  {
+    "name": "Dizzik",
+    "slug": "dizzik",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Dented Platinum Coin Pendant" },
+      { "item": "Dizzik's Wicked Dagger" }
+    ]
+  },
+  {
+    "name": "Elias Messing",
+    "slug": "elias-messing",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [{ "item": "Blued Steel Long Sword" }]
+  },
+  {
+    "name": "Ember",
+    "slug": "ember",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [{ "item": "Bonebreakers" }]
+  },
+  {
+    "name": "Frightweaver",
+    "slug": "frightweaver",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "levelRange": "25",
+    "drops": [
+      { "item": "Eggspinner's Cuffs" },
+      { "item": "Frightweaver Robe" },
+      { "item": "Frightwoven Cape" },
+      { "item": "Sphalerite Spider Figurine" }
+    ]
+  },
+  {
+    "name": "Ixelda Jackalfang",
+    "slug": "ixelda-jackalfang",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Skintaker Ritual Dagger" },
+      { "item": "Skintaker Spiritist Ring" }
+    ]
+  },
+  {
+    "name": "Klimpi The Feared",
+    "slug": "klimpi-the-feared",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Bracer of the Fallen Foe" },
+      { "item": "Broken Bone Earring" }
+    ]
+  },
+  {
+    "name": "Mercenary Lord Hrrush",
+    "slug": "mercenary-lord-hrrush",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Condottiere's Faceguard" },
+      { "item": "Hrrush's Ring" },
+      { "item": "Mindmesh Mail" },
+      { "item": "Pyrmos Browguard" }
+    ]
+  },
+  {
+    "name": "Nerguk",
+    "slug": "nerguk",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Bandit's Wristplates" },
+      { "item": "Bent Staff of Nerguk" },
+      { "item": "Nerguk's Onyx Studs" }
+    ]
+  },
+  {
+    "name": "Nizar Al-Harith",
+    "slug": "nizar-al-harith",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Bloodied Sickle" },
+      { "item": "Spectral Coif" }
+    ]
+  },
+  {
+    "name": "Rhakar Vexfang",
+    "slug": "rhakar-vexfang",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Ashira Sandstride Slippers" },
+      { "item": "Sand-Scored Leggings" },
+      { "item": "Vexfang Hood" },
+      { "item": "Vexfang Visor" }
+    ]
+  },
+  {
+    "name": "River Pirate Captain",
+    "slug": "river-pirate-captain",
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Captain's Ring" },
+      { "item": "River Pirate Sash" }
+    ]
+  },
+  {
+    "name": "Tolman Sneed",
+    "slug": "tolman-sneed",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Highwayman Wristraps" },
+      { "item": "Ravine Hauberk" },
+      { "item": "Sneed's Ambush Treads" },
+      { "item": "Sneed's Bauble" },
+      { "item": "Sneed's Cudgel" },
+      { "item": "Sneed's Cunning Gauntlets" }
+    ]
+  },
+  {
+    "name": "Warlord Muggrah",
+    "slug": "warlord-muggrah",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [{ "item": "Muggrah's Brazier Torc" }]
+  },
+  {
+    "name": "Zarek Dunewalk",
+    "slug": "zarek-dunewalk",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [{ "item": "Sandshroud Staff" }]
   }
 ]
