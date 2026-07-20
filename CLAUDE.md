@@ -521,27 +521,24 @@ entry, `"type": "gathering"`, above "Crafting" in the sidebar) and data file,
   identified at all — recorded as a placeholder node with an empty `locations` array and the
   known skill floor captured in `note` (not `minSkill`, since it's floor-only) so the
   picture itself becomes the identifying reference once a real name comes in.
-  **Pre-crop these images tightly around the subject before saving** (2026-07-20) — the
-  thumbnail (`.gathering-node-thumb`, 28x28) uses `object-fit: cover`, which centers on the
-  *source image's* own geometric middle, not necessarily the visible plant/vein within it.
-  Making the source merely square isn't enough on its own: a raw screenshot usually has the
-  subject occupying only a fraction of the frame (a lot of rock/sand/water around a small
-  plant), so even a perfectly-centered square crop still renders as a barely-recognizable
-  smudge at 26x26 — confirmed by actually simulating the real downscale (PowerShell,
-  render to 26x26 with `HighQualityBicubic` same as a browser, *then* re-view that at a
-  larger size with `NearestNeighbor` upscaling so the true low-res pixels are visible
-  without extra smoothing hiding the problem) rather than judging a crop by how it looks at
-  full size, which is misleadingly forgiving. The fix that actually worked: crop tightly
-  around the subject's own bounding box (~65-75% of the original frame, not just squaring
-  off the existing rectangle) so the subject fills most of the thumbnail — verified this
-  visibly fixed Ironroot, Nomad's Grace, Whispering Sage, and Lionleaf, all of which the user
-  flagged as still looking bad after an earlier pass that only made the sources square
-  (Lionleaf's pale flowers against light rock remain low-contrast even after tightening —
-  worth a different source screenshot if it's ever reported as unclear again). All 17
-  existing gathering images have at least the square treatment from that earlier pass; apply
-  the tighter subject-bounding-box crop (and verify with the true-26px-render technique
-  above, not just eyeballing the full-size crop) to any new gathering node picture going
-  forward.
+  **The thumbnail shows the entire source image, never cropped** (`object-fit: contain`,
+  not `cover` — changed 2026-07-20, user's own request) — same picture as the full-size
+  `#sample-viewer` lightbox, just smaller, so there's no cover-crop for a subject to ever
+  drift off-center or get cut off in the first place. `.gathering-node-thumb` is a 32x32
+  rounded-square frame with a few pixels of inset padding so it reads as a clean icon
+  (closer to the item-card icon look) rather than a raw thumbnail; any letterboxed gap
+  around a non-square source shows the frame's own background color, which is expected, not
+  a bug. **This replaced an earlier `object-fit: cover` approach that took real effort to
+  get only partway right** — worth knowing the history if thumbnail complaints come back:
+  first the source images were square-cropped around their own geometric center (insufficient
+  — a raw screenshot's subject usually occupies only a fraction of the frame, so even a
+  perfectly-centered square crop still rendered as a barely-recognizable smudge once actually
+  downscaled to 26x26, confirmed by simulating the real browser downscale rather than judging
+  a crop by how it looked at full size), then tightened to crop around the subject's own
+  bounding box instead (~65-75% of the original frame) which fixed most of them but still left
+  Lionleaf's low-contrast pale-flowers-on-light-rock hard to read. Switching to `contain`
+  sidesteps needing either technique going forward — a new gathering node picture doesn't need
+  any special cropping at all, just the normal `.jpg` quality-90 save.
 - **Columns are derived per-tradeskill from the data, not fixed** (`gatheringColumns()` in
   `script.js`) — Name and Min Skill always show; Trivial/Results/Rarity/Bait Required each
   only appear if at least one node of that tradeskill actually uses that field (Fishing uses
