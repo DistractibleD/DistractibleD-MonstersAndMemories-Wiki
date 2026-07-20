@@ -800,6 +800,7 @@ body:not(.site-entered) .sidebar {
   display: inline-block;
   width: 28px;
   height: 28px;
+  flex-shrink: 0;
   padding: 0;
   margin-right: 8px;
   border: 1px solid var(--border);
