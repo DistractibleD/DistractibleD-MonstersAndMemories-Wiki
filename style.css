@@ -720,6 +720,62 @@ body:not(.site-entered) .sidebar {
   outline: 2px solid #ff6b6b;
   outline-offset: 2px;
 }
+/* "Show item cards" toggle (showCardsToggleHTML/setupShowCardsToggle in
+   script.js) — same pill-switch structure as .needsinfo-toggle, just in the
+   site's normal accent color instead of that toggle's red, since this is a
+   plain display preference rather than a warning state. */
+.show-cards-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  color: var(--text-dim);
+  font-weight: 600;
+  font-size: 0.88rem;
+  font-family: inherit;
+  user-select: none;
+}
+.show-cards-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.show-cards-toggle-slider {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 20px;
+  background: var(--bg-panel-hover);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  transition: background 0.15s ease;
+}
+.show-cards-toggle-slider::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.show-cards-toggle input:checked + .show-cards-toggle-slider {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+}
+.show-cards-toggle input:checked + .show-cards-toggle-slider::before {
+  background: var(--accent);
+  transform: translateX(16px);
+}
+.show-cards-toggle input:focus-visible + .show-cards-toggle-slider {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 .items-clear-btn {
   background: transparent;
   /* A muted red border (2026-07-19, user's own request) makes this button

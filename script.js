@@ -387,10 +387,14 @@ async function updateRecentlyUpdatedSidebar() {
   // Same date string ("YYYY-MM-DD") sorts correctly with plain comparison;
   // ties (very common here — whole inbox batches share one date) break on
   // array position, since later entries in a data file are almost always
-  // the ones added most recently within that same batch.
+  // the ones added most recently within that same batch. Capped at 6 (not
+  // 10) — the user found a longer list was making the sidebar tall enough to
+  // need its own scrollbar (2026-07-20), which this box is specifically
+  // meant to avoid (see #sidebar-recent-wrapper's max-height-free layout —
+  // unlike the main .sidebar column, nothing here scrolls internally).
   const top = entries
     .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : b.idx - a.idx))
-    .slice(0, 10);
+    .slice(0, 6);
 
   const list = document.getElementById('sidebar-recent-list');
   list.innerHTML = '';
@@ -1617,7 +1621,6 @@ function renderItemsList(container, category) {
     <p>Browse, search, filter, and sort ${escapeAttr(subtitleLabel)}${subtitleSuffix}. Hover an item's name to see its full card.</p>
     <div class="items-toolbar">
       <input type="search" id="items-search" class="items-search" placeholder="Search name, stat, class..." autocomplete="off">
-      <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="items-search">Clear</button>
       <select id="items-filter-type" class="items-select">
         <option value="">All Types</option>
         ${allTypes.map(t => `<option value="${escapeAttr(t)}"${t === category ? ' selected' : ''}>${escapeAttr(ITEM_TYPE_LABELS[t] || t)}</option>`).join('')}
@@ -1660,7 +1663,8 @@ function renderItemsList(container, category) {
         <span class="needsinfo-toggle-slider"></span>
         <span>Show only items that need info</span>
       </label>
-      <button type="button" id="items-clear-filters" class="items-clear-btn">Clear filters</button>
+      ${showCardsToggleHTML('items-show-cards')}
+      <button type="button" id="items-clear-filters" class="items-clear-btn">Clear all filters</button>
     </div>
     <p class="items-count" id="items-count"></p>
     <div class="items-table-wrap">
@@ -1702,6 +1706,7 @@ function renderItemsList(container, category) {
 
   setupItemTooltip(container.querySelector('#items-tbody'));
   setupItemClickToView(container.querySelector('#items-tbody'));
+  setupShowCardsToggle(container, 'items-show-cards');
 
   const searchBox = container.querySelector('#items-search');
   const typeFilter = container.querySelector('#items-filter-type');
@@ -1854,12 +1859,19 @@ function renderItemsList(container, category) {
   [slotFilter, handednessFilter, materialFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].filter(Boolean).forEach(el => el.addEventListener('change', update));
   needsInfoFilter.addEventListener('change', update);
 
+  // Resets everything — search text, every dropdown (Slot/Class/Race/Tag/Max
+  // Size/handedness/material), the stat/buff picker, the needs-info toggle,
+  // and Type itself. Type can't just be reset to '' in place like the other
+  // dropdowns — its own option list (and Slot/Class/Race/etc. alongside it)
+  // is scoped per-type, so going back to "All Types" means a full re-render,
+  // same as picking a different Type from the dropdown does. Re-rendering
+  // with no pending query/filters set is what actually clears everything in
+  // one step, rather than this handler needing to know every current/future
+  // filter field by name.
   container.querySelector('#items-clear-filters').addEventListener('click', () => {
-    searchBox.value = '';
-    [slotFilter, handednessFilter, materialFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].filter(Boolean).forEach(el => el.value = '');
-    needsInfoFilter.checked = false;
-    buffDropdown.clear();
-    update();
+    pendingItemQuery = null;
+    pendingItemFilters = null;
+    renderItemsList(container, null);
   });
 
   update();
@@ -2025,6 +2037,66 @@ function renderItemCardHTML(item, opts = {}) {
 // viewport on hover so it's never clipped by a scroll container. Looks up
 // the full item by name and renders its card fresh on every hover rather
 // than caching anything, since items.json is the only source of truth here.
+// Site-wide "Show item cards" preference (2026-07-20, user's own request) —
+// a single localStorage-backed on/off switch (default on) for whether
+// hovering an item name pops up its card preview (#item-tooltip). Toggling
+// it off doesn't remove the item's own hover styling/cursor or disable
+// clicking through to the full item viewer (that's a deliberate action, not
+// an incidental hover) — it only silences the automatic popup for people who
+// find it distracting while scanning a long table/grid quickly. One shared
+// setting, not per-page, so a toggle switch dropped into any toolbar
+// (Item Database, Crafting/Gathering recipes, Gathering nodes, Monsters)
+// reads/writes the same value — see showCardsToggleHTML/setupShowCardsToggle.
+const SHOW_ITEM_CARDS_KEY = 'mnmwiki-show-item-cards';
+
+function getShowItemCards() {
+  try {
+    return localStorage.getItem(SHOW_ITEM_CARDS_KEY) !== '0';
+  } catch {
+    return true;
+  }
+}
+
+function setShowItemCards(show) {
+  try {
+    localStorage.setItem(SHOW_ITEM_CARDS_KEY, show ? '1' : '0');
+  } catch {
+    // Storage unavailable — the toggle just won't persist across page loads.
+  }
+}
+
+// Markup for the toggle switch itself — same visual language as
+// .needsinfo-toggle (checkbox + pill slider) but in the site's normal accent
+// color rather than that toggle's red, since this isn't a warning state.
+// `id` must be unique per render (a page can render more than one toolbar
+// with this control, e.g. none currently do at once, but ids still need to
+// not collide with a previous render left in the DOM momentarily).
+function showCardsToggleHTML(id) {
+  return `
+    <label class="show-cards-toggle" for="${id}">
+      <input type="checkbox" id="${id}">
+      <span class="show-cards-toggle-slider"></span>
+      <span>Show item cards</span>
+    </label>
+  `;
+}
+
+// Wires up one rendered showCardsToggleHTML instance: initializes its
+// checked state from the shared setting and persists any change back to it.
+// Call once per toolbar that includes the toggle markup.
+function setupShowCardsToggle(container, id) {
+  const input = container.querySelector(`#${id}`);
+  if (!input) return;
+  input.checked = getShowItemCards();
+  input.addEventListener('change', () => {
+    setShowItemCards(input.checked);
+    if (!input.checked) {
+      const tooltip = document.getElementById('item-tooltip');
+      if (tooltip) tooltip.style.display = 'none';
+    }
+  });
+}
+
 function setupItemTooltip(container) {
   let tooltip = document.getElementById('item-tooltip');
   if (!tooltip) {
@@ -2034,6 +2106,7 @@ function setupItemTooltip(container) {
   }
 
   container.addEventListener('mouseover', e => {
+    if (!getShowItemCards()) return;
     const span = e.target.closest('.item-name-hover');
     if (!span) return;
     const item = findItemByName(span.dataset.alt);
@@ -3091,6 +3164,7 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   const slotFilterId = `craft-recipe-filter-slot${idSuffix}`;
   const typeFilterId = `craft-recipe-filter-type${idSuffix}`;
   const sortId = `craft-recipe-sort${idSuffix}`;
+  const showCardsId = `craft-recipe-show-cards${idSuffix}`;
 
   // Sorted by the recipe's real skill requirement (lowest first) — a
   // confirmed `recipeSkillLevel` where one exists, otherwise the
@@ -3165,6 +3239,7 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
                 <span class="needsinfo-toggle-slider"></span>
                 <span>Show only recipes that need info</span>
               </label>
+              ${showCardsToggleHTML(showCardsId)}
             </div>
             <p class="items-count" id="${countId}"></p>
             <div id="${gridId}"></div>
@@ -3189,6 +3264,7 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   const slotFilter = isEnchanting ? rootEl.querySelector(`#${slotFilterId}`) : null;
   const typeFilter = isEnchanting ? rootEl.querySelector(`#${typeFilterId}`) : null;
   const sortSelect = rootEl.querySelector(`#${sortId}`);
+  setupShowCardsToggle(rootEl, showCardsId);
 
   function attachRecipeLinkHandlers() {
     grid.querySelectorAll('.craft-result-link').forEach(link => {
@@ -3409,6 +3485,7 @@ function renderGatheringNodes(container, tradeskillName) {
             <div class="items-toolbar">
               <input type="search" id="gathering-search" class="items-search" placeholder="Search ${escapeAttr(tradeskillName)} nodes, results, locations..." autocomplete="off">
               <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="gathering-search">Clear</button>
+              ${showCardsToggleHTML('gathering-show-cards')}
             </div>
             <p class="items-count" id="gathering-count"></p>
             <div class="items-table-wrap">
@@ -3444,6 +3521,7 @@ function renderGatheringNodes(container, tradeskillName) {
   const countEl = container.querySelector('#gathering-count');
   const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
   const columnCount = columns.length;
+  setupShowCardsToggle(container, 'gathering-show-cards');
 
   let sortKey = 'minSkill';
   let sortDir = 'asc';
@@ -3714,6 +3792,7 @@ function renderMonstersList(container, scope) {
         <span class="needsinfo-toggle-slider"></span>
         <span>Show only monsters that need info</span>
       </label>
+      ${showCardsToggleHTML('monsters-show-cards')}
     </div>
     <p class="items-count" id="monsters-count"></p>
     <div class="items-table-wrap">
@@ -3743,6 +3822,7 @@ function renderMonstersList(container, scope) {
   const searchBox = container.querySelector('#monsters-search');
   const needsInfoFilter = container.querySelector('#monsters-filter-needsinfo');
   const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
+  setupShowCardsToggle(container, 'monsters-show-cards');
 
   // Landed here from a header search result — pre-fill the search box with
   // that monster's name so the table filters straight down to it.

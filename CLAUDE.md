@@ -135,7 +135,15 @@ whatever values exist in the data).
 "Type" dropdown (Weapon/Armor/Jewelry/Container/Food/Drink/Misc, or "All Types"), Slot/Class/
 Race/Tag/Max Size dropdowns, the stat/buff checkbox dropdown, and a "Show only items that
 need info" toggle (see `needsInfo` note under "Item and recipe cards" below), all above the
-sortable table. The page used to open on a separate category grid of clickable cards
+sortable table. **"Clear all filters"** (2026-07-20, renamed/consolidated from a separate
+small "Clear" button next to the search box plus a "Clear filters" button — the user wanted
+one button that always resets everything) re-renders via `renderItemsList(container, null)`
+with `pendingItemQuery`/`pendingItemFilters` both cleared, rather than manually resetting each
+filter field by name — Type itself can't be reset in place like the other dropdowns (its
+option list, and Slot/Class/Race/etc. alongside it, is scoped per-type), so going back to "All
+Types" needs the same full re-render picking a different Type from the dropdown already
+triggers. This also means the button never needs updating when a new filter field is added —
+it isn't clearing fields one by one, it's just re-rendering from a clean slate. The page used to open on a separate category grid of clickable cards
 (`renderItemsCategories`) that you drilled into; the user asked to drop that in favor of just
 filtering (2026-07-19) since a dropdown reaches the same place in one fewer click — Type is
 now just one more dropdown in the same toolbar as everything else, not a distinct page.
@@ -513,6 +521,18 @@ entry, `"type": "gathering"`, above "Crafting" in the sidebar) and data file,
   identified at all — recorded as a placeholder node with an empty `locations` array and the
   known skill floor captured in `note` (not `minSkill`, since it's floor-only) so the
   picture itself becomes the identifying reference once a real name comes in.
+  **Pre-crop these images to a square before saving** (2026-07-20) — the thumbnail
+  (`.gathering-node-thumb`, 28x28) uses `object-fit: cover`, which centers on the *source
+  image's* own geometric middle, not necessarily the visible plant/vein within it. A raw
+  portrait screenshot (e.g. a plant shot taller than wide, with a lot of rock/sky above and
+  below it) can end up showing mostly background once cropped to a square, since the subject
+  itself usually isn't sitting exactly in the frame's center. Cropping the saved image to a
+  square around the actual subject first (PowerShell `System.Drawing`, same tool used for map
+  thumbnails) means the frame and the source are already the same shape — nothing left for
+  `object-fit: cover` to crop away, so there's no risk of the subject drifting off-center at
+  small size regardless of the original screenshot's framing. All 17 existing gathering
+  images were re-cropped this way in the same pass that added this rule; apply the same
+  square pre-crop to any new gathering node picture going forward.
 - **Columns are derived per-tradeskill from the data, not fixed** (`gatheringColumns()` in
   `script.js`) — Name and Min Skill always show; Trivial/Results/Rarity/Bait Required each
   only appear if at least one node of that tradeskill actually uses that field (Fishing uses
@@ -1276,6 +1296,22 @@ structure (`.item-card` base class, with `item-card-recipe`/`item-card-icon-reci
 - Every recipe on the Crafting page renders as its own card directly in the page (no
   hover/click needed — weight/size/components are always visible in the grid).
 
+**"Show item cards" toggle** (2026-07-20, user's own request) — a single site-wide on/off
+switch (default on) for whether hovering `.item-name-hover` pops up `#item-tooltip` at all.
+Backed by one shared `localStorage` key (`mnmwiki-show-item-cards`,
+`getShowItemCards()`/`setShowItemCards()` in `script.js`), not a per-page setting, so the
+toggle switch itself is just markup (`showCardsToggleHTML(id)`) dropped into whichever
+toolbar needs it, wired up with `setupShowCardsToggle(container, id)` — currently present on
+the Item Database, the Crafting/Gathering recipe view (`renderTradeskillSection`), the
+Gathering nodes table, and the Named/Regular Monsters zone list, i.e. every toolbar whose
+content can trigger an item-card hover preview (including indirectly — a monster's own
+tooltip can contain drop links that would otherwise show a nested item card). Turning it off
+only silences the automatic hover popup (`setupItemTooltip`'s `mouseover` handler bails early
+via `getShowItemCards()`) — it does **not** disable clicking an item's name to open the full
+`#item-viewer` modal, since that's a deliberate action rather than an incidental hover. Styled
+like `.needsinfo-toggle` (same pill-switch shape) but in the site's normal accent color rather
+than that toggle's red, since this is a plain display preference, not a warning state.
+
 **`item.foundAt`** is an optional free-text string ("Dropped by \<mob name\>", "Quest
 reward: \<quest name\>") shown as a "Found at" line on every item card — present or not, the
 line always renders (as "not yet known" when absent), so the field's existence is visible
@@ -1329,8 +1365,10 @@ plain `"YYYY-MM-DD"` string (same date-string convention used elsewhere in this 
 - **The sidebar's "Recently Updated" box** (`updateRecentlyUpdatedSidebar()` in `script.js`,
   its own bordered box right below "History" — a *separate* box, not a section nested inside
   it, since History is the visitor's own per-browser visit tracking while this is site-wide
-  content freshness, the same for every visitor) lists the 10 entries across all four files
-  with the newest `lastUpdated`, each a clickable link (via the existing `goToItem`/
+  content freshness, the same for every visitor) lists the 6 entries across all four files
+  with the newest `lastUpdated` (originally 10, cut down 2026-07-20 — a 10-entry list was
+  tall enough to force the whole sidebar into its own internal scrollbar, which this box's
+  own layout doesn't otherwise expect), each a clickable link (via the existing `goToItem`/
   `goToMonster`/`goToRecipe`/`goToCompanion`) straight to that entry. Ties (common, since a
   whole inbox batch usually shares one date) break on the entry's position within its own
   data file, later = more recent. Hidden entirely if nothing has a `lastUpdated` yet.
