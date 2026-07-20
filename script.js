@@ -2505,25 +2505,38 @@ async function renderCraftingPage(container) {
   renderCraftingCategories(container);
 }
 
+// Whether a gathering-category tradeskill should be treated as node-based
+// (renderGatheringNodes' table) or recipe-based (renderGatheringRecipes,
+// same view the Crafting grid's tradeskills use) — see tradeskillGridHTML
+// and renderGatheringCategories/renderGatheringPage, which all share this
+// one check rather than hardcoding a tradeskill name. Disenchanting sits in
+// Gathering's grid (2026-07-19, user's own call) while still being an
+// ordinary recipe-based tradeskill under the hood, so it needs the "recipe"
+// treatment even though every other card there is node-based — detected
+// here by it actually having crafting.json entries. A tradeskill with
+// neither nodes nor recipes yet (e.g. Foraging, moved to Gathering
+// 2026-07-19 with no data of either kind recorded so far) defaults to
+// node-based, since that's the far more common shape for something living
+// on the Gathering page — this only flips to recipe-based once real
+// crafting.json entries for it actually exist, same as Disenchanting.
+function gatheringTradeskillIsNodeBased(name) {
+  if (gatheringData.some(n => n.tradeskill === name)) return true;
+  return craftingData.filter(r => r.tradeskill === name).length === 0;
+}
+
 // Shared by the Crafting and Gathering category grids (split into separate
 // top-level pages on 2026-07-13, Gathering placed above Crafting in the
 // sidebar) — same card markup either way, just a different count label and
 // click target depending on whether a given card is node-based.
 // `isGathering` is the page-level default (Gathering's grid passes true,
-// Crafting's passes false), but a card's own node-based-ness is actually
-// derived per-card from whether gathering-nodes.json has any entries for
-// it — Disenchanting sits in Gathering's grid (2026-07-19, user's own call)
-// while still being an ordinary recipe-based tradeskill under the hood, so
-// its card needs the "recipe" count/label and the recipe click target even
-// though every other card on that page is node-based. Deriving this
-// structurally (rather than hardcoding "Disenchanting" by name here) means
-// any future recipe-based tradeskill added to the Gathering grid the same
-// way would automatically get this right too.
+// Crafting's passes false); a card's own node-based-ness on the Gathering
+// grid is further refined per-card by gatheringTradeskillIsNodeBased (see
+// there) rather than hardcoding any tradeskill name here.
 function tradeskillGridHTML(list, isGathering) {
   return `
     <div class="craft-grid">
       ${list.map(ts => {
-        const isNodeBased = isGathering && gatheringData.some(n => n.tradeskill === ts.name);
+        const isNodeBased = isGathering && gatheringTradeskillIsNodeBased(ts.name);
         const count = isNodeBased
           ? gatheringData.filter(n => n.tradeskill === ts.name).length
           : craftingData.filter(r => r.tradeskill === ts.name).length;
@@ -2618,17 +2631,17 @@ async function renderGatheringPage(container) {
 
   // Landed here from a header search result for a specific tradeskill —
   // jump straight to it instead of the category grid, same idea as
-  // pendingCraftingTradeskill on the Crafting page. Disenchanting is the one
-  // exception on this page: it's recipe-based, not node-based (see
-  // renderGatheringCategories below), so it needs the recipe view rather
-  // than renderGatheringNodes's table.
+  // pendingCraftingTradeskill on the Crafting page. Not every tradeskill on
+  // this page is node-based (see gatheringTradeskillIsNodeBased) — Disenchanting
+  // is recipe-based under the hood, so it needs the recipe view rather than
+  // renderGatheringNodes's table.
   if (pendingGatheringTradeskill) {
     const target = pendingGatheringTradeskill;
     pendingGatheringTradeskill = null;
-    if (target === 'Disenchanting') {
-      await renderGatheringDisenchantingRecipes(container);
-    } else {
+    if (gatheringTradeskillIsNodeBased(target)) {
       renderGatheringNodes(container, target);
+    } else {
+      await renderGatheringRecipes(container, target);
     }
     return;
   }
@@ -2674,7 +2687,7 @@ function renderGatheringCategories(container) {
   container.querySelectorAll('.craft-card').forEach(card => {
     card.addEventListener('click', () => {
       if (card.dataset.nodeBased === 'true') renderGatheringNodes(container, card.dataset.tradeskill);
-      else renderGatheringDisenchantingRecipes(container);
+      else renderGatheringRecipes(container, card.dataset.tradeskill);
     });
   });
 
@@ -3049,9 +3062,9 @@ function renderDisenchantingDustTiersHTML() {
 // count, station-grouped grid, item/recipe link handlers, highlight-on-
 // arrival) into `rootEl`. Shared by every tradeskill reached from either
 // grid — the Crafting page for ordinary tradeskills (including Enchanting)
-// and the Gathering page for Disenchanting (see
-// renderCraftingRecipes/renderGatheringDisenchantingRecipes, both of which
-// pass `showBackLink: true` and their own grid's `onBack`).
+// and the Gathering page for any recipe-based tradeskill living there (see
+// renderCraftingRecipes/renderGatheringRecipes, both of which pass
+// `showBackLink: true` and their own grid's `onBack`).
 // `idSuffix` keeps element ids unique on the rare page that renders more than
 // one of these sections at once (none currently do, but the option remains
 // from when Enchanting and Disenchanting briefly shared a page, before each
@@ -3271,17 +3284,20 @@ async function renderCraftingRecipes(container, tradeskillName) {
   });
 }
 
-// Same idea as renderCraftingRecipes, but for Disenchanting specifically —
-// its card lives in the Gathering grid instead (2026-07-19, user's own
-// call — see renderGatheringCategories), so its "back" link needs to return
-// there instead of to the Crafting grid, and its dust-tier thumbnails need
-// itemsData loaded (findItemByName lookups) the same way the old dedicated
-// Disenchanting page used to ensure.
-async function renderGatheringDisenchantingRecipes(container) {
+// Same idea as renderCraftingRecipes, but for a recipe-based tradeskill that
+// lives on the Gathering grid instead of Crafting's (per
+// gatheringTradeskillIsNodeBased — Disenchanting is the original case,
+// 2026-07-19 user's own call; any other recipe-based tradeskill later added
+// to this grid, e.g. Foraging if it ever gets real crafting.json recipes,
+// reaches this same generic renderer) — its "back" link needs to return to
+// the Gathering grid instead of Crafting's, and Disenchanting's own
+// dust-tier thumbnails need itemsData loaded (findItemByName lookups) the
+// same way the old dedicated Disenchanting page used to ensure.
+async function renderGatheringRecipes(container, tradeskillName) {
   await ensureItemsData();
   const highlightSlug = pendingHighlightRecipe;
   pendingHighlightRecipe = null;
-  await renderTradeskillSection(container, 'Disenchanting', {
+  await renderTradeskillSection(container, tradeskillName, {
     showBackLink: true,
     onBack: () => renderGatheringCategories(container),
     highlightSlug

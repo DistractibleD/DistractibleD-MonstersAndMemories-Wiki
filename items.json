@@ -11590,5 +11590,18 @@
     "size": "Large",
     "classes": ["ALL"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Wild Carrots",
+    "slug": "wild-carrots",
+    "lastUpdated": "2026-07-20",
+    "image": "images/items/wild-carrots.jpg",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a modest meal.",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
   }
 ]

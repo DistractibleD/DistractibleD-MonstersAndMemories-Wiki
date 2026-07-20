@@ -390,6 +390,7 @@
   {
     "name": "Gadolvine",
     "slug": "gadolvine",
+    "image": "images/gathering/gadolvine.jpg",
     "tradeskill": "Herbalism",
     "minSkill": 80,
     "trivialSkill": 125,
@@ -487,5 +488,26 @@
     "locations": [],
     "note": "Spotted in-game but not yet identified — no other details (skill, location) recorded yet. The screenshot is the only identifying info until a name/location/skill comes in.",
     "needsInfo": true
+  },
+  {
+    "name": "Grub",
+    "slug": "grub",
+    "tradeskill": "Foraging",
+    "minSkill": 1,
+    "locations": []
+  },
+  {
+    "name": "Multhele Root",
+    "slug": "multhele-root",
+    "tradeskill": "Foraging",
+    "minSkill": 1,
+    "locations": []
+  },
+  {
+    "name": "Wild Carrots",
+    "slug": "wild-carrots",
+    "tradeskill": "Foraging",
+    "minSkill": 1,
+    "locations": []
   }
 ]

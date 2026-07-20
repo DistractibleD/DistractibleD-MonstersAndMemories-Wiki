@@ -821,42 +821,57 @@
   {
     "name": "Arrow x100",
     "slug": "arrow-x100",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Fletching",
     "listOrder": 1,
     "difficultyColor": "Green",
-    "observedAtSkill": 27
+    "observedAtSkill": 27,
+    "components": [{ "item": "Wood", "quantity": 1 }],
+    "recipeSkillLevel": 25
   },
   {
     "name": "Arrow x500",
     "slug": "arrow-x500",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Fletching",
     "listOrder": 2,
     "difficultyColor": "Green",
-    "observedAtSkill": 27
+    "observedAtSkill": 27,
+    "components": [{ "item": "Wood", "quantity": 5 }],
+    "recipeSkillLevel": 25
   },
   {
     "name": "Bow",
     "slug": "bow",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Fletching",
     "listOrder": 3,
     "difficultyColor": "Green",
-    "observedAtSkill": 27
+    "observedAtSkill": 27,
+    "components": [{ "item": "Wood Board", "quantity": 5 }, { "item": "Bolt of Cloth", "quantity": 1 }],
+    "recipeSkillLevel": 25
   },
   {
     "name": "Buckler",
     "slug": "buckler",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Fletching",
     "listOrder": 4,
     "difficultyColor": "Green",
-    "observedAtSkill": 27
+    "observedAtSkill": 27,
+    "components": [{ "item": "Wood Board", "quantity": 5 }, { "item": "Copper Bar", "quantity": 1 }, { "item": "Rawhide Strap", "quantity": 1 }],
+    "recipeSkillLevel": 25
   },
   {
     "name": "Stonehead Arrow x100",
     "slug": "stonehead-arrow-x100",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Fletching",
     "listOrder": 5,
     "difficultyColor": "Green",
-    "observedAtSkill": 27
+    "observedAtSkill": 27,
+    "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Brittle Stone", "quantity": 1 }],
+    "recipeSkillLevel": 25
   },
   {
     "name": "Stonehead Arrow x1000",
@@ -869,26 +884,45 @@
   {
     "name": "Stonehead Arrow x500",
     "slug": "stonehead-arrow-x500",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Fletching",
     "listOrder": 7,
     "difficultyColor": "Green",
-    "observedAtSkill": 27
+    "observedAtSkill": 27,
+    "components": [{ "item": "Wood", "quantity": 5 }, { "item": "Brittle Stone", "quantity": 5 }],
+    "recipeSkillLevel": 25
   },
   {
     "name": "Longbow",
     "slug": "longbow",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Fletching",
     "listOrder": 8,
     "difficultyColor": "Dark Blue",
-    "observedAtSkill": 27
+    "observedAtSkill": 27,
+    "components": [{ "item": "Wood Board", "quantity": 7 }, { "item": "Bolt of Cloth", "quantity": 1 }],
+    "recipeSkillLevel": 35
+  },
+  {
+    "name": "Pitch-Wrapped Arrow",
+    "slug": "pitch-wrapped-arrow",
+    "lastUpdated": "2026-07-20",
+    "tradeskill": "Fletching",
+    "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Resin", "quantity": 2 }, { "item": "Cloth Scraps", "quantity": 1 }],
+    "resultQuantity": 20,
+    "recipeSkillLevel": 40,
+    "note": "Requires recipe purchase."
   },
   {
     "name": "Copperhead Arrow x100",
     "slug": "copperhead-arrow-x100",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Fletching",
     "listOrder": 9,
     "difficultyColor": "Orange",
-    "observedAtSkill": 27
+    "observedAtSkill": 27,
+    "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Copper Scraps", "quantity": 1 }],
+    "recipeSkillLevel": 50
   },
   {
     "name": "Copperhead Arrow x1000",
@@ -901,18 +935,33 @@
   {
     "name": "Copperhead Arrow x500",
     "slug": "copperhead-arrow-x500",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Fletching",
     "listOrder": 11,
     "difficultyColor": "Orange",
-    "observedAtSkill": 27
+    "observedAtSkill": 27,
+    "components": [{ "item": "Wood", "quantity": 5 }, { "item": "Copper Scraps", "quantity": 5 }],
+    "recipeSkillLevel": 50
+  },
+  {
+    "name": "Net Arrow",
+    "slug": "net-arrow",
+    "lastUpdated": "2026-07-20",
+    "tradeskill": "Fletching",
+    "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Rope, Hempen, 50 Length", "quantity": 1 }],
+    "resultQuantity": 20,
+    "note": "Requires recipe purchase."
   },
   {
     "name": "Bronzehead Arrow x100",
     "slug": "bronzehead-arrow-x100",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Fletching",
     "listOrder": 12,
     "difficultyColor": "Red",
-    "observedAtSkill": 27
+    "observedAtSkill": 27,
+    "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Bronze Scraps", "quantity": 1 }],
+    "recipeSkillLevel": 75
   },
   {
     "name": "Bronzehead Arrow x1000",
@@ -925,18 +974,78 @@
   {
     "name": "Bronzehead Arrow x500",
     "slug": "bronzehead-arrow-x500",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Fletching",
     "listOrder": 14,
     "difficultyColor": "Red",
-    "observedAtSkill": 27
+    "observedAtSkill": 27,
+    "components": [{ "item": "Wood", "quantity": 5 }, { "item": "Bronze Scraps", "quantity": 5 }],
+    "recipeSkillLevel": 75
   },
   {
     "name": "Recurve Bow",
     "slug": "recurve-bow",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Fletching",
     "listOrder": 15,
     "difficultyColor": "Red",
-    "observedAtSkill": 27
+    "observedAtSkill": 27,
+    "components": [{ "item": "Wood Board", "quantity": 9 }, { "item": "Bolt of Cloth", "quantity": 1 }]
+  },
+  {
+    "name": "Smoke Bomb Arrow",
+    "slug": "smoke-bomb-arrow",
+    "lastUpdated": "2026-07-20",
+    "tradeskill": "Fletching",
+    "components": [{ "item": "Fine Wood", "quantity": 1 }, { "item": "Vial of Smoke", "quantity": 1 }],
+    "resultQuantity": 20,
+    "note": "Requires recipe purchase."
+  },
+  {
+    "name": "Ironhead Arrow x100",
+    "slug": "ironhead-arrow-x100",
+    "lastUpdated": "2026-07-20",
+    "tradeskill": "Fletching",
+    "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Iron Scraps", "quantity": 1 }],
+    "recipeSkillLevel": 100
+  },
+  {
+    "name": "Ironhead Arrow x500",
+    "slug": "ironhead-arrow-x500",
+    "lastUpdated": "2026-07-20",
+    "tradeskill": "Fletching",
+    "components": [{ "item": "Wood", "quantity": 5 }, { "item": "Iron Scraps", "quantity": 5 }],
+    "recipeSkillLevel": 100
+  },
+  {
+    "name": "Steelhead Arrow x100",
+    "slug": "steelhead-arrow-x100",
+    "lastUpdated": "2026-07-20",
+    "tradeskill": "Fletching",
+    "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Steel Scraps", "quantity": 1 }],
+    "recipeSkillLevel": 125
+  },
+  {
+    "name": "Steelhead Arrow x500",
+    "slug": "steelhead-arrow-x500",
+    "lastUpdated": "2026-07-20",
+    "tradeskill": "Fletching",
+    "components": [{ "item": "Wood", "quantity": 5 }, { "item": "Steel Scraps", "quantity": 5 }],
+    "recipeSkillLevel": 125
+  },
+  {
+    "name": "Fine Wood Bow",
+    "slug": "fine-wood-bow",
+    "lastUpdated": "2026-07-20",
+    "tradeskill": "Fletching",
+    "components": [{ "item": "Fine Wood Board", "quantity": 5 }, { "item": "Bolt of Wool", "quantity": 1 }]
+  },
+  {
+    "name": "Fine Wood Buckler",
+    "slug": "fine-wood-buckler",
+    "lastUpdated": "2026-07-20",
+    "tradeskill": "Fletching",
+    "components": [{ "item": "Fine Wood Board", "quantity": 5 }, { "item": "Bronze Bar", "quantity": 1 }, { "item": "Hide Strap", "quantity": 1 }]
   },
   {
     "name": "Copper Mounting",
@@ -5431,6 +5540,13 @@
     ]
   },
   {
+    "name": "Adamantium Bar",
+    "slug": "adamantium-bar",
+    "lastUpdated": "2026-07-20",
+    "tradeskill": "Smelting",
+    "needsInfo": true
+  },
+  {
     "name": "Wood Frame",
     "slug": "wood-frame",
     "tradeskill": "Carpentry",
@@ -8503,59 +8619,92 @@
   { "name": "Iron Scraps", "slug": "iron-scraps-from-tarnished-iron-plate-cloak", "tradeskill": "Blacksmithing", "components": [{ "item": "Tarnished Iron Plate Cloak", "quantity": 1 }, { "item": "Hammer and Chisel", "quantity": 1 }], "resultQuantity": 2 },
   { "name": "Iron Scraps", "slug": "iron-scraps-from-tarnished-iron-plate-helm", "tradeskill": "Blacksmithing", "components": [{ "item": "Tarnished Iron Plate Helm", "quantity": 1 }, { "item": "Hammer and Chisel", "quantity": 1 }] },
   {
+    "name": "Campfire",
+    "slug": "campfire",
+    "lastUpdated": "2026-07-20",
+    "tradeskill": "Survival",
+    "components": [{ "item": "Wood", "quantity": 8 }],
+    "note": "Trivial is listed as \"Innate\" on the reference table this recipe came from (always trivial, no matter your skill level). Campfires can be used for cooking raw meats, and their duration can be extended by adding more wood to the fire."
+  },
+  {
     "name": "Cloth Bandage",
     "slug": "cloth-bandage-survival",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Survival",
     "difficultyColor": "Green",
     "observedAtSkill": 6,
-    "needsInfo": true
+    "components": [{ "item": "Cloth Scraps", "quantity": 1 }],
+    "resultQuantity": 2,
+    "recipeSkillLevel": 5
   },
   {
     "name": "Crude Handmade Torch",
     "slug": "crude-handmade-torch",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Survival",
     "difficultyColor": "Green",
     "observedAtSkill": 6,
-    "needsInfo": true
+    "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Resin", "quantity": 1 }],
+    "recipeSkillLevel": 5
   },
   {
     "name": "Heavy Cloth Bandage",
     "slug": "heavy-cloth-bandage-survival",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Survival",
     "difficultyColor": "Light Blue",
     "observedAtSkill": 6,
-    "needsInfo": true
+    "components": [{ "item": "Cloth Scraps", "quantity": 2 }],
+    "resultQuantity": 2,
+    "recipeSkillLevel": 10
   },
   {
     "name": "Wool Bandage",
     "slug": "wool-bandage-survival",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Survival",
     "difficultyColor": "White",
     "observedAtSkill": 6,
-    "needsInfo": true
+    "components": [{ "item": "Wool Scraps", "quantity": 1 }],
+    "resultQuantity": 2,
+    "recipeSkillLevel": 20
   },
   {
     "name": "Handmade Torch",
     "slug": "handmade-torch",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Survival",
     "difficultyColor": "Yellow",
     "observedAtSkill": 6,
-    "needsInfo": true
+    "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Resin", "quantity": 1 }, { "item": "Cloth Scraps", "quantity": 1 }],
+    "recipeSkillLevel": 25
   },
   {
     "name": "Heavy Wool Bandage",
     "slug": "heavy-wool-bandage-survival",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Survival",
     "difficultyColor": "Orange",
     "observedAtSkill": 6,
-    "needsInfo": true
+    "components": [{ "item": "Wool Scraps", "quantity": 2 }],
+    "resultQuantity": 2
   },
   {
     "name": "Cotton Bandage",
     "slug": "cotton-bandage-survival",
+    "lastUpdated": "2026-07-20",
     "tradeskill": "Survival",
     "difficultyColor": "Red",
     "observedAtSkill": 6,
-    "needsInfo": true
+    "components": [{ "item": "Cotton Scraps", "quantity": 1 }],
+    "resultQuantity": 2
+  },
+  {
+    "name": "Heavy Cotton Bandage",
+    "slug": "heavy-cotton-bandage-survival",
+    "lastUpdated": "2026-07-20",
+    "tradeskill": "Survival",
+    "components": [{ "item": "Cotton Scraps", "quantity": 2 }],
+    "resultQuantity": 2
   }
 ]

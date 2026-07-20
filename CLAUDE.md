@@ -362,27 +362,27 @@ Enchanting into Crafting, and Disenchanting into Gathering"). Concretely:
   `renderCraftingCategories`'s normal filter (`ts.category !== 'gathering'`) exactly like
   Blacksmithing or Alchemy — no special-casing needed anywhere for it to show up there.
 - Disenchanting has `"category": "gathering"` — the same value Mining/Lumberjacking/
-  Herbalism/Fishing use to land on the Gathering grid — even though it's still recipe-based
-  under the hood, not node-based. `tradeskillGridHTML` (shared by both grids) derives each
-  card's actual node-based-ness *structurally*, by checking whether `gathering-nodes.json`
-  has any entries for that tradeskill name (`data-node-based` on the card), rather than
-  trusting the page-level "is this the Gathering grid" flag — so Disenchanting's card
-  correctly shows a recipe count/label and routes to the recipe view
-  (`renderGatheringDisenchantingRecipes`) while every other card on that page shows a node
-  count/label and routes to `renderGatheringNodes`. This also means any future recipe-based
-  tradeskill added to the Gathering grid the same way would automatically get this right too,
-  without needing to hardcode its name anywhere.
+  Herbalism/Fishing (and now Foraging, see "Gathering tradeskills are a separate area" above)
+  use to land on the Gathering grid — even though it's still recipe-based under the hood, not
+  node-based. `tradeskillGridHTML` (shared by both grids) derives each card's actual
+  node-based-ness via `gatheringTradeskillIsNodeBased` (see above) rather than trusting the
+  page-level "is this the Gathering grid" flag — so Disenchanting's card correctly shows a
+  recipe count/label and routes to the recipe view (`renderGatheringRecipes`) while every
+  other card on that page shows a node count/label and routes to `renderGatheringNodes`.
 - `craftPageHash(tradeskillName)` is the one place that decides which hash a tradeskill's
   recipes actually live at — `'gathering'` for Disenchanting, `'crafting'` for everything
   else (including Enchanting, now that it has no special case at all). `goToRecipe`,
   `goToCraftingCategory`, and the header search's category/recipe links all call it rather
-  than hard-coding a hash, so nothing that links to a recipe needs to special-case
-  Disenchanting itself.
+  than hard-coding a hash. This one still hardcodes "Disenchanting" by name rather than
+  deriving it from `tradeskillsData` — harmless today since it's only reached for a
+  recipe's own tradeskill (`goToRecipe`) or a `kind: 'craft'` category jump, and Foraging has
+  no `crafting.json` recipes yet to trigger either path — but revisit it if a second
+  recipe-based Gathering tradeskill ever gets real recipes.
 - The actual recipe-list rendering (search box, needs-info toggle, station grouping, item
   link handlers, highlight-on-arrival) is still shared with every other tradeskill via
   `renderTradeskillSection` — `renderCraftingRecipes` (Crafting grid) and
-  `renderGatheringDisenchantingRecipes` (Gathering grid, Disenchanting only) are both just
-  thin wrappers passing their own grid's `onBack`.
+  `renderGatheringRecipes` (Gathering grid, for whichever of its tradeskills turn out
+  recipe-based) are both just thin wrappers passing their own grid's `onBack`.
 
 **Disenchanting's magic-dust tier chart:** rather than the lengthy explanatory `note` this
 tradeskill used to carry (removed 2026-07-16 — the user found it too much to read on the
@@ -462,9 +462,25 @@ entry, `"type": "gathering"`, above "Crafting" in the sidebar) and data file,
 `gathering-nodes.json`.
 
 - **`tradeskillsData[].category`** — an optional field in `tradeskills.json`, `"gathering"`
-  for exactly these four tradeskills, unset for everything else. This is what
-  `renderCraftingCategories`/`renderGatheringCategories` each filter on to build their own
-  page's tradeskill grid.
+  for these four plus Foraging and Disenchanting (see both below), unset for everything else.
+  This is what `renderCraftingCategories`/`renderGatheringCategories` each filter on to build
+  their own page's tradeskill grid.
+- **A gathering-category tradeskill isn't automatically node-based** — see
+  `gatheringTradeskillIsNodeBased(name)` in `script.js`, the one shared check
+  `tradeskillGridHTML` (card count/label), `renderGatheringCategories`'s click handler, and
+  `renderGatheringPage`'s `pendingGatheringTradeskill` routing all call instead of each
+  re-deriving or hardcoding a tradeskill name. It returns true if `gathering-nodes.json` has
+  any entries for that name (the normal case), otherwise it defaults to true anyway *unless*
+  `crafting.json` actually has recipes for that name — so a tradeskill with data in neither
+  file yet (Foraging, moved here 2026-07-19 with nothing recorded for it either way) still
+  reads as node-based and renders as an empty `renderGatheringNodes` table, same shape as any
+  other gathering tradeskill starting from zero, rather than being misread as a 0-recipe
+  crafting tradeskill. Disenchanting is the one tradeskill this currently flips to
+  recipe-based, since it actually has `crafting.json` entries — routed to the shared
+  `renderGatheringRecipes(container, tradeskillName)` (a generic version of what used to be a
+  Disenchanting-only `renderGatheringDisenchantingRecipes`, genericized the same day Foraging
+  moved here so a second recipe-based Gathering tradeskill wouldn't need its own hardcoded
+  copy) instead of `renderGatheringNodes`.
 - **`gathering-nodes.json`** — a flat array, one object per node: `name`, `slug`,
   `tradeskill`, `locations` (array of free-text location strings — these are gathering spots
   named by a source table, not tied to `maps.json` the way a monster's `maps` field is),
@@ -514,8 +530,8 @@ entry, `"type": "gathering"`, above "Crafting" in the sidebar) and data file,
   placed in a bag slot, can fail and destroy the item with nothing gained, and the output
   powder's quality depends on the item disenchanted in some not-yet-understood way). It lives
   in `crafting.json` as ordinary recipes, schema-wise identical to any other tradeskill's —
-  its Gathering-page placement is purely a display/navigation choice (see `tradeskillGridHTML`'s
-  structural node-based check), not a change to its underlying data shape. `tradeskills.json`'s
+  its Gathering-page placement is purely a display/navigation choice (see
+  `gatheringTradeskillIsNodeBased` above), not a change to its underlying data shape. `tradeskills.json`'s
   own Disenchanting entry no longer carries an explanatory `note` (a lengthy one covering this
   same mechanic was removed 2026-07-16 as too much to read on the page; see "Disenchanting's
   magic-dust tier chart" below for what replaced it).
@@ -593,6 +609,46 @@ inconsistent, e.g. "Copper Plate Boots"/"Copper Longsword" salvage into *Bronze*
 rather than Copper Scraps like every other Copper item in the table, and "Tarnished Bronze
 Mace" is the only weapon in its tier that doesn't also yield Rawhide Scraps. The table might
 just be wrong, or the game might genuinely be inconsistent here — don't guess which.
+
+### Fletching, Smelting, and Survival got the same reference-table treatment (2026-07-20)
+
+Same fan-wiki-style tables as above filled in `components`/`recipeSkillLevel` for existing
+crafting-window-sourced stubs and added a handful of recipes that weren't in `crafting.json`
+at all yet:
+
+- **Fletching** — the existing 15 crafting-window stubs (Arrow x100/x500, Bow, Buckler,
+  Stonehead/Copperhead/Bronzehead Arrow x100/x500/x1000, Longbow, Recurve Bow) got
+  `components` and, where the table gave a real number, `recipeSkillLevel` — the x1000
+  variants weren't in the table at all, so they're untouched. Seven recipes the table showed
+  but the crafting-window batch never had: Pitch-Wrapped Arrow, Net Arrow, and Smoke Bomb
+  Arrow (all "Requires recipe purchase" per the table, recorded as a `note`) use
+  `resultQuantity` rather than an "x20" name suffix, since — unlike the x100/x500 siblings —
+  there's no crafting-window confirmation of what these are actually named in-game. Ironhead
+  Arrow and Steelhead Arrow *do* use the "x100"/"x500" name-suffix convention, but that's a
+  pattern-inference from their Stonehead/Copperhead/Bronzehead siblings (same shape: Wood +
+  a material's Scraps), not a confirmed in-game name — flag if a real crafting-window sighting
+  ever shows them named differently. Net Arrow's second component is recorded verbatim as
+  "Rope, Hempen, 50 Length" — the source table's own comma-heavy formatting makes it
+  ambiguous whether that's one item name or a name plus a size descriptor, and Smoke Bomb
+  Arrow / Vial of Smoke had their table's own "(item)"/"(reagent)" disambiguation suffixes
+  stripped as presumed wiki-page artifacts, not real name text — both worth re-confirming
+  against an actual card if one ever comes in. Recipes still missing a number the table itself
+  showed as "??" (Net Arrow, Recurve Bow, Smoke Bomb Arrow, Fine Wood Bow, Fine Wood Buckler)
+  were left with no `recipeSkillLevel`, same as elsewhere.
+- **Smelting** — already fully populated from an earlier identical table; this pass only
+  added one new row the earlier pass missed, "Adamantium Bar" — its own Components column was
+  itself just "?" on the table, so it's a bare `needsInfo: true` stub (name/tradeskill only)
+  rather than a guessed recipe.
+- **Survival** — the existing 7 crafting-window stubs got `components` and (where stated)
+  `recipeSkillLevel` the same way; Heavy Wool Bandage/Cotton Bandage's Trivial was truncated
+  to "##" on the table (a spreadsheet-style column-too-narrow overflow, not a real value) so
+  neither got a `recipeSkillLevel`. Two recipes new to `crafting.json`: Campfire (Trivial
+  listed as "Innate" — always trivial regardless of skill, recorded as a `note` rather than a
+  fake `recipeSkillLevel`, alongside the table's own real usage note about cooking/duration)
+  and Heavy Cotton Bandage (a name-pattern sibling of Cotton Bandage, but this one *did* have
+  its own Components row on the table, so it's a normal recipe rather than a stub).
+  `tradeskills.json`'s Survival entry also gained a `note` (trainer location, the "Crafting:
+  Survival" ability-book mechanic) — it didn't have one before.
 
 ### New items/maps/recipes/monsters come in via `images/inbox/`
 
