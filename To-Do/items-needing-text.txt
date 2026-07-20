@@ -215,13 +215,13 @@ with damage/delay/skill/stats/resists/effect/description from this batch's card,
 removed since it's now substantially documented, but `weight`/`size`/`classes`/`race` are
 still unknown (the card was cropped before those lines) — still worth a fuller capture later.
 
-2026-07-19, images/inbox batch: Vestments of Vakraar (Chest, dropped near Servarator Vakraar
-in the Vale of Zintar orc caves — naming strongly suggests it's that monster's own drop, but
-the screenshot never showed a loot window confirming it, so it's not recorded in
-`monsters.json`'s `drops` yet) had its card cut off by an in-game scrollbar right after the
-Class line — `race` left unset entirely rather than guessed `["ALL"]`, same as every other
-scrollbar-cropped card in this file. Two other cards in the same screenshot (Dustmaul Sash,
-Dustmaul Pauldrons) showed their full Class/Race lines with no cropping.
+2026-07-19, images/inbox batch: Vestments of Vakraar (Chest — user has since confirmed all
+three cards from this screenshot, including this one, drop from Servarator Vakraar in the
+Vale of Zintar orc caves; recorded in that monster's `drops` in monsters.json) had its card
+cut off by an in-game scrollbar right after the Class line — `race` left unset entirely
+rather than guessed `["ALL"]`, same as every other scrollbar-cropped card in this file. The
+other two cards from the same screenshot (Dustmaul Sash, Dustmaul Pauldrons) showed their
+full Class/Race lines with no cropping.
 
 One likely-real stat conflict, left unresolved per the "existing screenshot wins" rule:
 Bibic's Hunt Wraps already has a real saved screenshot (`images/items/bibics-hunt-wraps.jpg`)

@@ -2374,6 +2374,11 @@
     "lastUpdated": "2026-07-19",
     "named": true,
     "maps": ["Vale of Zintar"],
-    "areas": ["Orc Caves"]
+    "areas": ["Orc Caves"],
+    "drops": [
+      { "item": "Vestments of Vakraar" },
+      { "item": "Dustmaul Sash" },
+      { "item": "Dustmaul Pauldrons" }
+    ]
   }
 ]
