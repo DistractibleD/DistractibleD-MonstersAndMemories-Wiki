@@ -2380,5 +2380,12 @@
       { "item": "Dustmaul Sash" },
       { "item": "Dustmaul Pauldrons" }
     ]
+  },
+  {
+    "name": "Vile Will",
+    "slug": "vile-will",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "drops": [{ "item": "The Backup Plan" }]
   }
 ]

@@ -229,3 +229,7 @@ recording DEX+2/STA+2, but this batch's mnmdrops.com card showed STA+1 instead o
 kept the existing screenshot-sourced value untouched since it's a stronger source than an
 external wiki capture, but flagging the discrepancy in case the existing screenshot is ever
 worth re-checking.
+
+2026-07-19, mnmdrops.com re-check: Sungreet Strand grew one new mob since the earlier
+scrape (Vile Will, 1 drop: The Backup Plan). The Backup Plan's card showed a scrollbar
+with no Race line visible — `race` left unset rather than assumed ALL.

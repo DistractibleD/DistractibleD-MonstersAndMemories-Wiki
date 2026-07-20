@@ -11603,5 +11603,22 @@
     "size": "Small",
     "classes": ["ALL"],
     "race": ["ALL"]
+  },
+  {
+    "name": "The Backup Plan",
+    "slug": "the-backup-plan",
+    "type": "Weapon",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Primary",
+    "twoHanded": true,
+    "damage": 15,
+    "delay": 39,
+    "skill": "Bludgeoning",
+    "stats": { "STR": 4, "STA": 3 },
+    "haste": 5,
+    "description": "A hefty two-handed maul slung over the shoulder, its scarred head serving as a trusted reminder that when all else fails, a backup plan never does.",
+    "weight": 7.5,
+    "size": "Large",
+    "classes": ["ALL"]
   }
 ]
