@@ -521,18 +521,27 @@ entry, `"type": "gathering"`, above "Crafting" in the sidebar) and data file,
   identified at all — recorded as a placeholder node with an empty `locations` array and the
   known skill floor captured in `note` (not `minSkill`, since it's floor-only) so the
   picture itself becomes the identifying reference once a real name comes in.
-  **Pre-crop these images to a square before saving** (2026-07-20) — the thumbnail
-  (`.gathering-node-thumb`, 28x28) uses `object-fit: cover`, which centers on the *source
-  image's* own geometric middle, not necessarily the visible plant/vein within it. A raw
-  portrait screenshot (e.g. a plant shot taller than wide, with a lot of rock/sky above and
-  below it) can end up showing mostly background once cropped to a square, since the subject
-  itself usually isn't sitting exactly in the frame's center. Cropping the saved image to a
-  square around the actual subject first (PowerShell `System.Drawing`, same tool used for map
-  thumbnails) means the frame and the source are already the same shape — nothing left for
-  `object-fit: cover` to crop away, so there's no risk of the subject drifting off-center at
-  small size regardless of the original screenshot's framing. All 17 existing gathering
-  images were re-cropped this way in the same pass that added this rule; apply the same
-  square pre-crop to any new gathering node picture going forward.
+  **Pre-crop these images tightly around the subject before saving** (2026-07-20) — the
+  thumbnail (`.gathering-node-thumb`, 28x28) uses `object-fit: cover`, which centers on the
+  *source image's* own geometric middle, not necessarily the visible plant/vein within it.
+  Making the source merely square isn't enough on its own: a raw screenshot usually has the
+  subject occupying only a fraction of the frame (a lot of rock/sand/water around a small
+  plant), so even a perfectly-centered square crop still renders as a barely-recognizable
+  smudge at 26x26 — confirmed by actually simulating the real downscale (PowerShell,
+  render to 26x26 with `HighQualityBicubic` same as a browser, *then* re-view that at a
+  larger size with `NearestNeighbor` upscaling so the true low-res pixels are visible
+  without extra smoothing hiding the problem) rather than judging a crop by how it looks at
+  full size, which is misleadingly forgiving. The fix that actually worked: crop tightly
+  around the subject's own bounding box (~65-75% of the original frame, not just squaring
+  off the existing rectangle) so the subject fills most of the thumbnail — verified this
+  visibly fixed Ironroot, Nomad's Grace, Whispering Sage, and Lionleaf, all of which the user
+  flagged as still looking bad after an earlier pass that only made the sources square
+  (Lionleaf's pale flowers against light rock remain low-contrast even after tightening —
+  worth a different source screenshot if it's ever reported as unclear again). All 17
+  existing gathering images have at least the square treatment from that earlier pass; apply
+  the tighter subject-bounding-box crop (and verify with the true-26px-render technique
+  above, not just eyeballing the full-size crop) to any new gathering node picture going
+  forward.
 - **Columns are derived per-tradeskill from the data, not fixed** (`gatheringColumns()` in
   `script.js`) — Name and Min Skill always show; Trivial/Results/Rarity/Bait Required each
   only appear if at least one node of that tradeskill actually uses that field (Fishing uses
