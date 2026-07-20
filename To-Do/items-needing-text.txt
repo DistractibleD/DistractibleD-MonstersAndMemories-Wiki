@@ -233,3 +233,20 @@ worth re-checking.
 2026-07-19, mnmdrops.com re-check: Sungreet Strand grew one new mob since the earlier
 scrape (Vile Will, 1 drop: The Backup Plan). The Backup Plan's card showed a scrollbar
 with no Race line visible — `race` left unset rather than assumed ALL.
+
+2026-07-19, mnmdrops.com scrape, Vale Of Zintar zone: Bloodfang Scale Shield and Eye of
+Serpents (both dropped by Bloodfang) showed a scrollbar with no Race line — `race` left
+unset on both. Leather Bracer of Obedience (dropped by Dustrend Kennel Master) similarly
+had no Race line at all. This zone also had two more site-side duplicate-listing situations
+(same pattern as Mirella Nighthorn/Tolman Sneed from Sungreet Strand and Grimtide Sanctum):
+Dustrend Kennel Master's own drop table listed "Leather Bracer of Obedience" twice, and
+"Rami Al'qawwaas" exists as two separate mob-page records on mnmdrops.com (slugs
+rami-alqawwaas and rami-al-qawwaas) that are almost certainly the same in-game mob — all of
+Rami's drops from both pages were merged into the single existing "Rami Al-Qawwaasr" entry.
+Also merged newly-revealed, non-overlapping drops into three existing entries whose card
+already existed from an earlier session: Fernic the Cur (+Fernstep Greaves, +Ripped Leather
+Mask), Khal'Baar the Growler (+Driftwood Crown, +Paua Shell Earring), Servarator Vakraar
+(+The Final Word, +Vakraar's Dustveil Hoop) — in each case the mnmdrops.com page showed a
+different subset of that mob's real drops than what was already recorded, so both sets were
+kept rather than treated as a conflict. The Final Word's card was cut off by a scrollbar
+before Weight/Size/Class/Race — all four left unset.

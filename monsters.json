@@ -274,7 +274,9 @@
     "drops": [
       { "item": "Desert Nomad Bracer" },
       { "item": "Fernstalker's Sash" },
-      { "item": "Ironwood Shortsword" }
+      { "item": "Ironwood Shortsword" },
+      { "item": "Fernstep Greaves" },
+      { "item": "Ripped Leather Mask" }
     ]
   },
   {
@@ -309,7 +311,10 @@
     "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Vale Giant Shortbow" },
-      { "item": "Duneshaper's Ring" }
+      { "item": "Duneshaper's Ring" },
+      { "item": "Duneshaper's Sandals" },
+      { "item": "Vale-Giant Warshins" },
+      { "item": "Vale Giant Tunic" }
     ]
   },
   {
@@ -318,7 +323,9 @@
     "named": true,
     "maps": ["Vale of Zintar"],
     "drops": [
-      { "item": "Carved Spirit Totem" }
+      { "item": "Carved Spirit Totem" },
+      { "item": "Driftwood Crown" },
+      { "item": "Paua Shell Earring" }
     ]
   },
   {
@@ -2378,7 +2385,9 @@
     "drops": [
       { "item": "Vestments of Vakraar" },
       { "item": "Dustmaul Sash" },
-      { "item": "Dustmaul Pauldrons" }
+      { "item": "Dustmaul Pauldrons" },
+      { "item": "The Final Word" },
+      { "item": "Vakraar's Dustveil Hoop" }
     ]
   },
   {
@@ -2387,5 +2396,72 @@
     "named": true,
     "maps": ["Sungreet Strand"],
     "drops": [{ "item": "The Backup Plan" }]
+  },
+  {
+    "name": "Bloodfang",
+    "slug": "bloodfang",
+    "named": true,
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Bloodfang Scale Shield" },
+      { "item": "Eye of Serpents" },
+      { "item": "Fang of the Serpent" }
+    ]
+  },
+  {
+    "name": "Dustrend Kennel Master",
+    "slug": "dustrend-kennel-master",
+    "named": true,
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Kennel Master's Faceguard" },
+      { "item": "Leather Bracer of Obedience" }
+    ]
+  },
+  {
+    "name": "Grand Vizier Al'kithar",
+    "slug": "grand-vizier-alkithar",
+    "named": true,
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Ancient Zintari Seal" },
+      { "item": "Gaze of Empire" },
+      { "item": "Grand Vizier's Coif" }
+    ]
+  },
+  {
+    "name": "King Mahraad",
+    "slug": "king-mahraad",
+    "named": true,
+    "maps": ["Vale of Zintar"],
+    "drops": [{ "item": "Crown of King Mahraad" }]
+  },
+  {
+    "name": "Old Scar",
+    "slug": "old-scar",
+    "named": true,
+    "maps": ["Vale of Zintar"],
+    "drops": [{ "item": "Stained Apostle's Cloak" }]
+  },
+  {
+    "name": "Sularfaan The Flamekeeper",
+    "slug": "sularfaan-the-flamekeeper",
+    "named": true,
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Branded Platinum Wristguard" },
+      { "item": "Hammer of Elemental Forging" }
+    ]
+  },
+  {
+    "name": "Zubair Goldentongue",
+    "slug": "zubair-goldentongue",
+    "named": true,
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Embezzler's Golden Kilt" },
+      { "item": "Wayfarer's Vambraces" },
+      { "item": "Whalebone Spear" }
+    ]
   }
 ]
