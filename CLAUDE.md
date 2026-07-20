@@ -521,24 +521,30 @@ entry, `"type": "gathering"`, above "Crafting" in the sidebar) and data file,
   identified at all — recorded as a placeholder node with an empty `locations` array and the
   known skill floor captured in `note` (not `minSkill`, since it's floor-only) so the
   picture itself becomes the identifying reference once a real name comes in.
-  **The thumbnail shows the entire source image, never cropped** (`object-fit: contain`,
-  not `cover` — changed 2026-07-20, user's own request) — same picture as the full-size
-  `#sample-viewer` lightbox, just smaller, so there's no cover-crop for a subject to ever
-  drift off-center or get cut off in the first place. `.gathering-node-thumb` is a 32x32
-  rounded-square frame with a few pixels of inset padding so it reads as a clean icon
-  (closer to the item-card icon look) rather than a raw thumbnail; any letterboxed gap
-  around a non-square source shows the frame's own background color, which is expected, not
-  a bug. **This replaced an earlier `object-fit: cover` approach that took real effort to
-  get only partway right** — worth knowing the history if thumbnail complaints come back:
-  first the source images were square-cropped around their own geometric center (insufficient
-  — a raw screenshot's subject usually occupies only a fraction of the frame, so even a
-  perfectly-centered square crop still rendered as a barely-recognizable smudge once actually
-  downscaled to 26x26, confirmed by simulating the real browser downscale rather than judging
-  a crop by how it looked at full size), then tightened to crop around the subject's own
-  bounding box instead (~65-75% of the original frame) which fixed most of them but still left
-  Lionleaf's low-contrast pale-flowers-on-light-rock hard to read. Switching to `contain`
-  sidesteps needing either technique going forward — a new gathering node picture doesn't need
-  any special cropping at all, just the normal `.jpg` quality-90 save.
+  **When that identification comes in, don't rename the placeholder — merge its picture (and
+  anything else it revealed) into the real, already-existing node entry, then delete the
+  placeholder entirely** (2026-07-20, user's own correction, after an "Unidentified Herb
+  (skill 38+)" placeholder was mistakenly renamed in place to "DuneLeaf" even though a real
+  `Duneleaf` entry — `minSkill: 90`, confirmed locations — already existed separately,
+  producing two `duneleaf`-slugged entries). The placeholder is a proxy standing in for a
+  real node that just hasn't been connected yet, not the node's permanent home once named —
+  a same-name real entry may well already exist elsewhere in the file with its own
+  confirmed data (skill numbers, locations) that the placeholder's own vaguer info
+  (floor-only skill, empty locations) shouldn't overwrite or duplicate.
+  **`.gathering-node-thumb` is back to its original plain form** (28x28, `object-fit: cover`,
+  no inset padding) after a 2026-07-20 same-day round-trip that made things worse, not
+  better, by the user's own repeated report — worth knowing the history so it isn't
+  re-attempted blindly: first pass square-cropped each source image around its own geometric
+  center (insufficient — the subject typically occupies only a fraction of the frame, so it
+  rendered as a barely-recognizable smudge once actually downscaled to 26x26); second pass
+  tried cropping tighter around the subject's own bounding box instead (better, but still
+  imperfect for a low-contrast subject like Lionleaf); third pass switched to
+  `object-fit: contain` to show the *entire* uncropped image — but for any non-square source
+  this left visible letterboxed gaps showing the button's own dark background color, which
+  the user found worse than a crop. All three attempts, and the source-image re-crops that
+  went with them, were reverted back to the plain `cover`-based original in the same session.
+  If this area gets revisited again, get explicit sign-off on the actual visual result (a
+  real screenshot from the user, not just an offline simulation) before considering it done.
 - **Columns are derived per-tradeskill from the data, not fixed** (`gatheringColumns()` in
   `script.js`) — Name and Min Skill always show; Trivial/Results/Rarity/Bait Required each
   only appear if at least one node of that tradeskill actually uses that field (Fishing uses

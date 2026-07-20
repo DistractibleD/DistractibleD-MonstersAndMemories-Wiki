@@ -382,6 +382,7 @@
   {
     "name": "Duneleaf",
     "slug": "duneleaf",
+    "image": "images/gathering/duneleaf.jpg",
     "tradeskill": "Herbalism",
     "minSkill": 90,
     "trivialSkill": 140,
@@ -470,14 +471,6 @@
     "trivialSkill": 250,
     "locations": ["Vale of Zintar"],
     "note": "In Giant City. Min skill given only as an uncertain value on the source table: \"250?\"."
-  },
-  {
-    "name": "DuneLeaf",
-    "slug": "duneleaf",
-    "image": "images/gathering/duneleaf.jpg",
-    "tradeskill": "Herbalism",
-    "locations": [],
-    "note": "Requires more than skill 38 to attempt (a floor-only value, so left out of minSkill)."
   },
   {
     "name": "Unidentified Herb (Blue Lily)",
