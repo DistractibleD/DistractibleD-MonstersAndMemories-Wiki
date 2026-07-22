@@ -2463,5 +2463,190 @@
       { "item": "Wayfarer's Vambraces" },
       { "item": "Whalebone Spear" }
     ]
+  },
+  {
+    "name": "Animast Wafi",
+    "slug": "animast-wafi",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [
+      { "item": "Chain Splitting Axe" },
+      { "item": "Chitonstep Greaves" },
+      { "item": "Chitonweave Breeches" },
+      { "item": "Claws of Bonding" },
+      { "item": "Scratched Armguards" }
+    ]
+  },
+  {
+    "name": "Ashir The Protector",
+    "slug": "ashir-the-protector",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [
+      { "item": "Ashira Protector Axe" },
+      { "item": "Protector's Mask" },
+      { "item": "Shield of the Protector" }
+    ]
+  },
+  {
+    "name": "Ayip",
+    "slug": "ayip",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [
+      { "item": "Ayip's Chopper" },
+      { "item": "Rat Bone Earring" },
+      { "item": "Rat Hide Jerkin" }
+    ]
+  },
+  {
+    "name": "Bloodynose Hag",
+    "slug": "bloodynose-hag",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [
+      { "item": "Freaky Pantaloons" },
+      { "item": "Messy Voodoo Doll" }
+    ]
+  },
+  {
+    "name": "Duneseer Hadi",
+    "slug": "duneseer-hadi",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [
+      { "item": "Braided Leather Belt" },
+      { "item": "Duneseer Soft Wraps" }
+    ]
+  },
+  {
+    "name": "Font Seeress Jumana",
+    "slug": "font-seeress-jumana",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [
+      { "item": "Ring of Water" },
+      { "item": "Shawl of the Font Seeress" }
+    ]
+  },
+  {
+    "name": "Forge Master Jabbar",
+    "slug": "forge-master-jabbar",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [{ "item": "Forge-Hammer Steelboots" }]
+  },
+  {
+    "name": "General Overlord Bloodynose",
+    "slug": "general-overlord-bloodynose",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [
+      { "item": "Cloak of the Bloodynose General" },
+      { "item": "Nose Bleeder" },
+      { "item": "Overlord's Plate Helm" },
+      { "item": "Ring of the Bloodynose Clan" }
+    ]
+  },
+  {
+    "name": "Hadhraman, First Among Alphas",
+    "slug": "hadhraman-first-among-alphas",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [
+      { "item": "Amulet of the First" },
+      { "item": "Hadhraman's Maul" },
+      { "item": "Hadhraman's Ring" }
+    ]
+  },
+  {
+    "name": "Herbalist Qirfa",
+    "slug": "herbalist-qirfa",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [
+      { "item": "Duskwrist Guard" },
+      { "item": "Earthened Gloves" },
+      { "item": "Sash of Herbs" },
+      { "item": "Scented Ceremonial Spear" }
+    ]
+  },
+  {
+    "name": "Luhum The Plump",
+    "slug": "luhum-the-plump",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [
+      { "item": "Flesh Ripper" },
+      { "item": "Oven-Burned Bracers" }
+    ]
+  },
+  {
+    "name": "Nosey",
+    "slug": "nosey",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [{ "item": "Cotton Satchel" }]
+  },
+  {
+    "name": "Rami Suresight",
+    "slug": "rami-suresight",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [
+      { "item": "Hip Quiver" },
+      { "item": "Serrated Longbow" },
+      { "item": "Suresight War Wraps" }
+    ]
+  },
+  {
+    "name": "Roa The Huntress",
+    "slug": "roa-the-huntress",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [
+      { "item": "Huntress's Bow" },
+      { "item": "Stillglow Chausses" }
+    ]
+  },
+  {
+    "name": "Tanner Daba",
+    "slug": "tanner-daba",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [{ "item": "Bated Leather Leggings" }]
+  },
+  {
+    "name": "Thirsty Sharab",
+    "slug": "thirsty-sharab",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [{ "item": "Soaked Copper Bracer" }]
+  },
+  {
+    "name": "Whipstich Khayyat",
+    "slug": "whipstich-khayyat",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [{ "item": "Slick Black Pantaloons" }]
+  },
+  {
+    "name": "Yapala",
+    "slug": "yapala",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [
+      { "item": "Desert Ironfists" },
+      { "item": "Sandwalker's Leggings" },
+      { "item": "Tribal Spear" },
+      { "item": "Yapalan Veil" }
+    ]
+  },
+  {
+    "name": "Zalia The Fierce",
+    "slug": "zalia-the-fierce",
+    "named": true,
+    "maps": ["Tel Ekir"],
+    "drops": [{ "item": "Goblin Skin Mask" }]
   }
 ]

@@ -250,3 +250,19 @@ Mask), Khal'Baar the Growler (+Driftwood Crown, +Paua Shell Earring), Servarator
 different subset of that mob's real drops than what was already recorded, so both sets were
 kept rather than treated as a conflict. The Final Word's card was cut off by a scrollbar
 before Weight/Size/Class/Race — all four left unset.
+
+2026-07-22, mnmdrops.com scrape, Tel Ekir zone: Chain Splitting Axe (dropped by Animast Wafi)
+and Ashira Protector Axe (dropped by Ashir The Protector) both had no Race line visible;
+Ashira Protector Axe's card also showed no MAGIC tag at all, recorded as tags: []. Shield of
+the Protector (dropped by Ashir The Protector) was cut off before Class/Race entirely --
+`needsInfo: true` set since neither is known. Alchemist Bag (dropped by Ashira Alchemist,
+a generic mob) showed no Capacity/Maximum Size fields on its card at all despite being a
+container -- `needsInfo: true` set since capacity is unconfirmed. Orb of the Waning Waters
+(dropped by Guardian Of The Life Font, a generic mob) had its card almost entirely cut off,
+only the Slot line was visible -- `needsInfo: true`, no stats recorded at all.
+
+This zone also had two more "generic type name, not a personal name" mobs treated as
+non-named per the established convention (A Bloodynose Muralist / Bloodynose Muralist --
+two distinct generic variants with completely different drop tables, both added as separate
+non-named entries' worth of items but no monster record; An Ashira Fortune Teller; Ashira
+Alchemist; Guardian Of The Life Font) -- only their items were added, not monster entries.
