@@ -289,3 +289,16 @@ Generic "type-only name" mobs in this zone, items added without a monster entry 
 established convention: A Pale Cook, A Pale Forman, A Pale Provisioner, A Robed Figure, A
 Sanguine Bat, An Infamous Swashbuckler, Majestic Skeleton, Ornate Beetle, Pale Senior,
 Unyeilding Brute.
+
+2026-07-22, mnmdrops.com scrape, Shallow Shoals zone: several cards had no Race line visible
+(scrollbar cut-off) -- `race` left unset on Tidebreaker Cane (Captain Harkan Saafir),
+Darklight Reliquary (High-Mother Haathala), Mawtooth (Sharkie), Searing Dagger (Veya Karn),
+Deathmask of the Witchlord and Skull of Whispers (both Witchlord Kruurgal). Girdle of Stern
+Mercy (High-Sister Sarinius) was cut off before Class/Race entirely -- `needsInfo: true` set.
+Skull of Whispers is recorded as `type: "Misc"` rather than "Weapon" despite its
+Primary/Secondary slot, since its card showed no Weapon DMG/Delay/Skill line at all (same
+"Torch"-style non-combat off-hand item precedent). Two new Bard instrument stats confirmed
+this zone: `stringed` (Ba'Haara Lute, "Stringed: +24%") and reconfirmed `brass`/`percussion`/
+`wind` on Horn of the Sea/Fine Elven Drum/Fine Elven Flute. Masquerade Marchers (Captain
+Jonas Cossa) has an unusual specific race list (HUM GNM DDF DEF DGN DWF ELF HFL HIE GOB)
+rather than ALL -- recorded verbatim from the card.

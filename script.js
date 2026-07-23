@@ -1458,6 +1458,9 @@ function statEntries(item) {
   // rangedHaste added 2026-07-19 — first seen on Hip Quiver ("Ranged Haste: +10%"),
   // distinct from the flat `haste` field which applies to melee.
   if (item.rangedHaste) entries.push({ label: 'Ranged Haste', value: `${formatSigned(item.rangedHaste)}%` });
+  // stringed added 2026-07-22 — first seen on Ba'Haara Lute ("Stringed: +24%"),
+  // a Bard instrument-skill bonus paralleling percussion/wind/brass.
+  if (item.stringed) entries.push({ label: 'Stringed', value: `${formatSigned(item.stringed)}%` });
   return entries;
 }
 

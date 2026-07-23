@@ -2737,5 +2737,239 @@
     "named": true,
     "maps": ["Night Harbor"],
     "drops": [{ "item": "The Impaler" }]
+  },
+  {
+    "name": "Baharu Storyteller",
+    "slug": "baharu-storyteller",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [{ "item": "Ba'Haara Lute" }]
+  },
+  {
+    "name": "Captain Bilgesneak",
+    "slug": "captain-bilgesneak",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Barnacle Bracer" },
+      { "item": "Coral Trident" }
+    ]
+  },
+  {
+    "name": "Captain Harkan Saafir",
+    "slug": "captain-harkan-saafir",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Ring of the Seas" },
+      { "item": "Tidebreaker Cane" }
+    ]
+  },
+  {
+    "name": "Captain Jonas Cossa",
+    "slug": "captain-jonas-cossa",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Masquerade Marchers" },
+      { "item": "Saltlash" }
+    ]
+  },
+  {
+    "name": "Champion Of Muurtu",
+    "slug": "champion-of-muurtu",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Muurtu Battleplate" },
+      { "item": "Muurtu Shield" },
+      { "item": "Shadowy Chain Gloves" },
+      { "item": "Vile Stud" }
+    ]
+  },
+  {
+    "name": "Elder Mahir Sultaan",
+    "slug": "elder-mahir-sultaan",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Verdant Branch" },
+      { "item": "Wavebreaker Amulet" }
+    ]
+  },
+  {
+    "name": "Fizzle Screwtape",
+    "slug": "fizzle-screwtape",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Horn of the Sea" },
+      { "item": "Sea Giant's Handkerchief" }
+    ]
+  },
+  {
+    "name": "Ghost Of Selam",
+    "slug": "ghost-of-selam",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [{ "item": "Ghostly Longbow" }]
+  },
+  {
+    "name": "Gidum, The Dark Spirit",
+    "slug": "gidum-the-dark-spirit",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Torque of the False God" },
+      { "item": "Vile Bastard Sword" }
+    ]
+  },
+  {
+    "name": "Hearld Of Murtur",
+    "slug": "hearld-of-murtur",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [{ "item": "Bracer of the Herald" }]
+  },
+  {
+    "name": "Hegumenia Mariam",
+    "slug": "hegumenia-mariam",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Element-Tempered Shoulderplates" },
+      { "item": "Elemental Wristguard" },
+      { "item": "Sandals of the Elements" }
+    ]
+  },
+  {
+    "name": "High Priest Of Muurtu",
+    "slug": "high-priest-of-muurtu",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Ceremonial Greaves" },
+      { "item": "Thoughtweaver's Wrap" },
+      { "item": "Waistguard of Fervor" }
+    ]
+  },
+  {
+    "name": "High-Mother Haathala",
+    "slug": "high-mother-haathala",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Darklight Reliquary" },
+      { "item": "Mantle of Zeal" }
+    ]
+  },
+  {
+    "name": "High-Sister Sarinius",
+    "slug": "high-sister-sarinius",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Faithpiercer" },
+      { "item": "Girdle of Stern Mercy" },
+      { "item": "Mask of Penance" },
+      { "item": "Ornate Sigil" },
+      { "item": "Sister's Whisper" }
+    ]
+  },
+  {
+    "name": "Mrvath Cinderhand",
+    "slug": "mrvath-cinderhand",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Cinch of the Giant" },
+      { "item": "Cinderstep Greaves" },
+      { "item": "Sootgrit" },
+      { "item": "Wristguard of Wailing" }
+    ]
+  },
+  {
+    "name": "Nadim Al-Saraf",
+    "slug": "nadim-al-saraf",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [{ "item": "Elemental Vest" }]
+  },
+  {
+    "name": "Sharkie",
+    "slug": "sharkie",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [{ "item": "Mawtooth" }]
+  },
+  {
+    "name": "Skizzak Darkrain",
+    "slug": "skizzak-darkrain",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [{ "item": "Seal of Elements" }]
+  },
+  {
+    "name": "Sylvaine",
+    "slug": "sylvaine",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Fine Elven Drum" },
+      { "item": "Fine Elven Flute" }
+    ]
+  },
+  {
+    "name": "The Hangman's Advocate",
+    "slug": "the-hangmans-advocate",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [{ "item": "Hangman's Cowl" }]
+  },
+  {
+    "name": "Veya Karn",
+    "slug": "veya-karn",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Moonstone Earring" },
+      { "item": "Searing Dagger" }
+    ]
+  },
+  {
+    "name": "Witchguard Hellblade",
+    "slug": "witchguard-hellblade",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Banded Steel Cuffs" },
+      { "item": "Dexterous Wristguard" },
+      { "item": "Hellblade Scout Gloves" },
+      { "item": "Infernal Helm" }
+    ]
+  },
+  {
+    "name": "Witchguard Primus",
+    "slug": "witchguard-primus",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Blade of the Witchguard" },
+      { "item": "Kreshka Treads" },
+      { "item": "Witchguard Gauntlets" }
+    ]
+  },
+  {
+    "name": "Witchlord Kruurgal",
+    "slug": "witchlord-kruurgal",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Deathmask of the Witchlord" },
+      { "item": "Ornate Sash" },
+      { "item": "Ring of Withering Thought" },
+      { "item": "Skull of Whispers" },
+      { "item": "Witchlord's Cuirass" }
+    ]
   }
 ]
