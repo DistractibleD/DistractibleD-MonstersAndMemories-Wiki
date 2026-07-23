@@ -465,7 +465,8 @@
     "named": true,
     "maps": ["Night Harbor"],
     "drops": [
-      { "item": "Ironhide Girdle" }
+      { "item": "Ironhide Girdle" },
+      { "item": "Ironhide Bracers" }
     ]
   },
   {
@@ -484,7 +485,8 @@
     "named": true,
     "maps": ["Night Harbor"],
     "drops": [
-      { "item": "Charmweaver Robe" }
+      { "item": "Charmweaver Robe" },
+      { "item": "Echo Stone" }
     ]
   },
   {
@@ -512,7 +514,8 @@
     "named": true,
     "maps": ["Night Harbor"],
     "drops": [
-      { "item": "Phantom Stein" }
+      { "item": "Phantom Stein" },
+      { "item": "Twilight Cap" }
     ]
   },
   {
@@ -522,7 +525,8 @@
     "maps": ["Night Harbor"],
     "drops": [
       { "item": "Ragged Leather Gloves" },
-      { "item": "Seafarer's Shroud" }
+      { "item": "Seafarer's Shroud" },
+      { "item": "Seafarer's Hide Boots" }
     ]
   },
   {
@@ -531,7 +535,9 @@
     "named": true,
     "maps": ["Night Harbor"],
     "drops": [
-      { "item": "Savage Heartplate" }
+      { "item": "Savage Heartplate" },
+      { "item": "Heartplate Scout Cap" },
+      { "item": "Sturdy Battle Axe" }
     ]
   },
   {
@@ -2648,5 +2654,88 @@
     "named": true,
     "maps": ["Tel Ekir"],
     "drops": [{ "item": "Goblin Skin Mask" }]
+  },
+  {
+    "name": "Aide Aida",
+    "slug": "aide-aida",
+    "named": true,
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Amulet of Wisdom" },
+      { "item": "Gilded Spellbook" },
+      { "item": "Sceptre of Wisdom" },
+      { "item": "Ward of Wisdom" }
+    ]
+  },
+  {
+    "name": "Darius Brask",
+    "slug": "darius-brask",
+    "named": true,
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Bonebreaker Club" },
+      { "item": "Cognitive Wristguard" },
+      { "item": "Interrogator's Clasp" }
+    ]
+  },
+  {
+    "name": "Jailer Benedict",
+    "slug": "jailer-benedict",
+    "named": true,
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Shadowstitch Handwraps" },
+      { "item": "Shadowstitch Leggings" }
+    ]
+  },
+  {
+    "name": "Jorvan Ironfist",
+    "slug": "jorvan-ironfist",
+    "named": true,
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Faceguard of the Gladiator" },
+      { "item": "Gilded Claw of the Gladiator" },
+      { "item": "Mask of the Gladiator" }
+    ]
+  },
+  {
+    "name": "Mila Dastan",
+    "slug": "mila-dastan",
+    "named": true,
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Mila's Kiss" },
+      { "item": "Ragged Leather Helm" }
+    ]
+  },
+  {
+    "name": "Pasha Patrice",
+    "slug": "pasha-patrice",
+    "named": true,
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Gilded Claw Cloak" },
+      { "item": "Pasha's Blade" },
+      { "item": "Pasha's Favor" }
+    ]
+  },
+  {
+    "name": "Vikar Brask",
+    "slug": "vikar-brask",
+    "named": true,
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Battleforged Plate Belt" },
+      { "item": "Interrogator's Hood" },
+      { "item": "Ragged Leather Cloak" }
+    ]
+  },
+  {
+    "name": "Guard Atep",
+    "slug": "guard-atep",
+    "named": true,
+    "maps": ["Night Harbor"],
+    "drops": [{ "item": "The Impaler" }]
   }
 ]

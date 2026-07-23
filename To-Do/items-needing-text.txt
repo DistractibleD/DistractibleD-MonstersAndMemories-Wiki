@@ -266,3 +266,26 @@ non-named per the established convention (A Bloodynose Muralist / Bloodynose Mur
 two distinct generic variants with completely different drop tables, both added as separate
 non-named entries' worth of items but no monster record; An Ashira Fortune Teller; Ashira
 Alchemist; Guardian Of The Life Font) -- only their items were added, not monster entries.
+
+2026-07-22, mnmdrops.com scrape, Night Harbor zone: several existing named-monster entries
+(from an earlier session) turned out to only have a subset of their real drops recorded --
+merged in newly-revealed, non-overlapping items rather than treating as a conflict: a pale
+lieutenant (+Ironhide Bracers), Manciple Daphne (+Echo Stone), Victualler Veera (+Twilight
+Cap), Cormac Renshaw (+Seafarer's Hide Boots), Eamon Kassir (+Heartplate Scout Cap, +Sturdy
+Battle Axe). Echo Stone's card was cut off before Weight/Size/Class/Race -- `needsInfo: true`
+set. Sanguine Bat Tooth (dropped by the generic "A Sanguine Bat") had no Race line visible --
+left unset. Interrogator's Clasp (dropped by Darius Brask) had a green "Enchant Gloves:
+Lesser Agility" line on its card -- left out of the recorded data per the standing rule that
+an Enchant line is a one-off applied buff, not an intrinsic item property.
+
+Pasha's Favor is a genuinely unusual case: mnmdrops.com records it as a drop from a combined
+"Pasha Patrice/Aide Aida" encounter page (both must apparently be present/killed together),
+not from either mob's own individual page. Recorded on the item itself via a `note` field
+explaining this, and also listed under Pasha Patrice's own `drops` (the more prominent name
+in the pairing) so it's still discoverable from a monster page -- not listed under Aide
+Aida's drops too, to avoid implying it's a separate, fully-duplicated source.
+
+Generic "type-only name" mobs in this zone, items added without a monster entry per the
+established convention: A Pale Cook, A Pale Forman, A Pale Provisioner, A Robed Figure, A
+Sanguine Bat, An Infamous Swashbuckler, Majestic Skeleton, Ornate Beetle, Pale Senior,
+Unyeilding Brute.
