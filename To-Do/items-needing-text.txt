@@ -302,3 +302,41 @@ this zone: `stringed` (Ba'Haara Lute, "Stringed: +24%") and reconfirmed `brass`/
 `wind` on Horn of the Sea/Fine Elven Drum/Fine Elven Flute. Masquerade Marchers (Captain
 Jonas Cossa) has an unusual specific race list (HUM GNM DDF DEF DGN DWF ELF HFL HIE GOB)
 rather than ALL -- recorded verbatim from the card.
+
+2026-07-24, mnmdrops.com scrape, Glass Flats zone (27 mobs): several cards had no Race line
+visible (scrollbar cut-off, or in a couple cases no visible scrollbar but the line was simply
+absent) -- `race` left unset on Brood Dagger (Chaim The Herald), Obsidian Crystal Staff (Ebon
+Scholar Myrddin), Cursed Radiant Blade and Guillome's Cracked Skull (both Guillome The
+Accursed), Fell Trident (Horvarth Ezzadel), Vest of the Glass Viper (Malik The Glass Viper),
+Savage Club (Master Tracker Lark, text barely legible at the very bottom edge), Rod of
+Consumption (Mistress Nephidna), and Cloak of the Chiropteran / Shattershriek Spike / Wings
+of the Flittermouse (all three from Shattershriek). Guillome's Cracked Skull is missing
+Slot/Class/Race entirely (card shows only Effect + Weight/Size) despite the site's own alt
+text calling it a BAG/BACKPACK-slot container -- the card itself gives no capacity/maxSize
+data to confirm that, so it's recorded as `needsInfo: true` with no slot at all rather than
+guessed as a Container. Wyrmsbane Signal Torch (Runner Murtazam) similarly shows no
+Weight/Size/Class/Race at all despite no visible scrollbar; its card also had a "Fuel: 100%"
+line and War Wizard Leonath's Wand of Cinder had "Charges: 0/3" -- neither recorded, no
+established field exists for consumable-charge state (matches the base "Torch" item's own
+precedent of omitting any charge/fuel field). Cursed Radiant Blade's card showed no tag line
+at all under its name (`tags: []`), unlike every other card in the batch.
+
+Two new stat fields confirmed this zone, both from Wings of the Flittermouse (Shattershriek):
+`singing` (+5%, a Bard vocal-skill bonus alongside percussion/wind/stringed/brass) was added
+to `statEntries()` in script.js. That same card also exposed a real bug: `brass` had been
+recorded on two pre-existing items since 2026-07-19 but was never actually wired up to render
+in `statEntries()` at all -- fixed alongside adding `singing`, so those two older items' Brass
+stat will now show correctly too.
+
+Site-duplicate-listing case: Selene Brightmantle's drop table listed "Bright Silex
+Pantaloons" and "Bright Silk Pantaloons" as two separate items, but both screenshots are the
+exact same "Bright Silk Pantaloons" card (same stats, same everything) -- added once, same
+precedent as the Rami Al'qawwaas duplicate-record situation from an earlier zone.
+
+Quartermaster Girault's Oversized Chain Hauberk has an unusual specific race list (HUM OGR
+DEF ELF HIE TRL) rather than ALL -- recorded verbatim from the card.
+
+Pre-existing data issue spotted while checking for duplicates in this batch (unrelated to
+Glass Flats, not touched): `items.json` has two separate entries both slugged
+"hunting-longbow" -- worth a look next time that area of the file is touched, but out of
+scope for this scrape.

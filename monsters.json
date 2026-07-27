@@ -2971,5 +2971,333 @@
       { "item": "Skull of Whispers" },
       { "item": "Witchlord's Cuirass" }
     ]
+  },
+  {
+    "name": "Adept Kossco",
+    "slug": "adept-kossco",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Adept's Trousers" },
+      { "item": "Basilisk Hide Jerkin" },
+      { "item": "Kossco's Fortitude" },
+      { "item": "Stillwater Gauntlets" },
+      { "item": "Wyrmsbane War Drum" },
+      { "item": "Wyvern Hide Tunic" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Baron Bigtent",
+    "slug": "baron-bigtent",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Bigtent's Gaudy Shoulderguards" },
+      { "item": "Dented Black Enamel Helm" },
+      { "item": "Reinforced Boiled Leather Buckler" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Bishop Aybram",
+    "slug": "bishop-aybram",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Consecrated Bracer" },
+      { "item": "Guardsman's Ceremonial Cloak" },
+      { "item": "Penitent Gavel" },
+      { "item": "Profaned Leather Boots" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Captain Brey",
+    "slug": "captain-brey",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Chain Captain Boots" },
+      { "item": "Crystal Bauble" },
+      { "item": "Dragon Sinew Bow" },
+      { "item": "Studded Marksman's Bracer" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Chaim The Herald",
+    "slug": "chaim-the-herald",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Brood Dagger" },
+      { "item": "Sticky Linen Gloves" },
+      { "item": "Twisted Cord" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Ebon Scholar Myrddin",
+    "slug": "ebon-scholar-myrddin",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Faceguard of Warding" },
+      { "item": "Mercenary's Hood" },
+      { "item": "Obsidian Crystal Staff" },
+      { "item": "Robe of the Veiled Doctrine" },
+      { "item": "Shard of Obscured Insight" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Emissary Irina",
+    "slug": "emissary-irina",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Amulet of the Accord" },
+      { "item": "Emissary's Veil of Persuasion" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Esaneq",
+    "slug": "esaneq",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Dunestrider's Boots" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Fenrix Lightfoot",
+    "slug": "fenrix-lightfoot",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Crimson Silk Robe" },
+      { "item": "Prowler Boots" },
+      { "item": "Prowler's Mailbands" },
+      { "item": "Stalker's Linked Gauntlets" },
+      { "item": "Wolf Tooth Earring" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Guillome The Accursed",
+    "slug": "guillome-the-accursed",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Band of Cinder" },
+      { "item": "Crusader's Bangle" },
+      { "item": "Cursed Radiant Blade" },
+      { "item": "Guillome's Cracked Skull" },
+      { "item": "Onyx Breastplate" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "High Wyrmseer Valthrun",
+    "slug": "high-wyrmseer-valthrun",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Amethystine Serpent Mace" },
+      { "item": "Coil of the Slithering" },
+      { "item": "High Wyrmseer's Signet" },
+      { "item": "Rider's Chainmail Leggings" },
+      { "item": "Scarred Crusader Shield" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Horvarth Ezzadel",
+    "slug": "horvarth-ezzadel",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Blackened Girdle" },
+      { "item": "Dull Golden Hoop" },
+      { "item": "Fell Trident" },
+      { "item": "Onyx Vambraces" },
+      { "item": "Rampaging Spaulders" },
+      { "item": "Spiked Onyx Pauldrons" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Layla Faraj",
+    "slug": "layla-faraj",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Black Feathered Bracelet" },
+      { "item": "Parched Salt Gauntlets" },
+      { "item": "Salt-Cured Cloak" },
+      { "item": "Salt-Cured Mailshirt" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Malik The Glass Viper",
+    "slug": "malik-the-glass-viper",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Delicate Silk Wristband" },
+      { "item": "Saltglass Knuckles" },
+      { "item": "Shardglass Dagger" },
+      { "item": "Vest of the Glass Viper" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Master Tracker Lark",
+    "slug": "master-tracker-lark",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Irontail Braces" },
+      { "item": "Oathkeeper Sabatons" },
+      { "item": "Savage Club" },
+      { "item": "Stalker's Leather Britches" },
+      { "item": "Threadbare Cape" },
+      { "item": "Untamed Spirit Grips" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Mistress Nephidna",
+    "slug": "mistress-nephidna",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Gelatinous Crown" },
+      { "item": "Lancer's Gauntlets" },
+      { "item": "Protean Mantle" },
+      { "item": "Rod of Consumption" },
+      { "item": "Shorog's Blessing" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Quartermaster Girault",
+    "slug": "quartermaster-girault",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Bone-Riveted Shoulderpads" },
+      { "item": "Frayed Sash" },
+      { "item": "Girault's Bulwark" },
+      { "item": "Oversized Chain Hauberk" },
+      { "item": "Seven-Fingered Gloves" },
+      { "item": "Trail Boots" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Runner Murtazam",
+    "slug": "runner-murtazam",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Hollow Earring" },
+      { "item": "Ruby Chausses" },
+      { "item": "Runner's Chain Tunic" },
+      { "item": "Wyrmsbane Signal Torch" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Selene Brightmantle",
+    "slug": "selene-brightmantle",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Bright Silk Pantaloons" },
+      { "item": "Bright Silk Veil" },
+      { "item": "Glimmering Ward" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Seneschal Kazmer",
+    "slug": "seneschal-kazmer",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Seneschal's Tunic" },
+      { "item": "Steward's Silk Slippers" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Shattershriek",
+    "slug": "shattershriek",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Cloak of the Chiropteran" },
+      { "item": "Dusktower Helm" },
+      { "item": "Shattershriek Spike" },
+      { "item": "Shatterwing Clasp" },
+      { "item": "Wings of the Flittermouse" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Soraya The Mirage",
+    "slug": "soraya-the-mirage",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Gem-Encrusted Staff" },
+      { "item": "Gemless Staff" },
+      { "item": "Sand-Polished Shield" },
+      { "item": "Suave Bandit's Loop" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Stormcaller Tabigan",
+    "slug": "stormcaller-tabigan",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Dinning Staff" },
+      { "item": "Drape of the Clouded Sky" },
+      { "item": "Groundskeeper Earring" },
+      { "item": "Stormcaller's Boots" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Tarakhan The Boulder",
+    "slug": "tarakhan-the-boulder",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Sanctified Chestguard" },
+      { "item": "Sandworn Bandit's Bracer" },
+      { "item": "Spined Battle Shield" }
+    ],
+    "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "War Wizard Leonath",
+    "slug": "war-wizard-leonath",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Carved Warstaff" },
+      { "item": "Cinder-Wand Leggings" },
+      { "item": "Silvery Robe" },
+      { "item": "Wand of Cinder" }
+    ],
+    "lastUpdated": "2026-07-24"
   }
 ]

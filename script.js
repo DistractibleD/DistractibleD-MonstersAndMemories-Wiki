@@ -1455,12 +1455,19 @@ function statEntries(item) {
   // wind added 2026-07-19 — first seen on Mantle of the Windcaller ("Wind: +5%"),
   // presumably a Bard wind-instrument-skill bonus paralleling `percussion`.
   if (item.wind) entries.push({ label: 'Wind', value: `${formatSigned(item.wind)}%` });
+  // brass added 2026-07-19 alongside `wind`/`percussion` but never wired up here until
+  // 2026-07-24 — two existing items already had a stored `brass` value that silently
+  // never rendered on their cards until this line was added.
+  if (item.brass) entries.push({ label: 'Brass', value: `${formatSigned(item.brass)}%` });
   // rangedHaste added 2026-07-19 — first seen on Hip Quiver ("Ranged Haste: +10%"),
   // distinct from the flat `haste` field which applies to melee.
   if (item.rangedHaste) entries.push({ label: 'Ranged Haste', value: `${formatSigned(item.rangedHaste)}%` });
   // stringed added 2026-07-22 — first seen on Ba'Haara Lute ("Stringed: +24%"),
   // a Bard instrument-skill bonus paralleling percussion/wind/brass.
   if (item.stringed) entries.push({ label: 'Stringed', value: `${formatSigned(item.stringed)}%` });
+  // singing added 2026-07-24 — first seen on Wings of the Flittermouse ("Singing: +5%"),
+  // a Bard vocal-skill bonus paralleling the instrument stats above.
+  if (item.singing) entries.push({ label: 'Singing', value: `${formatSigned(item.singing)}%` });
   return entries;
 }
 
