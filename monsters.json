@@ -3335,12 +3335,156 @@
       { "item": "Wise Handguards" },
       { "item": "Resolute Buckler" }
     ],
-    "note": "Sourced from an external fan-wiki page (a \"Ten Hooks rare mob\"), not a direct in-game screenshot — weaker than the usual source, per CLAUDE.md. The page also listed vague \"Corroded Bronze\"/\"Tattered Hide\" common-loot categories rather than exact item names, so those weren't added to drops."
+    "note": "Sourced from an external fan-wiki page (a \"Ten Hooks rare mob\"), not a direct in-game screenshot â€” weaker than the usual source, per CLAUDE.md. The page also listed vague \"Corroded Bronze\"/\"Tattered Hide\" common-loot categories rather than exact item names, so those weren't added to drops."
   },
   {
     "name": "a shady farmer",
     "slug": "a-shady-farmer",
     "lastUpdated": "2026-07-28",
     "drops": [{ "item": "Sangrel Rite II" }]
+  },
+  {
+    "name": "Aidan Thrym",
+    "slug": "aidan-thrym",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Aegis of the Dragon Crusader" },
+      { "item": "Greaves of Courage" },
+      { "item": "Oathband of House Thyrm" },
+      { "item": "Silentstep Slippers" },
+      { "item": "Thrym's Cuirass" },
+      { "item": "Thrym's Fury" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Alaric Brom",
+    "slug": "alaric-brom",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Gauntlets of Hearty Strength" },
+      { "item": "Pounce Bag" },
+      { "item": "Scribe's Cuffs" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Allistaire The Black",
+    "slug": "allistaire-the-black",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Bone Mask of the Servant" },
+      { "item": "Cowl of the Arch Lich" },
+      { "item": "Midnight Mesh" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Asthijvala",
+    "slug": "asthijvala",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Bonefire Bracer" },
+      { "item": "Emberbone Ring" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Blightcaller Ghora",
+    "slug": "blightcaller-ghora",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Leprotic Bracer" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Blightcaller Harun",
+    "slug": "blightcaller-harun",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Leprotic Gloves" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Blightcaller Vethis",
+    "slug": "blightcaller-vethis",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Banished Seamstress' Blade" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Blightcaller Zirat",
+    "slug": "blightcaller-zirat",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Festerclasp" },
+      { "item": "Filthstriders" },
+      { "item": "Zirat's Blackwire Cuffs" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Captain Belvoir",
+    "slug": "captain-belvoir",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Red Mantle Captain's Medallion" },
+      { "item": "Red Mantle Greaves" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Captain Haring",
+    "slug": "captain-haring",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Bulwark of the Fallen" },
+      { "item": "Copper Holy Symbol of Eltrindra" },
+      { "item": "Mirefall Visor" },
+      { "item": "Veil of the Blessed Crossing" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Chieftan Raka'matar",
+    "slug": "chieftan-rakamatar",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Blood Smeared Iron Breastplate" },
+      { "item": "Gore-Smeared Warleggings" },
+      { "item": "Rakamatar Whorls" },
+      { "item": "Studded Black Iron Bracer" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Dame Lysandra Thrym",
+    "slug": "dame-lysandra-thrym",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Disgraced Daughter's Locket" },
+      { "item": "House Captain's Ring" },
+      { "item": "Lysandra's Crook" },
+      { "item": "Mother's Sorrow" },
+      { "item": "Shins of the Disgraced Line" },
+      { "item": "Thrymguard Pauldrons" }
+    ],
+    "lastUpdated": "2026-07-28"
   }
 ]
