@@ -188,6 +188,7 @@
   {
     "name": "Ironbark Wood Pile",
     "slug": "ironbark-wood-pile",
+    "image": "images/gathering/ironbark-wood-pile.jpg",
     "tradeskill": "Lumberjacking",
     "minSkill": 85,
     "trivialSkill": 135,
@@ -330,6 +331,7 @@
   {
     "name": "Sylvine",
     "slug": "sylvine",
+    "image": "images/gathering/sylvine.jpg",
     "tradeskill": "Herbalism",
     "minSkill": 1,
     "trivialSkill": 30,
@@ -401,6 +403,7 @@
   {
     "name": "Dragon's Vigil",
     "slug": "dragons-vigil",
+    "image": "images/gathering/dragons-vigil.jpg",
     "tradeskill": "Herbalism",
     "minSkill": 110,
     "trivialSkill": 160,
@@ -409,6 +412,7 @@
   {
     "name": "Stygian Moss",
     "slug": "stygian-moss",
+    "image": "images/gathering/stygian-moss.jpg",
     "tradeskill": "Herbalism",
     "minSkill": 125,
     "trivialSkill": 175,
@@ -426,6 +430,7 @@
   {
     "name": "Magebloom",
     "slug": "magebloom",
+    "image": "images/gathering/magebloom.jpg",
     "tradeskill": "Herbalism",
     "minSkill": 150,
     "trivialSkill": 200,

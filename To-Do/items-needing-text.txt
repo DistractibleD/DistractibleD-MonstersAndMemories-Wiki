@@ -340,3 +340,11 @@ Pre-existing data issue spotted while checking for duplicates in this batch (unr
 Glass Flats, not touched): `items.json` has two separate entries both slugged
 "hunting-longbow" -- worth a look next time that area of the file is touched, but out of
 scope for this scrape.
+
+2026-07-28, images/inbox batch: Leggings of Reckoning's new card showed meaningfully
+different numbers than the existing entry (AC 21->24, STA/AGI +4->+3, HP/Mana +10->+5, and
+the COLD+4/FIRE+4 resists line disappeared entirely rather than just being cropped off -- the
+new card's description/Class lines sit right where a resists line would otherwise be). Updated
+to the new card's values per "newest screenshot wins," but flagging since a stat *decreasing*
+and resists vanishing outright is more unusual than a typical correction -- worth a second look
+if a future card ever disagrees with this again.

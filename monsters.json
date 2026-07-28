@@ -1367,13 +1367,14 @@
   {
     "name": "a sneaky rat",
     "slug": "a-sneaky-rat",
-    "lastUpdated": "2026-07-18",
+    "lastUpdated": "2026-07-27",
     "named": true,
     "maps": ["The Grain Cellar"],
     "levelRange": "30",
     "drops": [
       { "item": "Rat's Nest Greaves" },
-      { "item": "Burrow-Hide Pants" }
+      { "item": "Burrow-Hide Pants" },
+      { "item": "Broken Grain Beetle Legs" }
     ]
   },
   {
@@ -1821,7 +1822,8 @@
   {
     "name": "Krev Thistlehook",
     "slug": "krev-thistlehook",
-    "lastUpdated": "2026-07-19",
+    "lastUpdated": "2026-07-27",
+    "image": "images/Monsters/krev-thistlehook.jpg",
     "named": true,
     "maps": ["Scarwood"],
     "drops": [
@@ -3299,5 +3301,46 @@
       { "item": "Wand of Cinder" }
     ],
     "lastUpdated": "2026-07-24"
+  },
+  {
+    "name": "Zahid the Calm",
+    "slug": "zahid-the-calm",
+    "lastUpdated": "2026-07-27",
+    "named": true,
+    "image": "images/Monsters/zahid-the-calm.jpg"
+  },
+  {
+    "name": "Overseer Jaru'Kan",
+    "slug": "overseer-jarukan",
+    "lastUpdated": "2026-07-27",
+    "named": true,
+    "drops": [{ "item": "Ratswarm Staff" }]
+  },
+  {
+    "name": "Merrisam Copperhelm",
+    "slug": "merrisam-copperhelm",
+    "lastUpdated": "2026-07-27",
+    "named": true,
+    "image": "images/Monsters/merrisam-copperhelm.jpg"
+  },
+  {
+    "name": "An unrelenting don",
+    "slug": "an-unrelenting-don",
+    "lastUpdated": "2026-07-28",
+    "named": true,
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "levelRange": "20-25",
+    "drops": [
+      { "item": "Wise Handguards" },
+      { "item": "Resolute Buckler" }
+    ],
+    "note": "Sourced from an external fan-wiki page (a \"Ten Hooks rare mob\"), not a direct in-game screenshot — weaker than the usual source, per CLAUDE.md. The page also listed vague \"Corroded Bronze\"/\"Tattered Hide\" common-loot categories rather than exact item names, so those weren't added to drops."
+  },
+  {
+    "name": "a shady farmer",
+    "slug": "a-shady-farmer",
+    "lastUpdated": "2026-07-28",
+    "drops": [{ "item": "Sangrel Rite II" }]
   }
 ]

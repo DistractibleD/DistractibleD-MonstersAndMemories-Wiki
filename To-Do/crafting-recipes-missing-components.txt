@@ -11,6 +11,10 @@ Full card but components still missing (1):
 
 - Tailoring — Cloth Satchel (has image, weight 0.5, size Medium)
 
+(Enchanting's "Enchant Ring: Lesser Health" was in this list only briefly, 2026-07-28 — a
+second screenshot the same batch showed the full Components list: 8x Magic Powder, 2x
+Glimmer of Magic.)
+
 (Enchanting's "Enchant Chest: Minor Health" was in this list until 2026-07-16, when a
 recipe-card screenshot from the large Enchanting batch confirmed its components:
 7x Enchanted Powder, 1x Mote of Magic.)
