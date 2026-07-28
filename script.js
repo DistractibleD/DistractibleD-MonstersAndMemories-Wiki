@@ -2563,6 +2563,101 @@ function closeMapViewer() {
   document.body.style.overflow = '';
 }
 
+// A gathering node's picture(s) (see nodeImageList above), viewed the same
+// way a multi-map area is: a plain full-size image with prev/next arrows
+// that only appear (and blink once, reusing map-viewer's own blink
+// animation/class) when the node actually has more than one picture. No
+// zoom/pan here — unlike a map, these are small reference photos, not a
+// multi-thousand-pixel image that needs scroll-to-zoom to read.
+let gatheringViewerImages = [];
+let gatheringViewerIndex = 0;
+
+function setupGatheringImageViewer() {
+  if (document.getElementById('gathering-image-viewer')) return;
+
+  const viewer = document.createElement('div');
+  viewer.id = 'gathering-image-viewer';
+  viewer.innerHTML = `
+    <button id="gathering-image-viewer-close" aria-label="Close">&times;</button>
+    <button id="gathering-image-viewer-prev" aria-label="Previous picture of this node" title="Previous picture of this node">
+      <svg class="map-viewer-nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19"/></svg>
+    </button>
+    <img id="gathering-image-viewer-img" alt="">
+    <button id="gathering-image-viewer-next" aria-label="Next picture of this node" title="Next picture of this node">
+      <svg class="map-viewer-nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 L16 12 L9 19"/></svg>
+    </button>
+  `;
+  document.body.appendChild(viewer);
+
+  viewer.addEventListener('click', e => {
+    if (e.target === viewer) closeGatheringImageViewer();
+  });
+  viewer.querySelector('#gathering-image-viewer-close').addEventListener('click', closeGatheringImageViewer);
+  viewer.querySelector('#gathering-image-viewer-prev').addEventListener('click', e => {
+    e.stopPropagation();
+    navigateGatheringImageViewer(-1);
+  });
+  viewer.querySelector('#gathering-image-viewer-next').addEventListener('click', e => {
+    e.stopPropagation();
+    navigateGatheringImageViewer(1);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!viewer.classList.contains('open')) return;
+    if (e.key === 'Escape') closeGatheringImageViewer();
+    else if (e.key === 'ArrowLeft') navigateGatheringImageViewer(-1);
+    else if (e.key === 'ArrowRight') navigateGatheringImageViewer(1);
+  });
+}
+
+function showGatheringViewerImage() {
+  document.getElementById('gathering-image-viewer-img').src = gatheringViewerImages[gatheringViewerIndex];
+}
+
+// Only shown/blinked when the node has more than one picture — same
+// remove/reflow/re-add dance as updateMapViewerNav, restarted once per
+// fresh node opened rather than on every arrow click.
+function updateGatheringImageViewerNav() {
+  const viewer = document.getElementById('gathering-image-viewer');
+  const showNav = gatheringViewerImages.length > 1;
+  const prev = viewer.querySelector('#gathering-image-viewer-prev');
+  const next = viewer.querySelector('#gathering-image-viewer-next');
+  prev.style.display = showNav ? 'flex' : 'none';
+  next.style.display = showNav ? 'flex' : 'none';
+
+  if (showNav) {
+    [prev, next].forEach(btn => {
+      btn.classList.remove('map-viewer-nav-btn-play');
+      void btn.offsetWidth;
+      btn.classList.add('map-viewer-nav-btn-play');
+    });
+  }
+}
+
+function navigateGatheringImageViewer(delta) {
+  if (gatheringViewerImages.length < 2) return;
+  gatheringViewerIndex = (gatheringViewerIndex + delta + gatheringViewerImages.length) % gatheringViewerImages.length;
+  showGatheringViewerImage();
+}
+
+function openGatheringImageViewer(images, index) {
+  setupGatheringImageViewer();
+  gatheringViewerImages = images;
+  gatheringViewerIndex = index;
+  const viewer = document.getElementById('gathering-image-viewer');
+  viewer.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  updateGatheringImageViewerNav();
+  showGatheringViewerImage();
+}
+
+function closeGatheringImageViewer() {
+  const viewer = document.getElementById('gathering-image-viewer');
+  if (!viewer) return;
+  viewer.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
 /* ============================================
    Crafting
    Categories live in tradeskills.json (a fixed list —
@@ -3444,10 +3539,23 @@ function gatheringColumns(nodes) {
   return columns;
 }
 
+// A node normally has just its one `image`, but can carry extra alternate
+// pictures of the same resource (different angle/lighting) in an optional
+// `images` array — this combines both into the one ordered list the thumb
+// button and image viewer both work from, primary image first.
+function nodeImageList(node) {
+  return [node.image, ...(node.images || [])].filter(Boolean);
+}
+
 function gatheringCellHTML(node, key) {
   switch (key) {
-    case 'name':
-      return `<td data-label="Name">${node.image ? `<button type="button" class="gathering-node-thumb" data-full="${escapeAttr(node.image)}"><img src="${escapeAttr(node.image)}" alt="${escapeAttr(node.name)}"></button>` : ''}${escapeAttr(node.name)}${node.needsInfo ? ' <span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}</td>`;
+    case 'name': {
+      const images = nodeImageList(node);
+      const thumb = images.length
+        ? `<button type="button" class="gathering-node-thumb" data-images="${escapeAttr(JSON.stringify(images))}"><img src="${escapeAttr(images[0])}" alt="${escapeAttr(node.name)}"></button>`
+        : '';
+      return `<td data-label="Name">${thumb}${escapeAttr(node.name)}${node.needsInfo ? ' <span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}</td>`;
+    }
     case 'minSkill':
     case 'trivialSkill':
       return `<td data-label="${key === 'minSkill' ? 'Min Skill' : 'Trivial'}"${node[key] == null ? ' class="cell-empty"' : ''}>${node[key] != null ? node[key] : '?'}</td>`;
@@ -3585,7 +3693,7 @@ function renderGatheringNodes(container, tradeskillName) {
       });
     });
     tbody.querySelectorAll('.gathering-node-thumb').forEach(btn => {
-      btn.addEventListener('click', () => openSampleViewer(btn.dataset.full));
+      btn.addEventListener('click', () => openGatheringImageViewer(JSON.parse(btn.dataset.images), 0));
     });
     setupItemTooltip(tbody);
   }

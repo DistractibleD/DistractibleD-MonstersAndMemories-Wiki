@@ -512,9 +512,7 @@ entry, `"type": "gathering"`, above "Crafting" in the sidebar) and data file,
 - **Optional `image` + `needsInfo`:** a node can carry a picture of the actual plant/vein/
   etc. — `images/gathering/<slug>.jpg`, same `.jpg` quality-90 convention as everything
   else, referenced via an `image` field. When set, `gatheringCellHTML`'s Name cell shows a
-  small clickable thumbnail (`.gathering-node-thumb`) that opens the existing
-  `#sample-viewer` lightbox (the same minimal image-only modal the Submit page's examples
-  use — no separate viewer built). `needsInfo: true` is the same flag/meaning as
+  small clickable thumbnail (`.gathering-node-thumb`). `needsInfo: true` is the same flag/meaning as
   `items.json`/`crafting.json`'s (see "Item and recipe cards" below): confirmed to exist but
   not fully identified/documented yet — renders a red "NEEDS INFO" badge next to the name
   and a red note row linking to `#submit`. First used for a herb spotted in-game but not yet
@@ -545,6 +543,23 @@ entry, `"type": "gathering"`, above "Crafting" in the sidebar) and data file,
   went with them, were reverted back to the plain `cover`-based original in the same session.
   If this area gets revisited again, get explicit sign-off on the actual visual result (a
   real screenshot from the user, not just an offline simulation) before considering it done.
+- **A node can have more than one picture via an optional `images` array** (added
+  2026-07-28) — extra alternate photos of the same resource (different angle/lighting),
+  alongside its main `image`. `nodeImageList(node)` in `script.js` combines the two into one
+  ordered list (`image` first, then each entry of `images`) that both the thumbnail button
+  and the viewer work from — the thumb itself still just shows `image` (the first entry), the
+  full list only matters once the viewer is open. Clicking the thumbnail opens
+  `#gathering-image-viewer` (`openGatheringImageViewer` in `script.js`) — a plain full-size
+  lightbox, structurally `#map-viewer`'s prev/next arrows (including their once-per-open blink
+  animation, reusing that same `.map-viewer-nav-btn-play` CSS class/keyframe) grafted onto
+  `#sample-viewer`'s simpler shell — no zoom/pan, since unlike a map these are small reference
+  photos that don't need scroll-to-zoom to read. The arrows only render (and only blink) when
+  a node actually has more than one picture; a single-image node's thumbnail still opens the
+  same viewer, just with no visible nav. First used for "Wood Pile" (Lumberjacking), whose
+  second photo came in labeled "Tier 1 wood - alternative visuals, add to existing node do not
+  replace" — a naming pattern worth recognizing again: a future inbox file phrased as an
+  *alternate* view of something already documented (rather than a new/replacement image) is
+  exactly this case, not a duplicate to discard nor an `image` field to overwrite.
 - **Columns are derived per-tradeskill from the data, not fixed** (`gatheringColumns()` in
   `script.js`) — Name and Min Skill always show; Trivial/Results/Rarity/Bait Required each
   only appear if at least one node of that tradeskill actually uses that field (Fishing uses

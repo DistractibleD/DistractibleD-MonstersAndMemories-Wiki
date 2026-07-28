@@ -151,6 +151,7 @@
     "name": "Wood Pile",
     "slug": "wood-pile",
     "image": "images/gathering/wood-pile.jpg",
+    "images": ["images/gathering/wood-pile-alt.jpg"],
     "tradeskill": "Lumberjacking",
     "minSkill": 1,
     "trivialSkill": 35,

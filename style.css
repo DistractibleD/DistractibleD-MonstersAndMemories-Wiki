@@ -1965,6 +1965,85 @@ body:not(.site-entered) .sidebar {
   23%, 47%, 70% { background: var(--bg-panel); color: var(--accent); box-shadow: 0 0 18px rgba(224, 166, 64, 0.45); }
 }
 
+/* A gathering node's picture(s) — same overlay shell as #sample-viewer (a
+   plain centered image, no zoom/pan) but with #map-viewer's prev/next
+   arrows (including their blink-on-open animation, reusing that same
+   .map-viewer-nav-btn-play keyframe) for stepping between a node's own
+   alternate pictures. */
+#gathering-image-viewer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 11, 14, 0.85);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+#gathering-image-viewer.open {
+  display: flex;
+}
+#gathering-image-viewer-img {
+  max-width: 92vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+#gathering-image-viewer-close {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+#gathering-image-viewer-close:hover {
+  color: var(--accent);
+}
+#gathering-image-viewer-prev,
+#gathering-image-viewer-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--bg-panel);
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  width: 38px;
+  height: 210px;
+  border-radius: 19px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  box-shadow: 0 0 18px rgba(224, 166, 64, 0.45);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+#gathering-image-viewer-prev {
+  left: 24px;
+}
+#gathering-image-viewer-next {
+  right: 24px;
+}
+#gathering-image-viewer-prev:hover,
+#gathering-image-viewer-next:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+@media (max-width: 480px) {
+  #gathering-image-viewer-close { top: 10px; right: 12px; width: 34px; height: 34px; font-size: 1.2rem; }
+  #gathering-image-viewer-prev, #gathering-image-viewer-next { width: 30px; height: 140px; }
+  #gathering-image-viewer-prev { left: 8px; }
+  #gathering-image-viewer-next { right: 8px; }
+}
+
 /* ---------- Footer ---------- */
 .site-footer {
   border-top: 1px solid var(--border);
