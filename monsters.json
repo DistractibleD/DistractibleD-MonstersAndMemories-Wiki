@@ -426,8 +426,9 @@
   {
     "name": "Maleq",
     "slug": "maleq",
+    "lastUpdated": "2026-07-28",
     "named": true,
-    "maps": ["Shaded Dunes"],
+    "maps": ["Shaded Dunes", "Fallen Pass"],
     "levelRange": "~40",
     "drops": [
       { "item": "Giant Fire Wedding Ring" },
@@ -3161,16 +3162,17 @@
     "name": "Master Tracker Lark",
     "slug": "master-tracker-lark",
     "named": true,
-    "maps": ["Glass Flats"],
+    "maps": ["Glass Flats", "Fallen Pass"],
     "drops": [
       { "item": "Irontail Braces" },
+      { "item": "Maiden's Brooch" },
       { "item": "Oathkeeper Sabatons" },
       { "item": "Savage Club" },
       { "item": "Stalker's Leather Britches" },
       { "item": "Threadbare Cape" },
       { "item": "Untamed Spirit Grips" }
     ],
-    "lastUpdated": "2026-07-24"
+    "lastUpdated": "2026-07-28"
   },
   {
     "name": "Mistress Nephidna",
@@ -3319,9 +3321,14 @@
   {
     "name": "Merrisam Copperhelm",
     "slug": "merrisam-copperhelm",
-    "lastUpdated": "2026-07-27",
+    "lastUpdated": "2026-07-28",
     "named": true,
-    "image": "images/Monsters/merrisam-copperhelm.jpg"
+    "image": "images/Monsters/merrisam-copperhelm.jpg",
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Enchanted Bronze Battle Helm" },
+      { "item": "Tarnished Tinker's Ring" }
+    ]
   },
   {
     "name": "An unrelenting don",
@@ -3335,7 +3342,7 @@
       { "item": "Wise Handguards" },
       { "item": "Resolute Buckler" }
     ],
-    "note": "Sourced from an external fan-wiki page (a \"Ten Hooks rare mob\"), not a direct in-game screenshot Ã¢â‚¬â€ weaker than the usual source, per CLAUDE.md. The page also listed vague \"Corroded Bronze\"/\"Tattered Hide\" common-loot categories rather than exact item names, so those weren't added to drops."
+    "note": "Sourced from an external fan-wiki page (a \"Ten Hooks rare mob\"), not a direct in-game screenshot ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â weaker than the usual source, per CLAUDE.md. The page also listed vague \"Corroded Bronze\"/\"Tattered Hide\" common-loot categories rather than exact item names, so those weren't added to drops."
   },
   {
     "name": "a shady farmer",
@@ -3650,6 +3657,71 @@
       { "item": "Patina Mask" },
       { "item": "Putrid Carpenter's Vest" },
       { "item": "Rivenguard Tassets" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Namon Ka Har",
+    "slug": "namon-ka-har",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Dark Alchemist's Bag" },
+      { "item": "Prayer Beads of the Leper Saint" },
+      { "item": "Robe of the Namon Ka Har" },
+      { "item": "Shroud of the Dread Messiah" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Morthkara The Blight",
+    "slug": "morthkara-the-blight",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Ring of Remorse" },
+      { "item": "Runestone of Pride" },
+      { "item": "Withermaker" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Lady Tristanya Thrym",
+    "slug": "lady-tristanya-thrym",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Choker of the Gallows" },
+      { "item": "Ethereal Sword" },
+      { "item": "Souldbrand" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Lady Elana Torvald",
+    "slug": "lady-elana-torvald",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Amulet of Loyalty" },
+      { "item": "Silent Oath" },
+      { "item": "Silkbraid Girdle" },
+      { "item": "Slippers of Renewal" },
+      { "item": "Torvald Tassets" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Kowmeh Lalen",
+    "slug": "kowmeh-lalen",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Balm-Stained Leather Gloves" },
+      { "item": "Drycrack Jerkin" },
+      { "item": "Echoes of Kowmeh's Vigil" },
+      { "item": "Rotleaf Tracker Mantle" },
+      { "item": "Staff of the Leper Priest" }
     ],
     "lastUpdated": "2026-07-28"
   }
