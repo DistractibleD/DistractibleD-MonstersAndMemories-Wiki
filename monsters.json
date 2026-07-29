@@ -3314,9 +3314,15 @@
   {
     "name": "Overseer Jaru'Kan",
     "slug": "overseer-jarukan",
-    "lastUpdated": "2026-07-27",
+    "lastUpdated": "2026-07-28",
     "named": true,
-    "drops": [{ "item": "Ratswarm Staff" }]
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Ratswarm Staff" },
+      { "item": "Skri'Var Overseer's Chain" },
+      { "item": "Skri'Var War-Steps" },
+      { "item": "Spiritbreaker's Mantle" }
+    ]
   },
   {
     "name": "Merrisam Copperhelm",
@@ -3342,7 +3348,7 @@
       { "item": "Wise Handguards" },
       { "item": "Resolute Buckler" }
     ],
-    "note": "Sourced from an external fan-wiki page (a \"Ten Hooks rare mob\"), not a direct in-game screenshot ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â weaker than the usual source, per CLAUDE.md. The page also listed vague \"Corroded Bronze\"/\"Tattered Hide\" common-loot categories rather than exact item names, so those weren't added to drops."
+    "note": "Sourced from an external fan-wiki page (a \"Ten Hooks rare mob\"), not a direct in-game screenshot ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â weaker than the usual source, per CLAUDE.md. The page also listed vague \"Corroded Bronze\"/\"Tattered Hide\" common-loot categories rather than exact item names, so those weren't added to drops."
   },
   {
     "name": "a shady farmer",
@@ -3722,6 +3728,66 @@
       { "item": "Echoes of Kowmeh's Vigil" },
       { "item": "Rotleaf Tracker Mantle" },
       { "item": "Staff of the Leper Priest" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Pak'har",
+    "slug": "pakhar",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Cutpurse's Stud" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Overseer Shuk'naru",
+    "slug": "overseer-shuknaru",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Dented Black Iron Girdle" },
+      { "item": "Shuk'Silk Slipknots" },
+      { "item": "Skri'Var Overseer's Mask" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Observer Samvel",
+    "slug": "observer-samvel",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Ley Lined Carcanet" },
+      { "item": "Mind's Eye Turban" },
+      { "item": "Samvel's Manacles" },
+      { "item": "Staff of the Shattered Seer" },
+      { "item": "Trousers of Shattered Sight" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Nyxx",
+    "slug": "nyxx",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Bane of the Twin Drakes" },
+      { "item": "Crest of the Overwatch Commander" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Necroferius",
+    "slug": "necroferius",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Carapace Cloak" },
+      { "item": "Carrioncaller" },
+      { "item": "Foul Chitin Bracer" },
+      { "item": "Grave-Chitin Warshanks" }
     ],
     "lastUpdated": "2026-07-28"
   }
