@@ -3348,7 +3348,7 @@
       { "item": "Wise Handguards" },
       { "item": "Resolute Buckler" }
     ],
-    "note": "Sourced from an external fan-wiki page (a \"Ten Hooks rare mob\"), not a direct in-game screenshot ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â weaker than the usual source, per CLAUDE.md. The page also listed vague \"Corroded Bronze\"/\"Tattered Hide\" common-loot categories rather than exact item names, so those weren't added to drops."
+    "note": "Sourced from an external fan-wiki page (a \"Ten Hooks rare mob\"), not a direct in-game screenshot ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â weaker than the usual source, per CLAUDE.md. The page also listed vague \"Corroded Bronze\"/\"Tattered Hide\" common-loot categories rather than exact item names, so those weren't added to drops."
   },
   {
     "name": "a shady farmer",
@@ -3788,6 +3788,64 @@
       { "item": "Carrioncaller" },
       { "item": "Foul Chitin Bracer" },
       { "item": "Grave-Chitin Warshanks" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Seamas Growt",
+    "slug": "seamas-growt",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Mark of the Thrallmaker" },
+      { "item": "Smuggler's Jerkin" },
+      { "item": "Woven Rat Hide Belt" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Rotfang",
+    "slug": "rotfang",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Diseased Claw Shiv" },
+      { "item": "Putrid Hide Hand Wraps" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Riki'tipa",
+    "slug": "rikitipa",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Quickclaw Arm Wraps" },
+      { "item": "Scratching Mace" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Qassem Brolt",
+    "slug": "qassem-brolt",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Amulet of Disease Protection" },
+      { "item": "Rat Clawed Idol" },
+      { "item": "Sculpted Vermin Helm" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Pustulax",
+    "slug": "pustulax",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Cape of the Plague Avatar" },
+      { "item": "Pestilence, Shard of the Blightspire" },
+      { "item": "Pustulax's Robe" }
     ],
     "lastUpdated": "2026-07-28"
   }
