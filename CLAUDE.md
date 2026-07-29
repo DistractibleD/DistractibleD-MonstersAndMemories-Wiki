@@ -543,6 +543,16 @@ entry, `"type": "gathering"`, above "Crafting" in the sidebar) and data file,
   went with them, were reverted back to the plain `cover`-based original in the same session.
   If this area gets revisited again, get explicit sign-off on the actual visual result (a
   real screenshot from the user, not just an offline simulation) before considering it done.
+  **Root cause found and fixed 2026-07-30, confirmed by the user ("looks great!")** — none of
+  the three attempts above were actually the problem. The real cause: the site-wide
+  `.content-inner img` rule (see "Known CSS gotchas" below) sets `margin: 10px 0`,
+  `border: 1px solid`, and `border-radius: 8px` on every content image, and
+  `.gathering-node-thumb img` only ever overrode `width`/`height`/`object-fit`/`display` —
+  never those three — so they leaked straight through onto the 28x28 thumbnail: the margin
+  pushed the picture off-center inside the button and the border/radius cropped it further,
+  both exposing the button's own background color around the edges. Fixed by explicitly
+  zeroing `margin`/`border`/`border-radius` on `.gathering-node-thumb img` — no cropping/
+  object-fit change needed at all, `cover` was fine the whole time.
 - **A node can have more than one picture via an optional `images` array** (added
   2026-07-28) — extra alternate photos of the same resource (different angle/lighting),
   alongside its main `image`. `nodeImageList(node)` in `script.js` combines the two into one
