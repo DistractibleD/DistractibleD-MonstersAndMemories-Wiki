@@ -3348,7 +3348,7 @@
       { "item": "Wise Handguards" },
       { "item": "Resolute Buckler" }
     ],
-    "note": "Sourced from an external fan-wiki page (a \"Ten Hooks rare mob\"), not a direct in-game screenshot ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â weaker than the usual source, per CLAUDE.md. The page also listed vague \"Corroded Bronze\"/\"Tattered Hide\" common-loot categories rather than exact item names, so those weren't added to drops."
+    "note": "Sourced from an external fan-wiki page (a \"Ten Hooks rare mob\"), not a direct in-game screenshot ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â weaker than the usual source, per CLAUDE.md. The page also listed vague \"Corroded Bronze\"/\"Tattered Hide\" common-loot categories rather than exact item names, so those weren't added to drops."
   },
   {
     "name": "a shady farmer",
@@ -3846,6 +3846,58 @@
       { "item": "Cape of the Plague Avatar" },
       { "item": "Pestilence, Shard of the Blightspire" },
       { "item": "Pustulax's Robe" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Steward Grimaldi",
+    "slug": "steward-grimaldi",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Grimaldi's Padded Mantle" },
+      { "item": "Steward's Coif" },
+      { "item": "Steward's Cuirass" },
+      { "item": "The Red Book" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Stablemaster Tomaz",
+    "slug": "stablemaster-tomaz",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Frayed Rope" },
+      { "item": "Pale Handlamp" },
+      { "item": "Stablemaster's Claymore" },
+      { "item": "Stableplate Greaves" },
+      { "item": "Workman's Leather Gloves" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Sorchan Yazmul",
+    "slug": "sorchan-yazmul",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Forge-Touched Girdle" },
+      { "item": "Plagued Smith's Hammer" },
+      { "item": "Plaguesmith's Breastplate" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Sivah Arujan",
+    "slug": "sivah-arujan",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Band of Sivah" },
+      { "item": "Incantation Shoulderpads" },
+      { "item": "Moonlit Strides" },
+      { "item": "Staff of Sigils" }
     ],
     "lastUpdated": "2026-07-28"
   }

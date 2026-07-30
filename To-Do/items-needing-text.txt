@@ -348,3 +348,14 @@ new card's description/Class lines sit right where a resists line would otherwis
 to the new card's values per "newest screenshot wins," but flagging since a stat *decreasing*
 and resists vanishing outright is more unusual than a typical correction -- worth a second look
 if a future card ever disagrees with this again.
+
+2026-07-28, mnmdrops.com scrape, Fallen Pass zone, Steward Grimaldi: "Steward's Coif" (Head,
+same slot/description/AC on both cards) turned out to already exist in items.json from an
+earlier 2026-07-18 capture with INT+7/MANA+30, while this new mnmdrops.com card read
+INT+5/MANA+5 for what otherwise looks like the exact same item. Unlike the resists-disappearing
+case noted above, this one wasn't treated as "newest wins" -- both captures are external
+mnmdrops.com screenshots (not the user's own), so there's no clear reason to prefer one over
+the other, and the two numbers aren't a simple superset/subset of each other the way a
+cropped-vs-full card would be. Left the original 2026-07-18 entry untouched, discarded the
+duplicate, and did not overwrite the archived screenshot. Needs an in-game look (or the user's
+own screenshot) to resolve which INT/MANA values are actually correct.
