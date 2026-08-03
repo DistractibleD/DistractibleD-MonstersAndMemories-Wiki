@@ -3383,7 +3383,88 @@
     "image": "images/items/magic-powder.jpg",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Tiny",
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Recipe: Smoke Bomb Arrow (x20)",
+    "slug": "recipe-smoke-bomb-arrow",
+    "image": "images/items/recipe-smoke-bomb-arrow.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ARC"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Ashira Tail Charm",
+    "slug": "ashira-tail-charm",
+    "image": "images/items/ashira-tail-charm.jpg",
+    "type": "Jewelry",
+    "tags": ["MAGIC", "LORE"],
+    "slot": "Range / Ear / Belt",
+    "ac": 1,
+    "stats": { "STR": 1, "STA": 3, "AGI": 1, "DEX": 2, "WIS": 3, "CHA": 3 },
+    "description": "An ornamented ashira tail that provides comfort to the superstitious.",
+    "weight": 1.3,
+    "size": "Medium",
+    "classes": ["BRD", "BST", "CLR", "DRU", "INQ", "RNG", "SHM", "SPB"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Eth-ur Astrological Journal Page",
+    "slug": "eth-ur-astrological-journal-page",
+    "image": "images/items/eth-ur-astrological-journal-page.jpg",
+    "type": "Misc",
+    "tags": [],
+    "classes": ["DRU"],
+    "weight": 0.1,
+    "size": "Small",
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "To Serve Gnome",
+    "slug": "to-serve-gnome",
+    "image": "images/items/to-serve-gnome.jpg",
+    "type": "Misc",
+    "tags": [],
+    "readText": "cries. Tell me, reader, do you feel sadness when a lamb bleats for its mother?\n\nProcess gnome like you would any other meat, for they are just like any other meat, only with a more savory, melt-in-your-mouth flavor.\n\nGnome on a Stick\nThe most basic way to serve gnome. If you aren't patient enough to butcher it yourself, you can quickly throw the gnome meat onto a skewer, salt it, and cook it over a fire. Very simple, though not as tender.\n\nGnome Steak\nGnome makes delicious steak just as a steer would. Chop the meat into steaks, salt it, and sear it to desired doneness.\n\nGnome Pita\n(text continues, not fully captured)",
+    "needsInfo": true,
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Antique Ceramic Fragment",
+    "slug": "antique-ceramic-fragment",
+    "image": "images/items/antique-ceramic-fragment.jpg",
+    "type": "Misc",
+    "tags": ["UNIQUE"],
+    "description": "A curved piece of ceramic decorated with a blue pattern. It looks quite old and worn.",
+    "weight": 0.1,
+    "size": "Tiny",
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Ghoul Skin",
+    "slug": "ghoul-skin",
+    "image": "images/items/ghoul-skin.jpg",
+    "type": "Misc",
+    "weight": 0.1,
+    "size": "Small",
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Arcane Powder",
+    "slug": "arcane-powder",
+    "image": "images/items/arcane-powder.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Tiny",
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Muurtu Shield",
@@ -5380,6 +5461,17 @@
     "size": "Small"
   },
   {
+    "name": "Spirit World Ch. 20",
+    "slug": "spirit-world-ch-20",
+    "image": "images/items/spirit-world-ch-20.jpg",
+    "type": "Misc",
+    "tags": [],
+    "classes": ["SHM"],
+    "weight": 0.1,
+    "size": "Small",
+    "lastUpdated": "2026-07-30"
+  },
+  {
     "name": "Emerald Encrusted Ring",
     "slug": "emerald-encrusted-ring",
     "image": "images/items/emerald-encrusted-ring.jpg",
@@ -5897,12 +5989,19 @@
   {
     "name": "Rusty Iron Great Scythe",
     "slug": "rusty-iron-great-scythe",
+    "image": "images/items/rusty-iron-great-scythe.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
     "twoHanded": true,
+    "damage": 16,
+    "delay": 46,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["BST", "DRU", "FTR", "INQ", "NEC", "RNG", "SHD", "SPB"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Rusty Iron Greatsword",
@@ -5917,11 +6016,18 @@
   {
     "name": "Rusty Iron Longsword",
     "slug": "rusty-iron-longsword",
+    "image": "images/items/rusty-iron-longsword.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 10,
+    "delay": 38,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB", "WIZ"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Rusty Iron Mace",
@@ -5981,12 +6087,19 @@
   {
     "name": "Rusty Iron War Lance",
     "slug": "rusty-iron-war-lance",
+    "image": "images/items/rusty-iron-war-lance.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
     "twoHanded": true,
+    "damage": 16,
+    "delay": 48,
     "skill": "Stabbing",
-    "needsInfo": true
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Rusty Iron Warhammer",
@@ -7814,10 +7927,16 @@
   {
     "name": "Rusty Iron Plate Cloak",
     "slug": "rusty-iron-plate-cloak",
+    "image": "images/items/rusty-iron-plate-cloak.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Back",
-    "needsInfo": true
+    "ac": 5,
+    "weight": 0.25,
+    "size": "Medium",
+    "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Rusty Iron Plate Collar",
@@ -7859,10 +7978,16 @@
   {
     "name": "Rusty Iron Plate Helm",
     "slug": "rusty-iron-plate-helm",
+    "image": "images/items/rusty-iron-plate-helm.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Head",
-    "needsInfo": true
+    "ac": 15,
+    "weight": 1.0,
+    "size": "Small",
+    "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Rusty Iron Plate Pauldrons",
@@ -11640,6 +11765,7 @@
   {
     "name": "Colorful Leather Vest",
     "slug": "colorful-leather-vest",
+    "image": "images/items/colorful-leather-vest.jpg",
     "lastUpdated": "2026-07-19",
     "type": "Armor",
     "tags": ["MAGIC"],
@@ -13482,15 +13608,17 @@
   {
     "name": "Shadowy Chain Gloves",
     "slug": "shadowy-chain-gloves",
+    "image": "images/items/shadowy-chain-gloves.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Hands",
     "ac": 24,
-    "stats": { "WIS": 3, "HP": 10 },
+    "stats": { "WIS": 5, "HP": 20, "MANA": 10 },
     "weight": 2.0,
     "size": "Small",
     "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Vile Stud",
@@ -13667,6 +13795,7 @@
   {
     "name": "Ceremonial Greaves",
     "slug": "ceremonial-greaves",
+    "image": "images/items/ceremonial-greaves.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Legs",
@@ -13682,19 +13811,23 @@
   {
     "name": "Thoughtweaver's Wrap",
     "slug": "thoughtweavers-wrap",
+    "image": "images/items/thoughtweavers-wrap.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Back",
+    "ac": 8,
     "stats": { "STA": 1, "INT": 4, "MANA": 10 },
     "resists": { "DISEASE": 4 },
     "weight": 0.25,
     "size": "Medium",
     "classes": ["ELE", "ENC", "INQ", "NEC", "SHD", "SPB", "WIZ"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Waistguard of Fervor",
     "slug": "waistguard-of-fervor",
+    "image": "images/items/waistguard-of-fervor.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Waist",

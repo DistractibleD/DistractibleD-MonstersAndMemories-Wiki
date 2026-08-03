@@ -982,7 +982,49 @@
     "name": "a bandit",
     "slug": "a-bandit",
     "image": "images/Monsters/a-bandit.jpg",
-    "maps": ["Sungreet Strand"]
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Rawhide Scraps" },
+      { "item": "Torch" },
+      { "item": "Tomato" },
+      { "item": "Raw Human Meat" },
+      { "item": "Cooked Human Meat" },
+      { "item": "Decanter of Aged Ambergris" },
+      { "item": "Cloth Scraps" },
+      { "item": "Chipped Onyx" },
+      { "item": "Worn Buckler" },
+      { "item": "To Serve Gnome" },
+      { "item": "Antique Ceramic Fragment" },
+      { "item": "Rusty Axe" },
+      { "item": "Rusty Battle Axe" },
+      { "item": "Rusty Dagger" },
+      { "item": "Rusty Great Scythe" },
+      { "item": "Rusty Greatsword" },
+      { "item": "Rusty Kite Shield" },
+      { "item": "Rusty Long Spear" },
+      { "item": "Rusty Longsword" },
+      { "item": "Rusty Mace" },
+      { "item": "Rusty Maul" },
+      { "item": "Rusty Scimitar" },
+      { "item": "Rusty Scythe" },
+      { "item": "Rusty Shortsword" },
+      { "item": "Rusty Spear" },
+      { "item": "Rusty Tower Shield" },
+      { "item": "Rusty Trident" },
+      { "item": "Rusty War Lance" },
+      { "item": "Rusty Warhammer" }
+    ],
+    "coinDrops": [
+      { "silver": 0, "copper": 38 },
+      { "silver": 0, "copper": 42 },
+      { "silver": 0, "copper": 39 },
+      { "silver": 0, "copper": 29 },
+      { "silver": 0, "copper": 40 },
+      { "silver": 0, "copper": 41 },
+      { "silver": 0, "copper": 29 },
+      { "silver": 0, "copper": 41 }
+    ],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "a willowisp",
@@ -3907,6 +3949,34 @@
     "lastUpdated": "2026-07-28"
   },
   {
+    "name": "a werejackal sister",
+    "slug": "a-werejackal-sister",
+    "drops": [
+      { "item": "Leather Scraps" },
+      { "item": "Celery" }
+    ],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "a werejackal cub",
+    "slug": "a-werejackal-cub",
+    "drops": [
+      { "item": "Leather Scraps" }
+    ],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "a werejackal elder",
+    "slug": "a-werejackal-elder",
+    "drops": [
+      { "item": "Iron Scraps" }
+    ],
+    "coinDrops": [
+      { "silver": 5, "copper": 46 }
+    ],
+    "lastUpdated": "2026-07-30"
+  },
+  {
     "name": "Thuraya Aislingar",
     "slug": "thuraya-aislingar",
     "named": true,
@@ -3926,6 +3996,8 @@
       { "item": "Ghoul Skin" },
       { "item": "Iron Scraps" },
       { "item": "Bone Chips" },
+      { "item": "Cotton Scraps" },
+      { "item": "Cracked Ironbark Staff" },
       { "item": "Tattered Cotton Shirt" },
       { "item": "Rusty Iron Axe" },
       { "item": "Rusty Iron Battle Axe" },
@@ -3988,7 +4060,48 @@
     "maps": ["Fallen Pass"],
     "areas": ["Plagueborn Camp"],
     "drops": [
-      { "item": "Cotton Scraps" }
+      { "item": "Cotton Scraps" },
+      { "item": "Rusty Iron Axe" },
+      { "item": "Rusty Iron Battle Axe" },
+      { "item": "Rusty Iron Chain Boots" },
+      { "item": "Rusty Iron Chain Cloak" },
+      { "item": "Rusty Iron Chain Coif" },
+      { "item": "Rusty Iron Chain Gambeson" },
+      { "item": "Rusty Iron Chain Gloves" },
+      { "item": "Rusty Iron Chain Gorget" },
+      { "item": "Rusty Iron Chain Leggings" },
+      { "item": "Rusty Iron Chain Mask" },
+      { "item": "Rusty Iron Chain Shoulderguards" },
+      { "item": "Rusty Iron Chain Tunic" },
+      { "item": "Rusty Iron Chain Waistguard" },
+      { "item": "Rusty Iron Chain Wristguard" },
+      { "item": "Rusty Iron Dagger" },
+      { "item": "Rusty Iron Great Scythe" },
+      { "item": "Rusty Iron Greatsword" },
+      { "item": "Rusty Iron Kite Shield" },
+      { "item": "Rusty Iron Long Spear" },
+      { "item": "Rusty Iron Longsword" },
+      { "item": "Rusty Iron Mace" },
+      { "item": "Rusty Iron Maul" },
+      { "item": "Rusty Iron Plate Arming Doublet" },
+      { "item": "Rusty Iron Plate Boots" },
+      { "item": "Rusty Iron Plate Bracer" },
+      { "item": "Rusty Iron Plate Breastplate" },
+      { "item": "Rusty Iron Plate Cloak" },
+      { "item": "Rusty Iron Plate Collar" },
+      { "item": "Rusty Iron Plate Gauntlets" },
+      { "item": "Rusty Iron Plate Girdle" },
+      { "item": "Rusty Iron Plate Greaves" },
+      { "item": "Rusty Iron Plate Helm" },
+      { "item": "Rusty Iron Plate Pauldrons" },
+      { "item": "Rusty Iron Plate Visor" },
+      { "item": "Rusty Iron Scimitar" },
+      { "item": "Rusty Iron Scythe" },
+      { "item": "Rusty Iron Shortsword" },
+      { "item": "Rusty Iron Spear" },
+      { "item": "Rusty Iron Trident" },
+      { "item": "Rusty Iron War Lance" },
+      { "item": "Rusty Iron Warhammer" }
     ],
     "coinDrops": [
       { "silver": 4, "copper": 16 }
@@ -4057,6 +4170,7 @@
     "areas": ["Plagueborn Camp"],
     "drops": [
       { "item": "Tattered Leather Cloak" },
+      { "item": "Eth-ur Astrological Journal Page" },
       { "item": "Rusty Iron Axe" },
       { "item": "Rusty Iron Battle Axe" },
       { "item": "Rusty Iron Chain Boots" },
@@ -4164,6 +4278,7 @@
     "maps": ["Fallen Pass"],
     "areas": ["Plagueborn Camp"],
     "drops": [
+      { "item": "Cotton Scraps" },
       { "item": "Rusty Iron Axe" },
       { "item": "Rusty Iron Battle Axe" },
       { "item": "Rusty Iron Chain Boots" },
@@ -4220,6 +4335,7 @@
       { "item": "Torch" },
       { "item": "Iron Scraps" },
       { "item": "Tattered Cotton Tunic" },
+      { "item": "Spirit World Ch. 20" },
       { "item": "Rusty Iron Axe" },
       { "item": "Rusty Iron Battle Axe" },
       { "item": "Rusty Iron Chain Boots" },

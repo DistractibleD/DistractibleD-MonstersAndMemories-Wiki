@@ -1052,9 +1052,11 @@ each time.
 
 - A "quality set" is identified by a shared name prefix denoting a tier/material, not a
   literal in-game grouping. Confirmed families and their current known rosters:
-  - **Rusty** (18 pieces, weapons + Tower Shield): Dagger, Shortsword, Throwing Dagger, Axe,
-    Battle Axe, Scimitar, Scythe, Longsword, Spear, Long Spear, Trident, Mace, Warhammer,
-    Great Scythe, War Lance, Greatsword, Maul, Tower Shield.
+  - **Rusty** (18 pieces, weapons + Tower Shield): Axe, Battle Axe, Dagger, Great Scythe,
+    Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar, Scythe, Shortsword,
+    Spear, Tower Shield, Trident, War Lance, Warhammer. (A "Throwing Dagger" was listed here
+    in an earlier version of this doc, but no such item actually exists in items.json —
+    corrected 2026-07-30 rather than perpetuated.)
   - **Tattered Cloth** (13 pieces, armor — grown from an originally-documented 9 as more
     pieces turned up in later screenshots): Cap, Gorget, Pantaloons, Shirt, Gloves, Bracer,
     Boots, Robe, Veil, Belt, Cape, Mantle, Tunic.
