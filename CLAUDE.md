@@ -10,9 +10,10 @@ at runtime — either Markdown pages (via marked.js) or the Item Database (via `
 See `README.md` for the full explanation written for the (non-technical) site owner.
 
 Items and crafting recipes are **displayed** as cards rendered entirely from JSON data —
-not screenshots (see "Item and recipe cards" below). The screenshot itself is still saved
-as a `.jpg` for every item/recipe — archival/reference material, not something the site
-shows anyone.
+not screenshots (see "Item and recipe cards" below). As of 2026-08-04, the screenshot itself
+is no longer archived for new items/recipes (the game gets rebalanced over time, so an old
+screenshot stops being a reliable reference anyway) — pre-2026-08-04 entries keep whatever
+`.jpg` they already have, but nothing new gets saved to `images/items/`/`images/crafting/`.
 
 ## The user's screenshots are the source of truth
 
@@ -97,11 +98,12 @@ it's a searchable/filterable/sortable table rendered by `script.js` from `items.
     `"Saddlebag"` for its cargo container — and a `race` array of mount codes read straight
     off the card (e.g. `["HRS", "DNK"]`) instead of player classes/ALL. Don't try to map
     these to the player race list; they're a separate namespace on the same field.
-4. Still save the screenshot — convert to `.jpg` (quality 90, see "Item screenshot format"
-   below) into `images/items/`, filename matching the `image` field. **This is archival
-   only:** the site displays a card rendered from the JSON fields, not the screenshot
-   itself, so the saved file is never shown to a visitor — it exists purely so the data can
-   be re-verified against the original card later if something's ever in doubt.
+4. **Don't archive the screenshot** — no `image` field, nothing saved to `images/items/`
+   (2026-08-04, user's own call: the game gets rebalanced over time, so an old screenshot
+   stops being a reliable "receipt" anyway, and it costs real disk/repo space for
+   fast-diminishing value). Just record the item's data straight into `items.json` and
+   discard the source file once read. Pre-2026-08-04 items keep whatever `image` they
+   already have — this only changes what happens for *new* items going forward.
 5. A green line starting with "Enchant" (e.g. "Enchant Boots: Minor Agility +1 AGI") is
    **not** part of the item's own description or effect — it's a permanent buff an
    Enchanting-tradeskill scroll applied to that one specific item (confirmed 2026-07-17;
@@ -172,13 +174,18 @@ Item Database go through the same `goToItem` path.
 
 ## Item screenshot format
 
-Item/recipe screenshots (`images/items/`, `images/crafting/`) are stored as `.jpg` at
-quality 90, not `.png` — reference material for re-verifying data later, not something
-displayed on the site (see "Item and recipe cards" below). The popup card screenshots are
-mostly flat text over a noisy stone texture, which PNG compresses poorly (~350KB/file); JPEG
-at q90 gets the same image down to ~65KB with no visible loss of text legibility. When
-moving a screenshot out of the inbox, convert it to `.jpg` (quality 90) as part of the move
-rather than keeping the original `.png`/other format.
+**New items/recipes no longer get their screenshot archived at all (2026-08-04, see "Adding
+an item to the Item Database" and "Adding a crafting recipe" above)** — this section now
+only matters for monster/gathering-node pictures (which *are* displayed on the site) and for
+the pre-2026-08-04 item/recipe screenshots already sitting in `images/items/`/
+`images/crafting/`, which stay untouched and don't need re-converting.
+
+Screenshots that do get saved (`images/Monsters/`, `images/gathering/`, plus the untouched
+pre-2026-08-04 item/recipe archive) are stored as `.jpg` at quality 90, not `.png`. The popup
+card screenshots are mostly flat text over a noisy stone texture, which PNG compresses poorly
+(~350KB/file); JPEG at q90 gets the same image down to ~65KB with no visible loss of text
+legibility. When moving a screenshot out of the inbox, convert it to `.jpg` (quality 90) as
+part of the move rather than keeping the original `.png`/other format.
 
 **Map** images are the opposite: keep them as high-quality `.png`, uncompressed — they're
 viewed zoomed-in in the map viewer (see below) where JPEG artifacts would actually be
@@ -359,9 +366,9 @@ same way as new fields show up on future cards, rather than guessing ahead:
 
 1. Add an object to `crafting.json` with at least `name`, `slug`, `tradeskill`, plus whatever
    of the above the card shows.
-2. Still save the screenshot — same as items (see above), convert to `.jpg` (quality 90)
-   into `images/crafting/`, filename matching the `image` field. Archival only — not
-   something the site ever displays.
+2. **Don't archive the screenshot** — same as items (see above, 2026-08-04): no `image`
+   field, nothing saved to `images/crafting/`. Pre-2026-08-04 recipes keep whatever `image`
+   they already have.
 
 ### The sidebar can nest pages under a group
 
@@ -773,9 +780,10 @@ Workflow when asked to process new items (or "check the inbox"):
    card at all — see "Vendor screenshots" below), or a **monster** (a picture of a
    creature, no stat card at all — see "Adding a monster" below) — then follow the matching
    path below.
-4. Once a file has been moved out (to `images/items/`, `images/Maps/`, `images/crafting/`,
-   or `images/Monsters/`) or deleted as a duplicate, `images/Processing/` should no longer
-   contain it — an empty `images/Processing/` means everything from this batch is processed.
+4. Once a file's data has been recorded (items/recipes: read and deleted, no image saved —
+   see 2026-08-04 above; maps/monsters: moved to `images/Maps/`/`images/Monsters/`) or it's
+   been deleted as a duplicate, `images/Processing/` should no longer contain it — an empty
+   `images/Processing/` means everything from this batch is processed.
 
 **Duplicates (items/maps/recipes alike):** if a screenshot's item/map/recipe already exists
 (matched by slug or name), just delete it from the inbox — don't save it anywhere. The one
@@ -791,11 +799,9 @@ screenshot — the user's newest screenshot always wins.
 2. Check whether that item's slug (or name) already exists in `items.json` — this is a
    cheap text check against the existing entries, not the same as re-scanning every image
    in `images/items/`, and it's required every time to catch duplicates.
-   - **Not a duplicate:** add an entry to `items.json`. Convert the screenshot to `.jpg`
-     (quality 90, see "Item screenshot format" above) and rename it to the item's slug —
-     lower case, spaces and punctuation replaced with dashes (e.g. "Tunic of Night" →
-     `tunic-of-night.jpg`) — and move (don't copy) it into `images/items/` under that name.
-     Use the same slug for the `image` field in the entry.
+   - **Not a duplicate:** add an entry to `items.json` — no `image` field (2026-08-04, don't
+     archive the screenshot, see "Adding an item to the Item Database" above). Just delete
+     the screenshot from the inbox once its data is recorded.
    - **Duplicate of an existing item:** delete the screenshot from the inbox (see
      "Duplicates" above) — update `items.json` first if the new screenshot fills a gap.
 
@@ -815,14 +821,14 @@ screenshot — the user's newest screenshot always wins.
    rather than inventing a new category). See "Adding a crafting recipe" above for the
    current schema.
 2. Check whether that recipe's slug (or name) already exists in `crafting.json`.
-   - **Not a duplicate:** add an entry to `crafting.json`. Convert the screenshot to `.jpg`
-     (quality 90) and rename it to the recipe's slug, and move it into `images/crafting/`.
-     Use the same slug for the `image` field in the entry.
+   - **Not a duplicate:** add an entry to `crafting.json` — no `image` field (2026-08-04,
+     don't archive the screenshot, see "Adding a crafting recipe" above). Just delete the
+     screenshot from the inbox once its data is recorded.
    - **Duplicate of an existing recipe:** delete the screenshot from the inbox (see
      "Duplicates" above) — unless the new screenshot is the first *full card* for a recipe
-     that previously only had a minimal crafting-window entry (no `image`/`weight`/
-     `components` yet), in which case it's not really a duplicate — treat it like "not a
-     duplicate" above and fill in the fuller entry instead.
+     that previously only had a minimal crafting-window entry (no `weight`/`components` yet),
+     in which case it's not really a duplicate — treat it like "not a duplicate" above and
+     fill in the fuller entry instead (still no `image`).
 
 **Monsters:** a plain picture of the creature (its name floating over the model, no stat
 card) — see "Adding a monster" below for the named/boss-only picture policy: most monsters
@@ -1006,6 +1012,22 @@ fills in as the user provides it:
   at render time (`findItemByName`/`goToItem`), clickable if a matching item exists yet,
   plain text if not. Sourced from a loot-window screenshot paired with a plain item card per
   icon — see the inbox workflow above.
+  **A drops entry can also be `{ "family": "Rusty Iron" }`** (added 2026-07-30) — a compact
+  alternative to writing out a quality-set family's full roster (up to 42 lines, see
+  "Quality-set drop inference" below) one `{ "item": ... }` per piece. Use this form for
+  every *new* quality-set backfill going forward — it's both far cheaper to write and
+  self-updating: `familyItemCount()` in `script.js` computes the displayed count from
+  `items.json`'s current roster at render time, so if a family later turns out bigger than
+  currently known (as happened with Corroded Bronze, 19 → 42), every monster referencing it
+  via `family` shows the corrected count automatically, with no monsters.json edit needed —
+  unlike the old expanded form, which needed every affected monster hand-edited when Rusty
+  Iron's Tower Shield and Corroded Bronze's missing 23 pieces were discovered. The compact
+  form is never partial — per the standing backfill rule, a monster confirmed dropping one
+  piece is assumed to drop the *entire* family, so `family` always means "the complete
+  current roster," full stop. `groupMonsterDrops()` (see below) treats old expanded entries
+  and new compact ones identically for display and for the item page's reverse "Dropped by"
+  lookup (`findMonstersDroppingItem`) — nothing needs migrating, but don't add new expanded
+  per-item family entries by hand anymore.
 - **`coinDrops`** — optional array of raw per-corpse coin observations,
   `{ "silver": N, "copper": N }`, one entry per loot-log line actually seen (added
   2026-07-30). Sourced from a loot-log chat screenshot (not the loot-window UI `drops`
@@ -1114,7 +1136,12 @@ each time.
   from *any* monster, not just pieces it's personally been seen dropping. This also applies
   retroactively: an existing monster that already dropped some pieces of a family gets any
   newly-discovered pieces backfilled too, once those pieces become known via a different
-  monster's screenshot.
+  monster's screenshot. **Mechanically, applying a backfill means adding one
+  `{ "family": "Name" }` entry to that monster's `drops`** (see the compact form documented
+  above) — not writing out the family's individual items one by one, which is both far more
+  expensive to produce and, unlike the compact form, has to be hand-corrected on every
+  affected monster whenever the family's own roster later turns out bigger than currently
+  known.
 - **The confirmed-vs-inferred distinction is no longer tracked anywhere (2026-07-17)** — it
   used to be recorded in a `rumor` note listing which drops were directly screenshot-confirmed
   vs. backfilled by this rule, but the `rumor` field was removed site-wide (user's own call,
@@ -1311,19 +1338,20 @@ screenshots.** The user compared the site to mnmquest.com's item popups, liked t
 approach better, and asked for an original (not copied) equivalent built from
 `items.json`/`crafting.json` instead of the game screenshot.
 
-**The screenshot itself is still saved as a `.jpg`** — it's just no longer shown to
-visitors. Think of it as "the screenshot is the receipt": still filed in
-`images/items/`/`images/crafting/`, still referenced by the entry's `image` field, still
-useful if a stat's ever in doubt and needs re-checking against the original card — just not
-rendered anywhere on the page. Follow "Item screenshot format" above and the inbox
-workflow's Items/Recipes sections as before; nothing about *saving* screenshots is affected,
-only *displaying* them.
+**As of 2026-08-04, the screenshot itself is no longer saved for new items/recipes** (user's
+own call) — earlier versions of this doc described it as an archived "receipt" JPEG kept
+purely for later re-verification, but the game gets rebalanced over time, so an old
+screenshot stops reliably representing an item's current state anyway, and archiving cost
+real disk/repo space for that fast-diminishing value. Items and recipes added before this
+date keep whatever `image` they already have (untouched, not being cleaned up) — this only
+changes what happens going forward: no `image` field, nothing saved to `images/items/`/
+`images/crafting/`, just delete the source screenshot once its data is in the JSON.
 
-Drawing a card from the same JSON that already drives the table/filters/search loses
-nothing on the display side while the saved screenshot keeps the verification value. Cut-
-off/truncated screenshot text is now purely a data-completeness question (did the missing
-text make it into the JSON?), not a display problem — see `To-Do/items-needing-text.txt`,
-which tracks exactly that.
+Drawing a card from JSON alone was always the point of this whole redesign — the receipt
+was a nice-to-have on top, not load-bearing for the display itself, so dropping it doesn't
+change how a card renders. Cut-off/truncated screenshot text is still purely a
+data-completeness question (did the missing text make it into the JSON before the source was
+discarded?) — see `To-Do/items-needing-text.txt`, which tracks exactly that.
 
 **The renderer:** `renderItemCardHTML(item)` (items) and `renderRecipeCardHTML(recipe)`
 (recipes) in `script.js` build the card's HTML from scratch each time it's shown — header

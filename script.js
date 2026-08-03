@@ -958,10 +958,17 @@ function findRecipesUsingItem(itemName) {
 }
 
 // Reverse lookup for an item card's "Dropped by" section: every monster
-// (named or regular) whose own `drops` list names this item.
+// (named or regular) whose own `drops` list names this item — either
+// directly (`{ "item": ... }`) or via a compact quality-set `family`
+// reference (`{ "family": "Rusty Iron" }`, see groupMonsterDrops) that
+// covers this item because its own name falls under that family's prefix.
 function findMonstersDroppingItem(itemName) {
+  const itemFamily = qualitySetFamilyFor(itemName);
   return (monstersData || []).filter(m =>
-    (m.drops || []).some(d => d.item.toLowerCase() === itemName.toLowerCase())
+    (m.drops || []).some(d => {
+      if (d.family) return d.family === itemFamily;
+      return d.item.toLowerCase() === itemName.toLowerCase();
+    })
   );
 }
 
@@ -4354,6 +4361,17 @@ function qualitySetFamilyFor(itemName) {
   return QUALITY_SET_FAMILIES.find(f => itemName.startsWith(f + ' ')) || null;
 }
 
+// How many items.json entries currently share a given family's name prefix —
+// computed live rather than stored, so a family's count on every monster's
+// card automatically grows the moment a new piece is added to items.json
+// (this is exactly what happened 2026-07-30 when Corroded Bronze turned out
+// to be 42 pieces, not the 19 originally documented — every monster with a
+// compact `family` reference picked up the correct new count for free, with
+// no monsters.json edit needed).
+function familyItemCount(familyName) {
+  return (itemsData || []).filter(i => i.name.startsWith(familyName + ' ')).length;
+}
+
 // Splits a monster's drops into ordinary single-item entries plus grouped
 // quality-set families (2026-07-30, user's own request) — a fully-backfilled
 // family can run 18-42 items long (see the quality-set inference rule),
@@ -4361,22 +4379,45 @@ function qualitySetFamilyFor(itemName) {
 // drop on this particular monster still renders as its own group (not
 // unwrapped back to a plain item link) so the family link's destination
 // stays predictable — the point is grouping by *kind*, not by count.
+//
+// A drops entry can be `{ "item": "Name" }` (a single specific item — also
+// how a family's *individual* pieces used to be recorded one by one, before
+// the compact form below existed) or `{ "family": "Family Name" }` — added
+// 2026-07-30 specifically to stop every backfill from having to spell out
+// the family's full current roster (up to 42 lines) in monsters.json each
+// time. Per the standing quality-set inference rule, a monster confirmed
+// dropping any one piece of a family is assumed to drop the *entire*
+// current roster — so a compact `family` reference is never partial, and
+// its displayed count always comes from familyItemCount() (the live
+// items.json roster size) rather than anything stored on the monster.
+// Old expanded entries (still present on monsters backfilled before this
+// date) are supported unchanged — a monster can mix both forms freely; if
+// a family somehow appears as both a compact reference and loose expanded
+// items, the compact reference wins and the stray items are ignored, since
+// the compact form already represents the complete family.
 function groupMonsterDrops(drops) {
-  const families = new Map();
   const singles = [];
+  const compactFamilies = new Set();
+  const legacyCounts = new Map();
   drops.forEach(d => {
+    if (d.family) {
+      compactFamilies.add(d.family);
+      return;
+    }
     const family = qualitySetFamilyFor(d.item);
     if (family) {
-      if (!families.has(family)) families.set(family, []);
-      families.get(family).push(d.item);
+      legacyCounts.set(family, (legacyCounts.get(family) || 0) + 1);
     } else {
       singles.push(d.item);
     }
   });
-  return {
-    singles,
-    families: [...families.entries()].map(([name, items]) => ({ name, count: items.length }))
-  };
+  const families = [
+    ...[...compactFamilies].map(name => ({ name, count: familyItemCount(name) })),
+    ...[...legacyCounts.entries()]
+      .filter(([name]) => !compactFamilies.has(name))
+      .map(([name, count]) => ({ name, count }))
+  ];
+  return { singles, families };
 }
 
 function averageCoinDrop(monster) {
