@@ -338,6 +338,24 @@ same way as new fields show up on future cards, rather than guessing ahead:
   tradeskill's recipe grid into headed sections by `station` (ordered `STATION_ORDER` =
   Mortar and Pestle before Cauldron) whenever at least one of its recipes has the field set —
   every other tradeskill renders as the original flat grid, unaffected.
+  **Each station heading is also a collapse/expand toggle** (2026-07-30, user's own
+  request) — click it to hide/show that station's recipe grid, state tracked in a
+  `collapsedStations` Set local to that one `renderTradeskillSection` call (survives a
+  search/filter re-render since `updateGrid` reuses the same closure, resets to the default
+  next time the page is opened fresh). Alchemy's **Mortar and Pestle** section starts
+  collapsed by default; every other station (including Alchemy's own Cauldron) starts
+  expanded. Any future tradeskill that starts using `station` gets the same toggle for free
+  — nothing station-name-specific in the toggle mechanism itself, only the default-collapsed
+  set singles out "Mortar and Pestle" by name.
+- **Alchemy always shows a Skill field, even with nothing to show** (2026-07-30, user's own
+  request) — every other tradeskill still just omits the Skill field entirely when
+  `estimateRecipeSkill()` returns null (no confirmed `recipeSkillLevel` and no listOrder-based
+  estimate to interpolate from), per the "no fabricated number" rule described above. Alchemy
+  is the one exception: `renderRecipeCardHTML` shows `"Unknown"` in that case instead of
+  hiding the field, so every Alchemy recipe card always has a Skill row (a confirmed number,
+  an `~N (estimated)` interpolation, or literally "Unknown"). A confirmed `0` already
+  displayed correctly before this change (an object with `skill: 0` is still truthy) — the
+  fallback only affects the genuinely-nothing-known case.
 
 1. Add an object to `crafting.json` with at least `name`, `slug`, `tradeskill`, plus whatever
    of the above the card shows.
@@ -1349,10 +1367,21 @@ via `getShowItemCards()`) — it does **not** disable clicking an item's name to
 like `.needsinfo-toggle` (same pill-switch shape) but in the site's normal accent color rather
 than that toggle's red, since this is a plain display preference, not a warning state.
 
-**`item.foundAt`** is an optional free-text string ("Dropped by \<mob name\>", "Quest
-reward: \<quest name\>") shown as a "Found at" line on every item card — present or not, the
-line always renders (as "not yet known" when absent), so the field's existence is visible
-and the layout doesn't shift once it's filled in.
+**`item.foundAt`** is an optional free-text string ("Quest reward: \<quest name\>", or any
+other non-monster source) shown on every item card's **"Dropped by"** line (renamed from
+"Found at" 2026-07-30) — present or not, the line always renders (as "not yet known" when
+absent), so the field's existence is visible and the layout doesn't shift once it's filled
+in. **This line now leads with a live reverse lookup, not just `foundAt`'s free text:**
+`findMonstersDroppingItem(itemName)` in `script.js` scans every monster's own `drops` array
+(named or regular alike) for this item, same convention as `findRecipeForItem`/
+`findRecipesUsingItem`'s reverse crafting lookups just above it, and lists each match as a
+clickable link to that monster (only in the full item viewer — `opts.interactive` — never the
+hover tooltip, same reasoning as the "Wrong or missing info?" link: `#item-tooltip` is
+`pointer-events: none`, so a link there would be visible but unclickable). Any `foundAt` text
+still appears too, appended after the monster links — an item can be both a confirmed drop
+*and* have its own free-text note (e.g. a quest reward). If neither applies, still shows "not
+yet known" as before. Nothing new to set on the monster side — this is purely a render-time
+lookup against `monsters.json`'s existing `drops`, not a new field to keep in sync.
 
 **There is no `rumor` field anymore (removed site-wide 2026-07-17, user's own call)** — it
 used to hold unconfirmed guesses (where an item might drop, where a monster might spawn,
@@ -1531,6 +1560,17 @@ widths, set in `renderItemsPage`) and no `white-space: nowrap`, so long cells (C
 Stats) wrap onto multiple lines instead of forcing horizontal scroll. If you add a column,
 add a proportional `<col>` for it rather than letting the browser auto-size columns —
 auto-sizing is what caused the original horizontal-scroll problem.
+
+## Back to top button
+
+A single floating button (`#back-to-top-btn`, bottom-right) is built once, site-wide, in
+`setupBackToTopButton()` — called from `init()` alongside `setupSplashScreen()`. Requested
+2026-07-30 specifically for the long Crafting/Gathering recipe and node lists, but built as
+one global button rather than something wired into each page separately, since the whole
+site scrolls the window itself (no per-page inner scroll container — see the `.layout`/
+`.sidebar` CSS notes above) — a single `window.addEventListener('scroll', ...)` toggling a
+`.visible` class covers every page for free. Only appears once `window.scrollY > 400`, and
+smooth-scrolls back to the top (where the search box and filters live) on click.
 
 ## Local preview
 

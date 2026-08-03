@@ -156,6 +156,31 @@ function setupSplashScreen() {
   });
 }
 
+// A floating "Back to top" button, mainly meant for the long recipe/node
+// lists on the Crafting/Gathering pages (2026-07-30, user's own request) —
+// built once here rather than per-page since the whole site scrolls the
+// window itself (see the .layout/.sidebar CSS notes for why), so one global
+// button covers every page with no per-page wiring needed. Only shown once
+// the user has actually scrolled down far enough that "back to top" is
+// useful, so it doesn't clutter a short page.
+function setupBackToTopButton() {
+  const btn = document.createElement('button');
+  btn.id = 'back-to-top-btn';
+  btn.type = 'button';
+  btn.setAttribute('aria-label', 'Back to top');
+  btn.title = 'Back to top';
+  btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15 L12 9 L18 15"/></svg>';
+  document.body.appendChild(btn);
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+}
+
 // Keeps the sticky sidebar's own height capped to whatever room is actually
 // available — viewport height minus its own `top` offset (76px, must match
 // style.css) minus the footer's real rendered height minus a small safety
@@ -186,6 +211,7 @@ function updateSidebarMaxHeight() {
 
 async function init() {
   setupSplashScreen();
+  setupBackToTopButton();
 
   const res = await fetch('pages.json');
   allPages = await res.json();
@@ -913,6 +939,14 @@ function findRecipeForItem(itemName) {
 function findRecipesUsingItem(itemName) {
   return (craftingData || []).filter(r =>
     (r.components || []).some(c => c.item.toLowerCase() === itemName.toLowerCase())
+  );
+}
+
+// Reverse lookup for an item card's "Dropped by" section: every monster
+// (named or regular) whose own `drops` list names this item.
+function findMonstersDroppingItem(itemName) {
+  return (monstersData || []).filter(m =>
+    (m.drops || []).some(d => d.item.toLowerCase() === itemName.toLowerCase())
   );
 }
 
@@ -2035,9 +2069,18 @@ function renderItemCardHTML(item, opts = {}) {
           Class: ${escapeAttr(formatList(item.classes))}<br>
           Race: ${escapeAttr(formatList(item.race))}
         </div>` : ''}
-        <div class="item-card-section${item.foundAt ? '' : ' item-card-muted'}">
-          Found at &middot; ${item.foundAt ? escapeAttr(item.foundAt) : 'not yet known'}
-        </div>
+        ${(() => {
+          const droppedBy = findMonstersDroppingItem(item.name);
+          const monsterLinks = droppedBy.map(m => opts.interactive
+            ? `<a href="#" class="item-monster-drop-link" data-slug="${escapeAttr(m.slug)}">${escapeAttr(m.name)}</a>`
+            : escapeAttr(m.name)
+          );
+          const parts = [...monsterLinks, ...(item.foundAt ? [escapeAttr(item.foundAt)] : [])];
+          return `
+        <div class="item-card-section${parts.length ? '' : ' item-card-muted'}">
+          Dropped by &middot; ${parts.length ? parts.join(', ') : 'not yet known'}
+        </div>`;
+        })()}
         ${opts.interactive ? `<div class="item-card-section item-card-suggest">Wrong or missing info? <a href="#" class="item-suggest-link" data-name="${escapeAttr(item.name)}">Click here</a> to let us know.</div>` : ''}
         ${opts.isTooltip ? '<p class="item-card-tooltip-hint">Click for more info</p>' : ''}
       </div>
@@ -2199,6 +2242,16 @@ function setupItemViewer() {
       e.preventDefault();
       closeItemViewer();
       goToSubmit({ kind: 'item', name: suggestLink.dataset.name });
+      return;
+    }
+    const monsterLink = e.target.closest('.item-monster-drop-link');
+    if (monsterLink) {
+      e.preventDefault();
+      const monster = (monstersData || []).find(m => m.slug === monsterLink.dataset.slug);
+      if (monster) {
+        closeItemViewer();
+        goToMonster(monster);
+      }
     }
   });
 
@@ -3014,6 +3067,12 @@ function renderRecipeCardHTML(recipe) {
   const skillInfo = estimateRecipeSkill(recipe);
   if (skillInfo) {
     fields.push({ label: 'Skill', value: skillInfo.estimated ? `~${skillInfo.skill} (estimated)` : skillInfo.skill });
+  } else if (recipe.tradeskill === 'Alchemy') {
+    // Alchemy shows a Skill field on every recipe, even with nothing to show
+    // (2026-07-30, user's own request) — every other tradeskill still just
+    // omits the field entirely when there's no confirmed number and no
+    // listOrder-based estimate to interpolate from (see estimateRecipeSkill).
+    fields.push({ label: 'Skill', value: 'Unknown' });
   }
   if (recipe.weight != null) {
     fields.push({ label: 'Weight', value: recipe.weight });
@@ -3404,6 +3463,16 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   const stations = [...new Set(allRecipes.map(r => r.station).filter(Boolean))]
     .sort((a, b) => STATION_ORDER.indexOf(a) - STATION_ORDER.indexOf(b));
 
+  // Each station section can be collapsed independently (click its heading
+  // to toggle) — state lives here, in this render's own closure, so it
+  // survives a search/filter re-render (updateGrid rebuilds the grid's
+  // innerHTML on every keystroke) but resets to the default the next time
+  // this tradeskill's page is opened fresh. Mortar and Pestle starts
+  // collapsed on Alchemy (2026-07-30, user's own request — the grind-first
+  // step is the one visitors care about least); every other station starts
+  // expanded.
+  const collapsedStations = new Set(stations.filter(s => s === 'Mortar and Pestle'));
+
   function updateGrid() {
     const query = searchBox.value.toLowerCase().trim();
     const needsInfo = needsInfoFilter.checked;
@@ -3424,13 +3493,29 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
     } else if (stations.length) {
       const groups = stations.map(station => {
         const inStation = filtered.filter(r => r.station === station);
-        return inStation.length
-          ? `<h2>${escapeAttr(station)}</h2><div class="craft-recipe-grid">${inStation.map(renderRecipeCardHTML).join('')}</div>`
-          : '';
+        if (!inStation.length) return '';
+        const isCollapsed = collapsedStations.has(station);
+        return `
+          <h2 class="craft-station-heading">
+            <button type="button" class="craft-station-toggle" data-station="${escapeAttr(station)}" aria-expanded="${!isCollapsed}">
+              <span class="craft-station-toggle-arrow">&#9656;</span> ${escapeAttr(station)}
+              <span class="craft-station-toggle-hint">(click to ${isCollapsed ? 'expand' : 'collapse'})</span>
+            </button>
+          </h2>
+          <div class="craft-recipe-grid${isCollapsed ? ' craft-recipe-grid-collapsed' : ''}">${inStation.map(renderRecipeCardHTML).join('')}</div>
+        `;
       });
       const unstationed = filtered.filter(r => !r.station);
       if (unstationed.length) groups.push(`<div class="craft-recipe-grid">${unstationed.map(renderRecipeCardHTML).join('')}</div>`);
       grid.innerHTML = groups.join('');
+      grid.querySelectorAll('.craft-station-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const station = btn.dataset.station;
+          if (collapsedStations.has(station)) collapsedStations.delete(station);
+          else collapsedStations.add(station);
+          updateGrid();
+        });
+      });
     } else {
       grid.innerHTML = `<div class="craft-recipe-grid">${filtered.map(renderRecipeCardHTML).join('')}</div>`;
     }

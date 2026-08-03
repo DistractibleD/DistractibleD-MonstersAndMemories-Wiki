@@ -426,7 +426,8 @@
     "tradeskill": "Herbalism",
     "minSkill": 160,
     "trivialSkill": 210,
-    "locations": ["Fallen Pass"]
+    "locations": ["Vale of Zintar", "Fallen Pass"],
+    "note": "Found in caves — in the Giant City for Vale of Zintar, in the rat caves for Fallen Pass."
   },
   {
     "name": "Magebloom",

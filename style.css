@@ -1752,6 +1752,42 @@ body:not(.site-entered) .sidebar {
   gap: 14px;
   margin-top: 18px;
 }
+.craft-recipe-grid-collapsed {
+  display: none;
+}
+/* A station heading (e.g. Alchemy's "Mortar and Pestle"/"Cauldron") doubles
+   as a collapse/expand toggle for its own recipe grid right below it. */
+.craft-station-heading {
+  margin-bottom: 0;
+}
+.craft-station-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.craft-station-toggle-arrow {
+  display: inline-block;
+  color: var(--accent-craft, var(--accent));
+  transition: transform 0.15s ease;
+  font-size: 0.85em;
+}
+.craft-station-toggle[aria-expanded="true"] .craft-station-toggle-arrow {
+  transform: rotate(90deg);
+}
+.craft-station-toggle-hint {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--text-dim);
+  text-transform: none;
+  letter-spacing: normal;
+}
 
 /* ---------- Companions ---------- */
 .companion-grid {
@@ -2045,6 +2081,54 @@ body:not(.site-entered) .sidebar {
   #gathering-image-viewer-prev, #gathering-image-viewer-next { width: 30px; height: 140px; }
   #gathering-image-viewer-prev { left: 8px; }
   #gathering-image-viewer-next { right: 8px; }
+}
+
+/* A site-wide floating "back to top" button (hidden until scrolled down a
+   bit) — mainly meant for the long Crafting/Gathering recipe and node
+   lists, but built once globally since the whole site scrolls the window
+   itself rather than a per-page inner scroll container. */
+#back-to-top-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--bg-panel);
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease, background 0.15s ease, color 0.15s ease;
+  z-index: 150;
+}
+#back-to-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+#back-to-top-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+#back-to-top-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (max-width: 480px) {
+  #back-to-top-btn { right: 14px; bottom: 14px; width: 40px; height: 40px; }
+  #back-to-top-btn svg { width: 17px; height: 17px; }
 }
 
 /* ---------- Footer ---------- */
