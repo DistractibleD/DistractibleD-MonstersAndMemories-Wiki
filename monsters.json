@@ -9,8 +9,10 @@
       { "item": "Bat Wing" },
       { "item": "Raw Bat Meat" },
       { "item": "Bat Fur" },
-      { "item": "Bat Eye" }
-    ]
+      { "item": "Bat Eye" },
+      { "item": "Bat Tooth" }
+    ],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "a large rat",
@@ -231,7 +233,12 @@
     "slug": "a-snake",
     "image": "images/Monsters/a-snake.jpg",
     "maps": ["Sungreet Strand", "Night Harbor"],
-    "areas": ["North Gate", "West Gate"]
+    "areas": ["North Gate", "West Gate"],
+    "drops": [
+      { "item": "Snake Fang" },
+      { "item": "Snake Egg" }
+    ],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "a jackal pup",
@@ -663,7 +670,11 @@
     "slug": "a-spiderling",
     "image": "images/Monsters/a-spiderling.jpg",
     "maps": ["Night Harbor", "Sungreet Strand"],
-    "areas": ["North Gate", "West Gate"]
+    "areas": ["North Gate", "West Gate"],
+    "drops": [
+      { "item": "Spider Silk" }
+    ],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "a disgraced friar",
@@ -736,13 +747,21 @@
     "name": "a rattlesnake",
     "slug": "a-rattlesnake",
     "image": "images/Monsters/a-rattlesnake.jpg",
-    "maps": ["Shaded Dunes", "Sungreet Strand"]
+    "maps": ["Shaded Dunes", "Sungreet Strand"],
+    "drops": [
+      { "item": "Snake Fang" }
+    ],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "a giant spider",
     "slug": "a-giant-spider",
     "image": "images/Monsters/a-giant-spider.jpg",
-    "maps": ["Shaded Dunes", "Sungreet Strand"]
+    "maps": ["Shaded Dunes", "Sungreet Strand"],
+    "drops": [
+      { "item": "Spider Silk" }
+    ],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "a sickened ashira",
@@ -899,13 +918,21 @@
     "slug": "a-large-dunes-bat",
     "image": "images/Monsters/a-large-dunes-bat.jpg",
     "maps": ["Night Harbor", "Shaded Dunes"],
-    "areas": ["North Gate"]
+    "areas": ["North Gate"],
+    "drops": [
+      { "item": "Raw Bat Meat" }
+    ],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "a giant fire beetle",
     "slug": "a-giant-fire-beetle",
     "image": "images/Monsters/a-giant-fire-beetle.jpg",
-    "maps": ["Sungreet Strand"]
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Giant Fire Beetle Carapace" }
+    ],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "a ghost",
@@ -4272,6 +4299,75 @@
       { "item": "Fish Bones" },
       { "item": "Cooked Crocodile Meat" },
       { "item": "Raw Crocodile Meat" }
+    ],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "a wandering ghoul",
+    "slug": "a-wandering-ghoul",
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Rawhide Scraps" },
+      { "item": "Corrupted Heart" },
+      { "item": "Tattered Cloth Belt" },
+      { "item": "Tattered Cloth Boots" },
+      { "item": "Tattered Cloth Bracer" },
+      { "item": "Tattered Cloth Cap" },
+      { "item": "Tattered Cloth Cape" },
+      { "item": "Tattered Cloth Gloves" },
+      { "item": "Tattered Cloth Gorget" },
+      { "item": "Tattered Cloth Mantle" },
+      { "item": "Tattered Cloth Pantaloons" },
+      { "item": "Tattered Cloth Robe" },
+      { "item": "Tattered Cloth Shirt" },
+      { "item": "Tattered Cloth Tunic" },
+      { "item": "Tattered Cloth Veil" }
+    ],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "a grim farmhand",
+    "slug": "a-grim-farmhand",
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Rawhide Scraps" },
+      { "item": "Cloth Scraps" },
+      { "item": "Tattered Cloth Belt" },
+      { "item": "Tattered Cloth Boots" },
+      { "item": "Tattered Cloth Bracer" },
+      { "item": "Tattered Cloth Cap" },
+      { "item": "Tattered Cloth Cape" },
+      { "item": "Tattered Cloth Gloves" },
+      { "item": "Tattered Cloth Gorget" },
+      { "item": "Tattered Cloth Mantle" },
+      { "item": "Tattered Cloth Pantaloons" },
+      { "item": "Tattered Cloth Robe" },
+      { "item": "Tattered Cloth Shirt" },
+      { "item": "Tattered Cloth Tunic" },
+      { "item": "Tattered Cloth Veil" },
+      { "item": "Rusty Axe" },
+      { "item": "Rusty Battle Axe" },
+      { "item": "Rusty Dagger" },
+      { "item": "Rusty Great Scythe" },
+      { "item": "Rusty Greatsword" },
+      { "item": "Rusty Kite Shield" },
+      { "item": "Rusty Long Spear" },
+      { "item": "Rusty Longsword" },
+      { "item": "Rusty Mace" },
+      { "item": "Rusty Maul" },
+      { "item": "Rusty Scimitar" },
+      { "item": "Rusty Scythe" },
+      { "item": "Rusty Shortsword" },
+      { "item": "Rusty Spear" },
+      { "item": "Rusty Tower Shield" },
+      { "item": "Rusty Trident" },
+      { "item": "Rusty War Lance" },
+      { "item": "Rusty Warhammer" }
+    ],
+    "coinDrops": [
+      { "silver": 0, "copper": 28 },
+      { "silver": 0, "copper": 42 },
+      { "silver": 0, "copper": 30 }
     ],
     "lastUpdated": "2026-07-30"
   },

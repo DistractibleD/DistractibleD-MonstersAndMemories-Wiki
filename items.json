@@ -3798,6 +3798,17 @@
     "lastUpdated": "2026-07-30"
   },
   {
+    "name": "Corrupted Heart",
+    "slug": "corrupted-heart",
+    "image": "images/items/corrupted-heart.jpg",
+    "type": "Misc",
+    "tags": ["NODROP"],
+    "description": "A ghoul's bitter and blackened heart.",
+    "weight": 4.0,
+    "size": "Small",
+    "lastUpdated": "2026-07-30"
+  },
+  {
     "name": "Ghoul Skin",
     "slug": "ghoul-skin",
     "image": "images/items/ghoul-skin.jpg",
