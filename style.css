@@ -1499,6 +1499,24 @@ body:not(.site-entered) .sidebar {
 .monster-related-link:hover {
   text-decoration: none;
 }
+/* A quality-set family (e.g. "Rusty Iron") collapsing many drop rows into
+   one — bolded so it reads as a group heading rather than one more plain
+   item link in the same list. */
+.monster-drop-family-link {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent-dim);
+  cursor: pointer;
+  font-weight: 600;
+}
+.monster-drop-family-link:hover {
+  text-decoration: none;
+}
+.monster-drop-family-count {
+  color: var(--text-dim);
+  font-weight: 400;
+  font-size: 0.85em;
+}
 /* Only shown in the hover tooltip (see renderMonsterCardHTML's isTooltip
    option), not the full viewer modal — a small nudge that the card itself is
    clickable for the full picture/drop-table view. */

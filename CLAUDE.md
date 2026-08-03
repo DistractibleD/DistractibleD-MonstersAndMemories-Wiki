@@ -1110,6 +1110,22 @@ each time.
 - Items still need a real screenshot before getting a full `items.json` entry (stats aren't
   guessed) — an inferred drop with no matching item just renders as unlinked plain text
   until a card comes in, same as any other not-yet-added item name.
+- **A fully-backfilled family can make a monster's drop list unreadably long** (Rusty Iron
+  alone is 42 items) — `renderMonsterCardHTML` collapses these into a single grouped link
+  instead of listing every piece (2026-07-30, user's own request). `groupMonsterDrops(drops)`
+  in `script.js` splits a monster's `drops` into ordinary singles plus one entry per matched
+  `QUALITY_SET_FAMILIES` prefix (the same family list documented above, kept in sync with
+  it), rendered as `"<Family> (<N> items)"` — e.g. "Rusty Iron (42 items)" — in place of all
+  N individual `<li>`s. Clicking a family link calls `goToItemSearch(familyName)`, a thin
+  variant of `goToItemCategory` that pre-fills the Item Database's own search box with the
+  family name (e.g. `"Rusty Iron"`) rather than setting a Type/category — the existing
+  name-substring search already filters down to exactly that family with no new filter UI
+  needed, since every family name is a distinctive-enough prefix. A family with only one
+  drop on a given monster still renders as a group, not unwrapped to a plain item link —
+  grouping is by *kind*, not by count, so the link's meaning (and destination) stays
+  consistent everywhere it appears. `QUALITY_SET_FAMILIES` is checked longest-prefix-first
+  (`"Rusty Iron"`/`"Rusty Steel"` before plain `"Rusty"`) so a Rusty Iron piece is never
+  miscounted into the plain Rusty family it also textually starts with.
 
 Hovering a monster's name (`.monster-name-hover`, `setupMonsterTooltip`) shows its card in a
 floating preview (`#monster-tooltip`) — same flip-above-if-no-room-below positioning as an

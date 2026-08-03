@@ -809,6 +809,21 @@ function goToItem(item, returnTo) {
   if (alreadyThere) loadPage('items');
 }
 
+// Jumps to the Item Database with a plain text search pre-filled — used by
+// a monster's grouped quality-set drop link (e.g. "Rusty Iron") rather than
+// a single item, so there's no specific item to highlight/category to set,
+// just the search box driving the existing name-substring filter.
+function goToItemSearch(query) {
+  pendingItemQuery = query;
+  pendingItemCategory = null;
+  pendingReturnToRecipe = null;
+  pendingReturnToMonster = null;
+  pendingHighlightItem = null;
+  const alreadyThere = location.hash.replace('#', '') === 'items';
+  location.hash = 'items';
+  if (alreadyThere) loadPage('items');
+}
+
 // Jumps straight to a whole item-type category's list (e.g. from a "Jewelry"
 // category search result) rather than a single item — no query to pre-fill
 // and nothing to flash, since the destination *is* the whole list.
@@ -4191,6 +4206,13 @@ function setupMonsterTooltip(container) {
         goToSubmit({ kind: 'monster', name: suggestLink.dataset.name });
         return;
       }
+      const familyLink = e.target.closest('.monster-drop-family-link');
+      if (familyLink) {
+        e.preventDefault();
+        hideTooltip();
+        goToItemSearch(familyLink.dataset.family);
+        return;
+      }
       // Anywhere else on the card — the "click for more info" affordance.
       const monster = tooltip._monster;
       hideTooltip();
@@ -4280,6 +4302,13 @@ function setupMonsterViewer() {
       e.preventDefault();
       closeMonsterViewer();
       goToSubmit({ kind: 'monster', name: suggestLink.dataset.name });
+      return;
+    }
+    const familyLink = e.target.closest('.monster-drop-family-link');
+    if (familyLink) {
+      e.preventDefault();
+      closeMonsterViewer();
+      goToItemSearch(familyLink.dataset.family);
     }
   });
 
@@ -4303,6 +4332,52 @@ function setupMonsterViewer() {
 // never stored back into monsters.json — same "never persist a derived
 // number" precedent as itemRatio/estimateRecipeSkill elsewhere in this file
 // — so it updates automatically as more observations come in.
+// Quality-set families documented in CLAUDE.md's "Quality-set drop inference"
+// section — a shared name prefix denoting one drop-quality tier, not a real
+// in-game grouping. Order matters: a more specific prefix (e.g. "Rusty Iron")
+// must be checked before a shorter one it also starts with ("Rusty"), or
+// every Rusty Iron/Steel piece would get miscounted as plain Rusty.
+const QUALITY_SET_FAMILIES = [
+  'Rusty Iron',
+  'Rusty Steel',
+  'Rusty',
+  'Corroded Bronze',
+  'Tattered Cloth',
+  'Tattered Rawhide',
+  'Tattered Leather',
+  'Tattered Wool',
+  'Tattered Cotton'
+];
+
+function qualitySetFamilyFor(itemName) {
+  return QUALITY_SET_FAMILIES.find(f => itemName.startsWith(f + ' ')) || null;
+}
+
+// Splits a monster's drops into ordinary single-item entries plus grouped
+// quality-set families (2026-07-30, user's own request) — a fully-backfilled
+// family can run 18-42 items long (see the quality-set inference rule),
+// which made a monster's drop list unreadably long. A family with only one
+// drop on this particular monster still renders as its own group (not
+// unwrapped back to a plain item link) so the family link's destination
+// stays predictable — the point is grouping by *kind*, not by count.
+function groupMonsterDrops(drops) {
+  const families = new Map();
+  const singles = [];
+  drops.forEach(d => {
+    const family = qualitySetFamilyFor(d.item);
+    if (family) {
+      if (!families.has(family)) families.set(family, []);
+      families.get(family).push(d.item);
+    } else {
+      singles.push(d.item);
+    }
+  });
+  return {
+    singles,
+    families: [...families.entries()].map(([name, items]) => ({ name, count: items.length }))
+  };
+}
+
 function averageCoinDrop(monster) {
   const drops = monster.coinDrops || [];
   if (!drops.length) return null;
@@ -4329,6 +4404,7 @@ function renderMonsterCardHTML(monster, opts = {}) {
   const drops = monster.drops || [];
   const related = monster.relatedMonsters || [];
   const coinAvg = averageCoinDrop(monster);
+  const groupedDrops = groupMonsterDrops(drops);
 
   return `
     <div class="monster-card">
@@ -4353,11 +4429,14 @@ function renderMonsterCardHTML(monster, opts = {}) {
           Drops:
           ${drops.length ? `
             <ul class="item-card-components">
-              ${drops.map(d => {
-                const item = findItemByName(d.item);
+              ${groupedDrops.families.map(f => `
+                <li><a href="#" class="monster-drop-family-link" data-family="${escapeAttr(f.name)}">${escapeAttr(f.name)} <span class="monster-drop-family-count">(${f.count} items)</span></a></li>
+              `).join('')}
+              ${groupedDrops.singles.map(name => {
+                const item = findItemByName(name);
                 return item
-                  ? `<li><a href="#" class="monster-drop-link item-name-hover" data-alt="${escapeAttr(item.name)}" data-item="${escapeAttr(item.name)}" data-monster="${escapeAttr(monster.slug)}">${escapeAttr(d.item)}</a></li>`
-                  : `<li>${escapeAttr(d.item)}</li>`;
+                  ? `<li><a href="#" class="monster-drop-link item-name-hover" data-alt="${escapeAttr(item.name)}" data-item="${escapeAttr(item.name)}" data-monster="${escapeAttr(monster.slug)}">${escapeAttr(name)}</a></li>`
+                  : `<li>${escapeAttr(name)}</li>`;
               }).join('')}
             </ul>
           ` : '<p class="monster-card-no-drops">No known drops yet.</p>'}
