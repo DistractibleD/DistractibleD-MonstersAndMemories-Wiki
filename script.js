@@ -4346,6 +4346,7 @@ const QUALITY_SET_FAMILIES = [
   'Tattered Rawhide',
   'Tattered Leather',
   'Tattered Wool',
+  'Tattered Hide',
   'Tattered Cotton'
 ];
 

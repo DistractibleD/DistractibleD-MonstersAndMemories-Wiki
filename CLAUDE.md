@@ -1062,10 +1062,26 @@ each time.
     Boots, Robe, Veil, Belt, Cape, Mantle, Tunic.
   - **Tattered Rawhide** (8 pieces, armor): Gorget, Belt, Mask, Gloves, Bracer, Boots, Vest,
     Shoulderpads.
-  - **Corroded Bronze** (19 pieces, weapons + armor): Shortsword, Scythe, Battle Axe,
-    Longsword, Axe, Dagger, Trident, Maul, Great Scythe, Scimitar, Greatsword, Long Spear,
-    Tower Shield, Kite Shield, Plate Collar, Plate Boots, Chain Gloves, Chain Waistguard,
-    Chain Mask.
+  - **Tattered Wool** (11 pieces, armor — grown from an originally-documented 7 once a
+    2026-07-30 Ancient Crypt batch turned up Boots/Robe/Gorget/Veil): Belt, Boots, Bracer,
+    Cap, Gloves, Gorget, Mantle, Robe, Shirt, Tunic, Veil. First backfilled 2026-07-30 onto
+    several Ancient Crypt skeletons (porter/soldier/acolyte/cook) and retroactively onto
+    Yezkiel the Gatekeeper, who'd only had the single Belt piece recorded until then.
+  - **Tattered Hide** (5 pieces, armor — grown from an originally-undocumented 4 once the
+    same batch turned up Leggings): Cap, Gorget, Leggings, Mask, Vest. First backfilled
+    2026-07-30 onto a skeletal soldier (Ancient Crypt) — this family existed in items.json
+    before this date but had never actually been recorded as dropping from any monster, and
+    was missing from `QUALITY_SET_FAMILIES` in `script.js` until this same pass added it.
+  - **Corroded Bronze** (42 pieces, weapons + Tower Shield + chain + plate armor — grown from
+    an originally-documented 19 once a 2026-07-30 Ancient Crypt batch confirmed the same full
+    Rusty-Iron-shaped roster applies here too): Axe, Battle Axe, Dagger, Great Scythe,
+    Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar, Scythe, Shortsword,
+    Spear, Tower Shield, Trident, War Lance, Warhammer; Chain Boots/Cloak/Coif/Gambeson/
+    Gloves/Gorget/Leggings/Mask/Shoulderguards/Tunic/Waistguard/Wristguard; Plate Arming
+    Doublet/Boots/Bracer/Breastplate/Cloak/Collar/Gauntlets/Girdle/Greaves/Helm/Pauldrons/
+    Visor. Retroactively backfilled 2026-07-30 onto every monster that had the old partial
+    roster (a Dustrend priest, a Dustrend foot soldier, a sly farmhand, a risen
+    thaumaturgist) plus newly onto Commander Mangles and a skeletal porter.
   - **Rusty Iron** (42 pieces, weapons + Tower Shield + chain + plate armor — a distinct,
     higher tier from plain "Rusty" above, not the same family under a longer name): Axe,
     Battle Axe, Dagger, Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace,
