@@ -392,6 +392,10 @@ with the previously-captured middle section. Only the very end is still missing 
 follows the "Gnome Pita" recipe heading) — not enough to keep `needsInfo` set, since the
 actual item card itself is complete now.
 
+2026-07-30, images/inbox batch: Hip Quiver's Maximum Size read "SMALL" on a new card, but the
+existing entry (which had no saved screenshot) had `maxSize: "Medium"` — updated to Small
+per "newest screenshot wins," flagging since there's no old receipt to compare against.
+
 2026-07-30, images/inbox batch: Shadowy Chain Gloves (dropped by Champion of Muurtu) had a
 new card reading WIS+5/HP+20/Mana+10, roughly double the previously-recorded WIS+3/HP+10
 with no Mana line at all. Updated per "newest screenshot wins," but flagging since the old

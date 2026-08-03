@@ -962,10 +962,12 @@
     "damage": 0,
     "delay": 0,
     "skill": "Archery",
+    "description": "An arrow for use with a bow.",
     "weight": 0.0,
     "size": "Small",
     "classes": ["ALL"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Corroded Bronze Plate Boots",
@@ -3659,6 +3661,67 @@
     "weight": 7.0,
     "size": "Medium",
     "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB", "WIZ"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Mandible Edge Helm",
+    "slug": "mandible-edge-helm",
+    "image": "images/items/mandible-edge-helm.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Head",
+    "ac": 25,
+    "stats": { "STR": 3, "STA": 1, "DEX": 2, "HP": 10 },
+    "weight": 1.0,
+    "size": "Small",
+    "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Carrot",
+    "slug": "carrot",
+    "image": "images/items/carrot.jpg",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a light snack.\nThe bright orange roots of a carrot plant. They have a parsley-like flavor.",
+    "weight": 0.2,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Tattered Leather Cloak",
+    "slug": "tattered-leather-cloak",
+    "image": "images/items/tattered-leather-cloak.jpg",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "ac": 3,
+    "weight": 0.25,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Terrifying Staff",
+    "slug": "terrifying-staff",
+    "image": "images/items/terrifying-staff.jpg",
+    "type": "Weapon",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Primary",
+    "twoHanded": true,
+    "damage": 18,
+    "delay": 39,
+    "skill": "Blunt",
+    "stats": { "INT": 11, "HP": 10, "MANA": 25 },
+    "description": "A twisted darkwood staff covered with etchings of terrifying faces.",
+    "weight": 2.8,
+    "size": "Large",
+    "classes": ["ELE", "ENC", "INQ", "NEC", "SHD", "SPB", "WIZ"],
     "race": ["ALL"],
     "lastUpdated": "2026-07-30"
   },
@@ -7849,10 +7912,16 @@
   {
     "name": "Rusty Iron Chain Gorget",
     "slug": "rusty-iron-chain-gorget",
+    "image": "images/items/rusty-iron-chain-gorget.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Neck",
-    "needsInfo": true
+    "ac": 4,
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Rusty Iron Chain Leggings",
@@ -13056,16 +13125,18 @@
   {
     "name": "Hip Quiver",
     "slug": "hip-quiver",
+    "image": "images/items/hip-quiver.jpg",
     "type": "Container",
     "tags": [],
     "slot": "Bag / Belt",
     "capacity": 8,
-    "maxSize": "Medium",
+    "maxSize": "Small",
     "rangedHaste": 10,
     "description": "An efficient hip quiver designed for swift drawing.",
     "weight": 0.3,
     "size": "Medium",
-    "classes": ["ALL"]
+    "classes": ["ALL"],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Serrated Longbow",

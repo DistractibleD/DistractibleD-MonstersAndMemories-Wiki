@@ -4452,6 +4452,7 @@
     "areas": ["Plagueborn Camp"],
     "drops": [
       { "item": "Tattered Leather Cloak" },
+      { "item": "Carrot" },
       { "item": "Eth-ur Astrological Journal Page" },
       { "item": "Imperfect Fire Emerald" },
       { "item": "Cotton Scraps" },
