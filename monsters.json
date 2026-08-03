@@ -425,7 +425,9 @@
       { "item": "Dark Buckler" },
       { "item": "Sindr's Horn" },
       { "item": "Dark Tower Shield" },
-      { "item": "Grimoire of Demonology" }
+      { "item": "Grimoire of Demonology" },
+      { "item": "Bone Chips" },
+      { "item": "Tattered Wool Belt" }
     ]
   },
   {
@@ -3752,7 +3754,8 @@
       { "item": "Rusty Iron Spear" },
       { "item": "Rusty Iron Trident" },
       { "item": "Rusty Iron War Lance" },
-      { "item": "Rusty Iron Warhammer" }
+      { "item": "Rusty Iron Warhammer" },
+      { "item": "Rusty Iron Tower Shield" }
     ],
     "lastUpdated": "2026-07-30"
   },
@@ -4074,7 +4077,8 @@
       { "item": "Rusty Iron Spear" },
       { "item": "Rusty Iron Trident" },
       { "item": "Rusty Iron War Lance" },
-      { "item": "Rusty Iron Warhammer" }
+      { "item": "Rusty Iron Warhammer" },
+      { "item": "Rusty Iron Tower Shield" }
     ],
     "lastUpdated": "2026-07-30"
   },
@@ -4082,7 +4086,8 @@
     "name": "a highwayman prospect",
     "slug": "a-highwayman-prospect",
     "drops": [
-      { "item": "Leather Scraps" }
+      { "item": "Leather Scraps" },
+      { "item": "Cotton Scraps" }
     ],
     "lastUpdated": "2026-07-30"
   },
@@ -4131,7 +4136,8 @@
       { "item": "Rusty Iron Spear" },
       { "item": "Rusty Iron Trident" },
       { "item": "Rusty Iron War Lance" },
-      { "item": "Rusty Iron Warhammer" }
+      { "item": "Rusty Iron Warhammer" },
+      { "item": "Rusty Iron Tower Shield" }
     ],
     "coinDrops": [
       { "silver": 6, "copper": 88 }
@@ -4183,7 +4189,8 @@
       { "item": "Rusty Iron Spear" },
       { "item": "Rusty Iron Trident" },
       { "item": "Rusty Iron War Lance" },
-      { "item": "Rusty Iron Warhammer" }
+      { "item": "Rusty Iron Warhammer" },
+      { "item": "Rusty Iron Tower Shield" }
     ],
     "lastUpdated": "2026-07-30"
   },
@@ -4192,7 +4199,8 @@
     "slug": "a-benu-dhai-sister",
     "drops": [
       { "item": "Tattered Cotton Boots" },
-      { "item": "Iron Scraps" }
+      { "item": "Iron Scraps" },
+      { "item": "Cub's Claw" }
     ],
     "coinDrops": [
       { "silver": 5, "copper": 50 }
@@ -4256,6 +4264,18 @@
     "lastUpdated": "2026-07-30"
   },
   {
+    "name": "a crocodile hatchling",
+    "slug": "a-crocodile-hatchling",
+    "drops": [
+      { "item": "Crocodile Tooth" },
+      { "item": "Crocodile Hide" },
+      { "item": "Fish Bones" },
+      { "item": "Cooked Crocodile Meat" },
+      { "item": "Raw Crocodile Meat" }
+    ],
+    "lastUpdated": "2026-07-30"
+  },
+  {
     "name": "Thuraya Aislingar",
     "slug": "thuraya-aislingar",
     "named": true,
@@ -4276,6 +4296,7 @@
       { "item": "Iron Scraps" },
       { "item": "Bone Chips" },
       { "item": "Cotton Scraps" },
+      { "item": "Leather Scraps" },
       { "item": "Cracked Ironbark Staff" },
       { "item": "Worn Ironbark Bow" },
       { "item": "Tattered Cotton Shirt" },
@@ -4321,7 +4342,8 @@
       { "item": "Rusty Iron Spear" },
       { "item": "Rusty Iron Trident" },
       { "item": "Rusty Iron War Lance" },
-      { "item": "Rusty Iron Warhammer" }
+      { "item": "Rusty Iron Warhammer" },
+      { "item": "Rusty Iron Tower Shield" }
     ],
     "coinDrops": [
       { "silver": 4, "copper": 15 },
@@ -4343,6 +4365,8 @@
     "areas": ["Plagueborn Camp"],
     "drops": [
       { "item": "Cotton Scraps" },
+      { "item": "Raw Human Meat" },
+      { "item": "Cabbage" },
       { "item": "Rusty Iron Axe" },
       { "item": "Rusty Iron Battle Axe" },
       { "item": "Rusty Iron Chain Boots" },
@@ -4383,7 +4407,8 @@
       { "item": "Rusty Iron Spear" },
       { "item": "Rusty Iron Trident" },
       { "item": "Rusty Iron War Lance" },
-      { "item": "Rusty Iron Warhammer" }
+      { "item": "Rusty Iron Warhammer" },
+      { "item": "Rusty Iron Tower Shield" }
     ],
     "coinDrops": [
       { "silver": 4, "copper": 16 }
@@ -4398,6 +4423,8 @@
     "drops": [
       { "item": "Tattered Cotton Mantle" },
       { "item": "Ghoul Bile" },
+      { "item": "Iron Scraps" },
+      { "item": "Leather Scraps" },
       { "item": "Rusty Iron Axe" },
       { "item": "Rusty Iron Battle Axe" },
       { "item": "Rusty Iron Chain Boots" },
@@ -4438,7 +4465,8 @@
       { "item": "Rusty Iron Spear" },
       { "item": "Rusty Iron Trident" },
       { "item": "Rusty Iron War Lance" },
-      { "item": "Rusty Iron Warhammer" }
+      { "item": "Rusty Iron Warhammer" },
+      { "item": "Rusty Iron Tower Shield" }
     ],
     "coinDrops": [
       { "silver": 5, "copper": 79 }
@@ -4499,7 +4527,8 @@
       { "item": "Rusty Iron Spear" },
       { "item": "Rusty Iron Trident" },
       { "item": "Rusty Iron War Lance" },
-      { "item": "Rusty Iron Warhammer" }
+      { "item": "Rusty Iron Warhammer" },
+      { "item": "Rusty Iron Tower Shield" }
     ],
     "coinDrops": [
       { "silver": 3, "copper": 61 },
@@ -4553,7 +4582,8 @@
       { "item": "Rusty Iron Spear" },
       { "item": "Rusty Iron Trident" },
       { "item": "Rusty Iron War Lance" },
-      { "item": "Rusty Iron Warhammer" }
+      { "item": "Rusty Iron Warhammer" },
+      { "item": "Rusty Iron Tower Shield" }
     ],
     "coinDrops": [
       { "silver": 3, "copper": 42 }
@@ -4612,7 +4642,8 @@
       { "item": "Rusty Iron Spear" },
       { "item": "Rusty Iron Trident" },
       { "item": "Rusty Iron War Lance" },
-      { "item": "Rusty Iron Warhammer" }
+      { "item": "Rusty Iron Warhammer" },
+      { "item": "Rusty Iron Tower Shield" }
     ],
     "coinDrops": [
       { "silver": 3, "copper": 60 }
@@ -4629,6 +4660,7 @@
       { "item": "Iron Scraps" },
       { "item": "Tattered Cotton Tunic" },
       { "item": "Tattered Cotton Bracer" },
+      { "item": "Tattered Cotton Gloves" },
       { "item": "Spirit World Ch. 20" },
       { "item": "Raw Giant Meat" },
       { "item": "Cooked Giant Meat" },
@@ -4676,7 +4708,8 @@
       { "item": "Rusty Iron Spear" },
       { "item": "Rusty Iron Trident" },
       { "item": "Rusty Iron War Lance" },
-      { "item": "Rusty Iron Warhammer" }
+      { "item": "Rusty Iron Warhammer" },
+      { "item": "Rusty Iron Tower Shield" }
     ],
     "coinDrops": [
       { "silver": 5, "copper": 76 },
@@ -4693,7 +4726,8 @@
       { "silver": 4, "copper": 2 },
       { "silver": 6, "copper": 20 },
       { "silver": 5, "copper": 22 },
-      { "silver": 4, "copper": 36 }
+      { "silver": 4, "copper": 36 },
+      { "silver": 5, "copper": 76 }
     ],
     "lastUpdated": "2026-07-30"
   },
@@ -4702,6 +4736,7 @@
     "slug": "a-sand-giant-raider",
     "maps": ["Vale of Zintar"],
     "drops": [
+      { "item": "Padded Leather Scraps" },
       { "item": "Rusty Steel Axe" },
       { "item": "Rusty Steel Battle Axe" },
       { "item": "Rusty Steel Chain Boots" },
@@ -4743,6 +4778,9 @@
       { "item": "Rusty Steel Trident" },
       { "item": "Rusty Steel War Lance" },
       { "item": "Rusty Steel Warhammer" }
+    ],
+    "coinDrops": [
+      { "silver": 7, "copper": 8 }
     ],
     "lastUpdated": "2026-07-30"
   }

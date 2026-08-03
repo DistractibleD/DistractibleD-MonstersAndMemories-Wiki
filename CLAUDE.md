@@ -1066,17 +1066,21 @@ each time.
     Longsword, Axe, Dagger, Trident, Maul, Great Scythe, Scimitar, Greatsword, Long Spear,
     Tower Shield, Kite Shield, Plate Collar, Plate Boots, Chain Gloves, Chain Waistguard,
     Chain Mask.
-  - **Rusty Iron** (41 pieces, weapons + chain + plate armor — a distinct, higher tier from
-    plain "Rusty" above, not the same family under a longer name): Axe, Battle Axe, Dagger,
-    Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar,
-    Scythe, Shortsword, Spear, Trident, War Lance, Warhammer; Chain Boots/Cloak/Coif/
-    Gambeson/Gloves/Gorget/Leggings/Mask/Shoulderguards/Tunic/Waistguard/Wristguard; Plate
-    Arming Doublet/Boots/Bracer/Breastplate/Cloak/Collar/Gauntlets/Girdle/Greaves/Helm/
-    Pauldrons/Visor. First backfilled 2026-07-30 onto several Plagueborn-camp mobs (Fallen
-    Pass) and a sand giant fisher (Vale of Zintar).
+  - **Rusty Iron** (42 pieces, weapons + Tower Shield + chain + plate armor — a distinct,
+    higher tier from plain "Rusty" above, not the same family under a longer name): Axe,
+    Battle Axe, Dagger, Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace,
+    Maul, Scimitar, Scythe, Shortsword, Spear, Tower Shield, Trident, War Lance, Warhammer;
+    Chain Boots/Cloak/Coif/Gambeson/Gloves/Gorget/Leggings/Mask/Shoulderguards/Tunic/
+    Waistguard/Wristguard; Plate Arming Doublet/Boots/Bracer/Breastplate/Cloak/Collar/
+    Gauntlets/Girdle/Greaves/Helm/Pauldrons/Visor. First backfilled 2026-07-30 onto several
+    Plagueborn-camp mobs (Fallen Pass), a sand giant fisher (Vale of Zintar), a veteran
+    brigand, a road captain, a grizzled raider, and Kallen Oison — Tower Shield itself wasn't
+    confirmed until a later screenshot in the same batch, at which point it was retroactively
+    backfilled onto every one of those monsters per the "newly-discovered piece backfills
+    retroactively" rule below.
   - **Rusty Steel** (41 pieces, same shape as Rusty Iron but not item-for-item identical —
-    Rusty Steel has a Tower Shield that Rusty Iron doesn't, Rusty Iron has a Chain Gambeson
-    that Rusty Steel doesn't; recorded verbatim rather than assumed symmetric): Axe, Battle
+    Rusty Iron has a Chain Gambeson that Rusty Steel doesn't; recorded verbatim rather than
+    assumed symmetric): Axe, Battle
     Axe, Dagger, Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul,
     Scimitar, Scythe, Shortsword, Spear, Tower Shield, Trident, War Lance, Warhammer; Chain
     Boots/Cloak/Coif/Gloves/Gorget/Leggings/Mask/Shoulderguards/Tunic/Waistguard/Wristguard;

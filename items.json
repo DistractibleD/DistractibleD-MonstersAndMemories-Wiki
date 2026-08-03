@@ -3437,7 +3437,7 @@
     "description": "A poorly handwritten pamphlet covered in dried blood. But from what?",
     "weight": 0.1,
     "size": "Small",
-    "readText": "How to Serve Gnome\n\nWARNING: The words in this volume are SURE to offend. They're not for the faint of heart. In fact, the author has been run out of MANY CITIES simply for expressing his views on the culinary. If you're not a cocktail weenie, keep your eyes glued to this page. Otherwise, pass this pamphlet on to someone who is less cowardly than you.\n\nGnome is one of the most delectable meats available. The little buggers are hard to catch, but once you do, you're in for an evening of delicious culinary delight. Heed not their screams; they are not intelligent creatures. They only mimic the sounds of human beings as a defense mechanism. Do not feel guilty for their cries. Tell me, reader, do you feel sadness when a lamb bleats for its mother?\n\nProcess gnome like you would any other meat, for they are just like any other meat, only with a more savory, melt-in-your-mouth flavor.\n\nGnome on a Stick\nThe most basic way to serve gnome. If you aren't patient enough to butcher it yourself, you can quickly throw the gnome meat onto a skewer, salt it, and cook it over a fire. Very simple, though not as tender.\n\nGnome Steak\nGnome makes delicious steak just as a steer would. Chop the meat into steaks, salt it, and sear it to desired doneness.\n\nGnome Pita\n(text continues, not fully captured)",
+    "readText": "How to Serve Gnome\n\nWARNING: The words in this volume are SURE to offend. They're not for the faint of heart. In fact, the author has been run out of MANY CITIES simply for expressing his views on the culinary. If you're not a cocktail weenie, keep your eyes glued to this page. Otherwise, pass this pamphlet on to someone who is less cowardly than you.\n\nGnome is one of the most delectable meats available. The little buggers are hard to catch, but once you do, you're in for an evening of delicious culinary delight. Heed not their screams; they are not intelligent creatures. They only mimic the sounds of human beings as a defense mechanism. Do not feel guilty for their cries. Tell me, reader, do you feel sadness when a lamb bleats for its mother?\n\nProcess gnome like you would any other meat, for they are just like any other meat, only with a more savory, melt-in-your-mouth flavor.\n\nGnome on a Stick\nThe most basic way to serve gnome. If you aren't patient enough to butcher it yourself, you can quickly throw the gnome meat onto a skewer, salt it, and cook it over a fire. Very simple, though not as tender.\n\nGnome Steak\nGnome makes delicious steak just as a steer would. Chop the meat into steaks, salt it, and sear it to desired doneness.\n\nGnome Pita\nFlatbread and gnomes go together like pixie butter and jelly. Take some minced gnome, add chopped garlic and salt, cook until fragrant, and scoop it into some pita bread.\n\nI hope you, too, will be able to enjoy serving gnome as I have.",
     "lastUpdated": "2026-07-30"
   },
   {
@@ -3723,6 +3723,78 @@
     "size": "Large",
     "classes": ["ELE", "ENC", "INQ", "NEC", "SHD", "SPB", "WIZ"],
     "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Tattered Wool Belt",
+    "slug": "tattered-wool-belt",
+    "image": "images/items/tattered-wool-belt.jpg",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Waist",
+    "ac": 1,
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Recipe: Net Arrow (x20)",
+    "slug": "recipe-net-arrow",
+    "image": "images/items/recipe-net-arrow.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ARC"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Spark of Magic",
+    "slug": "spark-of-magic",
+    "image": "images/items/spark-of-magic.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Tiny",
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Leather Scraps",
+    "slug": "leather-scraps",
+    "image": "images/items/leather-scraps.jpg",
+    "type": "Misc",
+    "weight": 0.2,
+    "size": "Small",
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Cub's Claw",
+    "slug": "cubs-claw",
+    "image": "images/items/cubs-claw.jpg",
+    "type": "Weapon",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Primary / Secondary",
+    "damage": 13,
+    "delay": 30,
+    "skill": "Slashing",
+    "stats": { "STA": 2, "AGI": 6, "HP": 10 },
+    "description": "A simple claw fashioned to inflict deep lacerations.",
+    "weight": 4.6,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB", "WIZ"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Rusty Iron Tower Shield",
+    "slug": "rusty-iron-tower-shield",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Secondary",
+    "needsInfo": true,
     "lastUpdated": "2026-07-30"
   },
   {
@@ -6310,11 +6382,18 @@
   {
     "name": "Rusty Iron Mace",
     "slug": "rusty-iron-mace",
+    "image": "images/items/rusty-iron-mace.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 11,
+    "delay": 40,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Rusty Iron Maul",
@@ -7010,11 +7089,19 @@
   {
     "name": "Bow",
     "slug": "bow",
+    "image": "images/items/bow.jpg",
     "type": "Weapon",
     "tags": [],
     "slot": "Range",
+    "damage": 11,
+    "delay": 43,
     "skill": "Archery",
-    "needsInfo": true
+    "description": "A ranged weapon used to shoot arrows.",
+    "weight": 3.0,
+    "size": "Medium",
+    "classes": ["ARC", "BST", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Buckler",
@@ -7958,10 +8045,16 @@
   {
     "name": "Rusty Iron Chain Waistguard",
     "slug": "rusty-iron-chain-waistguard",
+    "image": "images/items/rusty-iron-chain-waistguard.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Waist",
-    "needsInfo": true
+    "ac": 4,
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Rusty Iron Chain Wristguard",
@@ -9509,12 +9602,13 @@
   {
     "name": "Dark Buckler",
     "slug": "dark-buckler",
-    "lastUpdated": "2026-07-19",
+    "image": "images/items/dark-buckler.jpg",
+    "lastUpdated": "2026-07-30",
     "type": "Armor",
     "tags": [],
     "slot": "Secondary",
-    "ac": 6,
-    "weight": 7.5,
+    "ac": 11,
+    "weight": 2.0,
     "size": "Large",
     "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
     "race": ["ALL"]

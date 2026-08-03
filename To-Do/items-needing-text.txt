@@ -385,16 +385,14 @@ entry is correct; only the "receipt" screenshot itself is missing. Re-add the im
 the user happens to post this card again; no need to ask them to re-screenshot solely for
 this.
 
-2026-07-30, images/inbox batch: "To Serve Gnome" (dropped by a bandit) is a readable book,
-in-page titled "How to Serve Gnome" — the full item card (NODROP, description, weight/size)
-and the opening of the readText both turned up later in the same batch, joining up cleanly
-with the previously-captured middle section. Only the very end is still missing (whatever
-follows the "Gnome Pita" recipe heading) — not enough to keep `needsInfo` set, since the
-actual item card itself is complete now.
-
 2026-07-30, images/inbox batch: Hip Quiver's Maximum Size read "SMALL" on a new card, but the
 existing entry (which had no saved screenshot) had `maxSize: "Medium"` — updated to Small
 per "newest screenshot wins," flagging since there's no old receipt to compare against.
+
+2026-07-30, images/inbox batch: Dark Buckler (dropped by Yezkiel the Gatekeeper) had a
+significant conflict — old entry (no saved screenshot) had AC 6/Weight 7.5, new card reads
+AC 11/Weight 2.0. Updated per "newest screenshot wins," flagged since there's no old receipt
+to compare and the gap is large enough to be worth a second look if it recurs.
 
 2026-07-30, images/inbox batch: Shadowy Chain Gloves (dropped by Champion of Muurtu) had a
 new card reading WIS+5/HP+20/Mana+10, roughly double the previously-recorded WIS+3/HP+10
