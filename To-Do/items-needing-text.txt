@@ -385,14 +385,12 @@ entry is correct; only the "receipt" screenshot itself is missing. Re-add the im
 the user happens to post this card again; no need to ask them to re-screenshot solely for
 this.
 
-2026-07-30, images/inbox batch: "To Serve Gnome" (dropped by a bandit) is a readable book —
-only its middle portion was captured (a mid-scroll screenshot starting "cries. Tell me,
-reader..." and cutting off partway into a "Gnome Pita" section), not the actual item card
-(no Slot/Weight/Class/Race, no "Click to read" description line) or the book's opening/
-closing text. `readText` holds what was captured, `needsInfo: true` is set since the real
-card is still missing. If the user's original inbox batch contained a paired item-card
-screenshot for this book (per their own "click to read" cards question), match it up and
-fill in the missing card fields + book ending.
+2026-07-30, images/inbox batch: "To Serve Gnome" (dropped by a bandit) is a readable book,
+in-page titled "How to Serve Gnome" — the full item card (NODROP, description, weight/size)
+and the opening of the readText both turned up later in the same batch, joining up cleanly
+with the previously-captured middle section. Only the very end is still missing (whatever
+follows the "Gnome Pita" recipe heading) — not enough to keep `needsInfo` set, since the
+actual item card itself is complete now.
 
 2026-07-30, images/inbox batch: Shadowy Chain Gloves (dropped by Champion of Muurtu) had a
 new card reading WIS+5/HP+20/Mana+10, roughly double the previously-recorded WIS+3/HP+10
