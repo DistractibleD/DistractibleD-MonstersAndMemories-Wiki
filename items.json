@@ -3610,6 +3610,59 @@
     "lastUpdated": "2026-07-30"
   },
   {
+    "name": "Tattered Cotton Gloves",
+    "slug": "tattered-cotton-gloves",
+    "image": "images/items/tattered-cotton-gloves.jpg",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Hands",
+    "ac": 4,
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Padded Leather Scraps",
+    "slug": "padded-leather-scraps",
+    "image": "images/items/padded-leather-scraps.jpg",
+    "type": "Misc",
+    "weight": 0.2,
+    "size": "Small",
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Recipe: Pitch-Wrapped Arrow (x20)",
+    "slug": "recipe-pitch-wrapped-arrow",
+    "image": "images/items/recipe-pitch-wrapped-arrow.jpg",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ARC"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Cinder Beetle Mandible",
+    "slug": "cinder-beetle-mandible",
+    "image": "images/items/cinder-beetle-mandible.jpg",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Primary / Secondary",
+    "damage": 12,
+    "delay": 32,
+    "skill": "Slashing",
+    "resists": { "COLD": -3 },
+    "effect": "Flameburst (Chance On Hit. Level: 7)",
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB", "WIZ"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
+  },
+  {
     "name": "Ghoul Skin",
     "slug": "ghoul-skin",
     "image": "images/items/ghoul-skin.jpg",
@@ -7782,10 +7835,16 @@
   {
     "name": "Rusty Iron Chain Gloves",
     "slug": "rusty-iron-chain-gloves",
+    "image": "images/items/rusty-iron-chain-gloves.jpg",
     "type": "Armor",
     "tags": [],
     "slot": "Hands",
-    "needsInfo": true
+    "ac": 11,
+    "weight": 2.0,
+    "size": "Small",
+    "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Rusty Iron Chain Gorget",

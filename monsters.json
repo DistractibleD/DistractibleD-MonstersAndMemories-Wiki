@@ -3711,7 +3711,48 @@
       { "item": "Putrid Carpenter's Vest" },
       { "item": "Rivenguard Tassets" },
       { "item": "Ghoul Skin" },
-      { "item": "Iron Scraps" }
+      { "item": "Iron Scraps" },
+      { "item": "Rusty Iron Axe" },
+      { "item": "Rusty Iron Battle Axe" },
+      { "item": "Rusty Iron Chain Boots" },
+      { "item": "Rusty Iron Chain Cloak" },
+      { "item": "Rusty Iron Chain Coif" },
+      { "item": "Rusty Iron Chain Gambeson" },
+      { "item": "Rusty Iron Chain Gloves" },
+      { "item": "Rusty Iron Chain Gorget" },
+      { "item": "Rusty Iron Chain Leggings" },
+      { "item": "Rusty Iron Chain Mask" },
+      { "item": "Rusty Iron Chain Shoulderguards" },
+      { "item": "Rusty Iron Chain Tunic" },
+      { "item": "Rusty Iron Chain Waistguard" },
+      { "item": "Rusty Iron Chain Wristguard" },
+      { "item": "Rusty Iron Dagger" },
+      { "item": "Rusty Iron Great Scythe" },
+      { "item": "Rusty Iron Greatsword" },
+      { "item": "Rusty Iron Kite Shield" },
+      { "item": "Rusty Iron Long Spear" },
+      { "item": "Rusty Iron Longsword" },
+      { "item": "Rusty Iron Mace" },
+      { "item": "Rusty Iron Maul" },
+      { "item": "Rusty Iron Plate Arming Doublet" },
+      { "item": "Rusty Iron Plate Boots" },
+      { "item": "Rusty Iron Plate Bracer" },
+      { "item": "Rusty Iron Plate Breastplate" },
+      { "item": "Rusty Iron Plate Cloak" },
+      { "item": "Rusty Iron Plate Collar" },
+      { "item": "Rusty Iron Plate Gauntlets" },
+      { "item": "Rusty Iron Plate Girdle" },
+      { "item": "Rusty Iron Plate Greaves" },
+      { "item": "Rusty Iron Plate Helm" },
+      { "item": "Rusty Iron Plate Pauldrons" },
+      { "item": "Rusty Iron Plate Visor" },
+      { "item": "Rusty Iron Scimitar" },
+      { "item": "Rusty Iron Scythe" },
+      { "item": "Rusty Iron Shortsword" },
+      { "item": "Rusty Iron Spear" },
+      { "item": "Rusty Iron Trident" },
+      { "item": "Rusty Iron War Lance" },
+      { "item": "Rusty Iron Warhammer" }
     ],
     "lastUpdated": "2026-07-30"
   },
@@ -4101,7 +4142,116 @@
     "name": "a grizzled raider",
     "slug": "a-grizzled-raider",
     "drops": [
-      { "item": "Tattered Leather Belt" }
+      { "item": "Tattered Leather Belt" },
+      { "item": "Rusty Iron Axe" },
+      { "item": "Rusty Iron Battle Axe" },
+      { "item": "Rusty Iron Chain Boots" },
+      { "item": "Rusty Iron Chain Cloak" },
+      { "item": "Rusty Iron Chain Coif" },
+      { "item": "Rusty Iron Chain Gambeson" },
+      { "item": "Rusty Iron Chain Gloves" },
+      { "item": "Rusty Iron Chain Gorget" },
+      { "item": "Rusty Iron Chain Leggings" },
+      { "item": "Rusty Iron Chain Mask" },
+      { "item": "Rusty Iron Chain Shoulderguards" },
+      { "item": "Rusty Iron Chain Tunic" },
+      { "item": "Rusty Iron Chain Waistguard" },
+      { "item": "Rusty Iron Chain Wristguard" },
+      { "item": "Rusty Iron Dagger" },
+      { "item": "Rusty Iron Great Scythe" },
+      { "item": "Rusty Iron Greatsword" },
+      { "item": "Rusty Iron Kite Shield" },
+      { "item": "Rusty Iron Long Spear" },
+      { "item": "Rusty Iron Longsword" },
+      { "item": "Rusty Iron Mace" },
+      { "item": "Rusty Iron Maul" },
+      { "item": "Rusty Iron Plate Arming Doublet" },
+      { "item": "Rusty Iron Plate Boots" },
+      { "item": "Rusty Iron Plate Bracer" },
+      { "item": "Rusty Iron Plate Breastplate" },
+      { "item": "Rusty Iron Plate Cloak" },
+      { "item": "Rusty Iron Plate Collar" },
+      { "item": "Rusty Iron Plate Gauntlets" },
+      { "item": "Rusty Iron Plate Girdle" },
+      { "item": "Rusty Iron Plate Greaves" },
+      { "item": "Rusty Iron Plate Helm" },
+      { "item": "Rusty Iron Plate Pauldrons" },
+      { "item": "Rusty Iron Plate Visor" },
+      { "item": "Rusty Iron Scimitar" },
+      { "item": "Rusty Iron Scythe" },
+      { "item": "Rusty Iron Shortsword" },
+      { "item": "Rusty Iron Spear" },
+      { "item": "Rusty Iron Trident" },
+      { "item": "Rusty Iron War Lance" },
+      { "item": "Rusty Iron Warhammer" }
+    ],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "a Benu Dhai sister",
+    "slug": "a-benu-dhai-sister",
+    "drops": [
+      { "item": "Tattered Cotton Boots" },
+      { "item": "Iron Scraps" }
+    ],
+    "coinDrops": [
+      { "silver": 5, "copper": 50 }
+    ],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "a Benu Dhai brother",
+    "slug": "a-benu-dhai-brother",
+    "drops": [
+      { "item": "Cub's Claw" }
+    ],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "a Benu Dhai elder",
+    "slug": "a-benu-dhai-elder",
+    "drops": [
+      { "item": "Cub's Claw" }
+    ],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Sister Elsi",
+    "slug": "sister-elsi",
+    "named": true,
+    "drops": [
+      { "item": "Iron Scraps" },
+      { "item": "Celery" }
+    ],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "a road deacon",
+    "slug": "a-road-deacon",
+    "drops": [
+      { "item": "Cotton Scraps" },
+      { "item": "Cheese" },
+      { "item": "Celery" }
+    ],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Father Rau",
+    "slug": "father-rau",
+    "named": true,
+    "drops": [
+      { "item": "Iron Scraps" },
+      { "item": "Cabbage" }
+    ],
+    "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "a plague rat",
+    "slug": "a-plague-rat",
+    "maps": ["Fallen Pass"],
+    "areas": ["Plagueborn Camp"],
+    "drops": [
+      { "item": "Raw Rat Fillet" }
     ],
     "lastUpdated": "2026-07-30"
   },
@@ -4420,6 +4570,7 @@
       { "item": "Ghoul Bile" },
       { "item": "Ghoul Skin" },
       { "item": "Iron Scraps" },
+      { "item": "Tattered Cotton Gloves" },
       { "item": "Rusty Iron Axe" },
       { "item": "Rusty Iron Battle Axe" },
       { "item": "Rusty Iron Chain Boots" },
@@ -4476,6 +4627,7 @@
       { "item": "Torch" },
       { "item": "Iron Scraps" },
       { "item": "Tattered Cotton Tunic" },
+      { "item": "Tattered Cotton Bracer" },
       { "item": "Spirit World Ch. 20" },
       { "item": "Raw Giant Meat" },
       { "item": "Cooked Giant Meat" },
