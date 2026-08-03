@@ -359,3 +359,28 @@ the other, and the two numbers aren't a simple superset/subset of each other the
 cropped-vs-full card would be. Left the original 2026-07-18 entry untouched, discarded the
 duplicate, and did not overwrite the archived screenshot. Needs an in-game look (or the user's
 own screenshot) to resolve which INT/MANA values are actually correct.
+
+2026-07-30, images/inbox batch: two MAGIC UNIQUE cards had no Race line visible at all —
+Crimson Cauldron Apron (Class: ALL, card cuts off right after) and Overseer's Filthy Maul
+(Class list ends with ROG, card shows a scrollbar implying more content below that wasn't
+captured). Both left with `race` unset rather than guessed `["ALL"]`, per the usual
+cropped-card handling.
+
+2026-07-30, images/inbox loot-log batch: several "Tattered Cotton" drops (Shirt on a
+Plagueborn citizen, Mantle on a Plagueborn constable, Tunic on a sand giant fisher) appeared
+in loot-log chat text, but items.json's actual matching family is named "Tattered Cloth"
+(Shirt/Mantle/Tunic all exist under that name, not "Cotton") — recorded verbatim as "Cotton"
+per the loot log text rather than silently renamed to link up, so these currently render as
+unlinked plain text on those monsters' drop lists. Unclear whether the game's chat loot
+message just uses a looser material name than the item's own title (in which case these
+should link to the existing Tattered Cloth pieces) or whether "Tattered Cotton" is a
+genuinely distinct, not-yet-carded tier — needs an in-game look or a real item card to
+resolve either way.
+
+2026-07-30: Sandy Dune Tunic (dropped by Ember, Sungreet Strand) has a full items.json entry
+but no saved screenshot — its source file was deleted from images/Processing during this
+session's inbox batch before it was converted/archived (a process slip, not a data loss —
+the full card text had already been read and transcribed accurately). Every field on the
+entry is correct; only the "receipt" screenshot itself is missing. Re-add the image only if
+the user happens to post this card again; no need to ask them to re-screenshot solely for
+this.

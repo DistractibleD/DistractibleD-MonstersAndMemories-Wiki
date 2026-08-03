@@ -4295,9 +4295,40 @@ function setupMonsterViewer() {
 // a small "Click for more info" hint at the bottom, shown only in the
 // tooltip (the modal IS the "more info" destination, so it doesn't need the
 // hint pointing at itself).
+// A monster's `coinDrops` (see CLAUDE.md) is a raw list of individual coin
+// observations pulled from loot-log screenshots — the TOTAL the corpse
+// dropped, not any one player's split of it (a group loot line shows both;
+// only the total reflects what the mob actually drops). The average shown
+// on the card is always computed here at render time from that raw list,
+// never stored back into monsters.json — same "never persist a derived
+// number" precedent as itemRatio/estimateRecipeSkill elsewhere in this file
+// — so it updates automatically as more observations come in.
+function averageCoinDrop(monster) {
+  const drops = monster.coinDrops || [];
+  if (!drops.length) return null;
+  const totalSilver = drops.reduce((sum, d) => sum + (d.silver || 0), 0);
+  const totalCopper = drops.reduce((sum, d) => sum + (d.copper || 0), 0);
+  return {
+    silver: totalSilver / drops.length,
+    copper: totalCopper / drops.length,
+    samples: drops.length
+  };
+}
+
+// Rounds each denomination to one decimal place and only mentions the ones
+// that are actually nonzero (an average of 0 silver, 41.8 copper just shows
+// the copper part).
+function formatCoinAmount(silver, copper) {
+  const parts = [];
+  if (silver) parts.push(`${silver.toFixed(1)} silver`);
+  if (copper) parts.push(`${copper.toFixed(1)} copper`);
+  return parts.length ? parts.join(', ') : '0 copper';
+}
+
 function renderMonsterCardHTML(monster, opts = {}) {
   const drops = monster.drops || [];
   const related = monster.relatedMonsters || [];
+  const coinAvg = averageCoinDrop(monster);
 
   return `
     <div class="monster-card">
@@ -4330,6 +4361,7 @@ function renderMonsterCardHTML(monster, opts = {}) {
               }).join('')}
             </ul>
           ` : '<p class="monster-card-no-drops">No known drops yet.</p>'}
+          ${coinAvg ? `<p class="monster-card-coin-avg">Average coin drop: ${formatCoinAmount(coinAvg.silver, coinAvg.copper)} <span class="monster-card-coin-samples">(${coinAvg.samples} sample${coinAvg.samples === 1 ? '' : 's'})</span></p>` : ''}
         </div>
         ${monster.needsInfo ? `<div class="item-card-section item-card-needs-info">This monster needs more info &middot; confirmed to exist, but a full picture/details haven't been captured yet. <a href="#submit">Submit a screenshot</a> to help fill it in!</div>` : ''}
         ${monster.named ? `<div class="item-card-section item-card-suggest">Wrong or missing info? <a href="#" class="monster-suggest-link" data-name="${escapeAttr(monster.name)}">Click here</a> to let us know.</div>` : ''}

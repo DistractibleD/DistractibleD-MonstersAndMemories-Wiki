@@ -1006,6 +1006,25 @@ fills in as the user provides it:
   at render time (`findItemByName`/`goToItem`), clickable if a matching item exists yet,
   plain text if not. Sourced from a loot-window screenshot paired with a plain item card per
   icon — see the inbox workflow above.
+- **`coinDrops`** — optional array of raw per-corpse coin observations,
+  `{ "silver": N, "copper": N }`, one entry per loot-log line actually seen (added
+  2026-07-30). Sourced from a loot-log chat screenshot (not the loot-window UI `drops`
+  comes from) — each qualifying line names the mob directly ("... from a Plagueborn
+  citizen's corpse..."), so a screenshot with several corpses of the same mob name yields
+  several observations straight onto that one monster entry. **Always record the TOTAL the
+  corpse dropped, never a player's own split of it** — a group loot line shows both, e.g.
+  "You loot 4 silver, and 15 copper coins from a Plagueborn citizen's corpse, and receive 1
+  silver, and 2 copper coins as your split." records `{"silver": 4, "copper": 15}` (the
+  total), not the 1s/2c split share, since the split depends on group size and isn't a
+  property of the mob at all. `averageCoinDrop(monster)` in `script.js` computes the average
+  silver/copper across every observation at render time — never stored back into
+  `monsters.json`, same "never persist a derived number" precedent as `itemRatio`/
+  `estimateRecipeSkill` elsewhere in this file, so it updates automatically as more
+  screenshots add observations. Shown on the monster card as "Average coin drop: X silver, Y
+  copper (N samples)" (`formatCoinAmount`, omits a denomination that averages to exactly 0).
+  No conversion between silver/copper/gold/platinum is assumed anywhere — every denomination
+  actually seen in a loot log is recorded and averaged on its own, since the exchange rate
+  between them isn't confirmed.
 - `relatedMonsters` — array of `{ "label": "Display Text", "slug": "other-monsters-slug" }`,
   for a Named boss whose loot flavor text ties it to an existing generic mob (e.g. a wing
   item whose flavor text names the bat boss it's said to come from). Rendered on the monster
@@ -1036,16 +1055,37 @@ each time.
   - **Rusty** (18 pieces, weapons + Tower Shield): Dagger, Shortsword, Throwing Dagger, Axe,
     Battle Axe, Scimitar, Scythe, Longsword, Spear, Long Spear, Trident, Mace, Warhammer,
     Great Scythe, War Lance, Greatsword, Maul, Tower Shield.
-  - **Tattered Cloth** (9 pieces, armor): Cap, Gorget, Pantaloons, Shirt, Gloves, Bracer,
-    Boots, Robe, Veil.
+  - **Tattered Cloth** (13 pieces, armor — grown from an originally-documented 9 as more
+    pieces turned up in later screenshots): Cap, Gorget, Pantaloons, Shirt, Gloves, Bracer,
+    Boots, Robe, Veil, Belt, Cape, Mantle, Tunic.
   - **Tattered Rawhide** (8 pieces, armor): Gorget, Belt, Mask, Gloves, Bracer, Boots, Vest,
     Shoulderpads.
   - **Corroded Bronze** (19 pieces, weapons + armor): Shortsword, Scythe, Battle Axe,
     Longsword, Axe, Dagger, Trident, Maul, Great Scythe, Scimitar, Greatsword, Long Spear,
     Tower Shield, Kite Shield, Plate Collar, Plate Boots, Chain Gloves, Chain Waistguard,
     Chain Mask.
+  - **Rusty Iron** (41 pieces, weapons + chain + plate armor — a distinct, higher tier from
+    plain "Rusty" above, not the same family under a longer name): Axe, Battle Axe, Dagger,
+    Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar,
+    Scythe, Shortsword, Spear, Trident, War Lance, Warhammer; Chain Boots/Cloak/Coif/
+    Gambeson/Gloves/Gorget/Leggings/Mask/Shoulderguards/Tunic/Waistguard/Wristguard; Plate
+    Arming Doublet/Boots/Bracer/Breastplate/Cloak/Collar/Gauntlets/Girdle/Greaves/Helm/
+    Pauldrons/Visor. First backfilled 2026-07-30 onto several Plagueborn-camp mobs (Fallen
+    Pass) and a sand giant fisher (Vale of Zintar).
+  - **Rusty Steel** (41 pieces, same shape as Rusty Iron but not item-for-item identical —
+    Rusty Steel has a Tower Shield that Rusty Iron doesn't, Rusty Iron has a Chain Gambeson
+    that Rusty Steel doesn't; recorded verbatim rather than assumed symmetric): Axe, Battle
+    Axe, Dagger, Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul,
+    Scimitar, Scythe, Shortsword, Spear, Tower Shield, Trident, War Lance, Warhammer; Chain
+    Boots/Cloak/Coif/Gloves/Gorget/Leggings/Mask/Shoulderguards/Tunic/Waistguard/Wristguard;
+    Plate Arming Doublet/Boots/Bracer/Breastplate/Cloak/Collar/Gauntlets/Girdle/Greaves/
+    Helm/Pauldrons/Visor. First backfilled 2026-07-30 onto a sand giant raider (Vale of
+    Zintar).
 
-  Treat a new shared prefix as its own family the same way if one shows up.
+  Treat a new shared prefix as its own family the same way if one shows up. **"Rusty" vs.
+  "Rusty Iron" vs. "Rusty Steel" are three separate families, not one family loosely
+  named** — same material word, different tiers, each with its own confirmed roster; don't
+  merge them or assume one's roster implies another's.
 - The backfill is **per-monster**, based on the *global* known roster of a family (not just
   what that one monster's own screenshots have shown) — if a monster is newly confirmed
   dropping one piece of a family, it gets every *other* piece of that family already known
