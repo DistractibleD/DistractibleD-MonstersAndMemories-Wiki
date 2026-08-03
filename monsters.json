@@ -3709,9 +3709,11 @@
       { "item": "Ancient Work Gloves" },
       { "item": "Patina Mask" },
       { "item": "Putrid Carpenter's Vest" },
-      { "item": "Rivenguard Tassets" }
+      { "item": "Rivenguard Tassets" },
+      { "item": "Ghoul Skin" },
+      { "item": "Iron Scraps" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-07-30"
   },
   {
     "name": "Namon Ka Har",
@@ -3999,6 +4001,8 @@
       { "item": "Cotton Scraps" },
       { "item": "Cracked Ironbark Staff" },
       { "item": "Tattered Cotton Shirt" },
+      { "item": "Tattered Cotton Bracer" },
+      { "item": "Tattered Leather Boots" },
       { "item": "Rusty Iron Axe" },
       { "item": "Rusty Iron Battle Axe" },
       { "item": "Rusty Iron Chain Boots" },
@@ -4171,6 +4175,11 @@
     "drops": [
       { "item": "Tattered Leather Cloak" },
       { "item": "Eth-ur Astrological Journal Page" },
+      { "item": "Imperfect Fire Emerald" },
+      { "item": "Cotton Scraps" },
+      { "item": "Worn Ironbark Bow" },
+      { "item": "Worn Ironbark Buckler" },
+      { "item": "Bell Pepper" },
       { "item": "Rusty Iron Axe" },
       { "item": "Rusty Iron Battle Axe" },
       { "item": "Rusty Iron Chain Boots" },
@@ -4279,6 +4288,8 @@
     "areas": ["Plagueborn Camp"],
     "drops": [
       { "item": "Cotton Scraps" },
+      { "item": "Worn Ironbark Great Staff" },
+      { "item": "Ghoul Bile" },
       { "item": "Rusty Iron Axe" },
       { "item": "Rusty Iron Battle Axe" },
       { "item": "Rusty Iron Chain Boots" },
@@ -4336,6 +4347,12 @@
       { "item": "Iron Scraps" },
       { "item": "Tattered Cotton Tunic" },
       { "item": "Spirit World Ch. 20" },
+      { "item": "Raw Giant Meat" },
+      { "item": "Cooked Giant Meat" },
+      { "item": "Tattered Leather Bracer" },
+      { "item": "Tattered Leather Shoulderpads" },
+      { "item": "Cotton Scraps" },
+      { "item": "Worn Ironbark Bow" },
       { "item": "Rusty Iron Axe" },
       { "item": "Rusty Iron Battle Axe" },
       { "item": "Rusty Iron Chain Boots" },
@@ -4387,7 +4404,12 @@
       { "silver": 6, "copper": 56 },
       { "silver": 4, "copper": 45 },
       { "silver": 6, "copper": 33 },
-      { "silver": 5, "copper": 88 }
+      { "silver": 5, "copper": 88 },
+      { "silver": 6, "copper": 14 },
+      { "silver": 4, "copper": 87 },
+      { "silver": 4, "copper": 2 },
+      { "silver": 6, "copper": 20 },
+      { "silver": 5, "copper": 22 }
     ],
     "lastUpdated": "2026-07-30"
   },
