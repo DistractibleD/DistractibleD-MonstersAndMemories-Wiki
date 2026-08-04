@@ -160,6 +160,22 @@
     "lastUpdated": "2026-07-30"
   },
   {
+    "name": "Giant Mining Pick",
+    "slug": "giant-mining-pick",
+    "type": "Weapon",
+    "tags": ["UNIQUE"],
+    "slot": "Primary",
+    "damage": 19,
+    "delay": 40,
+    "skill": "Stabbing",
+    "description": "A large mining pick, taken from the lifeless hands of a giant.",
+    "weight": 3.0,
+    "size": "Large",
+    "classes": ["ALL"],
+    "race": ["OGR", "TRL"],
+    "lastUpdated": "2026-08-04"
+  },
+  {
     "name": "Fine Wool Bracer",
     "slug": "fine-wool-bracer",
     "image": "images/items/fine-wool-bracer.jpg",
@@ -17068,7 +17084,8 @@
     "description": "A war-helm belonging to Dougal Bromm, bearing a scar inflicted by Kryannon's talon during the defense of Upper Saman. It hums faintly with the grit of a realm that refused to fall quietly.",
     "weight": 1.0,
     "size": "Small",
-    "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"]
+    "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"]
   },
   {
     "name": "Boots of the Strategist's Burden",

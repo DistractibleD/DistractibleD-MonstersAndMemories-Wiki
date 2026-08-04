@@ -2096,10 +2096,11 @@
   {
     "name": "Krothun Veincarver",
     "slug": "krothun-veincarver",
-    "lastUpdated": "2026-07-19",
+    "lastUpdated": "2026-08-04",
     "named": true,
     "maps": ["Scarwood"],
-    "drops": [{ "item": "Giant's Loincloth" }]
+    "areas": ["Giants Cave"],
+    "drops": [{ "item": "Giant's Loincloth" }, { "item": "Giant Mining Pick" }]
   },
   {
     "name": "Teyla Beastbound",
