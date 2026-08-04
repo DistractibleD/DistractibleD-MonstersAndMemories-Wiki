@@ -399,3 +399,67 @@ new card reading WIS+5/HP+20/Mana+10, roughly double the previously-recorded WIS
 with no Mana line at all. Updated per "newest screenshot wins," but flagging since the old
 entry had no saved screenshot to compare against directly — worth a second look if a future
 capture disagrees with this again, same as the Leggings of Reckoning case above.
+
+2026-07-28, mnmdrops.com scrape, Fallen Pass zone (55 mobs, full zone completed): missing
+Race lines were the single most common gap this zone -- far more cards than usual ended
+mid-scroll before the Race line, sometimes even before Class. Left `race` (and occasionally
+`classes`) unset per the usual convention rather than guessed, on: Aegis of the Dragon
+Crusader, Oathband of House Thyrm (Aidan Thrym); Leprotic Bracer, Leprotic Gloves, Banished
+Seamstress' Blade (the three Blightcallers); Copper Holy Symbol of Eltrindra, Veil of the
+Blessed Crossing (Captain Haring); Fell Trident (Horvarth Ezzadel); Vest of the Glass Viper
+(Malik The Glass Viper); Savage Club (Master Tracker Lark); Rod of Consumption (Mistress
+Nephidna); Cursed Radiant Blade, Guillome's Cracked Skull (Guillome The Accursed); Fell
+Trident-style cases repeated on Faylan's Gambeson (Faylan Torvald); Diseased Claw Shiv,
+Putrid Hide Hand Wraps (Rotfang); Mark of the Thrallmaker, Smuggler's Jerkin, Woven Rat Hide
+Belt (all three from Seamas Growt); Plagued Smith's Hammer, Plaguesmith's Breastplate
+(Sorchan Yazmul); Ivor's Battle Bracer, Ivor's Blood Bracer (Ivor Thrym, one of these also
+had a garbled class-list token "INO" read as "INQ" -- no other code fits); Overseer's Filthy
+Maul (Taskmaster Nor'tap, independently reflagged in the images/inbox batch above too);
+Blightborn Sickle, Verdant Mantle, Workhorse Saddle (all three from Yvette Gardener); Small
+Mur'Hua Trinket (Tora'galdo). A handful of cards were cut off even earlier, missing
+Weight/Size/Class/Race entirely -- these got `needsInfo: true` instead of just an unset race:
+Festerclasp (Blightcaller Zirat), Bulwark of the Fallen (Captain Haring), Warrenmother's Rod
+(Elder Luh'kan), Skinbound Staff (Felix Rathmere), Handmaiden's Robe (Handmaiden Mira),
+Spellbound Tome of Shielding (Ivor Thrym), Bane of the Twin Drakes (Nyxx), Mind's Eye Turban
+(Observer Samvel), Pestilence Shard of the Blightspire (Pustulax), Scratching Mace
+(Riki'tipa), Robe of the Namon Ka Har (Namon Ka Har).
+
+Site-vs-mob-name spelling mismatches this zone (recorded verbatim from the card, not
+silently "corrected" to match the mob's own name): Alaric Brom's Pounce Bag names "Alaric
+Bromm" (double-m) in its flavor text; Dougal Brom's Bromm's Bracers and Helm of the Last
+Roar both spell it "Bromm" too -- the mob-name convention in this zone consistently uses
+single-m "Brom" while item flavor text uses double-m "Bromm". Jailer Kur'mak's own card
+spells the item "Jailor Kur'mak's Cudgel" (o, not e). Two items also turned out to have a
+different real name than the site's own zone-list text: "Scribe's Cuff" (site) is actually
+"Scribe's Cuffs" (card, plural) from Alaric Brom; "Moonlit Slippers" (site) is actually
+"Moonlit Strides" (card) from Sivah Arujan; "Steward's Cap" (site) is actually "Steward's
+Coif" (card) from Steward Grimaldi (see the entry above for that one's separate stat
+conflict).
+
+Two monster-entry near-misses caught by cross-checking monsters.json before adding new
+entries, both from earlier sessions/concurrent work using different spellings than
+mnmdrops.com's zone list: "Overseer Jaru'Kan" (capital K) already existed with 1 drop
+(Ratswarm Staff) -- merged in the map and 3 new drops rather than creating a duplicate
+"Overseer Jaru'kan". "Thuraya Aislingar" (single i, with an "areas": ["Plagueborn Camp"]
+field and 1 drop already recorded) already existed under a spelling one letter off from this
+zone's own "Thuraya Aisliingar" -- merged in the 3 new drops instead of duplicating. A third
+near-duplicate was caught at the item level rather than monster level: this session's
+independent capture of Alchemist's Amulet, Crimson Cauldron Apron, Fine Woven Wire Bracelet,
+Worn Linen Mitts, Leather Linked Chain Belt, Overseer's Filthy Maul, Cruel Mail Belt, and
+Hood of the Iron Lash all turned out to already exist (added by a concurrent session
+scraping the same zone independently, matching data) -- discarded this session's duplicate
+captures of those 8 rather than re-adding.
+
+New/unresolved gaps from this zone: Guillome's Cracked Skull (Guillome The Accursed) shows
+only Effect + Weight/Size on its card despite the site listing its slot as BAG/BACKPACK --
+recorded as `type: "Misc"` with `needsInfo: true` rather than guessed as a real Container,
+since no Capacity/Maximum Size was ever shown. Dark Alchemist's Bag (Namon Ka Har) has the
+same problem in reverse -- card shows no Capacity/Class/Race at all for an item literally
+named "Bag" -- also left as Misc/needsInfo rather than assumed Container. Workhorse Saddle
+(Yvette Gardener, mount Rigging-slot equipment) showed a "MGT: +1" stat with no established
+field anywhere in items.json -- STA/HP recorded normally, MGT omitted rather than inventing
+a new schema field; worth adding a real field for this once a second mount item confirms the
+same stat. Skri'Var Ranger's Bow (Tora'galdo) had a visibly glitchy card render -- the Effect
+line showed two overlapping/duplicate entries for "Strength of Eth-el" with different Cast
+Time values (3s vs 10s) -- recorded the 3s version, flagged the ambiguity, needsInfo also set
+since Weight/Size/Class/Race were cut off on the same card.

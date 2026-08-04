@@ -3557,14 +3557,15 @@
     "name": "War Wizard Leonath",
     "slug": "war-wizard-leonath",
     "named": true,
-    "maps": ["Glass Flats"],
+    "maps": ["Glass Flats", "Fallen Pass"],
     "drops": [
       { "item": "Carved Warstaff" },
       { "item": "Cinder-Wand Leggings" },
+      { "item": "Embroidered Cape" },
       { "item": "Silvery Robe" },
       { "item": "Wand of Cinder" }
     ],
-    "lastUpdated": "2026-07-24"
+    "lastUpdated": "2026-07-28"
   },
   {
     "name": "Zahid the Calm",
@@ -3610,7 +3611,7 @@
       { "item": "Wise Handguards" },
       { "item": "Resolute Buckler" }
     ],
-    "note": "Sourced from an external fan-wiki page (a \"Ten Hooks rare mob\"), not a direct in-game screenshot ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â weaker than the usual source, per CLAUDE.md. The page also listed vague \"Corroded Bronze\"/\"Tattered Hide\" common-loot categories rather than exact item names, so those weren't added to drops."
+    "note": "Sourced from an external fan-wiki page (a \"Ten Hooks rare mob\"), not a direct in-game screenshot ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â weaker than the usual source, per CLAUDE.md. The page also listed vague \"Corroded Bronze\"/\"Tattered Hide\" common-loot categories rather than exact item names, so those weren't added to drops."
   },
   {
     "name": "a shady farmer",
@@ -4781,7 +4782,10 @@
     "maps": ["Fallen Pass"],
     "areas": ["Plagueborn Camp"],
     "drops": [
-      { "item": "Crimson Cauldron Apron" }
+      { "item": "Alchemist's Amulet" },
+      { "item": "Crimson Cauldron Apron" },
+      { "item": "Fine Woven Wire Bracelet" },
+      { "item": "Worn Linen Mitts" }
     ],
     "lastUpdated": "2026-07-30"
   },
@@ -5282,5 +5286,70 @@
       { "silver": 7, "copper": 8 }
     ],
     "lastUpdated": "2026-07-30"
+  },
+  {
+    "name": "Yvette Gardener",
+    "slug": "yvette-gardener",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Blightborn Sickle" },
+      { "item": "Gardener's Hauberk" },
+      { "item": "Verdant Mantle" },
+      { "item": "Workhorse Saddle" },
+      { "item": "Yvette's Cape" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Yeoman Borin Smythe",
+    "slug": "yeoman-borin-smythe",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Defiler's Blade" },
+      { "item": "Disgraced Captain's Cuirass" },
+      { "item": "Lysandra's Flower" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Tora'galdo",
+    "slug": "toragaldo",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Skri'Var Ranger's Bow" },
+      { "item": "Skri'Var Scapula" },
+      { "item": "Skri'Var Silkstrand" },
+      { "item": "Small Mur'Hua Trinket" },
+      { "item": "Tora's Sneakin' Mantle" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Taskmaster Nor'tap",
+    "slug": "taskmaster-nortap",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Blackened Bone Ring" },
+      { "item": "Leather Linked Chain Belt" },
+      { "item": "Nortap Chime" },
+      { "item": "Overseer's Filthy Maul" }
+    ],
+    "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Taskmaster Fek'ney",
+    "slug": "taskmaster-fekney",
+    "named": true,
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Cruel Mail Belt" },
+      { "item": "Hood of the Iron Lash" },
+      { "item": "Taskmaster's Leathers" }
+    ],
+    "lastUpdated": "2026-07-28"
   }
 ]
