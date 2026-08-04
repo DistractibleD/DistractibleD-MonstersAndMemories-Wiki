@@ -1,1845 +1,1114 @@
 # CLAUDE.md
 
-Guidance for Claude Code when working in this repo.
+Guidance for Claude Code working in this repo. Design-decision history/superseded-attempt
+post-mortems live in `CLAUDE-HISTORY.md` instead (not auto-loaded — read on demand); this
+file is current rules/schema only.
 
 ## What this is
 
-A static wiki for the game *Monsters and Memories*, hosted on GitHub Pages. No build
-step, no backend, no login system. `index.html` + `style.css` + `script.js` load content
-at runtime — either Markdown pages (via marked.js) or the Item Database (via `items.json`).
-See `README.md` for the full explanation written for the (non-technical) site owner.
+Static wiki for *Monsters and Memories*, GitHub Pages, no build/backend/login. `index.html`
++ `style.css` + `script.js` load content at runtime — Markdown pages (marked.js) or the Item
+Database (`items.json`). `README.md` has the full non-technical explanation for the site
+owner.
 
-Items and crafting recipes are **displayed** as cards rendered entirely from JSON data —
-not screenshots (see "Item and recipe cards" below). As of 2026-08-04, the screenshot itself
-is no longer archived for new items/recipes (the game gets rebalanced over time, so an old
-screenshot stops being a reliable reference anyway) — pre-2026-08-04 entries keep whatever
-`.jpg` they already have, but nothing new gets saved to `images/items/`/`images/crafting/`.
+Items/recipes are **displayed** as cards rendered from JSON, not screenshots (see "Item and
+recipe cards"). As of 2026-08-04, screenshots are no longer archived for new items/recipes
+(game gets rebalanced over time, so an old screenshot stops being a reliable reference) —
+pre-2026-08-04 entries keep whatever `.jpg` they already have; nothing new gets saved to
+`images/items/`/`images/crafting/`.
 
-## The user's screenshots are the source of truth
+## Source-of-truth rule
 
-Everything the user posts (item/map/recipe screenshots, or stats typed directly in chat) is
-taken straight from the live game, right now. If it conflicts with anything found on an
-external site (the unofficial wiki, MnM Quest, MnM Classes Map, or any other fan resource
-looked up during research), the user's own screenshot wins — external wikis can easily be
-outdated (the unofficial wiki is already flagged as such on the Welcome page) or simply
-wrong for this game specifically. External sources are still useful for filling in gaps the
-user hasn't posted about yet (e.g. the tradeskill difficulty-color wording), but never use
-one to override, "correct," or second-guess something the user actually posted a screenshot
-of — if the two disagree, say so and ask rather than quietly going with the external source.
+User's own screenshots/chat-typed stats > external sites (unofficial wiki, MnM Quest, MnM
+Classes Map, any fan resource) always. External sources fill gaps the user hasn't posted
+about, never override/correct/second-guess something the user actually posted — if they
+disagree, say so and ask, don't quietly go with the external source.
 
 ## The To-Do folder
 
-`To-Do/` (repo root) is where every gap-tracking / prediction / "things to look for in game"
-list lives — content aimed at the user and future Claude sessions, never linked from the site
-and never loaded by any code (`script.js` doesn't fetch anything from this folder).
+`To-Do/` (repo root) = gap-tracking/prediction/"watch for this in game" lists, aimed at
+future sessions. Never linked from the site, never loaded by code.
 
-- `To-Do/items-needing-text.txt` — items.json entries with missing/incomplete data (not
-  screenshot-cropping issues — see the file's own header). Referenced from "Adding an item
-  to the Item Database" below.
-- `To-Do/crafting-skill-estimates.md` — speculative numeric skill-requirement guesses for
-  crafting recipes, kept separate from `crafting.json`'s real `recipeSkillLevel` field
-  (never write a guess into that field — see "Adding a crafting recipe" below).
-- `To-Do/crafting-recipes-missing-components.txt` — crafting.json recipes with no (or a
-  partial) `components` list yet.
-- `To-Do/predicted-missing-items.txt` — items inferred to probably exist from a naming/slot
-  pattern already seen elsewhere in items.json (e.g. a material tier that's missing a piece
-  every sibling tier has), not from any screenshot. Revisited most recently 2026-07-15 after
-  a large vendor-screenshot batch confirmed several predicted tiers directly.
+- `To-Do/items-needing-text.txt` — items.json entries missing data (not cropping issues).
+- `To-Do/crafting-skill-estimates.md` — speculative skill-requirement guesses, separate from
+  crafting.json's real `recipeSkillLevel` (never write a guess into that field).
+- `To-Do/crafting-recipes-missing-components.txt` — recipes with no/partial `components`.
+- `To-Do/predicted-missing-items.txt` — items inferred from a naming/slot pattern, not a
+  screenshot.
 
-**Any future list of this kind — missing data, predicted-but-unconfirmed items, anything
-framed as "watch for this in game" — goes in `To-Do/` too**, not loose at the repo root or
-tucked into `images/`. Update an existing file in place when it already covers the topic
-rather than creating a near-duplicate; only start a new file for a genuinely distinct kind of
-gap.
+Any future list of this kind goes in `To-Do/`, not loose at repo root or in `images/`.
+Update an existing file in place rather than duplicating; only start a new file for a
+genuinely distinct kind of gap.
 
 ## Adding a normal wiki page
 
-1. Write the content as a `.md` file in `pages/`.
-2. Add one entry to `pages.json`: `{ "title": ..., "file": "name.md", "category": ... }`.
-3. Screenshots go in `images/`, referenced from the page as `![alt](images/file.png)`.
+1. `.md` file in `pages/`.
+2. One `pages.json` entry: `{ "title": ..., "file": "name.md", "category": ... }`.
+3. Screenshots in `images/`, referenced as `![alt](images/file.png)`.
 
-Do not edit `index.html`, `style.css`, or `script.js` for a normal content page — they
-don't need it.
+Don't touch `index.html`/`style.css`/`script.js` for a normal content page.
 
 ## Adding an item to the Item Database
 
-The Item Database (`pages.json` entry with `"type": "items"`) is not a Markdown page —
-it's a searchable/filterable/sortable table rendered by `script.js` from `items.json`.
+Item Database (`pages.json` `"type": "items"`) is not a Markdown page — searchable/
+filterable/sortable table rendered by `script.js` from `items.json`.
 
-1. Add an object to `items.json`. Weapons use `damage` / `delay` (ratio is computed at
-   render time, don't store it) and `twoHanded: true` if the screenshot says "Two Handed".
-   Armor/jewelry use `ac` and a `stats` object (`{"AGI": 1, "DEX": 2, ...}`). Saving-throw
-   bonuses (e.g. "SV Fire: +2") go in a separate `resists` object (`{"FIRE": 2}`), not in
-   `stats`. A resist can be negative (e.g. "SV Corruption: -5") — store it as a negative
-   number (`{"CORRUPTION": -5}`); `statEntries`/`formatSigned` in `script.js` render the sign
-   correctly either way. A "Haste: +6%" line goes in its own top-level `haste` field (e.g.
-   `"haste": 6`), not in `stats` or `resists` — it's a percentage, not a flat bonus. `race`
-   is an array (usually `["ALL"]`) — set it to the specific races listed on the card if it
-   isn't ALL. If a card is missing its Race line entirely where every other card in the
-   batch had one, that's more likely a cropped screenshot than a real absence — leave `race`
-   unset and flag it in `To-Do/items-needing-text.txt` rather than guessing `["ALL"]`.
-2. Check the card for a tag line directly below the item name and above "Slot:" — e.g.
-   "MAGIC". Capture every such tag (not just MAGIC) in a `tags` array, e.g. `["MAGIC"]` or
-   `["MAGIC", "UNIQUE", "NODROP"]`; use `[]` if there's no tag line. Known tags seen so far
-   (all confirmed on real cards): MAGIC, UNIQUE, NODROP, LORE — use the same all-caps
-   spelling and order as shown on the card.
-3. Bags/satchels/pouches/backpacks use `"type": "Container"` instead of Armor/Weapon/
-   Jewelry/Misc, with `capacity` (integer) and `maxSize` (Title Case, same value set as the
-   item's own `size` field — Tiny/Small/Medium/Large/Extra Large all seen on real cards)
-   instead of `ac`/`stats`/`damage`. Their `slot` is one of `"Bag"`, `"Belt"`, `"Backpack"`,
-   or `"Saddlebag"` (mount-only, `race` will be mount codes like `["HRS", "DNK"]` rather than
-   player races/ALL — see below) — distinct from `"Waist"`, which is for actual belt armor,
-   not a container-carrying slot. Some containers can go in more than one slot (e.g.
-   `"Bag / Belt"`), same `"X / Y"` format used for `"Primary / Secondary"`. A container whose
-   card says "Tradeskill Container." gets `"tradeskillContainer": true` — shown on its card
-   as a "TRADESKILL" badge alongside any real tags.
-3a. Mount equipment (saddles, saddlebags, rigging) works the same as any other item, just
-    with slots the game doesn't use for players — `"Rigging"` for the saddle itself,
-    `"Saddlebag"` for its cargo container — and a `race` array of mount codes read straight
-    off the card (e.g. `["HRS", "DNK"]`) instead of player classes/ALL. Don't try to map
-    these to the player race list; they're a separate namespace on the same field.
+1. Add an object to `items.json`. Weapons: `damage`/`delay` (ratio computed at render time,
+   don't store it), `twoHanded: true` if card says "Two Handed". Armor/jewelry: `ac` + a
+   `stats` object (`{"AGI": 1, "DEX": 2, ...}`). Saving-throw bonuses ("SV Fire: +2") go in a
+   separate `resists` object (`{"FIRE": 2}`), not `stats`; can be negative (`{"CORRUPTION":
+   -5}`), `statEntries`/`formatSigned` render the sign either way. "Haste: +6%" → top-level
+   `haste` field (`"haste": 6`), not stats/resists. `race` array (usually `["ALL"]`) — set
+   specific races if card shows them. Card missing Race entirely where siblings had one =
+   likely cropped, not a real absence — leave `race` unset, flag in
+   `To-Do/items-needing-text.txt` rather than guessing `["ALL"]`.
+2. Tag line below name, above "Slot:" (e.g. "MAGIC") → `tags` array, e.g. `["MAGIC"]` or
+   `["MAGIC", "UNIQUE", "NODROP"]`; `[]` if none. Known tags: MAGIC, UNIQUE, NODROP, LORE —
+   same all-caps spelling/order as the card.
+3. Bags/satchels/pouches/backpacks: `"type": "Container"`, `capacity` (int) + `maxSize`
+   (Title Case, same values as `size`: Tiny/Small/Medium/Large/Extra Large) instead of
+   `ac`/`stats`/`damage`. `slot` is `"Bag"`/`"Belt"`/`"Backpack"`/`"Saddlebag"` (mount-only,
+   `race` = mount codes like `["HRS", "DNK"]`) — distinct from `"Waist"` (actual belt armor).
+   Multi-slot containers use `"Bag / Belt"` format (same as `"Primary / Secondary"`). Card
+   says "Tradeskill Container." → `"tradeskillContainer": true` (TRADESKILL badge).
+3a. Mount equipment (saddles/saddlebags/rigging): same as any item, but `"Rigging"`/
+    `"Saddlebag"` slots and `race` = mount codes off the card (`["HRS", "DNK"]`) instead of
+    player classes/ALL — separate namespace, don't map to player race list.
 4. **Don't archive the screenshot** — no `image` field, nothing saved to `images/items/`
-   (2026-08-04, user's own call: the game gets rebalanced over time, so an old screenshot
-   stops being a reliable "receipt" anyway, and it costs real disk/repo space for
-   fast-diminishing value). Just record the item's data straight into `items.json` and
-   discard the source file once read. Pre-2026-08-04 items keep whatever `image` they
-   already have — this only changes what happens for *new* items going forward.
-5. A green line starting with "Enchant" (e.g. "Enchant Boots: Minor Agility +1 AGI") is
-   **not** part of the item's own description or effect — it's a permanent buff an
-   Enchanting-tradeskill scroll applied to that one specific item (confirmed 2026-07-17;
-   an earlier version of this rule wrongly called it "temporary" — it isn't, it stays with
-   the item once applied), not a fixed property of every item of that base type. Leave it
-   out of `description`/`effect` entirely; record the item's other stats as normal.
-   Enchanting scrolls themselves are tracked as their own recipes in `crafting.json` (see
-   "Enchanting recipes carry a slot/type filter no other tradeskill uses" below) — that
-   doesn't change this rule, since a scroll's own recipe entry is a separate thing from the
-   enchant line showing up on an unrelated item it was later used on.
-6. Food and drink use `"type": "Food"` or `"Drink"` — there's no on-card tag for either, only
-   the flavor text ("This is a modest meal."/"...modest drink."), so that's the signal to
-   use. These cards never show Slot/Class/Race at all (they're not equippable), so leave
-   `slot` out entirely, but still set `"classes": ["ALL"]`/`"race": ["ALL"]` — matching the
-   existing convention for containers (see above), which also never show Class/Race on
-   their cards but are understood to be unrestricted rather than actually missing that data.
-   Raw crafting materials/currency with no slot concept at all (ore, scraps, wood, coins —
-   e.g. "Copper Ore", "Rawhide Scraps") are the one case that *does* omit `classes`/`race`
-   entirely (`"type": "Misc"`, just `weight`/`size` and a `description` if the card has
-   flavor text) — there's no equivalent "always unrestricted" convention for them since
-   they're never worn or consumed by a class/race at all. The Item Database table and item
-   cards already handle items with no `slot`/`classes`/`race` gracefully (blank Slot field,
-   no Class/Race section on the card) — no code changes needed when adding more of either kind.
+   (2026-08-04). Record data into `items.json`, discard the source. Pre-2026-08-04 items
+   keep whatever `image` they already have.
+5. A green "Enchant..." line (e.g. "Enchant Boots: Minor Agility +1 AGI") is **not** part of
+   the item's own description/effect — it's a permanent buff an Enchanting scroll applied to
+   that specific item (stays with the item once applied, confirmed 2026-07-17). Leave out of
+   `description`/`effect`; record other stats normally. Enchanting scrolls are their own
+   `crafting.json` recipes (see "Enchanting" below) — separate from the enchant line showing
+   up on an unrelated item later.
+6. Food/Drink: `"type": "Food"` or `"Drink"` — no on-card tag, signal is flavor text ("This
+   is a modest meal./drink."). Never show Slot/Class/Race, so omit `slot`, but still set
+   `"classes": ["ALL"]`/`"race": ["ALL"]` (matches container convention). Raw materials/
+   currency with no slot concept (ore, scraps, wood, coins) omit `classes`/`race` entirely
+   (`"type": "Misc"`, just `weight`/`size`/`description`) — no "unrestricted" convention
+   applies since they're never worn/consumed.
 
-Filters (slot/class/race/tags/max size) and search are all derived from `items.json` at
-runtime — no other file needs to change when items are added, including when a new tag,
-slot, or max-size value shows up for the first time (those dropdowns are populated from
-whatever values exist in the data).
+Filters (slot/class/race/tags/max size) and search derive from `items.json` at runtime — no
+other file changes when items are added, including new tag/slot/max-size values.
 
-**Item Database browsing:** one view, `renderItemsList` in `script.js` — a search box, a
-"Type" dropdown (Weapon/Armor/Jewelry/Container/Food/Drink/Misc, or "All Types"), Slot/Class/
-Race/Tag/Max Size dropdowns, the stat/buff checkbox dropdown, and a "Show only items that
-need info" toggle (see `needsInfo` note under "Item and recipe cards" below), all above the
-sortable table. **"Clear all filters"** (2026-07-20, renamed/consolidated from a separate
-small "Clear" button next to the search box plus a "Clear filters" button — the user wanted
-one button that always resets everything) re-renders via `renderItemsList(container, null)`
-with `pendingItemQuery`/`pendingItemFilters` both cleared, rather than manually resetting each
-filter field by name — Type itself can't be reset in place like the other dropdowns (its
-option list, and Slot/Class/Race/etc. alongside it, is scoped per-type), so going back to "All
-Types" needs the same full re-render picking a different Type from the dropdown already
-triggers. This also means the button never needs updating when a new filter field is added —
-it isn't clearing fields one by one, it's just re-rendering from a clean slate. The page used to open on a separate category grid of clickable cards
-(`renderItemsCategories`) that you drilled into; the user asked to drop that in favor of just
-filtering (2026-07-19) since a dropdown reaches the same place in one fewer click — Type is
-now just one more dropdown in the same toolbar as everything else, not a distinct page.
-`renderItemsList(container, null)` (Type = "All Types") is the default landing state and the
-one case that shows a "Type" column, since there's no single category to imply it from.
-Picking a Type re-renders the whole function scoped to that type (Slot/Class/Race/Tag/Max
-Size options all narrow to just that type's items, same as before), carrying the *other*
-filter values the user already had set across that re-render via `pendingItemFilters`
-(consume-once-on-render, same pattern as `pendingItemQuery` — which the Type dropdown's own
-change handler also sets, from the search box's current value, so a typed search survives
-switching Type too) — this carry-over is one hop only (the type you're switching *from* → the
-type you land in), it doesn't keep following you through a second switch.
+**Item Database browsing:** one view, `renderItemsList` in `script.js` — search box, "Type"
+dropdown (Weapon/Armor/Jewelry/Container/Food/Drink/Misc/All Types), Slot/Class/Race/Tag/Max
+Size dropdowns, stat/buff checkbox dropdown, "Show only items that need info" toggle, above
+a sortable table. **"Clear all filters"** re-renders via `renderItemsList(container, null)`
+with `pendingItemQuery`/`pendingItemFilters` cleared, rather than resetting fields
+individually — Type can't reset in place (its own option list is scoped per-type), so this
+also means the button never needs updating when a new filter field is added.
+`renderItemsList(container, null)` (Type = "All Types") is the default landing state, the
+only case showing a "Type" column. Picking a Type re-renders scoped to that type (other
+filter options narrow too), carrying *other* filter values across via `pendingItemFilters`
+(consume-once, same pattern as `pendingItemQuery` — Type dropdown's change handler also
+sets this from the search box, so a typed search survives switching Type) — one hop only,
+doesn't follow through a second switch.
 
-Every type (including Armor) uses the same `renderItemsList`, with slot/class/race/tag/
-max-size dropdowns scoped to just that type's items. Armor additionally gets a "Material"
-dropdown (Cloth/Leather/Chain/Plate/Other, derived from `armorIconKey`/`ARMOR_MATERIAL_ORDER`/
-`ARMOR_MATERIAL_LABELS`) — same conditional-dropdown pattern the Weapon type's handedness
-dropdown uses. (Armor used to force a two-level material→slot card drill-down before reaching
-this table; removed 2026-07-15 since a dropdown does the same job in one click — the whole
-category-grid-of-cards approach it belonged to was later dropped the same way, 2026-07-19.)
-The header search box (global, searches everything regardless of type) still works the same —
-clicking an item result calls `goToItem`, which sets `pendingItemCategory` (alongside
-`pendingItemQuery`) so the Item Database opens directly on that item's type with the search
-box pre-filled and the Type dropdown set accordingly. Recipe component/result links into the
-Item Database go through the same `goToItem` path.
+Every type uses the same `renderItemsList`. Armor additionally gets a "Material" dropdown
+(Cloth/Leather/Chain/Plate/Other, from `armorIconKey`/`ARMOR_MATERIAL_ORDER`/
+`ARMOR_MATERIAL_LABELS`) — same conditional-dropdown pattern as Weapon's handedness dropdown.
+(See `CLAUDE-HISTORY.md` for the two drill-down UIs this replaced.) Header search box
+(global) still works the same — clicking a result calls `goToItem`, which sets
+`pendingItemCategory` + `pendingItemQuery` so the Item Database opens on that item's type
+with search pre-filled. Recipe component/result links go through the same `goToItem` path.
 
 ## Item screenshot format
 
-**New items/recipes no longer get their screenshot archived at all (2026-08-04, see "Adding
-an item to the Item Database" and "Adding a crafting recipe" above)** — this section now
-only matters for monster/gathering-node pictures (which *are* displayed on the site) and for
-the pre-2026-08-04 item/recipe screenshots already sitting in `images/items/`/
-`images/crafting/`, which stay untouched and don't need re-converting.
+New items/recipes don't get screenshots archived at all (2026-08-04) — this section now
+only matters for monster/gathering-node pictures (displayed on the site) and the untouched
+pre-2026-08-04 item/recipe archive.
 
-Screenshots that do get saved (`images/Monsters/`, `images/gathering/`, plus the untouched
-pre-2026-08-04 item/recipe archive) are stored as `.jpg` at quality 90, not `.png`. The popup
-card screenshots are mostly flat text over a noisy stone texture, which PNG compresses poorly
-(~350KB/file); JPEG at q90 gets the same image down to ~65KB with no visible loss of text
-legibility. When moving a screenshot out of the inbox, convert it to `.jpg` (quality 90) as
-part of the move rather than keeping the original `.png`/other format.
+Saved screenshots (`images/Monsters/`, `images/gathering/`, pre-2026-08-04 item/recipe
+archive) are `.jpg` quality 90, not `.png` — card screenshots are flat text over noisy stone
+texture, PNG compresses poorly (~350KB), JPEG q90 gets ~65KB with no visible text-legibility
+loss. Convert to `.jpg` q90 as part of moving a screenshot out of the inbox.
 
-**Map** images are the opposite: keep them as high-quality `.png`, uncompressed — they're
-viewed zoomed-in in the map viewer (see below) where JPEG artifacts would actually be
-visible, and they're few enough in number that file size isn't a concern. Do not apply any
-JPEG conversion to anything in `images/Maps/`.
+**Map** images are the opposite: high-quality `.png`, uncompressed — viewed zoomed-in where
+JPEG artifacts would show, and few enough that file size isn't a concern. No JPEG conversion
+for `images/Maps/`.
 
 ## Adding a map to the Maps page
 
-The Maps page (`pages.json` entry with `"type": "maps"`) works the same way as the Item
-Database: a manifest file, not hand-written HTML. Maps are listed alphabetically as
-clickable thumbnails; clicking one opens the full-size image in a viewer with scroll-to-
-zoom and click-and-drag panning (see `renderMapsPage`, `setupMapViewer` in `script.js`).
+Maps page (`pages.json` `"type": "maps"`) = manifest file, not hand-written HTML. Listed
+alphabetically as clickable thumbnails; click opens full-size in a viewer with scroll-zoom
+and drag-pan (`renderMapsPage`, `setupMapViewer` in `script.js`).
 
-Source map images can be huge (some are 20-40MB) since they need to stay high-quality for
-the zoom viewer. To avoid the grid page downloading every full-size map just to show small
-thumbnails, each entry has *two* images: `image` (full-size, opened in the viewer) and
-`thumbnail` (a small pre-generated JPEG shown in the grid).
+Source images can be huge (20-40MB), so each entry has *two* images: `image` (full-size, in
+viewer) and `thumbnail` (small pre-generated JPEG in the grid).
 
-1. Add an object to `maps.json`: `{ "name": ..., "slug": ..., "image": "images/Maps/<slug>.<ext>", "thumbnail": "images/Maps/thumbs/<slug>.jpg" }`.
-   Read the map image itself to get its actual in-image title (map titles frequently don't
-   match their filename — e.g. a file named `Valeofzintarmap.png` turned out to be titled
-   "Vale of Zintar"). If two source files are different renderings of the same place (e.g. a
-   top-down layout vs. an isometric render), keep both as separate entries and disambiguate
-   the names, e.g. `"Infested Crypt"` / `"Infested Crypt (Isometric)"`.
-2. Drop the full-size map image in `images/Maps/`, filename matching the `image` field.
-   Keep whatever format it already arrived in — don't force it to PNG or re-encode it.
-3. Generate the thumbnail into `images/Maps/thumbs/` — there's no Node/Python/ImageMagick
-   in this environment, so use PowerShell + `System.Drawing` (`Add-Type -AssemblyName
-   System.Drawing`) to resize to ~480px wide and save as JPEG quality ~80-85. This gets a
-   ~40MB map down to well under 100KB with no visible loss at thumbnail size.
+1. `maps.json` entry: `{ "name": ..., "slug": ..., "image": "images/Maps/<slug>.<ext>",
+   "thumbnail": "images/Maps/thumbs/<slug>.jpg" }`. Read the image for its actual in-image
+   title (frequently doesn't match filename). Two renderings of the same place (top-down vs
+   isometric) → separate entries, disambiguated names, e.g. `"Infested Crypt"` /
+   `"Infested Crypt (Isometric)"`.
+2. Full-size image into `images/Maps/`, matching `image` field, keep original format.
+3. Generate thumbnail into `images/Maps/thumbs/` via PowerShell + `System.Drawing`
+   (`Add-Type -AssemblyName System.Drawing`), resize ~480px wide, JPEG quality ~80-85 (no
+   Node/Python/ImageMagick in this environment).
 
-**Multiple maps of the same area are grouped automatically — no extra field needed.**
-`groupMapsByArea` in `script.js` strips a trailing `" (...)"` from each map's `name` to get
-its shared base (e.g. `"Infested Crypt"` from both `"Infested Crypt"` and `"Infested Crypt
-(Isometric)"`), so this falls directly out of the disambiguated-naming convention in step 1
-above — nothing to set explicitly when adding the second-or-later entry for an area. The
-grid shows one card per group: the *first* entry added (maps.json order, not alphabetical)
-as the thumbnail, with any others listed as small text links underneath (labeled with just
-their parenthetical, e.g. "Isometric") that jump straight to that variant in the viewer.
-Inside the viewer, prev/next buttons (and left/right arrow keys) step through every map in
-the group — they only render when the group has more than one map, so a plain single-map
-area shows no navigation arrows at all.
+**Multiple maps of the same area group automatically.** `groupMapsByArea` strips a trailing
+`" (...)"` from `name` to get the shared base — falls out of the disambiguated-naming
+convention above, nothing extra to set. Grid shows one card per group: *first* entry added
+(maps.json order) as thumbnail, others as small parenthetical-labeled links. Viewer's
+prev/next buttons (and arrow keys) step through the group, only render with >1 map.
 
-**`goToMap(mapName)`** (2026-07-19) jumps to the Maps page and opens a specific area's viewer
-directly, same `pendingMapOpen`-then-consume-once pattern as `pendingItemQuery` — matched
-against `groupMapsByArea`'s base names, case-insensitively. Currently only called from the
-Named/Regular Monsters quick search's own clickable zone link (see "Adding a monster" above)
-— extend the same way if another page ever needs a "jump straight to this area's map" link.
+**`goToMap(mapName)`** jumps to Maps page and opens a specific area's viewer directly, same
+`pendingMapOpen`-then-consume-once pattern as `pendingItemQuery`, matched against
+`groupMapsByArea`'s base names case-insensitively. Currently called from the Named/Regular
+Monsters quick search's zone link — extend the same way for future "jump to this area's
+map" needs.
 
 ## Adding a crafting recipe
 
-The Crafting page (`pages.json` entry with `"type": "crafting"`) shows a grid of tradeskill
-categories (from `tradeskills.json` — a fixed list, edit it directly to rename/add/remove a
-tradeskill); clicking one shows that tradeskill's recipes from `crafting.json` (see
-`renderCraftingPage`, `renderCraftingCategories`, `renderCraftingRecipes` in `script.js`).
-Each tradeskill has a `status` of `"live"` or `"planned"` — planned ones show a "Planned"
-badge and an explanatory message instead of a recipe list, since they exist in the game's
-design but aren't usable yet.
+Crafting page (`pages.json` `"type": "crafting"`) = tradeskill-category grid from
+`tradeskills.json` (fixed list, edit directly to rename/add/remove); click shows that
+tradeskill's recipes from `crafting.json` (`renderCraftingPage`, `renderCraftingCategories`,
+`renderCraftingRecipes`). Tradeskill `status`: `"live"` or `"planned"` (planned shows a
+badge + explanatory message, no recipe list).
 
-The recipe schema in `crafting.json` grows as real recipe cards come in (same pattern as the
-item schema growing tags/race/description/effect from real cards) — keep extending it the
-same way as new fields show up on future cards, rather than guessing ahead:
+Recipe schema grows as real cards come in — extend the same way for new fields:
 
-- `weight` / `size` — the crafted result's weight/size, shown directly on the recipe card
-  same as an item card (Title Case size, matching `items.json`'s convention).
-- `components` — array of `{ "item": "Name As Shown On Card", "quantity": N }`, parsed from
-  the card's "Components:" list (format on the card is `(N) Item Name`). Component names are
-  matched against `items.json` by exact name (case-insensitive) at render time — if a
-  matching item exists, `renderCraftingRecipes` makes it a clickable link to the Item
-  Database (via `findItemByName`/`goToItem`); if not (most raw materials don't have an item
-  card yet), it just renders as plain text. Don't try to resolve/store this link at data-entry
-  time — leave it to resolve dynamically so components automatically become clickable later,
-  the moment someone adds that material to `items.json`.
-- The recipe's own `name` (the crafted result) gets the same treatment inside
-  `renderRecipeCardHTML` — if an item with that exact name exists in `items.json`, the
-  recipe name itself becomes a clickable link to it. Clicking either kind of link
-  (component or result) sets `pendingReturnToRecipe` before navigating to the Item Database,
-  which shows a "&larr; Back to \<recipe name\>" link at the top of that page — see "Header
-  search box" below for the same pending-variable-consumed-on-render pattern.
-- `difficultyColor` / `difficultyText` — the recipe's trivial/skill-up status. The full
-  color → message mapping is confirmed exact wording for all seven colors, straight from
-  real cards: Green "This recipe is trivial to you.", Light Blue "Your skills make this a
-  simple task.", Dark Blue "Your skills make this a moderate task.", White "Your skills make
-  this a complex task.", Yellow "Your skills make this a daunting task.", Orange "Your
-  skills make this a herculean task.", Red "You will require all your skills to craft
-  this." Match the card's exact wording to a color from this list; if it doesn't match any
-  of these, flag it to the user rather than guessing a new one. **Still record these fields
-  on every recipe (from a recipe card or a crafting-window screenshot) even though the site
-  no longer displays them** (the colored badge was removed from the Crafting page — a color
-  is only accurate for whichever one user's skill it was captured at, so showing it as a
-  fixed property of the recipe was misleading) — they're the raw data the skill estimates in
-  `To-Do/crafting-skill-estimates.md` are calculated from. That file is not linked from the
-  site and not loaded by any code; read it before adding new estimates, and update it (never
-  `crafting.json`'s `recipeSkillLevel`) whenever new observations come in.
-- **A recipe card can arrive well after the fact and disagree with the most recent
-  crafting-window capture — that's expected, not an error** (a screenshot can be taken long
-  before it's uploaded). When this happens: keep the freshest `difficultyColor`/
-  `observedAtSkill` (don't let an older card overwrite a newer window reading), but still
-  merge in whatever the card newly reveals (`image`, `weight`, `size`, `components`) since
-  that's timeless information about the recipe, not a skill snapshot. If it's unclear
-  whether a card is old or current, say so rather than guessing.
-- `observedAtSkill` — the user's skill in that tradeskill at the time the screenshot was
-  taken (ask them, since it's not shown on the card itself). This isn't a property of the
-  recipe — it's a data point for figuring out the recipe's own underlying skill level, since
-  MnM's exact trivial-skill formula isn't publicly documented anywhere.
-- `recipeSkillLevel` — the recipe's own exact underlying skill requirement, when it can be
-  determined precisely. **Never derive this from a `difficultyColor` observation** — an
-  earlier attempt to treat "White" as meaning "recipe skill exactly equals crafter's current
-  skill" was tried and found wrong (Green/Dark Blue/Light Blue recipes are observed even at
-  0 skill, which couldn't happen if White were the lowest possible color at 0 skill) and was
-  fully retracted; every value written under that rule was removed from `crafting.json`. The
-  color scale is a continuous gradient tied to the *gap* between crafter skill and the
-  recipe's requirement (Green ↔ far easier, Red ↔ far harder) — colors tell you relative
-  ordering only, never an exact point. **The one narrow exception:** a recipe observed as
-  **Green at `observedAtSkill: 0`** can safely get `recipeSkillLevel: 0`, since skill can't
-  be negative and Green means "far exceeds the requirement" — the only way to far-exceed
-  something from a floor of 0 is if that something is also 0.
-  **This caution is about color-based guessing specifically — it does not apply to an
-  actual stated "Trivial" number.** "Trivial" *is* `recipeSkillLevel` by definition (the
-  skill at which a recipe stops giving skill-ups), not a guess derived from it. Whenever a
-  source states a concrete Trivial number (a recipe card, or a reference table like the ones
-  used for Tanning/Leatherworking/Blacksmithing), write it straight into `recipeSkillLevel`.
-  A vague Trivial value (`"?"`, or a `"90+"`/`"120+"` floor-only value) still doesn't count —
-  only write in an exact stated number.
-- `listOrder` — an integer giving the recipe's position in the game's own crafting-window
-  list (1 = first/lowest skill requirement) — see the "Crafting window screenshots" workflow
-  below for how it's derived and kept as one unbroken sequence per tradeskill.
-- **Skill-required sort fills gaps with a stated estimate.** The recipe grid sorts by a
-  recipe's real skill requirement, not just `listOrder` — `estimateRecipeSkill()` in
-  `script.js` (computed at render time, cached per tradeskill, never written back into this
-  file) resolves each recipe to a confirmed `recipeSkillLevel` where one exists, or failing
-  that, linearly interpolates from the tradeskill's own "anchors" — recipes that have *both*
-  `listOrder` and a confirmed `recipeSkillLevel` — surrounding that recipe's `listOrder`
-  position. A recipe past the last anchor (or before the first) flat-extends from the
-  nearest one rather than extrapolating a slope. Recipes with no `listOrder` at all, or
-  belonging to a tradeskill with zero anchors (Jewelcrafting/Fletching/Tailoring have 100%
-  `listOrder` coverage but 0% `recipeSkillLevel` — nothing to anchor an estimate to), get no
-  fabricated number and keep the old `listOrder`-then-alphabetical fallback. `renderRecipeCardHTML`
-  shows the result as a "Skill" field: a plain number when confirmed, or `~N (estimated)`
-  when interpolated, so an estimate is never presented as fact. This is purely a display/
-  sort computation on top of `recipeSkillLevel` — it never writes into that field, matching
-  the same never-store-a-computed-value precedent as an item's damage/delay ratio.
-- `resultQuantity` — set only when a recipe produces more than one of its named result (e.g.
-  Tanning, where a single pelt processes into "24x Rawhide Scraps") — shown on the card as a
-  "Yields" field. Every recipe without this field is still assumed to produce exactly one of
-  `name`.
-- `effect` / `description` — free-text flavor for the crafted result itself (needed for
-  Alchemy potions/serums/tinctures, which have real use-effects the way an item does). Same
-  convention as the matching fields on an item: `effect` for the mechanical "On Click. Any
-  Slot. Cast Time: Xs, Level: N" line, `description` for pure flavor text. Most recipes (a
-  sword, a bar of metal) have neither and won't show this section at all.
-- `station` — optional, which in-game crafting device the recipe is combined at, when a
-  tradeskill actually uses more than one. Alchemy is the current example: raw herbs/reagents
-  grind into powder at a **Mortar and Pestle**, then the powder combines with a vial at a
-  **Cauldron** to produce the final potion/serum/tincture; every Alchemy recipe gets
-  `"station"` set to one of those two exact strings. `renderCraftingRecipes` groups a
-  tradeskill's recipe grid into headed sections by `station` (ordered `STATION_ORDER` =
-  Mortar and Pestle before Cauldron) whenever at least one of its recipes has the field set —
-  every other tradeskill renders as the original flat grid, unaffected.
-  **Each station heading is also a collapse/expand toggle** (2026-07-30, user's own
-  request) — click it to hide/show that station's recipe grid, state tracked in a
-  `collapsedStations` Set local to that one `renderTradeskillSection` call (survives a
-  search/filter re-render since `updateGrid` reuses the same closure, resets to the default
-  next time the page is opened fresh). Alchemy's **Mortar and Pestle** section starts
-  collapsed by default; every other station (including Alchemy's own Cauldron) starts
-  expanded. Any future tradeskill that starts using `station` gets the same toggle for free
-  — nothing station-name-specific in the toggle mechanism itself, only the default-collapsed
-  set singles out "Mortar and Pestle" by name.
-- **Alchemy always shows a Skill field, even with nothing to show** (2026-07-30, user's own
-  request) — every other tradeskill still just omits the Skill field entirely when
-  `estimateRecipeSkill()` returns null (no confirmed `recipeSkillLevel` and no listOrder-based
-  estimate to interpolate from), per the "no fabricated number" rule described above. Alchemy
-  is the one exception: `renderRecipeCardHTML` shows `"Unknown"` in that case instead of
-  hiding the field, so every Alchemy recipe card always has a Skill row (a confirmed number,
-  an `~N (estimated)` interpolation, or literally "Unknown"). A confirmed `0` already
-  displayed correctly before this change (an object with `skill: 0` is still truthy) — the
-  fallback only affects the genuinely-nothing-known case.
+- `weight`/`size` — crafted result's, shown on the card (Title Case size).
+- `components` — array of `{ "item": "Name As Shown", "quantity": N }`, from the card's
+  "Components:" list (`(N) Item Name`). Matched against `items.json` by exact
+  case-insensitive name at render time — clickable link if a match exists, plain text if
+  not (most raw materials don't have a card yet). Don't resolve/store the link at
+  data-entry time — resolves dynamically so it becomes clickable once the item's added.
+- Recipe's own `name` gets the same treatment in `renderRecipeCardHTML` — clickable if a
+  matching item exists. Clicking either link type sets `pendingReturnToRecipe` before
+  navigating to the Item Database, which shows a "&larr; Back to `<recipe name>`" link.
+- `difficultyColor`/`difficultyText` — trivial/skill-up status, exact wording confirmed for
+  all seven colors: Green "This recipe is trivial to you.", Light Blue "Your skills make
+  this a simple task.", Dark Blue "...a moderate task.", White "...a complex task.", Yellow
+  "...a daunting task.", Orange "...a herculean task.", Red "You will require all your
+  skills to craft this." Match exact card wording; if it doesn't match, flag rather than
+  guess a new color. **Still record on every recipe even though the site no longer displays
+  the badge** — feeds `To-Do/crafting-skill-estimates.md`'s skill estimates (not loaded by
+  code; read before adding new estimates, update it — never `recipeSkillLevel` — as new
+  observations come in).
+- A recipe card can arrive after a crafting-window capture and disagree — expected, not an
+  error (screenshot may predate its upload). Keep freshest `difficultyColor`/
+  `observedAtSkill`, but merge in whatever the card newly reveals (`weight`, `size`,
+  `components` — timeless info, not a skill snapshot). If unclear which is newer, say so.
+- `observedAtSkill` — user's skill in that tradeskill when the screenshot was taken (ask,
+  not shown on the card) — data point for the recipe's own skill level, since MnM's exact
+  trivial-skill formula isn't public.
+- `recipeSkillLevel` — the recipe's exact skill requirement, when determinable precisely.
+  **Never derive from a `difficultyColor` observation** — an earlier attempt to treat
+  "White" as "recipe skill == crafter's current skill" was tried, found wrong (Green/Dark
+  Blue/Light Blue recipes observed even at 0 skill), and fully retracted; every value
+  written under that rule was removed. Color is a continuous gradient on the *gap* between
+  crafter skill and requirement — relative ordering only, never an exact point. **One narrow
+  exception:** Green at `observedAtSkill: 0` → safely `recipeSkillLevel: 0` (skill can't be
+  negative, Green = far exceeds requirement, only way from a floor of 0). **This caution is
+  about color-guessing only — doesn't apply to a stated "Trivial" number.** "Trivial" *is*
+  `recipeSkillLevel` by definition — whenever a source states one concretely (card or
+  reference table), write it straight in. A floor-only/vague value (`"?"`, `"90+"`) doesn't
+  count.
+- `listOrder` — recipe's position in the game's own crafting-window list (1 = lowest skill
+  requirement) — see "Crafting window screenshots" below.
+- **Skill-required sort fills gaps with a stated estimate.** `estimateRecipeSkill()`
+  (computed at render time, cached per tradeskill, never written back) resolves a confirmed
+  `recipeSkillLevel` where one exists, else linearly interpolates from the tradeskill's
+  "anchors" (recipes with both `listOrder` and confirmed `recipeSkillLevel`) around that
+  recipe's `listOrder`. Past the last anchor (or before the first): flat-extends, no slope
+  extrapolation. No `listOrder`, or zero anchors in that tradeskill (Jewelcrafting/
+  Fletching/Tailoring: 100% listOrder, 0% recipeSkillLevel) → no fabricated number, old
+  listOrder-then-alphabetical fallback. Card shows plain number (confirmed) or `~N
+  (estimated)` (interpolated) — never presented as fact. Same never-store-a-computed-value
+  precedent as an item's damage/delay ratio.
+- `resultQuantity` — set only when a recipe yields more than one of `name` (e.g. Tanning: a
+  pelt → "24x Rawhide Scraps"), shown as "Yields". Default (no field) = exactly one.
+- `effect`/`description` — free-text flavor for the crafted result (Alchemy
+  potions/serums/tinctures need real use-effects like an item). Same convention as an item's
+  matching fields.
+- `station` — optional, which crafting device the recipe uses, when a tradeskill has >1.
+  Alchemy: raw herbs grind at a **Mortar and Pestle**, powder+vial combine at a **Cauldron**
+  — every Alchemy recipe gets `"station"` set to one of those two exact strings.
+  `renderCraftingRecipes` groups the grid into headed sections by `station` (ordered
+  `STATION_ORDER` = Mortar and Pestle before Cauldron) when ≥1 recipe has it set; other
+  tradeskills render flat, unaffected. **Each station heading is also a collapse/expand
+  toggle** — state in a `collapsedStations` Set local to that `renderTradeskillSection` call
+  (survives search/filter re-render, resets on fresh page open). Alchemy's Mortar and Pestle
+  starts collapsed; every other station starts expanded. Any future `station`-using
+  tradeskill gets the toggle for free.
+- **Alchemy always shows a Skill field, even with nothing to show** — every other tradeskill
+  omits the field when `estimateRecipeSkill()` returns null; Alchemy shows `"Unknown"`
+  instead of hiding it, so every card has a Skill row (number, `~N (estimated)`, or
+  "Unknown"). A confirmed `0` already displayed correctly (object truthy even at 0).
 
-1. Add an object to `crafting.json` with at least `name`, `slug`, `tradeskill`, plus whatever
-   of the above the card shows.
-2. **Don't archive the screenshot** — same as items (see above, 2026-08-04): no `image`
-   field, nothing saved to `images/crafting/`. Pre-2026-08-04 recipes keep whatever `image`
-   they already have.
+1. `crafting.json` object with at least `name`, `slug`, `tradeskill`, plus whatever the card
+   shows.
+2. **Don't archive the screenshot** — same as items (2026-08-04): no `image` field, nothing
+   saved to `images/crafting/`. Pre-2026-08-04 recipes keep whatever `image` they have.
 
 ### The sidebar can nest pages under a group
 
 `pages.json` entries can carry an optional `"group"` field (e.g. `"Tradeskilling"`) — pages
-sharing the same `group` render nested under one plain, non-clickable heading in the sidebar
-instead of the normal flat top-level list (`buildSidebar` in `script.js`). Currently
-Gathering and Crafting use this, grouped under "Tradeskilling" (two separate sidebar links
-under one heading). Add a page to an existing group the same way (set the same `group`
-string); start a new group by picking a new `group` string on the pages that should share
-it — no other code changes needed, `buildSidebar` handles any group generically. Consecutive
-same-`group` pages share one heading; a page with no `group` renders exactly as before.
+sharing the same `group` render nested under one plain, non-clickable sidebar heading
+(`buildSidebar`). Currently Gathering + Crafting share "Tradeskilling". Add to an existing
+group by matching the string; start a new group with a new string — no other code changes,
+`buildSidebar` handles any group generically. Consecutive same-`group` pages share one
+heading; no-`group` pages render as before.
 
-**Enchanting and Disenchanting are ordinary tradeskills in `crafting.json`/`tradeskills.json`**
-(nothing schema-wise sets Enchanting apart from Blacksmithing or Alchemy), each reached as an
-ordinary category card rather than a page of its own — Enchanting on the Crafting grid,
-Disenchanting on the Gathering grid. This is the *third* shape this pair has been through
-(worth knowing the history if this area gets touched again): first both tradeskills were
-stacked on one shared page, then each got its own 2-card-grid page, then each got fully
-separated into its own top-level `pages.json` entry (2026-07-17) — before finally being
-folded back into the two main grids as ordinary cards (2026-07-19, user's own request: "move
-Enchanting into Crafting, and Disenchanting into Gathering"). Concretely:
+**Enchanting and Disenchanting are ordinary tradeskills in `crafting.json`/
+`tradeskills.json`** — nothing schema-wise sets them apart from Blacksmithing/Alchemy, each
+reached as an ordinary category card (Enchanting on Crafting grid, Disenchanting on
+Gathering grid), not a page of their own. (Full history of how they got here in
+`CLAUDE-HISTORY.md`.) Concretely:
 
-- Enchanting has no `category` in `tradeskills.json` at all now, so it's picked up by
-  `renderCraftingCategories`'s normal filter (`ts.category !== 'gathering'`) exactly like
-  Blacksmithing or Alchemy — no special-casing needed anywhere for it to show up there.
-- Disenchanting has `"category": "gathering"` — the same value Mining/Lumberjacking/
-  Herbalism/Fishing (and now Foraging, see "Gathering tradeskills are a separate area" above)
-  use to land on the Gathering grid — even though it's still recipe-based under the hood, not
-  node-based. `tradeskillGridHTML` (shared by both grids) derives each card's actual
-  node-based-ness via `gatheringTradeskillIsNodeBased` (see above) rather than trusting the
-  page-level "is this the Gathering grid" flag — so Disenchanting's card correctly shows a
-  recipe count/label and routes to the recipe view (`renderGatheringRecipes`) while every
-  other card on that page shows a node count/label and routes to `renderGatheringNodes`.
-- `craftPageHash(tradeskillName)` is the one place that decides which hash a tradeskill's
-  recipes actually live at — `'gathering'` for Disenchanting, `'crafting'` for everything
-  else (including Enchanting, now that it has no special case at all). `goToRecipe`,
-  `goToCraftingCategory`, and the header search's category/recipe links all call it rather
-  than hard-coding a hash. This one still hardcodes "Disenchanting" by name rather than
-  deriving it from `tradeskillsData` — harmless today since it's only reached for a
-  recipe's own tradeskill (`goToRecipe`) or a `kind: 'craft'` category jump, and Foraging has
-  no `crafting.json` recipes yet to trigger either path — but revisit it if a second
-  recipe-based Gathering tradeskill ever gets real recipes.
-- The actual recipe-list rendering (search box, needs-info toggle, station grouping, item
-  link handlers, highlight-on-arrival) is still shared with every other tradeskill via
-  `renderTradeskillSection` — `renderCraftingRecipes` (Crafting grid) and
-  `renderGatheringRecipes` (Gathering grid, for whichever of its tradeskills turn out
-  recipe-based) are both just thin wrappers passing their own grid's `onBack`.
+- Enchanting: no `category` in `tradeskills.json`, picked up by `renderCraftingCategories`'s
+  normal filter (`ts.category !== 'gathering'`) like any other tradeskill.
+- Disenchanting: `"category": "gathering"` (same value as Mining/Lumberjacking/Herbalism/
+  Fishing/Foraging), even though it's recipe-based not node-based.
+  `gatheringTradeskillIsNodeBased` (shared by both grids' card-count/label and routing)
+  derives actual node-based-ness rather than trusting the page-level flag — so
+  Disenchanting's card shows a recipe count and routes to `renderGatheringRecipes` while
+  every other card shows a node count and routes to `renderGatheringNodes`.
+- `craftPageHash(tradeskillName)` decides which hash a tradeskill's recipes live at —
+  `'gathering'` for Disenchanting, `'crafting'` for everything else. `goToRecipe`,
+  `goToCraftingCategory`, header search links all call it rather than hard-coding a hash.
+  Still hardcodes "Disenchanting" by name (harmless today; revisit if a second recipe-based
+  Gathering tradeskill gets real recipes).
+- Recipe-list rendering (search, needs-info toggle, station grouping, link handlers,
+  highlight-on-arrival) is shared via `renderTradeskillSection` — `renderCraftingRecipes`
+  and `renderGatheringRecipes` are thin wrappers passing their own grid's `onBack`.
 
-**Disenchanting's magic-dust tier chart:** rather than the lengthy explanatory `note` this
-tradeskill used to carry (removed 2026-07-16 — the user found it too much to read on the
-page), Disenchanting's own recipe view shows a small reference chart of its magic-dust tiers
-at the top, above the recipe grid (`renderDisenchantingDustTiersHTML`, styled like the
-`.gem-reference` panel Jewelcrafting's gemstone tables already use). This is derived
-straight from `crafting.json`'s existing Disenchanting recipes (`disenchantingDustTiers()`)
-rather than a new schema field: each distinct recipe result name (e.g. "Enchanted Powder
-(x1-5) & Mote of Magic (x0-2)") names one tier's two possible outputs — a common "Powder"
-and a rarer "of Magic" essence — and tiers are ordered lowest-to-highest by the same
-`listOrder`/`recipeSkillLevel` the recipes already carry. Each dust shows its real
-`items.json` image via `findItemByName` when one exists, or a dashed "No image yet"
-placeholder (`.dust-tier-placeholder`) otherwise — most of these 8 dust items don't have a
-card yet (only "Enchanted Powder" does so far), so the placeholder is the common case, not
-an error state; add the item normally (see "Adding an item to the Item Database" above) once
-a screenshot comes in and it'll start showing automatically, no code change needed. **What
-source item yields which tier isn't confirmed** (the user is unsure of the exact formula), so
-the chart only shows what a tier produces, not what feeds into it — don't guess or add a
-source-item mapping without the user confirming one first.
+**Disenchanting's magic-dust tier chart** shows above the recipe grid
+(`renderDisenchantingDustTiersHTML`, styled like Jewelcrafting's `.gem-reference` panel),
+derived from existing Disenchanting recipes (`disenchantingDustTiers()`) — no new schema
+field. Each distinct recipe result name (e.g. "Enchanted Powder (x1-5) & Mote of Magic
+(x0-2)") names one tier's two outputs, ordered lowest-to-highest by `listOrder`/
+`recipeSkillLevel`. Each dust shows its `items.json` image via `findItemByName` when one
+exists, dashed "No image yet" placeholder otherwise (most of these 8 dust items have no card
+yet — add normally once a screenshot comes in, shows automatically). **What source item
+yields which tier isn't confirmed** — chart shows outputs only, don't guess a source-item
+mapping without the user confirming one.
 
 ### Enchanting recipes carry a slot/type filter no other tradeskill uses
 
-A large batch of ~160 Enchanting recipe-card screenshots (2026-07-16) established two extra
-fields, both `Enchanting`-only:
+Two extra fields, `Enchanting`-only:
 
-- **`enchantSlot`** — the equipment slot a scroll recipe's buff applies to, parsed straight
-  from the recipe's own name (`"Enchant <Slot>: <Effect>"` → `<Slot>`, e.g. `"Gloves"`).
-  Unset for a raw enchanted-material recipe (e.g. `"Enchanted Hide"`), which has no slot.
-- **`craftType`** — `"Scroll"` for a buff-scroll recipe, or `"Crafting Material"` for a raw
-  enchanted-material recipe (Enchanted Hide/Rawhide/Wool/Cloth/Bronze/Tin/Silver/Copper Bar
-  — fed into another tradeskill, e.g. Leatherworking/Tailoring/Blacksmithing, to make actual
-  enchanted gear). An earlier version tried splitting the material side into `"Armor"` vs
-  `"Armor / Weapon"` by which other tradeskill consumes it, but collapsed back to one
-  `"Crafting Material"` value (2026-07-17, user's own call) since that split wasn't reliably
-  knowable anyway (Blacksmithing's metal bars serve both armor and weapon recipes).
+- **`enchantSlot`** — equipment slot a scroll's buff applies to, parsed from the recipe name
+  (`"Enchant <Slot>: <Effect>"` → `<Slot>`). Unset for a raw enchanted-material recipe (no
+  slot).
+- **`craftType`** — `"Scroll"` (buff scroll) or `"Crafting Material"` (raw enchanted
+  material: Enchanted Hide/Rawhide/Wool/Cloth/Bronze/Tin/Silver/Copper Bar, fed into another
+  tradeskill).
 
-Both fields drive dropdown filters shown only on the Enchanting tradeskill view
-(`renderTradeskillSection` in `script.js`, gated on `tradeskillName === 'Enchanting'`) —
-values are derived from whatever's actually in the data, same "no code change needed for a
-new value" convention as every other filter dropdown on the site. A third dropdown lets the
-recipe grid switch from the default skill-required sort to alphabetical; every tradeskill's
-own recipe view has this sort dropdown (not just Enchanting's — extended to all of them
-2026-07-19, user's own request), it's only the Slot/Type filters above it that stay
-Enchanting-only.
+Both drive dropdown filters shown only on Enchanting's view (gated on `tradeskillName ===
+'Enchanting'`), values derived from the data (no code change for a new value). A third
+dropdown (skill-required vs. alphabetical sort) is on every tradeskill's recipe view now,
+not just Enchanting's.
 
 **Enchanting's own crafting-window list is not sorted by skill requirement** — unlike every
-other tradeskill (whose window list order the site relies on for `listOrder`, see "Crafting
-window screenshots" below), Enchanting's window groups recipes by difficulty *color* first,
-alphabetically within each color group second. Position within a color band carries no
-finer-grained skill signal beyond the color itself, so `listOrder` was deliberately **not**
-set on any Enchanting recipe from this batch — recording it would misrepresent relative
-skill ordering to `estimateRecipeSkill()`'s interpolation. `observedAtSkill: 25` (the skill
-shown at the bottom of every window screenshot in this batch) was still recorded on every
-recipe, same as any other tradeskill.
+other tradeskill, it groups by difficulty *color* first, alphabetically within color second.
+Position within a color band carries no finer skill signal, so `listOrder` is deliberately
+**not** set on any Enchanting recipe (would misrepresent ordering to
+`estimateRecipeSkill()`'s interpolation). `observedAtSkill` still recorded normally.
 
-One name — `"Enchant Belt: Minor Electric Resistance"` — turned up only in a window
-screenshot, no card yet; it got the usual minimal stub shape (`name`/`slug`/`tradeskill`/
-`enchantSlot`/`craftType`/`difficultyColor`/`observedAtSkill`/`needsInfo: true`, no image/
-weight/components — see "Crafting window screenshots" below). Most of the ~160 source
-screenshots were cropped (missing the tail of the Effect line and/or part of the Components
-list) — the boilerplate effect suffix (`"(On Click. Any Slot. Cast Time: 5s. Level: 1)"`)
-and cut-off resistance-type words (e.g. completing `"SV Elect…"` to `"SV Electric"`) were
-safely reconstructed since they're 100% invariant/redundantly confirmed by the recipe's own
-name on every fully-visible card seen — but no stat **bonus number** was ever invented; where
-no screenshot of a given recipe showed the actual number, the recipe was left without one
-rather than guessed from a "Minor = +1 / Lesser = +2" pattern that only looked consistent by
-coincidence.
+Most Enchanting recipe-card screenshots (~160-card batch) were cropped (missing Effect-line
+tail and/or part of Components) — the boilerplate effect suffix ("(On Click. Any Slot. Cast
+Time: 5s. Level: 1)") and cut-off resistance-type words were safely reconstructed since
+they're invariant/redundantly confirmed by the recipe's own name — but no stat bonus
+*number* was ever invented; where no card showed the actual number, it was left unset rather
+than guessed from a "Minor = +1 / Lesser = +2" pattern.
 
 ### Gathering tradeskills are a separate area, not recipes
 
-Mining, Lumberjacking, Herbalism, and Fishing are **gathering** tradeskills — you interact
-directly with a resource node in the world (a vein, a wood pile, etc.) rather than combining
-components into a crafted result, so they don't fit `crafting.json`'s recipe shape at all
-(no components, no single named result, but a *minimum skill to even attempt the node* that
-no crafted recipe has). They get their own top-level page (`pages.json`'s `"Gathering"`
-entry, `"type": "gathering"`, above "Crafting" in the sidebar) and data file,
-`gathering-nodes.json`.
+Mining, Lumberjacking, Herbalism, Fishing = **gathering** tradeskills — interact directly
+with a resource node (vein, wood pile) rather than combining components, don't fit
+`crafting.json`'s shape (no components/single result, but a *minimum skill to attempt* no
+crafted recipe has). Own top-level page (`pages.json` `"Gathering"`, `"type": "gathering"`,
+above Crafting in sidebar) and data file `gathering-nodes.json`.
 
-- **`tradeskillsData[].category`** — an optional field in `tradeskills.json`, `"gathering"`
-  for these four plus Foraging and Disenchanting (see both below), unset for everything else.
-  This is what `renderCraftingCategories`/`renderGatheringCategories` each filter on to build
-  their own page's tradeskill grid.
-- **A gathering-category tradeskill isn't automatically node-based** — see
-  `gatheringTradeskillIsNodeBased(name)` in `script.js`, the one shared check
-  `tradeskillGridHTML` (card count/label), `renderGatheringCategories`'s click handler, and
-  `renderGatheringPage`'s `pendingGatheringTradeskill` routing all call instead of each
-  re-deriving or hardcoding a tradeskill name. It returns true if `gathering-nodes.json` has
-  any entries for that name (the normal case), otherwise it defaults to true anyway *unless*
-  `crafting.json` actually has recipes for that name — so a tradeskill with data in neither
-  file yet (Foraging, moved here 2026-07-19 with nothing recorded for it either way) still
-  reads as node-based and renders as an empty `renderGatheringNodes` table, same shape as any
-  other gathering tradeskill starting from zero, rather than being misread as a 0-recipe
-  crafting tradeskill. Disenchanting is the one tradeskill this currently flips to
-  recipe-based, since it actually has `crafting.json` entries — routed to the shared
-  `renderGatheringRecipes(container, tradeskillName)` (a generic version of what used to be a
-  Disenchanting-only `renderGatheringDisenchantingRecipes`, genericized the same day Foraging
-  moved here so a second recipe-based Gathering tradeskill wouldn't need its own hardcoded
-  copy) instead of `renderGatheringNodes`.
-- **`gathering-nodes.json`** — a flat array, one object per node: `name`, `slug`,
-  `tradeskill`, `locations` (array of free-text location strings — these are gathering spots
-  named by a source table, not tied to `maps.json` the way a monster's `maps` field is),
-  and two optional skill fields: `minSkill` (skill required to even attempt the node) and
-  `trivialSkill` (the point where it stops giving skill-ups — same "Trivial" concept as
-  `crafting.json`'s `recipeSkillLevel`, just named differently since this is a separate file/
-  shape). Only write an exact number into `minSkill`/`trivialSkill` when the source states
-  one outright — a floor-only value (`"225+"`, `">92"`) or a fully unknown value (`"???"`)
-  gets left unset with a `note` field capturing the raw text instead. `results` (array of
-  item names, same dynamic-linking-by-exact-name convention as a recipe's `components` or a
-  monster's `drops`) is optional — only include it when the source table actually has a
-  Results column.
-- **Source tables so far are fan-wiki-style reference charts** (dated "As of 5/26 Closed
-  Beta" for Mining), same weaker-than-a-screenshot caveat as the Tanning/Leatherworking/
-  Blacksmithing tables elsewhere in this file — good enough to seed real numbers, but
-  supersede it without hesitation if the user's own in-game observation ever disagrees.
-- **Rendering:** `renderGatheringNodes(container, tradeskillName)` in `script.js` — a
-  sortable/searchable table, same structural pattern as `renderMonstersList`'s table rather
-  than the recipe-card grid, since a node has no components to justify a full card. A node's
-  `note` (when set) renders as its own small row directly under it.
-- **Optional `image` + `needsInfo`:** a node can carry a picture of the actual plant/vein/
-  etc. — `images/gathering/<slug>.jpg`, same `.jpg` quality-90 convention as everything
-  else, referenced via an `image` field. When set, `gatheringCellHTML`'s Name cell shows a
-  small clickable thumbnail (`.gathering-node-thumb`). `needsInfo: true` is the same flag/meaning as
-  `items.json`/`crafting.json`'s (see "Item and recipe cards" below): confirmed to exist but
-  not fully identified/documented yet — renders a red "NEEDS INFO" badge next to the name
-  and a red note row linking to `#submit`. First used for a herb spotted in-game but not yet
-  identified at all — recorded as a placeholder node with an empty `locations` array and the
-  known skill floor captured in `note` (not `minSkill`, since it's floor-only) so the
-  picture itself becomes the identifying reference once a real name comes in.
-  **When that identification comes in, don't rename the placeholder — merge its picture (and
-  anything else it revealed) into the real, already-existing node entry, then delete the
-  placeholder entirely** (2026-07-20, user's own correction, after an "Unidentified Herb
-  (skill 38+)" placeholder was mistakenly renamed in place to "DuneLeaf" even though a real
-  `Duneleaf` entry — `minSkill: 90`, confirmed locations — already existed separately,
-  producing two `duneleaf`-slugged entries). The placeholder is a proxy standing in for a
-  real node that just hasn't been connected yet, not the node's permanent home once named —
-  a same-name real entry may well already exist elsewhere in the file with its own
-  confirmed data (skill numbers, locations) that the placeholder's own vaguer info
-  (floor-only skill, empty locations) shouldn't overwrite or duplicate.
-  **`.gathering-node-thumb` is back to its original plain form** (28x28, `object-fit: cover`,
-  no inset padding) after a 2026-07-20 same-day round-trip that made things worse, not
-  better, by the user's own repeated report — worth knowing the history so it isn't
-  re-attempted blindly: first pass square-cropped each source image around its own geometric
-  center (insufficient — the subject typically occupies only a fraction of the frame, so it
-  rendered as a barely-recognizable smudge once actually downscaled to 26x26); second pass
-  tried cropping tighter around the subject's own bounding box instead (better, but still
-  imperfect for a low-contrast subject like Lionleaf); third pass switched to
-  `object-fit: contain` to show the *entire* uncropped image — but for any non-square source
-  this left visible letterboxed gaps showing the button's own dark background color, which
-  the user found worse than a crop. All three attempts, and the source-image re-crops that
-  went with them, were reverted back to the plain `cover`-based original in the same session.
-  If this area gets revisited again, get explicit sign-off on the actual visual result (a
-  real screenshot from the user, not just an offline simulation) before considering it done.
-  **Root cause found and fixed 2026-07-30, confirmed by the user ("looks great!")** — none of
-  the three attempts above were actually the problem. The real cause: the site-wide
-  `.content-inner img` rule (see "Known CSS gotchas" below) sets `margin: 10px 0`,
-  `border: 1px solid`, and `border-radius: 8px` on every content image, and
-  `.gathering-node-thumb img` only ever overrode `width`/`height`/`object-fit`/`display` —
-  never those three — so they leaked straight through onto the 28x28 thumbnail: the margin
-  pushed the picture off-center inside the button and the border/radius cropped it further,
-  both exposing the button's own background color around the edges. Fixed by explicitly
-  zeroing `margin`/`border`/`border-radius` on `.gathering-node-thumb img` — no cropping/
-  object-fit change needed at all, `cover` was fine the whole time.
-- **A node can have more than one picture via an optional `images` array** (added
-  2026-07-28) — extra alternate photos of the same resource (different angle/lighting),
-  alongside its main `image`. `nodeImageList(node)` in `script.js` combines the two into one
-  ordered list (`image` first, then each entry of `images`) that both the thumbnail button
-  and the viewer work from — the thumb itself still just shows `image` (the first entry), the
-  full list only matters once the viewer is open. Clicking the thumbnail opens
-  `#gathering-image-viewer` (`openGatheringImageViewer` in `script.js`) — a plain full-size
-  lightbox, structurally `#map-viewer`'s prev/next arrows (including their once-per-open blink
-  animation, reusing that same `.map-viewer-nav-btn-play` CSS class/keyframe) grafted onto
-  `#sample-viewer`'s simpler shell — no zoom/pan, since unlike a map these are small reference
-  photos that don't need scroll-to-zoom to read. The arrows only render (and only blink) when
-  a node actually has more than one picture; a single-image node's thumbnail still opens the
-  same viewer, just with no visible nav. First used for "Wood Pile" (Lumberjacking), whose
-  second photo came in labeled "Tier 1 wood - alternative visuals, add to existing node do not
-  replace" — a naming pattern worth recognizing again: a future inbox file phrased as an
-  *alternate* view of something already documented (rather than a new/replacement image) is
-  exactly this case, not a duplicate to discard nor an `image` field to overwrite.
-- **Columns are derived per-tradeskill from the data, not fixed** (`gatheringColumns()` in
-  `script.js`) — Name and Min Skill always show; Trivial/Results/Rarity/Bait Required each
-  only appear if at least one node of that tradeskill actually uses that field (Fishing uses
-  Rarity/Bait Required instead of Trivial/Results, for example). Extend the same way if a
-  future tradeskill needs a column none of the existing ones have.
-- **Herbalism**'s tradeskill `note` (in `tradeskills.json`) is the source page's own "Getting
-  Started" paragraph (trainer location, early-leveling herbs) — general how-to info rather
-  than a specific node's data, same idea as Lumberjacking's equip-axe-and-right-click note.
-- **Disenchanting is *not* a node-based gathering tradeskill**, despite its card living on the
-  Gathering page (see "The sidebar can nest pages under a group" above) and consuming a
-  specific item somewhat like a gathering node consumes a resource — the distinction: a
-  gathering node consumes nothing and only gates on skill, while Disenchanting consumes a
-  specific MAGIC item (its card's own "Components" list) to produce output, which is
-  structurally an ordinary recipe just running "backwards" (requires a Disenchanting Cube
-  placed in a bag slot, can fail and destroy the item with nothing gained, and the output
-  powder's quality depends on the item disenchanted in some not-yet-understood way). It lives
-  in `crafting.json` as ordinary recipes, schema-wise identical to any other tradeskill's —
-  its Gathering-page placement is purely a display/navigation choice (see
-  `gatheringTradeskillIsNodeBased` above), not a change to its underlying data shape. `tradeskills.json`'s
-  own Disenchanting entry no longer carries an explanatory `note` (a lengthy one covering this
-  same mechanic was removed 2026-07-16 as too much to read on the page; see "Disenchanting's
-  magic-dust tier chart" below for what replaced it).
-  One flagged inconsistency worth knowing: "Cinder Beetle Shield" is no longer tagged MAGIC
-  in-game and can't actually be disenchanted anymore — recorded as a `note` field on that one
-  `crafting.json` entry (`disenchant-cinder-beetle-shield`) rather than removing the recipe,
-  since it's still useful historical/reference data. `renderRecipeCardHTML` renders
-  `recipe.note` (when set) as an italic line at the bottom of the card, right after
-  Components — extend this same field to any other recipe that needs a similar caveat.
+- **`tradeskillsData[].category`** — optional, `"gathering"` for these four plus Foraging
+  and Disenchanting, unset otherwise. What `renderCraftingCategories`/
+  `renderGatheringCategories` filter on for their own grid.
+- **A gathering-category tradeskill isn't automatically node-based** —
+  `gatheringTradeskillIsNodeBased(name)` (shared by card count/label, click handler,
+  routing) returns true if `gathering-nodes.json` has entries for that name, else defaults
+  true *unless* `crafting.json` has recipes for it — so a tradeskill with data in neither
+  file (Foraging) still reads node-based, renders an empty table rather than a misread
+  0-recipe crafting tradeskill. Disenchanting is the one flip to recipe-based, routed to
+  shared `renderGatheringRecipes(container, tradeskillName)`.
+- **`gathering-nodes.json`** — flat array, one object per node: `name`, `slug`,
+  `tradeskill`, `locations` (free-text array, not tied to `maps.json`), optional `minSkill`
+  (to attempt) and `trivialSkill` (skill-ups stop — same concept as `recipeSkillLevel`,
+  different name since separate shape). Only write an exact number when the source states
+  one outright — floor-only (`"225+"`) or unknown (`"???"`) stays unset with a `note`
+  capturing raw text. `results` (item names, same dynamic-linking convention as
+  `components`/`drops`) optional, only when the source has a Results column.
+- Source tables so far are fan-wiki-style reference charts, same weaker-than-a-screenshot
+  caveat as the Tanning/Leatherworking/Blacksmithing tables (see `CLAUDE-HISTORY.md`) —
+  supersede without hesitation if the user's own observation disagrees.
+- **Rendering:** `renderGatheringNodes(container, tradeskillName)` — sortable/searchable
+  table (like `renderMonstersList`), not a card grid (no components to justify one). `note`
+  (when set) renders as its own row underneath.
+- **Optional `image` + `needsInfo`:** node picture at `images/gathering/<slug>.jpg`, same
+  convention as item/recipe screenshots. Shows as a clickable thumbnail
+  (`.gathering-node-thumb`). `needsInfo: true` = same meaning as items/crafting: confirmed
+  to exist but not fully identified — red "NEEDS INFO" badge + note row linking to
+  `#submit`. First used for a herb spotted but not yet identified — placeholder node with
+  empty `locations`, skill floor captured in `note` (not `minSkill`, floor-only) so the
+  picture becomes the identifying reference.
+  **When identification comes in: don't rename the placeholder — merge its picture into the
+  real, already-existing node entry, then delete the placeholder** (2026-07-20 correction —
+  an "Unidentified Herb" placeholder was mistakenly renamed in place even though a real
+  `Duneleaf` entry already existed separately, producing two `duneleaf`-slugged entries).
+  Placeholder is a proxy for a real node not yet connected, not its permanent home — a
+  same-name real entry may already exist with its own confirmed data that the placeholder's
+  vaguer info shouldn't overwrite.
+  `.gathering-node-thumb` is `object-fit: cover`, 28x28, no inset padding — the real fix for
+  a past visual bug was zeroing `margin`/`border`/`border-radius` on the `img` (a
+  `.content-inner img` specificity leak, see "Known CSS gotchas"), *not* the cropping/
+  object-fit changes that were tried first and reverted (full story in
+  `CLAUDE-HISTORY.md` if this area gets touched again).
+- **A node can have more than one picture via an optional `images` array** — extra alternate
+  photos alongside `image`. `nodeImageList(node)` combines both into one ordered list
+  (`image` first) that the thumbnail button and viewer both use — thumb still shows just
+  `image`. Click opens `#gathering-image-viewer` (`openGatheringImageViewer`) — full-size
+  lightbox with `#map-viewer`-style prev/next arrows (including once-per-open blink,
+  `.map-viewer-nav-btn-play`) grafted onto `#sample-viewer`'s simpler shell, no zoom/pan.
+  Arrows only render/blink with >1 picture. A future inbox file phrased as an *alternate*
+  view of something already documented (not a new/replacement image) means add to `images`,
+  don't overwrite `image` or treat as duplicate.
+- **Columns derive per-tradeskill from the data** (`gatheringColumns()`) — Name/Min Skill
+  always show; Trivial/Results/Rarity/Bait Required only if ≥1 node of that tradeskill uses
+  the field (Fishing uses Rarity/Bait Required instead of Trivial/Results).
+- **Herbalism**'s tradeskill `note` = the source page's own "Getting Started" paragraph.
+- **Disenchanting is *not* node-based** despite living on the Gathering page — a gathering
+  node consumes nothing, only gates on skill; Disenchanting consumes a specific MAGIC item
+  (its "Components" list) to produce output — structurally an ordinary recipe running
+  "backwards" (Disenchanting Cube in a bag slot, can fail and destroy the item, output
+  quality depends on the item in some not-fully-understood way). Lives in `crafting.json` as
+  ordinary recipes; Gathering-page placement is purely display/navigation.
+  Flagged inconsistency: "Cinder Beetle Shield" is no longer tagged MAGIC in-game and can't
+  actually be disenchanted — recorded as a `note` on that entry (`disenchant-cinder-beetle-
+  shield`) rather than removing the recipe (useful historical data). `renderRecipeCardHTML`
+  renders `recipe.note` (when set) as an italic line after Components — reusable for any
+  recipe needing a similar caveat.
 
-**Disenchanting's own card layout is flipped from every other tradeskill's**
-(`renderDisenchantCardHTML` in `script.js`, dispatched to from `renderRecipeCardHTML` when
-`recipe.tradeskill === 'Disenchanting'` — 2026-07-17, user's own call). Every other recipe
-puts the crafted result (`name`) at the top and its inputs (`components`) at the bottom, but
-for Disenchanting that reads backwards: `components` holds the single MAGIC item actually fed
-into the cube — the thing someone's actually looking up — while `name` holds the resulting
-dust output. So the flipped card leads with the *source item*, including its own thumbnail
-(`findItemByName(sourceItem).image` when that item has a card yet, a dashed "No image yet"
-placeholder otherwise — most of these source items don't have a screenshot yet, so the
-placeholder is the common case), and lists the dust tier it produces — parsed from `name`
-into its two "Powder"/"of Magic" parts with their quantity ranges kept intact this time
-(unlike the tier chart's own parsing in `disenchantingDustTiers()`, which deliberately drops
-the ranges since they'd be redundant there — here on the actual recipe card they're the
-whole point) — under a "Produces:" section at the bottom instead of "Components:". Both the
-source item and each produced dust link to the Item Database the same dynamic-if-a-card-
-exists way component/result links already do everywhere else.
+**Disenchanting's card layout is flipped** (`renderDisenchantCardHTML`, dispatched from
+`renderRecipeCardHTML` when `recipe.tradeskill === 'Disenchanting'`). Every other recipe
+puts crafted result (`name`) at top, inputs (`components`) at bottom; Disenchanting reverses
+this — `components` holds the single MAGIC item fed in (what someone's actually looking
+up), `name` holds the resulting dust. Card leads with the *source item* (thumbnail via
+`findItemByName(sourceItem).image`, dashed placeholder if none — common case), lists the
+dust tier under "Produces:" (parsed from `name`, quantity ranges kept intact unlike the tier
+chart's own parsing). Both source item and produced dust link to the Item Database
+dynamically.
 
 ### Tanning is different: no recipes, just vat processing
 
-Confirmed by the user: Tanning has no crafting-window entries or recipe cards at all —
-instead, any tier-appropriate pelt is dropped directly into a tanning vat to produce scrap
-material (Low-Quality pelt → 24x Rawhide Scraps, Medium-Quality → 24x Hide Scraps,
-High-Quality → 24x Leather Scraps, one entry per pelt type). These still live in
-`crafting.json` as ordinary entries (`name`/`slug`/`tradeskill: "Tanning"`/`components`/
-`resultQuantity: 24`), just without `difficultyColor`/`observedAtSkill`/`listOrder` — there's
-no in-game screenshot to source those from, so they're left unset rather than guessed.
+No crafting-window entries or recipe cards — any tier-appropriate pelt drops directly into a
+tanning vat (Low→24x Rawhide Scraps, Medium→24x Hide Scraps, High→24x Leather Scraps). Live
+in `crafting.json` as ordinary entries (`name`/`slug`/`tradeskill: "Tanning"`/`components`/
+`resultQuantity: 24`) without `difficultyColor`/`observedAtSkill`/`listOrder` (no screenshot
+to source them from). `tradeskills.json` can carry an optional `note` field (Tanning has one
+explaining the vat mechanic), rendered as a callout under the tradeskill's `<h1>` — extend
+to another tradeskill the same way if needed.
 
-Since a Tanning "recipe" card would otherwise look like any other simple one-component
-recipe, with nothing explaining *why* there's no image/difficulty/list order, a tradeskill
-can carry an optional `note` field in `tradeskills.json` (Tanning has one, explaining the vat
-mechanic) rendered as a callout right under the tradeskill's `<h1>` in
-`renderCraftingRecipes` — extend to another tradeskill the same way if it ever needs a
-similar structural explanation.
-
-The pelt→scrap mapping itself came from a fan-wiki-style table (sortable-column styling,
-hyperlinked names), not the live game — per "The user's screenshots are the source of truth"
-above, that makes it weaker than a normal capture for anything *not* stated outright. Its
-exact Trivial values (25 for Low-Quality, 50 for Medium-Quality) were written straight into
-`recipeSkillLevel`; the `>50` High-Quality value stays a floor-only note in the estimates
-file since it isn't an exact number.
-
-### Blacksmithing was populated from reference tables too
-
-Same fan-wiki-style tables as Leatherworking/Tanning (sortable columns, hyperlinked names,
-"Crafting Bench"/"Scrapping" columns) gave the full Copper→Bronze→Iron→Steel progression:
-chain/plate armor, weapons, shields, base materials, sharpening/weight stones, mount
-barding, and a repair chain (Corroded/Rusty gear + metal scraps → "Tarnished" gear). Exact
-Trivial numbers went straight into `recipeSkillLevel`; `"?"` or `"200?"`-style uncertain
-values were left unset rather than guessed.
-
-The "Hammer and Chisel Master List" table (worn gear + Hammer and Chisel → raw scraps) is in
-`crafting.json` as 93 ordinary-shaped Blacksmithing recipes — salvaging a crafted item back
-into its materials, `components` is `[{ the worn item, quantity 1 or 2 }, { "Hammer and
-Chisel", quantity 1 or 2 }]`, `name` is the scrap result. A handful of source items salvage
-into *two* different scrap types in different quantities, which the existing `resultQuantity`
-field can't express (it's one number for one named result) — those recipes fold both into
-the `name` string itself, `"<Item> (xN) & <Item> (xM)"`, the same workaround used for
-Disenchanting's variable-output recipes. Many of the 93 share an identical `name` (e.g.
-dozens are just "Iron Scraps") since the *source* item differs, not the result — `slug`
-still disambiguates each one (`<result>-from-<source>`).
-
-**Don't silently "correct" an inconsistent-looking row from these reference tables without a
-re-confirming screenshot** — recorded verbatim even where a row looks internally
-inconsistent, e.g. "Copper Plate Boots"/"Copper Longsword" salvage into *Bronze* Scraps
-rather than Copper Scraps like every other Copper item in the table, and "Tarnished Bronze
-Mace" is the only weapon in its tier that doesn't also yield Rawhide Scraps. The table might
-just be wrong, or the game might genuinely be inconsistent here — don't guess which.
-
-### Fletching, Smelting, and Survival got the same reference-table treatment (2026-07-20)
-
-Same fan-wiki-style tables as above filled in `components`/`recipeSkillLevel` for existing
-crafting-window-sourced stubs and added a handful of recipes that weren't in `crafting.json`
-at all yet:
-
-- **Fletching** — the existing 15 crafting-window stubs (Arrow x100/x500, Bow, Buckler,
-  Stonehead/Copperhead/Bronzehead Arrow x100/x500/x1000, Longbow, Recurve Bow) got
-  `components` and, where the table gave a real number, `recipeSkillLevel` — the x1000
-  variants weren't in the table at all, so they're untouched. Seven recipes the table showed
-  but the crafting-window batch never had: Pitch-Wrapped Arrow, Net Arrow, and Smoke Bomb
-  Arrow (all "Requires recipe purchase" per the table, recorded as a `note`) use
-  `resultQuantity` rather than an "x20" name suffix, since — unlike the x100/x500 siblings —
-  there's no crafting-window confirmation of what these are actually named in-game. Ironhead
-  Arrow and Steelhead Arrow *do* use the "x100"/"x500" name-suffix convention, but that's a
-  pattern-inference from their Stonehead/Copperhead/Bronzehead siblings (same shape: Wood +
-  a material's Scraps), not a confirmed in-game name — flag if a real crafting-window sighting
-  ever shows them named differently. Net Arrow's second component is recorded verbatim as
-  "Rope, Hempen, 50 Length" — the source table's own comma-heavy formatting makes it
-  ambiguous whether that's one item name or a name plus a size descriptor, and Smoke Bomb
-  Arrow / Vial of Smoke had their table's own "(item)"/"(reagent)" disambiguation suffixes
-  stripped as presumed wiki-page artifacts, not real name text — both worth re-confirming
-  against an actual card if one ever comes in. Recipes still missing a number the table itself
-  showed as "??" (Net Arrow, Recurve Bow, Smoke Bomb Arrow, Fine Wood Bow, Fine Wood Buckler)
-  were left with no `recipeSkillLevel`, same as elsewhere.
-- **Smelting** — already fully populated from an earlier identical table; this pass only
-  added one new row the earlier pass missed, "Adamantium Bar" — its own Components column was
-  itself just "?" on the table, so it's a bare `needsInfo: true` stub (name/tradeskill only)
-  rather than a guessed recipe.
-- **Survival** — the existing 7 crafting-window stubs got `components` and (where stated)
-  `recipeSkillLevel` the same way; Heavy Wool Bandage/Cotton Bandage's Trivial was truncated
-  to "##" on the table (a spreadsheet-style column-too-narrow overflow, not a real value) so
-  neither got a `recipeSkillLevel`. Two recipes new to `crafting.json`: Campfire (Trivial
-  listed as "Innate" — always trivial regardless of skill, recorded as a `note` rather than a
-  fake `recipeSkillLevel`, alongside the table's own real usage note about cooking/duration)
-  and Heavy Cotton Bandage (a name-pattern sibling of Cotton Bandage, but this one *did* have
-  its own Components row on the table, so it's a normal recipe rather than a stub).
-  `tradeskills.json`'s Survival entry also gained a `note` (trainer location, the "Crafting:
-  Survival" ability-book mechanic) — it didn't have one before.
+(Population history/source tables for Tanning, Blacksmithing, Fletching, Smelting, Survival:
+`CLAUDE-HISTORY.md`.)
 
 ### New items/maps/recipes/monsters come in via `images/inbox/`
 
-The user drops new screenshots into `images/inbox/` (may appear as `images/Inbox` on
-disk — Windows paths are case-insensitive, don't create a second folder for it). This is
-the *only* place to look for new/unprocessed content — do not re-scan `images/items/` or
-re-read existing entries in `items.json`/`maps.json`/`crafting.json`/`monsters.json` looking
-for new work; that wastes tokens on files that haven't changed. Files are usually named with
-a random ID (from a screenshot tool), not the item/map/recipe/monster name — the filename is
-not meaningful, always read the image itself.
+User drops new screenshots into `images/inbox/` (may appear as `images/Inbox` on disk —
+Windows paths case-insensitive, don't create a second folder). This is the *only* place to
+look for new/unprocessed content — don't re-scan `images/items/` or re-read existing
+items.json/maps.json/crafting.json/monsters.json entries looking for new work. Filenames are
+usually a random ID, not meaningful — always read the image itself.
 
-This rule isn't limited to adding new entries — it applies to *any* task involving
-item/map/recipe/monster screenshots (e.g. checking for cut-off/truncated text, auditing image
-quality, re-verifying data). Only ever read/process files sitting in `images/inbox/`; never
-re-open every existing file in `images/items/`, `images/Maps/`, `images/crafting/`, or
-`images/Monsters/` to go looking for problems. If a task requires checking already-processed
-images, say so and ask the user rather than re-scanning everything.
+Applies to *any* task involving item/map/recipe/monster screenshots (cut-off-text checks,
+image-quality audits, re-verifying data), not just adding new entries. Only read/process
+files in `images/inbox/`; never re-open existing files in `images/items/`, `images/Maps/`,
+`images/crafting/`, `images/Monsters/`. If a task needs checking already-processed images,
+say so and ask rather than re-scanning everything.
 
-**Move the batch out of the inbox before reading anything.** The user regularly drops new
-screenshots into `images/inbox/` *while* a previous batch is still being processed — earlier
-this caused a real incident: a session listed the inbox, spent several minutes reading/
-processing that batch, and then cleared the inbox with a wildcard delete at the end, which
-caught screenshots the user had dropped in mid-session that were never read at all,
-permanently deleting them (`images/inbox/` isn't git-tracked, so there was no way to recover
-them). To make this race condition structurally impossible instead of just being careful:
-**before reading any file, `mv` (not copy) every file currently in `images/inbox/` into
-`images/Processing/`** (create it if it doesn't exist), and do all reading/processing/
-deleting from `images/Processing/` for the rest of the task — `images/inbox/` is never
-touched again after that one move. Any screenshot the user drops in afterward lands in
-`images/inbox/`, completely isolated from the batch already being worked on, and simply
-becomes the start of the *next* session's move instead of being caught by this one's
-cleanup. `images/Processing/` should always be empty between sessions — a non-empty one
-when a task starts means a previous session ended mid-batch (crashed, was interrupted,
-etc.); pick up processing those files rather than re-moving from `images/inbox/` again.
+**Move the batch out of the inbox before reading anything.** The user drops new screenshots
+into `images/inbox/` *while* a previous batch is still being processed — a wildcard-delete
+cleanup at the end of a session once caught and permanently deleted screenshots dropped in
+mid-session that were never read (`images/inbox/` isn't git-tracked, unrecoverable). To make
+this race condition structurally impossible: **before reading any file, `mv` (not copy)**
+every file in `images/inbox/` into `images/Processing/` (create if needed), and do all
+reading/processing/deleting from `images/Processing/` for the rest of the task —
+`images/inbox/` is never touched again after that one move. Anything the user drops in
+afterward lands in `images/inbox/`, isolated from the current batch, becomes the start of
+the *next* session's move. `images/Processing/` should always be empty between sessions — a
+non-empty one at task start means a previous session ended mid-batch (crashed, interrupted);
+pick up processing those files rather than re-moving from `images/inbox/`.
 
 Workflow when asked to process new items (or "check the inbox"):
 
-1. Move every file currently in `images/inbox/` into `images/Processing/` (see above) —
-   this is the one and only time `images/inbox/` gets touched during the task.
-2. List `images/Processing/` — each file there is one unprocessed screenshot.
-3. For each one: read the image and figure out whether it's an **item** (the stat-card
-   popup style used elsewhere in this doc), a **map** (a game map/zone image, no stat
-   card), a **recipe** (a single crafting card, same popup style as an item but with a
-   "Components:" list), a **crafting window** (the in-game tradeskill window listing
-   many known recipes at once, e.g. titled "Leatherworking" with a skill number at the
-   bottom), a **vendor screenshot** (an NPC's buy/sell list — item names + prices, no stat
-   card at all — see "Vendor screenshots" below), or a **monster** (a picture of a
-   creature, no stat card at all — see "Adding a monster" below) — then follow the matching
-   path below.
-4. Once a file's data has been recorded (items/recipes: read and deleted, no image saved —
-   see 2026-08-04 above; maps/monsters: moved to `images/Maps/`/`images/Monsters/`) or it's
-   been deleted as a duplicate, `images/Processing/` should no longer contain it — an empty
-   `images/Processing/` means everything from this batch is processed.
+1. Move every file in `images/inbox/` into `images/Processing/` — the one and only time
+   `images/inbox/` gets touched.
+2. List `images/Processing/` — each file is one unprocessed screenshot.
+3. For each: read and classify — **item** (stat-card popup), **map** (game map/zone image,
+   no stat card), **recipe** (single crafting card, popup style + "Components:" list),
+   **crafting window** (in-game tradeskill window listing many recipes, skill number at
+   bottom), **vendor screenshot** (NPC buy/sell list, no stat card), or **monster** (picture
+   of a creature, no stat card) — then follow the matching path below.
+4. Once a file's data is recorded (items/recipes: read and deleted, no image saved;
+   maps/monsters: moved to `images/Maps/`/`images/Monsters/`) or deleted as a duplicate,
+   `images/Processing/` should no longer contain it — empty = batch fully processed.
 
 **Duplicates (items/maps/recipes alike):** if a screenshot's item/map/recipe already exists
-(matched by slug or name), just delete it from the inbox — don't save it anywhere. The one
-exception: if the new screenshot reveals something the existing entry is missing or gets
-wrong (a stat that was cut off before, a corrected number), still update
-`items.json`/`maps.json`/`crafting.json` with that new information before deleting the
-screenshot — the user's newest screenshot always wins.
+(slug or name match), delete it from the inbox — don't save anywhere. Exception: if the new
+screenshot reveals something the existing entry is missing/wrong, update the JSON with the
+new info first — newest screenshot always wins.
 
 **Items:**
 
-1. Extract the item's name and stats, including `race` and any `tags` (see the tag/race
-   guidance in "Adding an item to the Item Database" above).
-2. Check whether that item's slug (or name) already exists in `items.json` — this is a
-   cheap text check against the existing entries, not the same as re-scanning every image
-   in `images/items/`, and it's required every time to catch duplicates.
-   - **Not a duplicate:** add an entry to `items.json` — no `image` field (2026-08-04, don't
-     archive the screenshot, see "Adding an item to the Item Database" above). Just delete
-     the screenshot from the inbox once its data is recorded.
-   - **Duplicate of an existing item:** delete the screenshot from the inbox (see
-     "Duplicates" above) — update `items.json` first if the new screenshot fills a gap.
+1. Extract name/stats, `race`, any `tags`.
+2. Check whether slug/name already exists in `items.json` (cheap text check, required every
+   time).
+   - **Not a duplicate:** add entry, no `image` field. Delete screenshot once recorded.
+   - **Duplicate:** delete screenshot — update `items.json` first if it fills a gap.
 
 **Maps:**
 
-1. Extract the map's name.
-2. Check whether that map's slug (or name) already exists in `maps.json`.
-   - **Not a duplicate:** add an entry to `maps.json`. Rename the file to the map's slug
-     and move it into `images/Maps/`, matching the `image` field.
-   - **Duplicate of an existing map:** delete the file from the inbox (see "Duplicates"
-     above).
+1. Extract map name.
+2. Check whether slug/name already exists in `maps.json`.
+   - **Not a duplicate:** add entry. Rename file to map's slug, move into `images/Maps/`.
+   - **Duplicate:** delete file.
 
 **Recipes:**
 
-1. Extract the recipe's name and which tradeskill it belongs to (must match a name in
-   `tradeskills.json` — if the card names a tradeskill not in that list, flag it to the user
-   rather than inventing a new category). See "Adding a crafting recipe" above for the
-   current schema.
-2. Check whether that recipe's slug (or name) already exists in `crafting.json`.
-   - **Not a duplicate:** add an entry to `crafting.json` — no `image` field (2026-08-04,
-     don't archive the screenshot, see "Adding a crafting recipe" above). Just delete the
-     screenshot from the inbox once its data is recorded.
-   - **Duplicate of an existing recipe:** delete the screenshot from the inbox (see
-     "Duplicates" above) — unless the new screenshot is the first *full card* for a recipe
-     that previously only had a minimal crafting-window entry (no `weight`/`components` yet),
-     in which case it's not really a duplicate — treat it like "not a duplicate" above and
-     fill in the fuller entry instead (still no `image`).
+1. Extract name + tradeskill (must match `tradeskills.json` — flag if it names one not in
+   that list, don't invent a category).
+2. Check whether slug/name already exists in `crafting.json`.
+   - **Not a duplicate:** add entry, no `image` field. Delete screenshot once recorded.
+   - **Duplicate:** delete — unless the new screenshot is the first *full card* for a recipe
+     that only had a minimal crafting-window entry (no `weight`/`components` yet), in which
+     case fill in the fuller entry instead (still no `image`).
 
-**Monsters:** a plain picture of the creature (its name floating over the model, no stat
-card) — see "Adding a monster" below for the named/boss-only picture policy: most monsters
-(generic "a desert bat"/"a large rat"-style mobs) won't have a picture at all, and that's
-expected, not a gap to fill. Map, level range, and drops come from whatever the user says
-directly in chat alongside the picture (counts as authoritative, same as a screenshot), not
-from the image itself — **except** drops, which are usually shown directly via a
-loot-window screenshot (the in-game corpse-loot UI, one item icon per slot) paired with a
-plain item card for each icon — read the item card to get the exact name rather than
-guessing from the icon alone, and process/add that item to `items.json` the same as any
-other new item in the same inbox batch (these are very often raw materials already
-referenced as plain-text, unlinked components elsewhere — adding the real item makes that
-link resolve automatically). A monster's loot window can take more than one screenshot
-across separate messages to show every slot; keep adding newly-revealed drops to that
-monster's `drops` array rather than assuming one screenshot is the complete list.
+**Monsters:** plain creature picture (name floating over model, no stat card) — see "Adding
+a monster" for the named/boss-only picture policy: most monsters won't have a picture, and
+that's expected. Map/level range/drops come from what the user says in chat (authoritative,
+same as a screenshot), not the image itself — **except** drops, usually shown via a
+loot-window screenshot (corpse-loot UI, one icon per slot) paired with a plain item card per
+icon — read the card for the exact name, process/add that item to `items.json` too (often
+raw materials already referenced as unlinked plain text elsewhere — adding the real item
+auto-resolves that link). A loot window can span multiple screenshots across messages — keep
+adding newly-revealed drops rather than assuming one screenshot is complete.
 
-1. Check whether that monster's slug (or name) already exists in `monsters.json`.
-   - **Not a duplicate:** add an entry (see "Adding a monster" below for the schema). If a
-     picture was actually provided (Named/boss only, per the policy above), convert it to
-     `.jpg` (quality 90), rename it to the monster's slug, move it into `images/Monsters/`,
-     and use that slug for the `image` field — otherwise just omit `image` entirely.
-   - **Duplicate:** delete the screenshot from the inbox (see "Duplicates" above) — update
-     `monsters.json` first if the new screenshot/chat message fills a gap (e.g. a map, level
-     range, or an additional drop that wasn't known before).
-2. If the user hasn't given a map, level range, or drop table yet, just add what's known
-   (name/slug at minimum, since image is optional even for a finished entry) rather than
-   blocking on the rest — every field beyond name/slug is optional, see "Adding a monster"
-   below.
+1. Check slug/name against `monsters.json`.
+   - **Not a duplicate:** add entry. If a picture was provided (Named/boss only), convert to
+     `.jpg` q90, rename to the monster's slug, move into `images/Monsters/`, use that slug
+     for `image` — otherwise omit `image`.
+   - **Duplicate:** delete screenshot — update `monsters.json` first if it fills a gap (map,
+     level range, additional drop).
+2. If map/level range/drop table isn't given yet, add what's known (name/slug minimum)
+   rather than blocking — every field beyond name/slug is optional.
 
-**Crafting window screenshots** (a different thing from a recipe card — this is the
-in-game tradeskill window listing every known recipe for one tradeskill, name-only with a
-color per recipe, e.g. "Leatherworking 22 / 300" at the bottom): these are a reference
-source, not a recipe card, and don't get saved anywhere — process them and delete them from
-the inbox, don't move them into `images/crafting/`.
+**Crafting window screenshots** (different from a recipe card — in-game tradeskill window
+listing every known recipe, name-only + color, e.g. "Leatherworking 22 / 300" at bottom):
+reference source, don't get saved anywhere — process and delete, don't move to
+`images/crafting/`.
 
-1. The window's title bar names the tradeskill directly (more reliable than guessing from
-   item names). The "X / 300" line at the bottom is the user's current skill in that
-   tradeskill — capture it as `observedAtSkill` on every recipe pulled from this screenshot.
-   **If that line is missing from the screenshot**, assume `observedAtSkill: 0` rather than
-   leaving it unset or asking.
-2. For each recipe name+color in the list: if it already exists in `crafting.json` (e.g. a
-   recipe that already has a full card), leave its card-derived fields alone (`image`,
-   `weight`, `size`, `components`, `difficultyText`) — this window is a secondary,
-   lower-detail source and shouldn't overwrite data from an actual card. If it's new, add a
-   minimal entry: `name`, `slug`, `tradeskill`, `difficultyColor`, `observedAtSkill` — no
-   `image`/`weight`/`components` yet, since the window doesn't show those (they fill in
-   later if/when a full card for that recipe comes in).
-3. `listOrder` — the recipe's position in the crafting window's list, counting from the very
-   top of the whole scrollable list (not just the top of one screenshot). **The Crafting page
-   sorts recipes by this field, ascending, instead of alphabetically** (`renderCraftingRecipes`
-   in `script.js`) — the game's own list order is already sorted by real skill requirement,
-   low to high, so this position doubles as a difficulty ranking without needing the
-   (unreliable) color-based guessing in `To-Do/crafting-skill-estimates.md`. Capture/update
-   `listOrder` on *every* recipe seen in the window, including ones that already have a full
-   card (unlike `difficultyColor` above, this field isn't something a real recipe card ever
-   shows, so there's no "actual card" data to protect from being overwritten). If a
-   screenshot batch only covers a portion of the full list, reconstruct the true list-wide
-   position by matching up rows that repeat between adjacent screenshots (same name *and*
-   same color in both) rather than assuming each screenshot starts a fresh count — a full
-   recapture of a tradeskill's list should end with `listOrder` values forming one unbroken
-   1..N sequence with no gaps or repeats. If the screenshots don't overlap enough to confirm
-   the exact join between two batches, the color trend at the boundary (colors should move
-   steadily from Green at the low end toward Red at the high end, never jump back and forth)
-   is usually enough to infer the join — but say so and flag the uncertainty to the user
-   rather than presenting a guessed join as confirmed fact.
-4. Match the recipe's difficulty color to the mapping in "Adding a crafting recipe" above.
-   If a color looks ambiguous (e.g. telling Light Blue from Dark Blue apart is genuinely
-   hard from a screenshot), say so and record the generic color rather than guessing which
-   shade — don't silently pick one.
-5. Delete the screenshot(s) from `images/inbox/` once processed — they don't get moved
-   anywhere, since nothing about them (aside from the extracted data) belongs on the wiki.
+1. Window's title bar names the tradeskill (more reliable than guessing from item names).
+   "X / 300" at bottom = user's current skill — capture as `observedAtSkill` on every recipe
+   from this screenshot. **Missing that line** → assume `observedAtSkill: 0`.
+2. Per recipe name+color: if already in `crafting.json` with card-derived fields (`weight`,
+   `size`, `components`, `difficultyText`), leave those alone — window is lower-detail,
+   shouldn't overwrite a real card. If new: minimal entry (`name`, `slug`, `tradeskill`,
+   `difficultyColor`, `observedAtSkill`), no `image`/`weight`/`components` yet.
+3. `listOrder` — position in the crafting window's *whole* scrollable list (not just this
+   screenshot), counting from the top. **Crafting page sorts by this field ascending**
+   instead of alphabetically — the game's own order is already low-to-high skill, doubling
+   as a difficulty ranking without the unreliable color-guessing in
+   `To-Do/crafting-skill-estimates.md`. Capture/update on *every* recipe seen, including
+   ones with a full card already (unlike `difficultyColor`, no "real card" data protects
+   this field). Partial-batch screenshots: reconstruct true list-wide position by matching
+   repeated rows (same name + color) between adjacent screenshots rather than assuming each
+   starts fresh — a full recapture should end as one unbroken 1..N sequence. If screenshots
+   don't overlap enough to confirm the join, the color trend at the boundary (should move
+   steadily Green→Red, never jump back and forth) is usually enough to infer it — but flag
+   the uncertainty rather than presenting a guessed join as fact.
+4. Match difficulty color to the mapping above. Ambiguous shade (Light Blue vs Dark Blue) →
+   say so, record the generic color, don't silently pick one.
+5. Delete screenshot(s) once processed — never moved anywhere.
 
-**Vendor screenshots** (an NPC's buy or sell list — item names + prices only, no stat card,
-no components, nothing else): like a crafting window, this is a reference source that
-confirms an item *exists* but reveals none of its real data — process it for names, then
-delete it, don't save it anywhere.
+**Vendor screenshots** (NPC buy/sell list — names + prices only, no stat card): confirms an
+item *exists*, reveals no real data — process for names, delete, don't save.
 
-1. For each item name in the list, check whether it already exists in `items.json` (by name
-   or an obvious slug match). Already-exists items need no action; note in
-   `To-Do/predicted-missing-items.txt` if the sighting confirms or contradicts a prediction
-   already tracked there.
-2. For a name that doesn't exist yet, add a minimal `items.json` entry: `name`, `slug`,
-   `type`, `tags: []`, and `"needsInfo": true` (see `needsInfo` under "Item and recipe
-   cards" below for how this renders). Only add fields beyond that when they're safely
-   inferable from the name itself matching an already-established pattern — e.g. a weapon's
-   `skill`/`twoHanded`/`slot` from its type matching every other same-type weapon already in
-   `items.json` (a "Dagger" is always Stabbing/1H in this game's data so far), or an armor
-   piece's `slot` from its piece-type name (every "Chain Coif" across every material tier is
-   Head). **Never** infer `damage`/`delay`/`weight`/`size`/`ac`/`classes`/`race` this way —
-   those actually vary by material/tier and a vendor listing gives no basis to guess them.
-3. The same treatment applies to a recipe name spotted on a vendor list, using
-   `crafting.json`'s equivalent minimal shape (`name`/`slug`/`tradeskill`/`needsInfo: true`).
-4. Delete the screenshot(s) from `images/inbox/` once processed — same as a crafting window,
-   nothing about the image itself belongs on the wiki once its names are extracted.
+1. Per item name: check `items.json` (name or obvious slug match). Already exists → no
+   action (note in `To-Do/predicted-missing-items.txt` if it confirms/contradicts a tracked
+   prediction).
+2. New name → minimal entry: `name`, `slug`, `type`, `tags: []`, `"needsInfo": true`. Only
+   add more when safely inferable from an established pattern (weapon `skill`/`twoHanded`/
+   `slot` matching same-type siblings; armor `slot` from piece-type name). **Never** infer
+   `damage`/`delay`/`weight`/`size`/`ac`/`classes`/`race` — those vary by tier, a vendor
+   listing gives no basis.
+3. Same treatment for a recipe name on a vendor list (`crafting.json`'s minimal shape:
+   `name`/`slug`/`tradeskill`/`needsInfo: true`).
+4. Delete screenshot(s) once processed.
 
 ## Adding a monster
 
-**Named and Regular monsters are two separate top-level pages** (`pages.json` entries
+**Named and Regular monsters are two separate top-level pages** (`pages.json`
 `"Named Monsters"`/`"Regular Monsters"`, both `"type": "monsters"`, sharing `"group":
-"Monsters"` so they nest under one "Monsters" sidebar heading) — split apart 2026-07-17
-(user's own call) the same way Gathering/Crafting are split under "Tradeskilling", rather
-than one shared page with both sections stacked on it. Each page is
-its own one-level drill-down: a category grid of zones (`renderMonstersCategories(container,
-named)`, scoped to just that page's named/regular subset — including its own quick search
-box) drilling into a sortable/searchable table (`renderMonstersList`) scoped to one zone at a
-time. Zone drill-down uses a hash sub-route (`#monsters-named/<zone>` or
-`#monsters-regular/<zone>`, not a pending variable) so the browser's Back button can pop out
-of a zone list to that page's own category grid — `loadPage`/the `hashchange` listener and
-`init()`'s startup routing all match pages by the part of the hash *before* the first `/`.
-This is the pattern to reuse if a future drill-down needs the same "should be
-Back-button-navigable" behavior. `goToMonster` picks `monsters-named`/`monsters-regular`
-based on the monster's own `named` field when routing to a specific monster (e.g. from header
-search or an item's "Back to `<Monster>`" link).
+"Monsters"`). Each: category grid of zones (`renderMonstersCategories(container, named)`,
+scoped to that page's subset, own quick search) drilling into a sortable/searchable table
+(`renderMonstersList`) scoped to one zone. Zone drill-down uses a hash sub-route
+(`#monsters-named/<zone>` or `#monsters-regular/<zone>`, not a pending variable) so Back pops
+out to the category grid — `loadPage`/`hashchange`/`init()` match pages by the hash part
+before the first `/`. Reuse this pattern for any future "should be Back-button-navigable"
+drill-down. `goToMonster` picks `monsters-named`/`monsters-regular` from the monster's own
+`named` field.
 
-`monsters.json` schema — only `name`/`slug` are required, everything else is optional and
-fills in as the user provides it:
+`monsters.json` schema — only `name`/`slug` required, everything else optional:
 
-- **`named`** — boolean, `true` for confirmed named/boss monsters. Has to be an explicit
-  field rather than derived from name casing, because several confirmed bosses use the exact
-  same lowercase "a/the X" naming style as regular trash mobs — there's no reliable
-  string-pattern signal to key off.
-- `image` — picture of the creature, dropped into `images/Monsters/`, same `.jpg`
-  quality-90 convention as item/recipe screenshots. Shown in the monster viewer modal, not
-  the table. **Only Named monsters/bosses get a picture** — screenshotting one for every
-  generic mob is too much ongoing effort for too little payoff; a generic monster having no
-  `image` is the normal case, not a gap to flag. **Replace-on-better-visibility:** if a new
-  screenshot comes in for a monster that already has an `image`, and the new one shows the
-  creature more clearly (better lighting, less obstructed, less distant/blurry), overwrite
-  the existing file rather than discarding it as a duplicate — a monster only has one
-  `image` slot, so this is always an overwrite, never a second field.
-- `maps` — array of map names the monster's been seen on (usually one, kept as an array in
-  case the same monster spawns in more than one zone). Must match a real top-level map (a
-  `maps.json` entry) — a named sub-area within a map (e.g. "Necropolis" within "Night
-  Harbor") is **not** a map of its own and goes in `areas` instead, not appended into the map
-  string (e.g. `"maps": ["Night Harbor"], "areas": ["Necropolis"]`, not `"Necropolis (Night
-  Harbor)"`). **The "Map" field is no longer shown on the monster card or in the zone-scoped
-  table's own column** (removed 2026-07-19, user's own call: by the time you're looking at a
-  monster's card, you got there by drilling into that exact zone already, so repeating the
-  same map name on every row/card was pure redundant restating — same "display-only removal,
-  data stays as before" precedent as `levelRange` below). `maps`/`monsterZone()` still drive
-  everything structural (which zone bucket a monster's card renders under, `goToMonster`'s
-  routing, `monsterSearchHaystack`) — only the redundant on-card/on-row *display* of the
-  current zone's own name was dropped. The one place a monster's zone still shows as text is
-  the **top-level quick search** (`renderMonstersCategories`, before drilling into any zone
-  folder) — there it's still genuinely useful information (you don't know the zone yet), and
-  it's now a clickable link of its own (`goToMap`, see "Adding a map" below) that opens that
-  area straight in the Maps viewer, separate from the result's own name-link to the monster
-  (2026-07-19, user's own request).
-- `areas` — optional array of confirmed sub-area names within the monster's `maps` (e.g.
-  `["Necropolis", "North Gate"]` for a monster seen in more than one) — `areas` is for the
-  coarser, confirmed subdivision the user actually names; a more specific single-spot
-  callout belongs in prose on some other field instead. Treated as confirmed (the user
-  states it directly, same authority as a screenshot). Rendered on the monster card as an
-  "Area" field (the first field on the card now that "Map" itself is no longer shown — see
-  above), and included in `monsterSearchHaystack` so it's searchable. Does not affect
-  zone-grid grouping on the Monsters page — that's still driven by `maps` (specifically
-  `monsterZone()`, which reads `maps[0]`), not `areas`.
-- `levelRange` — a plain string like `"5-8"`, not a structured min/max, since every level
-  range the user adds is a guess, not a confirmed in-game value — kept as a free string
-  rather than numeric fields. **Con color reference:** in this game a White con means the
-  monster is the same level as the player looking at it — if the user reports a monster
-  conning White to a character of known level, that pins down that monster's level exactly,
-  strong enough to write directly into `levelRange` as a single number. The exact
-  level-difference each *other* con color represents isn't known yet (don't assume it maps
-  1:1 to EverQuest's scale) — a monster conning Yellow (higher level) to a character of
-  known level N is recorded as `"N+"` (an open lower bound), not a guessed exact number or
-  span. **Full con-color order confirmed:** low to high, Light Green, Light Blue, Dark Blue,
-  White, Yellow, Orange, Red — the same seven colors used for crafting recipe difficulty,
-  with "Light Green" standing in for that scale's plain "Green" as the trivial end. Confirmed
-  meanings: **Light Green** is trivial (no XP for the kill); **White** is same level as the
-  player (pins down an exact level); **Red** is much higher level, close to impossible to
-  solo. Light Blue/Dark Blue/Yellow/Orange's exact level-difference isn't known yet — record
-  what's actually known, don't invent a number a color alone doesn't confirm.
-  **`levelRange` display is currently hidden** on the site until a more reliable conning
-  method is found (same reasoning as the crafting difficulty badge removal) — the "Level
-  Range" column/sort/viewer-field are all gone from rendering, but **keep recording
-  `levelRange` in `monsters.json` as before** — this is a display-only removal, not a data
-  one. Revisit showing it again once/if a more reliable conning method exists.
-- `drops` — array of `{ "item": "Name As Shown" }`, exactly the same shape and dynamic-
-  linking convention as a recipe's `components`: matched against `items.json` by exact name
-  at render time (`findItemByName`/`goToItem`), clickable if a matching item exists yet,
-  plain text if not. Sourced from a loot-window screenshot paired with a plain item card per
-  icon — see the inbox workflow above.
-  **A drops entry can also be `{ "family": "Rusty Iron" }`** (added 2026-07-30) — a compact
-  alternative to writing out a quality-set family's full roster (up to 42 lines, see
-  "Quality-set drop inference" below) one `{ "item": ... }` per piece. Use this form for
-  every *new* quality-set backfill going forward — it's both far cheaper to write and
-  self-updating: `familyItemCount()` in `script.js` computes the displayed count from
-  `items.json`'s current roster at render time, so if a family later turns out bigger than
-  currently known (as happened with Corroded Bronze, 19 → 42), every monster referencing it
-  via `family` shows the corrected count automatically, with no monsters.json edit needed —
-  unlike the old expanded form, which needed every affected monster hand-edited when Rusty
-  Iron's Tower Shield and Corroded Bronze's missing 23 pieces were discovered. The compact
-  form is never partial — per the standing backfill rule, a monster confirmed dropping one
-  piece is assumed to drop the *entire* family, so `family` always means "the complete
-  current roster," full stop. `groupMonsterDrops()` (see below) treats old expanded entries
-  and new compact ones identically for display and for the item page's reverse "Dropped by"
-  lookup (`findMonstersDroppingItem`) — nothing needs migrating, but don't add new expanded
-  per-item family entries by hand anymore.
-- **`coinDrops`** — optional array of raw per-corpse coin observations,
-  `{ "silver": N, "copper": N }`, one entry per loot-log line actually seen (added
-  2026-07-30). Sourced from a loot-log chat screenshot (not the loot-window UI `drops`
-  comes from) — each qualifying line names the mob directly ("... from a Plagueborn
-  citizen's corpse..."), so a screenshot with several corpses of the same mob name yields
-  several observations straight onto that one monster entry. **Always record the TOTAL the
-  corpse dropped, never a player's own split of it** — a group loot line shows both, e.g.
-  "You loot 4 silver, and 15 copper coins from a Plagueborn citizen's corpse, and receive 1
-  silver, and 2 copper coins as your split." records `{"silver": 4, "copper": 15}` (the
-  total), not the 1s/2c split share, since the split depends on group size and isn't a
-  property of the mob at all. `averageCoinDrop(monster)` in `script.js` computes the average
-  silver/copper across every observation at render time — never stored back into
-  `monsters.json`, same "never persist a derived number" precedent as `itemRatio`/
-  `estimateRecipeSkill` elsewhere in this file, so it updates automatically as more
-  screenshots add observations. Shown on the monster card as "Average coin drop: X silver, Y
-  copper (N samples)" (`formatCoinAmount`, omits a denomination that averages to exactly 0).
-  No conversion between silver/copper/gold/platinum is assumed anywhere — every denomination
-  actually seen in a loot log is recorded and averaged on its own, since the exchange rate
-  between them isn't confirmed.
+- **`named`** — boolean, `true` for confirmed named/boss monsters. Explicit field (not
+  derived from casing) since several bosses use the same lowercase "a/the X" style as
+  regular trash — no reliable string-pattern signal.
+- `image` — creature picture, `images/Monsters/`, same `.jpg` q90 convention. Shown in the
+  monster viewer modal, not the table. **Only Named monsters/bosses get a picture** — a
+  generic monster with no `image` is normal, not a gap. **Replace-on-better-visibility:** a
+  new screenshot showing the creature more clearly overwrites the existing file — one
+  `image` slot, always an overwrite.
+- `maps` — array of map names seen on (usually one). Must match a real `maps.json` entry — a
+  named sub-area (e.g. "Necropolis" within "Night Harbor") goes in `areas` instead, not
+  appended into the map string. **Map field no longer shown on the monster card/table** —
+  redundant once you've drilled into that zone already; `maps`/`monsterZone()` still drive
+  everything structural (zone bucket, `goToMonster` routing, search). The one place a
+  monster's zone still shows as text is the top-level quick search, where it's a clickable
+  `goToMap` link.
+- `areas` — optional array of confirmed sub-areas (e.g. `["Necropolis", "North Gate"]`).
+  Confirmed = user states it directly, same authority as a screenshot. Rendered as an "Area"
+  field, included in search. Doesn't affect zone-grid grouping (`maps`/`monsterZone()` still
+  drive that).
+- `levelRange` — plain string (`"5-8"`), not min/max fields, since every value is a guess.
+  **Con color reference:** White con = same level as the player (pins an exact level).
+  **Full con-color order confirmed:** low→high, Light Green, Light Blue, Dark Blue, White,
+  Yellow, Orange, Red (same 7 as crafting difficulty, Light Green = trivial end). Confirmed
+  meanings: **Light Green** trivial (no XP); **White** same level (exact level); **Red** much
+  higher, near-impossible to solo. Other colors' exact level-difference unknown — a Yellow
+  con to a known-level character records as `"N+"` (open lower bound), not a guessed number.
+  **Display currently hidden** (until a more reliable conning method exists) — **keep
+  recording in monsters.json as before**, display-only removal.
+- `drops` — array of `{ "item": "Name As Shown" }`, same shape/dynamic-linking as a recipe's
+  `components` (`findItemByName`/`goToItem`, clickable if a match exists). Sourced from a
+  loot-window screenshot + item card per icon.
+  **A drops entry can also be `{ "family": "Rusty Iron" }`** — compact alternative to
+  writing out a quality-set family's full roster (up to 42 lines, see "Quality-set drop
+  inference" below). **Use this form for every new backfill going forward.**
+  `familyItemCount()` computes the displayed count from `items.json`'s current roster at
+  render time — so if a family turns out bigger later, every monster referencing it via
+  `family` shows the corrected count automatically, no monsters.json edit needed. Never
+  partial — a monster confirmed dropping one piece is assumed to drop the *entire* family,
+  so `family` always means "the complete current roster." `groupMonsterDrops()` treats old
+  expanded entries and new compact ones identically for display and the item page's reverse
+  "Dropped by" lookup (`findMonstersDroppingItem`) — nothing needs migrating, but don't add
+  new expanded per-item entries by hand.
+- **`coinDrops`** — optional array of raw per-corpse observations, `{ "silver": N, "copper":
+  N }`, one per loot-log line seen. Sourced from loot-log chat screenshots (not the
+  loot-window `drops` come from) — each line names the mob directly, so one screenshot with
+  several corpses of the same mob yields several observations. **Always the TOTAL the corpse
+  dropped, never a player's split of it** — a group loot line shows both ("You loot 4
+  silver, and 15 copper coins from a Plagueborn citizen's corpse, and receive 1 silver, and
+  2 copper coins as your split" → record `{"silver": 4, "copper": 15}`, the total, not the
+  1s/2c split). `averageCoinDrop(monster)` computes the average at render time — never
+  stored back. Shown as "Average coin drop: X silver, Y copper (N samples)"
+  (`formatCoinAmount`, omits a denomination averaging to 0). No conversion assumed between
+  silver/copper/gold/platinum — each denomination recorded and averaged on its own.
 - `relatedMonsters` — array of `{ "label": "Display Text", "slug": "other-monsters-slug" }`,
-  for a Named boss whose loot flavor text ties it to an existing generic mob (e.g. a wing
-  item whose flavor text names the bat boss it's said to come from). Rendered on the monster
-  card as a "Place Holder" field (the user's own label for this — literal display label, not
-  a placeholder in the "TODO" sense) with each `label` as a link to that other monster's own
-  viewer, same dynamic-resolves-at-render-time convention as `drops`/`components` (via
-  `findMonsterBySlug`) — renders as plain text if the referenced slug doesn't exist yet.
-  Optional; most monsters won't have this.
-- **`needsInfo`** — boolean, same meaning/rendering as `items.json`/`crafting.json`'s: a red
-  "NEEDS INFO" badge next to the name in a zone's list, a red note-plus-Submit-link on the
-  card (tooltip and modal both), and a "Show only monsters that need info" toggle in a zone
-  list's toolbar. **Not** about a missing *picture* specifically — a generic monster with no
-  `image` is the normal case per the Named-only picture policy above, not something to flag.
-  This is for a monster barely known at all yet: confirmed to exist (a name), with nothing
-  else recorded — no map, no drops, nothing. First used for "a bone carver", which had
-  nothing beyond `name`/`slug`.
+  for a Named boss whose loot flavor text ties it to an existing generic mob. Rendered as a
+  "Place Holder" field (user's own label), link resolves dynamically via `findMonsterBySlug`
+  — plain text if the slug doesn't exist yet. Optional, most monsters won't have this.
+- **`needsInfo`** — boolean, same meaning as items/crafting: red "NEEDS INFO" badge, red
+  note+Submit-link, "Show only monsters that need info" toggle. Not about a missing
+  *picture* (normal for generic monsters) — for a monster barely known at all: confirmed to
+  exist, nothing else recorded.
 
 ### Quality-set drop inference
 
-**Standing rule, stated by the user:** "If a monster drops 1 piece of an item quality set
-(like Rusty weapons or Tattered armor), assume that mob can drop any of the other items in
-that quality range." Applies automatically whenever new inbox data confirms a monster drops
-at least one item from a recognized quality-set family — doesn't need to be re-requested
-each time.
+**Standing rule:** "If a monster drops 1 piece of an item quality set (like Rusty weapons or
+Tattered armor), assume that mob can drop any of the other items in that quality range."
+Applies automatically whenever inbox data confirms ≥1 item from a recognized family — no
+need to re-request each time.
 
-- A "quality set" is identified by a shared name prefix denoting a tier/material, not a
-  literal in-game grouping. Confirmed families and their current known rosters:
-  - **Rusty** (18 pieces, weapons + Tower Shield): Axe, Battle Axe, Dagger, Great Scythe,
-    Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar, Scythe, Shortsword,
-    Spear, Tower Shield, Trident, War Lance, Warhammer. (A "Throwing Dagger" was listed here
-    in an earlier version of this doc, but no such item actually exists in items.json —
-    corrected 2026-07-30 rather than perpetuated.)
-  - **Tattered Cloth** (13 pieces, armor — grown from an originally-documented 9 as more
-    pieces turned up in later screenshots): Cap, Gorget, Pantaloons, Shirt, Gloves, Bracer,
-    Boots, Robe, Veil, Belt, Cape, Mantle, Tunic.
-  - **Tattered Rawhide** (8 pieces, armor): Gorget, Belt, Mask, Gloves, Bracer, Boots, Vest,
-    Shoulderpads.
-  - **Tattered Wool** (11 pieces, armor — grown from an originally-documented 7 once a
-    2026-07-30 Ancient Crypt batch turned up Boots/Robe/Gorget/Veil): Belt, Boots, Bracer,
-    Cap, Gloves, Gorget, Mantle, Robe, Shirt, Tunic, Veil. First backfilled 2026-07-30 onto
-    several Ancient Crypt skeletons (porter/soldier/acolyte/cook) and retroactively onto
-    Yezkiel the Gatekeeper, who'd only had the single Belt piece recorded until then.
-  - **Tattered Hide** (5 pieces, armor — grown from an originally-undocumented 4 once the
-    same batch turned up Leggings): Cap, Gorget, Leggings, Mask, Vest. First backfilled
-    2026-07-30 onto a skeletal soldier (Ancient Crypt) — this family existed in items.json
-    before this date but had never actually been recorded as dropping from any monster, and
-    was missing from `QUALITY_SET_FAMILIES` in `script.js` until this same pass added it.
-  - **Corroded Bronze** (42 pieces, weapons + Tower Shield + chain + plate armor — grown from
-    an originally-documented 19 once a 2026-07-30 Ancient Crypt batch confirmed the same full
-    Rusty-Iron-shaped roster applies here too): Axe, Battle Axe, Dagger, Great Scythe,
-    Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar, Scythe, Shortsword,
-    Spear, Tower Shield, Trident, War Lance, Warhammer; Chain Boots/Cloak/Coif/Gambeson/
-    Gloves/Gorget/Leggings/Mask/Shoulderguards/Tunic/Waistguard/Wristguard; Plate Arming
-    Doublet/Boots/Bracer/Breastplate/Cloak/Collar/Gauntlets/Girdle/Greaves/Helm/Pauldrons/
-    Visor. Retroactively backfilled 2026-07-30 onto every monster that had the old partial
-    roster (a Dustrend priest, a Dustrend foot soldier, a sly farmhand, a risen
-    thaumaturgist) plus newly onto Commander Mangles and a skeletal porter.
-  - **Rusty Iron** (42 pieces, weapons + Tower Shield + chain + plate armor — a distinct,
-    higher tier from plain "Rusty" above, not the same family under a longer name): Axe,
-    Battle Axe, Dagger, Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace,
-    Maul, Scimitar, Scythe, Shortsword, Spear, Tower Shield, Trident, War Lance, Warhammer;
-    Chain Boots/Cloak/Coif/Gambeson/Gloves/Gorget/Leggings/Mask/Shoulderguards/Tunic/
-    Waistguard/Wristguard; Plate Arming Doublet/Boots/Bracer/Breastplate/Cloak/Collar/
-    Gauntlets/Girdle/Greaves/Helm/Pauldrons/Visor. First backfilled 2026-07-30 onto several
-    Plagueborn-camp mobs (Fallen Pass), a sand giant fisher (Vale of Zintar), a veteran
-    brigand, a road captain, a grizzled raider, and Kallen Oison — Tower Shield itself wasn't
-    confirmed until a later screenshot in the same batch, at which point it was retroactively
-    backfilled onto every one of those monsters per the "newly-discovered piece backfills
-    retroactively" rule below.
-  - **Rusty Steel** (41 pieces, same shape as Rusty Iron but not item-for-item identical —
-    Rusty Iron has a Chain Gambeson that Rusty Steel doesn't; recorded verbatim rather than
-    assumed symmetric): Axe, Battle
-    Axe, Dagger, Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul,
-    Scimitar, Scythe, Shortsword, Spear, Tower Shield, Trident, War Lance, Warhammer; Chain
-    Boots/Cloak/Coif/Gloves/Gorget/Leggings/Mask/Shoulderguards/Tunic/Waistguard/Wristguard;
-    Plate Arming Doublet/Boots/Bracer/Breastplate/Cloak/Collar/Gauntlets/Girdle/Greaves/
-    Helm/Pauldrons/Visor. First backfilled 2026-07-30 onto a sand giant raider (Vale of
-    Zintar).
+A "quality set" = shared name prefix denoting a tier/material, not a literal in-game
+grouping. **Confirmed families and current rosters** (check longest-prefix-first — "Rusty
+Iron"/"Rusty Steel" before plain "Rusty" — so a Rusty Iron piece is never miscounted into
+plain Rusty, which it also textually starts with; "Rusty" vs "Rusty Iron" vs "Rusty Steel"
+are three separate families, don't merge or assume one's roster implies another's):
 
-  Treat a new shared prefix as its own family the same way if one shows up. **"Rusty" vs.
-  "Rusty Iron" vs. "Rusty Steel" are three separate families, not one family loosely
-  named** — same material word, different tiers, each with its own confirmed roster; don't
-  merge them or assume one's roster implies another's.
-- The backfill is **per-monster**, based on the *global* known roster of a family (not just
-  what that one monster's own screenshots have shown) — if a monster is newly confirmed
-  dropping one piece of a family, it gets every *other* piece of that family already known
-  from *any* monster, not just pieces it's personally been seen dropping. This also applies
-  retroactively: an existing monster that already dropped some pieces of a family gets any
-  newly-discovered pieces backfilled too, once those pieces become known via a different
-  monster's screenshot. **Mechanically, applying a backfill means adding one
-  `{ "family": "Name" }` entry to that monster's `drops`** (see the compact form documented
-  above) — not writing out the family's individual items one by one, which is both far more
-  expensive to produce and, unlike the compact form, has to be hand-corrected on every
-  affected monster whenever the family's own roster later turns out bigger than currently
-  known.
-- **The confirmed-vs-inferred distinction is no longer tracked anywhere (2026-07-17)** — it
-  used to be recorded in a `rumor` note listing which drops were directly screenshot-confirmed
-  vs. backfilled by this rule, but the `rumor` field was removed site-wide (user's own call,
-  once the "Submit a Screenshot" form's drop/spawn suggestion links gave visitors a real
-  channel for this kind of unconfirmed info instead of it living on the card itself). The
-  backfill rule above still applies exactly the same — inferred pieces still get added to
-  `drops` — there's just no longer a way to tell, from the data alone, which of a monster's
-  drops were confirmed firsthand vs. assumed from the family roster.
-- Items still need a real screenshot before getting a full `items.json` entry (stats aren't
-  guessed) — an inferred drop with no matching item just renders as unlinked plain text
-  until a card comes in, same as any other not-yet-added item name.
-- **A fully-backfilled family can make a monster's drop list unreadably long** (Rusty Iron
-  alone is 42 items) — `renderMonsterCardHTML` collapses these into a single grouped link
-  instead of listing every piece (2026-07-30, user's own request). `groupMonsterDrops(drops)`
-  in `script.js` splits a monster's `drops` into ordinary singles plus one entry per matched
-  `QUALITY_SET_FAMILIES` prefix (the same family list documented above, kept in sync with
-  it), rendered as `"<Family> (<N> items)"` — e.g. "Rusty Iron (42 items)" — in place of all
-  N individual `<li>`s. Clicking a family link calls `goToItemSearch(familyName)`, a thin
-  variant of `goToItemCategory` that pre-fills the Item Database's own search box with the
-  family name (e.g. `"Rusty Iron"`) rather than setting a Type/category — the existing
-  name-substring search already filters down to exactly that family with no new filter UI
-  needed, since every family name is a distinctive-enough prefix. A family with only one
-  drop on a given monster still renders as a group, not unwrapped to a plain item link —
-  grouping is by *kind*, not by count, so the link's meaning (and destination) stays
-  consistent everywhere it appears. `QUALITY_SET_FAMILIES` is checked longest-prefix-first
-  (`"Rusty Iron"`/`"Rusty Steel"` before plain `"Rusty"`) so a Rusty Iron piece is never
-  miscounted into the plain Rusty family it also textually starts with.
+- **Rusty** (18, weapons + Tower Shield): Axe, Battle Axe, Dagger, Great Scythe, Greatsword,
+  Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar, Scythe, Shortsword, Spear, Tower
+  Shield, Trident, War Lance, Warhammer.
+- **Tattered Cloth** (13, armor): Cap, Gorget, Pantaloons, Shirt, Gloves, Bracer, Boots,
+  Robe, Veil, Belt, Cape, Mantle, Tunic.
+- **Tattered Rawhide** (8, armor): Gorget, Belt, Mask, Gloves, Bracer, Boots, Vest,
+  Shoulderpads.
+- **Tattered Wool** (11, armor): Belt, Boots, Bracer, Cap, Gloves, Gorget, Mantle, Robe,
+  Shirt, Tunic, Veil.
+- **Tattered Hide** (5, armor): Cap, Gorget, Leggings, Mask, Vest.
+- **Corroded Bronze** (42, weapons + Tower Shield + chain + plate): Axe, Battle Axe, Dagger,
+  Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar, Scythe,
+  Shortsword, Spear, Tower Shield, Trident, War Lance, Warhammer; Chain Boots/Cloak/Coif/
+  Gambeson/Gloves/Gorget/Leggings/Mask/Shoulderguards/Tunic/Waistguard/Wristguard; Plate
+  Arming Doublet/Boots/Bracer/Breastplate/Cloak/Collar/Gauntlets/Girdle/Greaves/Helm/
+  Pauldrons/Visor.
+- **Rusty Iron** (42, same shape as Corroded Bronze): Axe, Battle Axe, Dagger, Great Scythe,
+  Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar, Scythe, Shortsword,
+  Spear, Tower Shield, Trident, War Lance, Warhammer; Chain Boots/Cloak/Coif/Gambeson/
+  Gloves/Gorget/Leggings/Mask/Shoulderguards/Tunic/Waistguard/Wristguard; Plate Arming
+  Doublet/Boots/Bracer/Breastplate/Cloak/Collar/Gauntlets/Girdle/Greaves/Helm/Pauldrons/
+  Visor.
+- **Rusty Steel** (41 — has a Tower Shield that Rusty Iron... has too, but no Chain
+  Gambeson unlike Rusty Iron; recorded verbatim, not assumed symmetric): Axe, Battle Axe,
+  Dagger, Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar,
+  Scythe, Shortsword, Spear, Tower Shield, Trident, War Lance, Warhammer; Chain Boots/Cloak/
+  Coif/Gloves/Gorget/Leggings/Mask/Shoulderguards/Tunic/Waistguard/Wristguard; Plate Arming
+  Doublet/Boots/Bracer/Breastplate/Cloak/Collar/Gauntlets/Girdle/Greaves/Helm/Pauldrons/
+  Visor.
+
+Treat a new shared prefix as its own family the same way. Rosters grow over time as new
+screenshots turn up pieces not previously known (e.g. Corroded Bronze: 19→42, Rusty Iron
+gained Tower Shield, Tattered Wool: 7→11) — when this happens, retroactively backfill the
+newly-discovered piece(s) onto every monster that already references that family.
+
+- Backfill is **per-monster**, based on the *global* known roster (not just what that
+  monster's own screenshots showed) — newly confirmed dropping 1 piece → gets every other
+  known piece too. Applies retroactively: an existing monster with partial pieces gets new
+  discoveries backfilled too. **Mechanically: add one `{ "family": "Name" }` entry** — not
+  individual items (expensive to produce, and unlike the compact form, needs hand-correction
+  on every monster whenever the roster grows).
+- No confirmed-vs-inferred distinction is tracked (removed 2026-07-17, superseded by the
+  Submit form's own suggestion links) — inferred pieces still get added to `drops`, just no
+  longer flagged as such.
+- Items still need a real screenshot for a full `items.json` entry — an inferred drop with
+  no matching item renders as unlinked plain text until a card comes in.
+- **A fully-backfilled family can make a drop list unreadably long** (Rusty Iron alone is 42
+  items) — `renderMonsterCardHTML` collapses these into one grouped link
+  (`"<Family> (<N> items)"`) via `groupMonsterDrops(drops)`, instead of listing every piece.
+  A family with only one drop on a given monster still renders as a group (grouping is by
+  *kind*, not count). Click calls `goToItemSearch(familyName)` — pre-fills the Item
+  Database's search box with the family name (existing substring search already filters to
+  exactly that family, no new filter UI needed).
 
 Hovering a monster's name (`.monster-name-hover`, `setupMonsterTooltip`) shows its card in a
-floating preview (`#monster-tooltip`) — same flip-above-if-no-room-below positioning as an
-item's own hover tooltip (`setupItemTooltip`). Unlike an item's tooltip, this one is
-clickable (2026-07-17, user's own call): clicking anywhere on the card opens the full
-`#monster-viewer` modal (built by `openMonsterViewer`/`setupMonsterViewer`, same shell/
-close-button pattern as `#item-viewer`) for a bigger picture and a clickable drop table;
-clicking a drop or "Place Holder" link inside the tooltip instead jumps straight there,
-same as it would from the modal. The tooltip also carries a small "Click for more info"
-hint at the bottom so this is discoverable (`renderMonsterCardHTML(monster, { isTooltip:
-true })` — the modal omits the hint, since it IS the destination the hint points to).
-Both the tooltip and the modal render the exact same markup via the shared
-`renderMonsterCardHTML(monster, opts)` (picture — or a dashed "No image yet" placeholder
-when the monster has none, same visual language as an item's — Map/Area/"Place Holder"/
-Drops/needsInfo fields). The tooltip is a DOM singleton reused across every zone list
-(like `#item-tooltip`), so which monster it's currently showing is tracked as a property on
-the element itself (`tooltip._monster`) rather than a variable closed over by
-`setupMonsterTooltip` — a local would go stale the moment a second zone list calls that
-function again with a fresh closure, while the click/mouseleave listeners registered the
-first time stay attached to the one shared element. Clicking a drop that links to an item sets
-`pendingReturnToMonster` before navigating to the Item Database (mirroring
-`pendingReturnToRecipe`) so that item's page shows a "&larr; Back to &lt;monster name&gt;"
-link; `goToItem`'s second argument takes either a recipe object (untagged, the original
-case) or `{ kind: 'monster', name, slug }`, distinguished by the `kind` tag so the two "back
-to" links never collide.
+floating preview (`#monster-tooltip`, flip-above-if-no-room-below like an item's). Unlike an
+item tooltip, this one's clickable — clicking anywhere opens the full `#monster-viewer`
+modal (`openMonsterViewer`/`setupMonsterViewer`, same shell as `#item-viewer`); clicking a
+drop or "Place Holder" link inside the tooltip jumps straight there instead. Tooltip has a
+"Click for more info" hint (modal omits it, since it IS the destination). Both render via
+shared `renderMonsterCardHTML(monster, opts)`. Tooltip is a DOM singleton reused across every
+zone list, tracked via `tooltip._monster` property (not a closure variable, which would go
+stale on a second zone list's fresh closure). Clicking a drop-linked item sets
+`pendingReturnToMonster` before navigating, for a "&larr; Back to `<monster name>`" link;
+`goToItem`'s second arg takes a recipe object or `{ kind: 'monster', name, slug }`.
 
-The Monsters page is wired into the header search box the same way Items/Crafting are — a
-"Monsters" results section, `goToMonster` navigating to the page and flashing the matched
-row (`pendingHighlightMonster`, same `row-flash` mechanism as an Item Database search
-result), also setting the zone-scoped hash so a search result lands directly in the right
-scoped list instead of the top-level category grid.
+Monsters page is wired into header search the same way Items/Crafting are — "Monsters"
+results section, `goToMonster` navigates + flashes the matched row
+(`pendingHighlightMonster`), sets the zone-scoped hash so results land in the right scoped
+list.
 
-**Gotcha worth remembering:** `goToMonster`'s zone fallback must match `monsterZone()`'s
-fallback exactly (`"Unknown Zone"`, not `null`/`undefined`) — a mismatch there caused
-`renderMonstersList` to call `escapeAttr(null)`, which throws and gets silently swallowed by
-`loadPage`'s catch block, surfacing as a blank "Page not found" instead of a visible JS
-error. Worth checking if a future pending-scope-style feature hits the same silent-failure
+**Gotcha:** `goToMonster`'s zone fallback must match `monsterZone()`'s fallback exactly
+(`"Unknown Zone"`, not `null`/`undefined`) — a mismatch caused `escapeAttr(null)` to throw,
+silently swallowed by `loadPage`'s catch, surfacing as blank "Page not found" instead of a
+visible error. Check this if a future pending-scope feature hits the same silent-failure
 shape.
 
 ## Adding a Beastmaster companion
 
-The Companions page (`pages.json` entry with `"type": "companions"`) shows every tamed-pet
-type the Beastmaster class can summon, rendered as item-card-style cards
-(`renderCompanionCardHTML` in `script.js`, reusing the plain gold `.item-card` styling — not
-the teal recipe variant, since companions aren't a crafted/tradeskill thing) rather than raw
-screenshots.
+Companions page (`pages.json` `"type": "companions"`) shows every tamed-pet type, rendered
+as item-card-style cards (`renderCompanionCardHTML`, reusing the plain gold `.item-card`
+style, not teal recipe variant) rather than raw screenshots.
 
-Two data files, both flat arrays like every other `*.json` in this repo:
+Two flat-array data files:
 
-- `companions.json` — one entry per tamed animal type: `name` (e.g. "A Bear Companion"),
-  `slug`, `animal` (a lowercase icon key), `observedAtLevel` (the pet's level in the
-  screenshot it was captured from — recorded as an observation, not asserted as a fixed
-  per-species level), and `skills` — an array of that companion's *own* unique ability/
-  abilities only.
-- `companion-skills.json` — the abilities every companion shares regardless of animal type:
-  **Provoke** (Martial Ability, threat generation) and **Bite** (Might Ability, physical
-  damage). Recorded once here instead of repeated on every companion entry, rendered as a
-  "Shared Abilities (Every Companion)" reference block above the companion grid.
+- `companions.json` — one entry per animal type: `name` (e.g. "A Bear Companion"), `slug`,
+  `animal` (lowercase icon key), `observedAtLevel` (recorded as an observation, not asserted
+  as fixed per-species), `skills` (that companion's own unique abilities only).
+- `companion-skills.json` — abilities every companion shares: **Provoke** (Martial Ability,
+  threat) and **Bite** (Might Ability, physical damage). Recorded once, rendered as a
+  "Shared Abilities (Every Companion)" block above the grid.
 
-A skill object (used in both files) is `{ name, type, description, castTime, cooldown, range
-}` — `type` is "Martial Ability" or "Might Ability" as shown on the ability tooltip, `range`
-is omitted for self-cast/no-range abilities. This intentionally drops boilerplate tooltip
-lines (Innate, Does Not Trigger Global Cooldown, etc.) true of every companion ability seen
-so far — only the fields that actually vary/matter for a reader are captured.
+Skill object (both files): `{ name, type, description, castTime, cooldown, range }` — `type`
+= "Martial Ability"/"Might Ability", `range` omitted for self-cast/no-range. Drops
+boilerplate tooltip lines (Innate, Does Not Trigger Global Cooldown) true of every ability —
+only what varies is captured.
 
-**Screenshots are not archived for this category, unlike items/recipes/monsters** — a pet's
-screenshot batch is several stacked UI windows (the Pet window plus one tooltip per ability),
-a reference capture rather than one clean per-entry card, so these are processed for their
-data and deleted from `images/inbox/` rather than moved anywhere (same precedent as a
-crafting-window screenshot).
+**Screenshots not archived for this category** — a pet's batch is several stacked UI windows
+(Pet window + one tooltip per ability), processed for data and deleted, not moved anywhere.
 
-**Icons:** four `ICON_DEFS`/`ICON_BG` keys (`bear`, `rat`, `crocodile`, `spider`) in the same
-flat-silhouette-in-a-colored-circle style as every other icon — a companion's card icon is
-just `svgIcon(companion.animal)`, no separate lookup table needed since `animal` doubles as
-the icon key directly. Add another animal key the same way when a new companion type comes in.
+**Icons:** `ICON_DEFS`/`ICON_BG` keys `bear`/`rat`/`crocodile`/`spider`, same
+flat-silhouette-in-circle style as everything else — card icon is `svgIcon(companion.animal)`
+directly (`animal` doubles as the icon key). Add another animal key the same way for a new
+type.
 
-The Companions page has its own local search box and is wired into the header search box the
-same way Monsters is (`goToCompanion`, `pendingHighlightCompanion`, `.card-flash` — a
-gold-accent flash animation, since `.recipe-flash`'s teal doesn't match a plain `.item-card`).
+Own local search box, wired into header search like Monsters (`goToCompanion`,
+`pendingHighlightCompanion`, `.card-flash` gold-accent animation since `.recipe-flash`'s
+teal doesn't match a plain `.item-card`).
 
 ## Sidebar "Most Visited Tradeskills"
 
-Below the main nav, the sidebar shows up to 5 tradeskills by visit count
-(`#sidebar-visits-wrapper`, built once in `buildSidebar` and refreshed by
-`updateVisitedSidebarSections` in `script.js`). Purely client-side — visits are recorded to
-`localStorage` (`PAGE_VISITS_KEY = 'mnmwiki-page-visits'`), never sent anywhere, so it only
-ever reflects the one browser it's running in (a small note under the list says as much).
-The whole block stays hidden (`display: none`) until at least one visit is recorded, and
-reuses the exact same group-heading + tree-line-nested-list markup as the "Tradeskilling"
-sidebar group so it reads as a natural part of the nav rather than a bolted-on widget.
+Below main nav, shows up to 5 tradeskills by visit count (`#sidebar-visits-wrapper`, built
+in `buildSidebar`, refreshed by `updateVisitedSidebarSections`). Client-side only — visits
+in `localStorage` (`PAGE_VISITS_KEY = 'mnmwiki-page-visits'`), never sent anywhere, one
+browser only (noted under the list). Hidden until ≥1 visit recorded, reuses the
+"Tradeskilling" group's markup style.
 
-**Tradeskills only — every other top-level page was dropped from tracking entirely
-(2026-07-19, user's own follow-up request).** An earlier version also tracked ordinary page
-visits (Item Database, Maps, Monsters, etc.) under a `"page"` kind, alongside "Recently
-Visited" (by last-visited-time) as a second list next to "Most Visited" (by count). Both were
-removed: "Recently Visited" was dropped from display first (2026-07-17, though its data kept
-being recorded in case it came back), then page-tracking itself was dropped entirely
-(2026-07-19) after the user reported visiting Herbalism a lot but never seeing it show up —
-diagnosed by actually reproducing it: everyday page browsing (Item Database, Maps, etc.)
-racks up counts fast enough to crowd tradeskills out of a shared top-5 list, which defeated
-the point of a *tradeskill* shortlist. Since only tradeskills are tracked now, they no longer
-compete with page visits for a slot at all.
+**Tradeskills only** — every other top-level page dropped from tracking entirely (full
+removal history in `CLAUDE-HISTORY.md`).
 
-**Tracks the deepest thing actually reached, not the top-level page passed through to get
-there** (user's own call, 2026-07-17) — browsing the Gathering or Crafting category grid
-without picking a tradeskill records nothing at all; drilling into e.g. Mining or Alchemy
-records that tradeskill specifically, never "Gathering"/"Crafting" themselves:
+**Tracks the deepest thing actually reached, not the top-level page passed through** —
+browsing the Gathering/Crafting category grid without picking a tradeskill records nothing;
+drilling into e.g. Mining or Alchemy records that tradeskill specifically:
 
-- `renderTradeskillSection` (shared by every tradeskill reached from either grid — the
-  Crafting grid's drill-down for ordinary tradeskills including Enchanting, the Gathering
-  grid's for Disenchanting) calls `recordVisit('craft', tradeskillName)` — this is the single
-  choke point for "landing on one tradeskill's own recipe list" regardless of which route got
-  you there.
-- `renderGatheringNodes` calls `recordVisit('gathering', tradeskillName)` the same way, for
-  Mining/Lumberjacking/Herbalism/Fishing.
-- `loadPage` itself no longer calls `recordVisit` at all — no page (Item Database, Maps,
-  Monsters, Companions, Useful Links, Submit a Screenshot, or the Crafting/Gathering grids
-  themselves) is tracked as a visit in its own right anymore.
+- `renderTradeskillSection` calls `recordVisit('craft', tradeskillName)` — single choke
+  point for "landing on one tradeskill's own recipe list" regardless of route.
+- `renderGatheringNodes` calls `recordVisit('gathering', tradeskillName)` the same way.
+- `loadPage` no longer calls `recordVisit` at all — no page in its own right is tracked.
 
-Each stored entry is `{kind, id, count, lastVisited}` keyed by `` `${kind}:${id}` ``:
-`kind: "craft"` (`id` = a tradeskill name — including Enchanting, opened with
-`goToCraftingCategory`, which already knows how to route each tradeskill to its actual page
-via `craftPageHash` — Disenchanting also stores as `"craft"`, since it still reaches
-`renderTradeskillSection` the normal way, even though `craftPageHash` sends it to the
-Gathering page), or `kind: "gathering"` (`id` = a gathering tradeskill name, opened with
-`goToGatheringCategory`). `resolveVisitEntry` is the one place that turns a stored entry into
-a display title + click action per its kind, and returns `null` for anything else — this is
-also what transparently drops any leftover `"page"`-kind entry still sitting in a returning
-visitor's `localStorage` from before 2026-07-19, with no separate migration/cleanup needed,
-since it simply stops resolving to anything and gets filtered out. `"craft"`/`"gathering"`
-entries aren't validated against `tradeskills.json`, since tradeskills essentially never get
-renamed/removed here and a stale one would just land on an empty tradeskill page, not error.
+Stored entry: `{kind, id, count, lastVisited}` keyed `` `${kind}:${id}` ``. `kind: "craft"`
+(`id` = tradeskill name, including Enchanting and Disenchanting — both still reach
+`renderTradeskillSection` normally even though `craftPageHash` sends Disenchanting to the
+Gathering page) or `kind: "gathering"`. `resolveVisitEntry` turns a stored entry into a
+display title + click action per kind, returns `null` for anything else — transparently
+drops any leftover `"page"`-kind entry from before 2026-07-19, no migration needed. Entries
+aren't validated against `tradeskills.json` (tradeskills essentially never get
+renamed/removed; a stale one just lands on an empty page, not an error).
 
-Active-link highlighting (`loadPage`'s `link.dataset.file === baseFile` check) doesn't apply
-here at all anymore now that every tracked kind is a tradeskill — a tradeskill's link is left
-permanently non-active rather than approximated, since there's no single top-level `baseFile`
-that would correctly highlight just *one* tradeskill's link without also lighting up every
-other tradeskill sharing that same hash page (`#crafting`/`#gathering`).
+Active-link highlighting doesn't apply here — a tradeskill's link is left permanently
+non-active rather than approximated (no single top-level `baseFile` correctly highlights
+just one tradeskill sharing `#crafting`/`#gathering`).
 
 ## Header search box
 
-The search box in the header (`#search-box`, wired up in `init()`) searches everything on
-the wiki, not just page titles — it also matches against `items.json` (reusing
-`itemSearchHaystack`, the same haystack the Item Database's own search box uses) and
-`crafting.json` (matching against recipe name + tradeskill). Results are grouped into
-Pages/Items/Crafting sections in the sidebar via `renderSearchResults`.
+Searches everything, not just page titles — also `items.json` (`itemSearchHaystack`) and
+`crafting.json` (name + tradeskill). Results grouped into Pages/Items/Crafting sections via
+`renderSearchResults`.
 
-Clicking an item or recipe result needs to land the user on the right spot on a page that
-doesn't exist yet (the Item Database or Crafting page haven't rendered). This is done with
-two module-level variables, `pendingItemQuery` and `pendingCraftingTradeskill`, set right
-before navigating and consumed (and cleared) by `renderItemsPage`/`renderCraftingPage` once
-they render — pre-filling the Item Database's own search box, or jumping straight to a
-specific tradeskill's recipe list instead of the category grid. If you add another
-data-driven page that should be reachable from header search, follow the same pattern
-rather than trying to encode extra state into the URL hash (the hash is a plain page-file
-lookup elsewhere in the code, so cramming query info into it would break that).
+Clicking an item/recipe result needs to land on a page that doesn't exist yet — two
+module-level variables, `pendingItemQuery` and `pendingCraftingTradeskill`, set before
+navigating, consumed (and cleared) by `renderItemsPage`/`renderCraftingPage` on render — pre-
+filling the search box, or jumping straight to a tradeskill's recipe list. A future
+data-driven page reachable from header search should follow the same pattern rather than
+encoding state into the URL hash (hash is a plain page-file lookup elsewhere).
 
-Items/crafting data is pre-fetched in the background during `init()` (via
-`ensureItemsData()`/`ensureCraftingData()`, the same helpers `renderItemsPage`/
-`renderCraftingPage` use) so header search works immediately, without requiring the user to
-have visited those pages first.
+Items/crafting data pre-fetched during `init()` (`ensureItemsData()`/`ensureCraftingData()`)
+so header search works before the user visits those pages.
 
 ## Item and recipe cards
 
-**Items and recipes are *displayed* as cards rendered entirely from JSON data — not
-screenshots.** The user compared the site to mnmquest.com's item popups, liked that
-approach better, and asked for an original (not copied) equivalent built from
-`items.json`/`crafting.json` instead of the game screenshot.
+**Items/recipes are *displayed* as cards rendered entirely from JSON — not screenshots**
+(original design, not modeled on any other site's popup).
 
-**As of 2026-08-04, the screenshot itself is no longer saved for new items/recipes** (user's
-own call) — earlier versions of this doc described it as an archived "receipt" JPEG kept
-purely for later re-verification, but the game gets rebalanced over time, so an old
-screenshot stops reliably representing an item's current state anyway, and archiving cost
-real disk/repo space for that fast-diminishing value. Items and recipes added before this
-date keep whatever `image` they already have (untouched, not being cleaned up) — this only
-changes what happens going forward: no `image` field, nothing saved to `images/items/`/
-`images/crafting/`, just delete the source screenshot once its data is in the JSON.
+**As of 2026-08-04, screenshots are no longer saved for new items/recipes** — game gets
+rebalanced over time, an old screenshot stops reliably representing current state, and
+archiving cost real disk/repo space. Pre-2026-08-04 entries keep whatever `image` they have.
+Cut-off/truncated screenshot text is a data-completeness question (did the missing text make
+it into the JSON before the source was discarded?) — see `To-Do/items-needing-text.txt`.
 
-Drawing a card from JSON alone was always the point of this whole redesign — the receipt
-was a nice-to-have on top, not load-bearing for the display itself, so dropping it doesn't
-change how a card renders. Cut-off/truncated screenshot text is still purely a
-data-completeness question (did the missing text make it into the JSON before the source was
-discarded?) — see `To-Do/items-needing-text.txt`, which tracks exactly that.
+**The renderer:** `renderItemCardHTML(item)`/`renderRecipeCardHTML(recipe)` build each
+card's HTML from scratch — header (type icon, name, badges), field grid (Slot/AC/Weight/
+Size etc., or Weight/Size for recipes), stat chips (`statEntries(item)`, also used by the
+table's `formatStats()`), Class/Race line, description/effect, items-only "Dropped by" line.
+Recipes list Components, each linked to the Item Database when a match exists.
 
-**The renderer:** `renderItemCardHTML(item)` (items) and `renderRecipeCardHTML(recipe)`
-(recipes) in `script.js` build the card's HTML from scratch each time it's shown — header
-(a type icon, the name, tag/tradeskill badges), a field grid (Slot/AC/Weight/Size/etc., or
-Weight/Size for recipes), a row of stat chips (STR/AC bonuses, resists, haste — via the
-shared `statEntries(item)` helper, also used by the table's plain-text `formatStats()`), a
-Class/Race line, description/effect text, and — items only — a "Found at" line (see below).
-Recipes additionally list Components, each one a link to the Item Database when a matching
-item exists (same `findItemByName` dynamic-linking pattern as before).
+**`needsInfo`** (items and recipes) = confirmed to exist, no real data yet. Shows a red "This
+item/recipe needs more info" note linking to `#submit`, plus a red "NEEDS INFO" badge on the
+table/card header. Item Database and Crafting page both have a needs-info toggle filter.
+Only set fields genuinely confirmed (weapon `skill`/`twoHanded`/`slot` can often be inferred
+from an established sibling type — never `damage`/`delay`/`weight`/`ac`).
 
-**`needsInfo`** (items and recipes both) marks an entry that's confirmed to exist — usually
-from a vendor listing or crafting-window sighting that gave only a name, no full stat card —
-but doesn't have real data yet. `renderItemCardHTML`/`renderRecipeCardHTML` show a red "This
-item/recipe needs more info" note (`.item-card-needs-info` in `style.css`) with a blue link
-to `#submit` (the submit link is deliberately blue rather than matching the surrounding red
-warning text, so it still reads as a clickable link), and the Item Database table/recipe
-card header both show a small red "NEEDS INFO" badge (`.badge-needs-info`) next to the name.
-The Item Database and Crafting page each have a red-styled toggle ("Show only items/recipes
-that need info" — `.needsinfo-toggle` in `style.css`) to filter down to just these entries.
-Only ever set fields that are genuinely confirmed on a `needsInfo` entry (e.g. a weapon's
-`skill`/`twoHanded`/`slot` can often be inferred safely from its name matching an already-
-established sibling weapon type — never its `damage`/`delay`/`weight`/`ac`, which actually
-vary and have no such safe inference).
+**Icon system:** header icon = colored circular badge — `ICON_DEFS[key]` glyph SVG, parallel
+`ICON_BG[key]` background hex, `svgIcon(key)` assembles both. Icon key derived from existing
+fields (no new schema field):
+- **Weapon** — `weaponIconKey(item)`: `skill` + `twoHanded` → 1H/2H ×
+  Bludgeoning/Slashing/Piercing, plus Archery/Throwing/Ammo, falls back to `slashing1h`.
+- **Armor** — `armorIconKey(item)`: name keyword "Plate"/"Chain"/"Rawhide"/"Hide"/"Leather"/
+  "Cloth" → material icon (shared tunic base, per-material texture layer); `slot ===
+  "Secondary"` or name containing "Shield"/"Buckler" → Shield icon instead (own category,
+  not a Material-dropdown option — a shield isn't a material tier). No keyword match →
+  generic armor icon.
+- **Jewelry** — `jewelryIconKey(item)`: Ring/Earring/Necklace from `slot` (Finger/Ear/Neck).
+- **Food/Drink/Container** — one fixed icon each.
+- **Misc (crafting materials)** — `craftingIconKeys(item)`: one icon per linked tradeskill in
+  `crafting.json`, left to right. No recipe link → generic raw-material icon.
+- **`TRADESKILL_ICON`** — every tradeskill in `tradeskills.json` (38) — recipe cards' header
+  icon uses this, falling back to the tradeskill's initial letter if none.
+- **`NAV_ICON`** — maps a `pages.json` `file` to one of the icons above, shown at 16px before
+  each sidebar link and "Most Visited" entry (a "craft"/"gathering" entry looks itself up in
+  `TRADESKILL_ICON` by tradeskill name instead). Most reuse an existing icon (Maps →
+  `navigation`, Crafting → its own glyph, Monsters → `boss`/`paw`, Companions → `wolf`) —
+  `links`/`itemdb`/`gatheringicon`/`submiticon` are the only four drawn from scratch. No
+  `NAV_ICON` entry → renders without an icon, no gap left (true for Enchanting/Disenchanting
+  now that they're cards, not separate pages).
 
-**Icon system:** each card's header icon is a colored circular badge — `ICON_DEFS[key]` holds
-glyph-only SVG markup, a parallel `ICON_BG[key]` map holds each icon's background hex color,
-and `svgIcon(key)` assembles the two into `<svg><circle fill="${bg}"/><g fill="#f3e9d6">
-${glyph}</g></svg>`. The icon key is picked by sub-type, derived entirely from fields items
-already have (no new schema field to keep in sync):
-- **Weapon** — `weaponIconKey(item)` reads `skill` + `twoHanded` to pick one of 1H/2H ×
-  Bludgeoning/Slashing/Piercing, plus Archery/Throwing/Ammo — falls back to `slashing1h` if
-  nothing matches.
-- **Armor** — `armorIconKey(item)` checks the name for "Plate"/"Chain"/"Rawhide"/"Hide"/
-  "Leather"/"Cloth" to pick a material icon (all four materials share a tunic-silhouette
-  base shape with a per-material treatment layered on top — chain gets a dot-grid texture,
-  plate gets a center groove + belt line, cloth gets longer sleeves and a flared hem,
-  leather is the plain short-sleeve tunic); `slot === "Secondary"` or a name containing
-  "Shield"/"Buckler" gets the Shield icon instead (shields are their own category, not a
-  material tier — deliberately *not* listed as a Material-dropdown option either, see
-  "Adding an item to the Item Database" above, since a shield isn't a material tier the way
-  Cloth/Leather/Chain/Plate are). Anything matching no keyword falls back to a plain armor
-  icon.
-- **Jewelry** — `jewelryIconKey(item)` picks Ring/Earring/Necklace from the existing `slot`
-  field (Finger/Ear/Neck).
-- **Food / Drink / Container** — one fixed icon each.
-- **Misc (crafting materials)** — `craftingIconKeys(item)` looks up every tradeskill the
-  item is linked to in `crafting.json` and shows one icon per tradeskill, left to right. A
-  material with no recipe link at all gets a generic raw-material icon.
-- **`TRADESKILL_ICON`** covers every tradeskill in `tradeskills.json` (all 38) — recipe
-  cards' own header icon uses the same lookup keyed by the recipe's tradeskill, falling back
-  to the tradeskill's initial letter if a tradeskill somehow has no dedicated icon.
-- **`NAV_ICON`** (2026-07-17, user's own call — "makes it easier to instantly spot the place
-  you want to go") maps a `pages.json` `file` to one of the icons above, shown at a shrunk-down
-  16px via `svgIcon()` before each sidebar nav link's name (`buildSidebar`) and before each
-  "Most Visited" entry (`updateVisitedSidebarSections` — a "craft"/"gathering" kind entry
-  there looks itself up in `TRADESKILL_ICON` instead, by tradeskill name, since its `id` is a
-  tradeskill rather than a page file). Most entries reuse an icon already built for something
-  else (Maps → `navigation`; Crafting → its own tradeskill glyph; Named/Regular Monsters → the
-  same `boss`/`paw` already used on their own category cards; Companions → `wolf`) rather than
-  needing a new one — `links`/`itemdb`/`gatheringicon`/`submiticon` are the only four glyphs
-  that had to be drawn from scratch, for Useful Links/Item Database/Gathering/Submit a
-  Screenshot respectively. A page with no `NAV_ICON` entry just renders without an icon (no
-  gap left behind) rather than erroring — true for Enchanting/Disenchanting now that they're
-  cards inside Crafting/Gathering rather than their own `pages.json` entries; their icon still
-  shows up correctly on their own tradeskill card and in "Most Visited" via `TRADESKILL_ICON`.
+**Gotcha:** a filled ring/hoop drawn via one SVG arc sweeping almost 360° renders broken in
+Chrome — use two-arc-per-circle construction (`M (cx-r) cy A r r 0 1 0 (cx+r) cy A r r 0 1 0
+(cx-r) cy Z`, outer+inner each from two semicircle arcs) with `fill-rule="evenodd"` instead
+(what `ring`/`earring` use). (Icon system's redesign history: `CLAUDE-HISTORY.md`.)
 
-The icon set went through four visual redesign passes (silhouette → outline → solid →
-colored-badge, chasing a series of increasingly precise reference sheets the user provided)
-before landing on the current colored-badge system above — only the final state matters
-going forward. One gotcha from that process worth remembering for any future icon work:
-drawing a filled ring/hoop via a single SVG arc that sweeps *almost* 360° (a common
-"full circle from one arc" trick) renders incorrectly in Chrome (a broken/partial shape) —
-use the two-arc-per-circle construction (`M (cx-r) cy A r r 0 1 0 (cx+r) cy A r r 0 1 0
-(cx-r) cy Z`, outer and inner circle each built from two semicircle arcs) with
-`fill-rule="evenodd"` instead, which is what `ring`/`earring` use now.
+**Category label:** small muted line under the item name (e.g. "Greataxe", "Plate Armor") —
+`itemCategoryLabel(item)` reuses the same `itemIconKeys(item)` the icon is built from (via
+`ICON_LABELS`), so icon and label can never disagree. Items only.
 
-**Category label:** a small muted line under the item's name on its card shows the same
-sub-type in words (e.g. "Greataxe", "Plate Armor", "Blacksmithing Material") —
-`itemCategoryLabel(item)` reuses the exact same `itemIconKeys(item)` the icon itself is
-built from (via a shared `ICON_LABELS` lookup), so the icon and the text label can never
-disagree with each other. Items only — recipe cards don't get this, since their tradeskill
-is already shown as a badge.
-
-**Item cards use the gold `--accent`; recipe cards use the teal `--accent-craft`, with the
-recipe's own name colored teal and its tradeskill shown as a badge where an item card would
-show its tags.** Keep this color split if you touch either card type, since it's the only
-thing keeping the two visually distinct given they otherwise share the exact same card
-structure (`.item-card` base class, with `item-card-recipe`/`item-card-icon-recipe`/
-`item-card-name-recipe`/`badge-tag-craft` modifiers for the recipe variant).
+**Item cards use gold `--accent`; recipe cards use teal `--accent-craft`**, recipe name
+colored teal, tradeskill shown as a badge where an item card shows tags — only thing keeping
+the two visually distinct (`.item-card` base, `item-card-recipe`/`item-card-icon-recipe`/
+`item-card-name-recipe`/`badge-tag-craft` modifiers).
 
 **Where cards appear:**
-- Hovering any `.item-name-hover` element (an Item Database row, a linked recipe name, or a
-  linked recipe component) shows the matched item's card in a floating tooltip
-  (`#item-tooltip`, positioned by `setupItemTooltip` — flip-above-if-no-room-below), looked
-  up by name (`data-alt` + `findItemByName`) every time, never a cached image path.
-- Clicking an item's name in the Item Database opens `#item-viewer`, a modal built by
-  `openItemViewer`/`setupItemViewer`, showing the same card at a larger size plus the
-  "Crafted via" / "Used to craft" section (two reverse lookups against `crafting.json`,
-  `findRecipeForItem`/`findRecipesUsingItem`). `#item-viewer-panel` caps at `max-height: 88vh`
-  with `overflow-y: auto` as a safety net, since a rendered card can't be taller than its
-  content. The close button lives on the overlay itself, since the card has no separate
-  header bar to anchor it to.
-- Every recipe on the Crafting page renders as its own card directly in the page (no
-  hover/click needed — weight/size/components are always visible in the grid).
+- Hovering `.item-name-hover` (Item DB row, linked recipe name/component) → floating tooltip
+  (`#item-tooltip`, `setupItemTooltip`, flip-above-if-no-room), looked up by name every time
+  (never a cached image path).
+- Clicking an item name in the Item Database → `#item-viewer` modal
+  (`openItemViewer`/`setupItemViewer`), larger card + "Crafted via"/"Used to craft"
+  (`findRecipeForItem`/`findRecipesUsingItem`). `#item-viewer-panel` caps `max-height: 88vh`
+  + `overflow-y: auto`. Close button on the overlay (no separate header bar).
+- Every Crafting-page recipe renders as its own card directly in the grid.
 
-**"Show item cards" toggle** (2026-07-20, user's own request) — a single site-wide on/off
-switch (default on) for whether hovering `.item-name-hover` pops up `#item-tooltip` at all.
-Backed by one shared `localStorage` key (`mnmwiki-show-item-cards`,
-`getShowItemCards()`/`setShowItemCards()` in `script.js`), not a per-page setting, so the
-toggle switch itself is just markup (`showCardsToggleHTML(id)`) dropped into whichever
-toolbar needs it, wired up with `setupShowCardsToggle(container, id)` — currently present on
-the Item Database, the Crafting/Gathering recipe view (`renderTradeskillSection`), the
-Gathering nodes table, and the Named/Regular Monsters zone list, i.e. every toolbar whose
-content can trigger an item-card hover preview (including indirectly — a monster's own
-tooltip can contain drop links that would otherwise show a nested item card). Turning it off
-only silences the automatic hover popup (`setupItemTooltip`'s `mouseover` handler bails early
-via `getShowItemCards()`) — it does **not** disable clicking an item's name to open the full
-`#item-viewer` modal, since that's a deliberate action rather than an incidental hover. Styled
-like `.needsinfo-toggle` (same pill-switch shape) but in the site's normal accent color rather
-than that toggle's red, since this is a plain display preference, not a warning state.
+**"Show item cards" toggle** — site-wide on/off (default on) for hover-popup, backed by
+`localStorage` key `mnmwiki-show-item-cards` (`getShowItemCards()`/`setShowItemCards()`).
+Markup (`showCardsToggleHTML(id)`) + wiring (`setupShowCardsToggle(container, id)`) dropped
+into any toolbar that can trigger a hover preview: Item Database, Crafting/Gathering recipe
+view, Gathering nodes table, Named/Regular Monsters zone list. Off only silences the
+automatic hover popup — doesn't disable clicking to open the full `#item-viewer` (deliberate
+action, not incidental hover).
 
-**`item.foundAt`** is an optional free-text string ("Quest reward: \<quest name\>", or any
-other non-monster source) shown on every item card's **"Dropped by"** line (renamed from
-"Found at" 2026-07-30) — present or not, the line always renders (as "not yet known" when
-absent), so the field's existence is visible and the layout doesn't shift once it's filled
-in. **This line now leads with a live reverse lookup, not just `foundAt`'s free text:**
-`findMonstersDroppingItem(itemName)` in `script.js` scans every monster's own `drops` array
-(named or regular alike) for this item, same convention as `findRecipeForItem`/
-`findRecipesUsingItem`'s reverse crafting lookups just above it, and lists each match as a
-clickable link to that monster (only in the full item viewer — `opts.interactive` — never the
-hover tooltip, same reasoning as the "Wrong or missing info?" link: `#item-tooltip` is
-`pointer-events: none`, so a link there would be visible but unclickable). Any `foundAt` text
-still appears too, appended after the monster links — an item can be both a confirmed drop
-*and* have its own free-text note (e.g. a quest reward). If neither applies, still shows "not
-yet known" as before. Nothing new to set on the monster side — this is purely a render-time
-lookup against `monsters.json`'s existing `drops`, not a new field to keep in sync.
+**`item.foundAt`** — optional free-text ("Quest reward: `<quest name>`", any non-monster
+source) on the card's **"Dropped by"** line — always renders ("not yet known" when absent).
+**This line leads with a live reverse lookup:** `findMonstersDroppingItem(itemName)` scans
+every monster's `drops` for this item (same convention as the crafting reverse lookups just
+above it), lists each match as a clickable link (only in the full item viewer —
+`opts.interactive` — never the hover tooltip, since `#item-tooltip` is `pointer-events:
+none`). Any `foundAt` text still appears too, appended after monster links. Purely a
+render-time lookup, nothing new to set on the monster side.
 
-**There is no `rumor` field anymore (removed site-wide 2026-07-17, user's own call)** — it
-used to hold unconfirmed guesses (where an item might drop, where a monster might spawn,
-data-provenance caveats) separately from confirmed fields like `foundAt`, rendered in an
-amber "Rumor (unverified)" line. Once the "Submit a Screenshot" form grew a proper
-drop/spawn suggestion path (an item's or a named monster's "Wrong or missing info?" link —
-see "Community submissions" below), that on-card unverified
-note became redundant with it, so it was dropped entirely: don't add a `rumor` field to a
-new item/monster, and don't reintroduce `.item-card-section-rumor` styling if this area gets
-touched again. Genuinely unconfirmed info now belongs in a submission through that form, not
-written directly onto the item/monster's own card.
+**No `rumor` field** (removed site-wide 2026-07-17) — used to hold unconfirmed guesses
+separately from confirmed fields, rendered as an amber line. Superseded by the Submit
+form's drop/spawn suggestion path — don't add a `rumor` field or reintroduce
+`.item-card-section-rumor` styling. Genuinely unconfirmed info belongs in a form submission,
+not written directly onto the card.
 
-**`item.readText`** is the full text of a readable note/letter item, distinct from
-`description` (the card's own short flavor line) — `readText` is the longer content revealed
-only after actually reading the note in-game. Rendered as its own section
-(`.item-card-section-note`, quoted-letter style: italic with a left accent border) labeled
-"Note text", right after the flavor/effect section. Preserve the note's own paragraph breaks
-by embedding literal `\n` characters in the JSON string — `renderItemCardHTML` converts each
-`\n` to `<br>` after escaping (this is the one field where that matters). Also included in
-`itemSearchHaystack` so note contents are searchable. Use this same field for any future
-readable book/letter/scroll item.
+**`item.readText`** — full text of a readable note/letter, distinct from `description`
+(short flavor line) — only revealed after reading the note in-game. Own section
+(`.item-card-section-note`, italic quoted-letter style with left accent border), labeled
+"Note text", right after flavor/effect. Preserve paragraph breaks via literal `\n` in the
+JSON string (`renderItemCardHTML` converts to `<br>` after escaping — the one field where
+this matters). Included in `itemSearchHaystack`. Use for any future readable book/letter.
 
 ### `lastUpdated` — a "Last updated" badge, plus a site-wide "Recently Updated" list
 
-Added 2026-07-19 (user's own request: "a small but visible 'last updated' on any entry, item
-or crafting", plus a sidebar list of what's recently changed). `lastUpdated` is an optional
-plain `"YYYY-MM-DD"` string (same date-string convention used elsewhere in this file, e.g.
-`observedAtSkill`'s screenshot dates) on an entry in `items.json`, `monsters.json`,
+Optional plain `"YYYY-MM-DD"` string on an entry in `items.json`, `monsters.json`,
 `crafting.json`, or `companions.json`.
 
-- **Whenever you add a new entry, or edit an existing one's real data** (stats, drops,
-  components, description, image, — anything that isn't purely this field itself), **set
-  `lastUpdated` to today's date.** This applies across the normal add-a-new-entry workflows
-  above and to any inbox-batch processing. It's the one field that's expected to change on an
-  edit rather than only be set once at creation.
-- **Don't** set/bump it for a change that isn't about the entry's own content — e.g.
-  reformatting, or a schema-wide script.js/CSS change that happens to touch how every card
-  renders. It tracks "when was this entry's information last updated," not "when was this
-  JSON file last touched."
-- Rendered as a small muted "Last updated: \<date\>" line via `formatLastUpdated()` in
-  `script.js` (`.last-updated-badge` in `style.css`) on every item/recipe/monster/companion
-  card, right under the name — present or entirely absent, same as `item.foundAt`'s
-  "not yet known" pattern elsewhere, except here an unset value just renders nothing at all
-  rather than a placeholder, since most pre-2026-07-19 entries don't have one and won't
-  ever get a real backfilled date (see below) — showing a placeholder on all of them would
-  be more misleading than showing nothing.
-- **The sidebar's "Recently Updated" box** (`updateRecentlyUpdatedSidebar()` in `script.js`,
-  its own bordered box right below "History" — a *separate* box, not a section nested inside
-  it, since History is the visitor's own per-browser visit tracking while this is site-wide
-  content freshness, the same for every visitor) lists the 6 entries across all four files
-  with the newest `lastUpdated` (originally 10, cut down 2026-07-20 — a 10-entry list was
-  tall enough to force the whole sidebar into its own internal scrollbar, which this box's
-  own layout doesn't otherwise expect), each a clickable link (via the existing `goToItem`/
-  `goToMonster`/`goToRecipe`/`goToCompanion`) straight to that entry. Ties (common, since a
-  whole inbox batch usually shares one date) break on the entry's position within its own
-  data file, later = more recent. Hidden entirely if nothing has a `lastUpdated` yet.
-- **Backfilled once, retroactively, for recent history only — not attempted for the whole
-  site.** Mining exact "last touched" dates per entry from git history is only cheaply
-  reliable for a commit that actually added the entry (new `"slug"` line in the diff) — an
-  edit to an already-existing entry's other fields doesn't necessarily touch its `slug` line,
-  so it can't be found the same way without expensive/unreliable heuristics. The initial
-  rollout backfilled every entry touched by commits from 2026-07-18 and 2026-07-19 (the
-  session immediately preceding this feature) by matching added `"slug"` lines per commit to
-  that commit's date; everything older simply has no `lastUpdated` at all rather than a
-  guessed one. This is intentionally the same "starts fresh, builds up over time" precedent
-  as the "Most Visited Tradeskills" visit tracking — don't try to backfill further into
-  history if this area gets touched again; just keep setting the field going forward per the
-  rule above.
+- **Set to today's date whenever you add a new entry or edit an existing one's real data**
+  (stats, drops, components, description, image — anything beyond the field itself). Applies
+  to normal add-entry workflows and inbox-batch processing.
+- **Don't** bump for a change not about the entry's own content (reformatting, a
+  schema-wide script.js/CSS change touching how every card renders).
+- Rendered as "Last updated: `<date>`" (`formatLastUpdated()`, `.last-updated-badge`) under
+  the name on every card — absent entries render nothing (most pre-2026-07-19 entries have
+  none and won't get a backfilled date).
+- **Sidebar's "Recently Updated" box** (`updateRecentlyUpdatedSidebar()`, own bordered box
+  below History — site-wide content freshness, not per-visitor tracking) lists the 6 newest
+  `lastUpdated` entries across all four files, each a clickable link. Ties break on position
+  within the data file, later = more recent. Hidden entirely if nothing has `lastUpdated`.
+- **Backfilled once, retroactively, for recent history only** — mining exact dates from git
+  history is only reliable for a commit that added an entry (new `"slug"` line in the diff);
+  an edit to other fields doesn't necessarily touch the slug line. Initial rollout backfilled
+  entries touched by the two commits immediately preceding this feature; everything older has
+  no `lastUpdated` rather than a guessed one. Same "starts fresh, builds up over time"
+  precedent as visit tracking — don't try to backfill further if this area gets touched
+  again, just keep setting the field going forward.
 
 ## Known CSS gotchas
 
-`.content-inner img` (in `style.css`) sets `display: block` on every image rendered inside
-page content, with specificity `(0,1,1)`. A bare class selector like `.some-class` has
-specificity `(0,1,0)` and will lose to it silently. If a new img-related style in the
-Item Database (or a future feature) doesn't seem to apply, check this first — either raise
-specificity (`.content-inner .my-class`) or, more robustly, control visibility via inline
-styles set from JS rather than relying on a CSS class toggle.
+`.content-inner img` sets `display: block` at specificity `(0,1,1)`. A bare class selector
+like `.some-class` is `(0,1,0)` and loses silently. If a new img-related style doesn't seem
+to apply, check this first — raise specificity (`.content-inner .my-class`) or control
+visibility via inline styles from JS instead of a CSS class toggle.
 
-**`.layout` needs an explicit `width: 100%`.** `.layout` is `display: flex` with
-`align-items: flex-start` (needed for the desktop sidebar+content row so the sidebar column
-doesn't stretch to content's height), and also has `margin: 0 auto` for its `max-width: 1600px`
-desktop-centering trick, while itself being a flex item of `<body>` (the sticky-footer
-trick). Per the flexbox spec, **left/right `auto` margins on a flex item suppress cross-axis
-`align-items: stretch`** — with stretch suppressed, `.layout`'s width falls back to
-shrink-to-fit sizing based on its children's content instead of filling `body`'s width,
-which is unstable and most visible right after a client-side re-render swaps in different
-`.content-inner` HTML (clicking through Item Database → Armor → Cloth reproduced it
-reliably; a fresh page load usually looked fine, which made this hard to pin down). Fixed by
-giving `.layout` an explicit `width: 100%` — a definite width isn't subject to the
-stretch-vs-shrink-to-fit ambiguity at all. If any other element ever needs `margin: 0 auto`
-centering while also being a flex item of a flex container, give it an explicit `width: 100%`
-(or a definite width) for the same reason — don't rely on `align-items: stretch` alone once
-auto margins are involved. (An earlier, narrower patch — `align-items: stretch` inside the
-mobile media query only — masked the symptom at ≤900px without addressing the same bug at
-wider widths; it's harmless and still in place, but the `width: 100%` fix above is what
-actually matters.)
+**`.layout` needs an explicit `width: 100%`.** `.layout` is `display: flex` +
+`align-items: flex-start` (desktop sidebar+content row) + `margin: 0 auto` (1600px
+desktop-centering) while itself a flex item of `<body>` (sticky-footer trick). Per the
+flexbox spec, left/right `auto` margins on a flex item suppress cross-axis `align-items:
+stretch` — width falls back to shrink-to-fit based on children's content, unstable
+especially right after a client-side re-render swaps `.content-inner` HTML. Fixed with an
+explicit `width: 100%` (a definite width isn't subject to the ambiguity). Any element
+needing `margin: 0 auto` centering while also a flex item needs the same explicit width —
+don't rely on `align-items: stretch` alone once auto margins are involved.
 
-**A sticky sidebar needs its own height capped to the viewport, not just `position: sticky`.**
-`.layout`'s height (as a flex row with `align-items: flex-start`) is the *taller* of
-`.sidebar` and `.content` — it does not grow to accommodate the sidebar on top of content's
-own height. `position: sticky` can only keep an element pinned for as long as its containing
-block (`.layout` here) is taller than the element itself by at least its `top` offset,
-so whenever the sidebar's own height gets close to (or exceeds) `.content`'s height on a
-given page, that "room to travel" shrinks toward zero and the sidebar stops sticking almost
-immediately, scrolling away with the page instead — reported by a tester 2026-07-17 ("panel
-disappears off the top instead of following along"), reproduced directly on the Crafting
-page's short category grid (sidebar taller than that page's content left ~zero sticky room
-at 1920x1080), though *not* reproduced on taller-content pages like the Maps grid, where
-sticky already worked fine both before and after this fix — so if a similar report ever comes
-back for a page with substantially more content than that, there's likely a second cause
-still to find. Fixed by giving `.sidebar` `max-height: calc(100vh - 76px - 20px)` (76px
-matches its own `top` offset) plus `overflow-y: auto` (with a themed scrollbar via
-`scrollbar-color`/`::-webkit-scrollbar-*`) — this guarantees the sidebar itself can never
-exceed viewport height, which is the one thing that's fully within this element's own
-control regardless of how tall it keeps growing (Tradeskilling group, the Named/Regular
-Monsters split, the History box) or how short a given page's content is. `align-self:
-flex-start` was added alongside this as a harmless, unrelated hardening measure — it wasn't
-shown to be part of the actual cause.
+**A sticky sidebar needs its own height capped to the viewport, not just `position:
+sticky`.** `.layout`'s height (flex row, `align-items: flex-start`) is the *taller* of
+`.sidebar`/`.content`, doesn't grow to accommodate the sidebar atop content's own height.
+`position: sticky` can only pin for as long as the containing block is taller than the
+element by at least its `top` offset — when the sidebar's height approaches/exceeds
+content's, that room shrinks toward zero and sticky stops almost immediately. Reproduced on
+the Crafting page's short category grid (sidebar taller than content left ~zero sticky
+room). Fixed via `.sidebar { max-height: calc(100vh - 76px - 20px); overflow-y: auto; }`
+(themed scrollbar via `scrollbar-color`/`::-webkit-scrollbar-*`) — guarantees the sidebar
+itself can never exceed viewport height, the one thing fully within its own control
+regardless of content height on either side. `align-self: flex-start` added alongside as
+harmless hardening (not shown to be part of the actual cause).
 
 ## Mobile / narrow-viewport layout
 
-Three changes, all scoped to media queries so desktop (>900px) is untouched:
+Three changes, scoped to media queries (desktop >900px untouched):
 
 - **Structural breakpoint at 900px** (`.layout { flex-direction: column }`, sidebar
-  stacking, table/column-width tweaks) — raised from an earlier 780px, which left an awkward
-  dead zone where the sidebar still took its fixed 230px desktop column width alongside
-  content, squeezing everything into a cramped single column even at widths that weren't
-  really "mobile" by any reasonable definition.
-- **The `.layout` width fix above** — the actual root cause of a "looks absolutely awful in
-  tall narrow format" report, not just the breakpoint threshold.
-- **Sidebar nav in stacked mode restyled as rounded pill chips** (`.sidebar-link` gets a
-  background + `border-radius: 20px` inside the mobile query) instead of plain wrapped
-  text, so the flex-wrap nav row reads as tappable buttons rather than loose floating words.
-- **`@media (max-width: 480px)` tier** for real phone widths: tighter padding at every layer
-  (`.layout`, `.sidebar`, `.content`, `.content-inner`, `.header-inner`) so panels sit close
-  to the screen edges instead of floating as small islands surrounded by background art,
-  plus `background-attachment: scroll` (the site-wide fixed background is known to be
-  janky/inconsistent on mobile browsers, and pointless once panels fill nearly the whole
-  viewport anyway).
+  stacking, table/column-width tweaks) — raised from 780px, which left a dead zone where the
+  sidebar still took its fixed 230px column alongside content.
+- **The `.layout` width fix above** — the actual root cause of a narrow-format layout bug,
+  not just the breakpoint threshold.
+- **Sidebar nav in stacked mode = rounded pill chips** (`.sidebar-link` gets background +
+  `border-radius: 20px`) instead of plain wrapped text, reads as tappable buttons.
+- **`@media (max-width: 480px)`** for phone widths: tighter padding at every layer
+  (`.layout`, `.sidebar`, `.content`, `.content-inner`, `.header-inner`), plus
+  `background-attachment: scroll` (fixed background is janky on mobile browsers, pointless
+  once panels fill nearly the whole viewport anyway).
 
 ## Splash screen
 
-A full-viewport gate (`#splash-screen` in `index.html`) shows in front of everything on
-every fresh page load — the site's actual name, "Petrichor's Monsters and Memories Wiki",
-lives here (the header/`<title>` still just say "Game Wiki", untouched). Background art is
-`images/splash-hero.jpg`, converted from a `.webp` the user dropped in `images/Inbox/` —
-**note for future sessions: `System.Drawing` (GDI+) cannot load `.webp` at all ("Out of
-memory" is the misleading error it throws for an unsupported format), but
-`System.Windows.Media.Imaging.BitmapDecoder` (WPF, `Add-Type -AssemblyName
-PresentationCore`) can, since it goes through the OS's WIC codecs instead — use that path
-(`BitmapDecoder` to load, `JpegBitmapEncoder` to save) for any future `.webp` input instead
-of the usual `System.Drawing` crop/convert helper.**
+Full-viewport gate (`#splash-screen` in `index.html`) on every fresh load — site's actual
+name "Petrichor's Monsters and Memories Wiki" lives here (header/`<title>` still say "Game
+Wiki", untouched). Background: `images/splash-hero.jpg`.
+**Note for future `.webp` input:** `System.Drawing` (GDI+) can't load `.webp` at all ("Out of
+memory" is the misleading error) — use `System.Windows.Media.Imaging.BitmapDecoder` (WPF,
+`Add-Type -AssemblyName PresentationCore`) instead, goes through OS WIC codecs
+(`BitmapDecoder` to load, `JpegBitmapEncoder` to save).
 
-Clicking **Enter** adds a single `.site-entered` class to `<body>` (`setupSplashScreen()` in
-`script.js`) — everything else is driven off that one class in CSS: the splash fades out
-while the sidebar simultaneously slides in from the left (`transform`, not `display`/layout
-properties, so there's no content-column jump — the splash screen is what hides the
-mid-animation state from view). `body:not(.site-entered) { overflow: hidden }` blocks
-background scrolling while the splash is up.
+Clicking **Enter** adds `.site-entered` to `<body>` (`setupSplashScreen()`) — everything else
+driven off that class in CSS: splash fades out while sidebar slides in from the left
+(`transform`, not display/layout, so no content-column jump). `body:not(.site-entered) {
+overflow: hidden }` blocks background scrolling while splash is up.
 
-**Deliberately shows on every load, not just once per visitor** — no `sessionStorage`/
-`localStorage` "already entered" check. This was the simplest reading of the request;
-revisit only if the user says the repetition is annoying.
+**Shows on every load, not just once per visitor** — no session/localStorage "already
+entered" check (deliberate simplest reading of the original request; revisit only if the
+user says the repetition is annoying).
 
 ## Layout width
 
-`.layout`/`.header-inner` cap at 1600px so the site doesn't stretch edge-to-edge on huge
-monitors, but still uses most of the screen on normal ones. `.content-inner` is capped at
-~820px for prose pages (readable line length), but data-driven pages (Item Database, Maps,
-Crafting, Monsters) get a `content-wide` class toggled from `loadPage()` in `script.js` that
-removes the cap — add that class (or extend the same `page.type` check) for any future
-full-width page rather than raising the prose cap.
+`.layout`/`.header-inner` cap at 1600px (uses most of the screen on normal monitors, doesn't
+stretch edge-to-edge on huge ones). `.content-inner` caps ~820px for prose pages (readable
+line length); data-driven pages (Item Database, Maps, Crafting, Monsters) get a
+`content-wide` class toggled from `loadPage()` that removes the cap — extend the same
+`page.type` check for any future full-width page.
 
-The Item Database table uses `table-layout: fixed` with an explicit `<colgroup>` (percentage
-widths, set in `renderItemsPage`) and no `white-space: nowrap`, so long cells (Classes,
-Stats) wrap onto multiple lines instead of forcing horizontal scroll. If you add a column,
-add a proportional `<col>` for it rather than letting the browser auto-size columns —
-auto-sizing is what caused the original horizontal-scroll problem.
+Item Database table: `table-layout: fixed` + explicit `<colgroup>` (percentage widths in
+`renderItemsPage`), no `white-space: nowrap` — long cells (Classes, Stats) wrap instead of
+forcing horizontal scroll. Adding a column needs a proportional `<col>`, not auto-sizing
+(auto-sizing caused the original horizontal-scroll problem).
 
 ## Back to top button
 
-A single floating button (`#back-to-top-btn`, bottom-right) is built once, site-wide, in
-`setupBackToTopButton()` — called from `init()` alongside `setupSplashScreen()`. Requested
-2026-07-30 specifically for the long Crafting/Gathering recipe and node lists, but built as
-one global button rather than something wired into each page separately, since the whole
-site scrolls the window itself (no per-page inner scroll container — see the `.layout`/
-`.sidebar` CSS notes above) — a single `window.addEventListener('scroll', ...)` toggling a
-`.visible` class covers every page for free. Only appears once `window.scrollY > 400`, and
-smooth-scrolls back to the top (where the search box and filters live) on click.
+Single floating button (`#back-to-top-btn`, bottom-right), built once site-wide in
+`setupBackToTopButton()` (called from `init()`). Built as one global button since the whole
+site scrolls the window itself (no per-page inner scroll container) — one
+`window.addEventListener('scroll', ...)` toggling `.visible` covers every page. Appears once
+`window.scrollY > 400`, smooth-scrolls to top on click.
 
 ## Local preview
 
-There's no Node or Python in this environment's PATH. To preview the site locally, spin up
-a throwaway static file server (e.g. a small PowerShell `HttpListener` script) rather than
-assuming `python -m http.server` or `npx serve` will work — check first. Don't commit a
-`.claude/launch.json` that points at a session-scoped scratchpad path; it won't survive
-past the session.
+No Node/Python in this environment's PATH. Spin up a throwaway static file server (e.g. a
+small PowerShell `HttpListener` script) rather than assuming `python -m http.server`/`npx
+serve` work — check first. Don't commit a `.claude/launch.json` pointing at a
+session-scoped scratchpad path; won't survive past the session.
 
 ## Git workflow
 
-The user is non-technical and relies on Claude to commit and push. Changes are not pushed
-automatically — wait for an explicit request (e.g. "push") before running `git push`.
+User is non-technical, relies on Claude for all commits/pushes. **Changes are not pushed
+automatically — wait for an explicit request (e.g. "push") before `git push`.**
 
 ## Community submissions
 
-**Visitors submit through a real form directly on the wiki — never linked out to GitHub,
-never need a GitHub account.** This replaced an earlier GitHub-Issue-template-based version
-the user rejected specifically because it sent visitors to github.com and required an
-account.
+**Visitors submit through a real form on the wiki — never linked out to GitHub, no GitHub
+account needed.**
 
-- **`pages.json`** has a `"Submit a Screenshot"` entry, `"type": "submit"`, in its own
-  `"Contribute"` sidebar category — same `type`-driven routing as Items/Maps/Crafting/
-  Monsters/Companions (`loadPage` in `script.js`), just narrower reading-width rather than
-  `content-wide` since a form doesn't need the full page.
-- **`renderSubmitPage(container)`** in `script.js` builds the actual form: a drag-and-drop/
-  click-to-browse screenshot field (now **optional**, 2026-07-17 — see below) with a live
-  preview and a "Remove" button (`#submit-preview-clear`), a notes textarea, a honeypot
-  field hidden via CSS (`.submit-honeypot`, off-screen rather than `display:none` — a real
-  bot-filtering technique, not just a stray unused field), and a submit button that POSTs a
-  `FormData` (screenshot if one was chosen + notes + honeypot value) straight to a
-  Cloudflare Worker via `fetch`. Client-side error handling distinguishes a real API-
-  provided error message from a raw network/fetch failure — the latter never shows the
-  browser's own wording (e.g. "Failed to fetch") to a non-technical visitor, always a
-  friendly fallback instead.
-- **A screenshot is no longer required (2026-07-17, user's own call)** — someone with
-  info but no picture (e.g. "I don't have a card, but I know this drops off X") can submit
-  notes alone. Client-side validation requires at least one of screenshot/notes before
-  allowing submit; the Worker enforces the same rule server-side (defense in depth, since a
-  direct script/curl call bypasses client JS entirely — see the security note below).
-- **Two more optional fields feed into the same notes text, not separate form fields the
-  Worker has to know about:** a "Which map/zone is this about?" `<select>` (`#submit-zone`,
-  options built from `ensureMapsData()` + `groupMapsByArea` — the same area-name-grouping
-  the Maps page itself uses, so "Infested Crypt" and "Infested Crypt (Isometric)" collapse
-  to one option) and a "Regarding: `<name>`" banner (`#submit-context-banner`, dismissible
-  via "&times; Not about this") that appears when arriving from an item's or a named
-  monster's "Wrong or missing info?" link. On submit, both get
-  folded into the `notes` string as their own labeled lines (`Regarding: Item — <name>` /
-  `Zone/Map: <name>`) ahead of whatever the visitor actually typed — the Worker itself never
-  receives "regarding" or "zone" as distinct fields, so it needed no new field-parsing logic
-  to support this, only the optional-screenshot change below.
-- **"Wrong or missing info?" (items and named monsters both — reworded 2026-07-19 from the
-  original "Know where this drops?"/"Know where this spawns?" wording, since the user felt
-  it undersold the link's purpose: a card can already be fully correct today and still need
-  this escape hatch if the data turns out wrong later)** links jump to the Submit page with
-  that context pre-filled, via `goToSubmit(context)`
-  (sets `pendingSubmitContext`, same consume-once pattern as `pendingItemQuery`) — see
-  `renderItemCardHTML`'s `opts.interactive` (only passed `true` from `openItemViewer`, never
-  the hover tooltip, since `#item-tooltip` is `pointer-events: none` and a link there would
-  be visible but unclickable) and `renderMonsterCardHTML`'s `monster.named` check (shown in
-  both the tooltip and the modal, since a monster's tooltip is already fully interactive —
-  see "Adding a monster" above). Regular monsters don't get this link — a common mob's
-  spawn zones are rarely a mystery worth crowdsourcing the way a boss's is.
-  **The clickable part is now just "Click here" (2026-07-19, same-day follow-up)** — "Wrong
-  or missing info?" itself is plain text (the question), with a separate "Click here" `<a>`
-  right after it ("Wrong or missing info? Click here to let us know."), instead of the whole
-  question being the link — the user felt the link needed its own explicit call-to-action
-  text rather than making the reader infer that the question itself was clickable.
-- **Why a Worker at all:** GitHub Pages only serves static files — it cannot run any code,
-  so it can't hold the GitHub token needed to open a pull request. A token embedded in the
-  page's own JavaScript would be visible to anyone via dev tools, which would let a
-  stranger do anything that token can do to the repo. A small serverless function is the
-  minimum piece of infrastructure that can hold that secret safely while still giving
-  visitors a form that lives entirely on the wiki.
-- **`cloudflare-worker/submit-worker.js`** is that function — not deployed by GitHub Pages
-  at all (kept in the repo purely for reference/version history/diffing). To actually
-  deploy or update it, its contents get pasted into the Worker's own editor in the
-  Cloudflare dashboard. **This is a manual step only the site owner can do (requires their
-  Cloudflare login) — Claude cannot deploy or redeploy the Worker itself, only edit this
-  file in the repo.** It receives the form's `FormData`, checks the honeypot, and — as long
-  as at least a screenshot or notes text was sent — uses the GitHub REST API (with a
-  `GITHUB_TOKEN` stored as a Worker *secret*, never a plain variable) to create a branch,
-  commit either the screenshot into `images/Inbox/` (validating type/size first) or, for a
-  notes-only submission, a small `note-<timestamp>.md` into `community-notes/` (see below),
-  then open a pull request — it never commits to `main` directly. **Merging that PR is the
-  accept, closing it (without merging) is the deny** — either way nothing on the live site
-  changes until a human decides. A merged screenshot submission lands in the inbox to go
-  through the normal "check inbox" workflow above, exactly like a screenshot the user posts
-  directly; a merged notes-only submission needs its own, different next step — see
-  `community-notes/` below.
-- **`community-notes/`** holds notes-only submissions (each its own `note-<timestamp>.md`,
-  same one-new-file-per-PR pattern as an image submission, never edits an existing file, so
-  concurrent submissions can never conflict with each other). **Not** covered by the
-  `images/inbox/` workflow above (that one's specifically for screenshots) — processing a
-  merged note is its own small workflow: read the file; if it starts with a `Regarding:
-  Item — <name>` or `Regarding: Monster — <name>` line (set automatically when the
-  submission came from an item's/monster's "suggest" link — see below), that tells you
-  which entry it's about, otherwise read the rest of the note to figure that out; a
-  `Zone/Map: <name>` line (if present) is the visitor's answer to "which map/zone". This is
-  anonymous, unverified visitor input — nobody's screenshot, nobody confirmed it — and there
-  is no "unverified" field to park it in anymore (`rumor` was removed site-wide, see "Item
-  and recipe cards" below): either the user directly confirms it (in which case it goes
-  straight into a real confirmed field — `foundAt`, `maps`, `drops`, etc., same as any other
-  user-stated fact) or it doesn't get written into the data at all. Ask the user before
-  treating a visitor's note as confirmed rather than assuming; when in doubt, leave the note
-  file alone (don't delete unconfirmed leads) until it's actually resolved one way or the
-  other.
-- **`SUBMIT_WORKER_URL`** (top of the Submit-a-Screenshot section in `script.js`) holds the
-  real deployed `workers.dev` URL now (set once the one-time Cloudflare setup below was
-  done) — the page only shows the plain "not set up yet" notice when this is empty. Don't
-  guess or invent a URL here if it ever needs changing (e.g. the Worker gets redeployed
-  under a new name).
-- **Setup that has to happen outside this repo** (the site owner's one-time cost, not
-  something to build here): a free Cloudflare account, pasting the Worker script in via
-  their dashboard, minting a GitHub fine-grained Personal Access Token scoped to *only* this
-  repo (Contents + Pull requests, read/write) and saving it as the Worker's `GITHUB_TOKEN`
-  secret, then copying the deployed Worker's URL into `SUBMIT_WORKER_URL`. None of this is
-  something Claude can do on the user's behalf — creating third-party accounts and minting
-  auth tokens are both outside what an assistant should do unattended. **The same
-  paste-into-the-dashboard-and-deploy step is needed again any time
-  `cloudflare-worker/submit-worker.js` changes** (e.g. the 2026-07-17 optional-screenshot/
-  `community-notes/` update above) — editing the file in this repo alone does not affect the
-  live Worker until the site owner redeploys it themselves.
+- **`pages.json`** has `"Submit a Screenshot"`, `"type": "submit"`, in its own "Contribute"
+  sidebar category — same `type`-driven routing as other pages, narrower reading-width (not
+  `content-wide`).
+- **`renderSubmitPage(container)`** builds the form: drag-and-drop/click-to-browse
+  screenshot field (optional, see below) with live preview + Remove button, notes textarea,
+  a honeypot field hidden off-screen (`.submit-honeypot`, real bot-filter not a stray field),
+  submit button POSTs `FormData` to a Cloudflare Worker via `fetch`. Client-side error
+  handling distinguishes a real API error from a raw network failure (never shows raw
+  browser wording like "Failed to fetch" — friendly fallback instead).
+- **Screenshot not required** — notes alone are enough (e.g. "no card, but I know this drops
+  off X"). Client validation requires ≥1 of screenshot/notes; Worker enforces the same
+  server-side (defense in depth — a direct script/curl call bypasses client JS).
+- **Two more optional fields fold into the same `notes` text**, not separate Worker fields: a
+  "Which map/zone?" `<select>` (`#submit-zone`, options from `ensureMapsData()` +
+  `groupMapsByArea`) and a "Regarding: `<name>`" banner (`#submit-context-banner`,
+  dismissible) shown when arriving from an item's/monster's "Wrong or missing info?" link.
+  Folded in as labeled lines (`Regarding: Item — <name>` / `Zone/Map: <name>`) ahead of
+  whatever the visitor typed.
+- **"Wrong or missing info?"** (items and named monsters) jumps to Submit with context
+  pre-filled via `goToSubmit(context)` (`pendingSubmitContext`, consume-once). Item card:
+  only in the full viewer (`opts.interactive`), not the hover tooltip (pointer-events:
+  none). Monster card: shown in both tooltip and modal (monster tooltip is already fully
+  interactive), gated on `monster.named` — regular monsters don't get this link. Clickable
+  part is a separate "Click here" `<a>` after the plain-text question, not the question
+  itself.
+- **Why a Worker at all:** GitHub Pages serves static files only, can't hold a GitHub token
+  safely (embedded page JS would expose it to anyone). A small serverless function is the
+  minimum infrastructure that can hold that secret while keeping the form on-site.
+- **`cloudflare-worker/submit-worker.js`** — not deployed by GitHub Pages, kept in-repo for
+  reference/diffing only. **Deploying/updating requires pasting into the Worker's own
+  Cloudflare dashboard editor — a manual step only the site owner can do; Claude can't
+  deploy it, only edit the file.** Receives `FormData`, checks honeypot, and — given
+  screenshot or notes — uses the GitHub REST API (`GITHUB_TOKEN` Worker *secret*) to create a
+  branch, commit either the screenshot into `images/Inbox/` (type/size validated) or, for
+  notes-only, a `note-<timestamp>.md` into `community-notes/`, then open a PR — never commits
+  to `main` directly. **Merging the PR = accept; closing without merging = deny** — nothing
+  reaches the live site without a human decision. A merged screenshot lands in the inbox for
+  the normal "check inbox" workflow; a merged note needs its own next step (below).
+- **`community-notes/`** holds notes-only submissions (`note-<timestamp>.md`, one new file
+  per PR, no concurrent-submission conflicts possible). Not covered by the `images/inbox/`
+  workflow. Processing: read the file; a `Regarding: Item — <name>`/`Regarding: Monster —
+  <name>` line (auto-set from a "suggest" link) identifies the entry, else read the note to
+  figure it out; `Zone/Map: <name>` (if present) is the visitor's zone answer. Anonymous,
+  unverified — no `rumor` field exists anymore to park it in: either the user directly
+  confirms it (goes into a real confirmed field) or it doesn't get written into the data at
+  all. Ask before treating a visitor's note as confirmed; when in doubt, leave the file alone
+  rather than delete an unconfirmed lead.
+- **`SUBMIT_WORKER_URL`** (top of the Submit-page section in `script.js`) = the real deployed
+  `workers.dev` URL — page shows a "not set up yet" notice only when this is empty. Don't
+  guess/invent a URL if it ever needs changing.
+- **One-time setup outside this repo** (site owner's own cost, not something Claude builds):
+  free Cloudflare account, paste Worker script via dashboard, mint a GitHub fine-grained PAT
+  scoped to only this repo (Contents + Pull requests, read/write), save as `GITHUB_TOKEN`
+  Worker secret, copy the deployed URL into `SUBMIT_WORKER_URL`. Creating accounts/minting
+  tokens is outside what Claude should do unattended. **The same manual redeploy step is
+  needed again any time `submit-worker.js` changes** — editing the file in-repo alone doesn't
+  affect the live Worker.
 - Kept deliberately mechanical — no LLM call, no auto-generated JSON, just moving the
-  screenshot into the repo safely. Extending it to also draft the actual
-  `items.json`/`monsters.json` entry automatically would be a future, separate step if ever
-  wanted.
-- **Confirmed working end to end** with a real test submission (a plain curl POST straight
-  to the deployed Worker, bypassing the browser entirely, since CORS only restricts
-  *browser* callers — see the security note below) that successfully created a real pull
-  request on the repo. That test predates the 2026-07-17 optional-screenshot/
-  `community-notes/` update — the *deployed* Worker won't behave that new way until it's
-  redeployed (see above), and the notes-only path hasn't had its own live end-to-end test
-  yet, so treat it as unverified against the real GitHub API until someone tries it for real.
-- **Security posture, in case it's asked about again later:** the `GITHUB_TOKEN` never
-  leaves the Worker (not logged, not returned in any response), and it's scoped to only
-  Contents+PRs on this one repo, so worst-case token exposure can't touch other repos or
-  account settings. The Worker's own code is hard-coded to only ever create a new branch +
-  one file + one PR — it can't be made to touch `main` or other files no matter what a
-  caller sends it. `ALLOWED_ORIGIN`/CORS is *not* real access control (it only stops
-  browser-based JS from other sites reading the response; a direct script/curl call can
-  still reach the endpoint) — the honeypot field filters unsophisticated bots, but a
-  determined scripted caller could still spam junk PRs. That's a nuisance (manual cleanup),
-  not a security hole, since nothing reaches the live site without a manual merge. Rate-
-  limiting the Worker would close that gap if it ever becomes a real problem — not built
-  yet, deliberately deferred until it's actually needed.
-- **`images/samples/`** holds a few example screenshots shown directly on the Submit page
-  (`SUBMIT_EXAMPLES` in `script.js`) so visitors can see what a *complete* submission looks
-  like before they send one. Unlike every other inbox image covered elsewhere in this file,
-  these are **permanent site content the page displays**, not archival/pending-review
-  material, so they get a folder of their own rather than `images/items/`,
-  `images/Monsters/`, etc. Converted to `.jpg` quality 90 same as any other screenshot.
-  Clicking a thumbnail opens `#sample-viewer`, a minimal image lightbox (same overlay/
-  close-button shell as `#monster-viewer`, just a plain `<img>` with no card data). The
-  accompanying copy deliberately emphasizes capturing the *entire* card/window, to cut down
-  on submissions with cropped-off text.
-  **A `SUBMIT_EXAMPLES` entry can carry an optional `note`** — a short line rendered under
-  the label (`.submit-example-note` in `style.css`) for instructions specific to that one
-  submission type rather than the shared caption below the whole grid. The gathering-node
-  example's note tells submitters to name the file after the node/resource itself (e.g.
-  `"Lionleaf.jpg"`), matching the filename-matching convention `gathering-nodes.json`
-  images already use. Its sample image is a *copy* of an existing real gathering-node
-  picture rather than a reference to it in place, keeping `images/samples/` self-contained
-  so a future edit/removal of the real entry can't silently break the Submit page's example.
-  Add another example the same way (drop a `.jpg` into `images/samples/`, add an entry to
-  `SUBMIT_EXAMPLES`) if a new submission type needs its own sample.
+  screenshot into the repo safely. Auto-drafting the actual items.json/monsters.json entry
+  would be a future, separate step if ever wanted.
+- **Confirmed working end to end** with a real test submission (curl POST straight to the
+  deployed Worker, bypassing the browser — CORS only restricts browser callers) that
+  successfully created a real PR. That test predates the optional-screenshot/
+  `community-notes/` update — the *deployed* Worker won't behave the new way until
+  redeployed, and the notes-only path hasn't had its own live end-to-end test yet.
+- **Security posture:** `GITHUB_TOKEN` never leaves the Worker (not logged, not returned),
+  scoped to only Contents+PRs on this one repo — worst-case exposure can't touch other repos
+  or account settings. Worker code is hard-coded to only ever create a new branch + one file
+  + one PR, can't touch `main` or other files no matter what a caller sends.
+  `ALLOWED_ORIGIN`/CORS is *not* real access control (only stops browser-based JS from other
+  sites reading the response — a direct script/curl call can still reach the endpoint); the
+  honeypot filters unsophisticated bots, but a determined scripted caller could still spam
+  junk PRs — a nuisance (manual cleanup), not a security hole, since nothing reaches the live
+  site without a manual merge. Rate-limiting would close that gap if it ever becomes a real
+  problem — deliberately deferred until needed.
+- **`images/samples/`** — a few example screenshots on the Submit page (`SUBMIT_EXAMPLES`)
+  showing what a *complete* submission looks like. Unlike every other inbox image, these are
+  **permanent site content the page displays**, not archival/pending-review material — own
+  folder, `.jpg` q90 same as any screenshot. Click opens `#sample-viewer` (minimal lightbox,
+  same shell as `#monster-viewer`, plain `<img>` no card data). Copy emphasizes capturing the
+  *entire* card/window, to cut down on cropped-off-text submissions.
+  **A `SUBMIT_EXAMPLES` entry can carry an optional `note`** — short line under the label
+  for instructions specific to that submission type (the gathering-node example tells
+  submitters to name the file after the resource itself, e.g. `"Lionleaf.jpg"`, matching
+  `gathering-nodes.json`'s filename convention). Sample images are *copies* of real
+  screenshots, not references in place, so `images/samples/` stays self-contained. Add
+  another example the same way (drop a `.jpg`, add a `SUBMIT_EXAMPLES` entry).
