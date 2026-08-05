@@ -5553,6 +5553,7 @@
     "name": "Taskmaster Feeka",
     "slug": "taskmaster-feeka",
     "named": true,
+    "maps": ["Sungreet Strand"],
     "lastUpdated": "2026-08-05"
   }
 ]
