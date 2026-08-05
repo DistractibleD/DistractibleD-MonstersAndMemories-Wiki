@@ -19256,5 +19256,14 @@
     "tags": [],
     "weight": 0.0,
     "size": "Small"
+  },
+  {
+    "name": "Enchanted Frond",
+    "slug": "enchanted-frond",
+    "lastUpdated": "2026-08-05",
+    "image": "images/gathering/enchanted-frond.jpg",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
   }
 ]

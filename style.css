@@ -1024,6 +1024,66 @@ body:not(.site-entered) .sidebar {
   height: 24px;
   flex: 0 0 auto;
 }
+/* Named Monsters' zone-scoped card grid (renderMonsterGridCards) — replaced
+   the old single-column name table (2026-08-06, mockup approved by the site
+   owner). Regular Monsters still uses the plain table below, unchanged. */
+.monster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 14px;
+  margin-top: 12px;
+}
+.monster-grid-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.monster-grid-card:hover {
+  border-color: var(--accent-dim);
+}
+.monster-grid-card-photo {
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-panel-hover);
+  border-bottom: 1px dashed var(--border);
+  color: var(--text-dim);
+  font-size: 0.82rem;
+}
+.monster-grid-card-photo.has-img {
+  border-bottom: 1px solid var(--border);
+}
+.monster-grid-card-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.monster-grid-card-body {
+  padding: 10px 12px 12px;
+}
+.monster-grid-card-name {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 4px;
+}
+.monster-grid-card:hover .monster-grid-card-name {
+  color: var(--accent);
+}
+.monster-grid-card-area {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  margin-bottom: 6px;
+}
+.monster-grid-card-drops {
+  color: var(--accent-dim);
+  font-size: 0.78rem;
+}
 .items-empty {
   color: var(--text-dim);
   text-align: center !important;
@@ -2394,6 +2454,7 @@ body:not(.site-entered) .sidebar {
   .content-inner h1 { font-size: 1.5rem; }
   .items-category-grid { gap: 10px; }
   .items-category-card { padding: 12px; }
+  .monster-grid { gap: 10px; }
 }
 
 /* ---------- Submit a Screenshot ---------- */

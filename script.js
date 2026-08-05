@@ -213,9 +213,25 @@ function updateSidebarMaxHeight() {
   }
   const footer = document.querySelector('.site-footer');
   const footerHeight = footer ? footer.getBoundingClientRect().height : 0;
+  // .layout's own vertical padding (28px top + 60px bottom, see style.css)
+  // sits between the header and the sidebar/footer too, but wasn't being
+  // subtracted here — only a flat 20px safetyMargin was, which undershot the
+  // real padding by ~68px. On any page where the sidebar ends up the taller
+  // flex child (most pages — see the loadPage call site for when that is),
+  // the "capped" sidebar was still ~68px taller than the room actually left,
+  // making the whole document that much taller than the viewport. Since the
+  // sidebar is position: sticky, that small extra scroll range was enough for
+  // it to visibly shift on any scroll — reported as "the sidebar scrolls on
+  // its own" (2026-08-06). Measured dynamically (not hardcoded to 28+60) so
+  // this keeps working if .layout's padding ever changes.
+  const layout = document.querySelector('.layout');
+  const layoutStyle = layout ? getComputedStyle(layout) : null;
+  const layoutPadding = layoutStyle
+    ? (parseFloat(layoutStyle.paddingTop) || 0) + (parseFloat(layoutStyle.paddingBottom) || 0)
+    : 0;
   const topOffset = 76;
   const safetyMargin = 20;
-  const maxHeight = window.innerHeight - topOffset - footerHeight - safetyMargin;
+  const maxHeight = window.innerHeight - topOffset - footerHeight - layoutPadding - safetyMargin;
   sidebar.style.maxHeight = Math.max(200, maxHeight) + 'px';
 }
 
@@ -611,6 +627,22 @@ async function loadPage(file) {
   } else {
     window.scrollTo(0, 0);
   }
+
+  // Re-measure the sidebar's max-height cap for THIS page's content, not just
+  // at init/on resize. Without this, a page whose content is short enough
+  // that the sidebar becomes the taller flex child (see updateSidebarMaxHeight's
+  // own comment for why that's capped at all) still used the cap computed for
+  // whichever page happened to be showing at page load — on most other pages
+  // that stale cap could sit a few pixels too tall, leaving the document
+  // fractionally taller than the viewport. That's enough for the whole page
+  // to become scrollable even though content-inner itself doesn't need it,
+  // and because the sidebar is position: sticky, that tiny scroll range reads
+  // as "the sidebar moves on its own" — reported 2026-08-06, reproducible on
+  // every page type except Item Database (whose content is reliably taller
+  // than the viewport on its own, so the scroll range was never in question
+  // there). rAF (not a direct call) so this runs after the browser has
+  // actually laid out the HTML just injected above, not before.
+  requestAnimationFrame(updateSidebarMaxHeight);
 }
 
 function onSearch(e) {
@@ -985,6 +1017,22 @@ function findMonstersDroppingItem(itemName) {
   );
 }
 
+// Reverse lookup for an item card's "Dropped by" line — which gathering
+// tradeskill(s) yield this item as a node result (gatheringData is loaded
+// alongside crafting/tradeskills by ensureCraftingData, already called
+// before the item viewer renders). Named after the tradeskill, not the node
+// itself — the node's own name already equals the item name for every
+// tradeskill except Disenchanting (see gathering-nodes.json's `results`
+// convention), so repeating it would add nothing; the tradeskill is the new
+// information ("Lionleaf" dropped by "Herbalism").
+function findGatheringTradeskillsForItem(itemName) {
+  return [...new Set(
+    (gatheringData || [])
+      .filter(n => (n.results || []).some(r => r.toLowerCase() === itemName.toLowerCase()))
+      .map(n => n.tradeskill)
+  )];
+}
+
 /* ============================================
    Item Database
    Data lives in items.json. To add a new item,
@@ -1216,6 +1264,10 @@ const ICON_DEFS = {
   animaltaming: `<circle cx="12" cy="15.5" r="4.2"/><circle cx="5.5" cy="10" r="1.9"/><circle cx="10.3" cy="6.3" r="2"/><circle cx="15.5" cy="6.5" r="1.9"/><circle cx="19" cy="10.3" r="1.8"/>`,
   archaeology: `<g transform="rotate(35 9 9)"><rect x="8.3" y="3" width="1.4" height="10"/><path d="M6 12 C6 10.5 7.4 9.5 9 9.5 C10.6 9.5 12 10.5 12 12 L12 13.5 L6 13.5 Z"/></g><path d="M14 15 C14 13.3 15.8 12 18 12 C20.2 12 22 13.3 22 15 L22 19 C22 20.7 20.2 22 18 22 C15.8 22 14 20.7 14 19 Z"/><rect x="15" y="13.5" width="6" height="1.3"/>`,
   disenchanting: `<path fill-rule="evenodd" d="M12 2 L17 6 L15.5 13 L12 22 L8.5 13 L7 6 Z M11 8 L13 8 L12.3 13 L13.5 13 L11.5 18 L12.2 14 L11 14 Z"/>`,
+  // Leveling Suggestions nav icon (2026-08-06) — three ascending bars, same
+  // flat-silhouette-in-circle language as everything else. Reads as
+  // "progression"/"leveling up" without needing a new visual metaphor.
+  levelingicon: `<rect x="4" y="14" width="4.4" height="6" rx="0.6"/><rect x="9.8" y="9" width="4.4" height="11" rx="0.6"/><rect x="15.6" y="4" width="4.4" height="16" rx="0.6"/>`,
   // Beastmaster companion icons — one flat silhouette per tamed animal type,
   // same style as the tradeskill glyphs above. Extend with another animal
   // key the same way whenever a new companion type is confirmed.
@@ -1272,6 +1324,7 @@ const ICON_BG = {
   wolf: '#3a3f47',
   boss: '#5a1f1f', paw: '#3f4f30',
   links: '#455060', itemdb: '#7a5a2a', gatheringicon: '#455a2e', submiticon: '#3a3a45',
+  levelingicon: '#2e6b3f',
 };
 
 // Maps a tradeskill name (tradeskills.json) to one of the icons above — used
@@ -1347,6 +1400,7 @@ const NAV_ICON = {
   'monsters-named': 'boss',
   'monsters-regular': 'paw',
   companions: 'wolf',
+  leveling: 'levelingicon',
   submit: 'submiticon',
 };
 
@@ -2114,7 +2168,8 @@ function renderItemCardHTML(item, opts = {}) {
             ? `<a href="#" class="item-monster-drop-link" data-slug="${escapeAttr(m.slug)}">${escapeAttr(m.name)}</a>`
             : escapeAttr(m.name)
           );
-          const parts = [...monsterLinks, ...(item.foundAt ? [escapeAttr(item.foundAt)] : [])];
+          const gatheringTradeskills = findGatheringTradeskillsForItem(item.name).map(escapeAttr);
+          const parts = [...monsterLinks, ...gatheringTradeskills, ...(item.foundAt ? [escapeAttr(item.foundAt)] : [])];
           return `
         <div class="item-card-section${parts.length ? '' : ' item-card-muted'}">
           Dropped by &middot; ${parts.length ? parts.join(', ') : 'not yet known'}
@@ -2963,7 +3018,7 @@ async function renderLevelingPage(container) {
   }
 
   container.innerHTML = `
-    <h1>Leveling Suggestions</h1>
+    <h1 class="monsters-section-heading">${svgIcon('levelingicon')} Leveling Suggestions</h1>
     <p class="leveling-credit">Guide compiled by <strong>Flourishing</strong> (Monsters and Memories Discord).</p>
     <nav class="leveling-nav">
       ${allLevels.map(lv => `<a href="#leveling-lv-${lv}" class="leveling-nav-link">Lv ${lv}</a>`).join('')}
@@ -4128,11 +4183,17 @@ function renderMonstersList(container, scope) {
   const sectionLabel = scope.named ? 'Named Monsters (Bosses)' : 'Regular Monsters';
   const backLabel = `All ${scope.named ? 'named' : 'regular'} monster zones`;
 
+  // Named monsters render as a card grid (2026-08-06, mockup approved by the
+  // site owner — the old single-column name list wasted the content-wide
+  // page's own space) instead of the plain sortable table Regular Monsters
+  // still uses. Only one sort dimension exists either way (name), so the
+  // grid path skips the now-pointless sortable-column-header UI rather than
+  // building a dropdown for a single option.
   container.innerHTML = `
     <p class="items-back-link"><a href="#" id="monsters-back-to-categories">&larr; ${escapeAttr(backLabel)}</a></p>
     <h1>${escapeAttr(scope.map)} — ${escapeAttr(sectionLabel)}</h1>
-    <p>Browse, search, and sort ${escapeAttr(scope.named ? 'named (boss)' : 'regular')} monsters in
-    ${escapeAttr(scope.map)}. Click a monster's name to see its picture and drop table.</p>
+    <p>Browse, search, and filter ${escapeAttr(scope.named ? 'named (boss)' : 'regular')} monsters in
+    ${escapeAttr(scope.map)}. Click a monster to see its picture and drop table.</p>
     <div class="items-toolbar">
       <input type="search" id="monsters-search" class="items-search" placeholder="Search name, drop..." autocomplete="off">
       <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="monsters-search">Clear</button>
@@ -4144,6 +4205,9 @@ function renderMonstersList(container, scope) {
       ${showCardsToggleHTML('monsters-show-cards')}
     </div>
     <p class="items-count" id="monsters-count"></p>
+    ${scope.named ? `
+    <div class="monster-grid" id="monsters-grid"></div>
+    ` : `
     <div class="items-table-wrap">
       <table class="items-table">
         <colgroup>
@@ -4157,6 +4221,7 @@ function renderMonstersList(container, scope) {
         <tbody id="monsters-tbody"></tbody>
       </table>
     </div>
+    `}
   `;
 
   container.querySelector('#monsters-back-to-categories').addEventListener('click', e => {
@@ -4231,7 +4296,11 @@ function renderMonstersList(container, scope) {
     });
 
     updateSortIndicators();
-    renderMonsterRows(container.querySelector('#monsters-tbody'), filtered);
+    if (scope.named) {
+      renderMonsterGridCards(container.querySelector('#monsters-grid'), filtered);
+    } else {
+      renderMonsterRows(container.querySelector('#monsters-tbody'), filtered);
+    }
     container.querySelector('#monsters-count').textContent =
       `Showing ${filtered.length} of ${scopedMonsters.length} monsters`;
   }
@@ -4240,20 +4309,75 @@ function renderMonstersList(container, scope) {
   needsInfoFilter.addEventListener('change', update);
 
   update();
-  setupMonsterClickToView(container.querySelector('#monsters-tbody'));
-  setupMonsterTooltip(container.querySelector('#monsters-tbody'));
+  const resultsContainer = container.querySelector(scope.named ? '#monsters-grid' : '#monsters-tbody');
+  if (scope.named) {
+    setupMonsterGridClickToView(resultsContainer);
+  } else {
+    setupMonsterClickToView(resultsContainer);
+  }
+  setupMonsterTooltip(resultsContainer);
 
   if (pendingHighlightMonster) {
     const slug = pendingHighlightMonster;
     pendingHighlightMonster = null;
-    const row = container.querySelector(`#monsters-tbody tr[data-slug="${CSS.escape(slug)}"]`);
-    if (row) {
+    const itemSelector = scope.named
+      ? `#monsters-grid .monster-grid-card[data-slug="${CSS.escape(slug)}"]`
+      : `#monsters-tbody tr[data-slug="${CSS.escape(slug)}"]`;
+    const el = container.querySelector(itemSelector);
+    if (el) {
       suppressScrollReset = true;
-      row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      row.classList.add('row-flash');
-      row.addEventListener('animationend', () => row.classList.remove('row-flash'), { once: true });
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const flashClass = scope.named ? 'card-flash' : 'row-flash';
+      el.classList.add(flashClass);
+      el.addEventListener('animationend', () => el.classList.remove(flashClass), { once: true });
     }
   }
+}
+
+// Named Monsters' card grid (see renderMonstersList) — image or a "no photo
+// yet" placeholder, name, area, and a drop-count summary. Deliberately
+// leaner than the full renderMonsterCardHTML (no drop list itself) since
+// that's still one hover/click away via the same tooltip/viewer every other
+// monster reference on the site already uses — the card's job is to be
+// scannable in a grid of dozens, not to be the final destination.
+function renderMonsterGridCards(grid, monsters) {
+  if (!monsters.length) {
+    grid.innerHTML = `<p class="items-empty">${monstersData.length ? 'No monsters match your filters.' : 'No monsters yet.'}</p>`;
+    return;
+  }
+
+  grid.innerHTML = monsters.map(monster => {
+    const groupedDrops = groupMonsterDrops(monster.drops || []);
+    const dropCount = groupedDrops.families.length + groupedDrops.singles.length;
+    const dropSummary = dropCount ? `${dropCount} drop${dropCount === 1 ? '' : 's'}` : 'No drops yet';
+    const area = (monster.areas && monster.areas.length) ? monster.areas.join(', ') : '';
+    return `
+      <div class="monster-grid-card" data-slug="${escapeAttr(monster.slug)}">
+        <div class="monster-grid-card-photo${monster.image ? ' has-img' : ''}">
+          ${monster.image ? `<img src="${escapeAttr(monster.image)}" alt="${escapeAttr(monster.name)}">` : '<span>No photo yet</span>'}
+        </div>
+        <div class="monster-grid-card-body">
+          <div class="monster-grid-card-name item-name-hover monster-name-hover" data-slug="${escapeAttr(monster.slug)}">${escapeAttr(monster.name)}</div>
+          ${monster.needsInfo ? '<span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}
+          ${area ? `<div class="monster-grid-card-area">${escapeAttr(area)}</div>` : ''}
+          <div class="monster-grid-card-drops">${escapeAttr(dropSummary)}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Whole-card click opens the viewer directly (unlike the table row, where
+// only the name span is clickable) — separate from setupMonsterClickToView
+// so a click on the name itself doesn't fire both listeners and open the
+// same viewer twice.
+function setupMonsterGridClickToView(grid) {
+  grid.addEventListener('click', e => {
+    const card = e.target.closest('.monster-grid-card');
+    if (!card) return;
+    const monster = findMonsterBySlug(card.dataset.slug);
+    if (monster) openMonsterViewer(monster);
+  });
 }
 
 function renderMonsterRows(tbody, monsters) {

@@ -560,6 +560,7 @@
   {
     "name": "Magic Frond",
     "slug": "magic-frond",
+    "image": "images/items/magic-frond.jpg",
     "tradeskill": "Herbalism",
     "results": ["Magic Frond"],
     "locations": [],
@@ -577,6 +578,7 @@
   {
     "name": "Arcane Frond",
     "slug": "arcane-frond",
+    "image": "images/items/arcane-frond.jpg",
     "tradeskill": "Herbalism",
     "results": ["Arcane Frond"],
     "locations": [],
@@ -585,6 +587,7 @@
   {
     "name": "Clouded Crystallized Magic",
     "slug": "clouded-crystallized-magic",
+    "image": "images/items/clouded-crystallized-magic.jpg",
     "tradeskill": "Mining",
     "results": ["Clouded Crystallized Magic"],
     "locations": [],
@@ -593,6 +596,7 @@
   {
     "name": "Glinting Crystallized Magic",
     "slug": "glinting-crystallized-magic",
+    "image": "images/items/glinting-crystallized-magic.jpg",
     "tradeskill": "Mining",
     "results": ["Glinting Crystallized Magic"],
     "locations": [],
@@ -601,6 +605,7 @@
   {
     "name": "Shining Crystallized Magic",
     "slug": "shining-crystallized-magic",
+    "image": "images/items/shining-crystallized-magic.jpg",
     "tradeskill": "Mining",
     "results": ["Shining Crystallized Magic"],
     "locations": [],
@@ -609,6 +614,7 @@
   {
     "name": "Brilliant Crystallized Magic",
     "slug": "brilliant-crystallized-magic",
+    "image": "images/items/brilliant-crystallized-magic.jpg",
     "tradeskill": "Mining",
     "results": ["Brilliant Crystallized Magic"],
     "locations": [],
