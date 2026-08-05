@@ -5555,5 +5555,25 @@
     "named": true,
     "maps": ["Sungreet Strand"],
     "lastUpdated": "2026-08-05"
+  },
+  {
+    "name": "Thrallmaker Zladen",
+    "slug": "thrallmaker-zladen",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Cultbound Coif" }
+    ],
+    "lastUpdated": "2026-08-05"
+  },
+  {
+    "name": "A Forgotten Shadow",
+    "slug": "a-forgotten-shadow",
+    "named": true,
+    "maps": ["Glinting Hollow"],
+    "drops": [
+      { "item": "Silentfold Hauberk" }
+    ],
+    "lastUpdated": "2026-08-05"
   }
 ]

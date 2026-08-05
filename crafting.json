@@ -2281,6 +2281,8 @@
     "name": "Enchanted Hide Leggings",
     "slug": "enchanted-hide-leggings",
     "tradeskill": "Leatherworking",
+    "weight": 1.5,
+    "size": "Medium",
     "components": [
       { "item": "Enchanted Hide Canvas", "quantity": 3 },
       { "item": "Rough Thread", "quantity": 3 },
@@ -2675,6 +2677,8 @@
     "name": "Enchanted Padded Leather Leggings",
     "slug": "enchanted-padded-leather-leggings",
     "tradeskill": "Leatherworking",
+    "weight": 1.5,
+    "size": "Medium",
     "components": [
       { "item": "Enchanted Padded Leather Canvas", "quantity": 3 },
       { "item": "Light Thread", "quantity": 3 },
@@ -2695,6 +2699,8 @@
     "name": "Enchanted Padded Leather Tunic",
     "slug": "enchanted-padded-leather-tunic",
     "tradeskill": "Leatherworking",
+    "weight": 3.0,
+    "size": "Medium",
     "components": [
       { "item": "Enchanted Padded Leather Canvas", "quantity": 4 },
       { "item": "Light Thread", "quantity": 3 },
