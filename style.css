@@ -1261,6 +1261,58 @@ body:not(.site-entered) .sidebar {
   background: #5a1f1f;
   color: #ff8f8f;
 }
+/* "Copy Item Link" — copies item.gameLinkCode (a raw in-game chat-link
+   code) to the clipboard so it can be pasted in-game, see
+   renderItemCardHTML/setupItemViewer. Grayed out + disabled when the item
+   has no code yet, paired with an "Add a code?" link to the Submit page. */
+.item-card-gamelink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.copy-game-link-btn {
+  background: transparent;
+  border: 1px solid var(--accent-dim);
+  color: var(--accent);
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.copy-game-link-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: rgba(224, 166, 64, 0.1);
+}
+.copy-game-link-btn:disabled {
+  color: #6b6c72;
+  border-color: #3a3a3f;
+  cursor: not-allowed;
+}
+.copy-game-link-btn.copied {
+  color: #6bcf8f;
+  border-color: #6bcf8f;
+}
+.item-addlink-link {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent-dim);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.item-addlink-link:hover {
+  text-decoration: none;
+}
+.submit-linkcode-hint {
+  font-size: 0.9rem;
+  color: var(--text-dim, #a0a0a6);
+  border-left: 2px solid var(--accent-dim);
+  padding-left: 8px;
+}
+.submit-linkcode-hint code {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
 /* "Know where this drops?"/"Know where this spawns?" link — item viewer
    (opts.interactive) and named-monster cards only, see renderItemCardHTML/
    renderMonsterCardHTML. */

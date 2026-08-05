@@ -93,6 +93,30 @@ filterable/sortable table rendered by `script.js` from `items.json`.
 Filters (slot/class/race/tags/max size) and search derive from `items.json` at runtime — no
 other file changes when items are added, including new tag/slot/max-size values.
 
+### `item.gameLinkCode` — in-game chat item links
+
+Mirrors a feature on the unofficial Miraheze wiki: linking an item in the game's own chat
+box produces client-generated markup (`<link="item|<itemGUID>|<n>">...</link>`) that, pasted
+into chat by anyone, renders as a clickable in-game item link/tooltip — this is a client-side
+game feature, not something the wiki computes or calls an API for.
+
+- `item.gameLinkCode` — optional, the **exact raw code** as captured from the game (own
+  quotes/tags and all), stored and copied verbatim, never reconstructed/simplified by us.
+  Source-of-truth is always the user's own in-game test, same as any other confirmed field.
+- Item card (`renderItemCardHTML`, `opts.interactive` only — same gating as the monster
+  drop-links and suggest-link, since the tooltip is `pointer-events: none`) shows a **"Copy
+  Item Link"** button that copies `gameLinkCode` to the clipboard
+  (`navigator.clipboard.writeText`, `.copy-game-link-btn` in `setupItemViewer`'s click
+  handler) — flashes "Copied!" on success, "Copy failed" on a denied clipboard permission.
+- No code yet → button renders `disabled` (grayed out) next to an **"Add a code?"** link
+  (`.item-addlink-link`) that calls `goToSubmit({ kind: 'item', name, linkCode: true })` —
+  reuses the existing Submit-a-Screenshot form/Worker/`community-notes/` pipeline rather than
+  building new infrastructure. `linkCode: true` on the context just changes the banner text
+  and shows an extra hint paragraph explaining how to get the code in-game; the Worker itself
+  still only ever sees plain notes text (`Regarding: Item — <name> (in-game link code)`).
+  Processing a `community-notes/` file with that Regarding line: paste the visitor's code
+  into that item's `gameLinkCode` verbatim, same as any other confirmed-field community note.
+
 **Item Database browsing:** one view, `renderItemsList` in `script.js` — search box, "Type"
 dropdown (Weapon/Armor/Jewelry/Container/Food/Drink/Misc/All Types), Slot/Class/Race/Tag/Max
 Size dropdowns, stat/buff checkbox dropdown, "Show only items that need info" toggle, above
@@ -446,12 +470,14 @@ Workflow when asked to process new items (or "check the inbox"):
 
 1. Move every file in `images/inbox/` into `images/Processing/` — the one and only time
    `images/inbox/` gets touched.
-2. List `images/Processing/` — each file is one unprocessed screenshot.
+2. List `images/Processing/` — each file is one unprocessed screenshot (or, per below, a
+   `.txt` game-link-code list).
 3. For each: read and classify — **item** (stat-card popup), **map** (game map/zone image,
    no stat card), **recipe** (single crafting card, popup style + "Components:" list),
    **crafting window** (in-game tradeskill window listing many recipes, skill number at
-   bottom), **vendor screenshot** (NPC buy/sell list, no stat card), or **monster** (picture
-   of a creature, no stat card) — then follow the matching path below.
+   bottom), **vendor screenshot** (NPC buy/sell list, no stat card), **monster** (picture
+   of a creature, no stat card), or **game link code list** (a `.txt` file, not an image) —
+   then follow the matching path below.
 4. Once a file's data is recorded (items/recipes: read and deleted, no image saved;
    maps/monsters: moved to `images/Maps/`/`images/Monsters/`) or deleted as a duplicate,
    `images/Processing/` should no longer contain it — empty = batch fully processed.
@@ -547,6 +573,22 @@ item *exists*, reveals no real data — process for names, delete, don't save.
 3. Same treatment for a recipe name on a vendor list (`crafting.json`'s minimal shape:
    `name`/`slug`/`tradeskill`/`needsInfo: true`).
 4. Delete screenshot(s) once processed.
+
+**Game link code lists** (`.txt` file in the inbox, not a screenshot — see `item.gameLinkCode`
+in "Adding an item to the Item Database"): user copies each code from linking the item in
+their own in-game chat box, one item per line, expected as `Item Name: <code>` (e.g. `Torch:
+<link="item|d0a1669e39e2c90767d128b3|22803122">...`). Read the whole file, don't assume the
+format is perfectly clean — near-miss formatting (different separator, extra whitespace,
+stray blank lines) should still be parsed rather than rejected; only flag a line if it's
+genuinely ambiguous which item it names.
+
+1. Per line: match the name against `items.json` (exact, then obvious case/whitespace
+   variant). Match found → set/overwrite `gameLinkCode` with the code **verbatim** (own
+   quotes/tags included, never reformatted or simplified) and bump `lastUpdated`. No match →
+   list it back to the user rather than guessing/creating a new minimal item entry from a
+   name alone (unlike a vendor screenshot, a link-code line has no other data to seed an
+   entry with).
+2. Delete the `.txt` file once every line is processed — nothing to archive.
 
 ## Adding a monster
 

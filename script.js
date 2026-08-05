@@ -927,7 +927,8 @@ function goToMap(mapName) {
 
 // Jumps to the Submit page, optionally carrying "what this is about" context
 // from an item's or a named monster's "Wrong or missing info?" link (context
-// is { kind: 'item'|'monster', name }).
+// is { kind: 'item'|'monster', name }, plus an optional linkCode: true from
+// an item's "Add a code?" link — see renderItemCardHTML/gameLinkCode).
 // renderSubmitPage shows this as a dismissible "Regarding: <name>" banner and
 // folds it into the notes actually sent, so the Cloudflare Worker itself
 // doesn't need to know anything about items/monsters at all.
@@ -2103,6 +2104,14 @@ function renderItemCardHTML(item, opts = {}) {
           Dropped by &middot; ${parts.length ? parts.join(', ') : 'not yet known'}
         </div>`;
         })()}
+        ${opts.interactive ? `
+        <div class="item-card-section item-card-gamelink">
+          ${item.gameLinkCode
+            ? `<button type="button" class="copy-game-link-btn" data-link="${escapeAttr(item.gameLinkCode)}">Copy Item Link</button>`
+            : `<button type="button" class="copy-game-link-btn" disabled title="No in-game link code recorded yet">Copy Item Link</button>
+               <a href="#" class="item-addlink-link" data-name="${escapeAttr(item.name)}">Add a code?</a>`
+          }
+        </div>` : ''}
         ${opts.interactive ? `<div class="item-card-section item-card-suggest">Wrong or missing info? <a href="#" class="item-suggest-link" data-name="${escapeAttr(item.name)}">Click here</a> to let us know.</div>` : ''}
         ${opts.isTooltip ? '<p class="item-card-tooltip-hint">Click for more info</p>' : ''}
       </div>
@@ -2264,6 +2273,32 @@ function setupItemViewer() {
       e.preventDefault();
       closeItemViewer();
       goToSubmit({ kind: 'item', name: suggestLink.dataset.name });
+      return;
+    }
+    const addLinkLink = e.target.closest('.item-addlink-link');
+    if (addLinkLink) {
+      e.preventDefault();
+      closeItemViewer();
+      goToSubmit({ kind: 'item', name: addLinkLink.dataset.name, linkCode: true });
+      return;
+    }
+    const copyLinkBtn = e.target.closest('.copy-game-link-btn');
+    if (copyLinkBtn && !copyLinkBtn.disabled) {
+      const textToCopy = copyLinkBtn.dataset.link;
+      if (textToCopy) {
+        const original = copyLinkBtn.textContent;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          copyLinkBtn.textContent = 'Copied!';
+          copyLinkBtn.classList.add('copied');
+        }).catch(() => {
+          copyLinkBtn.textContent = 'Copy failed';
+        }).finally(() => {
+          setTimeout(() => {
+            copyLinkBtn.textContent = original;
+            copyLinkBtn.classList.remove('copied');
+          }, 1500);
+        });
+      }
       return;
     }
     const monsterLink = e.target.closest('.item-monster-drop-link');
@@ -4707,9 +4742,14 @@ async function renderSubmitPage(container) {
     ` : `
       ${context ? `
         <div class="submit-context-banner" id="submit-context-banner">
-          Regarding: <strong>${escapeAttr(context.name)}</strong>
+          Regarding: <strong>${escapeAttr(context.name)}</strong>${context.linkCode ? ' &middot; in-game link code' : ''}
           <button type="button" id="submit-context-clear">&times; Not about this</button>
         </div>
+      ` : ''}
+      ${context && context.linkCode ? `
+        <p class="submit-linkcode-hint">To get the code: link this item in your in-game chat box (however your
+        client does that), then copy the resulting text — it looks like
+        <code>&lt;link=&quot;item|...&quot;&gt;...&lt;/link&gt;</code> — and paste it into the notes box below.</p>
       ` : ''}
       <form id="submit-form" class="submit-form">
         <label class="submit-drop-zone" id="submit-drop-zone" for="submit-file-input">
@@ -4826,7 +4866,7 @@ async function renderSubmitPage(container) {
     // the plain notes text it already handles, as their own labeled lines.
     const notesParts = [];
     if (activeContext) {
-      notesParts.push(`Regarding: ${activeContext.kind === 'item' ? 'Item' : 'Monster'} — ${activeContext.name}`);
+      notesParts.push(`Regarding: ${activeContext.kind === 'item' ? 'Item' : 'Monster'} — ${activeContext.name}${activeContext.linkCode ? ' (in-game link code)' : ''}`);
     }
     if (zoneSelect.value) notesParts.push(`Zone/Map: ${zoneSelect.value}`);
     if (userNotes) notesParts.push(userNotes);
