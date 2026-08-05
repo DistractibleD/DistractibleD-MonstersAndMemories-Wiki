@@ -13,6 +13,7 @@ let gatheringData = null; // cached contents of gathering-nodes.json
 let gemstonesData = null; // cached contents of gemstones.json
 let monstersData = null; // cached contents of monsters.json
 let companionsData = null; // cached contents of companions.json
+let levelingData = null; // cached contents of leveling-locations.json
 let companionSkillsData = null; // cached contents of companion-skills.json
 
 // Set by the header search box when jumping straight to a specific item or
@@ -140,6 +141,15 @@ async function ensureMapsData() {
     mapsData = await res.json();
   }
   return mapsData;
+}
+
+async function ensureLevelingData() {
+  if (!levelingData) {
+    const res = await fetch('leveling-locations.json');
+    if (!res.ok) throw new Error('Could not load leveling-locations.json');
+    levelingData = await res.json();
+  }
+  return levelingData;
 }
 
 // Splash screen shown on every fresh load (see #splash-screen in
@@ -551,13 +561,15 @@ async function loadPage(file) {
 
   // Data-driven pages (Item Database, Maps, Crafting, Monsters) use the full
   // content width instead of the narrower reading width used for prose pages.
-  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'gathering' || page.type === 'crafting' || page.type === 'monsters' || page.type === 'companions')));
+  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'gathering' || page.type === 'crafting' || page.type === 'monsters' || page.type === 'companions' || page.type === 'leveling')));
 
   try {
     if (page && page.type === 'items') {
       await renderItemsPage(contentInner);
     } else if (page && page.type === 'maps') {
       await renderMapsPage(contentInner);
+    } else if (page && page.type === 'leveling') {
+      await renderLevelingPage(contentInner);
     } else if (page && page.type === 'gathering') {
       await renderGatheringPage(contentInner);
     } else if (page && page.type === 'crafting') {
@@ -2913,6 +2925,76 @@ function renderCraftingCategories(container) {
         const recipe = craftingData.find(r => r.slug === link.dataset.slug);
         if (recipe) goToRecipe(recipe);
       });
+    });
+  });
+}
+
+// Leveling Suggestions page — a curated (not derived) guide to where to
+// hunt at each level bracket, sourced from a community-submitted spreadsheet
+// (see leveling-locations.json: one entry per zone, each with a `levels`
+// array of { level, camps: [{ name, raid }] } buckets). Rendered as one
+// section per level bracket (ascending) with a quick-jump nav at the top,
+// each section grouped by region then zone — same "level-bracket-first"
+// layout the site owner approved from a mockup, chosen over a zone-first
+// drill-down since the page's whole point is "what's my level, where do I
+// go" rather than "I'm in this zone, what's here."
+// Camp/mob names are matched against monstersData by exact case-insensitive
+// name (same dynamic-linking convention as drops/components) — most camp
+// entries are place/trash descriptions with no matching monster and render
+// as plain text; named bosses that exist in monsters.json become clickable
+// links straight to that monster's page.
+async function renderLevelingPage(container) {
+  await ensureLevelingData();
+  await ensureMonstersData();
+
+  const allLevels = [...new Set(levelingData.flatMap(z => z.levels.map(l => l.level)))].sort((a, b) => a - b);
+  const regions = [...new Set(levelingData.map(z => z.region))];
+
+  function campHTML(camp) {
+    const monster = monstersData.find(m => m.name.toLowerCase() === camp.name.toLowerCase());
+    const label = `${escapeAttr(camp.name)}${camp.raid ? ' <span class="leveling-raid-badge">Raid</span>' : ''}`;
+    return monster
+      ? `<a href="#" class="leveling-camp leveling-camp-link" data-slug="${escapeAttr(monster.slug)}">${label}</a>`
+      : `<span class="leveling-camp">${label}</span>`;
+  }
+
+  container.innerHTML = `
+    <h1>Leveling Suggestions</h1>
+    <p class="leveling-credit">Guide compiled by <strong>Flourishing</strong> (Monsters and Memories Discord).</p>
+    <nav class="leveling-nav">
+      ${allLevels.map(lv => `<a href="#leveling-lv-${lv}" class="leveling-nav-link">Lv ${lv}</a>`).join('')}
+    </nav>
+    ${allLevels.map(lv => {
+      const regionBlocks = regions.map(region => {
+        const zones = levelingData.filter(z => z.region === region && z.levels.some(l => l.level === lv));
+        if (!zones.length) return '';
+        return `
+          <div class="leveling-region">${escapeAttr(region)}</div>
+          ${zones.map(z => {
+            const bucket = z.levels.find(l => l.level === lv);
+            return `
+              <div class="leveling-zone">
+                <div class="leveling-zone-name">${escapeAttr(z.zone)}${z.zoneAbbr ? ` <span class="leveling-zone-abbr">(${escapeAttr(z.zoneAbbr)})</span>` : ''}</div>
+                <div class="leveling-camps">${bucket.camps.map(campHTML).join('')}</div>
+              </div>
+            `;
+          }).join('')}
+        `;
+      }).join('');
+      return `
+        <section class="leveling-section" id="leveling-lv-${lv}">
+          <h2>Level ${lv}</h2>
+          ${regionBlocks || '<p class="leveling-empty">No suggestions recorded at this level yet.</p>'}
+        </section>
+      `;
+    }).join('')}
+  `;
+
+  container.querySelectorAll('.leveling-camp-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const monster = monstersData.find(m => m.slug === link.dataset.slug);
+      if (monster) goToMonster(monster);
     });
   });
 }

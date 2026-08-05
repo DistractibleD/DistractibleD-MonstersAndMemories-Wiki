@@ -789,6 +789,46 @@ Own local search box, wired into header search like Monsters (`goToCompanion`,
 `pendingHighlightCompanion`, `.card-flash` gold-accent animation since `.recipe-flash`'s
 teal doesn't match a plain `.item-card`).
 
+## Leveling Suggestions page
+
+A curated leveling guide (`pages.json` `"type": "leveling"`, own top-level sidebar entry) —
+**not derived from monster/map data**, it's a standalone community-submitted guide living in
+`leveling-locations.json`. Credit line ("Guide compiled by **Flourishing** (Monsters and
+Memories Discord)") is hard-coded in `renderLevelingPage` — update the name there if a
+different/updated source guide ever replaces this one.
+
+- **Data shape**: flat array, one object per zone: `region`, `zone`, `zoneAbbr`, `levels`
+  (array of `{ level, camps: [{ name, raid }] }`, only levels with at least one camp present —
+  no padding out to a fixed 1-60 list). `level` is the bracket's floor (1, 5, 10, ... 60,
+  matching the source spreadsheet's own columns), not an exact recommendation.
+- **Rendering is level-bracket-first, not zone-first** (`renderLevelingPage`) — a mockup was
+  shown to the user comparing this against a zone-drill-down and an interactive level-input
+  filter; level-bracket-first was the one approved. One `<section>` per level (ascending),
+  each grouped by region then zone. A sticky quick-jump nav bar at the top links to each
+  section by anchor (`#leveling-lv-<N>`).
+- **Camp names dynamically link to monsters.json** by exact case-insensitive name match, same
+  convention as drops/components — most camp entries are place/trash descriptions with no
+  match and render as plain text; named bosses that already exist in `monsters.json` become
+  clickable (`goToMonster`). Nothing new to set on the monster side.
+- `raid: true` (from a `(R)` suffix in the source) renders a small "Raid" badge next to that
+  camp — stripped from the display name itself, not left in the text.
+- **Source-of-truth note**: this page's data comes from a single community spreadsheet
+  (`.ods`), not individual screenshots — the normal "newest screenshot wins" per-field
+  correction model doesn't really apply here. If the user brings in a revised/updated version
+  of the guide later, treat it as a wholesale replacement of `leveling-locations.json` (ask
+  first) rather than trying to merge field-by-field.
+- Parsing an `.ods` (a zip of XML files, `content.xml` holds the sheet): watch for **vertically
+  merged cells** — ODF represents these as `<table:covered-table-cell>` placeholders in the
+  covered rows, not a repeated/empty `<table:table-cell>`. Skipping those (e.g. an XPath that
+  only selects `table:table-cell`) silently shifts every subsequent column left for any row
+  under a merge, misattributing values to the wrong level bracket. Also watch for a repeated
+  header/legend block appearing mid-sheet (this source had one before its second region) —
+  a naive "skip this row if column 0 matches the header text" check misses it if that same
+  merge-shift has pushed the header text into a different column; skipping by content match
+  regardless of column position (or a defensive post-pass stripping any camp name that's
+  exactly a legend string or a bare level number) is more robust than trusting column position
+  alone near a header repeat.
+
 ## Sidebar "Most Visited Tradeskills"
 
 Below main nav, shows up to 5 tradeskills by visit count (`#sidebar-visits-wrapper`, built

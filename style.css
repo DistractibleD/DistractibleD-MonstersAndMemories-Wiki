@@ -2646,3 +2646,101 @@ body:not(.site-entered) .sidebar {
 #sample-viewer-close:hover {
   color: var(--accent);
 }
+
+/* Leveling Suggestions page (renderLevelingPage) — level-bracket sections
+   with a sticky quick-jump nav, each listing region > zone > camps. */
+.leveling-credit {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin-top: -8px;
+}
+.leveling-nav {
+  position: sticky;
+  top: 12px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+.leveling-nav-link {
+  font-size: 0.8rem;
+  color: var(--accent);
+  background: rgba(224, 166, 64, 0.12);
+  padding: 4px 10px;
+  border-radius: 14px;
+  text-decoration: none;
+}
+.leveling-nav-link:hover {
+  background: rgba(224, 166, 64, 0.25);
+}
+.leveling-section {
+  margin-bottom: 28px;
+}
+.leveling-section h2 {
+  font-size: 1.1rem;
+  margin: 0 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--accent-dim);
+}
+.leveling-region {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  margin: 14px 0 6px;
+}
+.leveling-region:first-of-type {
+  margin-top: 0;
+}
+.leveling-zone {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+.leveling-zone-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.leveling-zone-abbr {
+  color: var(--text-dim);
+  font-weight: 400;
+}
+.leveling-camps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.leveling-camp {
+  font-size: 0.8rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 8px;
+  color: var(--text);
+  text-decoration: none;
+}
+a.leveling-camp {
+  color: var(--accent);
+  cursor: pointer;
+}
+a.leveling-camp:hover {
+  border-color: var(--accent-dim);
+}
+.leveling-raid-badge {
+  font-size: 0.7rem;
+  color: #ff8f8f;
+  font-weight: 600;
+}
+.leveling-empty {
+  color: var(--text-dim);
+  font-style: italic;
+}

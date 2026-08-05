@@ -7,5 +7,6 @@
   { "title": "Named Monsters", "file": "monsters-named", "category": "Monsters", "type": "monsters", "group": "Monsters" },
   { "title": "Regular Monsters", "file": "monsters-regular", "category": "Monsters", "type": "monsters", "group": "Monsters" },
   { "title": "Companions", "file": "companions", "category": "Companions", "type": "companions" },
+  { "title": "Leveling Suggestions", "file": "leveling", "category": "Leveling Suggestions", "type": "leveling" },
   { "title": "Submit a Screenshot", "file": "submit", "category": "Contribute", "type": "submit" }
 ]

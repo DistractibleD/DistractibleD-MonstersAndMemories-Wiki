@@ -19135,8 +19135,13 @@
     "type": "Container",
     "tags": [],
     "slot": "Backpack",
-    "gameLinkCode": "<link=\"item|9f4f5bc6729211aab3b0a616|22754933\"><color=green><b><u>[Hide Backpack]</u></b></color></link>",
-    "needsInfo": true
+    "capacity": 11,
+    "maxSize": "Large",
+    "weight": 2.5,
+    "size": "Extra Large",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|9f4f5bc6729211aab3b0a616|22754933\"><color=green><b><u>[Hide Backpack]</u></b></color></link>"
   },
   {
     "name": "Enchanted Hide Leggings",

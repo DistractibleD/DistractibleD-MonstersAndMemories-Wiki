@@ -1,0 +1,1855 @@
+[
+  {
+    "region": "Szuur Region",
+    "zone": "Night Harbor",
+    "zoneAbbr": "NH",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "North Gate (N.G.) Trash",
+            "raid": false
+          },
+          {
+            "name": "West Gate (W.G.) Trash",
+            "raid": false
+          },
+          {
+            "name": "Necropolis Yard",
+            "raid": false
+          },
+          {
+            "name": "N.G. Baby Crocs",
+            "raid": false
+          },
+          {
+            "name": "W.G. Baby Crocs",
+            "raid": false
+          },
+          {
+            "name": "Cellar Rats",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "N.G. Skeletons",
+            "raid": false
+          },
+          {
+            "name": "Grave Robbers",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Necropolis Cemetery",
+            "raid": false
+          },
+          {
+            "name": "Harbor Goblins",
+            "raid": false
+          },
+          {
+            "name": "Crocodiles (Pale Island)",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "Cultists Cave",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 20,
+        "camps": [
+          {
+            "name": "The Bends Pirates",
+            "raid": false
+          },
+          {
+            "name": "Aide Aida (3 pull minimum)",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 25,
+        "camps": [
+          {
+            "name": "Pale Island",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 30,
+        "camps": [
+          {
+            "name": "The Claw",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 35,
+        "camps": [
+          {
+            "name": "Pale Tower",
+            "raid": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Szuur Region",
+    "zone": "Tomb of the Last Wyrmsbane",
+    "zoneAbbr": "WB",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "Entrance Roamers",
+            "raid": false
+          },
+          {
+            "name": "Dario Numas",
+            "raid": false
+          },
+          {
+            "name": "Gerhardt Graves",
+            "raid": false
+          },
+          {
+            "name": "Grandmaster Obadiah",
+            "raid": false
+          },
+          {
+            "name": "Grandmaster Gildas",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "Timmon Bell",
+            "raid": false
+          },
+          {
+            "name": "Quartermaster Boothroy",
+            "raid": false
+          },
+          {
+            "name": "Lieutenant Gregan Snyde",
+            "raid": false
+          },
+          {
+            "name": "Ariblast the Wicked",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "High Marshal Fionna",
+            "raid": false
+          },
+          {
+            "name": "Jakob Geffrey",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "Bone Construct",
+            "raid": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Szuur Region",
+    "zone": "Sungreet Strand",
+    "zoneAbbr": "SGS",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "Baby Crocs (near Ashira)",
+            "raid": false
+          },
+          {
+            "name": "Baby Crocs (across river)",
+            "raid": false
+          },
+          {
+            "name": "Roamers (near NH zoneline)",
+            "raid": false
+          },
+          {
+            "name": "Skintakers",
+            "raid": false
+          },
+          {
+            "name": "Bandits",
+            "raid": false
+          },
+          {
+            "name": "Pirates",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "Ashira Tents (near NH zoneline)",
+            "raid": false
+          },
+          {
+            "name": "Tel'Ekir Entrance Goblins",
+            "raid": false
+          },
+          {
+            "name": "Palm Spiders",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Water Elemental Island",
+            "raid": false
+          },
+          {
+            "name": "Crocs and Caiman",
+            "raid": false
+          },
+          {
+            "name": "Tel'Ekir Entrance Goblins",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "Bandits",
+            "raid": false
+          },
+          {
+            "name": "Pirates",
+            "raid": false
+          },
+          {
+            "name": "Cinder Beetle Harvesters",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 20,
+        "camps": [
+          {
+            "name": "Muggrah",
+            "raid": false
+          },
+          {
+            "name": "Ashira Fort",
+            "raid": false
+          },
+          {
+            "name": "Quarry Goblins",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 25,
+        "camps": [
+          {
+            "name": "Cinder Beetle Sentinels",
+            "raid": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Szuur Region",
+    "zone": "Shaded Dunes",
+    "zoneAbbr": "SD",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "Roamers (near NH zoneline)",
+            "raid": false
+          },
+          {
+            "name": "Baby Crocs",
+            "raid": false
+          },
+          {
+            "name": "Ashira Oasis",
+            "raid": false
+          },
+          {
+            "name": "Ashira (near TE | behind hidden wall)",
+            "raid": false
+          },
+          {
+            "name": "Roamers",
+            "raid": false
+          },
+          {
+            "name": "Smugglers (Day) | Wererats (Night)",
+            "raid": false
+          },
+          {
+            "name": "Undead Pyramids",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "Ashira Camps (between NH and AC)",
+            "raid": false
+          },
+          {
+            "name": "Undead Highway",
+            "raid": false
+          },
+          {
+            "name": "AC Entrance Cultists (Night)",
+            "raid": false
+          },
+          {
+            "name": "Crocs and Caiman",
+            "raid": false
+          },
+          {
+            "name": "Undead Pyramids",
+            "raid": false
+          },
+          {
+            "name": "Roaming Giant Beetles",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Bandits",
+            "raid": false
+          },
+          {
+            "name": "AC Entrance Undead (Night)",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "AC Entrance Undead (Night)",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 20,
+        "camps": [
+          {
+            "name": "Sand Giant Scouts",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 25,
+        "camps": [
+          {
+            "name": "Sand Giant Scouts",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 30,
+        "camps": [
+          {
+            "name": "Maleq",
+            "raid": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Szuur Region",
+    "zone": "Ancient Crypt",
+    "zoneAbbr": "AC",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "Researcher Harseal",
+            "raid": false
+          },
+          {
+            "name": "Librarian Gallier",
+            "raid": false
+          },
+          {
+            "name": "Enraged Fire Elemental",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "AC Entrance Roamers",
+            "raid": false
+          },
+          {
+            "name": "Brahson the Butcher",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Commander Mangles",
+            "raid": false
+          },
+          {
+            "name": "Skyseer Illya",
+            "raid": true
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "Skyseer Illya",
+            "raid": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Szuur Region",
+    "zone": "Infested Crypt",
+    "zoneAbbr": "IC",
+    "levels": [
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "IC Entrance Spiders",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Broodmother Room",
+            "raid": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Szuur Region",
+    "zone": "Tel'Ekir",
+    "zoneAbbr": "TE",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "Goblin Side Entrance",
+            "raid": false
+          },
+          {
+            "name": "Ayip",
+            "raid": false
+          },
+          {
+            "name": "Yapala",
+            "raid": false
+          },
+          {
+            "name": "Roa the Huntress",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "Ashira Side Entrance",
+            "raid": false
+          },
+          {
+            "name": "Zahid the Calm",
+            "raid": false
+          },
+          {
+            "name": "A Bloodynose Hag",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Hadhraman, First Among Alphas",
+            "raid": false
+          },
+          {
+            "name": "Rami Suresight",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "Rami Suresight",
+            "raid": false
+          },
+          {
+            "name": "Ashir the Protector",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 20,
+        "camps": [
+          {
+            "name": "Font Seeress Jumana",
+            "raid": false
+          },
+          {
+            "name": "Animist Wafi",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 25,
+        "camps": [
+          {
+            "name": "Guardian of the Life Font",
+            "raid": true
+          }
+        ]
+      },
+      {
+        "level": 30,
+        "camps": [
+          {
+            "name": "Colorless Halin Serpent",
+            "raid": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Szuur Region",
+    "zone": "Fallen Pass",
+    "zoneAbbr": "FP",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "Boneyard Caves",
+            "raid": false
+          },
+          {
+            "name": "Undead Landing",
+            "raid": false
+          },
+          {
+            "name": "Plagueborn Drakes",
+            "raid": false
+          },
+          {
+            "name": "Garrison Plagueborn",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "Boneyard Skeletons",
+            "raid": false
+          },
+          {
+            "name": "Necroferius",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Boneyard Beetles",
+            "raid": false
+          },
+          {
+            "name": "Rotfang",
+            "raid": false
+          },
+          {
+            "name": "Plagueborn Drakes",
+            "raid": false
+          },
+          {
+            "name": "Sand Giant Scouts",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "Necroferius",
+            "raid": false
+          },
+          {
+            "name": "Garrison Rats",
+            "raid": false
+          },
+          {
+            "name": "Plagueborn Ramp",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 20,
+        "camps": [
+          {
+            "name": "Smugglers",
+            "raid": false
+          },
+          {
+            "name": "Plagueborn Ramp",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 25,
+        "camps": [
+          {
+            "name": "Garrison Rats",
+            "raid": false
+          },
+          {
+            "name": "Sand Giant Scouts",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 30,
+        "camps": [
+          {
+            "name": "Maleq",
+            "raid": false
+          },
+          {
+            "name": "Garrison Plagueborn",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 35,
+        "camps": [
+          {
+            "name": "Lower Saman",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 40,
+        "camps": [
+          {
+            "name": "Upper Saman",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 45,
+        "camps": [
+          {
+            "name": "Nyxx",
+            "raid": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Szuur Region",
+    "zone": "Vale of Zintar",
+    "zoneAbbr": "VoZ",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "Roamers in Desert",
+            "raid": false
+          },
+          {
+            "name": "Senesha the Lost",
+            "raid": false
+          },
+          {
+            "name": "Onis the Elder",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "Corrupted Ashira",
+            "raid": false
+          },
+          {
+            "name": "Fernic the Cur",
+            "raid": false
+          },
+          {
+            "name": "Defiled Asps",
+            "raid": false
+          },
+          {
+            "name": "Servarator Vakraar",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Dustrend Orcs",
+            "raid": false
+          },
+          {
+            "name": "Beetles",
+            "raid": false
+          },
+          {
+            "name": "Hemalmula the Hunter",
+            "raid": false
+          },
+          {
+            "name": "Skeletal Giants",
+            "raid": false
+          },
+          {
+            "name": "Sularfaan the Flamekeeper",
+            "raid": false
+          },
+          {
+            "name": "King Mahraad",
+            "raid": false
+          },
+          {
+            "name": "Spicy Raziq",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "Defiled Asps",
+            "raid": false
+          },
+          {
+            "name": "Roamers in Desert",
+            "raid": false
+          },
+          {
+            "name": "Hadir the Shipbreaker",
+            "raid": false
+          },
+          {
+            "name": "Grand Vizier Al'Kithar",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 20,
+        "camps": [
+          {
+            "name": "Giants (shoreline)",
+            "raid": false
+          },
+          {
+            "name": "Old Scar",
+            "raid": false
+          },
+          {
+            "name": "Grand Vizier Al'Kithar",
+            "raid": false
+          },
+          {
+            "name": "Khal'Baar the Growler",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 25,
+        "camps": [
+          {
+            "name": "Sand Giants (town)",
+            "raid": false
+          },
+          {
+            "name": "Rami Al'Qawwaas",
+            "raid": false
+          },
+          {
+            "name": "Zubair Goldentongue",
+            "raid": false
+          },
+          {
+            "name": "Old Scar",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 30,
+        "camps": [
+          {
+            "name": "Hadir the Shipbreaker",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 35,
+        "camps": [
+          {
+            "name": "Zubair Goldentongue",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 40,
+        "camps": [
+          {
+            "name": "Spicy Raziq",
+            "raid": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Szuur Region",
+    "zone": "Grain Cellar",
+    "zoneAbbr": "GC",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "a priestess of Kravvin",
+            "raid": false
+          },
+          {
+            "name": "Rais Muzari",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "a sneaky rat",
+            "raid": false
+          },
+          {
+            "name": "Zakariah Shriki",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Leila al-Bahri",
+            "raid": false
+          },
+          {
+            "name": "Khalid al-Bahri",
+            "raid": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Szuur Region",
+    "zone": "Glass Flats",
+    "zoneAbbr": "GF",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "Esaneq",
+            "raid": false
+          },
+          {
+            "name": "War Wizard Leonath",
+            "raid": false
+          },
+          {
+            "name": "Borwin",
+            "raid": false
+          },
+          {
+            "name": "Bishop Aybram",
+            "raid": false
+          },
+          {
+            "name": "Captain Brey",
+            "raid": false
+          },
+          {
+            "name": "High Wyrmseer Valthrun",
+            "raid": false
+          },
+          {
+            "name": "Fanguard Keep",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "Muggrah",
+            "raid": false
+          },
+          {
+            "name": "Baron Bigtent",
+            "raid": false
+          },
+          {
+            "name": "Quartermaster Girault",
+            "raid": false
+          },
+          {
+            "name": "Emissary Irina",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Fanguard Keep",
+            "raid": false
+          },
+          {
+            "name": "Selene Brightmantle",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "Salt Elementals",
+            "raid": false
+          },
+          {
+            "name": "Shattershriek",
+            "raid": false
+          },
+          {
+            "name": "Lord Ga'Duuz",
+            "raid": true
+          }
+        ]
+      },
+      {
+        "level": 25,
+        "camps": [
+          {
+            "name": "Malik the Glass Viper",
+            "raid": false
+          },
+          {
+            "name": "Soraya the Mirage",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 30,
+        "camps": [
+          {
+            "name": "Adept Kossco",
+            "raid": false
+          },
+          {
+            "name": "Horvath Ezzadel",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 35,
+        "camps": [
+          {
+            "name": "Emissary Irina",
+            "raid": false
+          },
+          {
+            "name": "High Wyrmseer Valthrun",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 40,
+        "camps": [
+          {
+            "name": "Guillome the Accursed",
+            "raid": true
+          },
+          {
+            "name": "Fanguard Keep",
+            "raid": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Szuur Region",
+    "zone": "Shallow Shoals",
+    "zoneAbbr": "SS",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "Thrallmaker Zladen",
+            "raid": false
+          },
+          {
+            "name": "Witchlord Kruurgal",
+            "raid": false
+          },
+          {
+            "name": "Hegumenia Mariam",
+            "raid": false
+          },
+          {
+            "name": "Gidum, the Dark Spirit",
+            "raid": false
+          },
+          {
+            "name": "High-Mother Haathala",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "Spectres",
+            "raid": false
+          },
+          {
+            "name": "Water Basilisks",
+            "raid": false
+          },
+          {
+            "name": "High-Sister Sarinius",
+            "raid": false
+          },
+          {
+            "name": "High-Mother Haathala",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Water Basilisk Broodmother",
+            "raid": false
+          },
+          {
+            "name": "Hegumenia Mariam",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "Ashira Island",
+            "raid": false
+          },
+          {
+            "name": "Gidum, the Dark Spirit",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 20,
+        "camps": [
+          {
+            "name": "Witchguard Hellblade",
+            "raid": false
+          },
+          {
+            "name": "Saahil the Tide Reaver",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 25,
+        "camps": [
+          {
+            "name": "Saahil the Tide Reaver",
+            "raid": false
+          },
+          {
+            "name": "Witchlord Kruurgal",
+            "raid": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Szuur Region",
+    "zone": "Grimtide Sanctum",
+    "zoneAbbr": "GS",
+    "levels": [
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "Tidecaller Selka",
+            "raid": false
+          },
+          {
+            "name": "Vesska the Bloodhound",
+            "raid": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Calafrey Region",
+    "zone": "Evershade Weald",
+    "zoneAbbr": "EW",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "Newbie Lift | Newbie Ruins",
+            "raid": false
+          },
+          {
+            "name": "Wasp Workers",
+            "raid": false
+          },
+          {
+            "name": "Black Widow Spiderlings (near Pixies)",
+            "raid": false
+          },
+          {
+            "name": "Fellstone Scouts",
+            "raid": false
+          },
+          {
+            "name": "Skeletons (Ruins near KB ZL)",
+            "raid": false
+          },
+          {
+            "name": "Fellstone Warriors",
+            "raid": false
+          },
+          {
+            "name": "Kyros Emeraldscale",
+            "raid": false
+          },
+          {
+            "name": "Vorkuul Blighteye",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "Wasp Workers",
+            "raid": false
+          },
+          {
+            "name": "Skeletons (Fallen Tree)",
+            "raid": false
+          },
+          {
+            "name": "Skeletons (Mid Tier Lift)",
+            "raid": false
+          },
+          {
+            "name": "Black Widows (near Pixies)",
+            "raid": false
+          },
+          {
+            "name": "Rabid Wolves (Ruins near KB ZL)",
+            "raid": false
+          },
+          {
+            "name": "Fellstone Orcs (near Orc cave)",
+            "raid": false
+          },
+          {
+            "name": "Meluli Dawnglow",
+            "raid": false
+          },
+          {
+            "name": "Elder Widows",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Fossergrim Cove",
+            "raid": false
+          },
+          {
+            "name": "Taeresh Deathcharmer",
+            "raid": false
+          },
+          {
+            "name": "Rotmuzzle",
+            "raid": false
+          },
+          {
+            "name": "Skeletons (near Orc cave)",
+            "raid": false
+          },
+          {
+            "name": "Skeletons (Mid Tier Lift)",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "Taeresh Deathcharmer",
+            "raid": false
+          },
+          {
+            "name": "Spider Landing",
+            "raid": false
+          },
+          {
+            "name": "Fossergrim Cove",
+            "raid": false
+          },
+          {
+            "name": "Mistress Naelira",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 20,
+        "camps": [
+          {
+            "name": "Mistress Naelira",
+            "raid": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Calafrey Region",
+    "zone": "Keeper's Bight",
+    "zoneAbbr": "KB",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "Forest Stalkers (Treehouse)",
+            "raid": false
+          },
+          {
+            "name": "Redpaw Den",
+            "raid": false
+          },
+          {
+            "name": "Mirella Nighthorn",
+            "raid": false
+          },
+          {
+            "name": "Blacktide Orc Cavern",
+            "raid": false
+          },
+          {
+            "name": "Baltharak Dunecaller",
+            "raid": false
+          },
+          {
+            "name": "Brak'Zul Bonecarver",
+            "raid": false
+          },
+          {
+            "name": "Darvok Skullbender",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "Roaming Wildlife (near EW ZL)",
+            "raid": false
+          },
+          {
+            "name": "Widow Vethra",
+            "raid": false
+          },
+          {
+            "name": "Redpaw",
+            "raid": false
+          },
+          {
+            "name": "Timberfang",
+            "raid": false
+          },
+          {
+            "name": "Chasm Drakes",
+            "raid": false
+          },
+          {
+            "name": "Rarthan Wartide",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Roaming Wildlife",
+            "raid": false
+          },
+          {
+            "name": "Various Sangrel Camps",
+            "raid": false
+          },
+          {
+            "name": "Poacher Tolan",
+            "raid": false
+          },
+          {
+            "name": "Poacher Wilna (Redpaw Den only)",
+            "raid": false
+          },
+          {
+            "name": "Canyon Stalkers",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "Spider Log",
+            "raid": false
+          },
+          {
+            "name": "Redpaw Den",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 20,
+        "camps": [
+          {
+            "name": "Widow Vethra",
+            "raid": false
+          },
+          {
+            "name": "Poacher Garrus",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 25,
+        "camps": [
+          {
+            "name": "Forest Stalkers (Treehouse)",
+            "raid": false
+          },
+          {
+            "name": "Brukk Goldgut",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 30,
+        "camps": [
+          {
+            "name": "Various Poacher Camps",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 35,
+        "camps": [
+          {
+            "name": "Hill Giants",
+            "raid": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Calafrey Region",
+    "zone": "Blacktide Bay",
+    "zoneAbbr": "BTB",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "Cove Boats",
+            "raid": false
+          },
+          {
+            "name": "Bloodchain Orcs",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "Gloomwidows",
+            "raid": false
+          },
+          {
+            "name": "Blacktide Orcs",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Gurowl, the Beast",
+            "raid": false
+          },
+          {
+            "name": "Gore",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "Bloodchain Orcs",
+            "raid": false
+          },
+          {
+            "name": "Admiral Blacktide",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 20,
+        "camps": [
+          {
+            "name": "Orbilis the Overseer",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 25,
+        "camps": [
+          {
+            "name": "Taskmaster Murkraal",
+            "raid": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Calafrey Region",
+    "zone": "Scarwood",
+    "zoneAbbr": "SCW",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "Thorne Grinholdt",
+            "raid": false
+          },
+          {
+            "name": "Bandit Caves",
+            "raid": false
+          },
+          {
+            "name": "Verdant Drake",
+            "raid": false
+          },
+          {
+            "name": "Sojourners",
+            "raid": false
+          },
+          {
+            "name": "Teyla Beastbound",
+            "raid": false
+          },
+          {
+            "name": "Maddening Echos",
+            "raid": false
+          },
+          {
+            "name": "Flickering Fragments",
+            "raid": false
+          },
+          {
+            "name": "Sunken Resort Entrance",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "Bandit Camps",
+            "raid": false
+          },
+          {
+            "name": "Garran Grinholdt",
+            "raid": false
+          },
+          {
+            "name": "Krev Thistlehook",
+            "raid": false
+          },
+          {
+            "name": "Green Drakes",
+            "raid": false
+          },
+          {
+            "name": "Corrupted Hill Giants",
+            "raid": false
+          },
+          {
+            "name": "Yurl Rootrender",
+            "raid": false
+          },
+          {
+            "name": "Maddening Echoes",
+            "raid": false
+          },
+          {
+            "name": "Witherwood",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Roaming Wildlife",
+            "raid": false
+          },
+          {
+            "name": "Poachers",
+            "raid": false
+          },
+          {
+            "name": "Various Wisps",
+            "raid": false
+          },
+          {
+            "name": "Hill Giants (Giant Fort)",
+            "raid": false
+          },
+          {
+            "name": "Witherwood",
+            "raid": false
+          },
+          {
+            "name": "Goreloch",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "Black Drakes",
+            "raid": false
+          },
+          {
+            "name": "Various Treants",
+            "raid": false
+          },
+          {
+            "name": "Dregath Warwake",
+            "raid": false
+          },
+          {
+            "name": "Krothun Veincarver",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 20,
+        "camps": [
+          {
+            "name": "Hill Giants (Giant Fort)",
+            "raid": false
+          },
+          {
+            "name": "Corrupted Hill Giants",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 25,
+        "camps": [
+          {
+            "name": "Dregath Warwake",
+            "raid": false
+          },
+          {
+            "name": "Goreloch",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 35,
+        "camps": [
+          {
+            "name": "Maal'Tosh",
+            "raid": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Calafrey Region",
+    "zone": "Glinting Hollow",
+    "zoneAbbr": "GH",
+    "levels": [
+      {
+        "level": 1,
+        "camps": [
+          {
+            "name": "Strig",
+            "raid": false
+          },
+          {
+            "name": "Shadowfunnel",
+            "raid": false
+          },
+          {
+            "name": "Treants",
+            "raid": false
+          },
+          {
+            "name": "Wisps",
+            "raid": false
+          },
+          {
+            "name": "Wolves",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "camps": [
+          {
+            "name": "Treants",
+            "raid": false
+          },
+          {
+            "name": "Wolves",
+            "raid": false
+          },
+          {
+            "name": "Brightspark",
+            "raid": false
+          },
+          {
+            "name": "Forgotten Shadow",
+            "raid": false
+          },
+          {
+            "name": "Wisps",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 10,
+        "camps": [
+          {
+            "name": "Softpaws",
+            "raid": false
+          },
+          {
+            "name": "Thornbark",
+            "raid": false
+          }
+        ]
+      },
+      {
+        "level": 15,
+        "camps": [
+          {
+            "name": "Strig",
+            "raid": false
+          },
+          {
+            "name": "Shadowfunnel",
+            "raid": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "region": "Calafrey Region",
+    "zone": "Sunken Resort",
+    "zoneAbbr": "SR",
+    "levels": []
+  }
+]
