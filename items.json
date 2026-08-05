@@ -347,7 +347,9 @@
     "weight": 0.5,
     "size": "Small",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|65e09d340238802c80c4898e|19770694\"><color=green><b><u>[Grandmaster's Dark Leather Hood]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Steel Longsword",
@@ -514,7 +516,9 @@
     "weight": 0.0,
     "size": "Small",
     "classes": ["ALL"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|852f697667af8be1a5e64411|19776118\"><color=green><b><u>[Stonehead Arrow]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Enchanted Copper Plate Breastplate",
@@ -1116,7 +1120,9 @@
     "size": "Small",
     "classes": ["ARC", "BRD", "BST", "ELE", "ENC", "FTR", "INQ", "NEC", "RNG", "ROG", "SHD", "SHM", "SPB", "WIZ"],
     "race": ["ALL"],
-    "description": "A vile black iron dagger stained and crusted with the blood of its victims."
+    "description": "A vile black iron dagger stained and crusted with the blood of its victims.",
+    "gameLinkCode": "<link=\"item|f2098af07faa79ba52c3a0b5|14656447\"><color=green><b><u>[Stained Black Iron Dagger]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Mace of Malice",
@@ -1276,7 +1282,9 @@
     "weight": 2.0,
     "size": "Medium",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|6caed6ca66cde82c52e3cd4b|23050146\"><color=green><b><u>[Tattered Hide Vest]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Corroded Bronze Long Spear",
@@ -2008,7 +2016,9 @@
     "weight": 0.1,
     "size": "Small",
     "classes": ["ALL"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|a5952b843312a8a5940c2455|19355186\"><color=green><b><u>[Inlaid Black Sapphire Bronze Ring]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Enchanted Copper Plate Helm",
@@ -2022,7 +2032,9 @@
     "weight": 1.0,
     "size": "Small",
     "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|de98b84961b67459cdbbe5dc\"><color=green><b><u>[Enchanted Copper Plate Helm]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Copper Plate Boots",
@@ -3149,7 +3161,9 @@
     "weight": 0.25,
     "size": "Medium",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|0d782580b2d9451cbb17ca97|20018062\"><color=green><b><u>[Suede Leather Mask]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Knucklehide Chausses",
@@ -3514,7 +3528,8 @@
     "size": "Small",
     "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SPB"],
     "race": ["ALL"],
-    "lastUpdated": "2026-07-30"
+    "gameLinkCode": "<link=\"item|8b226e6c7d0aa92726ae8239|22378637\"><color=green><b><u>[Ember Carapace Belt]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Imperfect Fire Emerald",
@@ -3582,7 +3597,8 @@
     "size": "Medium",
     "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB", "WIZ"],
     "race": ["ALL"],
-    "lastUpdated": "2026-07-30"
+    "gameLinkCode": "<link=\"item|8ebf6038670b0de9cd5ad5d4|22449157\"><color=green><b><u>[Hadir's Blade]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Hadir's Iron Fist",
@@ -3941,7 +3957,9 @@
     "weight": 0.1,
     "size": "Small",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|6efdeb7e197dfeffc82650c5|19085847\"><color=green><b><u>[Spiked Training Collar]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Runner's Chain Tunic",
@@ -4918,7 +4936,9 @@
     "weight": 0.5,
     "size": "Medium",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|4e32b23f1b30f5716e2a2b39|19499843\"><color=green><b><u>[Sand-Blasted Boots]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Corrupted Leather Leggings",
@@ -5445,7 +5465,9 @@
     "weight": 2.0,
     "size": "Medium",
     "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|de7914e1c2af6872e5f3e2bd|22354149\"><color=green><b><u>[Rivenguard Tassets]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Sootgrit",
@@ -8709,7 +8731,9 @@
     "weight": 0.5,
     "size": "Small",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|8fe8b7258033f34ed5df53a3|20405158\"><color=green><b><u>[Corrupted Leather Shoulderpads]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Corrupted Leather Cloak",
@@ -10218,14 +10242,14 @@
   {
     "name": "Mireguard",
     "slug": "mireguard",
-    "lastUpdated": "2026-07-19",
+    "lastUpdated": "2026-08-05",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Secondary",
-    "ac": 62,
+    "ac": 24,
     "stats": { "WIS": 7 },
     "resists": { "POISON": 4 },
-    "weight": 5.0,
+    "weight": 2.0,
     "size": "Medium",
     "classes": ["BRD", "CLR", "DRU", "FTR", "INQ", "PAL", "RNG", "SHD", "SHM"],
     "race": ["ALL"]
@@ -12212,7 +12236,8 @@
     "name": "Colorful Leather Vest",
     "slug": "colorful-leather-vest",
     "image": "images/items/colorful-leather-vest.jpg",
-    "lastUpdated": "2026-07-19",
+    "gameLinkCode": "<link=\"item|7ebbda5a1e754ed58c20f540|22310608\"><color=green><b><u>[Colorful Leather Vest]</u></b></color></link>",
+    "lastUpdated": "2026-08-05",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -13573,11 +13598,12 @@
     "tags": ["MAGIC", "NODROP"],
     "slot": "Wrist",
     "ac": 5,
-    "stats": { "INT": 1, "MANA": 10 },
-    "weight": 0.3,
+    "stats": { "INT": 2, "MANA": 15 },
+    "weight": 0.25,
     "size": "Medium",
     "classes": ["ELE", "ENC", "NEC", "WIZ"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Interrogator's Clasp",
@@ -13722,7 +13748,9 @@
     "size": "Medium",
     "classes": ["ARC", "BST", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB"],
     "race": ["ALL"],
-    "note": "A joint drop from the combined Pasha Patrice/Aide Aida encounter on mnmdrops.com, not from either mob individually."
+    "note": "A joint drop from the combined Pasha Patrice/Aide Aida encounter on mnmdrops.com, not from either mob individually.",
+    "gameLinkCode": "<link=\"item|4aceaa3626e5c28f13d81d97|22566352\"><color=green><b><u>[Pasha's Favor]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Battleforged Plate Belt",
@@ -13762,7 +13790,9 @@
     "weight": 0.3,
     "size": "Medium",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|4bf5cf901495ca634df5a98f|20460001\"><color=green><b><u>[Ragged Leather Cloak]</u></b></color></link>",
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "The Impaler",
@@ -17633,7 +17663,8 @@
   {
     "name": "Ancient Work Gloves",
     "slug": "ancient-work-gloves",
-    "lastUpdated": "2026-07-28",
+    "gameLinkCode": "<link=\"item|11f64dd101b1b889c2ae2498|22405034\"><color=green><b><u>[Ancient Work Gloves]</u></b></color></link>",
+    "lastUpdated": "2026-08-05",
     "image": "images/items/ancient-work-gloves.jpg",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
@@ -18272,7 +18303,8 @@
   {
     "name": "Foul Chitin Bracer",
     "slug": "foul-chitin-bracer",
-    "lastUpdated": "2026-07-28",
+    "gameLinkCode": "<link=\"item|8dfe09760b631a4c31e261d2|21725738\"><color=green><b><u>[Foul Chitin Bracer]</u></b></color></link>",
+    "lastUpdated": "2026-08-05",
     "image": "images/items/foul-chitin-bracer.jpg",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
@@ -18842,5 +18874,215 @@
     "size": "Small",
     "classes": ["ALL"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Inlaid Emerald Platinum Necklace",
+    "slug": "inlaid-emerald-platinum-necklace",
+    "lastUpdated": "2026-08-05",
+    "type": "Jewelry",
+    "tags": [],
+    "slot": "Neck",
+    "stats": { "STA": 7 },
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Inlaid Topaz Bronze Necklace",
+    "slug": "inlaid-topaz-bronze-necklace",
+    "lastUpdated": "2026-08-05",
+    "type": "Jewelry",
+    "tags": [],
+    "slot": "Neck",
+    "stats": { "WIS": 2 },
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Inlaid Bloodstone Platinum Necklace",
+    "slug": "inlaid-bloodstone-platinum-necklace",
+    "lastUpdated": "2026-08-05",
+    "type": "Jewelry",
+    "tags": [],
+    "slot": "Neck",
+    "stats": { "STA": 7 },
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Inlaid Hematite Platinum Ring",
+    "slug": "inlaid-hematite-platinum-ring",
+    "lastUpdated": "2026-08-05",
+    "type": "Jewelry",
+    "tags": [],
+    "slot": "Finger",
+    "stats": { "INT": 7 },
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Inlaid Hematite Platinum Necklace",
+    "slug": "inlaid-hematite-platinum-necklace",
+    "lastUpdated": "2026-08-05",
+    "type": "Jewelry",
+    "tags": [],
+    "slot": "Neck",
+    "stats": { "INT": 7 },
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Hexwoven Handwraps",
+    "slug": "hexwoven-handwraps",
+    "lastUpdated": "2026-08-05",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Hands",
+    "ac": 7,
+    "stats": { "INT": 3, "MANA": 15 },
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Midnight Anklet",
+    "slug": "midnight-anklet",
+    "lastUpdated": "2026-08-05",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Feet",
+    "ac": 13,
+    "stats": { "STA": 1, "WIS": 3, "MANA": 10 },
+    "weight": 2.0,
+    "size": "Medium",
+    "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Head of the Overseer",
+    "slug": "head-of-the-overseer",
+    "lastUpdated": "2026-08-05",
+    "type": "Misc",
+    "tags": [],
+    "description": "The severed head of the goblin overseer.",
+    "weight": 1.0,
+    "size": "Medium"
+  },
+  {
+    "name": "Grudgehaft",
+    "slug": "grudgehaft",
+    "lastUpdated": "2026-08-05",
+    "image": "images/items/grudgehaft.jpg",
+    "type": "Weapon",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Primary",
+    "twoHanded": true,
+    "damage": 38,
+    "delay": 48,
+    "skill": "Bludgeoning",
+    "stats": { "STR": 14, "AGI": -2, "DEX": -2 },
+    "effect": "Crippling Surge (Chance On Hit. Level: 30)",
+    "description": "A titanic maul embodying agony transfigured into wrath, the source of a lifetime of suffering. Forged from the malformed shoulder bone of Edric \"the Lame\" Torvald."
+  },
+  {
+    "name": "Leprotic Veil",
+    "slug": "leprotic-veil",
+    "lastUpdated": "2026-08-05",
+    "image": "images/items/leprotic-veil.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Face",
+    "ac": 11,
+    "stats": { "INT": 6, "WIS": 3, "CHA": 4, "MANA": 15 },
+    "description": "A filthy veil with dark symbols lining its edge. It feels stronger than normal silk.",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Scholar's Shoulderpads",
+    "slug": "scholars-shoulderpads",
+    "lastUpdated": "2026-08-05",
+    "image": "images/items/scholars-shoulderpads.jpg",
+    "type": "Armor",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Shoulders",
+    "ac": 36,
+    "stats": { "STR": 8, "STA": 3, "INT": 8, "HP": 15 },
+    "description": "One of the shoulderpads has the initials \"H.W.\" sewn into the leather with silver thread.",
+    "weight": 0.5,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"]
+  },
+  {
+    "name": "Bloodied Allegiance Cuff",
+    "slug": "bloodied-allegiance-cuff",
+    "lastUpdated": "2026-08-05",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true
+  },
+  {
+    "name": "Tattered Wool Cape",
+    "slug": "tattered-wool-cape",
+    "lastUpdated": "2026-08-05",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true
+  },
+  {
+    "name": "Tattered Wool Pantaloons",
+    "slug": "tattered-wool-pantaloons",
+    "lastUpdated": "2026-08-05",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Legs",
+    "needsInfo": true
+  },
+  {
+    "name": "Tattered Hide Shoulderpads",
+    "slug": "tattered-hide-shoulderpads",
+    "lastUpdated": "2026-08-05",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shoulders",
+    "needsInfo": true
+  },
+  {
+    "name": "Flawed Jade",
+    "slug": "flawed-jade",
+    "lastUpdated": "2026-08-05",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Potato",
+    "slug": "potato",
+    "lastUpdated": "2026-08-05",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Celery",
+    "slug": "celery",
+    "lastUpdated": "2026-08-05",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true
   }
 ]

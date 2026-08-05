@@ -185,7 +185,11 @@
   {
     "name": "a bone carver",
     "slug": "a-bone-carver",
-    "needsInfo": true
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Raw Beetle Meat" }
+    ],
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "an ashira warrior",
@@ -2990,11 +2994,16 @@
     "slug": "vikar-brask",
     "named": true,
     "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
     "drops": [
       { "item": "Battleforged Plate Belt" },
       { "item": "Interrogator's Hood" },
-      { "item": "Ragged Leather Cloak" }
-    ]
+      { "item": "Ragged Leather Cloak" },
+      { "item": "Head of Vikar Brask" },
+      { "item": "Lemon" },
+      { "item": "Mushroom" }
+    ],
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Guard Atep",
@@ -3695,9 +3704,10 @@
     "named": true,
     "maps": ["Fallen Pass"],
     "drops": [
-      { "item": "Banished Seamstress' Blade" }
+      { "item": "Banished Seamstress' Blade" },
+      { "item": "Leprotic Veil" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Blightcaller Zirat",
@@ -3798,9 +3808,10 @@
       { "item": "Boots of the Strategist's Burden" },
       { "item": "Cloak of Shame" },
       { "item": "Stillbrook Coif" },
-      { "item": "Torvald's Grace" }
+      { "item": "Torvald's Grace" },
+      { "item": "Grudgehaft" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "Elda The Cook",
@@ -5351,5 +5362,197 @@
       { "item": "Taskmaster's Leathers" }
     ],
     "lastUpdated": "2026-07-28"
+  },
+  {
+    "name": "Seeric of Maelsin Thrys",
+    "slug": "seeric-of-maelsin-thrys",
+    "named": true,
+    "image": "images/Monsters/seeric-of-maelsin-thrys.jpg",
+    "maps": ["Sungreet Strand"],
+    "drops": [
+      { "item": "Hexwoven Handwraps" },
+      { "item": "Midnight Anklet" }
+    ],
+    "lastUpdated": "2026-08-05"
+  },
+  {
+    "name": "a goblin overseer",
+    "slug": "a-goblin-overseer",
+    "drops": [
+      { "item": "Head of the Overseer" }
+    ],
+    "lastUpdated": "2026-08-05"
+  },
+  {
+    "name": "a dusty skeleton",
+    "slug": "a-dusty-skeleton",
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "family": "Tattered Wool" },
+      { "family": "Corroded Bronze" },
+      { "item": "Bone Chips" },
+      { "item": "Hide Scraps" },
+      { "item": "Bronze Scraps" },
+      { "item": "Wool Scraps" }
+    ],
+    "coinDrops": [
+      { "copper": 51 },
+      { "silver": 1, "copper": 18 },
+      { "copper": 65 },
+      { "copper": 61 },
+      { "copper": 80 },
+      { "copper": 82 },
+      { "copper": 83 },
+      { "copper": 77 }
+    ],
+    "lastUpdated": "2026-08-05"
+  },
+  {
+    "name": "a devotee",
+    "slug": "a-devotee",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "drops": [
+      { "item": "Bloodied Allegiance Cuff" },
+      { "family": "Corroded Bronze" },
+      { "family": "Tattered Hide" },
+      { "item": "Bronze Scraps" }
+    ],
+    "coinDrops": [
+      { "copper": 67 },
+      { "silver": 1, "copper": 1 }
+    ],
+    "lastUpdated": "2026-08-05"
+  },
+  {
+    "name": "a lawbreaker",
+    "slug": "a-lawbreaker",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "drops": [
+      { "item": "Raw Human Meat" },
+      { "item": "Garlic" },
+      { "family": "Corroded Bronze" },
+      { "item": "Carrot" },
+      { "family": "Tattered Wool" },
+      { "family": "Tattered Hide" },
+      { "item": "Lemon" },
+      { "item": "Bronze Scraps" },
+      { "item": "Hide Scraps" },
+      { "item": "Flawed Ruby" }
+    ],
+    "coinDrops": [
+      { "copper": 59 },
+      { "copper": 71 },
+      { "copper": 71 },
+      { "copper": 86 },
+      { "copper": 66 },
+      { "copper": 90 },
+      { "copper": 59 },
+      { "copper": 74 },
+      { "copper": 87 },
+      { "copper": 54 },
+      { "copper": 77 },
+      { "copper": 63 }
+    ],
+    "lastUpdated": "2026-08-05"
+  },
+  {
+    "name": "an enforcer",
+    "slug": "an-enforcer",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "drops": [
+      { "item": "Flawed Jade" },
+      { "item": "Bronze Scraps" },
+      { "item": "Potato" },
+      { "family": "Tattered Hide" },
+      { "item": "Raw Human Meat" },
+      { "item": "Garlic" },
+      { "item": "Cheese" },
+      { "item": "Celery" }
+    ],
+    "coinDrops": [
+      { "copper": 77 },
+      { "copper": 67 },
+      { "copper": 55 },
+      { "copper": 89 }
+    ],
+    "lastUpdated": "2026-08-05"
+  },
+  {
+    "name": "a goon",
+    "slug": "a-goon",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "drops": [
+      { "item": "Wool Scraps" },
+      { "item": "Raw Human Meat" },
+      { "family": "Tattered Wool" },
+      { "family": "Tattered Hide" },
+      { "item": "Bronze Scraps" },
+      { "item": "Cheese" },
+      { "item": "Bloodied Allegiance Cuff" },
+      { "item": "Flawed Black Sapphire" },
+      { "item": "Garlic" },
+      { "item": "Celery" }
+    ],
+    "coinDrops": [
+      { "copper": 80 },
+      { "copper": 83 },
+      { "copper": 58 },
+      { "copper": 73 },
+      { "copper": 63 },
+      { "copper": 56 },
+      { "copper": 87 },
+      { "copper": 68 },
+      { "copper": 87 }
+    ],
+    "lastUpdated": "2026-08-05"
+  },
+  {
+    "name": "a loyal protector",
+    "slug": "a-loyal-protector",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "drops": [
+      { "item": "Bronze Scraps" },
+      { "family": "Corroded Bronze" },
+      { "item": "Hide Scraps" }
+    ],
+    "coinDrops": [
+      { "copper": 85 },
+      { "copper": 79 }
+    ],
+    "lastUpdated": "2026-08-05"
+  },
+  {
+    "name": "a silent protector",
+    "slug": "a-silent-protector",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "drops": [
+      { "family": "Corroded Bronze" }
+    ],
+    "coinDrops": [
+      { "copper": 88 }
+    ],
+    "lastUpdated": "2026-08-05"
+  },
+  {
+    "name": "Brittle Surgeon",
+    "slug": "brittle-surgeon",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "drops": [
+      { "item": "Surgeon's Razor" }
+    ],
+    "lastUpdated": "2026-08-05"
+  },
+  {
+    "name": "Taskmaster Feeka",
+    "slug": "taskmaster-feeka",
+    "named": true,
+    "lastUpdated": "2026-08-05"
   }
 ]

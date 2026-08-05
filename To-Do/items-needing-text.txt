@@ -463,3 +463,15 @@ same stat. Skri'Var Ranger's Bow (Tora'galdo) had a visibly glitchy card render 
 line showed two overlapping/duplicate entries for "Strength of Eth-el" with different Cast
 Time values (3s vs 10s) -- recorded the 3s version, flagged the ambiguity, needsInfo also set
 since Weight/Size/Class/Race were cut off on the same card.
+
+2026-08-05, mnmdrops.com "New/Updated Item" screenshots (finishing an interrupted earlier
+batch -- the item images had already been saved to images/items/ as grudgehaft.jpg/
+leprotic-veil.jpg/scholars-shoulderpads.jpg, but the items.json entries were never written):
+Grudgehaft's card ends right after its flavor text with no visible Weight/Size row at all --
+recorded everything else, left weight/size unset rather than guessed. Scholar's Shoulderpads
+shows a Class line but no Race line beneath it (every sibling unique armor piece shows both)
+-- likely cropped the same way a missing Race line usually is, left unset rather than
+assumed ALL. A fourth orphaned image, stirring-stick.jpg, has no matching screenshot in this
+batch at all -- Spicy Raziq's monsters.json entry already lists "Stirring Stick" as a drop,
+but the item itself still has no card data and no items.json entry; needs its own screenshot
+to complete.
