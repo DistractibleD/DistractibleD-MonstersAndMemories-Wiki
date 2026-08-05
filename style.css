@@ -1363,7 +1363,10 @@ body:not(.site-entered) .sidebar {
 #item-tooltip {
   display: none;
   position: fixed;
-  z-index: 200;
+  /* Must outrank #item-viewer/#monster-viewer's z-index: 300 — hovering an
+     item name inside an already-open monster card (e.g. a drop link) needs
+     the tooltip to render above that modal, not behind it. */
+  z-index: 400;
   width: 320px;
   max-width: 90vw;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
@@ -1379,7 +1382,7 @@ body:not(.site-entered) .sidebar {
 #monster-tooltip {
   display: none;
   position: fixed;
-  z-index: 200;
+  z-index: 400;
   width: 320px;
   max-width: 90vw;
   background: var(--bg-panel);

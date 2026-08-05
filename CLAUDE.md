@@ -366,6 +366,17 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   one outright — floor-only (`"225+"`) or unknown (`"???"`) stays unset with a `note`
   capturing raw text. `results` (item names, same dynamic-linking convention as
   `components`/`drops`) optional, only when the source has a Results column.
+- **Every gathering tradeskill except Disenchanting: the node's own name is also its
+  result** (confirmed 2026-08-05) — set `results: ["<node's own name>"]` on every node whose
+  name is confirmed (not a placeholder like "Unidentified Herb"). A `"Rich <X>"` node yields
+  the same result as its plain counterpart, not a different item — it's the same material at
+  higher difficulty/yield, not a distinct tier. For Herbalism this is cross-confirmed by the
+  Mortar and Pestle recipes (`crafting.json`), which consume `(2) <node name>` to produce
+  `<node name> Powder`. For Fishing, node names carry a `"Raw "` prefix (e.g. "Raw Whitefish")
+  because the catch is uncooked, not because "Raw" is a separate qualifier — the result name
+  keeps that prefix verbatim, still an exact match to the node's own name. Most of these
+  result item names don't have a real `items.json` card yet and render as plain text until
+  one comes in, same as any other unmatched dynamic link.
 - Source tables so far are fan-wiki-style reference charts, same weaker-than-a-screenshot
   caveat as the Tanning/Leatherworking/Blacksmithing tables (see `CLAUDE-HISTORY.md`) —
   supersede without hesitation if the user's own observation disagrees.

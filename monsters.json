@@ -634,7 +634,11 @@
     "slug": "a-fire-beetle",
     "image": "images/Monsters/a-fire-beetle.jpg",
     "maps": ["Night Harbor"],
-    "areas": ["North Gate"]
+    "areas": ["North Gate"],
+    "drops": [
+      { "item": "Fire Beetle Eye" }
+    ],
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "a curious jackal",
@@ -1028,9 +1032,10 @@
     "image": "images/Monsters/a-giant-fire-beetle.jpg",
     "maps": ["Sungreet Strand"],
     "drops": [
-      { "item": "Giant Fire Beetle Carapace" }
+      { "item": "Giant Fire Beetle Carapace" },
+      { "item": "Fire Beetle Eye" }
     ],
-    "lastUpdated": "2026-07-30"
+    "lastUpdated": "2026-08-05"
   },
   {
     "name": "a ghost",
@@ -3581,7 +3586,8 @@
     "slug": "zahid-the-calm",
     "lastUpdated": "2026-07-27",
     "named": true,
-    "image": "images/Monsters/zahid-the-calm.jpg"
+    "image": "images/Monsters/zahid-the-calm.jpg",
+    "needsInfo": true
   },
   {
     "name": "Overseer Jaru'Kan",
@@ -4452,6 +4458,7 @@
     "name": "Sister Elsi",
     "slug": "sister-elsi",
     "named": true,
+    "needsInfo": true,
     "drops": [
       { "item": "Iron Scraps" },
       { "item": "Celery" }
@@ -4472,6 +4479,7 @@
     "name": "Father Rau",
     "slug": "father-rau",
     "named": true,
+    "needsInfo": true,
     "drops": [
       { "item": "Iron Scraps" },
       { "item": "Cabbage" }

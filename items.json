@@ -19232,5 +19232,29 @@
     "size": "Medium",
     "classes": ["CLR", "PAL", "RNG", "SHM"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Fire Beetle Eye",
+    "slug": "fire-beetle-eye",
+    "lastUpdated": "2026-08-05",
+    "type": "Misc",
+    "tags": [],
+    "slot": "Primary / Secondary / Range / Belt",
+    "effect": "Fire Beetle Eye (Passive. Must Equip. Level: 1)",
+    "fuel": 100,
+    "description": "The eye of a fire beetle. It can be used as a cheap light source.",
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Resin",
+    "slug": "resin",
+    "lastUpdated": "2026-08-05",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.0,
+    "size": "Small"
   }
 ]

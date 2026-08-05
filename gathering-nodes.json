@@ -6,6 +6,7 @@
     "tradeskill": "Mining",
     "minSkill": 1,
     "trivialSkill": 50,
+    "results": ["Copper Ore"],
     "locations": ["Night Harbor (West Gate, North Gate)", "Shaded Dunes", "Evershade Weald", "Keeper's Bight"]
   },
   {
@@ -15,6 +16,7 @@
     "tradeskill": "Mining",
     "minSkill": 1,
     "trivialSkill": 65,
+    "results": ["Copper Ore"],
     "locations": ["Night Harbor (West Gate, North Gate)", "Shaded Dunes", "Evershade Weald", "Keeper's Bight"]
   },
   {
@@ -24,6 +26,7 @@
     "tradeskill": "Mining",
     "minSkill": 40,
     "trivialSkill": 75,
+    "results": ["Limestone"],
     "locations": ["Fallen Pass (on cliffs)", "Shaded Dunes, on the way to Tel'Ekir", "Fallen Pass (atop the canyon)", "Sungreet Strand (atop the canyon above the pit)", "Scarwood"]
   },
   {
@@ -32,6 +35,7 @@
     "tradeskill": "Mining",
     "minSkill": 60,
     "trivialSkill": 90,
+    "results": ["Limestone"],
     "locations": ["Shaded Dunes", "Fallen Pass", "Scarwood"]
   },
   {
@@ -41,6 +45,7 @@
     "tradeskill": "Mining",
     "minSkill": 75,
     "trivialSkill": 125,
+    "results": ["Tin Ore"],
     "locations": ["Sungreet Strand", "Vale of Zintar", "Scarwood"]
   },
   {
@@ -50,6 +55,7 @@
     "tradeskill": "Mining",
     "minSkill": 85,
     "trivialSkill": 135,
+    "results": ["Tin Ore"],
     "locations": ["Sungreet Strand", "Vale of Zintar", "Scarwood"]
   },
   {
@@ -59,6 +65,7 @@
     "tradeskill": "Mining",
     "minSkill": 110,
     "trivialSkill": 150,
+    "results": ["Silver Ore"],
     "locations": ["Sungreet Strand", "Vale of Zintar", "Scarwood"]
   },
   {
@@ -67,6 +74,7 @@
     "tradeskill": "Mining",
     "minSkill": 110,
     "trivialSkill": 160,
+    "results": ["Silver Ore"],
     "locations": ["Sungreet Strand", "Vale of Zintar", "Scarwood"]
   },
   {
@@ -75,6 +83,7 @@
     "tradeskill": "Mining",
     "minSkill": 150,
     "trivialSkill": 200,
+    "results": ["Iron Ore"],
     "locations": ["Fallen Pass", "Glass Flats", "Shallow Shoals"]
   },
   {
@@ -83,6 +92,7 @@
     "tradeskill": "Mining",
     "minSkill": 165,
     "trivialSkill": 210,
+    "results": ["Iron Ore"],
     "locations": ["Fallen Pass", "Glass Flats", "Shallow Shoals"]
   },
   {
@@ -91,6 +101,7 @@
     "tradeskill": "Mining",
     "minSkill": 175,
     "trivialSkill": 225,
+    "results": ["Gold Ore"],
     "locations": ["Fallen Pass", "Glass Flats", "Shallow Shoals"]
   },
   {
@@ -98,6 +109,7 @@
     "slug": "rich-gold-vein",
     "tradeskill": "Mining",
     "minSkill": 190,
+    "results": ["Gold Ore"],
     "locations": ["Fallen Pass", "Glass Flats", "Shallow Shoals"],
     "note": "Trivial only given as a floor on the source table: \"225+\"."
   },
@@ -107,6 +119,7 @@
     "tradeskill": "Mining",
     "minSkill": 225,
     "trivialSkill": 275,
+    "results": ["Coal"],
     "locations": ["Fallen Pass", "Sungreet Strand (in the dwarf mines)"]
   },
   {
@@ -115,6 +128,7 @@
     "tradeskill": "Mining",
     "minSkill": 240,
     "trivialSkill": 290,
+    "results": ["Coal"],
     "locations": ["Fallen Pass", "Sungreet Strand (in the dwarf mines)"]
   },
   {
@@ -122,6 +136,7 @@
     "slug": "platinum-vein",
     "tradeskill": "Mining",
     "minSkill": 250,
+    "results": ["Platinum Ore"],
     "locations": ["Fallen Pass"],
     "note": "Trivial not yet known — the source table shows \"???\"."
   },
@@ -130,6 +145,7 @@
     "slug": "rich-platinum-vein",
     "tradeskill": "Mining",
     "minSkill": 260,
+    "results": ["Platinum Ore"],
     "locations": ["Fallen Pass"],
     "note": "Trivial not yet known — the source table shows \"???\"."
   },
@@ -137,6 +153,7 @@
     "name": "Mithril Vein",
     "slug": "mithril-vein",
     "tradeskill": "Mining",
+    "results": ["Mithril Ore"],
     "locations": [],
     "note": "Neither min skill nor trivial is known yet — the source table shows \"???\" for both."
   },
@@ -144,6 +161,7 @@
     "name": "Rich Mithril Vein",
     "slug": "rich-mithril-vein",
     "tradeskill": "Mining",
+    "results": ["Mithril Ore"],
     "locations": [],
     "note": "Neither min skill nor trivial is known yet — the source table shows \"???\" for both."
   },
@@ -174,7 +192,7 @@
     "tradeskill": "Lumberjacking",
     "minSkill": 50,
     "trivialSkill": 85,
-    "results": ["Fine Wood", "Resin"],
+    "results": ["Fine Wood"],
     "locations": ["Sungreet Strand", "Keeper's Bight"]
   },
   {
@@ -183,7 +201,7 @@
     "tradeskill": "Lumberjacking",
     "minSkill": 50,
     "trivialSkill": 100,
-    "results": ["Fine Wood", "Resin"],
+    "results": ["Fine Wood"],
     "locations": ["Sungreet Strand", "Keeper's Bight"]
   },
   {
@@ -193,7 +211,7 @@
     "tradeskill": "Lumberjacking",
     "minSkill": 85,
     "trivialSkill": 135,
-    "results": ["Ironbark Wood", "Resin"],
+    "results": ["Ironbark Wood"],
     "locations": ["Sungreet Strand", "Keeper's Bight"]
   },
   {
@@ -201,7 +219,7 @@
     "slug": "rich-ironbark-wood-pile",
     "tradeskill": "Lumberjacking",
     "trivialSkill": 150,
-    "results": ["Ironbark Wood", "Resin"],
+    "results": ["Ironbark Wood"],
     "locations": ["Sungreet Strand"],
     "note": "Min skill only given as a floor on the source table: \">92\"."
   },
@@ -211,7 +229,7 @@
     "tradeskill": "Lumberjacking",
     "minSkill": 110,
     "trivialSkill": 160,
-    "results": ["Golden Palm Wood", "Resin"],
+    "results": ["Golden Palm Wood"],
     "locations": ["Sungreet Strand"]
   },
   {
@@ -220,7 +238,7 @@
     "tradeskill": "Lumberjacking",
     "minSkill": 125,
     "trivialSkill": 175,
-    "results": ["Golden Palm Wood", "Resin"],
+    "results": ["Golden Palm Wood"],
     "locations": ["Sungreet Strand"]
   },
   {
@@ -229,7 +247,7 @@
     "tradeskill": "Lumberjacking",
     "minSkill": 60,
     "trivialSkill": 110,
-    "results": ["Whisperpine Wood", "Resin"],
+    "results": ["Whisperpine Wood"],
     "locations": ["Keeper's Bight"]
   },
   {
@@ -237,7 +255,7 @@
     "slug": "rich-whisperpine-wood-pile",
     "tradeskill": "Lumberjacking",
     "minSkill": 75,
-    "results": ["Whisperpine Wood", "Resin"],
+    "results": ["Whisperpine Wood"],
     "locations": ["Keeper's Bight"],
     "note": "Trivial only given as a floor on the source table: \"110+\"."
   },
@@ -246,6 +264,7 @@
     "slug": "raw-whitefish",
     "tradeskill": "Fishing",
     "minSkill": 1,
+    "results": ["Raw Whitefish"],
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Common",
     "baitRequired": "No at fishing skill 50"
@@ -255,6 +274,7 @@
     "slug": "raw-basa",
     "tradeskill": "Fishing",
     "minSkill": 1,
+    "results": ["Raw Basa"],
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Uncommon",
     "baitRequired": "No"
@@ -264,6 +284,7 @@
     "slug": "raw-grouper",
     "tradeskill": "Fishing",
     "minSkill": 1,
+    "results": ["Raw Grouper"],
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Uncommon",
     "baitRequired": "No at fishing skill 75"
@@ -272,6 +293,7 @@
     "name": "Raw Bay Crab",
     "slug": "raw-bay-crab",
     "tradeskill": "Fishing",
+    "results": ["Raw Bay Crab"],
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Rare",
     "baitRequired": "?",
@@ -281,6 +303,7 @@
     "name": "Raw Thorn Sturgeon",
     "slug": "raw-thorn-sturgeon",
     "tradeskill": "Fishing",
+    "results": ["Raw Thorn Sturgeon"],
     "locations": ["Night Harbor", "Evershade Weald"],
     "rarity": "Very Rare",
     "baitRequired": "?",
@@ -290,6 +313,7 @@
     "name": "Raw Tide Minnow",
     "slug": "raw-tide-minnow",
     "tradeskill": "Fishing",
+    "results": ["Raw Tide Minnow"],
     "locations": ["Shallow Shoals"],
     "baitRequired": "No at fishing skill 100",
     "note": "Fishing skill required not yet known — the source table shows \"???\"."
@@ -298,6 +322,7 @@
     "name": "Deep Sea Devourer",
     "slug": "deep-sea-devourer",
     "tradeskill": "Fishing",
+    "results": ["Deep Sea Devourer"],
     "locations": ["Shallow Shoals"],
     "rarity": "Very Rare",
     "baitRequired": "?",
@@ -310,6 +335,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 1,
     "trivialSkill": 15,
+    "results": ["Lionleaf"],
     "locations": ["Evershade Weald", "Night Harbor", "Shaded Dunes"]
   },
   {
@@ -319,6 +345,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 1,
     "trivialSkill": 20,
+    "results": ["Ghost Poppy"],
     "locations": ["Night Harbor", "Shaded Dunes", "Evershade Weald", "Sungreet Strand"]
   },
   {
@@ -326,6 +353,7 @@
     "slug": "selstie-kelp",
     "tradeskill": "Herbalism",
     "minSkill": 1,
+    "results": ["Selstie Kelp"],
     "locations": ["Evershade Weald"],
     "note": "Needed for the Bard Starter Quest (Faelindral); no observed skill-ups from harvesting. Trivial only given as a floor on the source table: \">20\"."
   },
@@ -336,6 +364,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 1,
     "trivialSkill": 30,
+    "results": ["Sylvine"],
     "locations": ["Evershade Weald"]
   },
   {
@@ -345,6 +374,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 10,
     "trivialSkill": 45,
+    "results": ["Nomad's Grace"],
     "locations": ["Evershade Weald", "Shaded Dunes", "Sungreet Strand"]
   },
   {
@@ -354,6 +384,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 15,
     "trivialSkill": 65,
+    "results": ["Whispering Sage"],
     "locations": ["Evershade Weald", "Shaded Dunes"]
   },
   {
@@ -363,6 +394,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 30,
     "trivialSkill": 80,
+    "results": ["Ironroot"],
     "locations": ["Shaded Dunes", "Sungreet Strand"]
   },
   {
@@ -370,6 +402,7 @@
     "slug": "moonveil",
     "tradeskill": "Herbalism",
     "minSkill": 35,
+    "results": ["Moonveil"],
     "locations": ["Evershade Weald", "Keeper's Bight", "Shallow Shoals"],
     "note": "Only spawns at night, at 6pm in-game. Trivial is somewhere between 77 and 88 (exact value unknown) — shown as \"88>?>77\" on the source table."
   },
@@ -379,6 +412,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 55,
     "trivialSkill": 105,
+    "results": ["Stranglevine"],
     "locations": ["Fallen Pass"],
     "image": "images/gathering/stranglevine.jpg"
   },
@@ -389,6 +423,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 90,
     "trivialSkill": 140,
+    "results": ["Duneleaf"],
     "locations": ["Shaded Dunes", "Sungreet Strand"]
   },
   {
@@ -398,6 +433,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 80,
     "trivialSkill": 125,
+    "results": ["Gadolvine"],
     "locations": ["Fallen Pass", "Shallow Shoals"],
     "note": "Grows underwater. In the water at Southern Beach, near invisible Smuggler Lookouts."
   },
@@ -408,6 +444,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 110,
     "trivialSkill": 160,
+    "results": ["Dragon's Vigil"],
     "locations": ["Evershade Weald", "Keeper's Bight"]
   },
   {
@@ -417,6 +454,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 125,
     "trivialSkill": 175,
+    "results": ["Stygian Moss"],
     "locations": ["Sungreet Strand", "Fallen Pass"],
     "note": "In the dwarven caves for Sungreet Strand, in the undead caves for Fallen Pass."
   },
@@ -426,6 +464,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 160,
     "trivialSkill": 210,
+    "results": ["Shadeshroom"],
     "locations": ["Vale of Zintar", "Fallen Pass"],
     "note": "Found in caves — in the Giant City for Vale of Zintar, in the rat caves for Fallen Pass."
   },
@@ -436,6 +475,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 150,
     "trivialSkill": 200,
+    "results": ["Magebloom"],
     "locations": ["Shaded Dunes", "Fallen Pass", "Glass Flats"]
   },
   {
@@ -444,6 +484,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 170,
     "trivialSkill": 220,
+    "results": ["Last Breath"],
     "locations": ["Fallen Pass", "Glass Flats"],
     "note": "In Glass Flats at the large bone graveyard."
   },
@@ -453,6 +494,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 185,
     "trivialSkill": 235,
+    "results": ["Witherweed"],
     "locations": ["Glass Flats"]
   },
   {
@@ -461,6 +503,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 200,
     "trivialSkill": 250,
+    "results": ["Ethtongue"],
     "locations": ["Shallow Shoals", "Scarwood"]
   },
   {
@@ -469,6 +512,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 215,
     "trivialSkill": 265,
+    "results": ["Phoenix Flower"],
     "locations": ["Fallen Pass", "Glass Flats"]
   },
   {
@@ -476,6 +520,7 @@
     "slug": "flamestalk",
     "tradeskill": "Herbalism",
     "trivialSkill": 250,
+    "results": ["Flamestalk"],
     "locations": ["Vale of Zintar"],
     "note": "In Giant City. Min skill given only as an uncertain value on the source table: \"250?\"."
   },
@@ -493,6 +538,7 @@
     "slug": "grub",
     "tradeskill": "Foraging",
     "minSkill": 1,
+    "results": ["Grub"],
     "locations": []
   },
   {
@@ -500,6 +546,7 @@
     "slug": "multhele-root",
     "tradeskill": "Foraging",
     "minSkill": 1,
+    "results": ["Multhele Root"],
     "locations": []
   },
   {
@@ -507,6 +554,64 @@
     "slug": "wild-carrots",
     "tradeskill": "Foraging",
     "minSkill": 1,
+    "results": ["Wild Carrots"],
     "locations": []
+  },
+  {
+    "name": "Magic Frond",
+    "slug": "magic-frond",
+    "tradeskill": "Herbalism",
+    "results": ["Magic Frond"],
+    "locations": [],
+    "note": "Skill level not yet known."
+  },
+  {
+    "name": "Enchanted Frond",
+    "slug": "enchanted-frond",
+    "image": "images/gathering/enchanted-frond.jpg",
+    "tradeskill": "Herbalism",
+    "results": ["Enchanted Frond"],
+    "locations": [],
+    "note": "Skill level not yet known."
+  },
+  {
+    "name": "Arcane Frond",
+    "slug": "arcane-frond",
+    "tradeskill": "Herbalism",
+    "results": ["Arcane Frond"],
+    "locations": [],
+    "note": "Skill level not yet known."
+  },
+  {
+    "name": "Clouded Crystallized Magic",
+    "slug": "clouded-crystallized-magic",
+    "tradeskill": "Mining",
+    "results": ["Clouded Crystallized Magic"],
+    "locations": [],
+    "note": "Skill level not yet known."
+  },
+  {
+    "name": "Glinting Crystallized Magic",
+    "slug": "glinting-crystallized-magic",
+    "tradeskill": "Mining",
+    "results": ["Glinting Crystallized Magic"],
+    "locations": [],
+    "note": "Skill level not yet known."
+  },
+  {
+    "name": "Shining Crystallized Magic",
+    "slug": "shining-crystallized-magic",
+    "tradeskill": "Mining",
+    "results": ["Shining Crystallized Magic"],
+    "locations": [],
+    "note": "Skill level not yet known."
+  },
+  {
+    "name": "Brilliant Crystallized Magic",
+    "slug": "brilliant-crystallized-magic",
+    "tradeskill": "Mining",
+    "results": ["Brilliant Crystallized Magic"],
+    "locations": [],
+    "note": "Skill level not yet known."
   }
 ]

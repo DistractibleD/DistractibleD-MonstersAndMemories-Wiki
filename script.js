@@ -1537,6 +1537,10 @@ function statEntries(item) {
   // singing added 2026-07-24 — first seen on Wings of the Flittermouse ("Singing: +5%"),
   // a Bard vocal-skill bonus paralleling the instrument stats above.
   if (item.singing) entries.push({ label: 'Singing', value: `${formatSigned(item.singing)}%` });
+  // fuel added 2026-08-05 — first seen on Fire Beetle Eye ("Fuel: 100 %"), a plain
+  // remaining-amount percentage (light-source charge) rather than a +/- stat bonus, so it
+  // skips formatSigned unlike every other %-suffixed field above.
+  if (item.fuel != null) entries.push({ label: 'Fuel', value: `${item.fuel}%` });
   return entries;
 }
 
@@ -4829,9 +4833,9 @@ async function renderSubmitPage(container) {
         </div>
       ` : ''}
       ${context && context.linkCode ? `
-        <p class="submit-linkcode-hint">To get the code: link this item in your in-game chat box (however your
-        client does that), then copy the resulting text — it looks like
-        <code>&lt;link=&quot;item|...&quot;&gt;...&lt;/link&gt;</code> — and paste it into the notes box below.</p>
+        <p class="submit-linkcode-hint">To get the code: link this item in any in-game chat box, target the text
+        field and hit ctrl+A to mark the text, then ctrl+C to copy it. Paste that text here in the "Notes" section —
+        it looks like <code>&lt;link=&quot;item|...&quot;&gt;...&lt;/link&gt;</code> —</p>
       ` : ''}
       <form id="submit-form" class="submit-form">
         <label class="submit-drop-zone" id="submit-drop-zone" for="submit-file-input">
