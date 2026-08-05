@@ -4977,6 +4977,16 @@ async function renderSubmitPage(container) {
       the text (a stat, a name, a component) is much less useful than a couple of slightly messy
       ones that show everything.</p>
     </div>
+    <div class="submit-itemcode-info">
+      <h2>Have an item's in-game link code instead?</h2>
+      <p>Every item can carry a "Copy Item Link" button on its page, which copies a code you can
+      paste into your own in-game chat box to show off the item to other players. We don't have
+      one recorded for every item yet — if you have a moment, here's how to grab one:</p>
+      <p>Link the item in any in-game chat box, target the text field and hit ctrl+A to mark the
+      text, then ctrl+C to copy it. It looks like
+      <code>&lt;link=&quot;item|...&quot;&gt;...&lt;/link&gt;</code> — paste that into the Notes
+      box below (no screenshot needed), and mention which item it's for.</p>
+    </div>
     ${!SUBMIT_WORKER_URL ? `
       <p class="submit-form-notice">This form isn't finished being set up yet (no Worker URL
       configured), so submissions can't be sent right now. Come back soon!</p>

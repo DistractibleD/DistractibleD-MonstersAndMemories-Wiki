@@ -2763,6 +2763,36 @@ body:not(.site-entered) .sidebar {
   color: var(--text-dim);
   font-size: 0.85rem;
 }
+/* General "how to get a code" callout — always visible on the Submit page,
+   unlike .submit-linkcode-hint (which only shows contextually after
+   arriving via a specific item's "Add a code?" link). Same bordered-box
+   language as .submit-form-notice. */
+.submit-itemcode-info {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  max-width: 640px;
+  margin: 0 0 26px;
+}
+.submit-itemcode-info h2 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+.submit-itemcode-info p {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin: 0 0 8px;
+}
+.submit-itemcode-info p:last-child {
+  margin-bottom: 0;
+}
+.submit-itemcode-info code {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1px 4px;
+  border-radius: 3px;
+  color: var(--text);
+}
 
 /* ---------- Sample screenshot lightbox (Submit page examples) ---------- */
 #sample-viewer {
