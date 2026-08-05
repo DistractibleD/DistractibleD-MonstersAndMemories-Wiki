@@ -13786,8 +13786,8 @@
     "tags": ["MAGIC"],
     "slot": "Back",
     "ac": 4,
-    "stats": { "STR": 2, "STA": 1 },
-    "weight": 0.3,
+    "stats": { "STR": 2, "STA": 3 },
+    "weight": 0.25,
     "size": "Medium",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
     "race": ["ALL"],
@@ -17670,7 +17670,7 @@
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Hands",
     "ac": 18,
-    "stats": { "DEX": 4, "INT": 3, "WIS": 2 },
+    "stats": { "STA": 1, "DEX": 5, "INT": 3, "WIS": 2 },
     "description": "Gloves as old as Saman's ruins, yet they remain soft, thin, and durable.",
     "weight": 0.5,
     "size": "Small",
@@ -19092,8 +19092,12 @@
     "type": "Jewelry",
     "tags": [],
     "slot": "Ear",
-    "gameLinkCode": "<link=\"item|bd447f8049f50e24e4169128|23120556\"><color=green><b><u>[Inlaid Onyx Steel Earring]</u></b></color></link>",
-    "needsInfo": true
+    "stats": { "STR": 6 },
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|bd447f8049f50e24e4169128|23120556\"><color=green><b><u>[Inlaid Onyx Steel Earring]</u></b></color></link>"
   },
   {
     "name": "Inlaid Cat's Eye Agate Iron Ring",
@@ -19102,18 +19106,27 @@
     "type": "Jewelry",
     "tags": [],
     "slot": "Finger",
-    "gameLinkCode": "<link=\"item|8a389fd84a4ee228b203ecc6|20739647\"><color=green><b><u>[Inlaid Cat's Eye Agate Iron Ring]</u></b></color></link>",
-    "needsInfo": true
+    "stats": { "AGI": 4 },
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|8a389fd84a4ee228b203ecc6|20739647\"><color=green><b><u>[Inlaid Cat's Eye Agate Iron Ring]</u></b></color></link>"
   },
   {
     "name": "Marshal's Insignia Bracer",
     "slug": "marshals-insignia-bracer",
     "lastUpdated": "2026-08-05",
     "type": "Armor",
-    "tags": [],
+    "tags": ["MAGIC"],
     "slot": "Wrist",
-    "gameLinkCode": "<link=\"item|9d52cad44343a8334502bc6a|21431586\"><color=green><b><u>[Marshal's Insignia Bracer]</u></b></color></link>",
-    "needsInfo": true
+    "ac": 6,
+    "stats": { "STR": 3, "STA": 1 },
+    "weight": 0.5,
+    "size": "Small",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|9d52cad44343a8334502bc6a|21431586\"><color=green><b><u>[Marshal's Insignia Bracer]</u></b></color></link>"
   },
   {
     "name": "Hide Backpack",
