@@ -373,11 +373,56 @@ body:not(.site-entered) .sidebar {
   color: var(--text);
   padding: 10px 10px 6px;
 }
+/* Clickable variant (buildSidebar's own "Tradeskilling"/"Monsters" headings,
+   not the auto-generated "Most Visited"/"Recently Updated" ones, which stay
+   plain non-clickable text) — icon + label + chevron laid out like a
+   .sidebar-link so it reads as part of the same nav, not a different kind
+   of control. */
+.sidebar-group-heading-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.sidebar-group-heading-toggle:hover {
+  color: var(--accent);
+}
+.sidebar-group-heading-toggle .type-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+.sidebar-group-heading-toggle .sidebar-link-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+/* The expand/collapse hint — a small right-pointing triangle that rotates
+   to point down once expanded, same idea as a native <details> marker. */
+.sidebar-group-chevron {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  fill: var(--text-dim);
+  transition: transform 0.15s ease;
+}
+.sidebar-group-heading-toggle.expanded .sidebar-group-chevron {
+  fill: var(--accent);
+  transform: rotate(90deg);
+}
 .sidebar-group {
   position: relative;
   margin-left: 20px;
   padding-left: 10px;
   border-left: 1px solid var(--border-light);
+}
+/* Collapsed by default (buildSidebar) — the compound selector (not just
+   .sidebar-group-collapsed alone) beats both the plain .sidebar-group rule
+   above and its mobile display:contents override below on specificity,
+   regardless of source order, so this reliably wins at every viewport
+   width without needing !important. */
+.sidebar-group.sidebar-group-collapsed {
+  display: none;
 }
 .sidebar-link-nested {
   position: relative;
@@ -1024,9 +1069,10 @@ body:not(.site-entered) .sidebar {
   height: 24px;
   flex: 0 0 auto;
 }
-/* Named Monsters' zone-scoped card grid (renderMonsterGridCards) — replaced
-   the old single-column name table (2026-08-06, mockup approved by the site
-   owner). Regular Monsters still uses the plain table below, unchanged. */
+/* Zone-scoped card grid (renderMonsterGridCards), shared by both Named and
+   Regular Monsters — replaced the old single-column name table/list and the
+   zone-selection grid in front of it (2026-08-06, mockup approved by the
+   site owner). */
 .monster-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -1091,10 +1137,11 @@ body:not(.site-entered) .sidebar {
   color: var(--accent-dim);
   font-size: 0.78rem;
 }
-/* Zone-switcher pill bar (renderMonstersList, Named Monsters only) — same
-   visual language as .leveling-nav/.leveling-nav-link, so jumping between
-   zones once you've drilled in feels like the same pattern as Leveling
-   Suggestions' level quick-jump bar. */
+/* Zone-switcher pill bar (renderMonstersList, both Named and Regular
+   Monsters) — same visual language as .leveling-nav/.leveling-nav-link, so
+   jumping between zones feels like the same pattern as Leveling
+   Suggestions' level quick-jump bar. Replaces the old zone-selection grid
+   entirely (2026-08-06). */
 .monster-zone-switcher {
   display: flex;
   flex-wrap: wrap;

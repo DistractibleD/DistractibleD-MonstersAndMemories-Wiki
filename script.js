@@ -214,16 +214,9 @@ function updateSidebarMaxHeight() {
   const footer = document.querySelector('.site-footer');
   const footerHeight = footer ? footer.getBoundingClientRect().height : 0;
   // .layout's own vertical padding (28px top + 60px bottom, see style.css)
-  // sits between the header and the sidebar/footer too, but wasn't being
-  // subtracted here — only a flat 20px safetyMargin was, which undershot the
-  // real padding by ~68px. On any page where the sidebar ends up the taller
-  // flex child (most pages — see the loadPage call site for when that is),
-  // the "capped" sidebar was still ~68px taller than the room actually left,
-  // making the whole document that much taller than the viewport. Since the
-  // sidebar is position: sticky, that small extra scroll range was enough for
-  // it to visibly shift on any scroll — reported as "the sidebar scrolls on
-  // its own" (2026-08-06). Measured dynamically (not hardcoded to 28+60) so
-  // this keeps working if .layout's padding ever changes.
+  // sits between the header and the sidebar/footer too — measured
+  // dynamically (not hardcoded to 28+60) so this keeps working if that
+  // padding ever changes.
   const layout = document.querySelector('.layout');
   const layoutStyle = layout ? getComputedStyle(layout) : null;
   const layoutPadding = layoutStyle
@@ -231,7 +224,35 @@ function updateSidebarMaxHeight() {
     : 0;
   const topOffset = 76;
   const safetyMargin = 20;
-  const maxHeight = window.innerHeight - topOffset - footerHeight - layoutPadding - safetyMargin;
+
+  // Two different regimes, not one flat formula (2026-08-06 — the flat
+  // version fixed an earlier "sidebar scrolls on its own" bug on SHORT
+  // pages, but then over-corrected: it always reserved room for the footer
+  // and .layout's padding even on long pages where the footer is thousands
+  // of pixels away, capping the sidebar far shorter than the room actually
+  // available and leaving a visible gap above the viewport's bottom edge —
+  // "ends too soon, sits high up").
+  //
+  // Short-page regime: content is short enough that the sidebar risks being
+  // the taller flex child, which would make the whole document taller than
+  // the viewport. Cap it to the same conservative bound as before (leaves
+  // room for header + .layout's own padding + the footer + a safety
+  // margin) so that can't happen.
+  const safeCapShort = window.innerHeight - topOffset - footerHeight - layoutPadding - safetyMargin;
+
+  // Long-page regime: if the page's own content is already at least as
+  // tall as that conservative bound, the footer is guaranteed to already
+  // sit far below the viewport regardless of what the sidebar does — so
+  // there's no overflow risk in letting the sidebar grow all the way down
+  // to just above the header offset (its own overflow-y: auto still caps
+  // it once its nav content genuinely runs out of room, so it stays
+  // independently scrollable exactly as before).
+  const content = document.querySelector('.content');
+  const contentHeight = content ? content.getBoundingClientRect().height : 0;
+  const maxHeight = contentHeight >= safeCapShort
+    ? window.innerHeight - topOffset - safetyMargin
+    : safeCapShort;
+
   sidebar.style.maxHeight = Math.max(200, maxHeight) + 'px';
 }
 
@@ -327,11 +348,15 @@ function buildSidebar(pages) {
   // per-category heading looked arbitrary once every category held exactly
   // one page). A page can opt into a `group` (pages.json) — e.g.
   // "Tradeskilling" for Gathering and Crafting —
-  // which nests it under a plain, non-clickable group heading instead,
-  // indented, so real hierarchy can still show up without reintroducing a
-  // heading over every single page. Consecutive pages sharing the same
-  // `group` render under one shared heading; a page with no `group` renders
-  // exactly as before.
+  // which nests it under a group heading instead, indented, so real
+  // hierarchy can still show up without reintroducing a heading over every
+  // single page. Consecutive pages sharing the same `group` render under
+  // one shared heading; a page with no `group` renders exactly as before.
+  // The heading itself is clickable and collapsed by default (2026-08-06,
+  // user's own request) — the chevron (rotates via .expanded) is the hint
+  // that it can be expanded, same purpose the "NEEDS INFO"/badge affordances
+  // serve elsewhere: a small always-visible cue rather than relying on
+  // hover-only discovery.
   let currentGroup = null;
   let groupContainer = null;
 
@@ -340,12 +365,25 @@ function buildSidebar(pages) {
       if (page.group !== currentGroup) {
         currentGroup = page.group;
         const heading = document.createElement('div');
-        heading.className = 'sidebar-group-heading';
-        heading.textContent = page.group;
+        heading.className = 'sidebar-group-heading sidebar-group-heading-toggle';
+        const groupIcon = SIDEBAR_GROUP_ICON[page.group];
+        heading.innerHTML = (groupIcon ? svgIcon(groupIcon) : '') +
+          `<span class="sidebar-link-text">${escapeAttr(page.group)}</span>` +
+          '<svg viewBox="0 0 24 24" class="sidebar-group-chevron"><path d="M8 5 L16 12 L8 19 Z"/></svg>';
         sidebar.appendChild(heading);
         groupContainer = document.createElement('div');
-        groupContainer.className = 'sidebar-group';
+        groupContainer.className = 'sidebar-group sidebar-group-collapsed';
         sidebar.appendChild(groupContainer);
+        // Captures THIS group's own container in a per-iteration constant —
+        // `groupContainer` itself is one shared `let` reassigned on every
+        // subsequent group, so a closure over the outer variable directly
+        // would have every group's click handler end up toggling whichever
+        // group happened to be built last, not its own.
+        const thisGroupContainer = groupContainer;
+        heading.addEventListener('click', () => {
+          const collapsed = thisGroupContainer.classList.toggle('sidebar-group-collapsed');
+          heading.classList.toggle('expanded', !collapsed);
+        });
       }
     } else {
       currentGroup = null;
@@ -629,20 +667,23 @@ async function loadPage(file) {
   }
 
   // Re-measure the sidebar's max-height cap for THIS page's content, not just
-  // at init/on resize. Without this, a page whose content is short enough
-  // that the sidebar becomes the taller flex child (see updateSidebarMaxHeight's
-  // own comment for why that's capped at all) still used the cap computed for
-  // whichever page happened to be showing at page load — on most other pages
-  // that stale cap could sit a few pixels too tall, leaving the document
-  // fractionally taller than the viewport. That's enough for the whole page
-  // to become scrollable even though content-inner itself doesn't need it,
-  // and because the sidebar is position: sticky, that tiny scroll range reads
-  // as "the sidebar moves on its own" — reported 2026-08-06, reproducible on
-  // every page type except Item Database (whose content is reliably taller
-  // than the viewport on its own, so the scroll range was never in question
-  // there). rAF (not a direct call) so this runs after the browser has
-  // actually laid out the HTML just injected above, not before.
+  // at init/on resize — otherwise a page whose content is short enough that
+  // the sidebar becomes the taller flex child kept using whatever cap was
+  // computed for a previous page, which could leave the document
+  // fractionally taller than the viewport (position: sticky then makes that
+  // tiny extra scroll range read as "the sidebar moves on its own",
+  // reported 2026-08-06). rAF (not a direct call) so this runs after the
+  // browser has laid out the HTML just injected above, not before.
+  //
+  // A second, delayed call follows it — some pages (Item Database, with its
+  // full unvirtualized table) don't finish populating their rows within the
+  // same frame the scaffold above renders in, so the rAF call alone still
+  // measured `.content` before the real row count landed and undershot the
+  // "long page" cap this same fix is supposed to unlock. 120ms is well past
+  // that population step without being long enough to see the sidebar
+  // visibly resize underneath the visitor.
   requestAnimationFrame(updateSidebarMaxHeight);
+  setTimeout(updateSidebarMaxHeight, 120);
 }
 
 function onSearch(e) {
@@ -1268,6 +1309,13 @@ const ICON_DEFS = {
   // flat-silhouette-in-circle language as everything else. Reads as
   // "progression"/"leveling up" without needing a new visual metaphor.
   levelingicon: `<rect x="4" y="14" width="4.4" height="6" rx="0.6"/><rect x="9.8" y="9" width="4.4" height="11" rx="0.6"/><rect x="15.6" y="4" width="4.4" height="16" rx="0.6"/>`,
+  // Sidebar group-heading icons (2026-08-06) — "Tradeskilling" covers both
+  // Gathering and Crafting, so it gets its own umbrella glyph (a crossed
+  // hammer and pick) rather than borrowing one sub-page's icon and
+  // misrepresenting the other. "Monsters" reuses the existing boss skull
+  // (svgIcon('boss')) directly — already a generic enough "monster" glyph
+  // that a second one would be redundant.
+  tradeskillgroupicon: `<g transform="rotate(-45 12 12)"><rect x="11.2" y="9" width="1.6" height="12"/><rect x="6" y="4" width="12" height="5" rx="1"/></g><g transform="rotate(45 12 12)"><rect x="11.3" y="9" width="1.4" height="12"/><path d="M12 3 C9 3 6.5 5 5.5 7.5 C7.5 7.1 9.7 6.8 12 6.8 C14.3 6.8 16.5 7.1 18.5 7.5 C17.5 5 15 3 12 3 Z"/></g>`,
   // Beastmaster companion icons — one flat silhouette per tamed animal type,
   // same style as the tradeskill glyphs above. Extend with another animal
   // key the same way whenever a new companion type is confirmed.
@@ -1325,6 +1373,7 @@ const ICON_BG = {
   boss: '#5a1f1f', paw: '#3f4f30',
   links: '#455060', itemdb: '#7a5a2a', gatheringicon: '#455a2e', submiticon: '#3a3a45',
   levelingicon: '#2e6b3f',
+  tradeskillgroupicon: '#5a4a2e',
 };
 
 // Maps a tradeskill name (tradeskills.json) to one of the icons above — used
@@ -1402,6 +1451,14 @@ const NAV_ICON = {
   companions: 'wolf',
   leveling: 'levelingicon',
   submit: 'submiticon',
+};
+
+// Sidebar group-heading icons (buildSidebar) — keyed by the `group` string
+// in pages.json, distinct from NAV_ICON (keyed by page `file`) since a
+// group heading isn't a page of its own.
+const SIDEBAR_GROUP_ICON = {
+  Tradeskilling: 'tradeskillgroupicon',
+  Monsters: 'boss',
 };
 
 function svgIcon(key) {
@@ -4075,15 +4132,27 @@ async function renderMonstersPage(container, file) {
 
   // A zone-scoped view is encoded as a sub-route in the hash itself —
   // "monsters-named/<map>" or "monsters-regular/<map>" (see goToMonster and
-  // the zone-card click handler in renderMonstersCategories) — rather than a
-  // pending variable, so that drilling into a zone creates a real
-  // browser-history entry: pressing Back pops to that page's own zone grid
-  // instead of leaving the page entirely.
+  // the zone-switcher pill bar in renderMonstersList) — rather than a
+  // pending variable, so that switching zones creates a real browser-history
+  // entry: pressing Back pops to the previous zone instead of leaving the
+  // page entirely.
   const parts = (file || 'monsters-named').split('/');
   const named = parts[0] === 'monsters-named';
 
   if (parts.length >= 2) {
     renderMonstersList(container, { named, map: decodeURIComponent(parts[1]) });
+    return;
+  }
+
+  // Both pages skip the old zone-selection grid entirely (2026-08-06,
+  // user's own call — the zone-switcher pill bar in renderMonstersList now
+  // covers that job and looks better) — land straight on the first zone
+  // alphabetically, same list a switcher click would show.
+  // renderMonstersCategories stays only as a defensive fallback for the
+  // (currently unreachable) case of zero monsters recorded for this scope.
+  const zones = [...new Set(monstersData.filter(m => !!m.named === named).map(monsterZone))].sort();
+  if (zones.length) {
+    renderMonstersList(container, { named, map: zones[0] });
     return;
   }
 
@@ -4204,22 +4273,20 @@ function renderMonstersCategories(container, named) {
 function renderMonstersList(container, scope) {
   const scopedMonsters = monstersData.filter(m => !!m.named === scope.named && monsterZone(m) === scope.map);
   const sectionLabel = scope.named ? 'Named Monsters (Bosses)' : 'Regular Monsters';
-  const backLabel = `All ${scope.named ? 'named' : 'regular'} monster zones`;
-  // Every zone that has at least one named monster, for the zone-switcher
-  // pill bar below — Named Monsters only (2026-08-06, user's own request),
-  // same idea as Leveling Suggestions' level quick-jump bar: once you've
-  // drilled into a zone, jump straight to another one instead of having to
-  // go back to the category grid first.
-  const namedZones = scope.named ? [...new Set(monstersData.filter(m => m.named).map(monsterZone))].sort() : [];
+  const baseHash = scope.named ? 'monsters-named' : 'monsters-regular';
+  // Every zone that has at least one monster of this scope, for the
+  // zone-switcher pill bar below (2026-08-06, user's own request — now
+  // shared by both Named and Regular Monsters, replacing the old
+  // zone-selection grid entirely, not just Named's) — same idea as Leveling
+  // Suggestions' level quick-jump bar: jump straight to another zone instead
+  // of going back to a category grid that no longer exists.
+  const switcherZones = [...new Set(monstersData.filter(m => !!m.named === scope.named).map(monsterZone))].sort();
 
-  // Named monsters render as a card grid (2026-08-06, mockup approved by the
-  // site owner — the old single-column name list wasted the content-wide
-  // page's own space) instead of the plain sortable table Regular Monsters
-  // still uses. Only one sort dimension exists either way (name), so the
-  // grid path skips the now-pointless sortable-column-header UI rather than
-  // building a dropdown for a single option.
+  // Both pages render as a card grid (2026-08-06, mockup approved by the
+  // site owner — the old single-column name list/table wasted the
+  // content-wide page's own space). Only one sort dimension exists (name),
+  // so there's no sortable-column-header UI to build a dropdown for.
   container.innerHTML = `
-    <p class="items-back-link"><a href="#" id="monsters-back-to-categories">&larr; ${escapeAttr(backLabel)}</a></p>
     <h1>${escapeAttr(scope.map)} — ${escapeAttr(sectionLabel)}</h1>
     <p>Browse, search, and filter ${escapeAttr(scope.named ? 'named (boss)' : 'regular')} monsters in
     ${escapeAttr(scope.map)}. Click a monster to see its picture and drop table.</p>
@@ -4233,88 +4300,32 @@ function renderMonstersList(container, scope) {
       </label>
       ${showCardsToggleHTML('monsters-show-cards')}
     </div>
-    ${namedZones.length ? `
+    ${switcherZones.length ? `
     <nav class="monster-zone-switcher">
-      ${namedZones.map(zone => `<a href="#" class="monster-zone-switcher-link${zone === scope.map ? ' active' : ''}" data-zone="${escapeAttr(zone)}">${escapeAttr(zone)}</a>`).join('')}
+      ${switcherZones.map(zone => `<a href="#" class="monster-zone-switcher-link${zone === scope.map ? ' active' : ''}" data-zone="${escapeAttr(zone)}">${escapeAttr(zone)}</a>`).join('')}
     </nav>
     ` : ''}
     <p class="items-count" id="monsters-count"></p>
-    ${scope.named ? `
     <div class="monster-grid" id="monsters-grid"></div>
-    ` : `
-    <div class="items-table-wrap">
-      <table class="items-table">
-        <colgroup>
-          <col class="col-monster-name">
-        </colgroup>
-        <thead>
-          <tr>
-            <th data-sort-key="name" class="sortable">Name</th>
-          </tr>
-        </thead>
-        <tbody id="monsters-tbody"></tbody>
-      </table>
-    </div>
-    `}
   `;
-
-  container.querySelector('#monsters-back-to-categories').addEventListener('click', e => {
-    e.preventDefault();
-    // Set via the hash (not a direct renderMonstersCategories call) so this
-    // stays consistent with the browser's history — matches whatever the
-    // Back button would already do from here. Routes back to whichever of
-    // the two Monsters pages this zone list belongs to.
-    location.hash = scope.named ? 'monsters-named' : 'monsters-regular';
-  });
 
   container.querySelectorAll('.monster-zone-switcher-link').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       if (link.classList.contains('active')) return;
-      location.hash = `monsters-named/${encodeURIComponent(link.dataset.zone)}`;
+      location.hash = `${baseHash}/${encodeURIComponent(link.dataset.zone)}`;
     });
   });
 
   const searchBox = container.querySelector('#monsters-search');
   const needsInfoFilter = container.querySelector('#monsters-filter-needsinfo');
-  const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
   setupShowCardsToggle(container, 'monsters-show-cards');
 
   // Landed here from a header search result — pre-fill the search box with
-  // that monster's name so the table filters straight down to it.
+  // that monster's name so the grid filters straight down to it.
   if (pendingMonsterQuery) {
     searchBox.value = pendingMonsterQuery;
     pendingMonsterQuery = null;
-  }
-
-  let sortKey = 'name';
-  let sortDir = 'asc';
-
-  function updateSortIndicators() {
-    sortHeaders.forEach(th => {
-      th.classList.toggle('sorted-asc', th.dataset.sortKey === sortKey && sortDir === 'asc');
-      th.classList.toggle('sorted-desc', th.dataset.sortKey === sortKey && sortDir === 'desc');
-    });
-  }
-
-  sortHeaders.forEach(th => {
-    th.addEventListener('click', () => {
-      const key = th.dataset.sortKey;
-      if (key === sortKey) {
-        sortDir = sortDir === 'asc' ? 'desc' : 'asc';
-      } else {
-        sortKey = key;
-        sortDir = 'asc';
-      }
-      update();
-    });
-  });
-
-  function monsterSortValue(monster, key) {
-    switch (key) {
-      case 'name': return monster.name.toLowerCase();
-      default: return '';
-    }
   }
 
   function update() {
@@ -4327,22 +4338,9 @@ function renderMonstersList(container, scope) {
       return true;
     });
 
-    filtered.sort((a, b) => {
-      const av = monsterSortValue(a, sortKey);
-      const bv = monsterSortValue(b, sortKey);
-      if (av == null && bv == null) return 0;
-      if (av == null) return 1;
-      if (bv == null) return -1;
-      const cmp = typeof av === 'string' ? av.localeCompare(bv) : av - bv;
-      return sortDir === 'asc' ? cmp : -cmp;
-    });
+    filtered.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
 
-    updateSortIndicators();
-    if (scope.named) {
-      renderMonsterGridCards(container.querySelector('#monsters-grid'), filtered);
-    } else {
-      renderMonsterRows(container.querySelector('#monsters-tbody'), filtered);
-    }
+    renderMonsterGridCards(container.querySelector('#monsters-grid'), filtered);
     container.querySelector('#monsters-count').textContent =
       `Showing ${filtered.length} of ${scopedMonsters.length} monsters`;
   }
@@ -4351,37 +4349,30 @@ function renderMonstersList(container, scope) {
   needsInfoFilter.addEventListener('change', update);
 
   update();
-  const resultsContainer = container.querySelector(scope.named ? '#monsters-grid' : '#monsters-tbody');
-  if (scope.named) {
-    setupMonsterGridClickToView(resultsContainer);
-  } else {
-    setupMonsterClickToView(resultsContainer);
-  }
-  setupMonsterTooltip(resultsContainer);
+  const grid = container.querySelector('#monsters-grid');
+  setupMonsterGridClickToView(grid);
+  setupMonsterTooltip(grid);
 
   if (pendingHighlightMonster) {
     const slug = pendingHighlightMonster;
     pendingHighlightMonster = null;
-    const itemSelector = scope.named
-      ? `#monsters-grid .monster-grid-card[data-slug="${CSS.escape(slug)}"]`
-      : `#monsters-tbody tr[data-slug="${CSS.escape(slug)}"]`;
-    const el = container.querySelector(itemSelector);
+    const el = container.querySelector(`#monsters-grid .monster-grid-card[data-slug="${CSS.escape(slug)}"]`);
     if (el) {
       suppressScrollReset = true;
       el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      const flashClass = scope.named ? 'card-flash' : 'row-flash';
-      el.classList.add(flashClass);
-      el.addEventListener('animationend', () => el.classList.remove(flashClass), { once: true });
+      el.classList.add('card-flash');
+      el.addEventListener('animationend', () => el.classList.remove('card-flash'), { once: true });
     }
   }
 }
 
-// Named Monsters' card grid (see renderMonstersList) — image or a "no photo
-// yet" placeholder, name, area, and a drop-count summary. Deliberately
-// leaner than the full renderMonsterCardHTML (no drop list itself) since
-// that's still one hover/click away via the same tooltip/viewer every other
-// monster reference on the site already uses — the card's job is to be
-// scannable in a grid of dozens, not to be the final destination.
+// Shared card grid for both Named and Regular Monsters (see
+// renderMonstersList) — image or a "no photo yet" placeholder, name, area,
+// and a drop-count summary. Deliberately leaner than the full
+// renderMonsterCardHTML (no drop list itself) since that's still one
+// hover/click away via the same tooltip/viewer every other monster
+// reference on the site already uses — the card's job is to be scannable in
+// a grid of dozens, not to be the final destination.
 function renderMonsterGridCards(grid, monsters) {
   if (!monsters.length) {
     grid.innerHTML = `<p class="items-empty">${monstersData.length ? 'No monsters match your filters.' : 'No monsters yet.'}</p>`;
@@ -4422,30 +4413,8 @@ function setupMonsterGridClickToView(grid) {
   });
 }
 
-function renderMonsterRows(tbody, monsters) {
-  if (!monsters.length) {
-    tbody.innerHTML = `<tr><td colspan="1" class="items-empty">${monstersData.length ? 'No monsters match your filters.' : 'No monsters yet.'}</td></tr>`;
-    return;
-  }
-
-  tbody.innerHTML = monsters.map(monster => `
-    <tr data-slug="${escapeAttr(monster.slug)}">
-      <td data-label="Name"><span class="item-name-hover monster-name-hover" data-slug="${escapeAttr(monster.slug)}">${escapeAttr(monster.name)}</span>${monster.needsInfo ? ' <span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}</td>
-    </tr>
-  `).join('');
-}
-
 function findMonsterBySlug(slug) {
   return (monstersData || []).find(m => m.slug === slug);
-}
-
-function setupMonsterClickToView(tbody) {
-  tbody.addEventListener('click', e => {
-    const span = e.target.closest('.monster-name-hover');
-    if (!span) return;
-    const monster = findMonsterBySlug(span.dataset.slug);
-    if (monster) openMonsterViewer(monster);
-  });
 }
 
 // Hover-to-preview a monster's card, same idea and positioning logic as
@@ -4962,6 +4931,11 @@ const SUBMIT_EXAMPLES = [
     image: 'images/samples/sample-gathering-node.jpg',
     label: 'Gathering node',
     note: 'Name the file after the node or resource itself (e.g. "Lionleaf.jpg") — that\'s how we match it up.'
+  },
+  {
+    image: 'images/samples/sample-combat-log.jpg',
+    label: 'Combat log',
+    note: 'Name the file with the zone/area it\'s from (e.g. "Loot from Night Harbor - West Gate.jpg") so we know where these mobs are. Capturing item drops and coin loot together like this, not just one or the other, lets us fill in a monster\'s full drop table and its average coin drop from a single screenshot instead of two.'
   }
 ];
 

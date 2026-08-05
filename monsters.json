@@ -90,7 +90,11 @@
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" },
       { "item": "Shattered Skeleton Femur" }
-    ]
+    ],
+    "coinDrops": [
+      { "copper": 2 }
+    ],
+    "lastUpdated": "2026-08-06"
   },
   {
     "name": "a Bloodynose quarreler",
