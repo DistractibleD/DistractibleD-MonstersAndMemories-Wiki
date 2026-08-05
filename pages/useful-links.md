@@ -6,4 +6,3 @@
 - **[MnM Classes Map](https://mnmclasses.com/map)** — a good place for game maps. It also has other nice features like class guides and an item database, but those sections are outdated.
 - **[MnM Drops](https://mnmdrops.com/)** — a fan-run item and drop database, organized by zone and mob, with in-game item card screenshots.
 - **[MNM Realm](https://mnmrealm.com/)** — a fan-made database covering items, spells, NPCs, zones, quests, classes, races, tradeskills, and recipes, aiming for the feel of classic MMO database sites like EQ Casters Realm and Allakhazam. Also mirrors official patch notes/news and takes community submissions through a Discord bot.
-- **[Stories of MnM](https://storiesofmnm.com)** — a site made by Fattboi from the official MnM Discord.

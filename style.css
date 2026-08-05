@@ -1063,6 +1063,13 @@ body:not(.site-entered) .sidebar {
   height: 100%;
   object-fit: cover;
 }
+/* Shared sketch artwork standing in for a real screenshot (monsterPlaceholderImage)
+   — dimmed slightly so it still reads as "not the real thing" at a glance
+   without needing a text label on every card in the grid. */
+.monster-grid-card-photo.is-placeholder img {
+  opacity: 0.75;
+  filter: saturate(0.7);
+}
 .monster-grid-card-body {
   padding: 10px 12px 12px;
 }
@@ -1083,6 +1090,36 @@ body:not(.site-entered) .sidebar {
 .monster-grid-card-drops {
   color: var(--accent-dim);
   font-size: 0.78rem;
+}
+/* Zone-switcher pill bar (renderMonstersList, Named Monsters only) — same
+   visual language as .leveling-nav/.leveling-nav-link, so jumping between
+   zones once you've drilled in feels like the same pattern as Leveling
+   Suggestions' level quick-jump bar. */
+.monster-zone-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 14px 0;
+}
+.monster-zone-switcher-link {
+  font-size: 0.8rem;
+  color: var(--accent);
+  background: rgba(224, 166, 64, 0.12);
+  padding: 4px 10px;
+  border-radius: 14px;
+  text-decoration: none;
+}
+.monster-zone-switcher-link:hover {
+  background: rgba(224, 166, 64, 0.25);
+}
+.monster-zone-switcher-link.active {
+  background: var(--accent);
+  color: var(--bg);
+  cursor: default;
 }
 .items-empty {
   color: var(--text-dim);
@@ -1566,17 +1603,25 @@ body:not(.site-entered) .sidebar {
 }
 /* Shown instead of .monster-card-image when the monster has no picture yet
    (most Regular/generic monsters, per the "Named/boss only" picture policy) —
-   same dashed-box "No image yet" language as .item-card-icon-thumb-placeholder/
-   .dust-tier-placeholder elsewhere on the site. */
-.monster-card-image-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
-  background: var(--bg-panel-hover);
-  border-bottom: 1px dashed var(--border);
+   the shared sketch artwork (monsterPlaceholderImage) with a small caption
+   overlaid at the bottom so it's still clear this isn't the real screenshot. */
+.monster-card-image-wrap {
+  position: relative;
+}
+.monster-card-image-placeholder-img {
+  opacity: 0.8;
+  filter: saturate(0.7);
+}
+.monster-card-image-placeholder-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 4px 10px;
+  background: rgba(10, 11, 14, 0.72);
   color: var(--text-dim);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
+  text-align: center;
 }
 .monster-card-body {
   padding: 16px;
@@ -2718,6 +2763,9 @@ body:not(.site-entered) .sidebar {
   font-size: 0.9rem;
   margin-top: -8px;
 }
+.leveling-credit-name {
+  color: var(--accent);
+}
 .leveling-nav {
   position: sticky;
   top: 12px;
@@ -2741,6 +2789,10 @@ body:not(.site-entered) .sidebar {
 }
 .leveling-nav-link:hover {
   background: rgba(224, 166, 64, 0.25);
+}
+.leveling-nav-link.active {
+  background: var(--accent);
+  color: var(--bg);
 }
 .leveling-section {
   margin-bottom: 28px;

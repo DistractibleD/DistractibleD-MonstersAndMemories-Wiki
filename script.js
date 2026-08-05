@@ -3019,9 +3019,9 @@ async function renderLevelingPage(container) {
 
   container.innerHTML = `
     <h1 class="monsters-section-heading">${svgIcon('levelingicon')} Leveling Suggestions</h1>
-    <p class="leveling-credit">Guide compiled by <strong>Flourishing</strong> (Monsters and Memories Discord).</p>
+    <p class="leveling-credit">Guide compiled by <strong class="leveling-credit-name">Flourishing</strong> (Monsters and Memories Discord).</p>
     <nav class="leveling-nav">
-      ${allLevels.map(lv => `<a href="#leveling-lv-${lv}" class="leveling-nav-link">Lv ${lv}</a>`).join('')}
+      ${allLevels.map(lv => `<a href="#" class="leveling-nav-link" data-level="${lv}">Lv ${lv}</a>`).join('')}
     </nav>
     ${allLevels.map(lv => {
       const regionBlocks = regions.map(region => {
@@ -3041,7 +3041,7 @@ async function renderLevelingPage(container) {
         `;
       }).join('');
       return `
-        <section class="leveling-section" id="leveling-lv-${lv}">
+        <section class="leveling-section" id="leveling-lv-${lv}" data-level="${lv}">
           <h2>Level ${lv}</h2>
           ${regionBlocks || '<p class="leveling-empty">No suggestions recorded at this level yet.</p>'}
         </section>
@@ -3054,6 +3054,29 @@ async function renderLevelingPage(container) {
       e.preventDefault();
       const monster = monstersData.find(m => m.slug === link.dataset.slug);
       if (monster) goToMonster(monster);
+    });
+  });
+
+  // Picking a level bracket hides every other section instead of just
+  // scrolling to it (2026-08-06, user's own request — with 13 brackets the
+  // scroll-to-anchor version still meant a lot of scrolling past sections
+  // you didn't care about). Clicking the already-active level again clears
+  // the filter and shows every bracket, since that's otherwise the only way
+  // back to the full list once one's selected.
+  const navLinks = [...container.querySelectorAll('.leveling-nav-link')];
+  const sections = [...container.querySelectorAll('.leveling-section')];
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const alreadyActive = link.classList.contains('active');
+      navLinks.forEach(l => l.classList.remove('active'));
+      if (alreadyActive) {
+        sections.forEach(s => { s.style.display = ''; });
+        return;
+      }
+      link.classList.add('active');
+      const level = link.dataset.level;
+      sections.forEach(s => { s.style.display = s.dataset.level === level ? '' : 'none'; });
     });
   });
 }
@@ -4182,6 +4205,12 @@ function renderMonstersList(container, scope) {
   const scopedMonsters = monstersData.filter(m => !!m.named === scope.named && monsterZone(m) === scope.map);
   const sectionLabel = scope.named ? 'Named Monsters (Bosses)' : 'Regular Monsters';
   const backLabel = `All ${scope.named ? 'named' : 'regular'} monster zones`;
+  // Every zone that has at least one named monster, for the zone-switcher
+  // pill bar below — Named Monsters only (2026-08-06, user's own request),
+  // same idea as Leveling Suggestions' level quick-jump bar: once you've
+  // drilled into a zone, jump straight to another one instead of having to
+  // go back to the category grid first.
+  const namedZones = scope.named ? [...new Set(monstersData.filter(m => m.named).map(monsterZone))].sort() : [];
 
   // Named monsters render as a card grid (2026-08-06, mockup approved by the
   // site owner — the old single-column name list wasted the content-wide
@@ -4204,6 +4233,11 @@ function renderMonstersList(container, scope) {
       </label>
       ${showCardsToggleHTML('monsters-show-cards')}
     </div>
+    ${namedZones.length ? `
+    <nav class="monster-zone-switcher">
+      ${namedZones.map(zone => `<a href="#" class="monster-zone-switcher-link${zone === scope.map ? ' active' : ''}" data-zone="${escapeAttr(zone)}">${escapeAttr(zone)}</a>`).join('')}
+    </nav>
+    ` : ''}
     <p class="items-count" id="monsters-count"></p>
     ${scope.named ? `
     <div class="monster-grid" id="monsters-grid"></div>
@@ -4231,6 +4265,14 @@ function renderMonstersList(container, scope) {
     // Back button would already do from here. Routes back to whichever of
     // the two Monsters pages this zone list belongs to.
     location.hash = scope.named ? 'monsters-named' : 'monsters-regular';
+  });
+
+  container.querySelectorAll('.monster-zone-switcher-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      if (link.classList.contains('active')) return;
+      location.hash = `monsters-named/${encodeURIComponent(link.dataset.zone)}`;
+    });
   });
 
   const searchBox = container.querySelector('#monsters-search');
@@ -4353,8 +4395,8 @@ function renderMonsterGridCards(grid, monsters) {
     const area = (monster.areas && monster.areas.length) ? monster.areas.join(', ') : '';
     return `
       <div class="monster-grid-card" data-slug="${escapeAttr(monster.slug)}">
-        <div class="monster-grid-card-photo${monster.image ? ' has-img' : ''}">
-          ${monster.image ? `<img src="${escapeAttr(monster.image)}" alt="${escapeAttr(monster.name)}">` : '<span>No photo yet</span>'}
+        <div class="monster-grid-card-photo has-img${monster.image ? '' : ' is-placeholder'}">
+          <img src="${escapeAttr(monster.image || monsterPlaceholderImage(monster))}" alt="${escapeAttr(monster.name)}">
         </div>
         <div class="monster-grid-card-body">
           <div class="monster-grid-card-name item-name-hover monster-name-hover" data-slug="${escapeAttr(monster.slug)}">${escapeAttr(monster.name)}</div>
@@ -4687,6 +4729,18 @@ function formatCoinAmount(silver, copper) {
   return parts.length ? parts.join(', ') : '0 copper';
 }
 
+// Shared "no screenshot yet" artwork (2026-08-06, site owner's own sketches)
+// shown in place of a monster's real picture — named vs. regular each get
+// their own piece, matching the "Named/boss only" picture policy (a regular
+// monster with no image is normal, not a gap, so its placeholder doesn't
+// need to look like one). Purely a rendering fallback, nothing stored on
+// the monster itself — stops applying the instant a real `image` is set.
+function monsterPlaceholderImage(monster) {
+  return monster.named
+    ? 'images/Monsters/placeholder-named-monster.jpg'
+    : 'images/Monsters/placeholder-regular-monster.jpg';
+}
+
 function renderMonsterCardHTML(monster, opts = {}) {
   const drops = monster.drops || [];
   const related = monster.relatedMonsters || [];
@@ -4697,7 +4751,10 @@ function renderMonsterCardHTML(monster, opts = {}) {
     <div class="monster-card">
       ${monster.image
         ? `<img class="monster-card-image" src="${escapeAttr(monster.image)}" alt="${escapeAttr(monster.name)}">`
-        : '<div class="monster-card-image-placeholder">No image yet</div>'}
+        : `<div class="monster-card-image-wrap">
+             <img class="monster-card-image monster-card-image-placeholder-img" src="${escapeAttr(monsterPlaceholderImage(monster))}" alt="">
+             <span class="monster-card-image-placeholder-label">No screenshot yet</span>
+           </div>`}
       <div class="monster-card-body">
         <h2 class="monster-card-name">${escapeAttr(monster.name)}</h2>
         ${formatLastUpdated(monster.lastUpdated)}
