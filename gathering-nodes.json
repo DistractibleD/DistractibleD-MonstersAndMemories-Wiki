@@ -6,7 +6,7 @@
     "tradeskill": "Mining",
     "minSkill": 1,
     "trivialSkill": 50,
-    "results": ["Copper Ore", "Brittle Stone", "Clouded Crystallized Magic", "Chipped Peridot", "Chipped Bloodstone", "Chipped Black Pearl", "Chipped Black Sapphire", "Chipped Carnelian", "Chipped Cat's Eye Agate", "Chipped Diamond", "Chipped Emerald", "Chipped Fire Emerald", "Chipped Fire Opal", "Chipped Hematite", "Chipped Jacinth", "Chipped Jade", "Chipped Lapis Lazuli", "Chipped Malachite", "Chipped Onyx", "Chipped Opal", "Chipped Pearl", "Chipped Ruby", "Chipped Sapphire", "Chipped Star Rose Quartz", "Chipped Star Ruby", "Chipped Topaz", "Chipped Turquoise", "Chipped Wolf's Eye Agate"],
+    "results": ["Copper Ore", "Brittle Stone", "Clouded Crystallized Magic", { "family": "Chipped", "label": "Chipped Gems" }],
     "locations": ["Night Harbor (West Gate, North Gate)", "Shaded Dunes", "Evershade Weald", "Keeper's Bight"]
   },
   {
@@ -353,7 +353,7 @@
     "slug": "selstie-kelp",
     "tradeskill": "Herbalism",
     "minSkill": 1,
-    "results": ["Selstie Kelp"],
+    "results": ["Selstie Kelp", "Magic Frond"],
     "locations": ["Evershade Weald"],
     "note": "Needed for the Bard Starter Quest (Faelindral); no observed skill-ups from harvesting. Trivial only given as a floor on the source table: \">20\"."
   },
@@ -364,7 +364,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 1,
     "trivialSkill": 30,
-    "results": ["Sylvine"],
+    "results": ["Sylvine", "Magic Frond"],
     "locations": ["Evershade Weald"]
   },
   {
@@ -374,7 +374,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 10,
     "trivialSkill": 45,
-    "results": ["Nomad's Grace"],
+    "results": ["Nomad's Grace", "Magic Frond"],
     "locations": ["Evershade Weald", "Shaded Dunes", "Sungreet Strand"]
   },
   {

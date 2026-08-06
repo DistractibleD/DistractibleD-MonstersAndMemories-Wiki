@@ -1069,7 +1069,9 @@ function findMonstersDroppingItem(itemName) {
 function findGatheringTradeskillsForItem(itemName) {
   return [...new Set(
     (gatheringData || [])
-      .filter(n => (n.results || []).some(r => r.toLowerCase() === itemName.toLowerCase()))
+      .filter(n => (n.results || []).some(r => typeof r === 'string'
+        ? r.toLowerCase() === itemName.toLowerCase()
+        : itemName.toLowerCase().startsWith(r.family.toLowerCase() + ' ')))
       .map(n => n.tradeskill)
   )];
 }
@@ -3861,7 +3863,7 @@ async function renderGatheringRecipes(container, tradeskillName) {
 function gatheringNodeSearchHaystack(node) {
   return [
     node.name,
-    (node.results || []).join(' '),
+    (node.results || []).map(r => (typeof r === 'string' ? r : r.family)).join(' '),
     (node.locations || []).join(' '),
     node.rarity || '',
     node.baitRequired || '',
@@ -3930,6 +3932,10 @@ function gatheringCellHTML(node, key) {
     case 'results':
       return `<td data-label="Results"${!(node.results && node.results.length) ? ' class="cell-empty"' : ''}>${
         (node.results || []).map(r => {
+          if (typeof r !== 'string') {
+            const label = r.label || r.family;
+            return `<a href="#" class="gathering-family-link" data-family="${escapeAttr(r.family)}">${escapeAttr(label)} <span class="gathering-family-count">(${familyItemCount(r.family)} items)</span></a>`;
+          }
           const m = findItemByName(r);
           return m
             ? `<a href="#" class="item-name-hover gathering-result-link" data-alt="${escapeAttr(m.name)}" data-item="${escapeAttr(m.name)}">${escapeAttr(r)}</a>`
@@ -4058,6 +4064,12 @@ function renderGatheringNodes(container, tradeskillName) {
         e.preventDefault();
         const item = findItemByName(link.dataset.item);
         if (item) goToItem(item);
+      });
+    });
+    tbody.querySelectorAll('.gathering-family-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        goToItemSearch(link.dataset.family);
       });
     });
     tbody.querySelectorAll('.gathering-node-thumb').forEach(btn => {

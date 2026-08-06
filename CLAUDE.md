@@ -377,17 +377,46 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   keeps that prefix verbatim, still an exact match to the node's own name. Most of these
   result item names don't have a real `items.json` card yet and render as plain text until
   one comes in, same as any other unmatched dynamic link.
+- **A `results` entry can also be a compact family reference** (2026-08-06, user's own
+  request, mirrors monster `drops`' `{ "family": "Rusty Iron" }` form) —
+  `{ "family": "Chipped", "label": "Chipped Gems" }` instead of spelling out all 25+
+  same-prefix items. `label` is optional (defaults to the family name itself) — use it when
+  the bare prefix reads awkwardly on its own (e.g. "Chipped" alone vs. "Chipped Gems").
+  Renders as one link with a live count (`familyItemCount()`, same items.json-derived count
+  monster families use) instead of a long comma list; clicking it jumps to the Item
+  Database with that prefix pre-filled in the search box (`goToItemSearch`), same
+  destination a monster's family link goes to. Mix freely with plain item-name strings in
+  the same `results` array. Use this any time a node's confirmed results grow into a whole
+  quality-set family (gemstones today) — don't write out the full roster by hand.
 - **Mining gemstone quality-tier inference** (confirmed 2026-08-06, same idea as monster
   drops' quality-set inference): gemstones come in quality tiers — Chipped, Flawed,
   Imperfect (only three confirmed as gem-quality prefixes so far; `Cracked` is unrelated,
   used only for wood staffs) — and if a node is confirmed to yield any one gem of a given
   tier, assume it can yield every other gem of that same tier too. Applies automatically
   whenever inbox data confirms ≥1 gem drop from a node, same as the monster-drops rule —
-  no need to re-request each time. Add every other `items.json` entry sharing that quality
-  prefix (e.g. one confirmed "Chipped Peridot" → add every other `"Chipped <Gem>"` item) to
-  the node's `results` array alongside its ore/other results. No compact `family`-reference
-  form exists for `gathering-nodes.json` (unlike monster `drops`) — list every gem name
-  directly; revisit only if a node's results list grows unreadably long in practice.
+  no need to re-request each time. Record it as a compact `results` entry (below), not by
+  listing every gem name.
+- **Herbalism Frond skill-threshold inference** (confirmed 2026-08-06, refined 2026-08-06):
+  a node yielding Magic Frond as a bonus result means every Herbalism node with `minSkill`
+  **less than or equal to** that node's own `minSkill` can also yield Magic Frond — "the
+  higher the skill, the higher the frond" (user's own framing), so this is a skill-ordering
+  rule, not a quality-set/name-prefix rule like gemstones above. First confirmed on Ghost
+  Poppy (`minSkill` 1) and Lionleaf (`minSkill` 1); re-confirmed and extended when Nomad's
+  Grace (`minSkill` 10) also yielded one, which pulled in every node at `minSkill` 1 too
+  (Selstie Kelp, Sylvine) alongside Nomad's Grace itself. Applies automatically whenever
+  inbox data confirms a new highest-`minSkill` node yielding Magic Frond — re-scan every
+  Herbalism node at or below that `minSkill` and add `"Magic Frond"` to `results` if not
+  already there.
+  **This is a moving window, not a permanently-growing one** — there are 3-4 Frond tiers
+  overall (Magic → Enchanted → Arcane → possibly a 4th), each replacing the previous tier's
+  availability as skill rises. The instant a node is confirmed yielding **Enchanted Frond**
+  (tier 2), Magic Frond becomes unavailable at that node's `minSkill` and above — go back and
+  **remove** `"Magic Frond"` from every node with `minSkill` >= that Enchanted-Frond-yielding
+  node's `minSkill`, leaving Magic Frond only on nodes strictly below it. Then apply this
+  same less-than-or-equal-`minSkill` inference rule to Enchanted Frond among the nodes now in
+  its range, and so on up the tier chain once Arcane Frond (tier 3) is confirmed. No evidence
+  yet of any Enchanted/Arcane Frond source node — don't extrapolate a threshold ahead of
+  actual inbox confirmation.
 - Source tables so far are fan-wiki-style reference charts, same weaker-than-a-screenshot
   caveat as the Tanning/Leatherworking/Blacksmithing tables (see `CLAUDE-HISTORY.md`) —
   supersede without hesitation if the user's own observation disagrees.

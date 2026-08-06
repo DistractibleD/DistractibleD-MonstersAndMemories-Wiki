@@ -919,6 +919,24 @@ body:not(.site-entered) .sidebar {
   border: 0;
   border-radius: 0;
 }
+/* A compact result family (e.g. "Chipped Gems") collapsing many similar
+   results into one link, same visual treatment as a monster's quality-set
+   drop family. */
+.gathering-family-link {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent-dim);
+  cursor: pointer;
+  font-weight: 600;
+}
+.gathering-family-link:hover {
+  text-decoration: none;
+}
+.gathering-family-count {
+  color: var(--text-dim);
+  font-weight: 400;
+  font-size: 0.85em;
+}
 .items-table th {
   background: var(--bg);
   color: var(--accent);
