@@ -384,7 +384,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 15,
     "trivialSkill": 65,
-    "results": ["Whispering Sage"],
+    "results": ["Whispering Sage", "Enchanted Frond"],
     "locations": ["Evershade Weald", "Shaded Dunes"]
   },
   {
@@ -394,7 +394,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 30,
     "trivialSkill": 80,
-    "results": ["Ironroot"],
+    "results": ["Ironroot", "Enchanted Frond"],
     "locations": ["Shaded Dunes", "Sungreet Strand"]
   },
   {
@@ -402,7 +402,7 @@
     "slug": "moonveil",
     "tradeskill": "Herbalism",
     "minSkill": 35,
-    "results": ["Moonveil"],
+    "results": ["Moonveil", "Enchanted Frond"],
     "locations": ["Evershade Weald", "Keeper's Bight", "Shallow Shoals"],
     "note": "Only spawns at night, at 6pm in-game. Trivial is somewhere between 77 and 88 (exact value unknown) — shown as \"88>?>77\" on the source table."
   },
@@ -412,7 +412,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 55,
     "trivialSkill": 105,
-    "results": ["Stranglevine"],
+    "results": ["Stranglevine", "Enchanted Frond"],
     "locations": ["Fallen Pass"],
     "image": "images/gathering/stranglevine.jpg"
   },
@@ -433,7 +433,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 80,
     "trivialSkill": 125,
-    "results": ["Gadolvine"],
+    "results": ["Gadolvine", "Enchanted Frond"],
     "locations": ["Fallen Pass", "Shallow Shoals"],
     "note": "Grows underwater. In the water at Southern Beach, near invisible Smuggler Lookouts."
   },

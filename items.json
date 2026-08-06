@@ -13769,13 +13769,14 @@
   {
     "name": "Battleforged Plate Belt",
     "slug": "battleforged-plate-belt",
+    "lastUpdated": "2026-08-06",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Waist",
-    "ac": 12,
+    "ac": 4,
     "stats": { "STR": 2, "STA": 2, "HP": 15 },
     "description": "A thick metal belt etched with the scars of countless skirmishes.",
-    "weight": 2.0,
+    "weight": 0.25,
     "size": "Small",
     "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
     "race": ["ALL"]
@@ -17074,10 +17075,10 @@
   {
     "name": "Ring of Regret",
     "slug": "ring-of-regret",
-    "lastUpdated": "2026-07-28",
+    "lastUpdated": "2026-08-06",
     "image": "images/items/ring-of-regret.jpg",
     "type": "Jewelry",
-    "tags": [],
+    "tags": ["MAGIC", "LORE"],
     "slot": "Finger",
     "ac": 6,
     "stats": { "STA": 1, "AGI": 6, "HP": 10 },
@@ -17085,7 +17086,8 @@
     "description": "A dull gold band, marred with dents and blemishes. Faint traces of an inscription remain inside the band, but the words have been violently scratched out.",
     "weight": 0.1,
     "size": "Small",
-    "classes": ["ALL"]
+    "classes": ["ALL"],
+    "race": ["ALL"]
   },
   {
     "name": "Bromm's Bracers",
@@ -19276,6 +19278,44 @@
     "slug": "enchanted-frond",
     "lastUpdated": "2026-08-06",
     "image": "images/gathering/frond.jpg",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Flux",
+    "slug": "flux",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "description": "A reagent used by blacksmiths to forge metal.",
+    "weight": 1.0,
+    "size": "Small"
+  },
+  {
+    "name": "Moonveil",
+    "slug": "moonveil",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "description": "A mysterious herb named for its fascinating trait of appearing only under direct moonlight.",
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
+    "name": "Stranglevine",
+    "slug": "stranglevine",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "description": "An invasive herb, often found preying on surrounding foliage.",
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
+    "name": "Wisp Dust",
+    "slug": "wisp-dust",
+    "lastUpdated": "2026-08-06",
     "type": "Misc",
     "tags": [],
     "needsInfo": true

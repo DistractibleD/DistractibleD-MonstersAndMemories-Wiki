@@ -1185,7 +1185,11 @@
     "name": "a willowisp",
     "slug": "a-willowisp",
     "image": "images/Monsters/a-willowisp.jpg",
-    "maps": ["Shaded Dunes"]
+    "maps": ["Shaded Dunes"],
+    "drops": [
+      { "item": "Wisp Dust" }
+    ],
+    "lastUpdated": "2026-08-06"
   },
   {
     "name": "a Dustrend priest",

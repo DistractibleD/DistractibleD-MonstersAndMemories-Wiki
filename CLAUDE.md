@@ -414,9 +414,15 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   **remove** `"Magic Frond"` from every node with `minSkill` >= that Enchanted-Frond-yielding
   node's `minSkill`, leaving Magic Frond only on nodes strictly below it. Then apply this
   same less-than-or-equal-`minSkill` inference rule to Enchanted Frond among the nodes now in
-  its range, and so on up the tier chain once Arcane Frond (tier 3) is confirmed. No evidence
-  yet of any Enchanted/Arcane Frond source node — don't extrapolate a threshold ahead of
-  actual inbox confirmation.
+  its range, and so on up the tier chain once Arcane Frond (tier 3) is confirmed.
+  **Enchanted Frond confirmed 2026-08-06** on Gadolvine (`minSkill` 80) — Magic Frond's
+  existing ceiling (Nomad's Grace, `minSkill` 10) was untouched (nothing at/above 80 had it),
+  so no removal was needed this time. Pulled `"Enchanted Frond"` into every node strictly
+  above the Magic Frond ceiling and at or below 80: Whispering Sage (15), Ironroot (30),
+  Moonveil (35), Stranglevine (55), Gadolvine (80) itself. No evidence yet of any Arcane
+  Frond source node — don't extrapolate a threshold ahead of actual inbox confirmation, and
+  don't assume every node between two confirmed tier boundaries is fully settled forever —
+  a future screenshot could still narrow the Enchanted range further from either end.
 - Source tables so far are fan-wiki-style reference charts, same weaker-than-a-screenshot
   caveat as the Tanning/Leatherworking/Blacksmithing tables (see `CLAUDE-HISTORY.md`) —
   supersede without hesitation if the user's own observation disagrees.
