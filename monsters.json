@@ -92,7 +92,10 @@
       { "item": "Shattered Skeleton Femur" }
     ],
     "coinDrops": [
-      { "copper": 2 }
+      { "copper": 2 },
+      { "copper": 2 },
+      { "copper": 1 },
+      { "copper": 1 }
     ],
     "lastUpdated": "2026-08-06"
   },
@@ -246,7 +249,11 @@
       { "item": "Rusty Maul" },
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" }
-    ]
+    ],
+    "coinDrops": [
+      { "copper": 8 }
+    ],
+    "lastUpdated": "2026-08-06"
   },
   {
     "name": "an ashira lookout",
@@ -627,9 +634,13 @@
     "drops": [
       { "item": "Multhele Root" },
       { "item": "Ashira Scout Necklace" },
-      { "item": "Cloth Scraps" }
+      { "item": "Cloth Scraps" },
+      { "item": "Cabbage" },
+      { "item": "Tattered Cloth Robe" }
     ],
     "coinDrops": [
+      { "copper": 4 },
+      { "copper": 5 },
       { "copper": 4 }
     ],
     "lastUpdated": "2026-08-06"
