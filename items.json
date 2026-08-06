@@ -19337,5 +19337,21 @@
     "type": "Misc",
     "tags": [],
     "needsInfo": true
+  },
+  {
+    "name": "Soul Shackle",
+    "slug": "soul-shackle",
+    "lastUpdated": "2026-08-06",
+    "type": "Armor",
+    "tags": ["MAGIC", "LORE"],
+    "slot": "Wrist",
+    "ac": 18,
+    "stats": { "STR": 6, "STA": 4, "HP": 5 },
+    "description": "Mortal souls may be shackled by materials from the shadow realm.",
+    "weight": 0.5,
+    "size": "Small",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|8c79338f73746b518ec180e4\"><color=green><b><u>[Soul Shackle]</u></b></color></link>"
   }
 ]
