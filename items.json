@@ -2944,11 +2944,12 @@
   {
     "name": "Brilliant Crystallized Magic",
     "slug": "brilliant-crystallized-magic",
-    "image": "images/items/brilliant-crystallized-magic.jpg",
+    "image": "images/gathering/crystallized-magic.jpg",
     "type": "Misc",
     "tags": ["MAGIC"],
     "weight": 0.25,
-    "size": "Small"
+    "size": "Small",
+    "lastUpdated": "2026-08-06"
   },
   {
     "name": "Medium-Quality Wolf Pelt",
@@ -3011,11 +3012,12 @@
   {
     "name": "Arcane Frond",
     "slug": "arcane-frond",
-    "image": "images/items/arcane-frond.jpg",
+    "image": "images/gathering/frond.jpg",
     "type": "Misc",
     "tags": ["MAGIC"],
     "weight": 0.25,
-    "size": "Small"
+    "size": "Small",
+    "lastUpdated": "2026-08-06"
   },
   {
     "name": "Overlord's Plate Helm",
@@ -3269,11 +3271,12 @@
   {
     "name": "Clouded Crystallized Magic",
     "slug": "clouded-crystallized-magic",
-    "image": "images/items/clouded-crystallized-magic.jpg",
+    "image": "images/gathering/crystallized-magic.jpg",
     "type": "Misc",
     "tags": ["MAGIC"],
     "weight": 0.25,
-    "size": "Small"
+    "size": "Small",
+    "lastUpdated": "2026-08-06"
   },
   {
     "name": "Penitential Veil",
@@ -3292,11 +3295,12 @@
   {
     "name": "Shining Crystallized Magic",
     "slug": "shining-crystallized-magic",
-    "image": "images/items/shining-crystallized-magic.jpg",
+    "image": "images/gathering/crystallized-magic.jpg",
     "type": "Misc",
     "tags": ["MAGIC"],
     "weight": 0.25,
-    "size": "Small"
+    "size": "Small",
+    "lastUpdated": "2026-08-06"
   },
   {
     "name": "Orcish Ritual Staff",
@@ -4609,11 +4613,12 @@
   {
     "name": "Magic Frond",
     "slug": "magic-frond",
-    "image": "images/items/magic-frond.jpg",
+    "image": "images/gathering/frond.jpg",
     "type": "Misc",
     "tags": ["MAGIC"],
     "weight": 0.25,
-    "size": "Small"
+    "size": "Small",
+    "lastUpdated": "2026-08-06"
   },
   {
     "name": "Skri'Var Silkstrand",
@@ -4926,11 +4931,12 @@
   {
     "name": "Glinting Crystallized Magic",
     "slug": "glinting-crystallized-magic",
-    "image": "images/items/glinting-crystallized-magic.jpg",
+    "image": "images/gathering/crystallized-magic.jpg",
     "type": "Misc",
     "tags": ["MAGIC"],
     "weight": 0.25,
-    "size": "Small"
+    "size": "Small",
+    "lastUpdated": "2026-08-06"
   },
   {
     "name": "Sand-Blasted Boots",
@@ -19268,8 +19274,8 @@
   {
     "name": "Enchanted Frond",
     "slug": "enchanted-frond",
-    "lastUpdated": "2026-08-05",
-    "image": "images/gathering/enchanted-frond.jpg",
+    "lastUpdated": "2026-08-06",
+    "image": "images/gathering/frond.jpg",
     "type": "Misc",
     "tags": [],
     "needsInfo": true

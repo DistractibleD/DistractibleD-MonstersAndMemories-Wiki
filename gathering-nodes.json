@@ -6,7 +6,7 @@
     "tradeskill": "Mining",
     "minSkill": 1,
     "trivialSkill": 50,
-    "results": ["Copper Ore", "Brittle Stone", "Clouded Crystallized Magic", "Chipped Peridot"],
+    "results": ["Copper Ore", "Brittle Stone", "Clouded Crystallized Magic", "Chipped Peridot", "Chipped Bloodstone", "Chipped Black Pearl", "Chipped Black Sapphire", "Chipped Carnelian", "Chipped Cat's Eye Agate", "Chipped Diamond", "Chipped Emerald", "Chipped Fire Emerald", "Chipped Fire Opal", "Chipped Hematite", "Chipped Jacinth", "Chipped Jade", "Chipped Lapis Lazuli", "Chipped Malachite", "Chipped Onyx", "Chipped Opal", "Chipped Pearl", "Chipped Ruby", "Chipped Sapphire", "Chipped Star Rose Quartz", "Chipped Star Ruby", "Chipped Topaz", "Chipped Turquoise", "Chipped Wolf's Eye Agate"],
     "locations": ["Night Harbor (West Gate, North Gate)", "Shaded Dunes", "Evershade Weald", "Keeper's Bight"]
   },
   {
@@ -335,7 +335,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 1,
     "trivialSkill": 15,
-    "results": ["Lionleaf"],
+    "results": ["Lionleaf", "Magic Frond"],
     "locations": ["Evershade Weald", "Night Harbor", "Shaded Dunes"]
   },
   {
@@ -345,7 +345,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 1,
     "trivialSkill": 20,
-    "results": ["Ghost Poppy"],
+    "results": ["Ghost Poppy", "Magic Frond"],
     "locations": ["Night Harbor", "Shaded Dunes", "Evershade Weald", "Sungreet Strand"]
   },
   {
@@ -560,64 +560,64 @@
   {
     "name": "Magic Frond",
     "slug": "magic-frond",
-    "image": "images/items/magic-frond.jpg",
+    "image": "images/gathering/frond.jpg",
     "tradeskill": "Herbalism",
     "results": ["Magic Frond"],
     "locations": [],
-    "note": "Skill level not yet known."
+    "note": "Skill level not yet known. All quality levels of frond (Magic/Enchanted/Arcane) share this same in-game icon."
   },
   {
     "name": "Enchanted Frond",
     "slug": "enchanted-frond",
-    "image": "images/gathering/enchanted-frond.jpg",
+    "image": "images/gathering/frond.jpg",
     "tradeskill": "Herbalism",
     "results": ["Enchanted Frond"],
     "locations": [],
-    "note": "Skill level not yet known."
+    "note": "Skill level not yet known. All quality levels of frond (Magic/Enchanted/Arcane) share this same in-game icon."
   },
   {
     "name": "Arcane Frond",
     "slug": "arcane-frond",
-    "image": "images/items/arcane-frond.jpg",
+    "image": "images/gathering/frond.jpg",
     "tradeskill": "Herbalism",
     "results": ["Arcane Frond"],
     "locations": [],
-    "note": "Skill level not yet known."
+    "note": "Skill level not yet known. All quality levels of frond (Magic/Enchanted/Arcane) share this same in-game icon."
   },
   {
     "name": "Clouded Crystallized Magic",
     "slug": "clouded-crystallized-magic",
-    "image": "images/items/clouded-crystallized-magic.jpg",
+    "image": "images/gathering/crystallized-magic.jpg",
     "tradeskill": "Mining",
     "results": ["Clouded Crystallized Magic"],
     "locations": [],
-    "note": "Skill level not yet known."
+    "note": "Skill level not yet known. All quality levels of crystallized magic (Clouded/Glinting/Shining/Brilliant) share this same in-game icon."
   },
   {
     "name": "Glinting Crystallized Magic",
     "slug": "glinting-crystallized-magic",
-    "image": "images/items/glinting-crystallized-magic.jpg",
+    "image": "images/gathering/crystallized-magic.jpg",
     "tradeskill": "Mining",
     "results": ["Glinting Crystallized Magic"],
     "locations": [],
-    "note": "Skill level not yet known."
+    "note": "Skill level not yet known. All quality levels of crystallized magic (Clouded/Glinting/Shining/Brilliant) share this same in-game icon."
   },
   {
     "name": "Shining Crystallized Magic",
     "slug": "shining-crystallized-magic",
-    "image": "images/items/shining-crystallized-magic.jpg",
+    "image": "images/gathering/crystallized-magic.jpg",
     "tradeskill": "Mining",
     "results": ["Shining Crystallized Magic"],
     "locations": [],
-    "note": "Skill level not yet known."
+    "note": "Skill level not yet known. All quality levels of crystallized magic (Clouded/Glinting/Shining/Brilliant) share this same in-game icon."
   },
   {
     "name": "Brilliant Crystallized Magic",
     "slug": "brilliant-crystallized-magic",
-    "image": "images/items/brilliant-crystallized-magic.jpg",
+    "image": "images/gathering/crystallized-magic.jpg",
     "tradeskill": "Mining",
     "results": ["Brilliant Crystallized Magic"],
     "locations": [],
-    "note": "Skill level not yet known."
+    "note": "Skill level not yet known. All quality levels of crystallized magic (Clouded/Glinting/Shining/Brilliant) share this same in-game icon."
   }
 ]

@@ -377,6 +377,17 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   keeps that prefix verbatim, still an exact match to the node's own name. Most of these
   result item names don't have a real `items.json` card yet and render as plain text until
   one comes in, same as any other unmatched dynamic link.
+- **Mining gemstone quality-tier inference** (confirmed 2026-08-06, same idea as monster
+  drops' quality-set inference): gemstones come in quality tiers — Chipped, Flawed,
+  Imperfect (only three confirmed as gem-quality prefixes so far; `Cracked` is unrelated,
+  used only for wood staffs) — and if a node is confirmed to yield any one gem of a given
+  tier, assume it can yield every other gem of that same tier too. Applies automatically
+  whenever inbox data confirms ≥1 gem drop from a node, same as the monster-drops rule —
+  no need to re-request each time. Add every other `items.json` entry sharing that quality
+  prefix (e.g. one confirmed "Chipped Peridot" → add every other `"Chipped <Gem>"` item) to
+  the node's `results` array alongside its ore/other results. No compact `family`-reference
+  form exists for `gathering-nodes.json` (unlike monster `drops`) — list every gem name
+  directly; revisit only if a node's results list grows unreadably long in practice.
 - Source tables so far are fan-wiki-style reference charts, same weaker-than-a-screenshot
   caveat as the Tanning/Leatherworking/Blacksmithing tables (see `CLAUDE-HISTORY.md`) —
   supersede without hesitation if the user's own observation disagrees.
