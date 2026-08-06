@@ -472,6 +472,7 @@
     "name": "Magebloom",
     "slug": "magebloom",
     "image": "images/gathering/magebloom.jpg",
+    "images": ["images/gathering/magebloom-alt.jpg"],
     "tradeskill": "Herbalism",
     "minSkill": 150,
     "trivialSkill": 200,
@@ -525,15 +526,6 @@
     "note": "In Giant City. Min skill given only as an uncertain value on the source table: \"250?\"."
   },
   {
-    "name": "Unidentified Herb (Blue Lily)",
-    "slug": "unidentified-herb-blue-lily",
-    "image": "images/gathering/unidentified-herb-blue-lily.jpg",
-    "tradeskill": "Herbalism",
-    "locations": [],
-    "note": "Spotted in-game but not yet identified — no other details (skill, location) recorded yet. The screenshot is the only identifying info until a name/location/skill comes in.",
-    "needsInfo": true
-  },
-  {
     "name": "Grub",
     "slug": "grub",
     "tradeskill": "Foraging",
@@ -556,33 +548,6 @@
     "minSkill": 1,
     "results": ["Wild Carrots"],
     "locations": []
-  },
-  {
-    "name": "Magic Frond",
-    "slug": "magic-frond",
-    "image": "images/gathering/frond.jpg",
-    "tradeskill": "Herbalism",
-    "results": ["Magic Frond"],
-    "locations": [],
-    "note": "Skill level not yet known. All quality levels of frond (Magic/Enchanted/Arcane) share this same in-game icon."
-  },
-  {
-    "name": "Enchanted Frond",
-    "slug": "enchanted-frond",
-    "image": "images/gathering/frond.jpg",
-    "tradeskill": "Herbalism",
-    "results": ["Enchanted Frond"],
-    "locations": [],
-    "note": "Skill level not yet known. All quality levels of frond (Magic/Enchanted/Arcane) share this same in-game icon."
-  },
-  {
-    "name": "Arcane Frond",
-    "slug": "arcane-frond",
-    "image": "images/gathering/frond.jpg",
-    "tradeskill": "Herbalism",
-    "results": ["Arcane Frond"],
-    "locations": [],
-    "note": "Skill level not yet known. All quality levels of frond (Magic/Enchanted/Arcane) share this same in-game icon."
   },
   {
     "name": "Clouded Crystallized Magic",

@@ -19353,5 +19353,21 @@
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
     "race": ["ALL"],
     "gameLinkCode": "<link=\"item|8c79338f73746b518ec180e4\"><color=green><b><u>[Soul Shackle]</u></b></color></link>"
+  },
+  {
+    "name": "Torvald Signet Ring",
+    "slug": "torvald-signet-ring",
+    "lastUpdated": "2026-08-06",
+    "type": "Jewelry",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Finger",
+    "stats": { "STA": 3, "INT": 5, "CHA": 1, "HP": 10, "MANA": 5 },
+    "effect": "Sonnet of the Unseen (On Click. Must Equip. Cast Time: 6s. Level: 50)",
+    "description": "The steward knew the comings and goings of everyone in the Torvald household.",
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["BRD"],
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|af3671b5f4d26969c449fdf1\"><color=green><b><u>[Torvald Signet Ring]</u></b></color></link>"
   }
 ]
