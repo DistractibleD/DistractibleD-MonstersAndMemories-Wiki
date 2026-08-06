@@ -16,7 +16,7 @@
     "tradeskill": "Mining",
     "minSkill": 1,
     "trivialSkill": 65,
-    "results": ["Copper Ore"],
+    "results": ["Copper Ore", "Brittle Stone", "Clouded Crystallized Magic", { "family": "Chipped", "label": "Chipped Gems" }],
     "locations": ["Night Harbor (West Gate, North Gate)", "Shaded Dunes", "Evershade Weald", "Keeper's Bight"]
   },
   {

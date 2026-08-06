@@ -2249,11 +2249,13 @@
   {
     "name": "Rawhide Scraps",
     "slug": "rawhide-scraps",
+    "lastUpdated": "2026-08-06",
     "image": "images/items/rawhide-scraps.jpg",
     "type": "Misc",
     "tags": [],
     "weight": 0.2,
-    "size": "Small"
+    "size": "Small",
+    "gameLinkCode": "<link=\"item|6a2f49f8c5733b91b9fa1bd9\"><color=green><b><u>[Rawhide Scraps]</u></b></color></link>"
   },
   {
     "name": "Moonwhisper Knot",
@@ -3107,6 +3109,7 @@
   {
     "name": "Wristguard of Wailing",
     "slug": "wristguard-of-wailing",
+    "lastUpdated": "2026-08-06",
     "image": "images/items/wristguard-of-wailing.jpg",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
@@ -3117,7 +3120,8 @@
     "weight": 0.25,
     "size": "Medium",
     "classes": ["ALL"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|4485fe89d712eeed3e59842c\"><color=green><b><u>[Wristguard of Wailing]</u></b></color></link>"
   },
   {
     "name": "Corrupted Leather Tunic",
@@ -4160,11 +4164,13 @@
   {
     "name": "Cloth Scraps",
     "slug": "cloth-scraps",
+    "lastUpdated": "2026-08-06",
     "image": "images/items/cloth-scraps.jpg",
     "type": "Misc",
     "tags": [],
     "weight": 0.1,
-    "size": "Small"
+    "size": "Small",
+    "gameLinkCode": "<link=\"item|b688897ebe26c20e25e8b0b8\"><color=green><b><u>[Cloth Scraps]</u></b></color></link>"
   },
   {
     "name": "Tattered Cloth Shirt",
@@ -10469,16 +10475,17 @@
   {
     "name": "Corrupted Scout Gloves",
     "slug": "corrupted-scout-gloves",
-    "lastUpdated": "2026-07-19",
+    "lastUpdated": "2026-08-06",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Hands",
     "ac": 23,
-    "stats": { "STR": 7, "STA": 9 },
+    "stats": { "STR": 7, "STA": 3, "AGI": 6 },
     "weight": 0.5,
     "size": "Small",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|c35609c2f2a958e2d78169db\"><color=green><b><u>[Corrupted Scout Gloves]</u></b></color></link>"
   },
   {
     "name": "Mirebloom Choker",
@@ -12719,7 +12726,7 @@
   {
     "name": "Hammer of Elemental Forging",
     "slug": "hammer-of-elemental-forging",
-    "lastUpdated": "2026-08-04",
+    "lastUpdated": "2026-08-06",
     "type": "Weapon",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Primary / Secondary",
@@ -12732,7 +12739,8 @@
     "weight": 15.0,
     "size": "Extra Large",
     "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|6632010f242f43052287b7a5\"><color=green><b><u>[Hammer of Elemental Forging]</u></b></color></link>"
   },
   {
     "name": "Embezzler's Golden Kilt",
@@ -13779,11 +13787,13 @@
     "weight": 0.25,
     "size": "Small",
     "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|0676c6e2c6f529a5176513e4\"><color=green><b><u>[Battleforged Plate Belt]</u></b></color></link>"
   },
   {
     "name": "Interrogator's Hood",
     "slug": "interrogators-hood",
+    "lastUpdated": "2026-08-06",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Head",
@@ -13792,7 +13802,8 @@
     "weight": 0.5,
     "size": "Small",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|4987ec7ef190fce4dbfc901d\"><color=green><b><u>[Interrogator's Hood]</u></b></color></link>"
   },
   {
     "name": "Ragged Leather Cloak",
@@ -14924,7 +14935,7 @@
   {
     "name": "Profaned Leather Boots",
     "slug": "profaned-leather-boots",
-    "lastUpdated": "2026-07-24",
+    "lastUpdated": "2026-08-06",
     "image": "images/items/profaned-leather-boots.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
@@ -14934,7 +14945,8 @@
     "weight": 0.5,
     "size": "Medium",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|0753c9a75fc6048da2d3d4de\"><color=green><b><u>[Profaned Leather Boots]</u></b></color></link>"
   },
   {
     "name": "Doctor's Polished Pauldrons",
@@ -15758,7 +15770,7 @@
   {
     "name": "Bone-Riveted Shoulderpads",
     "slug": "bone-riveted-shoulderpads",
-    "lastUpdated": "2026-07-24",
+    "lastUpdated": "2026-08-06",
     "image": "images/items/bone-riveted-shoulderpads.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
@@ -15768,7 +15780,8 @@
     "weight": 0.5,
     "size": "Small",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|b819e1398d79e2dd3dd052d2\"><color=green><b><u>[Bone-Riveted Shoulderpads]</u></b></color></link>"
   },
   {
     "name": "Girault's Bulwark",
@@ -15820,7 +15833,7 @@
   {
     "name": "Trail Boots",
     "slug": "trail-boots",
-    "lastUpdated": "2026-07-24",
+    "lastUpdated": "2026-08-06",
     "image": "images/items/trail-boots.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
@@ -15830,7 +15843,8 @@
     "weight": 0.5,
     "size": "Medium",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|b69a645ffe1d05d7fac2fdb8\"><color=green><b><u>[Trail Boots]</u></b></color></link>"
   },
   {
     "name": "Hollow Earring",
@@ -17087,7 +17101,8 @@
     "weight": 0.1,
     "size": "Small",
     "classes": ["ALL"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|5f9890d40f57d4ec92307b77\"><color=green><b><u>[Ring of Regret]</u></b></color></link>"
   },
   {
     "name": "Bromm's Bracers",
@@ -17231,7 +17246,7 @@
   {
     "name": "Rough Iron Pot",
     "slug": "rough-iron-pot",
-    "lastUpdated": "2026-07-28",
+    "lastUpdated": "2026-08-06",
     "image": "images/items/rough-iron-pot.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
@@ -17242,7 +17257,8 @@
     "weight": 1.0,
     "size": "Medium",
     "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|07c77cd7822262f70dfb951e\"><color=green><b><u>[Rough Iron Pot]</u></b></color></link>"
   },
   {
     "name": "Scorched Apron",
@@ -19176,7 +19192,7 @@
   {
     "name": "Enchanted Padded Leather Tunic",
     "slug": "enchanted-padded-leather-tunic",
-    "lastUpdated": "2026-08-05",
+    "lastUpdated": "2026-08-06",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Chest",
@@ -19185,7 +19201,8 @@
     "weight": 3.0,
     "size": "Medium",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|fe6985cee3e7aa74016bdc04\"><color=green><b><u>[Enchanted Padded Leather Tunic]</u></b></color></link>"
   },
   {
     "name": "Enchanted Padded Leather Leggings",
@@ -19219,7 +19236,7 @@
   {
     "name": "Stirring Stick",
     "slug": "stirring-stick",
-    "lastUpdated": "2026-08-05",
+    "lastUpdated": "2026-08-06",
     "image": "images/items/stirring-stick.jpg",
     "type": "Weapon",
     "tags": ["MAGIC", "UNIQUE"],
@@ -19232,7 +19249,8 @@
     "weight": 6.3,
     "size": "Large",
     "classes": ["ALL"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|204aad6135e7af8593fc975e\"><color=green><b><u>[Stirring Stick]</u></b></color></link>"
   },
   {
     "name": "Silentfold Hauberk",
