@@ -3074,66 +3074,71 @@ async function renderLevelingPage(container) {
       : `<span class="leveling-camp">${label}</span>`;
   }
 
+  function sectionHTML(lv) {
+    const regionBlocks = regions.map(region => {
+      const zones = levelingData.filter(z => z.region === region && z.levels.some(l => l.level === lv));
+      if (!zones.length) return '';
+      return `
+        <div class="leveling-region">${escapeAttr(region)}</div>
+        ${zones.map(z => {
+          const bucket = z.levels.find(l => l.level === lv);
+          return `
+            <div class="leveling-zone">
+              <div class="leveling-zone-name">${escapeAttr(z.zone)}${z.zoneAbbr ? ` <span class="leveling-zone-abbr">(${escapeAttr(z.zoneAbbr)})</span>` : ''}</div>
+              <div class="leveling-camps">${bucket.camps.map(campHTML).join('')}</div>
+            </div>
+          `;
+        }).join('')}
+      `;
+    }).join('');
+    return `
+      <section class="leveling-section" id="leveling-lv-${lv}" data-level="${lv}">
+        <h2>Level ${lv}</h2>
+        ${regionBlocks || '<p class="leveling-empty">No suggestions recorded at this level yet.</p>'}
+      </section>
+    `;
+  }
+
+  // Only the selected level bracket's suggestions are ever in the DOM at
+  // once (2026-08-06, user's own request — supersedes the earlier
+  // show-all-then-hide-with-CSS approach). "All Levels" (default) renders
+  // every bracket back to back; picking one bracket re-renders down to just
+  // that section instead of merely hiding the others.
+  function renderSections(selectedLevel) {
+    const sectionsContainer = container.querySelector('.leveling-sections');
+    sectionsContainer.innerHTML = selectedLevel === null
+      ? allLevels.map(sectionHTML).join('')
+      : sectionHTML(selectedLevel);
+
+    sectionsContainer.querySelectorAll('.leveling-camp-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const monster = monstersData.find(m => m.slug === link.dataset.slug);
+        if (monster) goToMonster(monster);
+      });
+    });
+  }
+
   container.innerHTML = `
     <h1 class="monsters-section-heading">${svgIcon('levelingicon')} Leveling Suggestions</h1>
     <p class="leveling-credit">Guide compiled by <strong class="leveling-credit-name">Flourishing</strong> (Monsters and Memories Discord).</p>
     <nav class="leveling-nav">
-      ${allLevels.map(lv => `<a href="#" class="leveling-nav-link" data-level="${lv}">Lv ${lv}</a>`).join('')}
+      <a href="#" class="leveling-nav-link active" data-level="">All Levels</a>
+      ${allLevels.map(lv => `<a href="#" class="leveling-nav-link" data-level="${lv}">Lvl ${lv}</a>`).join('')}
     </nav>
-    ${allLevels.map(lv => {
-      const regionBlocks = regions.map(region => {
-        const zones = levelingData.filter(z => z.region === region && z.levels.some(l => l.level === lv));
-        if (!zones.length) return '';
-        return `
-          <div class="leveling-region">${escapeAttr(region)}</div>
-          ${zones.map(z => {
-            const bucket = z.levels.find(l => l.level === lv);
-            return `
-              <div class="leveling-zone">
-                <div class="leveling-zone-name">${escapeAttr(z.zone)}${z.zoneAbbr ? ` <span class="leveling-zone-abbr">(${escapeAttr(z.zoneAbbr)})</span>` : ''}</div>
-                <div class="leveling-camps">${bucket.camps.map(campHTML).join('')}</div>
-              </div>
-            `;
-          }).join('')}
-        `;
-      }).join('');
-      return `
-        <section class="leveling-section" id="leveling-lv-${lv}" data-level="${lv}">
-          <h2>Level ${lv}</h2>
-          ${regionBlocks || '<p class="leveling-empty">No suggestions recorded at this level yet.</p>'}
-        </section>
-      `;
-    }).join('')}
+    <div class="leveling-sections"></div>
   `;
 
-  container.querySelectorAll('.leveling-camp-link').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const monster = monstersData.find(m => m.slug === link.dataset.slug);
-      if (monster) goToMonster(monster);
-    });
-  });
+  renderSections(null);
 
-  // Picking a level bracket hides every other section instead of just
-  // scrolling to it (2026-08-06, user's own request — with 13 brackets the
-  // scroll-to-anchor version still meant a lot of scrolling past sections
-  // you didn't care about). Clicking the already-active level again clears
-  // the filter and shows every bracket, since that's otherwise the only way
-  // back to the full list once one's selected.
   const navLinks = [...container.querySelectorAll('.leveling-nav-link')];
-  const sections = [...container.querySelectorAll('.leveling-section')];
   navLinks.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
-      const alreadyActive = link.classList.contains('active');
       navLinks.forEach(l => l.classList.remove('active'));
-      if (alreadyActive) {
-        sections.forEach(s => { s.style.display = ''; });
-        return;
-      }
       link.classList.add('active');
-      const level = link.dataset.level;
-      sections.forEach(s => { s.style.display = s.dataset.level === level ? '' : 'none'; });
+      const level = link.dataset.level === '' ? null : Number(link.dataset.level);
+      renderSections(level);
     });
   });
 }
