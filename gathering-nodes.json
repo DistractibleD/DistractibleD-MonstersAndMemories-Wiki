@@ -6,7 +6,7 @@
     "tradeskill": "Mining",
     "minSkill": 1,
     "trivialSkill": 50,
-    "results": ["Copper Ore"],
+    "results": ["Copper Ore", "Brittle Stone", "Clouded Crystallized Magic", "Chipped Peridot"],
     "locations": ["Night Harbor (West Gate, North Gate)", "Shaded Dunes", "Evershade Weald", "Keeper's Bight"]
   },
   {

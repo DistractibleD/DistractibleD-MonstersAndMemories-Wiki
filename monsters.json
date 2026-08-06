@@ -295,10 +295,13 @@
     "slug": "a-jackal-pup",
     "image": "images/Monsters/a-jackal-pup.jpg",
     "maps": ["Night Harbor"],
-    "areas": ["West Gate"],
+    "areas": ["West Gate", "North Gate"],
     "drops": [
-      { "item": "Raw Jackal Meat" }
-    ]
+      { "item": "Raw Jackal Meat" },
+      { "item": "Low-Quality Jackal Pelt" },
+      { "item": "Jackal Tooth" }
+    ],
+    "lastUpdated": "2026-08-06"
   },
   {
     "name": "the corrupted ashira",
@@ -623,8 +626,13 @@
     "areas": ["North Gate"],
     "drops": [
       { "item": "Multhele Root" },
-      { "item": "Ashira Scout Necklace" }
-    ]
+      { "item": "Ashira Scout Necklace" },
+      { "item": "Cloth Scraps" }
+    ],
+    "coinDrops": [
+      { "copper": 4 }
+    ],
+    "lastUpdated": "2026-08-06"
   },
   {
     "name": "a dunes scarab",

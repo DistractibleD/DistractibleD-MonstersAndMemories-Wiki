@@ -2972,6 +2972,14 @@
     "size": "Medium"
   },
   {
+    "name": "Jackal Tooth",
+    "slug": "jackal-tooth",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-06"
+  },
+  {
     "name": "Opal",
     "slug": "opal",
     "image": "images/items/opal.jpg",
