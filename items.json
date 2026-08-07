@@ -19376,23 +19376,9 @@
     "lastUpdated": "2026-08-06",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
-  },
-  {
-    "name": "Green Drakeling Wing",
-    "slug": "green-drakeling-wing",
-    "lastUpdated": "2026-08-06",
-    "type": "Misc",
-    "tags": [],
-    "needsInfo": true
-  },
-  {
-    "name": "Green Drakeling Poison Duct",
-    "slug": "green-drakeling-poison-duct",
-    "lastUpdated": "2026-08-06",
-    "type": "Misc",
-    "tags": [],
-    "needsInfo": true
+    "description": "Sap from a forest dryad.",
+    "weight": 0.1,
+    "size": "Tiny"
   },
   {
     "name": "Wasp Wing",
@@ -19400,7 +19386,10 @@
     "lastUpdated": "2026-08-06",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.2,
+    "size": "Small",
+    "classes": ["DRU", "ENC", "RNG", "SHM", "WIZ"],
+    "race": ["ALL"]
   },
   {
     "name": "Royal Jelly",
@@ -19408,7 +19397,8 @@
     "lastUpdated": "2026-08-06",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Wolf Tooth",
@@ -19416,7 +19406,9 @@
     "lastUpdated": "2026-08-06",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "description": "A sharp canine tooth from a sharp canine.",
+    "weight": 0.1,
+    "size": "Tiny"
   },
   {
     "name": "Wolf Blood",
@@ -19424,7 +19416,8 @@
     "lastUpdated": "2026-08-06",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Snake Egg",
@@ -19439,8 +19432,10 @@
     "slug": "blood-soaked-bear-claw",
     "lastUpdated": "2026-08-06",
     "type": "Misc",
-    "tags": [],
-    "needsInfo": true
+    "tags": ["NODROP"],
+    "description": "The claw of a provoked bear, still fresh with the blood of its latest victim.",
+    "weight": 2.0,
+    "size": "Medium"
   },
   {
     "name": "Raw Bear Meat",
@@ -19448,6 +19443,50 @@
     "lastUpdated": "2026-08-06",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.25,
+    "size": "Small"
+  },
+  {
+    "name": "Green Drakeling Wing",
+    "slug": "green-drakeling-wing",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "description": "The wing of a green drakeling.",
+    "weight": 0.3,
+    "size": "Small"
+  },
+  {
+    "name": "Green Drakeling Poison Duct",
+    "slug": "green-drakeling-poison-duct",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "description": "The poison duct of a green drakeling. Remarkably, it is still intact.",
+    "weight": 0.5,
+    "size": "Small"
+  },
+  {
+    "name": "Duneleaf",
+    "slug": "duneleaf",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
+    "name": "Fellstone Warrior's Belt",
+    "slug": "fellstone-warriors-belt",
+    "lastUpdated": "2026-08-06",
+    "type": "Armor",
+    "tags": ["NODROP"],
+    "slot": "Waist",
+    "ac": 2,
+    "description": "The crude belt of a Fellstone warrior.",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   }
 ]

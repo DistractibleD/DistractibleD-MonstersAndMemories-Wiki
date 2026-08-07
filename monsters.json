@@ -5702,5 +5702,38 @@
       { "item": "Raw Bear Meat" }
     ],
     "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "a dunes madman",
+    "slug": "a-dunes-madman",
+    "maps": ["Sungreet Strand"],
+    "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "a Fellstone scout",
+    "slug": "a-fellstone-scout",
+    "maps": ["Evershade Weald"],
+    "drops": [
+      { "item": "Cloth Scraps" }
+    ],
+    "coinDrops": [
+      { "copper": 3 },
+      { "copper": 3 }
+    ],
+    "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "a Fellstone warrior",
+    "slug": "a-fellstone-warrior",
+    "maps": ["Evershade Weald"],
+    "drops": [
+      { "item": "Cloth Scraps" },
+      { "item": "Rusty Greatsword" },
+      { "item": "Fellstone Warrior's Belt" }
+    ],
+    "coinDrops": [
+      { "copper": 9 }
+    ],
+    "lastUpdated": "2026-08-06"
   }
 ]

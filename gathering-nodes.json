@@ -192,7 +192,7 @@
     "tradeskill": "Lumberjacking",
     "minSkill": 50,
     "trivialSkill": 85,
-    "results": ["Fine Wood"],
+    "results": ["Fine Wood", "Resin"],
     "locations": ["Sungreet Strand", "Keeper's Bight"]
   },
   {
@@ -201,7 +201,7 @@
     "tradeskill": "Lumberjacking",
     "minSkill": 50,
     "trivialSkill": 100,
-    "results": ["Fine Wood"],
+    "results": ["Fine Wood", "Resin"],
     "locations": ["Sungreet Strand", "Keeper's Bight"]
   },
   {
