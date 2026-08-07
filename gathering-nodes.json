@@ -423,7 +423,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 90,
     "trivialSkill": 140,
-    "results": ["Duneleaf"],
+    "results": ["Duneleaf", "Arcane Frond"],
     "locations": ["Shaded Dunes", "Sungreet Strand"]
   },
   {

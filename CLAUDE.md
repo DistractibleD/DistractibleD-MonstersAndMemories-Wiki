@@ -419,10 +419,14 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   existing ceiling (Nomad's Grace, `minSkill` 10) was untouched (nothing at/above 80 had it),
   so no removal was needed this time. Pulled `"Enchanted Frond"` into every node strictly
   above the Magic Frond ceiling and at or below 80: Whispering Sage (15), Ironroot (30),
-  Moonveil (35), Stranglevine (55), Gadolvine (80) itself. No evidence yet of any Arcane
-  Frond source node — don't extrapolate a threshold ahead of actual inbox confirmation, and
-  don't assume every node between two confirmed tier boundaries is fully settled forever —
-  a future screenshot could still narrow the Enchanted range further from either end.
+  Moonveil (35), Stranglevine (55), Gadolvine (80) itself. Don't assume every node between two
+  confirmed tier boundaries is fully settled forever — a future screenshot could still narrow
+  a range further from either end.
+  **Arcane Frond confirmed 2026-08-07** on Duneleaf (`minSkill` 90) — Enchanted Frond's
+  existing ceiling (Gadolvine, `minSkill` 80) was untouched (nothing at/above 90 had it), so no
+  removal was needed. No other Herbalism node currently falls in the (80, 90] range, so Duneleaf
+  is the only node carrying Arcane Frond so far. No evidence yet of a possible 4th tier beyond
+  Arcane — don't extrapolate a threshold ahead of actual inbox confirmation.
 - Source tables so far are fan-wiki-style reference charts, same weaker-than-a-screenshot
   caveat as the Tanning/Leatherworking/Blacksmithing tables (see `CLAUDE-HISTORY.md`) —
   supersede without hesitation if the user's own observation disagrees.
