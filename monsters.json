@@ -352,6 +352,7 @@
     "slug": "onis-the-elder",
     "named": true,
     "maps": ["Vale of Zintar"],
+    "areas": ["Corrupted Ashira Camp"],
     "drops": [
       { "item": "Fang-Backed Boots" },
       { "item": "Moonrise Staff" },
@@ -431,6 +432,7 @@
     "slug": "seshena-the-lost",
     "named": true,
     "maps": ["Vale of Zintar"],
+    "areas": ["Corrupted Ashira Camp"],
     "drops": [
       { "item": "Knotted Cudgel" },
       { "item": "Embermoss Ring" },
@@ -5743,6 +5745,7 @@
     "name": "a corrupted ashira",
     "slug": "a-corrupted-ashira",
     "maps": ["Vale of Zintar"],
+    "areas": ["Corrupted Ashira Camp"],
     "drops": [
       { "item": "Wool Scraps" },
       { "item": "Corrupted Leather Scraps" },
@@ -5778,6 +5781,7 @@
     "name": "a corrupted outrider",
     "slug": "a-corrupted-outrider",
     "maps": ["Vale of Zintar"],
+    "areas": ["Corrupted Ashira Camp"],
     "drops": [
       { "item": "Hide Scraps" },
       { "item": "Wool Scraps" },
@@ -5796,6 +5800,7 @@
     "name": "a corrupted adept",
     "slug": "a-corrupted-adept",
     "maps": ["Vale of Zintar"],
+    "areas": ["Corrupted Ashira Camp"],
     "drops": [
       { "item": "Hide Scraps" },
       { "item": "Raw Ashira Meat" },
@@ -5813,6 +5818,7 @@
     "name": "a corrupted warrior",
     "slug": "a-corrupted-warrior",
     "maps": ["Vale of Zintar"],
+    "areas": ["Corrupted Ashira Camp"],
     "drops": [
       { "item": "Hide Scraps" },
       { "item": "Ashira Tooth" },
