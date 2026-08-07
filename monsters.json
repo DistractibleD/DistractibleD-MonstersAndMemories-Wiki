@@ -2988,12 +2988,20 @@
     "slug": "aide-aida",
     "named": true,
     "maps": ["Night Harbor"],
+    "areas": ["Gilded Claw Compound"],
+    "levelRange": "37-38",
     "drops": [
       { "item": "Amulet of Wisdom" },
       { "item": "Gilded Spellbook" },
       { "item": "Sceptre of Wisdom" },
-      { "item": "Ward of Wisdom" }
-    ]
+      { "item": "Ward of Wisdom" },
+      { "item": "Dappled Hide Yoke" },
+      { "item": "Pasha's Favor" }
+    ],
+    "relatedMonsters": [
+      { "label": "a Claw aide", "slug": "a-claw-aide" }
+    ],
+    "lastUpdated": "2026-08-07"
   },
   {
     "name": "Darius Brask",
@@ -5969,6 +5977,27 @@
     "areas": ["The Bends"],
     "coinDrops": [
       { "silver": 1, "copper": 1 }
+    ],
+    "lastUpdated": "2026-08-07"
+  },
+  {
+    "name": "a Claw aide",
+    "slug": "a-claw-aide",
+    "maps": ["Night Harbor"],
+    "areas": ["Gilded Claw Compound"],
+    "levelRange": "40",
+    "drops": [
+      { "item": "Sceptre of Wisdom" },
+      { "item": "Used Spellbook" },
+      { "item": "Gilded Claw Compound Key" },
+      { "item": "Leather Scraps" },
+      { "item": "Iron Scraps" },
+      { "item": "Cotton Scraps" },
+      { "item": "Worn Ironbark Buckler" },
+      { "item": "Raw Human Meat" }
+    ],
+    "relatedMonsters": [
+      { "label": "Aide Aida", "slug": "aide-aida" }
     ],
     "lastUpdated": "2026-08-07"
   }

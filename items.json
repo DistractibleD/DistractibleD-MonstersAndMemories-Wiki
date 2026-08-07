@@ -13580,10 +13580,11 @@
   {
     "name": "Sceptre of Wisdom",
     "slug": "sceptre-of-wisdom",
+    "lastUpdated": "2026-08-07",
     "type": "Misc",
     "tags": ["MAGIC", "LORE", "UNIQUE"],
     "slot": "Secondary / Range",
-    "stats": { "STA": 2, "WIS": 4, "HP": 5, "MANA": 15 },
+    "stats": { "STA": 3, "WIS": 6, "HP": 5, "MANA": 15 },
     "weight": 2.5,
     "size": "Small",
     "classes": ["ALL"],
@@ -19574,5 +19575,21 @@
     "weight": 1.0,
     "size": "Small",
     "gameLinkCode": "<link=\"item|c6d09b7e5aa6308e8eb835dc\"><color=green><b><u>[Eltindra's Blessing Potion]</u></b></color></link>"
+  },
+  {
+    "name": "Used Spellbook",
+    "slug": "used-spellbook",
+    "lastUpdated": "2026-08-07",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Gilded Claw Compound Key",
+    "slug": "gilded-claw-compound-key",
+    "lastUpdated": "2026-08-07",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
   }
 ]
