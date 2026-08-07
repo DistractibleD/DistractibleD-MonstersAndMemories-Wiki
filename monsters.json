@@ -95,7 +95,8 @@
       { "copper": 2 },
       { "copper": 2 },
       { "copper": 1 },
-      { "copper": 1 }
+      { "copper": 1 },
+      { "copper": 2 }
     ],
     "lastUpdated": "2026-08-06"
   },
@@ -5610,5 +5611,96 @@
       { "item": "Silentfold Hauberk" }
     ],
     "lastUpdated": "2026-08-05"
+  },
+  {
+    "name": "a dryad fawn",
+    "slug": "a-dryad-fawn",
+    "maps": ["Evershade Weald"],
+    "drops": [
+      { "item": "Dryad Sap" }
+    ],
+    "coinDrops": [
+      { "copper": 4 },
+      { "copper": 5 },
+      { "copper": 4 },
+      { "copper": 3 },
+      { "copper": 3 },
+      { "copper": 5 },
+      { "copper": 3 }
+    ],
+    "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "a green drakeling",
+    "slug": "a-green-drakeling",
+    "maps": ["Evershade Weald"],
+    "drops": [
+      { "item": "Green Drakeling Wing" },
+      { "item": "Drake Claw" },
+      { "item": "Green Drakeling Poison Duct" }
+    ],
+    "coinDrops": [
+      { "copper": 14 }
+    ],
+    "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "a black bat",
+    "slug": "a-black-bat",
+    "maps": ["Evershade Weald"],
+    "drops": [
+      { "item": "Raw Bat Meat" },
+      { "item": "Bat Wing" }
+    ],
+    "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "a wasp drone",
+    "slug": "a-wasp-drone",
+    "maps": ["Evershade Weald"],
+    "drops": [
+      { "item": "Wasp Wing" },
+      { "item": "Royal Jelly" }
+    ],
+    "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "a timber wolf",
+    "slug": "a-timber-wolf",
+    "maps": ["Keeper's Bight"],
+    "drops": [
+      { "item": "Wolf Tooth" },
+      { "item": "Wolf Blood" },
+      { "item": "Medium-Quality Wolf Pelt" }
+    ],
+    "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "a bight asp",
+    "slug": "a-bight-asp",
+    "maps": ["Keeper's Bight"],
+    "drops": [
+      { "item": "Snake Egg" }
+    ],
+    "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "a wasp scout",
+    "slug": "a-wasp-scout",
+    "maps": ["Keeper's Bight"],
+    "drops": [
+      { "item": "Wasp Wing" }
+    ],
+    "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "an aggressive black bear",
+    "slug": "an-aggressive-black-bear",
+    "maps": ["Keeper's Bight"],
+    "drops": [
+      { "item": "Blood-Soaked Bear Claw" },
+      { "item": "Raw Bear Meat" }
+    ],
+    "lastUpdated": "2026-08-06"
   }
 ]

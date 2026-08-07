@@ -2956,11 +2956,11 @@
   {
     "name": "Medium-Quality Wolf Pelt",
     "slug": "medium-quality-wolf-pelt",
+    "lastUpdated": "2026-08-06",
     "image": "images/items/medium-quality-wolf-pelt.jpg",
     "type": "Misc",
     "tags": [],
     "description": "A wolf pelt of average quality. It can be refined at a tannery.",
-    "foundAt": "Dropped by a timber wolf",
     "weight": 3.0,
     "size": "Medium"
   },
@@ -19369,5 +19369,85 @@
     "classes": ["BRD"],
     "race": ["ALL"],
     "gameLinkCode": "<link=\"item|af3671b5f4d26969c449fdf1\"><color=green><b><u>[Torvald Signet Ring]</u></b></color></link>"
+  },
+  {
+    "name": "Dryad Sap",
+    "slug": "dryad-sap",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Green Drakeling Wing",
+    "slug": "green-drakeling-wing",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Green Drakeling Poison Duct",
+    "slug": "green-drakeling-poison-duct",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Wasp Wing",
+    "slug": "wasp-wing",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Royal Jelly",
+    "slug": "royal-jelly",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Wolf Tooth",
+    "slug": "wolf-tooth",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Wolf Blood",
+    "slug": "wolf-blood",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Snake Egg",
+    "slug": "snake-egg",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Blood-Soaked Bear Claw",
+    "slug": "blood-soaked-bear-claw",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Raw Bear Meat",
+    "slug": "raw-bear-meat",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
   }
 ]
