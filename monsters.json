@@ -619,11 +619,17 @@
     "slug": "cormac-renshaw",
     "named": true,
     "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
     "drops": [
       { "item": "Ragged Leather Gloves" },
       { "item": "Seafarer's Shroud" },
-      { "item": "Seafarer's Hide Boots" }
-    ]
+      { "item": "Seafarer's Hide Boots" },
+      { "item": "Head of Cormac Renshaw" }
+    ],
+    "coinDrops": [
+      { "silver": 1, "copper": 68 }
+    ],
+    "lastUpdated": "2026-08-07"
   },
   {
     "name": "Eamon Kassir",
@@ -950,8 +956,8 @@
     "name": "a smuggler",
     "slug": "a-smuggler",
     "image": "images/Monsters/a-smuggler.jpg",
-    "maps": ["Shaded Dunes"],
-    "areas": ["Smugglers Camp"],
+    "maps": ["Shaded Dunes", "Night Harbor"],
+    "areas": ["Smugglers Camp", "The Bends"],
     "drops": [
       { "item": "Rusty Great Scythe" },
       { "item": "Rusty Battle Axe" },
@@ -970,8 +976,18 @@
       { "item": "Rusty Warhammer" },
       { "item": "Rusty Greatsword" },
       { "item": "Rusty Tower Shield" },
-      { "item": "Rusty Long Spear" }
-    ]
+      { "item": "Rusty Long Spear" },
+      { "item": "Mushroom" },
+      { "item": "Wool Scraps" },
+      { "family": "Tattered Hide" }
+    ],
+    "coinDrops": [
+      { "copper": 78 },
+      { "silver": 1, "copper": 13 },
+      { "copper": 95 },
+      { "copper": 88 }
+    ],
+    "lastUpdated": "2026-08-07"
   },
   {
     "name": "a wererat",
@@ -5462,9 +5478,11 @@
     ],
     "coinDrops": [
       { "copper": 67 },
-      { "silver": 1, "copper": 1 }
+      { "silver": 1, "copper": 1 },
+      { "silver": 1, "copper": 2 },
+      { "copper": 81 }
     ],
-    "lastUpdated": "2026-08-05"
+    "lastUpdated": "2026-08-07"
   },
   {
     "name": "a lawbreaker",
@@ -5495,9 +5513,10 @@
       { "copper": 87 },
       { "copper": 54 },
       { "copper": 77 },
-      { "copper": 63 }
+      { "copper": 63 },
+      { "copper": 84 }
     ],
-    "lastUpdated": "2026-08-05"
+    "lastUpdated": "2026-08-07"
   },
   {
     "name": "an enforcer",
@@ -5548,9 +5567,11 @@
       { "copper": 56 },
       { "copper": 87 },
       { "copper": 68 },
-      { "copper": 87 }
+      { "copper": 87 },
+      { "copper": 65 },
+      { "copper": 85 }
     ],
-    "lastUpdated": "2026-08-05"
+    "lastUpdated": "2026-08-07"
   },
   {
     "name": "a loyal protector",
@@ -5560,13 +5581,17 @@
     "drops": [
       { "item": "Bronze Scraps" },
       { "family": "Corroded Bronze" },
-      { "item": "Hide Scraps" }
+      { "item": "Hide Scraps" },
+      { "item": "Wool Scraps" },
+      { "item": "Cabbage" },
+      { "item": "Raw Human Meat" }
     ],
     "coinDrops": [
       { "copper": 85 },
-      { "copper": 79 }
+      { "copper": 79 },
+      { "copper": 88 }
     ],
-    "lastUpdated": "2026-08-05"
+    "lastUpdated": "2026-08-07"
   },
   {
     "name": "a silent protector",
@@ -5574,12 +5599,14 @@
     "maps": ["Night Harbor"],
     "areas": ["The Bends"],
     "drops": [
-      { "family": "Corroded Bronze" }
+      { "family": "Corroded Bronze" },
+      { "item": "Bronze Scraps" }
     ],
     "coinDrops": [
-      { "copper": 88 }
+      { "copper": 88 },
+      { "copper": 69 }
     ],
-    "lastUpdated": "2026-08-05"
+    "lastUpdated": "2026-08-07"
   },
   {
     "name": "Brittle Surgeon",
@@ -5882,5 +5909,67 @@
       { "silver": 1, "copper": 94 }
     ],
     "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "a cunning privateer",
+    "slug": "a-cunning-privateer",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "drops": [
+      { "family": "Tattered Hide" },
+      { "item": "Dirty Pirate Earring" }
+    ],
+    "coinDrops": [
+      { "copper": 86 }
+    ],
+    "lastUpdated": "2026-08-07"
+  },
+  {
+    "name": "a scoundrel",
+    "slug": "a-scoundrel",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "drops": [
+      { "item": "Bronze Scraps" },
+      { "item": "Onion" },
+      { "family": "Corroded Bronze" },
+      { "item": "Garlic" },
+      { "item": "Flawed Ruby" }
+    ],
+    "coinDrops": [
+      { "copper": 86 },
+      { "copper": 75 },
+      { "copper": 97 }
+    ],
+    "lastUpdated": "2026-08-07"
+  },
+  {
+    "name": "a river pirate",
+    "slug": "a-river-pirate",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "drops": [
+      { "item": "Onion" },
+      { "family": "Corroded Bronze" },
+      { "item": "Hide Scraps" },
+      { "item": "Raw Human Meat" }
+    ],
+    "coinDrops": [
+      { "silver": 1, "copper": 10 },
+      { "copper": 89 },
+      { "silver": 1, "copper": 10 },
+      { "silver": 1, "copper": 1 }
+    ],
+    "lastUpdated": "2026-08-07"
+  },
+  {
+    "name": "a sea witch",
+    "slug": "a-sea-witch",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "coinDrops": [
+      { "silver": 1, "copper": 1 }
+    ],
+    "lastUpdated": "2026-08-07"
   }
 ]

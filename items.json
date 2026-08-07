@@ -5608,6 +5608,7 @@
   {
     "name": "Dappled Hide Yoke",
     "slug": "dappled-hide-yoke",
+    "lastUpdated": "2026-08-07",
     "image": "images/items/dappled-hide-yoke.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
@@ -5617,7 +5618,8 @@
     "weight": 0.5,
     "size": "Small",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|5774d50c1a72f8023ea852a2\"><color=green><b><u>[Dappled Hide Yoke]</u></b></color></link>"
   },
   {
     "name": "Glacial Fists",
@@ -12365,7 +12367,7 @@
   {
     "name": "Gilded Spellbook",
     "slug": "gilded-spellbook",
-    "lastUpdated": "2026-07-19",
+    "lastUpdated": "2026-08-07",
     "image": "images/items/gilded-spellbook.jpg",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
@@ -12375,7 +12377,8 @@
     "weight": 0.0,
     "size": "Small",
     "classes": ["BST", "CLR", "DRU", "ELE", "ENC", "INQ", "NEC", "PAL", "RNG", "SHD", "SHM", "SPB", "WIZ"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|539e6bdd75ff2e83eac606de\"><color=green><b><u>[Gilded Spellbook]</u></b></color></link>"
   },
   {
     "name": "Grub",
@@ -13562,6 +13565,7 @@
   {
     "name": "Amulet of Wisdom",
     "slug": "amulet-of-wisdom",
+    "lastUpdated": "2026-08-07",
     "type": "Jewelry",
     "tags": ["MAGIC"],
     "slot": "Neck",
@@ -13570,7 +13574,8 @@
     "weight": 0.1,
     "size": "Small",
     "classes": ["ALL"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|75a15d0c54e00c5ac081148b\"><color=green><b><u>[Amulet of Wisdom]</u></b></color></link>"
   },
   {
     "name": "Sceptre of Wisdom",
@@ -13587,6 +13592,7 @@
   {
     "name": "Ward of Wisdom",
     "slug": "ward-of-wisdom",
+    "lastUpdated": "2026-08-07",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Secondary",
@@ -13596,7 +13602,8 @@
     "weight": 7.5,
     "size": "Large",
     "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|64edd1d4853b2928a42734ed\"><color=green><b><u>[Ward of Wisdom]</u></b></color></link>"
   },
   {
     "name": "Bonebreaker Club",
@@ -15582,7 +15589,7 @@
   {
     "name": "Vest of the Glass Viper",
     "slug": "vest-of-the-glass-viper",
-    "lastUpdated": "2026-07-24",
+    "lastUpdated": "2026-08-07",
     "image": "images/items/vest-of-the-glass-viper.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
@@ -15592,7 +15599,8 @@
     "effect": "Charisma (Passive. Must Equip. Level: -1)",
     "weight": 3.0,
     "size": "Medium",
-    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"]
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Irontail Braces",
@@ -19530,5 +19538,41 @@
     "type": "Armor",
     "tags": [],
     "needsInfo": true
+  },
+  {
+    "name": "Tattered Hide Leggings",
+    "slug": "tattered-hide-leggings",
+    "lastUpdated": "2026-08-07",
+    "type": "Armor",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Head of Cormac Renshaw",
+    "slug": "head-of-cormac-renshaw",
+    "lastUpdated": "2026-08-07",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Dirty Pirate Earring",
+    "slug": "dirty-pirate-earring",
+    "lastUpdated": "2026-08-07",
+    "type": "Jewelry",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Eltindra's Blessing Potion",
+    "slug": "eltindras-blessing-potion",
+    "lastUpdated": "2026-08-07",
+    "type": "Misc",
+    "tags": [],
+    "effect": "Eltindra's Blessing (On Click. Any Slot. Cast Time: 6s. Level: 1)",
+    "description": "Embrace your adventurous spirit, increasing your Movement Speed by 30% for 1 hour.",
+    "weight": 1.0,
+    "size": "Small",
+    "gameLinkCode": "<link=\"item|c6d09b7e5aa6308e8eb835dc\"><color=green><b><u>[Eltindra's Blessing Potion]</u></b></color></link>"
   }
 ]
