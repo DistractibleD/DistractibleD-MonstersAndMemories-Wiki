@@ -16003,7 +16003,7 @@
   {
     "name": "Shattershriek Spike",
     "slug": "shattershriek-spike",
-    "lastUpdated": "2026-07-24",
+    "lastUpdated": "2026-08-06",
     "image": "images/items/shattershriek-spike.jpg",
     "type": "Weapon",
     "tags": ["MAGIC"],
@@ -16016,12 +16016,13 @@
     "description": "A crystallized razor quill plucked from Shattershriek's spine that, when blown into, creates a shrill, haunting shriek.",
     "weight": 2.0,
     "size": "Small",
-    "classes": ["ARC", "BRD", "BST", "ELE", "ENC", "FTR", "INQ", "NEC", "RNG", "ROG", "SHD", "SHM", "SPB", "WIZ"]
+    "classes": ["ARC", "BRD", "BST", "ELE", "ENC", "FTR", "INQ", "NEC", "RNG", "ROG", "SHD", "SHM", "SPB", "WIZ"],
+    "race": ["ALL"]
   },
   {
     "name": "Wings of the Flittermouse",
     "slug": "wings-of-the-flittermouse",
-    "lastUpdated": "2026-07-24",
+    "lastUpdated": "2026-08-06",
     "image": "images/items/wings-of-the-flittermouse.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
@@ -16036,7 +16037,8 @@
     "description": "Leather shoulder pieces shaped from Shattershriek's wings, each crease suggesting wings about to spread.",
     "weight": 0.5,
     "size": "Small",
-    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"]
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Gem-Encrusted Staff",

@@ -362,7 +362,8 @@
       { "family": "Corroded Bronze" }
     ],
     "coinDrops": [
-      { "silver": 2, "copper": 98 }
+      { "silver": 2, "copper": 98 },
+      { "silver": 2, "copper": 51 }
     ],
     "lastUpdated": "2026-08-06"
   },
@@ -5757,6 +5758,11 @@
       { "item": "Poor Ashira Pelt" },
       { "item": "Ashira Tooth" },
       { "item": "Ashira War Tooth" },
+      { "item": "Bronze Scraps" },
+      { "item": "Cheese" },
+      { "item": "Worn Fine Wood Bow" },
+      { "item": "Bell Pepper" },
+      { "item": "Ashira Tail" },
       { "family": "Corroded Bronze" },
       { "family": "Tattered Hide" }
     ],
@@ -5773,7 +5779,20 @@
       { "silver": 2, "copper": 23 },
       { "silver": 1, "copper": 89 },
       { "silver": 2, "copper": 51 },
-      { "silver": 1, "copper": 84 }
+      { "silver": 1, "copper": 84 },
+      { "silver": 1, "copper": 53 },
+      { "silver": 1, "copper": 83 },
+      { "silver": 2, "copper": 9 },
+      { "silver": 1, "copper": 64 },
+      { "silver": 2, "copper": 38 },
+      { "silver": 1, "copper": 90 },
+      { "silver": 2, "copper": 30 },
+      { "silver": 2, "copper": 39 },
+      { "silver": 2, "copper": 2 },
+      { "silver": 1, "copper": 46 },
+      { "silver": 2, "copper": 64 },
+      { "silver": 2, "copper": 17 },
+      { "silver": 2, "copper": 12 }
     ],
     "lastUpdated": "2026-08-06"
   },
@@ -5786,13 +5805,28 @@
       { "item": "Hide Scraps" },
       { "item": "Wool Scraps" },
       { "item": "Bronze Scraps" },
+      { "item": "Ashira Tail" },
+      { "item": "Spirit Powder" },
+      { "item": "Cracked Fine Wood Staff" },
+      { "item": "Mushroom" },
+      { "item": "Lemon" },
       { "family": "Corroded Bronze" }
     ],
     "coinDrops": [
       { "silver": 2, "copper": 50 },
       { "silver": 2, "copper": 42 },
       { "silver": 1, "copper": 83 },
-      { "silver": 2, "copper": 62 }
+      { "silver": 2, "copper": 62 },
+      { "silver": 1, "copper": 46 },
+      { "silver": 1, "copper": 87 },
+      { "silver": 2, "copper": 55 },
+      { "silver": 1, "copper": 93 },
+      { "silver": 2, "copper": 8 },
+      { "silver": 1, "copper": 77 },
+      { "silver": 2, "copper": 5 },
+      { "silver": 1, "copper": 68 },
+      { "silver": 1, "copper": 67 },
+      { "silver": 2, "copper": 11 }
     ],
     "lastUpdated": "2026-08-06"
   },
@@ -5810,7 +5844,9 @@
     ],
     "coinDrops": [
       { "silver": 1, "copper": 85 },
-      { "silver": 2, "copper": 3 }
+      { "silver": 2, "copper": 3 },
+      { "silver": 1, "copper": 60 },
+      { "silver": 2, "copper": 28 }
     ],
     "lastUpdated": "2026-08-06"
   },
@@ -5827,13 +5863,23 @@
       { "item": "Ashira Tail" },
       { "item": "Mushroom" },
       { "item": "Corrupted Leather Cap" },
-      { "item": "Corrupted Leather Scraps" }
+      { "item": "Corrupted Leather Scraps" },
+      { "item": "Bell Pepper" },
+      { "item": "Raw Ashira Meat" },
+      { "item": "Worn Fine Wood Bow" },
+      { "item": "Cracked Fine Wood Staff" },
+      { "item": "Corrupted Leather Boots" }
     ],
     "coinDrops": [
       { "silver": 2, "copper": 9 },
       { "silver": 1, "copper": 93 },
       { "silver": 2, "copper": 85 },
-      { "silver": 1, "copper": 85 }
+      { "silver": 1, "copper": 85 },
+      { "silver": 1, "copper": 80 },
+      { "silver": 1, "copper": 84 },
+      { "silver": 1, "copper": 42 },
+      { "silver": 2, "copper": 45 },
+      { "silver": 1, "copper": 94 }
     ],
     "lastUpdated": "2026-08-06"
   }
