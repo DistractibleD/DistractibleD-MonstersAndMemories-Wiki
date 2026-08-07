@@ -19488,5 +19488,45 @@
     "size": "Small",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Poor Ashira Pelt",
+    "slug": "poor-ashira-pelt",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Spirit Powder",
+    "slug": "spirit-powder",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Ashira Tooth",
+    "slug": "ashira-tooth",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Ashira War Tooth",
+    "slug": "ashira-war-tooth",
+    "lastUpdated": "2026-08-06",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Tattered Hide Belt",
+    "slug": "tattered-hide-belt",
+    "lastUpdated": "2026-08-06",
+    "type": "Armor",
+    "tags": [],
+    "needsInfo": true
   }
 ]

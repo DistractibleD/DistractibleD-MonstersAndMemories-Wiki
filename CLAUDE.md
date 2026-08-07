@@ -746,7 +746,7 @@ are three separate families, don't merge or assume one's roster implies another'
   Shoulderpads.
 - **Tattered Wool** (11, armor): Belt, Boots, Bracer, Cap, Gloves, Gorget, Mantle, Robe,
   Shirt, Tunic, Veil.
-- **Tattered Hide** (5, armor): Cap, Gorget, Leggings, Mask, Vest.
+- **Tattered Hide** (6, armor): Cap, Gorget, Mask, Vest, Shoulderpads, Belt.
 - **Corroded Bronze** (42, weapons + Tower Shield + chain + plate): Axe, Battle Axe, Dagger,
   Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar, Scythe,
   Shortsword, Spear, Tower Shield, Trident, War Lance, Warhammer; Chain Boots/Cloak/Coif/

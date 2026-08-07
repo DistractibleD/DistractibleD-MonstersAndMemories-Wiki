@@ -357,8 +357,13 @@
       { "item": "Moonrise Staff" },
       { "item": "Desert Nomad Treadwraps" },
       { "item": "Ceremonial Plated Mantle" },
-      { "item": "Sekhara Manacles" }
-    ]
+      { "item": "Sekhara Manacles" },
+      { "family": "Corroded Bronze" }
+    ],
+    "coinDrops": [
+      { "silver": 2, "copper": 98 }
+    ],
+    "lastUpdated": "2026-08-06"
   },
   {
     "name": "Hemalmula the Hunter",
@@ -431,8 +436,10 @@
       { "item": "Embermoss Ring" },
       { "item": "Chain Dervish Mantle" },
       { "item": "Onyx Bat Figurine" },
-      { "item": "Desert Nomad Belt" }
-    ]
+      { "item": "Desert Nomad Belt" },
+      { "item": "Torch" }
+    ],
+    "lastUpdated": "2026-08-06"
   },
   {
     "name": "Chompers",
@@ -4781,11 +4788,7 @@
       { "item": "Worn Fine Wood Bow" },
       { "item": "Hide Scraps" },
       { "item": "Bronze Scraps" },
-      { "item": "Tattered Hide Cap" },
-      { "item": "Tattered Hide Gorget" },
-      { "item": "Tattered Hide Leggings" },
-      { "item": "Tattered Hide Mask" },
-      { "item": "Tattered Hide Vest" }
+      { "family": "Tattered Hide" }
     ],
     "coinDrops": [
       { "silver": 0, "copper": 78 },
@@ -5733,6 +5736,98 @@
     ],
     "coinDrops": [
       { "copper": 9 }
+    ],
+    "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "a corrupted ashira",
+    "slug": "a-corrupted-ashira",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Wool Scraps" },
+      { "item": "Corrupted Leather Scraps" },
+      { "item": "Hide Scraps" },
+      { "item": "Torch" },
+      { "item": "Raw Ashira Meat" },
+      { "item": "Onion" },
+      { "item": "Cabbage" },
+      { "item": "Poor Ashira Pelt" },
+      { "item": "Ashira Tooth" },
+      { "item": "Ashira War Tooth" },
+      { "family": "Corroded Bronze" },
+      { "family": "Tattered Hide" }
+    ],
+    "coinDrops": [
+      { "silver": 1, "copper": 76 },
+      { "silver": 2, "copper": 78 },
+      { "silver": 1, "copper": 92 },
+      { "silver": 1, "copper": 68 },
+      { "silver": 2, "copper": 76 },
+      { "silver": 1, "copper": 73 },
+      { "silver": 1, "copper": 82 },
+      { "silver": 1, "copper": 93 },
+      { "silver": 1, "copper": 79 },
+      { "silver": 2, "copper": 23 },
+      { "silver": 1, "copper": 89 },
+      { "silver": 2, "copper": 51 },
+      { "silver": 1, "copper": 84 }
+    ],
+    "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "a corrupted outrider",
+    "slug": "a-corrupted-outrider",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Hide Scraps" },
+      { "item": "Wool Scraps" },
+      { "item": "Bronze Scraps" },
+      { "family": "Corroded Bronze" }
+    ],
+    "coinDrops": [
+      { "silver": 2, "copper": 50 },
+      { "silver": 2, "copper": 42 },
+      { "silver": 1, "copper": 83 },
+      { "silver": 2, "copper": 62 }
+    ],
+    "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "a corrupted adept",
+    "slug": "a-corrupted-adept",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Hide Scraps" },
+      { "item": "Raw Ashira Meat" },
+      { "item": "Bell Pepper" },
+      { "family": "Corroded Bronze" },
+      { "family": "Tattered Hide" }
+    ],
+    "coinDrops": [
+      { "silver": 1, "copper": 85 },
+      { "silver": 2, "copper": 3 }
+    ],
+    "lastUpdated": "2026-08-06"
+  },
+  {
+    "name": "a corrupted warrior",
+    "slug": "a-corrupted-warrior",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Hide Scraps" },
+      { "item": "Ashira Tooth" },
+      { "item": "Spirit Powder" },
+      { "item": "Wool Scraps" },
+      { "item": "Ashira Tail" },
+      { "item": "Mushroom" },
+      { "item": "Corrupted Leather Cap" },
+      { "item": "Corrupted Leather Scraps" }
+    ],
+    "coinDrops": [
+      { "silver": 2, "copper": 9 },
+      { "silver": 1, "copper": 93 },
+      { "silver": 2, "copper": 85 },
+      { "silver": 1, "copper": 85 }
     ],
     "lastUpdated": "2026-08-06"
   }
