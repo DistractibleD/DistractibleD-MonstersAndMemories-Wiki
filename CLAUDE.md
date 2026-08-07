@@ -716,9 +716,17 @@ drill-down. `goToMonster` picks `monsters-named`/`monsters-regular` from the mon
   (`formatCoinAmount`, omits a denomination averaging to 0). No conversion assumed between
   silver/copper/gold/platinum — each denomination recorded and averaged on its own.
 - `relatedMonsters` — array of `{ "label": "Display Text", "slug": "other-monsters-slug" }`,
-  for a Named boss whose loot flavor text ties it to an existing generic mob. Rendered as a
-  "Place Holder" field (user's own label), link resolves dynamically via `findMonsterBySlug`
-  — plain text if the slug doesn't exist yet. Optional, most monsters won't have this.
+  for a Named boss tied to an existing generic mob, confirmed either by loot flavor text or by
+  another source (external wiki, user statement). **This is a universal game mechanic, not a
+  rare pairing** (confirmed 2026-08-07, user's own explanation): every Named monster has a
+  "placeholder" — typically a common regular mob spawning at the same location — which spawns
+  far more often than the Named monster itself, making the Named spawn rare. Only add the link
+  once a *specific* placeholder mob is actually confirmed for that Named monster (don't invent
+  one from the mechanic alone); when confirmed, link it in both directions — the Named boss's
+  own entry pointing at the placeholder, and the placeholder's entry pointing back at the boss
+  (see Aide Aida / a Claw aide for the reference pair). Rendered as a "Place Holder" field
+  (user's own label), link resolves dynamically via `findMonsterBySlug` — plain text if the
+  slug doesn't exist yet. Optional, most monsters won't have this confirmed yet.
 - **`needsInfo`** — boolean, same meaning as items/crafting: red "NEEDS INFO" badge, red
   note+Submit-link, "Show only monsters that need info" toggle. Not about a missing
   *picture* (normal for generic monsters) — for a monster barely known at all: confirmed to

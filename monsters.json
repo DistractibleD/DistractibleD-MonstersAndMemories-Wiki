@@ -6000,5 +6000,28 @@
       { "label": "Aide Aida", "slug": "aide-aida" }
     ],
     "lastUpdated": "2026-08-07"
+  },
+  {
+    "name": "a smuggler lookout",
+    "slug": "a-smuggler-lookout",
+    "drops": [
+      { "item": "Cotton Scraps" },
+      { "family": "Rusty Iron" }
+    ],
+    "coinDrops": [
+      { "silver": 3, "copper": 25 }
+    ],
+    "lastUpdated": "2026-08-07"
+  },
+  {
+    "name": "a hired tracker",
+    "slug": "a-hired-tracker",
+    "drops": [
+      { "item": "Raw Human Meat" }
+    ],
+    "coinDrops": [
+      { "silver": 2, "copper": 63 }
+    ],
+    "lastUpdated": "2026-08-07"
   }
 ]
