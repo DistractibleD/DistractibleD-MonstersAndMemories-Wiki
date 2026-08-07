@@ -916,7 +916,14 @@
     "slug": "a-skeleton",
     "image": "images/Monsters/a-skeleton.jpg",
     "maps": ["Shaded Dunes", "Night Harbor"],
-    "areas": ["North Gate"]
+    "areas": ["North Gate"],
+    "drops": [
+      { "item": "Rawhide Scraps" }
+    ],
+    "coinDrops": [
+      { "copper": 18 }
+    ],
+    "lastUpdated": "2026-08-07"
   },
   {
     "name": "a restless ghoul",
@@ -5770,12 +5777,13 @@
     "drops": [
       { "item": "Cloth Scraps" },
       { "item": "Rusty Greatsword" },
-      { "item": "Fellstone Warrior's Belt" }
+      { "item": "Fellstone Warrior's Belt" },
+      { "item": "Left Orc Ear" }
     ],
     "coinDrops": [
       { "copper": 9 }
     ],
-    "lastUpdated": "2026-08-06"
+    "lastUpdated": "2026-08-08"
   },
   {
     "name": "a corrupted ashira",
@@ -6021,6 +6029,20 @@
     ],
     "coinDrops": [
       { "silver": 2, "copper": 63 }
+    ],
+    "lastUpdated": "2026-08-07"
+  },
+  {
+    "name": "an old elven skeleton",
+    "slug": "an-old-elven-skeleton",
+    "drops": [
+      { "item": "Bone Chips" },
+      { "item": "Cloth Scraps" },
+      { "item": "Rawhide Scraps" }
+    ],
+    "coinDrops": [
+      { "copper": 25 },
+      { "copper": 23 }
     ],
     "lastUpdated": "2026-08-07"
   }

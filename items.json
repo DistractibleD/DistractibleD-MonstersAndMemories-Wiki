@@ -10205,12 +10205,12 @@
   {
     "name": "Faceguard of the Torturer",
     "slug": "faceguard-of-the-torturer",
-    "lastUpdated": "2026-07-19",
+    "lastUpdated": "2026-08-07",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Face",
     "ac": 10,
-    "stats": { "STR": 5, "STA": 7, "CHA": -2 },
+    "stats": { "STR": 5, "STA": 7 },
     "resists": { "CORRUPTION": 3 },
     "description": "A haunting faceguard that hides the wearer's emotions.",
     "weight": 0.25,
@@ -19587,6 +19587,14 @@
   {
     "name": "Gilded Claw Compound Key",
     "slug": "gilded-claw-compound-key",
+    "lastUpdated": "2026-08-07",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Left Orc Ear",
+    "slug": "left-orc-ear",
     "lastUpdated": "2026-08-07",
     "type": "Misc",
     "tags": [],

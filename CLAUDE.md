@@ -396,37 +396,44 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   whenever inbox data confirms ≥1 gem drop from a node, same as the monster-drops rule —
   no need to re-request each time. Record it as a compact `results` entry (below), not by
   listing every gem name.
-- **Herbalism Frond skill-threshold inference** (confirmed 2026-08-06, refined 2026-08-06):
-  a node yielding Magic Frond as a bonus result means every Herbalism node with `minSkill`
-  **less than or equal to** that node's own `minSkill` can also yield Magic Frond — "the
-  higher the skill, the higher the frond" (user's own framing), so this is a skill-ordering
-  rule, not a quality-set/name-prefix rule like gemstones above. First confirmed on Ghost
-  Poppy (`minSkill` 1) and Lionleaf (`minSkill` 1); re-confirmed and extended when Nomad's
-  Grace (`minSkill` 10) also yielded one, which pulled in every node at `minSkill` 1 too
-  (Selstie Kelp, Sylvine) alongside Nomad's Grace itself. Applies automatically whenever
-  inbox data confirms a new highest-`minSkill` node yielding Magic Frond — re-scan every
-  Herbalism node at or below that `minSkill` and add `"Magic Frond"` to `results` if not
-  already there.
-  **This is a moving window, not a permanently-growing one** — there are 3-4 Frond tiers
-  overall (Magic → Enchanted → Arcane → possibly a 4th), each replacing the previous tier's
-  availability as skill rises. The instant a node is confirmed yielding **Enchanted Frond**
-  (tier 2), Magic Frond becomes unavailable at that node's `minSkill` and above — go back and
-  **remove** `"Magic Frond"` from every node with `minSkill` >= that Enchanted-Frond-yielding
-  node's `minSkill`, leaving Magic Frond only on nodes strictly below it. Then apply this
-  same less-than-or-equal-`minSkill` inference rule to Enchanted Frond among the nodes now in
-  its range, and so on up the tier chain once Arcane Frond (tier 3) is confirmed.
-  **Enchanted Frond confirmed 2026-08-06** on Gadolvine (`minSkill` 80) — Magic Frond's
-  existing ceiling (Nomad's Grace, `minSkill` 10) was untouched (nothing at/above 80 had it),
-  so no removal was needed this time. Pulled `"Enchanted Frond"` into every node strictly
-  above the Magic Frond ceiling and at or below 80: Whispering Sage (15), Ironroot (30),
-  Moonveil (35), Stranglevine (55), Gadolvine (80) itself. Don't assume every node between two
-  confirmed tier boundaries is fully settled forever — a future screenshot could still narrow
-  a range further from either end.
-  **Arcane Frond confirmed 2026-08-07** on Duneleaf (`minSkill` 90) — Enchanted Frond's
-  existing ceiling (Gadolvine, `minSkill` 80) was untouched (nothing at/above 90 had it), so no
-  removal was needed. No other Herbalism node currently falls in the (80, 90] range, so Duneleaf
-  is the only node carrying Arcane Frond so far. No evidence yet of a possible 4th tier beyond
-  Arcane — don't extrapolate a threshold ahead of actual inbox confirmation.
+- **Herbalism Frond skill-threshold inference** (confirmed 2026-08-06, corrected 2026-08-08):
+  a node yielding a given Frond tier as a bonus result means every Herbalism node with
+  `minSkill` **less than or equal to** that node's own `minSkill` can *also* yield that same
+  tier — "the higher the skill, the higher the frond" (user's own framing), so this is a
+  skill-ordering rule, not a quality-set/name-prefix rule like gemstones above. Applies
+  automatically whenever inbox data confirms a new highest-`minSkill` node for a tier —
+  re-scan every Herbalism node at or below that `minSkill` and add that tier to `results` if
+  not already there.
+  **Do NOT fill the gap between two different confirmed tiers** — an earlier version of this
+  rule assumed everything between the previous tier's ceiling and a new tier's confirmed node
+  shifted to the new tier (e.g. treating Whispering Sage/Ironroot/Moonveil/Stranglevine as
+  Enchanted Frond just because they sat between Nomad's Grace-tier-1 and Gadolvine-tier-2).
+  **This was proven wrong 2026-08-07**: Whispering Sage (`minSkill` 15) was directly observed
+  yielding Magic Frond, not Enchanted Frond, despite sitting in that "gap." Every node in an
+  unconfirmed gap must stay unconfirmed (no Frond tier in `results`) until its own screenshot
+  comes in — never assume it inherits the higher neighboring tier.
+  **Current confirmed state**: Magic Frond — Lionleaf (1), Ghost Poppy (1), Selstie Kelp (1),
+  Sylvine (1), Nomad's Grace (10), Whispering Sage (15). Enchanted Frond — Gadolvine (80)
+  only (Ironroot/Moonveil/Stranglevine are unconfirmed, not Enchanted — reverted). Arcane
+  Frond — Duneleaf (90) only. If a node is ever confirmed yielding a *lower* tier than a
+  higher-`minSkill` node already has, that's fine and expected (skill only sets a floor, not
+  an exact tier) — but still only apply the >=-removal step (below) when a strictly *higher*
+  tier is confirmed at or above an existing lower-tier node's `minSkill`.
+  **Tier supersession still applies exactly as before**: the instant a node is confirmed
+  yielding a higher tier, remove the lower tier from every node with `minSkill` >= that
+  node's own `minSkill` (nothing has hit this case yet — every higher-tier confirmation so
+  far has been strictly above the previous tier's ceiling, so no removals have actually been
+  needed). No evidence yet of a 4th tier beyond Arcane — don't extrapolate ahead of actual
+  inbox confirmation, and don't backfill an unconfirmed gap under any circumstances now that
+  Whispering Sage has shown that guess to be unreliable.
+- **Mining Crystallized Magic skill-threshold inference** (confirmed 2026-08-07, same
+  mechanic as Frond above, applied to ore veins instead of herbs): Copper Vein (`minSkill` 1)
+  and Limestone Deposit (`minSkill` 40) both confirmed yielding Clouded Crystallized Magic —
+  apply the same less-than-or-equal-`minSkill` inference and gap-avoidance rules as Frond.
+  Tin Vein (`minSkill` 75) was also confirmed yielding **Limestone** itself as a bonus result
+  (a non-Crystallized-Magic cross-node material) plus **Jagged Stone** — record both
+  literally rather than assuming a skill-threshold pattern, since neither is a tiered magic
+  material.
 - Source tables so far are fan-wiki-style reference charts, same weaker-than-a-screenshot
   caveat as the Tanning/Leatherworking/Blacksmithing tables (see `CLAUDE-HISTORY.md`) —
   supersede without hesitation if the user's own observation disagrees.

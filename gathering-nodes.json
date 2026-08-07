@@ -26,7 +26,7 @@
     "tradeskill": "Mining",
     "minSkill": 40,
     "trivialSkill": 75,
-    "results": ["Limestone"],
+    "results": ["Limestone", "Clouded Crystallized Magic"],
     "locations": ["Fallen Pass (on cliffs)", "Shaded Dunes, on the way to Tel'Ekir", "Fallen Pass (atop the canyon)", "Sungreet Strand (atop the canyon above the pit)", "Scarwood"]
   },
   {
@@ -35,7 +35,7 @@
     "tradeskill": "Mining",
     "minSkill": 60,
     "trivialSkill": 90,
-    "results": ["Limestone"],
+    "results": ["Limestone", "Clouded Crystallized Magic"],
     "locations": ["Shaded Dunes", "Fallen Pass", "Scarwood"]
   },
   {
@@ -45,7 +45,7 @@
     "tradeskill": "Mining",
     "minSkill": 75,
     "trivialSkill": 125,
-    "results": ["Tin Ore"],
+    "results": ["Tin Ore", "Jagged Stone", "Limestone"],
     "locations": ["Sungreet Strand", "Vale of Zintar", "Scarwood"]
   },
   {
@@ -55,7 +55,7 @@
     "tradeskill": "Mining",
     "minSkill": 85,
     "trivialSkill": 135,
-    "results": ["Tin Ore"],
+    "results": ["Tin Ore", "Jagged Stone", "Limestone"],
     "locations": ["Sungreet Strand", "Vale of Zintar", "Scarwood"]
   },
   {
@@ -384,7 +384,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 15,
     "trivialSkill": 65,
-    "results": ["Whispering Sage", "Enchanted Frond"],
+    "results": ["Whispering Sage", "Magic Frond"],
     "locations": ["Evershade Weald", "Shaded Dunes"]
   },
   {
@@ -394,7 +394,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 30,
     "trivialSkill": 80,
-    "results": ["Ironroot", "Enchanted Frond"],
+    "results": ["Ironroot"],
     "locations": ["Shaded Dunes", "Sungreet Strand"]
   },
   {
@@ -402,7 +402,7 @@
     "slug": "moonveil",
     "tradeskill": "Herbalism",
     "minSkill": 35,
-    "results": ["Moonveil", "Enchanted Frond"],
+    "results": ["Moonveil"],
     "locations": ["Evershade Weald", "Keeper's Bight", "Shallow Shoals"],
     "note": "Only spawns at night, at 6pm in-game. Trivial is somewhere between 77 and 88 (exact value unknown) — shown as \"88>?>77\" on the source table."
   },
@@ -412,7 +412,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 55,
     "trivialSkill": 105,
-    "results": ["Stranglevine", "Enchanted Frond"],
+    "results": ["Stranglevine"],
     "locations": ["Fallen Pass"],
     "image": "images/gathering/stranglevine.jpg"
   },
