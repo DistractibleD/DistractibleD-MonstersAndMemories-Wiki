@@ -4941,19 +4941,11 @@ const SUBMIT_WORKER_URL = 'https://muddy-bar-88a7.mnm-wiki.workers.dev';
 // not archival/pending-review material). Extend this array the same way if
 // another example type is ever needed.
 const SUBMIT_EXAMPLES = [
-  { image: 'images/samples/sample-loot.jpg', label: 'Item / loot window' },
+  { image: 'images/samples/sample-item.jpg', label: 'Item card' },
   { image: 'images/samples/sample-monster.jpg', label: 'Monster picture' },
   { image: 'images/samples/sample-companion.jpg', label: 'Companion / ability screenshot' },
-  {
-    image: 'images/samples/sample-gathering-node.jpg',
-    label: 'Gathering node',
-    note: 'Name the file after the node or resource itself (e.g. "Lionleaf.jpg") — that\'s how we match it up.'
-  },
-  {
-    image: 'images/samples/sample-combat-log.jpg',
-    label: 'Combat log',
-    note: 'Name the file with the zone/area it\'s from (e.g. "Loot from Night Harbor - West Gate.jpg") so we know where these mobs are. Capturing item drops and coin loot together like this, not just one or the other, lets us fill in a monster\'s full drop table and its average coin drop from a single screenshot instead of two.'
-  }
+  { image: 'images/samples/sample-gathering-node.jpg', label: 'Gathering node' },
+  { image: 'images/samples/sample-combat-log.jpg', label: 'Combat log' }
 ];
 
 // Set by an item's or a named monster's "Wrong or missing info?" link
@@ -4973,36 +4965,57 @@ async function renderSubmitPage(container) {
 
   container.innerHTML = `
     <h1>Submit a Screenshot</h1>
-    <p>Found something not on the wiki yet? Attach a screenshot below — an item card, a
-    monster picture, a map, a recipe card, anything from the game — or, if you don't have
+    <p>Found something not on the wiki yet? Attach a screenshot below — or, if you don't have
     one, just write in what you know. It won't appear on the wiki automatically; every
     submission is reviewed first.</p>
+    <div class="submit-panel">
+      <h2>What we need</h2>
+      <ul class="submit-guide-list">
+        <li><strong>Item or recipe card</strong> &mdash; crop in close around the card itself,
+        cutting out the game world behind it. Every line of text needs to stay readable; if a
+        card has more text than fits in one shot, take a second screenshot rather than leaving
+        anything out.</li>
+        <li><strong>Monster picture</strong> &mdash; a clear view of the creature, with its name
+        label visible if possible. Only named/boss monsters need a picture &mdash; regular
+        monsters don't.</li>
+        <li><strong>Gathering node</strong> &mdash; the resource itself (vein, wood pile, herb,
+        etc). Name the file after the node (e.g. "Lionleaf.jpg") so it's easy to match up.</li>
+        <li><strong>Combat log / loot window</strong> &mdash; item drops and coin loot together
+        in one screenshot when possible, so a monster's full drop table and its average coin
+        drop can both come from a single shot. Name the file with the zone it's from (e.g.
+        "Loot from Night Harbor - West Gate.jpg").</li>
+        <li><strong>Companion / ability screenshot</strong> &mdash; the pet window plus a
+        tooltip for each ability.</li>
+        <li><strong>Map</strong> &mdash; the full zone map, uncropped.</li>
+      </ul>
+      <p>Whatever it is: readability beats a perfectly framed shot. A screenshot missing a
+      stat, a name, or a component is far less useful than a couple of slightly messy ones
+      that show everything.</p>
+    </div>
     <div class="submit-examples">
+      <h2>Examples</h2>
       <div class="submit-examples-grid">
         ${SUBMIT_EXAMPLES.map(ex => `
           <button type="button" class="submit-example" data-full="${escapeAttr(ex.image)}">
             <img src="${escapeAttr(ex.image)}" alt="Example: ${escapeAttr(ex.label)}">
             <span>${escapeAttr(ex.label)}</span>
-            ${ex.note ? `<small class="submit-example-note">${escapeAttr(ex.note)}</small>` : ''}
           </button>
         `).join('')}
       </div>
-      <p class="submit-examples-note">Click an example to see it full-size. What matters most
-      isn't a perfectly framed screenshot — it's making sure every bit of <strong>text</strong>
-      is readable and nothing gets cut off. If a card or window has too much text to fit in one
-      screenshot, just take two instead of cropping anything out. A screenshot missing part of
-      the text (a stat, a name, a component) is much less useful than a couple of slightly messy
-      ones that show everything.</p>
+      <p class="submit-examples-note">Click an example to see it full-size.</p>
     </div>
-    <div class="submit-itemcode-info">
-      <h2>Have an item's in-game link code instead?</h2>
-      <p>Every item can carry a "Copy Item Link" button on its page, which copies a code you can
-      paste into your own in-game chat box to show off the item to other players. We don't have
-      one recorded for every item yet — if you have a moment, here's how to grab one:</p>
-      <p>Link the item in any in-game chat box, target the text field and hit ctrl+A to mark the
-      text, then ctrl+C to copy it. It looks like
-      <code>&lt;link=&quot;item|...&quot;&gt;...&lt;/link&gt;</code> — paste that into the Notes
-      box below (no screenshot needed), and mention which item it's for.</p>
+    <div class="submit-panel">
+      <h2>Posting an item's in-game link code</h2>
+      <p>Every item page can show a "Copy Item Link" button, letting other players click the
+      item in chat to see its card. We don't have one recorded for every item yet &mdash;
+      here's how to grab one:</p>
+      <ol class="submit-steps-list">
+        <li>Link the item in any in-game chat box.</li>
+        <li>Click into the chat text field and press Ctrl+A to select the text.</li>
+        <li>Press Ctrl+C to copy it.</li>
+        <li>Paste it into the Notes box below, along with the item's name &mdash; no screenshot
+        needed.</li>
+      </ol>
     </div>
     ${!SUBMIT_WORKER_URL ? `
       <p class="submit-form-notice">This form isn't finished being set up yet (no Worker URL
@@ -5015,9 +5028,8 @@ async function renderSubmitPage(container) {
         </div>
       ` : ''}
       ${context && context.linkCode ? `
-        <p class="submit-linkcode-hint">To get the code: link this item in any in-game chat box, target the text
-        field and hit ctrl+A to mark the text, then ctrl+C to copy it. Paste that text here in the "Notes" section —
-        it looks like <code>&lt;link=&quot;item|...&quot;&gt;...&lt;/link&gt;</code> —</p>
+        <p class="submit-linkcode-hint">Follow the steps above, then paste the result into the
+        Notes box below.</p>
       ` : ''}
       <form id="submit-form" class="submit-form">
         <label class="submit-drop-zone" id="submit-drop-zone" for="submit-file-input">

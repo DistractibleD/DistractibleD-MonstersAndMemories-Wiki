@@ -1,0 +1,9 @@
+Pending sample-image updates for the Submit a Screenshot page (SUBMIT_EXAMPLES in
+script.js, images live in images/samples/). Requested 2026-08-08 — clear each line once
+done.
+
+- Next gathering node screenshot the user posts: replace images/samples/sample-gathering-
+  node.jpg with it (same SUBMIT_EXAMPLES entry, just swap the file) so the example shows
+  current best practice.
+- DONE 2026-08-08: item card sample added (images/samples/sample-item.jpg, "Item card"
+  entry in SUBMIT_EXAMPLES).
