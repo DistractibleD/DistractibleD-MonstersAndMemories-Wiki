@@ -2825,9 +2825,11 @@
     "maps": ["Tel Ekir"],
     "drops": [
       { "item": "Ashira Protector Axe" },
+      { "item": "Emberguard Helm" },
       { "item": "Protector's Mask" },
       { "item": "Shield of the Protector" }
-    ]
+    ],
+    "lastUpdated": "2026-08-08"
   },
   {
     "name": "Ayip",
@@ -3930,12 +3932,13 @@
     "named": true,
     "maps": ["Fallen Pass"],
     "drops": [
+      { "item": "Greaves of the Entrusted" },
       { "item": "Rat-Skin Warhood" },
       { "item": "Rathmere's Spyglass" },
       { "item": "Skinbound Staff" },
       { "item": "Supple Rat Skin Tunic" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-08-08"
   },
   {
     "name": "Handmaiden Mira",
@@ -6045,5 +6048,23 @@
       { "copper": 23 }
     ],
     "lastUpdated": "2026-08-07"
+  },
+  {
+    "name": "Tansy Farwinds",
+    "slug": "tansy-farwinds",
+    "named": true,
+    "maps": ["Night Harbor"],
+    "drops": [
+      { "item": "Farwinds Pendant" }
+    ],
+    "lastUpdated": "2026-08-08"
+  },
+  {
+    "name": "a forest drakeling",
+    "slug": "a-forest-drakeling",
+    "coinDrops": [
+      { "copper": 58 }
+    ],
+    "lastUpdated": "2026-08-08"
   }
 ]

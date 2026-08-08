@@ -3435,7 +3435,7 @@
     "tags": [],
     "weight": 0.1,
     "size": "Tiny",
-    "lastUpdated": "2026-07-30"
+    "lastUpdated": "2026-08-08"
   },
   {
     "name": "Recipe: Smoke Bomb Arrow (x20)",
@@ -3642,7 +3642,7 @@
     "tags": [],
     "weight": 0.1,
     "size": "Tiny",
-    "lastUpdated": "2026-07-30"
+    "lastUpdated": "2026-08-08"
   },
   {
     "name": "Throwing Dagger",
@@ -3809,7 +3809,7 @@
     "tags": [],
     "weight": 0.1,
     "size": "Tiny",
-    "lastUpdated": "2026-07-30"
+    "lastUpdated": "2026-08-08"
   },
   {
     "name": "Leather Scraps",
@@ -3875,7 +3875,7 @@
     "tags": [],
     "weight": 0.1,
     "size": "Tiny",
-    "lastUpdated": "2026-07-30"
+    "lastUpdated": "2026-08-08"
   },
   {
     "name": "Muurtu Shield",
@@ -10221,12 +10221,12 @@
   {
     "name": "Torturer's Thorn Shoulders",
     "slug": "torturers-thorn-shoulders",
-    "lastUpdated": "2026-07-19",
+    "lastUpdated": "2026-08-08",
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Shoulders",
     "ac": 35,
-    "stats": { "WIS": 3, "HP": 15 },
+    "stats": { "WIS": 5, "HP": 25, "MANA": 15 },
     "weight": 2.0,
     "size": "Small",
     "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
@@ -12947,13 +12947,14 @@
     "type": "Armor",
     "tags": ["MAGIC"],
     "slot": "Face",
-    "ac": 6,
-    "stats": { "STA": 3 },
-    "resists": { "CORRUPTION": 6 },
-    "weight": 0.5,
+    "ac": 5,
+    "stats": { "STA": 4 },
+    "resists": { "CORRUPTION": 2 },
+    "weight": 0.25,
     "size": "Small",
     "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-08"
   },
   {
     "name": "Shield of the Protector",
@@ -19305,11 +19306,12 @@
   {
     "name": "Enchanted Frond",
     "slug": "enchanted-frond",
-    "lastUpdated": "2026-08-06",
+    "lastUpdated": "2026-08-08",
     "image": "images/gathering/frond.jpg",
     "type": "Misc",
-    "tags": [],
-    "needsInfo": true
+    "tags": ["MAGIC"],
+    "weight": 0.25,
+    "size": "Small"
   },
   {
     "name": "Flux",
@@ -19599,5 +19601,48 @@
     "type": "Misc",
     "tags": [],
     "needsInfo": true
+  },
+  {
+    "name": "Emberguard Helm",
+    "slug": "emberguard-helm",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Head",
+    "ac": 17,
+    "stats": { "STR": 5, "STA": 1 },
+    "weight": 0.7,
+    "size": "Small",
+    "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-08"
+  },
+  {
+    "name": "Landing Loop",
+    "slug": "landing-loop",
+    "type": "Jewelry",
+    "tags": ["MAGIC", "UNIQUE", "NODROP"],
+    "slot": "Ear",
+    "stats": { "STA": 8, "INT": 8, "WIS": 8, "MANA": 40 },
+    "effect": "Enduring Breath (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "description": "A golden earring with a sparkling emerald, bearing the mark of Zaedin's Landing.",
+    "weight": 0.1,
+    "size": "Small",
+    "foundAt": "Quest reward",
+    "lastUpdated": "2026-08-08"
+  },
+  {
+    "name": "Greaves of the Entrusted",
+    "slug": "greaves-of-the-entrusted",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Legs",
+    "ac": 33,
+    "stats": { "STR": 5, "AGI": 5, "DEX": 1 },
+    "description": "Reliable chain greaves, gifted to one entrusted with operations of great import.",
+    "weight": 2.0,
+    "size": "Medium",
+    "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-08"
   }
 ]

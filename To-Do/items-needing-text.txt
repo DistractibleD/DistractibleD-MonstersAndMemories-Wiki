@@ -475,3 +475,18 @@ assumed ALL. A fourth orphaned image, stirring-stick.jpg, has no matching screen
 batch at all -- Spicy Raziq's monsters.json entry already lists "Stirring Stick" as a drop,
 but the item itself still has no card data and no items.json entry; needs its own screenshot
 to complete.
+
+2026-08-08, images/inbox batch (mnmdrops.com-style "Zone"/"Dropped by" screenshots paired
+with the in-game item card): Landing Loop (Shallow Shoals, dropped by a Quest -- recorded as
+`foundAt: "Quest reward"`) showed no Class/Race section at all -- this card came from a
+different, bot-style "New Item" layout rather than the usual in-game overlay, so it's unclear
+whether that layout ever shows Class/Race or if this one was simply cropped -- left both
+unset rather than guessed, watch for another card in this same layout to tell which it is.
+
+Two stat conflicts resolved per "newest screenshot wins," both already linked from an
+existing monster's drops so this was a data update, not a new discovery: Protector's Mask
+(dropped by Ashir The Protector, Tel Ekir) went from AC 6/STA+3/Corruption+6/weight 0.5 to AC
+5/STA+4/Corruption+2/weight 0.25; Torturer's Thorn Shoulders (dropped by Vesska The
+Bloodbound, Grimtide Sanctum) went from WIS+3/HP+15 to WIS+5/HP+25/Mana+15 (Mana previously
+absent entirely). Both changes read as a plausible rebalance rather than a misread, but
+flagging in case a future card disagrees again.
