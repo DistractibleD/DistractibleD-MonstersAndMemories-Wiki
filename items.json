@@ -3062,7 +3062,9 @@
     "weight": 0.25,
     "size": "Medium",
     "classes": ["ELE", "ENC", "INQ", "NEC", "SHD", "SPB", "WIZ"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|fc5a26a169c2fb3b16618749\"><color=green><b><u>[Widow's Veil]</u></b></color></link>",
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Vethra's Figurine",
@@ -4855,7 +4857,9 @@
     "weight": 5.0,
     "size": "Large",
     "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|af6e7556388b365678320792\"><color=green><b><u>[Mother's Sorrow]</u></b></color></link>",
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Dragon Sinew Bow",
@@ -5948,7 +5952,9 @@
     "weight": 6.0,
     "size": "Medium",
     "classes": ["CLR", "FTR", "INQ", "PAL", "SHD"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|c402fafd15c0c23e3d19f67c\"><color=green><b><u>[Muurtu Battleplate]</u></b></color></link>",
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Rigid Sharpening Stone",
@@ -14115,7 +14121,9 @@
     "weight": 1.1,
     "size": "Medium",
     "classes": ["ELE", "ENC", "NEC", "WIZ"],
-    "race": ["ALL"]
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|073c8d8fc147432f1dde641b\"><color=green><b><u>[Fine Black Robe]</u></b></color></link>",
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Sanguine Bat Tooth",
@@ -18836,7 +18844,7 @@
   {
     "name": "Pale Handlamp",
     "slug": "pale-handlamp",
-    "lastUpdated": "2026-07-28",
+    "lastUpdated": "2026-08-10",
     "image": "images/items/pale-handlamp.jpg",
     "type": "Armor",
     "tags": ["MAGIC", "UNIQUE"],
@@ -18847,7 +18855,8 @@
     "description": "A sturdy iron lantern that emits a cold and sickly light.",
     "weight": 2.3,
     "size": "Small",
-    "classes": ["CLR", "DRU", "ELE", "ENC", "NEC", "SHM", "SPB", "WIZ"]
+    "classes": ["CLR", "DRU", "ELE", "ENC", "NEC", "SHM", "SPB", "WIZ"],
+    "gameLinkCode": "<link=\"item|0b418a8834c0e0d629ae6755\"><color=green><b><u>[Pale Handlamp]</u></b></color></link>"
   },
   {
     "name": "Stableplate Greaves",
@@ -20096,5 +20105,23 @@
     "classes": ["PAL", "RNG", "SHM"],
     "race": ["ALL"],
     "effect": "A spell scroll. Scribe this in the Book tab of your Ability Book while a Spellbook is equipped. Required Level: 32. Moderately heal your target, restoring 57 Health."
+  },
+  {
+    "name": "Sturdy Bindings",
+    "slug": "sturdy-bindings",
+    "lastUpdated": "2026-08-10",
+    "type": "Weapon",
+    "tags": ["MAGIC"],
+    "slot": "Primary / Secondary",
+    "damage": 1,
+    "delay": 3,
+    "skill": "H2H",
+    "ac": 1,
+    "stats": { "STR": 2, "HP": 5 },
+    "weight": 2.0,
+    "size": "Small",
+    "classes": ["MNK"],
+    "race": ["ALL"],
+    "gameLinkCode": "<link=\"item|ee10f67262348530d4b07595\"><color=green><b><u>[Sturdy Bindings]</u></b></color></link>"
   }
 ]
