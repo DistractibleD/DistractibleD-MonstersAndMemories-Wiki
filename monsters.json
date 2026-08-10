@@ -1376,10 +1376,30 @@
       { "item": "Corroded Bronze Tower Shield" },
       { "item": "Corroded Bronze Trident" },
       { "item": "Corroded Bronze War Lance" },
-      { "item": "Corroded Bronze Warhammer" }
+      { "item": "Corroded Bronze Warhammer" },
+      { "item": "Bronze Scraps" },
+      { "item": "Wool Scraps" },
+      { "item": "Raw Orc Meat" },
+      { "family": "Tattered Wool" }
+    ],
+    "coinDrops": [
+      { "silver": 2, "copper": 25 },
+      { "silver": 2, "copper": 81 },
+      { "silver": 2, "copper": 94 },
+      { "silver": 2, "copper": 93 },
+      { "silver": 3, "copper": 4 },
+      { "silver": 2, "copper": 87 },
+      { "silver": 2, "copper": 41 }
     ],
     "conObservations": [
-      { "playerLevel": 28, "con": "White" }
+      { "playerLevel": 28, "con": "White" },
+      { "playerLevel": 29, "con": "Light Blue" }
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Orcs", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -1431,7 +1451,34 @@
       { "item": "Corroded Bronze Tower Shield" },
       { "item": "Corroded Bronze Trident" },
       { "item": "Corroded Bronze War Lance" },
-      { "item": "Corroded Bronze Warhammer" }
+      { "item": "Corroded Bronze Warhammer" },
+      { "item": "Wool Scraps" },
+      { "item": "Worn Fine Wood Great Staff" },
+      { "item": "Raw Orc Meat" },
+      { "item": "Hide Scraps" },
+      { "item": "Bronze Scraps" },
+      { "family": "Tattered Wool" }
+    ],
+    "coinDrops": [
+      { "silver": 3, "copper": 6 },
+      { "silver": 2, "copper": 45 },
+      { "silver": 2, "copper": 2 },
+      { "silver": 2, "copper": 38 },
+      { "silver": 2, "copper": 52 },
+      { "silver": 2, "copper": 56 },
+      { "silver": 2, "copper": 83 },
+      { "silver": 3, "copper": 18 },
+      { "silver": 2, "copper": 82 },
+      { "silver": 3, "copper": 41 },
+      { "silver": 2, "copper": 9 },
+      { "silver": 2, "copper": 29 },
+      { "silver": 2, "copper": 54 },
+      { "silver": 3, "copper": 20 },
+      { "silver": 2, "copper": 93 },
+      { "silver": 3, "copper": 29 },
+      { "silver": 2, "copper": 79 },
+      { "silver": 2, "copper": 70 },
+      { "silver": 2, "copper": 61 }
     ],
     "conObservations": [
       { "playerLevel": 28, "con": "White" },
@@ -1442,7 +1489,16 @@
       { "playerLevel": 28, "con": "Yellow" },
       { "playerLevel": 28, "con": "Yellow" },
       { "playerLevel": 28, "con": "Yellow" },
-      { "playerLevel": 28, "con": "Yellow" }
+      { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 29, "con": "White" },
+      { "playerLevel": 29, "con": "Light Blue" },
+      { "playerLevel": 29, "con": "Light Blue" }
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Orcs", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -4575,7 +4631,7 @@
     "name": "a grizzled raider",
     "slug": "a-grizzled-raider",
     "drops": [
-      { "item": "Tattered Leather Belt" },
+      { "family": "Tattered Leather" },
       { "item": "Rusty Iron Axe" },
       { "item": "Rusty Iron Battle Axe" },
       { "item": "Rusty Iron Chain Boots" },
@@ -5024,7 +5080,7 @@
       { "item": "Worn Ironbark Bow" },
       { "item": "Tattered Cotton Shirt" },
       { "item": "Tattered Cotton Bracer" },
-      { "item": "Tattered Leather Boots" },
+      { "family": "Tattered Leather" },
       { "item": "Rusty Iron Axe" },
       { "item": "Rusty Iron Battle Axe" },
       { "item": "Rusty Iron Chain Boots" },
@@ -5202,7 +5258,7 @@
     "maps": ["Fallen Pass"],
     "areas": ["Plagueborn Camp"],
     "drops": [
-      { "item": "Tattered Leather Cloak" },
+      { "family": "Tattered Leather" },
       { "item": "Carrot" },
       { "item": "Eth-ur Astrological Journal Page" },
       { "item": "Imperfect Fire Emerald" },
@@ -5387,8 +5443,7 @@
       { "item": "Spirit World Ch. 20" },
       { "item": "Raw Giant Meat" },
       { "item": "Cooked Giant Meat" },
-      { "item": "Tattered Leather Bracer" },
-      { "item": "Tattered Leather Shoulderpads" },
+      { "family": "Tattered Leather" },
       { "item": "Cotton Scraps" },
       { "item": "Worn Ironbark Bow" },
       { "item": "Rusty Iron Axe" },
@@ -6701,6 +6756,14 @@
     "name": "a Dustrend patroller",
     "slug": "a-dustrend-patroller",
     "maps": ["Vale of Zintar"],
+    "drops": [
+      { "family": "Tattered Leather" },
+      { "item": "Raw Orc Meat" }
+    ],
+    "coinDrops": [
+      { "silver": 2, "copper": 32 },
+      { "silver": 1, "copper": 97 }
+    ],
     "conObservations": [
       { "playerLevel": 28, "con": "Yellow" },
       { "playerLevel": 28, "con": "Yellow" }
@@ -6711,8 +6774,18 @@
     "name": "a dire wolf patroller",
     "slug": "a-dire-wolf-patroller",
     "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Wolf Tooth" }
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Orcs", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
     "conObservations": [
-      { "playerLevel": 28, "con": "Yellow" }
+      { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 29, "con": "Yellow" }
     ],
     "lastUpdated": "2026-08-10"
   }

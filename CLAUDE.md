@@ -834,6 +834,15 @@ are three separate families, don't merge or assume one's roster implies another'
   Shirt, Tunic, Veil.
 - **Tattered Hide** (11, armor): Cap, Gorget, Mask, Vest, Shoulderpads, Belt, Leggings, Bracer,
   Gloves, Cloak, Tunic.
+- **Tattered Leather** (5, armor, confirmed 2026-08-10): Belt, Boots, Cloak, Bracer,
+  Shoulderpads — pieces had been sitting as unlinked plain-text drops on four separate
+  monsters (a grizzled raider, a Plagueborn citizen, a Plagueborn worshipper, a sand giant
+  fisher) across multiple earlier sessions, never recognized as a shared family until a
+  Vale of Zintar batch confirmed a second piece (Cloak) dropping from the same monster
+  another family member already existed on — backfilled onto all five monsters at once
+  per the standing inference rule. Only 2 of the 5 named pieces (Boots, Cloak) have a real
+  items.json card so far; the rest render as plain text on the family badge until a
+  screenshot comes in for each.
 - **Corroded Bronze** (42, weapons + Tower Shield + chain + plate): Axe, Battle Axe, Dagger,
   Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar, Scythe,
   Shortsword, Spear, Tower Shield, Trident, War Lance, Warhammer; Chain Boots/Cloak/Coif/
@@ -995,10 +1004,17 @@ nothing is precomputed or stored elsewhere, same as `groupMonsterDrops`'s revers
 **Workflow once a faction-change screenshot/chat message comes in**: identify which monster
 was killed and which faction changed (and which direction), then append one `factionEffects`
 entry to that monster (create the array if it doesn't exist yet) and bump `lastUpdated` — same
-append-only-per-confirmed-observation convention as `conObservations`/`coinDrops`. **No exact
-in-game message wording is confirmed yet** (no screenshot has shown one so far) — don't invent
-a template to match against; when a real one comes in, read it directly like any other
-screenshot and record the faction name/direction it states.
+append-only-per-confirmed-observation convention as `conObservations`/`coinDrops`.
+
+**Confirmed message format** (2026-08-10): `"Your faction standing with <Faction Name> got
+better."` / `"...got worse."` — one line per affected faction, printed together right after a
+kill. `"got better"` → `effect: "positive"`, `"got worse"` → `effect: "negative"`. **A single
+kill can print several of these at once** (one real example: killing any Dustrend-camp mob in
+Vale of Zintar prints all four of Citizens of Night Harbor +, Orcs -, Pyrmos Mercenaries +,
+Steel Talons + together, every time) — record every line shown, not just the first.
+Confirmed so far, every Vale of Zintar Dustrend-camp/orc kill prints this same fixed set of
+four; unconfirmed whether other zones/factions share it or have their own — don't assume this
+exact four-faction bundle for a monster in a different camp until its own screenshot confirms it.
 
 The page renders an empty state ("No faction data recorded yet") until the first
 `factionEffects` entry exists anywhere in `monsters.json` — this is expected, not a bug, same
