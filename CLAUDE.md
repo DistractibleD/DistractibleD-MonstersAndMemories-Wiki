@@ -832,7 +832,8 @@ are three separate families, don't merge or assume one's roster implies another'
   Shoulderpads.
 - **Tattered Wool** (11, armor): Belt, Boots, Bracer, Cap, Gloves, Gorget, Mantle, Robe,
   Shirt, Tunic, Veil.
-- **Tattered Hide** (8, armor): Cap, Gorget, Mask, Vest, Shoulderpads, Belt, Leggings, Bracer.
+- **Tattered Hide** (9, armor): Cap, Gorget, Mask, Vest, Shoulderpads, Belt, Leggings, Bracer,
+  Gloves.
 - **Corroded Bronze** (42, weapons + Tower Shield + chain + plate): Axe, Battle Axe, Dagger,
   Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar, Scythe,
   Shortsword, Spear, Tower Shield, Trident, War Lance, Warhammer; Chain Boots/Cloak/Coif/
@@ -855,7 +856,7 @@ are three separate families, don't merge or assume one's roster implies another'
 
 Treat a new shared prefix as its own family the same way. Rosters grow over time as new
 screenshots turn up pieces not previously known (e.g. Corroded Bronze: 19→42, Rusty Iron
-gained Tower Shield, Tattered Wool: 7→11, Tattered Hide: 7→8) — when this happens, retroactively backfill the
+gained Tower Shield, Tattered Wool: 7→11, Tattered Hide: 7→8→9) — when this happens, retroactively backfill the
 newly-discovered piece(s) onto every monster that already references that family.
 
 - Backfill is **per-monster**, based on the *global* known roster (not just what that

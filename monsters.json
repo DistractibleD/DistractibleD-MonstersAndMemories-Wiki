@@ -225,7 +225,8 @@
       { "playerLevel": 26, "con": "Light Blue" },
       { "playerLevel": 26, "con": "Light Blue" },
       { "playerLevel": 26, "con": "Light Blue" },
-      { "playerLevel": 26, "con": "Light Blue" }
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 27, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -6186,11 +6187,15 @@
       { "silver": 1, "copper": 1 },
       { "silver": 1, "copper": 87 },
       { "silver": 1, "copper": 76 },
-      { "silver": 1, "copper": 56 }
+      { "silver": 1, "copper": 56 },
+      { "silver": 1, "copper": 59 }
     ],
     "conObservations": [
       { "playerLevel": 26, "con": "Dark Blue" },
-      { "playerLevel": 26, "con": "Light Blue" }
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 27, "con": "Dark Blue" },
+      { "playerLevel": 27, "con": "Dark Blue" },
+      { "playerLevel": 27, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -6254,7 +6259,8 @@
       { "silver": 2, "copper": 15 },
       { "silver": 2, "copper": 49 },
       { "silver": 1, "copper": 96 },
-      { "silver": 1, "copper": 56 }
+      { "silver": 1, "copper": 56 },
+      { "silver": 2, "copper": 25 }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "Yellow" },
@@ -6268,7 +6274,8 @@
       { "playerLevel": 26, "con": "White" },
       { "playerLevel": 26, "con": "Yellow" },
       { "playerLevel": 26, "con": "Yellow" },
-      { "playerLevel": 26, "con": "Yellow" }
+      { "playerLevel": 26, "con": "Yellow" },
+      { "playerLevel": 27, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -6313,12 +6320,16 @@
       { "item": "Celery" },
       { "item": "Cheese" },
       { "item": "Worn Fine Wood Buckler" },
-      { "family": "Tattered Wool" }
+      { "family": "Tattered Wool" },
+      { "family": "Tattered Hide" },
+      { "family": "Corroded Bronze" }
     ],
     "coinDrops": [
       { "silver": 2, "copper": 63 },
       { "silver": 1, "copper": 96 },
-      { "silver": 2, "copper": 40 }
+      { "silver": 2, "copper": 40 },
+      { "silver": 2, "copper": 22 },
+      { "silver": 1, "copper": 77 }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "Yellow" },
@@ -6331,7 +6342,9 @@
       { "playerLevel": 26, "con": "White" },
       { "playerLevel": 26, "con": "White" },
       { "playerLevel": 26, "con": "White" },
-      { "playerLevel": 26, "con": "White" }
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 27, "con": "Light Blue" },
+      { "playerLevel": 27, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -6380,7 +6393,8 @@
       { "silver": 1, "copper": 93 },
       { "silver": 2, "copper": 13 },
       { "silver": 2, "copper": 52 },
-      { "silver": 2, "copper": 60 }
+      { "silver": 2, "copper": 60 },
+      { "silver": 2, "copper": 46 }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "Yellow" },
@@ -6388,7 +6402,10 @@
       { "playerLevel": 26, "con": "Yellow" },
       { "playerLevel": 26, "con": "Yellow" },
       { "playerLevel": 26, "con": "Yellow" },
-      { "playerLevel": 26, "con": "Yellow" }
+      { "playerLevel": 26, "con": "Yellow" },
+      { "playerLevel": 27, "con": "White" },
+      { "playerLevel": 27, "con": "White" },
+      { "playerLevel": 27, "con": "White" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -6417,7 +6434,8 @@
       { "playerLevel": 26, "con": "Light Blue" },
       { "playerLevel": 26, "con": "Light Blue" },
       { "playerLevel": 26, "con": "Light Blue" },
-      { "playerLevel": 26, "con": "Light Blue" }
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 27, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -6438,7 +6456,8 @@
       { "playerLevel": 26, "con": "White" },
       { "playerLevel": 26, "con": "Light Blue" },
       { "playerLevel": 26, "con": "Light Blue" },
-      { "playerLevel": 26, "con": "Light Blue" }
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 27, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
   },

@@ -19986,5 +19986,14 @@
     "type": "Misc",
     "tags": [],
     "needsInfo": true
+  },
+  {
+    "name": "Tattered Hide Gloves",
+    "slug": "tattered-hide-gloves",
+    "lastUpdated": "2026-08-10",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Hands",
+    "needsInfo": true
   }
 ]
