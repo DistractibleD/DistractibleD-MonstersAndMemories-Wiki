@@ -893,7 +893,10 @@
     "drops": [
       { "item": "Snake Fang" }
     ],
-    "lastUpdated": "2026-07-30"
+    "conObservations": [
+      { "playerLevel": 24, "con": "Trivial" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a giant spider",
@@ -1063,7 +1066,11 @@
     "slug": "a-blister-beetle",
     "image": "images/Monsters/a-blister-beetle.jpg",
     "maps": ["Night Harbor", "Sungreet Strand"],
-    "areas": ["West Gate"]
+    "areas": ["West Gate"],
+    "conObservations": [
+      { "playerLevel": 24, "con": "Trivial" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a cemetery rat",
@@ -4602,7 +4609,10 @@
       { "item": "Tattered Cloth Tunic" },
       { "item": "Tattered Cloth Veil" }
     ],
-    "lastUpdated": "2026-07-30"
+    "conObservations": [
+      { "playerLevel": 24, "con": "Trivial" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a grim farmhand",
@@ -5460,6 +5470,9 @@
     "drops": [
       { "item": "Head of the Overseer" }
     ],
+    "conObservations": [
+      { "playerLevel": 24, "con": "Green" }
+    ],
     "lastUpdated": "2026-08-10"
   },
   {
@@ -5770,6 +5783,9 @@
     "coinDrops": [
       { "copper": 35 }
     ],
+    "conObservations": [
+      { "playerLevel": 24, "con": "Trivial" }
+    ],
     "lastUpdated": "2026-08-10"
   },
   {
@@ -5777,6 +5793,9 @@
     "slug": "a-cinder-harvester",
     "maps": ["Sungreet Strand"],
     "areas": ["Quarry"],
+    "conObservations": [
+      { "playerLevel": 24, "con": "Green" }
+    ],
     "lastUpdated": "2026-08-10"
   },
   {
@@ -5784,6 +5803,9 @@
     "slug": "a-cinder-worker",
     "maps": ["Sungreet Strand"],
     "areas": ["Quarry"],
+    "conObservations": [
+      { "playerLevel": 24, "con": "Green" }
+    ],
     "lastUpdated": "2026-08-10"
   },
   {
@@ -5791,6 +5813,9 @@
     "slug": "a-cinder-carrier",
     "maps": ["Sungreet Strand"],
     "areas": ["Quarry"],
+    "conObservations": [
+      { "playerLevel": 24, "con": "Light Blue" }
+    ],
     "lastUpdated": "2026-08-10"
   },
   {
@@ -5798,6 +5823,9 @@
     "slug": "a-cinder-drone",
     "maps": ["Sungreet Strand"],
     "areas": ["Quarry"],
+    "conObservations": [
+      { "playerLevel": 24, "con": "White" }
+    ],
     "lastUpdated": "2026-08-10"
   },
   {
@@ -5805,6 +5833,9 @@
     "slug": "a-cinder-sentinel",
     "maps": ["Sungreet Strand"],
     "areas": ["Quarry"],
+    "conObservations": [
+      { "playerLevel": 24, "con": "Yellow" }
+    ],
     "lastUpdated": "2026-08-10"
   },
   {
@@ -5812,6 +5843,9 @@
     "slug": "a-goblin-claim-jumper",
     "maps": ["Sungreet Strand"],
     "areas": ["Quarry"],
+    "conObservations": [
+      { "playerLevel": 24, "con": "Green" }
+    ],
     "lastUpdated": "2026-08-10"
   },
   {
@@ -5819,6 +5853,10 @@
     "slug": "a-goblin-miner",
     "maps": ["Sungreet Strand"],
     "areas": ["Quarry"],
+    "conObservations": [
+      { "playerLevel": 24, "con": "Green" },
+      { "playerLevel": 24, "con": "Light Blue" }
+    ],
     "lastUpdated": "2026-08-10"
   },
   {
@@ -5826,6 +5864,9 @@
     "slug": "a-goblin-bandit",
     "maps": ["Sungreet Strand"],
     "areas": ["Quarry"],
+    "conObservations": [
+      { "playerLevel": 24, "con": "Light Blue" }
+    ],
     "lastUpdated": "2026-08-10"
   },
   {
@@ -5833,6 +5874,9 @@
     "slug": "a-goblin-spellshooter",
     "maps": ["Sungreet Strand"],
     "areas": ["Quarry"],
+    "conObservations": [
+      { "playerLevel": 24, "con": "Light Blue" }
+    ],
     "lastUpdated": "2026-08-10"
   },
   {
@@ -5841,6 +5885,9 @@
     "named": true,
     "maps": ["Sungreet Strand"],
     "areas": ["Quarry"],
+    "conObservations": [
+      { "playerLevel": 24, "con": "Green" }
+    ],
     "lastUpdated": "2026-08-10"
   },
   {

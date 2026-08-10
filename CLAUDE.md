@@ -696,12 +696,34 @@ drill-down. `goToMonster` picks `monsters-named`/`monsters-regular` from the mon
   field, included in search. Doesn't affect zone-grid grouping (`maps`/`monsterZone()` still
   drive that).
 - `levelRange` — plain string (`"5-8"`), not min/max fields, since every value is a guess.
-  **Con color reference:** White con = same level as the player (pins an exact level).
-  **Full con-color order confirmed:** low→high, Light Green, Light Blue, Dark Blue, White,
-  Yellow, Orange, Red (same 7 as crafting difficulty, Light Green = trivial end). Confirmed
-  meanings: **Light Green** trivial (no XP); **White** same level (exact level); **Red** much
-  higher, near-impossible to solo. Other colors' exact level-difference unknown (fixed number
-  vs. percentage — open question, not something to guess at).
+  **Con color reference (corrected 2026-08-10, user's own definitive list — supersedes any
+  earlier "Light Green/Orange" naming):** low→high, **Trivial** (very bright green/teal, no
+  XP reward — its own tier, not the same as Green), **Green** (extremely easy/low-level),
+  **Light Blue** (fairly easy match), **Dark Blue** (you should win, but it might hurt a
+  bit), **White** (even match, could win or lose, within your level range — pins an exact
+  level), **Yellow** (tough fight, hard to win), **Red** (higher level, you will most likely
+  lose). Exactly 7 tiers, no more — there is no "Orange."
+  **Combat-prediction chat text is the same con system, just read as colored sentences
+  instead of a nameplate color** (confirmed 2026-08-10) — e.g. considering a monster prints
+  `"<mob> seethes at you, ready to strike -- <outcome phrase>."` (or `"seems indifferent to
+  your presence --"` for a passive one) in the con's own color. This is actually *more*
+  reliable than a nameplate (rendered chat text, not a 3D-model tooltip), so read the color
+  directly from the screenshot instead of asking the user to state it — the general "con
+  color read off a screenshot isn't reliably legible" caution below is about the nameplate
+  variant, not this one. Confirmed outcome-phrase → color mapping (user-confirmed test cases
+  in parentheses), low→high:
+  - **Trivial**: "You would almost certainly emerge victorious in battle." (a desert bat, a
+    giant fire beetle) — the very bright/teal-ish green, distinct from regular Green below.
+  - **Green**: "You would likely emerge victorious in battle." (a hired sword) — a duller,
+    "regular" green — read the actual shade, not just the phrase, if unsure which of these
+    two greens a screenshot shows.
+  - **Light Blue**: "It might prove to be a difficult battle." (Blooper)
+  - **Dark Blue**: unconfirmed — no test case yet.
+  - **White**: "Battle would be quite risky." (Henryhaha)
+  - **Yellow**: "You would likely be defeated in battle." (a bodyguard)
+  - **Red**: "Would you like to die? You would almost certainly be defeated in battle." (Iniu)
+  Player's own level always comes from the same screenshot batch (e.g. filenames stating
+  "I am level 24") — same source-of-truth authority as a stated level in chat.
 - **`conObservations`** (2026-08-10) — raw data feeding a real level-estimation system, same
   append-only-log shape as `coinDrops`: array of `{ "playerLevel": N, "con": "White" }`, one
   entry per screenshot+stated-con+stated-player-level the user reports. **Workflow:** user
