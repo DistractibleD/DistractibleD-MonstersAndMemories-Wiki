@@ -738,16 +738,23 @@ drill-down. `goToMonster` picks `monsters-named`/`monsters-regular` from the mon
   append one `conObservations` entry to that monster (create the array if it doesn't exist
   yet) and bump `lastUpdated`. Never overwritten, never averaged/merged by hand —
   `estimateMonsterLevel(monster)` (`script.js`) computes the display value at render time,
-  same never-store-a-computed-value precedent as `estimateRecipeSkill`/`averageCoinDrop`:
-  - Any `White` observation is an exact confirmed level (multiple different values across
-    observations of the same monster type → confirmed range, e.g. `"12-14"`).
-  - Absent White, a below-White con (Light Green/Light Blue/Dark Blue) yields an open upper
-    bound (`"N-"`, monster confirmed below `N`); an above-White con (Yellow/Orange/Red)
-    yields an open lower bound (`"N+"`) — same notation already hand-typed into pre-existing
-    `levelRange` values (`"8+"`, `"9+"`) before this system existed. Having both an upper and
-    a lower bound narrows to `"~N-M"` (tilde marks it estimated, not confirmed — same
-    convention as `estimateRecipeSkill`'s `~N (estimated)`; card also appends the literal
-    "(estimated)" suffix whenever the value isn't White-confirmed).
+  same never-store-a-computed-value precedent as `estimateRecipeSkill`/`averageCoinDrop`.
+  **Monsters spawn across a level range, not one fixed level** (confirmed 2026-08-10, user's
+  own explanation) — two kills of the same species at the same player level legitimately
+  conning differently (e.g. one White, one Yellow) reflects two different-level spawns of
+  that species, not inconsistent/erroneous data. That means a single White observation only
+  pins *that one spawn's* level, not the species' level as a whole, so the display format
+  stays deliberately conservative — only two possible shapes, nothing in between:
+  - **`"X-Y"`** (confirmed) — only once two *different* White-observed levels exist for
+    the species, since that's direct proof it spans at least that range.
+  - **`"~X"`** (estimated, card appends the literal "(estimated)" suffix too) — every other
+    case: a single White observation (even repeated at the same value — still only one
+    proven spawn-level, not proof that's the *only* level), or only one-sided bound info from
+    non-White cons (below-White → `~(upperBound - 1)`; above-White → `~(lowerBound + 1)`;
+    both sides → `~` the midpoint between them). Whether **named/boss monsters might turn out
+    to have a single fixed level** (unlike regular trash mobs) is an open question — not
+    confirmed either way, so treat named monsters the same conservative way until real data
+    settles it one way or the other.
   - No `conObservations` yet → falls back to displaying the hand-typed `levelRange` string
     as-is, so old entries keep working unchanged.
   - **Card display re-enabled** (was hidden 2026-07 "until a more reliable conning method

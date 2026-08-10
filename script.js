@@ -4756,14 +4756,22 @@ function estimateMonsterLevel(monster) {
   if (exactLevels.length) {
     const min = Math.min(...exactLevels);
     const max = Math.max(...exactLevels);
-    return { display: min === max ? `${min}` : `${min}-${max}`, confirmed: true };
+    // Two different White-observed levels for the same species is direct proof
+    // it spawns across a range (confirmed "X-Y"). A single repeated value is
+    // still just one sample of that range, not proof it's the species' only
+    // level, so it stays an estimate rather than a bare confirmed number.
+    if (min !== max) {
+      return { display: `${min}-${max}`, confirmed: true };
+    }
+    return { display: `~${min}`, confirmed: false };
   }
 
-  if (lowerBound != null && upperBound != null && lowerBound + 1 <= upperBound - 1) {
-    return { display: `~${lowerBound + 1}-${upperBound - 1}`, confirmed: false };
+  if (lowerBound != null && upperBound != null) {
+    const mid = Math.round((lowerBound + 1 + upperBound - 1) / 2);
+    return { display: `~${mid}`, confirmed: false };
   }
-  if (lowerBound != null) return { display: `${lowerBound + 1}+`, confirmed: false };
-  if (upperBound != null) return { display: `${upperBound - 1}-`, confirmed: false };
+  if (lowerBound != null) return { display: `~${lowerBound + 1}`, confirmed: false };
+  if (upperBound != null) return { display: `~${upperBound - 1}`, confirmed: false };
   return null;
 }
 
