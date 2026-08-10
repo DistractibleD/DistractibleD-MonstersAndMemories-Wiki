@@ -19995,5 +19995,23 @@
     "tags": [],
     "slot": "Hands",
     "needsInfo": true
+  },
+  {
+    "name": "Tattered Hide Tunic",
+    "slug": "tattered-hide-tunic",
+    "lastUpdated": "2026-08-10",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true
+  },
+  {
+    "name": "Tattered Hide Cloak",
+    "slug": "tattered-hide-cloak",
+    "lastUpdated": "2026-08-10",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true
   }
 ]

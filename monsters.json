@@ -210,7 +210,12 @@
       { "silver": 2, "copper": 13 },
       { "silver": 2, "copper": 15 },
       { "silver": 1, "copper": 78 },
-      { "silver": 1, "copper": 94 }
+      { "silver": 1, "copper": 94 },
+      { "silver": 1, "copper": 68 },
+      { "silver": 2, "copper": 1 },
+      { "silver": 2, "copper": 22 },
+      { "silver": 1, "copper": 75 },
+      { "silver": 1, "copper": 63 }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "White" },
@@ -6178,7 +6183,10 @@
       { "item": "Raw Human Meat" },
       { "item": "Bronze Scraps" },
       { "item": "Tomato" },
-      { "item": "Wool Scraps" }
+      { "item": "Wool Scraps" },
+      { "item": "Cabbage" },
+      { "item": "Cracked Fine Wood Staff" },
+      { "family": "Tattered Wool" }
     ],
     "coinDrops": [
       { "silver": 1, "copper": 10 },
@@ -6188,7 +6196,14 @@
       { "silver": 1, "copper": 87 },
       { "silver": 1, "copper": 76 },
       { "silver": 1, "copper": 56 },
-      { "silver": 1, "copper": 59 }
+      { "silver": 1, "copper": 59 },
+      { "silver": 1, "copper": 45 },
+      { "silver": 1, "copper": 89 },
+      { "silver": 1, "copper": 43 },
+      { "silver": 1, "copper": 97 },
+      { "copper": 95 },
+      { "silver": 1, "copper": 65 },
+      { "silver": 1, "copper": 1 }
     ],
     "conObservations": [
       { "playerLevel": 26, "con": "Dark Blue" },
@@ -6251,6 +6266,7 @@
       { "item": "Raw Human Meat" },
       { "item": "Bronze Scraps" },
       { "item": "Onion" },
+      { "item": "Wool Scraps" },
       { "family": "Corroded Bronze" },
       { "family": "Tattered Hide" }
     ],
@@ -6260,7 +6276,13 @@
       { "silver": 2, "copper": 49 },
       { "silver": 1, "copper": 96 },
       { "silver": 1, "copper": 56 },
-      { "silver": 2, "copper": 25 }
+      { "silver": 2, "copper": 25 },
+      { "silver": 2, "copper": 48 },
+      { "silver": 2, "copper": 56 },
+      { "silver": 2, "copper": 68 },
+      { "silver": 1, "copper": 91 },
+      { "silver": 1, "copper": 76 },
+      { "silver": 2, "copper": 13 }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "Yellow" },
@@ -6320,6 +6342,10 @@
       { "item": "Celery" },
       { "item": "Cheese" },
       { "item": "Worn Fine Wood Buckler" },
+      { "item": "Bell Pepper" },
+      { "item": "Carrot" },
+      { "item": "Raw Human Meat" },
+      { "item": "Bronze Scraps" },
       { "family": "Tattered Wool" },
       { "family": "Tattered Hide" },
       { "family": "Corroded Bronze" }
@@ -6329,7 +6355,13 @@
       { "silver": 1, "copper": 96 },
       { "silver": 2, "copper": 40 },
       { "silver": 2, "copper": 22 },
-      { "silver": 1, "copper": 77 }
+      { "silver": 1, "copper": 77 },
+      { "silver": 2, "copper": 57 },
+      { "silver": 1, "copper": 69 },
+      { "silver": 2, "copper": 49 },
+      { "silver": 1, "copper": 69 },
+      { "silver": 2, "copper": 41 },
+      { "silver": 2, "copper": 34 }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "Yellow" },
@@ -6355,18 +6387,23 @@
     "areas": ["Farmhands Camp"],
     "drops": [
       { "item": "Bronze Scraps" },
-      { "item": "Tattered Wool Cape" }
+      { "item": "Tattered Wool Cape" },
+      { "family": "Corroded Bronze" }
     ],
     "coinDrops": [
       { "silver": 2 },
-      { "silver": 1, "copper": 82 }
+      { "silver": 1, "copper": 82 },
+      { "silver": 2, "copper": 64 },
+      { "silver": 2, "copper": 20 }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "Yellow" },
       { "playerLevel": 25, "con": "Yellow" },
       { "playerLevel": 26, "con": "Light Blue" },
       { "playerLevel": 26, "con": "Light Blue" },
-      { "playerLevel": 26, "con": "Light Blue" }
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 27, "con": "White" },
+      { "playerLevel": 28, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -6377,14 +6414,15 @@
     "areas": ["Farmhands Camp"],
     "drops": [
       { "item": "Mushroom" },
-      { "item": "Tattered Hide Cloak" },
       { "item": "Raw Human Meat" },
       { "item": "Bronze Scraps" },
       { "item": "Celery" },
       { "item": "Cabbage" },
       { "item": "Wool Scraps" },
       { "item": "Worn Fine Wood Bow" },
-      { "family": "Corroded Bronze" }
+      { "item": "Carrot" },
+      { "family": "Corroded Bronze" },
+      { "family": "Tattered Hide" }
     ],
     "coinDrops": [
       { "silver": 1, "copper": 73 },
@@ -6394,7 +6432,11 @@
       { "silver": 2, "copper": 13 },
       { "silver": 2, "copper": 52 },
       { "silver": 2, "copper": 60 },
-      { "silver": 2, "copper": 46 }
+      { "silver": 2, "copper": 46 },
+      { "silver": 2, "copper": 56 },
+      { "silver": 1, "copper": 87 },
+      { "silver": 2, "copper": 36 },
+      { "silver": 1, "copper": 86 }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "Yellow" },
@@ -6405,7 +6447,8 @@
       { "playerLevel": 26, "con": "Yellow" },
       { "playerLevel": 27, "con": "White" },
       { "playerLevel": 27, "con": "White" },
-      { "playerLevel": 27, "con": "White" }
+      { "playerLevel": 27, "con": "White" },
+      { "playerLevel": 28, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -6419,13 +6462,17 @@
       { "item": "Raw Human Meat" },
       { "item": "Lemon" },
       { "item": "Flawed Peridot" },
+      { "item": "Hide Scraps" },
+      { "item": "Wool Scraps" },
       { "family": "Corroded Bronze" },
       { "family": "Tattered Hide" }
     ],
     "coinDrops": [
       { "silver": 1, "copper": 89 },
       { "silver": 1, "copper": 62 },
-      { "silver": 2, "copper": 9 }
+      { "silver": 2, "copper": 9 },
+      { "silver": 1, "copper": 74 },
+      { "silver": 2, "copper": 31 }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "White" },
@@ -6435,7 +6482,8 @@
       { "playerLevel": 26, "con": "Light Blue" },
       { "playerLevel": 26, "con": "Light Blue" },
       { "playerLevel": 26, "con": "Light Blue" },
-      { "playerLevel": 27, "con": "Light Blue" }
+      { "playerLevel": 27, "con": "Light Blue" },
+      { "playerLevel": 28, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -6446,7 +6494,8 @@
     "areas": ["Farmhands Camp"],
     "drops": [
       { "item": "Wolf Blood" },
-      { "item": "Wolf Tooth" }
+      { "item": "Wolf Tooth" },
+      { "item": "Medium-Quality Wolf Pelt" }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "White" },
@@ -6457,7 +6506,8 @@
       { "playerLevel": 26, "con": "Light Blue" },
       { "playerLevel": 26, "con": "Light Blue" },
       { "playerLevel": 26, "con": "Light Blue" },
-      { "playerLevel": 27, "con": "Light Blue" }
+      { "playerLevel": 27, "con": "Light Blue" },
+      { "playerLevel": 28, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -6520,6 +6570,21 @@
     "areas": ["Farmhands Camp"],
     "conObservations": [
       { "playerLevel": 26, "con": "Trivial" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a burly henchman",
+    "slug": "a-burly-henchman",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Farmhands Camp"],
+    "drops": [
+      { "item": "Raw Human Meat" },
+      { "family": "Corroded Bronze" }
+    ],
+    "conObservations": [
+      { "playerLevel": 28, "con": "White" },
+      { "playerLevel": 28, "con": "White" }
     ],
     "lastUpdated": "2026-08-10"
   }
