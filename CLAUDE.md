@@ -721,7 +721,11 @@ drill-down. `goToMonster` picks `monsters-named`/`monsters-regular` from the mon
     giant fire beetle) — the very bright/teal-ish green, distinct from regular Green below.
   - **Green**: "You would likely emerge victorious in battle." (a hired sword) — a duller,
     "regular" green — read the actual shade, not just the phrase, if unsure which of these
-    two greens a screenshot shows.
+    two greens a screenshot shows. A second Green-tier phrase turned up 2026-08-10: "You would
+    stand a fair chance in battle." (a river pirate) — read as the duller Green shade and
+    logically slots between Trivial and Light Blue, but unlike the other entries here this one
+    wasn't separately confirmed by the user in chat, just inferred from the screenshot itself —
+    flag if a future screenshot puts this phrase at a different color.
   - **Light Blue**: "It might prove to be a difficult battle." (Blooper)
   - **Dark Blue**: unconfirmed — no test case yet.
   - **White**: "Battle would be quite risky." (Henryhaha)
