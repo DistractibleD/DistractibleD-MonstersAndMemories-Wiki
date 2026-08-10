@@ -712,22 +712,20 @@ drill-down. `goToMonster` picks `monsters-named`/`monsters-regular` from the mon
   instead of a nameplate color** (confirmed 2026-08-10) — e.g. considering a monster prints
   `"<mob> seethes at you, ready to strike -- <outcome phrase>."` (or `"seems indifferent to
   your presence --"` for a passive one) in the con's own color. This is actually *more*
-  reliable than a nameplate (rendered chat text, not a 3D-model tooltip), so read the color
-  directly from the screenshot instead of asking the user to state it — the general "con
+  reliable than a nameplate (rendered chat text, not a 3D-model tooltip) — the general "con
   color read off a screenshot isn't reliably legible" caution below is about the nameplate
-  variant, not this one. Confirmed outcome-phrase → color mapping (user-confirmed test cases
-  in parentheses), low→high:
+  variant, not this one. **The outcome phrase itself is deterministic — the same phrase always
+  means the same color** (confirmed 2026-08-10, user's own statement) — so match on the phrase
+  text alone, don't bother eyeballing the rendered color at all; a screenshot's exact shade is
+  irrelevant once the phrase is known. Confirmed outcome-phrase → color mapping (user-confirmed
+  test cases in parentheses), low→high:
   - **Trivial**: "You would almost certainly emerge victorious in battle." (a desert bat, a
-    giant fire beetle) — the very bright/teal-ish green, distinct from regular Green below.
-  - **Green**: "You would likely emerge victorious in battle." (a hired sword) — a duller,
-    "regular" green — read the actual shade, not just the phrase, if unsure which of these
-    two greens a screenshot shows. A second Green-tier phrase turned up 2026-08-10: "You would
-    stand a fair chance in battle." (a river pirate) — read as the duller Green shade and
-    logically slots between Trivial and Light Blue, but unlike the other entries here this one
-    wasn't separately confirmed by the user in chat, just inferred from the screenshot itself —
-    flag if a future screenshot puts this phrase at a different color.
+    giant fire beetle)
+  - **Green**: "You would likely emerge victorious in battle." (a hired sword)
   - **Light Blue**: "It might prove to be a difficult battle." (Blooper)
-  - **Dark Blue**: unconfirmed — no test case yet.
+  - **Dark Blue**: "You would stand a fair chance in battle." (a river pirate, 2026-08-10 — the
+    slot this phrase fills was unconfirmed before; by elimination, once every other tier already
+    had its own distinct phrase, this had to be Dark Blue's)
   - **White**: "Battle would be quite risky." (Henryhaha)
   - **Yellow**: "You would likely be defeated in battle." (a bodyguard)
   - **Red**: "Would you like to die? You would almost certainly be defeated in battle." (Iniu)

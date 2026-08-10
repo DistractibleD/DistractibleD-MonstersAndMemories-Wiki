@@ -4729,7 +4729,7 @@ function formatCoinAmount(silver, copper) {
 // known yet (fixed number vs. percentage — open question), so this never
 // invents an exact number for a non-White con — only an open bound, same
 // "N+" notation already hand-typed into levelRange before this existed.
-const CON_ORDER = ['Light Green', 'Light Blue', 'Dark Blue', 'White', 'Yellow', 'Orange', 'Red'];
+const CON_ORDER = ['Trivial', 'Green', 'Light Blue', 'Dark Blue', 'White', 'Yellow', 'Red'];
 
 // Computed at render time from a monster's raw `conObservations` log (never
 // stored back), same never-store-a-computed-value precedent as
