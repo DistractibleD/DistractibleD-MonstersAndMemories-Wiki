@@ -12,7 +12,10 @@
       { "item": "Bat Eye" },
       { "item": "Bat Tooth" }
     ],
-    "lastUpdated": "2026-07-30"
+    "conObservations": [
+      { "playerLevel": 4, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a large rat",
@@ -27,7 +30,13 @@
       { "item": "Rat Tooth" },
       { "item": "Burrow Hide Pants" },
       { "item": "Rat Foot" }
-    ]
+    ],
+    "conObservations": [
+      { "playerLevel": 4, "con": "Light Blue" },
+      { "playerLevel": 4, "con": "Light Blue" },
+      { "playerLevel": 4, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a young crypt scarab",
@@ -306,7 +315,10 @@
       { "item": "Snake Fang" },
       { "item": "Snake Egg" }
     ],
-    "lastUpdated": "2026-07-30"
+    "conObservations": [
+      { "playerLevel": 4, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a jackal pup",
@@ -319,7 +331,10 @@
       { "item": "Low-Quality Jackal Pelt" },
       { "item": "Jackal Tooth" }
     ],
-    "lastUpdated": "2026-08-06"
+    "conObservations": [
+      { "playerLevel": 4, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "the corrupted ashira",
@@ -657,7 +672,7 @@
     "slug": "an-ashira-scout",
     "image": "images/Monsters/an-ashira-scout.jpg",
     "maps": ["Night Harbor"],
-    "areas": ["North Gate"],
+    "areas": ["North Gate", "West Gate"],
     "drops": [
       { "item": "Multhele Root" },
       { "item": "Ashira Scout Necklace" },
@@ -670,25 +685,35 @@
       { "copper": 5 },
       { "copper": 4 }
     ],
-    "lastUpdated": "2026-08-06"
+    "conObservations": [
+      { "playerLevel": 4, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a dunes scarab",
     "slug": "a-dunes-scarab",
     "image": "images/Monsters/a-dunes-scarab.jpg",
     "maps": ["Night Harbor"],
-    "areas": ["North Gate"]
+    "areas": ["North Gate", "West Gate"],
+    "conObservations": [
+      { "playerLevel": 4, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a fire beetle",
     "slug": "a-fire-beetle",
     "image": "images/Monsters/a-fire-beetle.jpg",
     "maps": ["Night Harbor"],
-    "areas": ["North Gate"],
+    "areas": ["North Gate", "West Gate"],
     "drops": [
       { "item": "Fire Beetle Eye" }
     ],
-    "lastUpdated": "2026-08-05"
+    "conObservations": [
+      { "playerLevel": 4, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a curious jackal",
@@ -784,7 +809,10 @@
     "drops": [
       { "item": "Spider Silk" }
     ],
-    "lastUpdated": "2026-07-30"
+    "conObservations": [
+      { "playerLevel": 4, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a disgraced friar",
@@ -899,12 +927,14 @@
     "name": "a rattlesnake",
     "slug": "a-rattlesnake",
     "image": "images/Monsters/a-rattlesnake.jpg",
-    "maps": ["Shaded Dunes", "Sungreet Strand"],
+    "maps": ["Shaded Dunes", "Sungreet Strand", "Night Harbor"],
+    "areas": ["West Gate"],
     "drops": [
       { "item": "Snake Fang" }
     ],
     "conObservations": [
-      { "playerLevel": 24, "con": "Trivial" }
+      { "playerLevel": 24, "con": "Trivial" },
+      { "playerLevel": 4, "con": "White" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -4592,6 +4622,8 @@
   {
     "name": "a crocodile hatchling",
     "slug": "a-crocodile-hatchling",
+    "maps": ["Night Harbor"],
+    "areas": ["West Gate", "Croc Camp"],
     "drops": [
       { "item": "Crocodile Tooth" },
       { "item": "Crocodile Hide" },
@@ -4599,7 +4631,11 @@
       { "item": "Cooked Crocodile Meat" },
       { "item": "Raw Crocodile Meat" }
     ],
-    "lastUpdated": "2026-07-30"
+    "conObservations": [
+      { "playerLevel": 4, "con": "White" },
+      { "playerLevel": 4, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a wandering ghoul",
@@ -6320,6 +6356,58 @@
     "conObservations": [
       { "playerLevel": 25, "con": "White" },
       { "playerLevel": 26, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a diseased desert bat",
+    "slug": "a-diseased-desert-bat",
+    "maps": ["Night Harbor"],
+    "areas": ["West Gate"],
+    "conObservations": [
+      { "playerLevel": 4, "con": "Light Blue" },
+      { "playerLevel": 4, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a large diseased rat",
+    "slug": "a-large-diseased-rat",
+    "maps": ["Night Harbor"],
+    "areas": ["West Gate"],
+    "conObservations": [
+      { "playerLevel": 4, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a jackal",
+    "slug": "a-jackal",
+    "maps": ["Night Harbor"],
+    "areas": ["West Gate"],
+    "conObservations": [
+      { "playerLevel": 4, "con": "White" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a large desert bat",
+    "slug": "a-large-desert-bat",
+    "maps": ["Night Harbor"],
+    "areas": ["West Gate"],
+    "conObservations": [
+      { "playerLevel": 4, "con": "Light Blue" },
+      { "playerLevel": 4, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a wharf rat",
+    "slug": "a-wharf-rat",
+    "maps": ["Night Harbor"],
+    "areas": ["West Gate"],
+    "conObservations": [
+      { "playerLevel": 4, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
   }

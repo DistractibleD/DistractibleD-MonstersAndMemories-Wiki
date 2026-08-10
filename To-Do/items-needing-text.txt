@@ -490,3 +490,14 @@ existing monster's drops so this was a data update, not a new discovery: Protect
 Bloodbound, Grimtide Sanctum) went from WIS+3/HP+15 to WIS+5/HP+25/Mana+15 (Mana previously
 absent entirely). Both changes read as a plausible rebalance rather than a misread, but
 flagging in case a future card disagrees again.
+
+2026-08-10, images/inbox batch (starter-gear screenshots): Humble Note's `readText` opens
+"Dear Ciszil," which reads like a class-quest starter note (its flavor text points to an
+Elementalist trainer, "School of the Fourfold Path") -- recorded the name verbatim since
+that's what the screenshot showed, but it's worth confirming whether "Ciszil" is a fixed
+NPC-authored name or a placeholder the game fills in with the reading character's own name
+(some MMOs template starter-quest letters that way). If it's templated, the recorded text
+technically only matches a character actually named Ciszil. No Class/Race line appeared on
+the card either way, so both stayed unset rather than guessed -- this is presumably an
+Elementalist-only starter item (unlike the Trainee's.../Well-Worn... gear in the same batch,
+which the user confirmed every new character starts with regardless of class/race).
