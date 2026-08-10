@@ -13,7 +13,8 @@
       { "item": "Bat Tooth" }
     ],
     "conObservations": [
-      { "playerLevel": 4, "con": "Light Blue" }
+      { "playerLevel": 4, "con": "Light Blue" },
+      { "playerLevel": 1, "con": "White" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -34,7 +35,8 @@
     "conObservations": [
       { "playerLevel": 4, "con": "Light Blue" },
       { "playerLevel": 4, "con": "Light Blue" },
-      { "playerLevel": 4, "con": "Light Blue" }
+      { "playerLevel": 4, "con": "Light Blue" },
+      { "playerLevel": 1, "con": "White" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -107,7 +109,10 @@
       { "copper": 1 },
       { "copper": 2 }
     ],
-    "lastUpdated": "2026-08-06"
+    "conObservations": [
+      { "playerLevel": 1, "con": "White" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a Bloodynose quarreler",
@@ -198,14 +203,29 @@
       { "item": "Corroded Bronze Tower Shield" },
       { "item": "Corroded Bronze Trident" },
       { "item": "Corroded Bronze War Lance" },
-      { "item": "Corroded Bronze Warhammer" }
+      { "item": "Corroded Bronze Warhammer" },
+      { "item": "Hide Scraps" }
     ],
     "coinDrops": [
-      { "silver": 2, "copper": 13 }
+      { "silver": 2, "copper": 13 },
+      { "silver": 2, "copper": 15 },
+      { "silver": 1, "copper": 78 },
+      { "silver": 1, "copper": 94 }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "White" },
-      { "playerLevel": 25, "con": "White" }
+      { "playerLevel": 25, "con": "White" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -316,7 +336,8 @@
       { "item": "Snake Egg" }
     ],
     "conObservations": [
-      { "playerLevel": 4, "con": "Light Blue" }
+      { "playerLevel": 4, "con": "Light Blue" },
+      { "playerLevel": 1, "con": "White" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -324,15 +345,17 @@
     "name": "a jackal pup",
     "slug": "a-jackal-pup",
     "image": "images/Monsters/a-jackal-pup.jpg",
-    "maps": ["Night Harbor"],
-    "areas": ["West Gate", "North Gate"],
+    "maps": ["Night Harbor", "Sungreet Strand"],
+    "areas": ["West Gate", "North Gate", "Farmhands Camp"],
     "drops": [
       { "item": "Raw Jackal Meat" },
       { "item": "Low-Quality Jackal Pelt" },
       { "item": "Jackal Tooth" }
     ],
     "conObservations": [
-      { "playerLevel": 4, "con": "Light Blue" }
+      { "playerLevel": 4, "con": "Light Blue" },
+      { "playerLevel": 1, "con": "White" },
+      { "playerLevel": 26, "con": "Trivial" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -615,9 +638,15 @@
     "slug": "a-cunning-privateer",
     "named": true,
     "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
     "drops": [
+      { "family": "Tattered Hide" },
       { "item": "Dirty Pirate Earring" }
-    ]
+    ],
+    "coinDrops": [
+      { "copper": 86 }
+    ],
+    "lastUpdated": "2026-08-07"
   },
   {
     "name": "Grubbfist",
@@ -686,7 +715,8 @@
       { "copper": 4 }
     ],
     "conObservations": [
-      { "playerLevel": 4, "con": "Light Blue" }
+      { "playerLevel": 4, "con": "Light Blue" },
+      { "playerLevel": 1, "con": "Yellow" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -711,7 +741,8 @@
       { "item": "Fire Beetle Eye" }
     ],
     "conObservations": [
-      { "playerLevel": 4, "con": "Light Blue" }
+      { "playerLevel": 4, "con": "Light Blue" },
+      { "playerLevel": 1, "con": "Yellow" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -810,7 +841,8 @@
       { "item": "Spider Silk" }
     ],
     "conObservations": [
-      { "playerLevel": 4, "con": "Light Blue" }
+      { "playerLevel": 4, "con": "Light Blue" },
+      { "playerLevel": 1, "con": "Yellow" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -1108,7 +1140,8 @@
     "maps": ["Night Harbor", "Sungreet Strand"],
     "areas": ["West Gate"],
     "conObservations": [
-      { "playerLevel": 24, "con": "Trivial" }
+      { "playerLevel": 24, "con": "Trivial" },
+      { "playerLevel": 1, "con": "Red" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -1181,7 +1214,12 @@
     "name": "a hired thug",
     "slug": "a-hired-thug",
     "image": "images/Monsters/a-hired-thug.jpg",
-    "maps": ["Sungreet Strand"]
+    "maps": ["Sungreet Strand"],
+    "areas": ["Farmhands Camp"],
+    "conObservations": [
+      { "playerLevel": 26, "con": "Trivial" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a water elementaling",
@@ -6109,20 +6147,6 @@
     "lastUpdated": "2026-08-06"
   },
   {
-    "name": "a cunning privateer",
-    "slug": "a-cunning-privateer",
-    "maps": ["Night Harbor"],
-    "areas": ["The Bends"],
-    "drops": [
-      { "family": "Tattered Hide" },
-      { "item": "Dirty Pirate Earring" }
-    ],
-    "coinDrops": [
-      { "copper": 86 }
-    ],
-    "lastUpdated": "2026-08-07"
-  },
-  {
     "name": "a scoundrel",
     "slug": "a-scoundrel",
     "maps": ["Night Harbor"],
@@ -6144,21 +6168,31 @@
   {
     "name": "a river pirate",
     "slug": "a-river-pirate",
-    "maps": ["Night Harbor"],
-    "areas": ["The Bends"],
+    "maps": ["Night Harbor", "Sungreet Strand"],
+    "areas": ["The Bends", "Farmhands Camp"],
     "drops": [
       { "item": "Onion" },
       { "family": "Corroded Bronze" },
       { "item": "Hide Scraps" },
-      { "item": "Raw Human Meat" }
+      { "item": "Raw Human Meat" },
+      { "item": "Bronze Scraps" },
+      { "item": "Tomato" },
+      { "item": "Wool Scraps" }
     ],
     "coinDrops": [
       { "silver": 1, "copper": 10 },
       { "copper": 89 },
       { "silver": 1, "copper": 10 },
-      { "silver": 1, "copper": 1 }
+      { "silver": 1, "copper": 1 },
+      { "silver": 1, "copper": 87 },
+      { "silver": 1, "copper": 76 },
+      { "silver": 1, "copper": 56 }
     ],
-    "lastUpdated": "2026-08-07"
+    "conObservations": [
+      { "playerLevel": 26, "con": "Green" },
+      { "playerLevel": 26, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a sea witch",
@@ -6210,18 +6244,31 @@
     "areas": ["Farmhands Camp"],
     "drops": [
       { "item": "Raw Human Meat" },
-      { "item": "Bronze Scraps" }
+      { "item": "Bronze Scraps" },
+      { "item": "Onion" },
+      { "family": "Corroded Bronze" },
+      { "family": "Tattered Hide" }
     ],
     "coinDrops": [
       { "silver": 2, "copper": 63 },
       { "silver": 2, "copper": 15 },
-      { "silver": 2, "copper": 49 }
+      { "silver": 2, "copper": 49 },
+      { "silver": 1, "copper": 96 },
+      { "silver": 1, "copper": 56 }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "Yellow" },
       { "playerLevel": 25, "con": "White" },
       { "playerLevel": 25, "con": "Yellow" },
-      { "playerLevel": 26, "con": "White" }
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "Yellow" },
+      { "playerLevel": 26, "con": "Yellow" },
+      { "playerLevel": 26, "con": "Yellow" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -6264,16 +6311,27 @@
     "areas": ["Farmhands Camp"],
     "drops": [
       { "item": "Celery" },
-      { "item": "Cheese" }
+      { "item": "Cheese" },
+      { "item": "Worn Fine Wood Buckler" },
+      { "family": "Tattered Wool" }
     ],
     "coinDrops": [
       { "silver": 2, "copper": 63 },
-      { "silver": 1, "copper": 96 }
+      { "silver": 1, "copper": 96 },
+      { "silver": 2, "copper": 40 }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "Yellow" },
       { "playerLevel": 25, "con": "Yellow" },
-      { "playerLevel": 25, "con": "Yellow" }
+      { "playerLevel": 25, "con": "Yellow" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "White" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -6293,6 +6351,8 @@
     "conObservations": [
       { "playerLevel": 25, "con": "Yellow" },
       { "playerLevel": 25, "con": "Yellow" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" },
       { "playerLevel": 26, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
@@ -6306,18 +6366,29 @@
       { "item": "Mushroom" },
       { "item": "Tattered Hide Cloak" },
       { "item": "Raw Human Meat" },
-      { "item": "Corroded Bronze Plate Visor" },
-      { "item": "Bronze Scraps" }
+      { "item": "Bronze Scraps" },
+      { "item": "Celery" },
+      { "item": "Cabbage" },
+      { "item": "Wool Scraps" },
+      { "item": "Worn Fine Wood Bow" },
+      { "family": "Corroded Bronze" }
     ],
     "coinDrops": [
       { "silver": 1, "copper": 73 },
       { "silver": 2, "copper": 51 },
       { "silver": 2, "copper": 56 },
-      { "silver": 1, "copper": 93 }
+      { "silver": 1, "copper": 93 },
+      { "silver": 2, "copper": 13 },
+      { "silver": 2, "copper": 52 },
+      { "silver": 2, "copper": 60 }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "Yellow" },
-      { "playerLevel": 25, "con": "Yellow" }
+      { "playerLevel": 25, "con": "Yellow" },
+      { "playerLevel": 26, "con": "Yellow" },
+      { "playerLevel": 26, "con": "Yellow" },
+      { "playerLevel": 26, "con": "Yellow" },
+      { "playerLevel": 26, "con": "Yellow" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -6327,19 +6398,25 @@
     "maps": ["Sungreet Strand"],
     "areas": ["Farmhands Camp"],
     "drops": [
-      { "item": "Corroded Bronze Longsword" },
       { "item": "Garlic" },
-      { "item": "Corroded Bronze Plate Visor" },
       { "item": "Raw Human Meat" },
-      { "item": "Lemon" }
+      { "item": "Lemon" },
+      { "item": "Flawed Peridot" },
+      { "family": "Corroded Bronze" },
+      { "family": "Tattered Hide" }
     ],
     "coinDrops": [
       { "silver": 1, "copper": 89 },
-      { "silver": 1, "copper": 62 }
+      { "silver": 1, "copper": 62 },
+      { "silver": 2, "copper": 9 }
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "White" },
       { "playerLevel": 25, "con": "White" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" },
       { "playerLevel": 26, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
@@ -6355,6 +6432,12 @@
     ],
     "conObservations": [
       { "playerLevel": 25, "con": "White" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "White" },
+      { "playerLevel": 26, "con": "Light Blue" },
+      { "playerLevel": 26, "con": "Light Blue" },
       { "playerLevel": 26, "con": "Light Blue" }
     ],
     "lastUpdated": "2026-08-10"
@@ -6408,6 +6491,16 @@
     "areas": ["West Gate"],
     "conObservations": [
       { "playerLevel": 4, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a hired scout",
+    "slug": "a-hired-scout",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Farmhands Camp"],
+    "conObservations": [
+      { "playerLevel": 26, "con": "Trivial" }
     ],
     "lastUpdated": "2026-08-10"
   }

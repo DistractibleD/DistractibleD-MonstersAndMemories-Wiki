@@ -19329,14 +19329,6 @@
     "size": "Small"
   },
   {
-    "name": "Potato",
-    "slug": "potato",
-    "lastUpdated": "2026-08-05",
-    "type": "Food",
-    "tags": [],
-    "needsInfo": true
-  },
-  {
     "name": "Celery",
     "slug": "celery",
     "lastUpdated": "2026-08-05",
@@ -19945,19 +19937,6 @@
     "lastUpdated": "2026-08-10"
   },
   {
-    "name": "Well-Worn Cloth Shirt",
-    "slug": "well-worn-cloth-shirt",
-    "type": "Armor",
-    "tags": ["NODROP"],
-    "slot": "Shirt",
-    "description": "The shirt you arrived in.",
-    "weight": 2.0,
-    "size": "Medium",
-    "classes": ["ALL"],
-    "race": ["ALL"],
-    "lastUpdated": "2026-08-10"
-  },
-  {
     "name": "Well-Worn Cloth Trousers",
     "slug": "well-worn-cloth-trousers",
     "type": "Armor",
@@ -19981,5 +19960,31 @@
     "weight": 0.1,
     "size": "Small",
     "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Tattered Wool Gorget",
+    "slug": "tattered-wool-gorget",
+    "lastUpdated": "2026-08-10",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Neck",
+    "needsInfo": true
+  },
+  {
+    "name": "Tattered Hide Bracer",
+    "slug": "tattered-hide-bracer",
+    "lastUpdated": "2026-08-10",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true
+  },
+  {
+    "name": "Hide Scraps",
+    "slug": "hide-scraps",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
   }
 ]
