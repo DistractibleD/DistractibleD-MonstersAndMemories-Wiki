@@ -19859,5 +19859,21 @@
     "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
     "race": ["ALL"],
     "lastUpdated": "2026-08-08"
+  },
+  {
+    "name": "Giant Fire Beetle Eye",
+    "slug": "giant-fire-beetle-eye",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
+  },
+  {
+    "name": "Giant Fire Beetle Legs",
+    "slug": "giant-fire-beetle-legs",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true
   }
 ]

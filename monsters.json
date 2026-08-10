@@ -144,7 +144,10 @@
     "slug": "a-sly-farmhand",
     "image": "images/Monsters/a-sly-farmhand.jpg",
     "maps": ["Sungreet Strand"],
+    "areas": ["Farmhands Camp"],
     "drops": [
+      { "item": "Bronze Scraps" },
+      { "item": "Raw Human Meat" },
       { "item": "Corroded Bronze Axe" },
       { "item": "Corroded Bronze Battle Axe" },
       { "item": "Corroded Bronze Chain Boots" },
@@ -188,7 +191,14 @@
       { "item": "Corroded Bronze War Lance" },
       { "item": "Corroded Bronze Warhammer" }
     ],
-    "lastUpdated": "2026-07-30"
+    "coinDrops": [
+      { "silver": 2, "copper": 13 }
+    ],
+    "conObservations": [
+      { "playerLevel": 25, "con": "White" },
+      { "playerLevel": 25, "con": "White" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a bone carver",
@@ -1095,11 +1105,14 @@
     "slug": "a-giant-fire-beetle",
     "image": "images/Monsters/a-giant-fire-beetle.jpg",
     "maps": ["Sungreet Strand"],
+    "areas": ["Farmhands Camp"],
     "drops": [
       { "item": "Giant Fire Beetle Carapace" },
-      { "item": "Fire Beetle Eye" }
+      { "item": "Fire Beetle Eye" },
+      { "item": "Giant Fire Beetle Eye" },
+      { "item": "Giant Fire Beetle Legs" }
     ],
-    "lastUpdated": "2026-08-05"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a ghost",
@@ -6157,13 +6170,24 @@
   {
     "name": "a hired tracker",
     "slug": "a-hired-tracker",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Farmhands Camp"],
     "drops": [
-      { "item": "Raw Human Meat" }
+      { "item": "Raw Human Meat" },
+      { "item": "Bronze Scraps" }
     ],
     "coinDrops": [
-      { "silver": 2, "copper": 63 }
+      { "silver": 2, "copper": 63 },
+      { "silver": 2, "copper": 15 },
+      { "silver": 2, "copper": 49 }
     ],
-    "lastUpdated": "2026-08-07"
+    "conObservations": [
+      { "playerLevel": 25, "con": "Yellow" },
+      { "playerLevel": 25, "con": "White" },
+      { "playerLevel": 25, "con": "Yellow" },
+      { "playerLevel": 26, "con": "White" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "an old elven skeleton",
@@ -6196,5 +6220,107 @@
       { "copper": 58 }
     ],
     "lastUpdated": "2026-08-08"
+  },
+  {
+    "name": "a bodyguard",
+    "slug": "a-bodyguard",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Farmhands Camp"],
+    "drops": [
+      { "item": "Celery" },
+      { "item": "Cheese" }
+    ],
+    "coinDrops": [
+      { "silver": 2, "copper": 63 },
+      { "silver": 1, "copper": 96 }
+    ],
+    "conObservations": [
+      { "playerLevel": 25, "con": "Yellow" },
+      { "playerLevel": 25, "con": "Yellow" },
+      { "playerLevel": 25, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a corrupt clergyman",
+    "slug": "a-corrupt-clergyman",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Farmhands Camp"],
+    "drops": [
+      { "item": "Bronze Scraps" },
+      { "item": "Tattered Wool Cape" }
+    ],
+    "coinDrops": [
+      { "silver": 2 },
+      { "silver": 1, "copper": 82 }
+    ],
+    "conObservations": [
+      { "playerLevel": 25, "con": "Yellow" },
+      { "playerLevel": 25, "con": "Yellow" },
+      { "playerLevel": 26, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a henchman",
+    "slug": "a-henchman",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Farmhands Camp"],
+    "drops": [
+      { "item": "Mushroom" },
+      { "item": "Tattered Hide Cloak" },
+      { "item": "Raw Human Meat" },
+      { "item": "Corroded Bronze Plate Visor" },
+      { "item": "Bronze Scraps" }
+    ],
+    "coinDrops": [
+      { "silver": 1, "copper": 73 },
+      { "silver": 2, "copper": 51 },
+      { "silver": 2, "copper": 56 },
+      { "silver": 1, "copper": 93 }
+    ],
+    "conObservations": [
+      { "playerLevel": 25, "con": "Yellow" },
+      { "playerLevel": 25, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a gruff farmhand",
+    "slug": "a-gruff-farmhand",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Farmhands Camp"],
+    "drops": [
+      { "item": "Corroded Bronze Longsword" },
+      { "item": "Garlic" },
+      { "item": "Corroded Bronze Plate Visor" },
+      { "item": "Raw Human Meat" },
+      { "item": "Lemon" }
+    ],
+    "coinDrops": [
+      { "silver": 1, "copper": 89 },
+      { "silver": 1, "copper": 62 }
+    ],
+    "conObservations": [
+      { "playerLevel": 25, "con": "White" },
+      { "playerLevel": 25, "con": "White" },
+      { "playerLevel": 26, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a dismal cur",
+    "slug": "a-dismal-cur",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Farmhands Camp"],
+    "drops": [
+      { "item": "Wolf Blood" },
+      { "item": "Wolf Tooth" }
+    ],
+    "conObservations": [
+      { "playerLevel": 25, "con": "White" },
+      { "playerLevel": 26, "con": "Light Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
   }
 ]
