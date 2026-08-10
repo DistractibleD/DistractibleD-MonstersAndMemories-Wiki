@@ -4401,6 +4401,7 @@ function renderMonsterGridCards(grid, monsters) {
     const dropCount = groupedDrops.families.length + groupedDrops.singles.length;
     const dropSummary = dropCount ? `${dropCount} drop${dropCount === 1 ? '' : 's'}` : 'No drops yet';
     const area = (monster.areas && monster.areas.length) ? monster.areas.join(', ') : '';
+    const levelEst = estimateMonsterLevel(monster);
     return `
       <div class="monster-grid-card" data-slug="${escapeAttr(monster.slug)}">
         <div class="monster-grid-card-photo has-img${monster.image ? '' : ' is-placeholder'}">
@@ -4409,6 +4410,7 @@ function renderMonsterGridCards(grid, monsters) {
         <div class="monster-grid-card-body">
           <div class="monster-grid-card-name item-name-hover monster-name-hover" data-slug="${escapeAttr(monster.slug)}">${escapeAttr(monster.name)}</div>
           ${monster.needsInfo ? '<span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}
+          ${levelEst ? `<div class="monster-grid-card-level">Level ${escapeAttr(levelEst.display)}</div>` : ''}
           ${area ? `<div class="monster-grid-card-area">${escapeAttr(area)}</div>` : ''}
           <div class="monster-grid-card-drops">${escapeAttr(dropSummary)}</div>
         </div>
@@ -4715,6 +4717,56 @@ function formatCoinAmount(silver, copper) {
   return parts.length ? parts.join(', ') : '0 copper';
 }
 
+// Con color reflects the gap between a monster's actual level and the
+// player's own level. White = same level (confirmed), full order low->high:
+// Light Green, Light Blue, Dark Blue, White, Yellow, Orange, Red (see
+// CLAUDE.md's "Con color reference"). The exact per-color level gap isn't
+// known yet (fixed number vs. percentage — open question), so this never
+// invents an exact number for a non-White con — only an open bound, same
+// "N+" notation already hand-typed into levelRange before this existed.
+const CON_ORDER = ['Light Green', 'Light Blue', 'Dark Blue', 'White', 'Yellow', 'Orange', 'Red'];
+
+// Computed at render time from a monster's raw `conObservations` log (never
+// stored back), same never-store-a-computed-value precedent as
+// estimateRecipeSkill/averageCoinDrop. Falls back to the hand-typed
+// `levelRange` string when there's no observation data yet.
+function estimateMonsterLevel(monster) {
+  const obs = monster.conObservations || [];
+  if (!obs.length) {
+    return monster.levelRange ? { display: monster.levelRange, confirmed: false } : null;
+  }
+
+  const whiteIdx = CON_ORDER.indexOf('White');
+  const exactLevels = [];
+  let lowerBound = null; // monster level confirmed above this player level
+  let upperBound = null; // monster level confirmed below this player level
+
+  obs.forEach(o => {
+    const idx = CON_ORDER.indexOf(o.con);
+    if (idx === -1) return;
+    if (idx === whiteIdx) {
+      exactLevels.push(o.playerLevel);
+    } else if (idx < whiteIdx) {
+      upperBound = upperBound == null ? o.playerLevel : Math.min(upperBound, o.playerLevel);
+    } else {
+      lowerBound = lowerBound == null ? o.playerLevel : Math.max(lowerBound, o.playerLevel);
+    }
+  });
+
+  if (exactLevels.length) {
+    const min = Math.min(...exactLevels);
+    const max = Math.max(...exactLevels);
+    return { display: min === max ? `${min}` : `${min}-${max}`, confirmed: true };
+  }
+
+  if (lowerBound != null && upperBound != null && lowerBound + 1 <= upperBound - 1) {
+    return { display: `~${lowerBound + 1}-${upperBound - 1}`, confirmed: false };
+  }
+  if (lowerBound != null) return { display: `${lowerBound + 1}+`, confirmed: false };
+  if (upperBound != null) return { display: `${upperBound - 1}-`, confirmed: false };
+  return null;
+}
+
 // Shared "no screenshot yet" artwork (2026-08-06, site owner's own sketches)
 // shown in place of a monster's real picture — named vs. regular each get
 // their own piece, matching the "Named/boss only" picture policy (a regular
@@ -4732,6 +4784,7 @@ function renderMonsterCardHTML(monster, opts = {}) {
   const related = monster.relatedMonsters || [];
   const coinAvg = averageCoinDrop(monster);
   const groupedDrops = groupMonsterDrops(drops);
+  const levelEst = estimateMonsterLevel(monster);
 
   return `
     <div class="monster-card">
@@ -4744,6 +4797,7 @@ function renderMonsterCardHTML(monster, opts = {}) {
       <div class="monster-card-body">
         <h2 class="monster-card-name">${escapeAttr(monster.name)}</h2>
         ${formatLastUpdated(monster.lastUpdated)}
+        ${levelEst ? `<div class="monster-card-field"><span class="item-card-field-label">Level</span><span>${escapeAttr(levelEst.display)}${levelEst.confirmed ? '' : ' (estimated)'}</span></div>` : ''}
         ${(monster.areas && monster.areas.length) ? `<div class="monster-card-field"><span class="item-card-field-label">Area</span><span>${escapeAttr(monster.areas.join(', '))}</span></div>` : ''}
         ${related.length ? `
         <div class="monster-card-field">

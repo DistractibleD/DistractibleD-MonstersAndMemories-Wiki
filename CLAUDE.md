@@ -700,10 +700,38 @@ drill-down. `goToMonster` picks `monsters-named`/`monsters-regular` from the mon
   **Full con-color order confirmed:** low→high, Light Green, Light Blue, Dark Blue, White,
   Yellow, Orange, Red (same 7 as crafting difficulty, Light Green = trivial end). Confirmed
   meanings: **Light Green** trivial (no XP); **White** same level (exact level); **Red** much
-  higher, near-impossible to solo. Other colors' exact level-difference unknown — a Yellow
-  con to a known-level character records as `"N+"` (open lower bound), not a guessed number.
-  **Display currently hidden** (until a more reliable conning method exists) — **keep
-  recording in monsters.json as before**, display-only removal.
+  higher, near-impossible to solo. Other colors' exact level-difference unknown (fixed number
+  vs. percentage — open question, not something to guess at).
+- **`conObservations`** (2026-08-10) — raw data feeding a real level-estimation system, same
+  append-only-log shape as `coinDrops`: array of `{ "playerLevel": N, "con": "White" }`, one
+  entry per screenshot+stated-con+stated-player-level the user reports. **Workflow:** user
+  posts a monster screenshot, states its con color and their own current level in chat (con
+  color read off the game's own nameplate/tooltip isn't reliably legible from a screenshot,
+  so always take the user's stated color, same source-of-truth rule as everything else) —
+  append one `conObservations` entry to that monster (create the array if it doesn't exist
+  yet) and bump `lastUpdated`. Never overwritten, never averaged/merged by hand —
+  `estimateMonsterLevel(monster)` (`script.js`) computes the display value at render time,
+  same never-store-a-computed-value precedent as `estimateRecipeSkill`/`averageCoinDrop`:
+  - Any `White` observation is an exact confirmed level (multiple different values across
+    observations of the same monster type → confirmed range, e.g. `"12-14"`).
+  - Absent White, a below-White con (Light Green/Light Blue/Dark Blue) yields an open upper
+    bound (`"N-"`, monster confirmed below `N`); an above-White con (Yellow/Orange/Red)
+    yields an open lower bound (`"N+"`) — same notation already hand-typed into pre-existing
+    `levelRange` values (`"8+"`, `"9+"`) before this system existed. Having both an upper and
+    a lower bound narrows to `"~N-M"` (tilde marks it estimated, not confirmed — same
+    convention as `estimateRecipeSkill`'s `~N (estimated)`; card also appends the literal
+    "(estimated)" suffix whenever the value isn't White-confirmed).
+  - No `conObservations` yet → falls back to displaying the hand-typed `levelRange` string
+    as-is, so old entries keep working unchanged.
+  - **Card display re-enabled** (was hidden 2026-07 "until a more reliable conning method
+    exists" — this is that method): `renderMonsterCardHTML` (full card, "Level" field) and
+    `renderMonsterGridCards` (grid preview, compact "Level N" line) both call
+    `estimateMonsterLevel`.
+  - **The actual level-gap-per-con-color is still unknown** — the bound math above never
+    needs it, deliberately conservative (only ever narrows via confirmed bounds, never
+    assumes a gap size). If/when enough data accumulates to see a real pattern (e.g. Dark
+    Blue consistently ~2 levels below White), that's a future refinement to
+    `estimateMonsterLevel` — don't hardcode a gap from a single data point.
 - `drops` — array of `{ "item": "Name As Shown" }`, same shape/dynamic-linking as a recipe's
   `components` (`findItemByName`/`goToItem`, clickable if a match exists). Sourced from a
   loot-window screenshot + item card per icon.

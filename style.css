@@ -1146,6 +1146,11 @@ body:not(.site-entered) .sidebar {
 .monster-grid-card:hover .monster-grid-card-name {
   color: var(--accent);
 }
+.monster-grid-card-level {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  margin-bottom: 2px;
+}
 .monster-grid-card-area {
   color: var(--text-dim);
   font-size: 0.78rem;
