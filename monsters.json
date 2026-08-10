@@ -1378,7 +1378,10 @@
       { "item": "Corroded Bronze War Lance" },
       { "item": "Corroded Bronze Warhammer" }
     ],
-    "lastUpdated": "2026-07-30"
+    "conObservations": [
+      { "playerLevel": 28, "con": "White" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a Dustrend foot soldier",
@@ -1430,7 +1433,18 @@
       { "item": "Corroded Bronze War Lance" },
       { "item": "Corroded Bronze Warhammer" }
     ],
-    "lastUpdated": "2026-07-30"
+    "conObservations": [
+      { "playerLevel": 28, "con": "White" },
+      { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 28, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a skeletal priest",
@@ -1991,8 +2005,14 @@
   {
     "name": "a Dustrend legionary",
     "slug": "a-dustrend-legionary",
-    "lastUpdated": "2026-07-19",
-    "drops": [{ "item": "Rusty Iron Plate Collar" }]
+    "maps": ["Vale of Zintar"],
+    "drops": [{ "item": "Rusty Iron Plate Collar" }],
+    "conObservations": [
+      { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 28, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Librarian Gallier",
@@ -6637,6 +6657,62 @@
     "maps": ["Sungreet Strand"],
     "conObservations": [
       { "playerLevel": 28, "con": "Red" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a Zintari asp",
+    "slug": "a-zintari-asp",
+    "maps": ["Vale of Zintar"],
+    "conObservations": [
+      { "playerLevel": 28, "con": "Dark Blue" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a giant tomb burrower",
+    "slug": "a-giant-tomb-burrower",
+    "maps": ["Vale of Zintar"],
+    "conObservations": [
+      { "playerLevel": 28, "con": "Red" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Obsib",
+    "slug": "obsib",
+    "named": true,
+    "maps": ["Vale of Zintar"],
+    "conObservations": [
+      { "playerLevel": 28, "con": "White" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "an elder tomb burrower",
+    "slug": "an-elder-tomb-burrower",
+    "maps": ["Vale of Zintar"],
+    "conObservations": [
+      { "playerLevel": 28, "con": "Red" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a Dustrend patroller",
+    "slug": "a-dustrend-patroller",
+    "maps": ["Vale of Zintar"],
+    "conObservations": [
+      { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 28, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a dire wolf patroller",
+    "slug": "a-dire-wolf-patroller",
+    "maps": ["Vale of Zintar"],
+    "conObservations": [
+      { "playerLevel": 28, "con": "Yellow" }
     ],
     "lastUpdated": "2026-08-10"
   }
