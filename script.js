@@ -1340,6 +1340,9 @@ const ICON_DEFS = {
   itemdb: `<path d="M4 9 L20 9 L20 19 C20 20.1 19.1 21 18 21 L6 21 C4.9 21 4 20.1 4 19 Z"/><path fill-rule="evenodd" d="M4 9 C4 6 6.5 4 12 4 C17.5 4 20 6 20 9 Z M7 9 C7 7.2 8.5 6.3 12 6.3 C15.5 6.3 17 7.2 17 9 Z"/><rect x="10.7" y="12" width="2.6" height="2.6" rx="0.6"/>`,
   gatheringicon: `<path d="M5 10 L19 10 L17 20 C16.9 20.6 16.3 21 15.6 21 L8.4 21 C7.7 21 7.1 20.6 7 20 Z"/><path fill-rule="evenodd" d="M8.3 10 C8.3 6.5 9.9 4.3 12 4.3 C14.1 4.3 15.7 6.5 15.7 10 L14.3 10 C14.3 7.3 13.2 5.7 12 5.7 C10.8 5.7 9.7 7.3 9.7 10 Z"/><rect x="7.6" y="13" width="8.8" height="1" rx="0.4"/><rect x="7.9" y="16" width="8.2" height="1" rx="0.4"/>`,
   submiticon: `<path fill-rule="evenodd" d="M3 8 C3 6.9 3.9 6 5 6 L8 6 L9 4 L15 4 L16 6 L19 6 C20.1 6 21 6.9 21 8 L21 18 C21 19.1 20.1 20 19 20 L5 20 C3.9 20 3 19.1 3 18 Z M12 8.5 A5 5 0 1 0 12.01 8.5 Z M12 10.3 A3.2 3.2 0 1 1 11.99 10.3 Z"/><circle cx="18" cy="8.5" r="0.7"/>`,
+  // New Player Guide nav icon (2026-08-10) — an open book, flat-silhouette
+  // style matching everything else (two splayed "pages" plus a center spine).
+  guideicon: `<path d="M12 6.5 C9.5 5 6 4.3 3.3 4.8 L3.3 17.3 C6 16.8 9.5 17.5 12 19 Z"/><path d="M12 6.5 C14.5 5 18 4.3 20.7 4.8 L20.7 17.3 C18 16.8 14.5 17.5 12 19 Z"/><rect x="11.3" y="6" width="1.4" height="12.5"/>`,
 };
 
 // Background circle color per icon key — approximated from the reference
@@ -1376,6 +1379,7 @@ const ICON_BG = {
   links: '#455060', itemdb: '#7a5a2a', gatheringicon: '#455a2e', submiticon: '#3a3a45',
   levelingicon: '#2e6b3f',
   tradeskillgroupicon: '#5a4a2e',
+  guideicon: '#3f5f45',
 };
 
 // Maps a tradeskill name (tradeskills.json) to one of the icons above — used
@@ -1443,6 +1447,7 @@ const TRADESKILL_ICON = {
 // their own tradeskill card and in "Most Visited" via TRADESKILL_ICON,
 // which is keyed by tradeskill name rather than page file.
 const NAV_ICON = {
+  'new-player-guide.md': 'guideicon',
   'useful-links.md': 'links',
   items: 'itemdb',
   maps: 'navigation',

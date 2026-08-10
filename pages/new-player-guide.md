@@ -3,13 +3,6 @@
 A quick primer for brand-new adventurers in Aêthoril — enough to get you moving, fighting,
 and questing. (Condensed from the [official new player guide](https://monstersandmemories.com/new-player-guide) — see that page for pictures and animated examples.)
 
-## Chat
-
-- Press **Enter** to open the chat bar, type your message, then **Enter** again to send.
-- Regular chat ("say") is local — only nearby players see it.
-- Type `/ooc` before a message to reach the whole zone out-of-character. This is the best
-  channel for questions or finding a group.
-
 ## Inventory & Gear
 
 - Press **I** to open your inventory — stats on the left, bags and equipment on the right.
@@ -47,6 +40,8 @@ and questing. (Condensed from the [official new player guide](https://monstersan
 - To hand over a quest item, left-click it to pick it up, then left-click the NPC.
 - No quest log exists — quests are discovered and tracked entirely through conversation, so
   the Journal is your best reference.
+- Some quests require MUD commands instead, like `/pick up item` or similar. For spoilers,
+  see the [Useful Links](#useful-links.md) page.
 
 ## Grouping Up
 
@@ -58,7 +53,8 @@ and questing. (Condensed from the [official new player guide](https://monstersan
 
 ## Death
 
-- Dying drops your items onto your corpse and sends you back to your bind point.
+- Dying drops your items onto your corpse and sends you back to your bind point. Some
+  classes can bind you to a new location.
 - Return to your corpse to loot it back, or get help from another player (some spells/classes
   can locate or resurrect corpses, restoring some lost experience).
 - `/consent <name>` lets a trusted player drag your corpse for you; `/deny` revokes it.
@@ -66,6 +62,8 @@ and questing. (Condensed from the [official new player guide](https://monstersan
 
 ## Resting & States
 
+- Press **X** to sit. Sitting increases your health and mana regeneration. Some classes
+  learn the Meditation skill, which further increases mana regeneration while sitting.
 - Sitting near a campfire or inside an inn puts you in a **Rested** state — worth a 15%
   experience bonus once fully built up.
 - **Hungry/Thirsty** slows health and mana regen — keep food and drink stocked.
@@ -90,6 +88,7 @@ and questing. (Condensed from the [official new player guide](https://monstersan
 |---|---|
 | W A S D | Move |
 | Space | Jump |
+| X | Sit |
 | Tab / Shift+Tab | Target nearest enemy / player |
 | C | Consider target |
 | H | Hail NPC |
