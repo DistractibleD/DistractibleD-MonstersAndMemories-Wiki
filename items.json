@@ -7283,72 +7283,146 @@
   {
     "name": "Chipped Black Pearl",
     "slug": "chipped-black-pearl",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Black Pearl",
+    "slug": "black-pearl",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Carnelian",
+    "slug": "carnelian",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Hematite",
+    "slug": "hematite",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Fire Emerald",
+    "slug": "fire-emerald",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Imperfect Amber",
+    "slug": "imperfect-amber",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
+  },
+  {
+    "name": "Chipped Blue Diamond",
+    "slug": "chipped-blue-diamond",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Black Sapphire",
     "slug": "chipped-black-sapphire",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Carnelian",
     "slug": "chipped-carnelian",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Cat's Eye Agate",
     "slug": "chipped-cats-eye-agate",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Diamond",
     "slug": "chipped-diamond",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Emerald",
     "slug": "chipped-emerald",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Fire Emerald",
     "slug": "chipped-fire-emerald",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Fire Opal",
     "slug": "chipped-fire-opal",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Hematite",
     "slug": "chipped-hematite",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Jacinth",
     "slug": "chipped-jacinth",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
 {
     "name": "Copper War Lance",
@@ -7396,9 +7470,11 @@
   {
     "name": "Coal",
     "slug": "coal",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 1.5,
+    "size": "Small"
   },
   {
     "name": "Iron Tread",
@@ -7424,30 +7500,72 @@
   {
     "name": "Gold Bar",
     "slug": "gold-bar",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Gold Ore",
     "slug": "gold-ore",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.25,
+    "size": "Small"
   },
   {
     "name": "Pyrite Ore",
     "slug": "pyrite-ore",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "description": "A cluster of gold-colored minerals.",
+    "weight": 0.25,
+    "size": "Small"
   },
   {
     "name": "Rigid Stone",
     "slug": "rigid-stone",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.25,
+    "size": "Small"
+  },
+  {
+    "name": "Weighty Stone",
+    "slug": "weighty-stone",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.25,
+    "size": "Small"
+  },
+  {
+    "name": "Burnt-Out Lightstone",
+    "slug": "burnt-out-lightstone",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "slot": "Primary / Secondary / Belt",
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Scroll: Hearth of the Ranger",
+    "slug": "scroll-hearth-of-the-ranger",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["RNG"],
+    "race": ["ALL"],
+    "effect": "An ability scroll. Scribe this in the Innates tab of your Ability Book. Required Level: 26. Place a Hearth of the Ranger at your feet, providing warmth, comfort, and a place to cook. This ability lasts 50% longer than a normal campfire, and each log adds 50% more burn time. This ability requires 8 Wood."
   },
   {
     "name": "Jagged Stone",
@@ -7468,331 +7586,425 @@
   {
     "name": "Jade",
     "slug": "jade",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Jade",
     "slug": "chipped-jade",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Lapis Lazuli",
     "slug": "chipped-lapis-lazuli",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Malachite",
     "slug": "chipped-malachite",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Onyx",
     "slug": "chipped-onyx",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Opal",
     "slug": "chipped-opal",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Pearl",
     "slug": "chipped-pearl",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Ruby",
     "slug": "chipped-ruby",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Sapphire",
     "slug": "chipped-sapphire",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Star Rose Quartz",
     "slug": "chipped-star-rose-quartz",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Star Ruby",
     "slug": "chipped-star-ruby",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Topaz",
     "slug": "chipped-topaz",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Turquoise",
     "slug": "chipped-turquoise",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Chipped Wolf's Eye Agate",
     "slug": "chipped-wolfs-eye-agate",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Black Sapphire",
     "slug": "flawed-black-sapphire",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Bloodstone",
     "slug": "flawed-bloodstone",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Blue Diamond",
     "slug": "flawed-blue-diamond",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Carnelian",
     "slug": "flawed-carnelian",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Cat's Eye Agate",
     "slug": "flawed-cats-eye-agate",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Diamond",
     "slug": "flawed-diamond",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Emerald",
     "slug": "flawed-emerald",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Fire Opal",
     "slug": "flawed-fire-opal",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Hematite",
     "slug": "flawed-hematite",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Lapis Lazuli",
     "slug": "flawed-lapis-lazuli",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Malachite",
     "slug": "flawed-malachite",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Onyx",
     "slug": "flawed-onyx",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Opal",
     "slug": "flawed-opal",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Pearl",
     "slug": "flawed-pearl",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Peridot",
     "slug": "flawed-peridot",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Ruby",
     "slug": "flawed-ruby",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Sapphire",
     "slug": "flawed-sapphire",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Star Rose Quartz",
     "slug": "flawed-star-rose-quartz",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Star Ruby",
     "slug": "flawed-star-ruby",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Topaz",
     "slug": "flawed-topaz",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Flawed Turquoise",
     "slug": "flawed-turquoise",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Imperfect Black Pearl",
     "slug": "imperfect-black-pearl",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Imperfect Blue Diamond",
     "slug": "imperfect-blue-diamond",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Imperfect Fire Opal",
     "slug": "imperfect-fire-opal",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Imperfect Jacinth",
     "slug": "imperfect-jacinth",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Imperfect Jade",
     "slug": "imperfect-jade",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Imperfect Jasper",
     "slug": "imperfect-jasper",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Imperfect Malachite",
     "slug": "imperfect-malachite",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Imperfect Opal",
     "slug": "imperfect-opal",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Imperfect Star Rose Quartz",
     "slug": "imperfect-star-rose-quartz",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Imperfect Topaz",
     "slug": "imperfect-topaz",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Imperfect Turquoise",
     "slug": "imperfect-turquoise",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Imperfect Wolf's Eye Agate",
     "slug": "imperfect-wolfs-eye-agate",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
 {
     "name": "Tarnished Bronze Axe",
@@ -7894,9 +8106,11 @@
   {
     "name": "Silver Bar",
     "slug": "silver-bar",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Copper Chain Coif",
@@ -19108,10 +19322,11 @@
   {
     "name": "Flawed Jade",
     "slug": "flawed-jade",
-    "lastUpdated": "2026-08-05",
+    "lastUpdated": "2026-08-10",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 0.1,
+    "size": "Small"
   },
   {
     "name": "Potato",

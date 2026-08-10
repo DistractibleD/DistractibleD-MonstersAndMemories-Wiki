@@ -2231,6 +2231,39 @@
     "resultQuantity": 24
   },
   {
+    "name": "Rawhide Canvas",
+    "slug": "rawhide-canvas-tanning",
+    "tradeskill": "Tanning",
+    "weight": 0.2,
+    "size": "Small",
+    "components": [
+      { "item": "Tannable Item", "quantity": 1 },
+      { "item": "Wood", "quantity": 2 },
+      { "item": "Resin", "quantity": 3 }
+    ],
+    "difficultyColor": "Light Blue",
+    "difficultyText": "Your skills make this a simple task.",
+    "observedAtSkill": 24,
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Hide Canvas",
+    "slug": "hide-canvas-tanning",
+    "tradeskill": "Tanning",
+    "weight": 0.2,
+    "size": "Small",
+    "components": [
+      { "item": "Tannable Item", "quantity": 1 },
+      { "item": "Fine Wood", "quantity": 2 },
+      { "item": "Resin", "quantity": 3 },
+      { "item": "Limestone", "quantity": 3 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 24,
+    "lastUpdated": "2026-08-10"
+  },
+  {
     "name": "Enchanted Hide Canvas",
     "slug": "enchanted-hide-canvas",
     "tradeskill": "Leatherworking",

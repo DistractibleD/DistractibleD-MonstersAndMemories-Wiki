@@ -413,8 +413,11 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   unconfirmed gap must stay unconfirmed (no Frond tier in `results`) until its own screenshot
   comes in — never assume it inherits the higher neighboring tier.
   **Current confirmed state**: Magic Frond — Lionleaf (1), Ghost Poppy (1), Selstie Kelp (1),
-  Sylvine (1), Nomad's Grace (10), Whispering Sage (15). Enchanted Frond — Gadolvine (80)
-  only (Ironroot/Moonveil/Stranglevine are unconfirmed, not Enchanted — reverted). Arcane
+  Sylvine (1), Nomad's Grace (10), Whispering Sage (15). Enchanted Frond — Ironroot (30,
+  confirmed 2026-08-10) and Gadolvine (80); Moonveil/Stranglevine remain unconfirmed (no
+  automatic backfill applied to them — Ironroot's confirmation wasn't a new *highest*
+  minSkill for the tier, so it only updates Ironroot's own entry, not a re-scan downward).
+  Arcane
   Frond — Duneleaf (90) only. If a node is ever confirmed yielding a *lower* tier than a
   higher-`minSkill` node already has, that's fine and expected (skill only sets a floor, not
   an exact tier) — but still only apply the >=-removal step (below) when a strictly *higher*

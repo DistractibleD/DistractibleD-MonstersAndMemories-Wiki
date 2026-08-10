@@ -1219,11 +1219,12 @@
     "name": "a willowisp",
     "slug": "a-willowisp",
     "image": "images/Monsters/a-willowisp.jpg",
-    "maps": ["Shaded Dunes"],
+    "maps": ["Shaded Dunes", "Sungreet Strand"],
     "drops": [
-      { "item": "Wisp Dust" }
+      { "item": "Wisp Dust" },
+      { "item": "Burnt-Out Lightstone" }
     ],
-    "lastUpdated": "2026-08-06"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a Dustrend priest",
@@ -5454,10 +5455,12 @@
   {
     "name": "a goblin overseer",
     "slug": "a-goblin-overseer",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Quarry"],
     "drops": [
       { "item": "Head of the Overseer" }
     ],
-    "lastUpdated": "2026-08-05"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a dusty skeleton",
@@ -5758,7 +5761,87 @@
     "name": "a dunes madman",
     "slug": "a-dunes-madman",
     "maps": ["Sungreet Strand"],
-    "lastUpdated": "2026-08-06"
+    "areas": ["Quarry"],
+    "drops": [
+      { "item": "Rawhide Scraps" },
+      { "item": "Worn Great Staff" },
+      { "family": "Chipped", "label": "Chipped Gems" }
+    ],
+    "coinDrops": [
+      { "copper": 35 }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a cinder harvester",
+    "slug": "a-cinder-harvester",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Quarry"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a cinder worker",
+    "slug": "a-cinder-worker",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Quarry"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a cinder carrier",
+    "slug": "a-cinder-carrier",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Quarry"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a cinder drone",
+    "slug": "a-cinder-drone",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Quarry"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a cinder sentinel",
+    "slug": "a-cinder-sentinel",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Quarry"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a goblin claim jumper",
+    "slug": "a-goblin-claim-jumper",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Quarry"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a goblin miner",
+    "slug": "a-goblin-miner",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Quarry"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a goblin bandit",
+    "slug": "a-goblin-bandit",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Quarry"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a goblin spellshooter",
+    "slug": "a-goblin-spellshooter",
+    "maps": ["Sungreet Strand"],
+    "areas": ["Quarry"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Taskmaster Urka",
+    "slug": "taskmaster-urka",
+    "named": true,
+    "maps": ["Sungreet Strand"],
+    "areas": ["Quarry"],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a Fellstone scout",

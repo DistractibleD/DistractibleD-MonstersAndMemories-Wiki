@@ -45,7 +45,7 @@
     "tradeskill": "Mining",
     "minSkill": 75,
     "trivialSkill": 125,
-    "results": ["Tin Ore", "Jagged Stone", "Limestone"],
+    "results": ["Tin Ore", "Jagged Stone", "Limestone", { "family": "Flawed", "label": "Flawed Gems" }],
     "locations": ["Sungreet Strand", "Vale of Zintar", "Scarwood"]
   },
   {
@@ -394,7 +394,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 30,
     "trivialSkill": 80,
-    "results": ["Ironroot"],
+    "results": ["Ironroot", "Enchanted Frond"],
     "locations": ["Shaded Dunes", "Sungreet Strand"]
   },
   {
@@ -524,6 +524,15 @@
     "results": ["Flamestalk"],
     "locations": ["Vale of Zintar"],
     "note": "In Giant City. Min skill given only as an uncertain value on the source table: \"250?\"."
+  },
+  {
+    "name": "Unidentified Herb",
+    "slug": "unidentified-herb",
+    "image": "images/gathering/unidentified-herb.jpg",
+    "tradeskill": "Herbalism",
+    "locations": [],
+    "needsInfo": true,
+    "note": "Spotted but not yet identified. Picture is the identifying reference until this is matched to a known herb."
   },
   {
     "name": "Grub",
