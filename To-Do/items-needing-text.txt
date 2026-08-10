@@ -501,3 +501,8 @@ technically only matches a character actually named Ciszil. No Class/Race line a
 the card either way, so both stayed unset rather than guessed -- this is presumably an
 Elementalist-only starter item (unlike the Trainee's.../Well-Worn... gear in the same batch,
 which the user confirmed every new character starts with regardless of class/race).
+
+2026-08-10, images/inbox batch (Ranger spell scrolls): Scroll: Lesser Regeneration's card was
+seen three times across the batch, every copy cut off right after "Class: DRU RNG SHM" with
+no Race line visible at all -- `race` left unset rather than assumed ALL, same as every other
+scrollbar/crop-cut Class-but-no-Race case in this file.

@@ -20013,5 +20013,88 @@
     "tags": [],
     "slot": "Back",
     "needsInfo": true
+  },
+  {
+    "name": "Scroll: Bristly Barrier",
+    "slug": "scroll-bristly-barrier",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["DRU", "RNG"],
+    "race": ["ALL"],
+    "effect": "A spell scroll. Scribe this in the Book tab of your Ability Book while a Spellbook is equipped. Required Level: 32. Surround your target with a bristly barrier, granting them a Damage Shield that deals 10 damage when hit for 10 minutes."
+  },
+  {
+    "name": "Scroll: Bristly Tunic",
+    "slug": "scroll-bristly-tunic",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["RNG"],
+    "race": ["ALL"],
+    "effect": "A spell scroll. Scribe this in the Book tab of your Ability Book while a Spellbook is equipped. Required Level: 32. Wrap yourself in a bristly tunic, increasing your Armor Class by 15 and granting you a Damage Shield that deals 3 damage when hit for 1 hour."
+  },
+  {
+    "name": "Scroll: Nature Arrows",
+    "slug": "scroll-nature-arrows",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["RNG"],
+    "race": ["ALL"],
+    "effect": "An ability scroll. Scribe this in the Innates tab of your Ability Book. Required Level: 31. Imbue your arrows with nature, increasing your Ranged Damage dealt by 1 (L1) to 7 (L60) Magic Damage and granting you a chance to activate Nature Arrow Advantage on ranged attacks. Nature Arrow Advantage: Seize the advantage, reducing the cast time of your next spell in the Root, Snare, or Swarm line by 100% for 10 seconds."
+  },
+  {
+    "name": "Scroll: Imbue Weapon: Nature",
+    "slug": "scroll-imbue-weapon-nature",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["RNG"],
+    "race": ["ALL"],
+    "effect": "A spell scroll. Scribe this in the Book tab of your Ability Book while a Spellbook is equipped. Required Level: 31. Imbue your weapon with nature, granting you a chance to activate Nature Attack on melee attacks for 15 minutes. Nature Attack: Unleash a nature attack, dealing 7 (L1) to 75 (L60) Magic Damage."
+  },
+  {
+    "name": "Scroll: Stinging Swarm",
+    "slug": "scroll-stinging-swarm",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["RNG"],
+    "race": ["ALL"],
+    "effect": "A spell scroll. Scribe this in the Book tab of your Ability Book while a Spellbook is equipped. Required Level: 30. Engulf your target in a stinging swarm, dealing 20 Poison Damage every 6 seconds for 1 minute."
+  },
+  {
+    "name": "Scroll: Lesser Regeneration",
+    "slug": "scroll-lesser-regeneration",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["DRU", "RNG", "SHM"],
+    "effect": "A spell scroll. Scribe this in the Book tab of your Ability Book while a Spellbook is equipped. Required Level: 32. Lightly regenerate your target, increasing their Health Regeneration by 5 for 30 minutes."
+  },
+  {
+    "name": "Scroll: Heal",
+    "slug": "scroll-heal",
+    "lastUpdated": "2026-08-10",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["PAL", "RNG", "SHM"],
+    "race": ["ALL"],
+    "effect": "A spell scroll. Scribe this in the Book tab of your Ability Book while a Spellbook is equipped. Required Level: 32. Moderately heal your target, restoring 57 Health."
   }
 ]

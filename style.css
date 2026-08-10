@@ -2572,6 +2572,32 @@ body:not(.site-entered) .sidebar {
   .monster-grid { gap: 10px; }
 }
 
+/* ---------- Faction ---------- */
+.faction-card h2 {
+  color: var(--accent);
+}
+.faction-card-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 10px;
+}
+.faction-card-column ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+}
+.faction-card-column li {
+  margin-bottom: 4px;
+}
+.faction-positive, .faction-negative {
+  margin: 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.faction-positive { color: #b6f2b6; }
+.faction-negative { color: #ffb3b3; }
+
 /* ---------- Submit a Screenshot ---------- */
 .submit-form-notice {
   background: var(--bg-panel);

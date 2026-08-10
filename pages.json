@@ -8,6 +8,8 @@
   { "title": "Named Monsters", "file": "monsters-named", "category": "Monsters", "type": "monsters", "group": "Monsters" },
   { "title": "Regular Monsters", "file": "monsters-regular", "category": "Monsters", "type": "monsters", "group": "Monsters" },
   { "title": "Companions", "file": "companions", "category": "Companions", "type": "companions" },
+  { "title": "Spells & Abilities", "file": "spells", "category": "Spells & Abilities", "type": "spells" },
+  { "title": "Faction", "file": "faction", "category": "Faction", "type": "faction" },
   { "title": "Leveling Suggestions", "file": "leveling", "category": "Leveling Suggestions", "type": "leveling" },
   { "title": "Submit a Screenshot", "file": "submit", "category": "Contribute", "type": "submit" }
 ]

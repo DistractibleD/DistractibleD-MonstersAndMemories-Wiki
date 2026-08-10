@@ -933,6 +933,78 @@ Own local search box, wired into header search like Monsters (`goToCompanion`,
 `pendingHighlightCompanion`, `.card-flash` gold-accent animation since `.recipe-flash`'s
 teal doesn't match a plain `.item-card`).
 
+## Spells & Abilities page
+
+Own top-level page (`pages.json` `"type": "spells"`, no group), a class-scoped lookup for
+player spells/abilities — **separate concept from the class-quest starter items** covered
+under "Adding an item to the Item Database" (e.g. Humble Note). Two-level like Crafting:
+`renderSpellsClassCategories` shows a grid of all 18 classes (`.craft-grid`/`.craft-card`,
+reused as-is — a spell card can belong to multiple classes, unlike a tradeskill card, so
+there's no dedicated per-class icon; every class card uses the same `spellsicon` glyph) with
+a live spell count per class; clicking one calls `renderSpellsClassList`, a flat
+`.companion-grid` of `.item-card`-styled spell cards for that class (same "back to grid"
+pattern as `renderCraftingRecipes`'s `onBack`, no hash sub-route).
+
+**`spells.json`** — flat array, one object per spell/ability: `name`, `slug`, `classes`
+(array of class codes, e.g. `["DRU", "RNG"]` — a spell usable by multiple classes appears
+under each one), `requiredLevel`, `type` (`"Spell"` or `"Ability"` — see below), `description`
+(the effect text), `lastUpdated`.
+
+**Source is the teaching scroll, not a spellbook tooltip** — spells/abilities are learned via
+a `"Scroll: <name>"` item (right-click, scribe into your Ability Book), so every spell card's
+source screenshot is that scroll's own item-card popup. **Add the scroll to `items.json` too**
+(`type: "Misc"`, `tags: []`, `weight`/`size`/`classes`/`race` from the card, `effect` = the
+scroll's full boilerplate + description text verbatim, e.g. `"A spell scroll. Scribe this in
+the Book tab of your Ability Book while a Spellbook is equipped. Required Level: 32. <effect
+description>"`) — this is a real, separate `items.json` entry (not archived as an image,
+2026-08-04 policy still applies), and `spells.json`'s own `description` field holds just the
+effect text on its own, without the boilerplate. **Don't store the scroll link as a field** —
+`renderSpellCardHTML` resolves `findItemByName('Scroll: ' + spell.name)` dynamically at render
+time (clickable "Taught by:" line if a match exists, plain text otherwise), same
+never-store-a-computed-reference precedent as a recipe's `components`.
+
+**`type` comes straight from the scroll's own boilerplate line**: "A spell scroll. Scribe
+this in the **Book** tab..." → `"Spell"`; "An ability scroll. Scribe this in the **Innates**
+tab..." → `"Ability"`. Record verbatim, don't guess from the spell's own effect.
+
+**`CLASS_NAMES`** (script.js) — full class-code-to-name map used only for this page's display
+labels (every other item/recipe filter on the site shows the bare 3-letter code, unchanged).
+**Only 8 of the 18 are actually confirmed**: CLR/DRU/ELE/ENC/NEC/SHM/WIZ from the official new
+player guide's own "true caster classes" list, and RNG from this page's own Ranger spell
+scrolls. The rest (ARC/BRD/BST/FTR/INQ/MNK/PAL/ROG/SHD/SPB) are standard-genre-convention
+guesses, not yet confirmed by any in-game text — correct the map directly if one turns out
+wrong, no schema migration needed since nothing else reads it.
+
+Same source-of-truth caution as everywhere else applies to a scroll card missing its Class/
+Race line (scrollbar-cropped vs. genuinely absent) — leave unset and flag in
+`To-Do/items-needing-text.txt` rather than guessing, same as any other item.
+
+Header search integration matches Companions' pattern exactly (`goToSpell`/
+`pendingHighlightSpell`/`pendingSpellsClass` — the latter picks the spell's *first* listed
+class to land on, since a multi-class spell doesn't have one canonical class page).
+
+## Faction
+
+Own top-level page (`pages.json` `"type": "faction"`, no group) listing which monsters raise
+or lower standing with a given faction. **No dedicated data file** — reuses `monsters.json`
+via an optional `factionEffects` array on a monster entry: `[{ "faction": "Faction Name",
+"effect": "positive" | "negative" }]`. `renderFactionPage` scans every monster for this field
+at render time and groups the results by faction name into two columns (raises/lowers) —
+nothing is precomputed or stored elsewhere, same as `groupMonsterDrops`'s reverse lookups.
+
+**Workflow once a faction-change screenshot/chat message comes in**: identify which monster
+was killed and which faction changed (and which direction), then append one `factionEffects`
+entry to that monster (create the array if it doesn't exist yet) and bump `lastUpdated` — same
+append-only-per-confirmed-observation convention as `conObservations`/`coinDrops`. **No exact
+in-game message wording is confirmed yet** (no screenshot has shown one so far) — don't invent
+a template to match against; when a real one comes in, read it directly like any other
+screenshot and record the faction name/direction it states.
+
+The page renders an empty state ("No faction data recorded yet") until the first
+`factionEffects` entry exists anywhere in `monsters.json` — this is expected, not a bug, same
+"structurally ready, fills in over time" precedent as `conObservations` when that system was
+first added.
+
 ## Leveling Suggestions page
 
 A curated leveling guide (`pages.json` `"type": "leveling"`, own top-level sidebar entry) —

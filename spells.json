@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Bristly Barrier",
+    "slug": "bristly-barrier",
+    "classes": ["DRU", "RNG"],
+    "requiredLevel": 32,
+    "type": "Spell",
+    "description": "Surround your target with a bristly barrier, granting them a Damage Shield that deals 10 damage when hit for 10 minutes.",
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Bristly Tunic",
+    "slug": "bristly-tunic",
+    "classes": ["RNG"],
+    "requiredLevel": 32,
+    "type": "Spell",
+    "description": "Wrap yourself in a bristly tunic, increasing your Armor Class by 15 and granting you a Damage Shield that deals 3 damage when hit for 1 hour.",
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Nature Arrows",
+    "slug": "nature-arrows",
+    "classes": ["RNG"],
+    "requiredLevel": 31,
+    "type": "Ability",
+    "description": "Imbue your arrows with nature, increasing your Ranged Damage dealt by 1 (L1) to 7 (L60) Magic Damage and granting you a chance to activate Nature Arrow Advantage on ranged attacks. Nature Arrow Advantage: Seize the advantage, reducing the cast time of your next spell in the Root, Snare, or Swarm line by 100% for 10 seconds.",
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Imbue Weapon: Nature",
+    "slug": "imbue-weapon-nature",
+    "classes": ["RNG"],
+    "requiredLevel": 31,
+    "type": "Spell",
+    "description": "Imbue your weapon with nature, granting you a chance to activate Nature Attack on melee attacks for 15 minutes. Nature Attack: Unleash a nature attack, dealing 7 (L1) to 75 (L60) Magic Damage.",
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Stinging Swarm",
+    "slug": "stinging-swarm",
+    "classes": ["RNG"],
+    "requiredLevel": 30,
+    "type": "Spell",
+    "description": "Engulf your target in a stinging swarm, dealing 20 Poison Damage every 6 seconds for 1 minute.",
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Lesser Regeneration",
+    "slug": "lesser-regeneration",
+    "classes": ["DRU", "RNG", "SHM"],
+    "requiredLevel": 32,
+    "type": "Spell",
+    "description": "Lightly regenerate your target, increasing their Health Regeneration by 5 for 30 minutes.",
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Heal",
+    "slug": "heal",
+    "classes": ["PAL", "RNG", "SHM"],
+    "requiredLevel": 32,
+    "type": "Spell",
+    "description": "Moderately heal your target, restoring 57 Health.",
+    "lastUpdated": "2026-08-10"
+  }
+]

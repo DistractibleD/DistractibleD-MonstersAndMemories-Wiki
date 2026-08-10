@@ -15,6 +15,7 @@ let monstersData = null; // cached contents of monsters.json
 let companionsData = null; // cached contents of companions.json
 let levelingData = null; // cached contents of leveling-locations.json
 let companionSkillsData = null; // cached contents of companion-skills.json
+let spellsData = null; // cached contents of spells.json
 
 // Set by the header search box when jumping straight to a specific item or
 // crafting recipe, then consumed (and cleared) by the corresponding render
@@ -59,6 +60,12 @@ let pendingHighlightMonster = null;
 // Same idea again, for a companion's card on the Companions page — set by
 // goToCompanion so a header search result flashes the right card.
 let pendingHighlightCompanion = null;
+// Same idea as pendingCraftingTradeskill/pendingHighlightRecipe, but for the
+// Spells & Abilities page's own class drill-down — set by goToSpellsClass/
+// goToSpell so landing there opens straight on the right class list (and,
+// for goToSpell, flashes the specific spell's card once it renders).
+let pendingSpellsClass = null;
+let pendingHighlightSpell = null;
 // Set by renderCraftingRecipes when it scrolls to a highlighted recipe, so
 // loadPage's normal "reset scroll to top on navigation" doesn't immediately
 // cancel that scroll.
@@ -132,6 +139,15 @@ async function ensureCompanionsData() {
     companionsData = await res.json();
   }
   return companionsData;
+}
+
+async function ensureSpellsData() {
+  if (!spellsData) {
+    const res = await fetch('spells.json');
+    if (!res.ok) throw new Error('Could not load spells.json');
+    spellsData = await res.json();
+  }
+  return spellsData;
 }
 
 async function ensureMapsData() {
@@ -287,6 +303,7 @@ async function init() {
   ensureCraftingData().catch(() => {});
   ensureMonstersData().catch(() => {});
   ensureCompanionsData().catch(() => {});
+  ensureSpellsData().catch(() => {});
 
   const searchBox = document.getElementById('search-box');
   searchBox.addEventListener('input', onSearch);
@@ -615,7 +632,7 @@ async function loadPage(file) {
 
   // Data-driven pages (Item Database, Maps, Crafting, Monsters) use the full
   // content width instead of the narrower reading width used for prose pages.
-  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'gathering' || page.type === 'crafting' || page.type === 'monsters' || page.type === 'companions' || page.type === 'leveling')));
+  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'gathering' || page.type === 'crafting' || page.type === 'monsters' || page.type === 'companions' || page.type === 'leveling' || page.type === 'spells' || page.type === 'faction')));
 
   try {
     if (page && page.type === 'items') {
@@ -632,6 +649,10 @@ async function loadPage(file) {
       await renderMonstersPage(contentInner, file);
     } else if (page && page.type === 'companions') {
       await renderCompanionsPage(contentInner);
+    } else if (page && page.type === 'spells') {
+      await renderSpellsPage(contentInner);
+    } else if (page && page.type === 'faction') {
+      await renderFactionPage(contentInner);
     } else if (page && page.type === 'submit') {
       await renderSubmitPage(contentInner);
     } else {
@@ -758,8 +779,12 @@ function renderSearchResults(query) {
     .filter(c => companionSearchHaystack(c).includes(query))
     .sort((a, b) => a.name.localeCompare(b.name))
     .slice(0, 8);
+  const matchedSpells = (spellsData || [])
+    .filter(s => spellSearchHaystack(s).includes(query))
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .slice(0, 8);
 
-  if (!matchedCategories.length && !matchedPages.length && !matchedItems.length && !matchedRecipes.length && !matchedGatheringNodes.length && !matchedMonsters.length && !matchedCompanions.length) {
+  if (!matchedCategories.length && !matchedPages.length && !matchedItems.length && !matchedRecipes.length && !matchedGatheringNodes.length && !matchedMonsters.length && !matchedCompanions.length && !matchedSpells.length) {
     results.innerHTML = '<p class="search-results-empty">No results found.</p>';
     openSearchResults();
     return;
@@ -866,6 +891,19 @@ function renderSearchResults(query) {
       e.preventDefault();
       clearSearch();
       goToCompanion(companion);
+    });
+    return link;
+  });
+
+  addSection('Spells & Abilities', matchedSpells, spell => {
+    const link = document.createElement('a');
+    link.href = '#spells';
+    link.className = 'search-result-link';
+    link.textContent = spell.name;
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      clearSearch();
+      goToSpell(spell);
     });
     return link;
   });
@@ -996,6 +1034,26 @@ function goToCompanion(companion) {
   const alreadyThere = location.hash.replace('#', '') === 'companions';
   location.hash = 'companions';
   if (alreadyThere) loadPage('companions');
+}
+
+// Jumps straight to one class's spell list on the Spells & Abilities page
+// (e.g. from a header search category match) — no specific spell to highlight.
+function goToSpellsClass(classCode) {
+  pendingSpellsClass = classCode;
+  pendingHighlightSpell = null;
+  const alreadyThere = location.hash.replace('#', '') === 'spells';
+  location.hash = 'spells';
+  if (alreadyThere) loadPage('spells');
+}
+
+// Same idea as goToCompanion, but a spell can belong to multiple classes —
+// lands on the first class in its own `classes` list, then flashes the card.
+function goToSpell(spell) {
+  pendingSpellsClass = (spell.classes && spell.classes[0]) || null;
+  pendingHighlightSpell = spell.slug;
+  const alreadyThere = location.hash.replace('#', '') === 'spells';
+  location.hash = 'spells';
+  if (alreadyThere) loadPage('spells');
 }
 
 // Jumps to the Maps page and opens a specific area's viewer directly —
@@ -1343,6 +1401,15 @@ const ICON_DEFS = {
   // New Player Guide nav icon (2026-08-10) — an open book, flat-silhouette
   // style matching everything else (two splayed "pages" plus a center spine).
   guideicon: `<path d="M12 6.5 C9.5 5 6 4.3 3.3 4.8 L3.3 17.3 C6 16.8 9.5 17.5 12 19 Z"/><path d="M12 6.5 C14.5 5 18 4.3 20.7 4.8 L20.7 17.3 C18 16.8 14.5 17.5 12 19 Z"/><rect x="11.3" y="6" width="1.4" height="12.5"/>`,
+  // Spells & Abilities nav icon (2026-08-10) — a closed spellbook (distinct
+  // silhouette from guideicon's open pages) with a sparkle, since every
+  // entry here comes from a "Scroll: <name>" ability-teaching item. Deliberately
+  // not reusing the existing `spellcrafting` glyph (a wand-and-altar shape
+  // for that tradeskill) to avoid visual collision with an unrelated page.
+  spellsicon: `<path d="M6 4 L16 4 C16.6 4 17 4.4 17 5 L17 19 C17 19.6 16.6 20 16 20 L6 20 C5.4 20 5 19.6 5 19 L5 5 C5 4.4 5.4 4 6 4 Z"/><rect x="7.3" y="7" width="7" height="1" rx="0.4"/><rect x="7.3" y="10" width="7" height="1" rx="0.4"/><rect x="7.3" y="13" width="4.5" height="1" rx="0.4"/><path d="M18.5 3 L19.3 5.3 L21.5 5.8 L19.6 7.1 L20 9.4 L18.5 8 L17 9.4 L17.4 7.1 L15.5 5.8 L17.7 5.3 Z"/>`,
+  // Faction nav icon (2026-08-10) — a balance scale, the standard "standing/
+  // reputation" symbol.
+  factionicon: `<rect x="11.3" y="2" width="1.4" height="18"/><path d="M12 2 L14 4.5 L10 4.5 Z"/><rect x="3.5" y="6.5" width="5" height="1"/><rect x="13.5" y="6.5" width="5" height="1"/><path d="M4 7.5 L8 7.5 L6 13 C6 14.1 6.9 15 8 15 C9.1 15 10 14.1 10 13 Z"/><path d="M14 7.5 L18 7.5 L16 13 C16 14.1 16.9 15 18 15 C19.1 15 20 14.1 20 13 Z"/><rect x="8" y="19.3" width="8" height="1.4" rx="0.4"/>`,
 };
 
 // Background circle color per icon key — approximated from the reference
@@ -1380,6 +1447,8 @@ const ICON_BG = {
   levelingicon: '#2e6b3f',
   tradeskillgroupicon: '#5a4a2e',
   guideicon: '#3f5f45',
+  spellsicon: '#3a2f5c',
+  factionicon: '#5a4a2e',
 };
 
 // Maps a tradeskill name (tradeskills.json) to one of the icons above — used
@@ -1456,6 +1525,8 @@ const NAV_ICON = {
   'monsters-named': 'boss',
   'monsters-regular': 'paw',
   companions: 'wolf',
+  spells: 'spellsicon',
+  faction: 'factionicon',
   leveling: 'levelingicon',
   submit: 'submiticon',
 };
@@ -4981,6 +5052,216 @@ async function renderCompanionsPage(container) {
       card.addEventListener('animationend', () => card.classList.remove('card-flash'), { once: true });
     }
   }
+}
+
+/* ============================================
+   Spells & Abilities
+   A player-facing reference for class spells/abilities, kept in its own
+   spells.json rather than reusing the "Scroll: <name>" ability-teaching
+   items already in items.json — spells.json holds just the fields relevant
+   to looking a spell up by class (name, classes, requiredLevel, type,
+   description); the teaching scroll is looked up dynamically by name at
+   render time (findItemByName) and linked if a match exists, same
+   never-store-a-computed-reference precedent as a recipe's components.
+   ============================================ */
+
+// Best-guess full names for the 18 class codes used throughout items.json —
+// seven (CLR/DRU/ELE/ENC/NEC/SHM/WIZ) are confirmed by the official new
+// player guide's own "true caster classes" list; RNG is confirmed by this
+// page's own Ranger spell scrolls. The rest are standard genre-convention
+// guesses, not yet confirmed by any in-game text — correct if wrong.
+const CLASS_NAMES = {
+  ARC: 'Archer', BRD: 'Bard', BST: 'Beastmaster', CLR: 'Cleric', DRU: 'Druid',
+  ELE: 'Elementalist', ENC: 'Enchanter', FTR: 'Fighter', INQ: 'Inquisitor',
+  MNK: 'Monk', NEC: 'Necromancer', PAL: 'Paladin', RNG: 'Ranger', ROG: 'Rogue',
+  SHD: 'Shadowknight', SHM: 'Shaman', SPB: 'Spellblade', WIZ: 'Wizard',
+};
+
+function spellSearchHaystack(spell) {
+  return [
+    spell.name,
+    spell.description || '',
+    spell.type || '',
+    (spell.classes || []).map(c => CLASS_NAMES[c] || c).join(' '),
+  ].join(' ').toLowerCase();
+}
+
+function renderSpellCardHTML(spell) {
+  const scroll = findItemByName(`Scroll: ${spell.name}`);
+  const classLabels = (spell.classes || []).map(c => CLASS_NAMES[c] || c).join(', ');
+  return `
+    <div class="item-card" data-spell-slug="${escapeAttr(spell.slug)}">
+      <div class="item-card-header">
+        <div class="item-card-icon">${svgIcon('spellsicon')}</div>
+        <div class="item-card-titles">
+          <div class="item-card-name">${escapeAttr(spell.name)}</div>
+          <div class="item-card-category">${escapeAttr(spell.type || 'Spell')}</div>
+          ${formatLastUpdated(spell.lastUpdated)}
+        </div>
+      </div>
+      <div class="item-card-body">
+        <div class="item-card-grid">
+          ${spell.requiredLevel != null ? `<div class="item-card-field"><span class="item-card-field-label">Required Level</span><span>${spell.requiredLevel}</span></div>` : ''}
+          ${classLabels ? `<div class="item-card-field"><span class="item-card-field-label">Classes</span><span>${escapeAttr(classLabels)}</span></div>` : ''}
+        </div>
+        ${spell.description ? `<div class="item-card-section">${escapeAttr(spell.description)}</div>` : ''}
+        <div class="item-card-section">
+          Taught by: ${scroll
+            ? `<a href="#" class="spell-scroll-link item-name-hover" data-item="${escapeAttr(scroll.name)}">${escapeAttr(scroll.name)}</a>`
+            : escapeAttr(`Scroll: ${spell.name}`)}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function classGridHTML() {
+  const codes = Object.keys(CLASS_NAMES).sort((a, b) => CLASS_NAMES[a].localeCompare(CLASS_NAMES[b]));
+  return `
+    <div class="craft-grid">
+      ${codes.map(code => {
+        const count = spellsData.filter(s => (s.classes || []).includes(code)).length;
+        return `
+          <div class="craft-card" data-class="${escapeAttr(code)}">
+            <div class="craft-card-icon">${svgIcon('spellsicon')}</div>
+            <div class="craft-card-body">
+              <div class="craft-card-name">${escapeAttr(CLASS_NAMES[code])}</div>
+              <div class="craft-card-count">${count} spell${count === 1 ? '' : 's'}</div>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+function renderSpellsClassCategories(container) {
+  container.innerHTML = `
+    <h1>Spells & Abilities</h1>
+    <p>Spells and abilities are taught by scrolls found or bought in the world — right-click
+    one to scribe it into your Ability Book. Browse by class to see what's confirmed on the
+    wiki so far.</p>
+    ${classGridHTML()}
+  `;
+  container.querySelectorAll('.craft-card').forEach(card => {
+    card.addEventListener('click', () => renderSpellsClassList(container, card.dataset.class));
+  });
+}
+
+function renderSpellsClassList(container, classCode) {
+  const spells = spellsData
+    .filter(s => (s.classes || []).includes(classCode))
+    .sort((a, b) => (a.requiredLevel || 0) - (b.requiredLevel || 0));
+  const className = CLASS_NAMES[classCode] || classCode;
+
+  container.innerHTML = `
+    <p><a href="#" id="spells-back-link">&larr; Back to Spells &amp; Abilities</a></p>
+    <h1>${escapeAttr(className)} Spells &amp; Abilities</h1>
+    <div class="companion-grid">
+      ${spells.length ? spells.map(renderSpellCardHTML).join('') : '<p class="items-empty">No spells recorded for this class yet.</p>'}
+    </div>
+  `;
+
+  container.querySelector('#spells-back-link').addEventListener('click', e => {
+    e.preventDefault();
+    renderSpellsClassCategories(container);
+  });
+
+  container.querySelectorAll('.spell-scroll-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const item = findItemByName(link.dataset.item);
+      if (item) goToItem(item);
+    });
+  });
+
+  if (pendingHighlightSpell) {
+    const slug = pendingHighlightSpell;
+    pendingHighlightSpell = null;
+    const card = container.querySelector(`.item-card[data-spell-slug="${CSS.escape(slug)}"]`);
+    if (card) {
+      suppressScrollReset = true;
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.classList.add('card-flash');
+      card.addEventListener('animationend', () => card.classList.remove('card-flash'), { once: true });
+    }
+  }
+}
+
+async function renderSpellsPage(container) {
+  await ensureSpellsData();
+
+  if (pendingSpellsClass) {
+    const target = pendingSpellsClass;
+    pendingSpellsClass = null;
+    renderSpellsClassList(container, target);
+    return;
+  }
+
+  renderSpellsClassCategories(container);
+}
+
+/* ============================================
+   Faction
+   Lists which monsters raise or lower standing with a given faction, from
+   an optional `factionEffects` array on a monsters.json entry (see
+   CLAUDE.md "Faction"). No screenshot has confirmed any faction data yet —
+   this renders an empty state until the first one comes in, same
+   "structurally ready, data fills in over time" precedent as conObservations
+   when that system was first added.
+   ============================================ */
+function renderFactionCardHTML(name, group) {
+  return `
+    <div class="gem-reference faction-card">
+      <h2>${escapeAttr(name)}</h2>
+      <div class="faction-card-columns">
+        <div class="faction-card-column">
+          <h3 class="faction-positive">Increases this faction</h3>
+          <ul>
+            ${group.positive.length ? group.positive.map(m => `<li><a href="#" class="item-name-hover faction-monster-link" data-slug="${escapeAttr(m.slug)}">${escapeAttr(m.name)}</a></li>`).join('') : '<li class="item-card-muted">None known yet</li>'}
+          </ul>
+        </div>
+        <div class="faction-card-column">
+          <h3 class="faction-negative">Decreases this faction</h3>
+          <ul>
+            ${group.negative.length ? group.negative.map(m => `<li><a href="#" class="item-name-hover faction-monster-link" data-slug="${escapeAttr(m.slug)}">${escapeAttr(m.name)}</a></li>`).join('') : '<li class="item-card-muted">None known yet</li>'}
+          </ul>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+async function renderFactionPage(container) {
+  await ensureMonstersData();
+
+  const factions = new Map();
+  monstersData.forEach(m => {
+    (m.factionEffects || []).forEach(fe => {
+      if (!factions.has(fe.faction)) factions.set(fe.faction, { positive: [], negative: [] });
+      const group = factions.get(fe.faction);
+      (fe.effect === 'negative' ? group.negative : group.positive).push(m);
+    });
+  });
+
+  const names = [...factions.keys()].sort((a, b) => a.localeCompare(b));
+
+  container.innerHTML = `
+    <h1>Faction</h1>
+    <p>Which monsters raise or lower your standing with a given faction, confirmed from
+    in-game faction-change messages.</p>
+    ${names.length
+      ? names.map(name => renderFactionCardHTML(name, factions.get(name))).join('')
+      : '<p class="items-empty">No faction data recorded yet — this fills in as monster kills are confirmed to affect a faction.</p>'}
+  `;
+
+  container.querySelectorAll('.faction-monster-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const monster = monstersData.find(m => m.slug === link.dataset.slug);
+      if (monster) goToMonster(monster);
+    });
+  });
 }
 
 /* ============================================
