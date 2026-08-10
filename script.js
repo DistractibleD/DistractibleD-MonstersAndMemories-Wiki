@@ -1938,7 +1938,6 @@ function renderItemsList(container, category) {
         <span class="needsinfo-toggle-slider"></span>
         <span>Show only items that need info</span>
       </label>
-      ${showCardsToggleHTML('items-show-cards')}
       <button type="button" id="items-clear-filters" class="items-clear-btn">Clear all filters</button>
     </div>
     <p class="items-count" id="items-count"></p>
@@ -1979,9 +1978,12 @@ function renderItemsList(container, category) {
     </div>
   `;
 
-  setupItemTooltip(container.querySelector('#items-tbody'));
+  // No hover preview on the Item Database itself (2026-08-10, user's own
+  // call) — clicking a name for the full #item-viewer modal is the only way
+  // to see a card here now. Every other page that links to an item (Crafting
+  // components, Monster drops, etc.) keeps its own setupItemTooltip call
+  // untouched, so hovering still works everywhere else.
   setupItemClickToView(container.querySelector('#items-tbody'));
-  setupShowCardsToggle(container, 'items-show-cards');
 
   const searchBox = container.querySelector('#items-search');
   const typeFilter = container.querySelector('#items-filter-type');

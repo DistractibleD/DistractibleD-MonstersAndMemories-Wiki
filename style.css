@@ -1578,15 +1578,26 @@ body:not(.site-entered) .sidebar {
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 10px;
-  max-width: min(420px, 92vw);
+  max-width: min(640px, 94vw);
   max-height: 88vh;
   overflow-y: auto;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  font-size: 1.1rem;
 }
 #item-viewer-card .item-card {
   border: 0;
   border-radius: 0;
   background: transparent;
+}
+/* #item-viewer/#monster-viewer are appended straight to <body> (so they can
+   overlay everything), not nested inside .content-inner — so they miss the
+   site-wide ".content-inner a { color: var(--accent) }" rule and any dynamic
+   link rendered inside them (e.g. an item card's "Dropped by" monster link)
+   falls back to the browser's default blue/purple. Covering both viewer
+   cards directly here, rather than each link class individually, so a
+   future new link type inside either card is covered for free. */
+#item-viewer-card a, #monster-viewer-card a {
+  color: var(--accent);
 }
 #item-viewer-close {
   position: absolute;
