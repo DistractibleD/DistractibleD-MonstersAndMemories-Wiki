@@ -518,6 +518,11 @@ look for new/unprocessed content — don't re-scan `images/items/` or re-read ex
 items.json/maps.json/crafting.json/monsters.json entries looking for new work. Filenames are
 usually a random ID, not meaningful — always read the image itself.
 
+**Zone acronyms the user uses in filenames** (e.g. to batch-name loot-log screenshots) —
+expand before matching against `maps.json`/`monsters.json`, never treat the acronym itself as
+the zone name: SGS = Sungreet Strand, VoZ = Vale of Zintar, NH = Night Harbor, SD = Shaded
+Dunes, KB = Keeper's Bight, EW = Evershade Weald, FP = Fallen Pass.
+
 Applies to *any* task involving item/map/recipe/monster screenshots (cut-off-text checks,
 image-quality audits, re-verifying data), not just adding new entries. Only read/process
 files in `images/inbox/`; never re-open existing files in `images/items/`, `images/Maps/`,
