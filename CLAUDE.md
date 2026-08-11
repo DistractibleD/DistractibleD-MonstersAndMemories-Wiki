@@ -523,6 +523,16 @@ expand before matching against `maps.json`/`monsters.json`, never treat the acro
 the zone name: SGS = Sungreet Strand, VoZ = Vale of Zintar, NH = Night Harbor, SD = Shaded
 Dunes, KB = Keeper's Bight, EW = Evershade Weald, FP = Fallen Pass.
 
+**A filename is the user's own casual typing, not a game-data source — the rendered in-game
+text inside the screenshot always wins if the two disagree** (confirmed 2026-08-10, after
+"Dustrend Sacramir.png" — capitalized only because that's how the user happened to type the
+filename — got mistaken for a distinct capital-letter Named monster, when every actual
+con-check/loot-log line in the same batch consistently showed lowercase "a Dustrend sacramir"
+with an article, i.e. an ordinary regular monster). Capitalization, spacing, and wording in a
+filename can be sloppy; the same details rendered in a chat line or item card are not — trust
+the pixels over the filename whenever they conflict, especially for something as
+significant as a name implying Named/boss status.
+
 Applies to *any* task involving item/map/recipe/monster screenshots (cut-off-text checks,
 image-quality audits, re-verifying data), not just adding new entries. Only read/process
 files in `images/inbox/`; never re-open existing files in `images/items/`, `images/Maps/`,
