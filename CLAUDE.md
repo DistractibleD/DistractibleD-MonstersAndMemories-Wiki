@@ -853,6 +853,26 @@ are three separate families, don't merge or assume one's roster implies another'
   per the standing inference rule. Only 2 of the 5 named pieces (Boots, Cloak) have a real
   items.json card so far; the rest render as plain text on the family badge until a
   screenshot comes in for each.
+- **Corrupted Leather** (12 armor pieces, confirmed 2026-08-11): Cap, Mask, Gorget,
+  Shoulderpads, Cloak, Tunic, Robe, Bracer, Leggings, Belt, Gloves, Boots — all 12 already
+  had real items.json cards. **The family badge itself shows 13**, not 12 — unlike every
+  other tracked family, this tier also has a same-prefix raw material, "Corrupted Leather
+  Scraps" (recorded as a plain drop alongside the `family` reference on all four monsters
+  below, same as any other tier's Scraps material), which `familyItemCount()`'s prefix match
+  can't distinguish from an armor piece. Not a bug, just this family's one quirk — armor
+  pieces had been wrongly consolidated under a single fictional monster,
+  "the corrupted ashira" (no such singular name exists in-game — user's own correction).
+  The real monsters are four separate "a corrupted `<type>`" regulars sharing the "Corrupted
+  Ashira Camp" area in Vale of Zintar (a corrupted ashira, a corrupted outrider, a corrupted
+  adept, a corrupted warrior) — deleted the fictional entry and redistributed its drop list
+  (the family plus Corrupted Leather Scraps, Ashira War Tooth, Ashira Hunter Tooth) onto all
+  four per the user's explicit statement that any of them can drop any of those items. Two
+  named bosses also share that area (Onis the Elder, Seshena the Lost) but don't have
+  "corrupted" in their own name, so they weren't touched. **One item from the fictional
+  entry's list, Mace of Malice, was itself wrong** — the user immediately caught it and
+  posted its real card, which already had a correctly-recorded "Dropped By: Demeter Stollen"
+  (Fallen Pass) — removed from all four corrupted-camp monsters rather than assumed correct
+  just because it came from the same source list.
 - **Corroded Bronze** (42, weapons + Tower Shield + chain + plate): Axe, Battle Axe, Dagger,
   Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar, Scythe,
   Shortsword, Spear, Tower Shield, Trident, War Lance, Warhammer; Chain Boots/Cloak/Coif/

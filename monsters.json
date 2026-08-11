@@ -371,29 +371,6 @@
     "lastUpdated": "2026-08-10"
   },
   {
-    "name": "the corrupted ashira",
-    "slug": "the-corrupted-ashira",
-    "maps": ["Vale of Zintar"],
-    "drops": [
-      { "item": "Corrupted Leather Cap" },
-      { "item": "Corrupted Leather Mask" },
-      { "item": "Corrupted Leather Gorget" },
-      { "item": "Corrupted Leather Shoulderpads" },
-      { "item": "Corrupted Leather Cloak" },
-      { "item": "Corrupted Leather Tunic" },
-      { "item": "Corrupted Leather Robe" },
-      { "item": "Corrupted Leather Bracer" },
-      { "item": "Corrupted Leather Leggings" },
-      { "item": "Corrupted Leather Belt" },
-      { "item": "Corrupted Leather Gloves" },
-      { "item": "Corrupted Leather Boots" },
-      { "item": "Corrupted Leather Scraps" },
-      { "item": "Mace of Malice" },
-      { "item": "Ashira War Tooth" },
-      { "item": "Ashira Hunter Tooth" }
-    ]
-  },
-  {
     "name": "Fernic the Cur",
     "slug": "fernic-the-cur",
     "named": true,
@@ -6169,8 +6146,10 @@
       { "item": "Worn Fine Wood Bow" },
       { "item": "Bell Pepper" },
       { "item": "Ashira Tail" },
+      { "item": "Ashira Hunter Tooth" },
       { "family": "Corroded Bronze" },
-      { "family": "Tattered Hide" }
+      { "family": "Tattered Hide" },
+      { "family": "Corrupted Leather" }
     ],
     "coinDrops": [
       { "silver": 1, "copper": 76 },
@@ -6200,7 +6179,7 @@
       { "silver": 2, "copper": 17 },
       { "silver": 2, "copper": 12 }
     ],
-    "lastUpdated": "2026-08-06"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a corrupted outrider",
@@ -6216,7 +6195,11 @@
       { "item": "Cracked Fine Wood Staff" },
       { "item": "Mushroom" },
       { "item": "Lemon" },
-      { "family": "Corroded Bronze" }
+      { "item": "Corrupted Leather Scraps" },
+      { "item": "Ashira War Tooth" },
+      { "item": "Ashira Hunter Tooth" },
+      { "family": "Corroded Bronze" },
+      { "family": "Corrupted Leather" }
     ],
     "coinDrops": [
       { "silver": 2, "copper": 50 },
@@ -6234,7 +6217,7 @@
       { "silver": 1, "copper": 67 },
       { "silver": 2, "copper": 11 }
     ],
-    "lastUpdated": "2026-08-06"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a corrupted adept",
@@ -6245,8 +6228,12 @@
       { "item": "Hide Scraps" },
       { "item": "Raw Ashira Meat" },
       { "item": "Bell Pepper" },
+      { "item": "Corrupted Leather Scraps" },
+      { "item": "Ashira War Tooth" },
+      { "item": "Ashira Hunter Tooth" },
       { "family": "Corroded Bronze" },
-      { "family": "Tattered Hide" }
+      { "family": "Tattered Hide" },
+      { "family": "Corrupted Leather" }
     ],
     "coinDrops": [
       { "silver": 1, "copper": 85 },
@@ -6254,7 +6241,7 @@
       { "silver": 1, "copper": 60 },
       { "silver": 2, "copper": 28 }
     ],
-    "lastUpdated": "2026-08-06"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a corrupted warrior",
@@ -6268,13 +6255,14 @@
       { "item": "Wool Scraps" },
       { "item": "Ashira Tail" },
       { "item": "Mushroom" },
-      { "item": "Corrupted Leather Cap" },
       { "item": "Corrupted Leather Scraps" },
       { "item": "Bell Pepper" },
       { "item": "Raw Ashira Meat" },
       { "item": "Worn Fine Wood Bow" },
       { "item": "Cracked Fine Wood Staff" },
-      { "item": "Corrupted Leather Boots" }
+      { "item": "Ashira War Tooth" },
+      { "item": "Ashira Hunter Tooth" },
+      { "family": "Corrupted Leather" }
     ],
     "coinDrops": [
       { "silver": 2, "copper": 9 },
@@ -6287,7 +6275,7 @@
       { "silver": 2, "copper": 45 },
       { "silver": 1, "copper": 94 }
     ],
-    "lastUpdated": "2026-08-06"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "a scoundrel",
