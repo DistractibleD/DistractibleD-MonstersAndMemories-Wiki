@@ -1389,11 +1389,13 @@
       { "silver": 2, "copper": 93 },
       { "silver": 3, "copper": 4 },
       { "silver": 2, "copper": 87 },
-      { "silver": 2, "copper": 41 }
+      { "silver": 2, "copper": 41 },
+      { "silver": 2, "copper": 23 }
     ],
     "conObservations": [
       { "playerLevel": 28, "con": "White" },
-      { "playerLevel": 29, "con": "Light Blue" }
+      { "playerLevel": 29, "con": "Light Blue" },
+      { "playerLevel": 29, "con": "White" }
     ],
     "factionEffects": [
       { "faction": "Citizens of Night Harbor", "effect": "positive" },
@@ -1478,7 +1480,15 @@
       { "silver": 3, "copper": 29 },
       { "silver": 2, "copper": 79 },
       { "silver": 2, "copper": 70 },
-      { "silver": 2, "copper": 61 }
+      { "silver": 2, "copper": 61 },
+      { "silver": 2, "copper": 79 },
+      { "silver": 3, "copper": 33 },
+      { "silver": 2, "copper": 71 },
+      { "silver": 2, "copper": 61 },
+      { "silver": 2, "copper": 61 },
+      { "silver": 2, "copper": 58 },
+      { "silver": 3, "copper": 9 },
+      { "silver": 2, "copper": 69 }
     ],
     "conObservations": [
       { "playerLevel": 28, "con": "White" },
@@ -1491,6 +1501,7 @@
       { "playerLevel": 28, "con": "Yellow" },
       { "playerLevel": 28, "con": "Yellow" },
       { "playerLevel": 29, "con": "White" },
+      { "playerLevel": 29, "con": "Light Blue" },
       { "playerLevel": 29, "con": "Light Blue" },
       { "playerLevel": 29, "con": "Light Blue" }
     ],
@@ -2062,11 +2073,38 @@
     "name": "a Dustrend legionary",
     "slug": "a-dustrend-legionary",
     "maps": ["Vale of Zintar"],
-    "drops": [{ "item": "Rusty Iron Plate Collar" }],
+    "drops": [
+      { "item": "Cotton Scraps" },
+      { "item": "Iron Scraps" },
+      { "item": "Worn Ironbark Buckler" },
+      { "family": "Rusty Iron" }
+    ],
+    "coinDrops": [
+      { "silver": 2, "copper": 80 },
+      { "silver": 2, "copper": 36 },
+      { "silver": 2, "copper": 64 },
+      { "silver": 2, "copper": 22 },
+      { "silver": 3, "copper": 9 },
+      { "silver": 2, "copper": 29 }
+    ],
     "conObservations": [
       { "playerLevel": 28, "con": "Yellow" },
       { "playerLevel": 28, "con": "Yellow" },
-      { "playerLevel": 28, "con": "Yellow" }
+      { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 29, "con": "Yellow" }
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Orcs", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
     ],
     "lastUpdated": "2026-08-10"
   },
@@ -5560,7 +5598,10 @@
     "coinDrops": [
       { "silver": 7, "copper": 8 }
     ],
-    "lastUpdated": "2026-07-30"
+    "conObservations": [
+      { "playerLevel": 29, "con": "Red" }
+    ],
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Yvette Gardener",
@@ -6775,7 +6816,9 @@
     "slug": "a-dire-wolf-patroller",
     "maps": ["Vale of Zintar"],
     "drops": [
-      { "item": "Wolf Tooth" }
+      { "item": "Wolf Tooth" },
+      { "item": "Medium-Quality Wolf Pelt" },
+      { "item": "Wolf Blood" }
     ],
     "factionEffects": [
       { "faction": "Citizens of Night Harbor", "effect": "positive" },
@@ -6785,6 +6828,53 @@
     ],
     "conObservations": [
       { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 29, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Dustrend Sacramir",
+    "slug": "dustrend-sacramir",
+    "named": true,
+    "maps": ["Vale of Zintar"],
+    "relatedMonsters": [
+      { "label": "a Dustrend sacramir", "slug": "a-dustrend-sacramir" }
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Orcs", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a Dustrend sacramir",
+    "slug": "a-dustrend-sacramir",
+    "relatedMonsters": [
+      { "label": "Dustrend Sacramir", "slug": "dustrend-sacramir" }
+    ],
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Iron Scraps" },
+      { "family": "Rusty Iron" }
+    ],
+    "coinDrops": [
+      { "silver": 3, "copper": 49 },
+      { "silver": 3, "copper": 60 }
+    ],
+    "conObservations": [
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 29, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "a Dustrend venator",
+    "slug": "a-dustrend-venator",
+    "maps": ["Vale of Zintar"],
+    "conObservations": [
       { "playerLevel": 29, "con": "Yellow" }
     ],
     "lastUpdated": "2026-08-10"
