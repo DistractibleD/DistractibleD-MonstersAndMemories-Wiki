@@ -1256,7 +1256,7 @@ function setupBuffDropdown(container, idPrefix, { onChange } = {}) {
     // run off the right edge, and never letting it run off the left edge
     // either — the button can sit anywhere in a wrapped toolbar, and on a
     // narrow phone viewport the panel can be nearly as wide as the screen,
-    // so a simple two-way left/right flip (like setupItemTooltip's
+    // so a simple two-way left/right flip (like setupMonsterTooltip's
     // flip-above-if-no-room-below) isn't enough on its own; this instead
     // computes the panel's desired left edge in viewport coordinates,
     // clamps it between the two margins, then converts back to a `left`
@@ -2000,11 +2000,15 @@ function renderItemsList(container, category) {
     </div>
   `;
 
-  // No hover preview on the Item Database itself (2026-08-10, user's own
-  // call) — clicking a name for the full #item-viewer modal is the only way
-  // to see a card here now. Every other page that links to an item (Crafting
-  // components, Monster drops, etc.) keeps its own setupItemTooltip call
-  // untouched, so hovering still works everywhere else.
+  // No hover preview anywhere on the site (2026-08-11, user's own call,
+  // extending the 2026-08-10 Item-Database-only version) — clicking a name
+  // for the full #item-viewer modal is the only way to see an item's card
+  // now. setupItemClickToView is the Item Database table's own click
+  // handler; every other page's own item-link click handler (recipe
+  // components, monster drops, gathering results, spell scrolls) already
+  // navigated to the full item on click before hover was ever added, so
+  // removing the old setupItemTooltip calls there didn't need any
+  // replacement wiring.
   setupItemClickToView(container.querySelector('#items-tbody'));
 
   const searchBox = container.querySelector('#items-search');
@@ -2260,15 +2264,12 @@ function renderItemRows(tbody, items, showTypeColumn) {
 
 // Renders an item's full card — an original layout (not a screenshot, and
 // deliberately not modeled on any other site's item popup) built entirely
-// from items.json fields, used by both the hover preview and the item
-// viewer modal. A gold accent + type icon (weapon/armor sub-type, jewelry
-// slot, or tradeskill for materials — see itemIconHTML) marks it as an ITEM
-// card, as opposed to the teal recipe cards below.
-// `opts.interactive` adds a "Wrong or missing info?" link after
-// the Found at line — only passed true from the full item viewer
-// (openItemViewer), never the hover tooltip (#item-tooltip is
-// pointer-events: none, so a link there would be visible but unclickable).
-function renderItemCardHTML(item, opts = {}) {
+// from items.json fields, used by the item viewer modal (there's no hover
+// preview anymore — removed site-wide 2026-08-11, clicking an item name is
+// now the only way to see its card). A gold accent + type icon (weapon/armor
+// sub-type, jewelry slot, or tradeskill for materials — see itemIconHTML)
+// marks it as an ITEM card, as opposed to the teal recipe cards below.
+function renderItemCardHTML(item) {
   const iconHtml = itemIconHTML(item);
   const categoryLabel = itemCategoryLabel(item);
   const badges = (item.tags || []).map(t => `<span class="badge-tag">${t}</span>`).join('')
@@ -2323,9 +2324,8 @@ function renderItemCardHTML(item, opts = {}) {
         </div>` : ''}
         ${(() => {
           const droppedBy = findMonstersDroppingItem(item.name);
-          const monsterLinks = droppedBy.map(m => opts.interactive
-            ? `<a href="#" class="item-monster-drop-link" data-slug="${escapeAttr(m.slug)}">${escapeAttr(m.name)}</a>`
-            : escapeAttr(m.name)
+          const monsterLinks = droppedBy.map(m =>
+            `<a href="#" class="item-monster-drop-link" data-slug="${escapeAttr(m.slug)}">${escapeAttr(m.name)}</a>`
           );
           const gatheringTradeskills = findGatheringTradeskillsForItem(item.name).map(escapeAttr);
           const vendors = findVendorsSellingItem(item.name);
@@ -2340,127 +2340,21 @@ function renderItemCardHTML(item, opts = {}) {
           Dropped by &middot; ${parts.length ? parts.join(', ') : 'not yet known'}
         </div>`;
         })()}
-        ${opts.interactive ? `
         <div class="item-card-section item-card-gamelink">
           ${item.gameLinkCode
             ? `<button type="button" class="copy-game-link-btn" data-link="${escapeAttr(item.gameLinkCode)}">Copy Item Link</button>`
             : `<button type="button" class="copy-game-link-btn" disabled title="No in-game link code recorded yet">Copy Item Link</button>
                <a href="#" class="item-addlink-link" data-name="${escapeAttr(item.name)}">Add a code?</a>`
           }
-        </div>` : ''}
-        ${opts.interactive ? `<div class="item-card-section item-card-suggest">Wrong or missing info? <a href="#" class="item-suggest-link" data-name="${escapeAttr(item.name)}">Click here</a> to let us know.</div>` : ''}
-        ${opts.isTooltip ? '<p class="item-card-tooltip-hint">Click for more info</p>' : ''}
+        </div>
+        <div class="item-card-section item-card-suggest">Wrong or missing info? <a href="#" class="item-suggest-link" data-name="${escapeAttr(item.name)}">Click here</a> to let us know.</div>
       </div>
     </div>
   `;
 }
 
-// A single floating preview card, shared by every hoverable name on the
-// site (item rows, recipe names, recipe components), positioned in the
-// viewport on hover so it's never clipped by a scroll container. Looks up
-// the full item by name and renders its card fresh on every hover rather
-// than caching anything, since items.json is the only source of truth here.
-// Site-wide "Show item cards" preference (2026-07-20, user's own request) —
-// a single localStorage-backed on/off switch (default on) for whether
-// hovering an item name pops up its card preview (#item-tooltip). Toggling
-// it off doesn't remove the item's own hover styling/cursor or disable
-// clicking through to the full item viewer (that's a deliberate action, not
-// an incidental hover) — it only silences the automatic popup for people who
-// find it distracting while scanning a long table/grid quickly. One shared
-// setting, not per-page, so a toggle switch dropped into any toolbar
-// (Item Database, Crafting/Gathering recipes, Gathering nodes, Monsters)
-// reads/writes the same value — see showCardsToggleHTML/setupShowCardsToggle.
-const SHOW_ITEM_CARDS_KEY = 'mnmwiki-show-item-cards';
-
-function getShowItemCards() {
-  try {
-    return localStorage.getItem(SHOW_ITEM_CARDS_KEY) !== '0';
-  } catch {
-    return true;
-  }
-}
-
-function setShowItemCards(show) {
-  try {
-    localStorage.setItem(SHOW_ITEM_CARDS_KEY, show ? '1' : '0');
-  } catch {
-    // Storage unavailable — the toggle just won't persist across page loads.
-  }
-}
-
-// Markup for the toggle switch itself — same visual language as
-// .needsinfo-toggle (checkbox + pill slider) but in the site's normal accent
-// color rather than that toggle's red, since this isn't a warning state.
-// `id` must be unique per render (a page can render more than one toolbar
-// with this control, e.g. none currently do at once, but ids still need to
-// not collide with a previous render left in the DOM momentarily).
-function showCardsToggleHTML(id) {
-  return `
-    <label class="show-cards-toggle" for="${id}">
-      <input type="checkbox" id="${id}">
-      <span class="show-cards-toggle-slider"></span>
-      <span>Show item cards</span>
-    </label>
-  `;
-}
-
-// Wires up one rendered showCardsToggleHTML instance: initializes its
-// checked state from the shared setting and persists any change back to it.
-// Call once per toolbar that includes the toggle markup.
-function setupShowCardsToggle(container, id) {
-  const input = container.querySelector(`#${id}`);
-  if (!input) return;
-  input.checked = getShowItemCards();
-  input.addEventListener('change', () => {
-    setShowItemCards(input.checked);
-    if (!input.checked) {
-      const tooltip = document.getElementById('item-tooltip');
-      if (tooltip) tooltip.style.display = 'none';
-    }
-  });
-}
-
-function setupItemTooltip(container) {
-  let tooltip = document.getElementById('item-tooltip');
-  if (!tooltip) {
-    tooltip = document.createElement('div');
-    tooltip.id = 'item-tooltip';
-    document.body.appendChild(tooltip);
-  }
-
-  container.addEventListener('mouseover', e => {
-    if (!getShowItemCards()) return;
-    const span = e.target.closest('.item-name-hover');
-    if (!span) return;
-    const item = findItemByName(span.dataset.alt);
-    if (!item) return;
-    const rect = span.getBoundingClientRect();
-    tooltip.innerHTML = renderItemCardHTML(item, { isTooltip: true });
-    tooltip.style.display = 'block';
-
-    const left = Math.min(rect.left, window.innerWidth - 336);
-    const spaceBelow = window.innerHeight - rect.bottom;
-    if (spaceBelow < 260 && rect.top > spaceBelow) {
-      tooltip.style.top = '';
-      tooltip.style.bottom = (window.innerHeight - rect.top + 8) + 'px';
-    } else {
-      tooltip.style.bottom = '';
-      tooltip.style.top = (rect.bottom + 8) + 'px';
-    }
-    tooltip.style.left = Math.max(left, 8) + 'px';
-  });
-
-  container.addEventListener('mouseout', e => {
-    const span = e.target.closest('.item-name-hover');
-    if (!span) return;
-    if (span.contains(e.relatedTarget)) return;
-    tooltip.style.display = 'none';
-  });
-}
-
 // Clicking an item's name in the Item Database table opens the full item
-// viewer (see below) — the same card as the hover preview, just bigger and
-// with crafting links attached, in a modal instead of a floating tooltip.
+// viewer (see below), with crafting links attached.
 function setupItemClickToView(tbody) {
   tbody.addEventListener('click', e => {
     const span = e.target.closest('.item-name-hover');
@@ -2561,7 +2455,7 @@ async function openItemViewer(item) {
   setupItemViewer();
 
   const viewer = document.getElementById('item-viewer');
-  viewer.querySelector('#item-viewer-card').innerHTML = renderItemCardHTML(item, { interactive: true });
+  viewer.querySelector('#item-viewer-card').innerHTML = renderItemCardHTML(item);
 
   const resultRecipe = findRecipeForItem(item.name);
   const usedIn = findRecipesUsingItem(item.name);
@@ -3723,7 +3617,6 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   const slotFilterId = `craft-recipe-filter-slot${idSuffix}`;
   const typeFilterId = `craft-recipe-filter-type${idSuffix}`;
   const sortId = `craft-recipe-sort${idSuffix}`;
-  const showCardsId = `craft-recipe-show-cards${idSuffix}`;
 
   // Sorted by the recipe's real skill requirement (lowest first) — a
   // confirmed `recipeSkillLevel` where one exists, otherwise the
@@ -3798,7 +3691,6 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
                 <span class="needsinfo-toggle-slider"></span>
                 <span>Show only recipes that need info</span>
               </label>
-              ${showCardsToggleHTML(showCardsId)}
             </div>
             <p class="items-count" id="${countId}"></p>
             <div id="${gridId}"></div>
@@ -3823,7 +3715,6 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   const slotFilter = isEnchanting ? rootEl.querySelector(`#${slotFilterId}`) : null;
   const typeFilter = isEnchanting ? rootEl.querySelector(`#${typeFilterId}`) : null;
   const sortSelect = rootEl.querySelector(`#${sortId}`);
-  setupShowCardsToggle(rootEl, showCardsId);
 
   function attachRecipeLinkHandlers() {
     grid.querySelectorAll('.craft-result-link').forEach(link => {
@@ -3913,7 +3804,6 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
     }
 
     countEl.textContent = (query || needsInfo || slotValue || typeValue) ? `Showing ${filtered.length} of ${allRecipes.length} recipes` : '';
-    setupItemTooltip(grid);
     attachRecipeLinkHandlers();
   }
 
@@ -4087,7 +3977,6 @@ function renderGatheringNodes(container, tradeskillName) {
             <div class="items-toolbar">
               <input type="search" id="gathering-search" class="items-search" placeholder="Search ${escapeAttr(tradeskillName)} nodes, results, locations..." autocomplete="off">
               <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="gathering-search">Clear</button>
-              ${showCardsToggleHTML('gathering-show-cards')}
             </div>
             <p class="items-count" id="gathering-count"></p>
             <div class="items-table-wrap">
@@ -4123,7 +4012,6 @@ function renderGatheringNodes(container, tradeskillName) {
   const countEl = container.querySelector('#gathering-count');
   const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
   const columnCount = columns.length;
-  setupShowCardsToggle(container, 'gathering-show-cards');
 
   let sortKey = 'minSkill';
   let sortDir = 'asc';
@@ -4182,7 +4070,6 @@ function renderGatheringNodes(container, tradeskillName) {
     tbody.querySelectorAll('.gathering-node-thumb').forEach(btn => {
       btn.addEventListener('click', () => openGatheringImageViewer(JSON.parse(btn.dataset.images), 0));
     });
-    setupItemTooltip(tbody);
   }
 
   function update() {
@@ -4422,7 +4309,6 @@ function renderMonstersList(container, scope) {
         <span class="needsinfo-toggle-slider"></span>
         <span>Show only monsters that need info</span>
       </label>
-      ${showCardsToggleHTML('monsters-show-cards')}
     </div>
     ${switcherZones.length ? `
     <nav class="monster-zone-switcher">
@@ -4443,7 +4329,6 @@ function renderMonstersList(container, scope) {
 
   const searchBox = container.querySelector('#monsters-search');
   const needsInfoFilter = container.querySelector('#monsters-filter-needsinfo');
-  setupShowCardsToggle(container, 'monsters-show-cards');
 
   // Landed here from a header search result — pre-fill the search box with
   // that monster's name so the grid filters straight down to it.
@@ -4543,26 +4428,25 @@ function findMonsterBySlug(slug) {
   return (monstersData || []).find(m => m.slug === slug);
 }
 
-// Hover-to-preview a monster's card, same idea and positioning logic as
-// setupItemTooltip (flip-above-if-no-room-below) — but unlike an item's
-// tooltip, this one is clickable (2026-07-17, user's own call: clicking the
+// Hover-to-preview a monster's card, flip-above-if-no-room-below positioning
+// — this one is clickable (2026-07-17, user's own call: clicking the
 // card itself should open the full viewer with its screenshot and
 // clickable drops, not just the underlying table row). The tooltip element
-// is a singleton (like #item-tooltip) reused across every call to this
-// function, so the monster it's currently showing is tracked as a property
-// on the element itself (tooltip._monster) rather than a closed-over local
-// — a local would go stale the moment a second page calls this function
-// again with a new closure, while the click/mouseleave listeners registered
-// on the first call are still the ones attached to the shared element.
+// is a singleton reused across every call to this function, so the monster
+// it's currently showing is tracked as a property on the element itself
+// (tooltip._monster) rather than a closed-over local — a local would go
+// stale the moment a second page calls this function again with a new
+// closure, while the click/mouseleave listeners registered on the first
+// call are still the ones attached to the shared element. (Item names
+// inside the preview, e.g. drop links, no longer get their own hover card
+// on top — item hover previews were removed site-wide 2026-08-11; clicking
+// one still navigates to the full item.)
 function setupMonsterTooltip(container) {
   let tooltip = document.getElementById('monster-tooltip');
   if (!tooltip) {
     tooltip = document.createElement('div');
     tooltip.id = 'monster-tooltip';
     document.body.appendChild(tooltip);
-    // Lets hovering a drop-link's item name inside the preview show that
-    // item's own hover card on top, same as it would in the full viewer.
-    setupItemTooltip(tooltip);
 
     const hideTooltip = () => {
       tooltip.style.display = 'none';
@@ -4954,7 +4838,6 @@ function openMonsterViewer(monster) {
 
   const viewer = document.getElementById('monster-viewer');
   viewer.querySelector('#monster-viewer-card').innerHTML = renderMonsterCardHTML(monster);
-  setupItemTooltip(viewer.querySelector('#monster-viewer-card'));
 
   viewer.classList.add('open');
   document.body.style.overflow = 'hidden';

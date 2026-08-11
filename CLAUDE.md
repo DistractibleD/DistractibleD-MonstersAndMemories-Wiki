@@ -103,9 +103,9 @@ game feature, not something the wiki computes or calls an API for.
 - `item.gameLinkCode` — optional, the **exact raw code** as captured from the game (own
   quotes/tags and all), stored and copied verbatim, never reconstructed/simplified by us.
   Source-of-truth is always the user's own in-game test, same as any other confirmed field.
-- Item card (`renderItemCardHTML`, `opts.interactive` only — same gating as the monster
-  drop-links and suggest-link, since the tooltip is `pointer-events: none`) shows a **"Copy
-  Item Link"** button that copies `gameLinkCode` to the clipboard
+- Item card (`renderItemCardHTML`, rendered only in the full `#item-viewer` modal now — no
+  hover preview exists to gate this out of) shows a **"Copy Item Link"** button that copies
+  `gameLinkCode` to the clipboard
   (`navigator.clipboard.writeText`, `.copy-game-link-btn` in `setupItemViewer`'s click
   handler) — flashes "Copied!" on success, "Copy failed" on a denied clipboard permission.
 - No code yet → button renders `disabled` (grayed out) next to an **"Add a code?"** link
@@ -1215,31 +1215,27 @@ the two visually distinct (`.item-card` base, `item-card-recipe`/`item-card-icon
 `item-card-name-recipe`/`badge-tag-craft` modifiers).
 
 **Where cards appear:**
-- Hovering `.item-name-hover` (Item DB row, linked recipe name/component) → floating tooltip
-  (`#item-tooltip`, `setupItemTooltip`, flip-above-if-no-room), looked up by name every time
-  (never a cached image path).
-- Clicking an item name in the Item Database → `#item-viewer` modal
-  (`openItemViewer`/`setupItemViewer`), larger card + "Crafted via"/"Used to craft"
+- Clicking an item name anywhere on the site (Item DB row, linked recipe name/component,
+  monster drop, gathering result, spell scroll) → `#item-viewer` modal
+  (`openItemViewer`/`setupItemViewer`), full card + "Crafted via"/"Used to craft"
   (`findRecipeForItem`/`findRecipesUsingItem`). `#item-viewer-panel` caps `max-height: 88vh`
-  + `overflow-y: auto`. Close button on the overlay (no separate header bar).
+  + `overflow-y: auto`. Close button on the overlay (no separate header bar). **No hover
+  preview anymore** — removed site-wide 2026-08-11 (started 2026-08-10 as an Item-Database-
+  only change, then extended everywhere at the user's request). `renderItemCardHTML(item)`
+  no longer takes an `opts` param — the old `opts.interactive`-gated sections (gamelink,
+  suggest-a-correction) always render now, since the only remaining caller (`openItemViewer`)
+  always wanted them; the removed `opts.isTooltip` hint text doesn't apply anywhere anymore.
+  If a hover preview is ever wanted back for items, `setupMonsterTooltip` is the pattern to
+  copy from — it's the one hover-card shell still on the site.
 - Every Crafting-page recipe renders as its own card directly in the grid.
-
-**"Show item cards" toggle** — site-wide on/off (default on) for hover-popup, backed by
-`localStorage` key `mnmwiki-show-item-cards` (`getShowItemCards()`/`setShowItemCards()`).
-Markup (`showCardsToggleHTML(id)`) + wiring (`setupShowCardsToggle(container, id)`) dropped
-into any toolbar that can trigger a hover preview: Item Database, Crafting/Gathering recipe
-view, Gathering nodes table, Named/Regular Monsters zone list. Off only silences the
-automatic hover popup — doesn't disable clicking to open the full `#item-viewer` (deliberate
-action, not incidental hover).
 
 **`item.foundAt`** — optional free-text ("Quest reward: `<quest name>`", any non-monster
 source) on the card's **"Dropped by"** line — always renders ("not yet known" when absent).
 **This line leads with a live reverse lookup:** `findMonstersDroppingItem(itemName)` scans
 every monster's `drops` for this item (same convention as the crafting reverse lookups just
-above it), lists each match as a clickable link (only in the full item viewer —
-`opts.interactive` — never the hover tooltip, since `#item-tooltip` is `pointer-events:
-none`). Any `foundAt` text still appears too, appended after monster links. Purely a
-render-time lookup, nothing new to set on the monster side.
+above it), lists each match as a clickable link. Any `foundAt` text still appears too,
+appended after monster links. Purely a render-time lookup, nothing new to set on the monster
+side.
 
 **No `rumor` field** (removed site-wide 2026-07-17) — used to hold unconfirmed guesses
 separately from confirmed fields, rendered as an amber line. Superseded by the Submit
@@ -1402,11 +1398,11 @@ account needed.**
   whatever the visitor typed.
 - **"Wrong or missing info?"** (items and named monsters) jumps to Submit with context
   pre-filled via `goToSubmit(context)` (`pendingSubmitContext`, consume-once). Item card:
-  only in the full viewer (`opts.interactive`), not the hover tooltip (pointer-events:
-  none). Monster card: shown in both tooltip and modal (monster tooltip is already fully
-  interactive), gated on `monster.named` — regular monsters don't get this link. Clickable
-  part is a separate "Click here" `<a>` after the plain-text question, not the question
-  itself.
+  only ever rendered in the full `#item-viewer` modal now (no hover preview exists to gate
+  this out of). Monster card: shown in both the hover tooltip and the modal (monster tooltip
+  is already fully interactive), gated on `monster.named` — regular monsters don't get this
+  link. Clickable part is a separate "Click here" `<a>` after the plain-text question, not
+  the question itself.
 - **Why a Worker at all:** GitHub Pages serves static files only, can't hold a GitHub token
   safely (embedded page JS would expose it to anyone). A small serverless function is the
   minimum infrastructure that can hold that secret while keeping the form on-site.

@@ -765,62 +765,6 @@ body:not(.site-entered) .sidebar {
   outline: 2px solid #ff6b6b;
   outline-offset: 2px;
 }
-/* "Show item cards" toggle (showCardsToggleHTML/setupShowCardsToggle in
-   script.js) — same pill-switch structure as .needsinfo-toggle, just in the
-   site's normal accent color instead of that toggle's red, since this is a
-   plain display preference rather than a warning state. */
-.show-cards-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  cursor: pointer;
-  color: var(--text-dim);
-  font-weight: 600;
-  font-size: 0.88rem;
-  font-family: inherit;
-  user-select: none;
-}
-.show-cards-toggle input {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-.show-cards-toggle-slider {
-  position: relative;
-  display: inline-block;
-  flex: 0 0 auto;
-  width: 36px;
-  height: 20px;
-  background: var(--bg-panel-hover);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  transition: background 0.15s ease;
-}
-.show-cards-toggle-slider::before {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--text-dim);
-  transition: transform 0.15s ease, background 0.15s ease;
-}
-.show-cards-toggle input:checked + .show-cards-toggle-slider {
-  background: var(--accent-dim);
-  border-color: var(--accent);
-}
-.show-cards-toggle input:checked + .show-cards-toggle-slider::before {
-  background: var(--accent);
-  transform: translateX(16px);
-}
-.show-cards-toggle input:focus-visible + .show-cards-toggle-slider {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
 .items-clear-btn {
   background: transparent;
   /* A muted red border (2026-07-19, user's own request) makes this button
@@ -1210,11 +1154,11 @@ body:not(.site-entered) .sidebar {
 
 /* ---------- Item/recipe cards ----------
    Shared, original card layout (not modeled on any other site) used
-   everywhere an item or recipe needs to show its full stats: the hover
-   preview (#item-tooltip), the item viewer modal, and every recipe card
-   on the Crafting page. Gold accent = item, teal accent = recipe — the
-   two are visually distinct even though they share the same structure,
-   so a recipe card is never mistaken for an item card at a glance. */
+   everywhere an item or recipe needs to show its full stats: the item
+   viewer modal and every recipe card on the Crafting page. Gold accent =
+   item, teal accent = recipe — the two are visually distinct even though
+   they share the same structure, so a recipe card is never mistaken for an
+   item card at a glance. */
 .item-card {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -1523,15 +1467,6 @@ body:not(.site-entered) .sidebar {
 }
 /* Shown on every item card (see renderItemCardHTML) as a reminder that
    hovering is only a preview — click the name for the full viewer. */
-.item-card-tooltip-hint {
-  margin: 10px 0 0;
-  padding-top: 8px;
-  border-top: 1px solid var(--border);
-  color: var(--text-dim);
-  font-size: 0.76rem;
-  font-style: italic;
-  text-align: center;
-}
 .item-card-components {
   list-style: none;
   padding: 0;
@@ -1550,25 +1485,13 @@ body:not(.site-entered) .sidebar {
   cursor: pointer;
   border-bottom: 1px dotted var(--accent-dim);
 }
-#item-tooltip {
-  display: none;
-  position: fixed;
-  /* Must outrank #item-viewer/#monster-viewer's z-index: 300 — hovering an
-     item name inside an already-open monster card (e.g. a drop link) needs
-     the tooltip to render above that modal, not behind it. */
-  z-index: 400;
-  width: 320px;
-  max-width: 90vw;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
-  pointer-events: none;
-}
 /* Hover-to-preview a monster's card (.monster-name-hover, setupMonsterTooltip)
-   — same shell as #item-tooltip, just sized for .monster-card's own layout
-   (picture + body) instead of an item card. Unlike #item-tooltip, this one is
-   clickable (pointer-events left at its default 'auto') — clicking it opens
-   the full monster viewer, or navigates straight to a drop/related-monster
-   link if that's what was clicked (see setupMonsterTooltip). */
+   — sized for .monster-card's own layout (picture + body). Clickable
+   (pointer-events left at its default 'auto') — clicking it opens the full
+   monster viewer, or navigates straight to a drop/related-monster link if
+   that's what was clicked (see setupMonsterTooltip). Item names no longer
+   have an equivalent hover preview (removed site-wide 2026-08-11) — this is
+   the only hover-card shell left on the site. */
 #monster-tooltip {
   display: none;
   position: fixed;
