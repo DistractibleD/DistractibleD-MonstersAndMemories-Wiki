@@ -19787,6 +19787,25 @@
     "size": "Small"
   },
   {
+    "name": "Fine Wood",
+    "slug": "fine-wood",
+    "lastUpdated": "2026-08-11",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Medium"
+  },
+  {
+    "name": "Dreadweave Silk",
+    "slug": "dreadweave-silk",
+    "lastUpdated": "2026-08-11",
+    "type": "Misc",
+    "tags": ["MAGIC"],
+    "description": "An exceptionally tough thread from an exceptionally large spider.",
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
     "name": "Enchanted Frond",
     "slug": "enchanted-frond",
     "lastUpdated": "2026-08-08",

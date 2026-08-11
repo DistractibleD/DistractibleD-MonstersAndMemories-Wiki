@@ -65,7 +65,7 @@
     "tradeskill": "Mining",
     "minSkill": 110,
     "trivialSkill": 150,
-    "results": ["Silver Ore"],
+    "results": ["Silver Ore", "Jagged Stone", "Glinting Crystallized Magic", { "family": "Flawed", "label": "Flawed Gems" }],
     "locations": ["Sungreet Strand", "Vale of Zintar", "Scarwood"]
   },
   {
@@ -190,6 +190,7 @@
   {
     "name": "Fine Wood Pile",
     "slug": "fine-wood-pile",
+    "image": "images/gathering/fine-wood-pile.jpg",
     "tradeskill": "Lumberjacking",
     "minSkill": 50,
     "trivialSkill": 85,
@@ -199,6 +200,7 @@
   {
     "name": "Rich Fine Wood Pile",
     "slug": "rich-fine-wood-pile",
+    "image": "images/gathering/rich-fine-wood-pile.jpg",
     "tradeskill": "Lumberjacking",
     "minSkill": 50,
     "trivialSkill": 100,

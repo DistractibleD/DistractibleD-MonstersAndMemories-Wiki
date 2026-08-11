@@ -885,13 +885,41 @@
     "drops": [
       { "item": "Aashir's Journal Page 42" },
       { "item": "Mushroom" }
-    ]
+    ],
+    "conObservations": [
+      { "playerLevel": 29, "con": "Green" },
+      { "playerLevel": 29, "con": "Green" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a risen commander",
     "slug": "a-risen-commander",
     "image": "images/Monsters/a-risen-commander.jpg",
-    "maps": ["Shaded Dunes"]
+    "maps": ["Shaded Dunes"],
+    "conObservations": [
+      { "playerLevel": 29, "con": "Green" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a risen deacon",
+    "slug": "a-risen-deacon",
+    "maps": ["Shaded Dunes"],
+    "conObservations": [
+      { "playerLevel": 29, "con": "Green" },
+      { "playerLevel": 29, "con": "Green" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a risen guard",
+    "slug": "a-risen-guard",
+    "maps": ["Shaded Dunes"],
+    "conObservations": [
+      { "playerLevel": 29, "con": "Green" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a risen thaumaturgist",
@@ -959,7 +987,7 @@
       { "playerLevel": 24, "con": "Trivial" },
       { "playerLevel": 4, "con": "White" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a giant spider",
@@ -1138,7 +1166,7 @@
       { "playerLevel": 24, "con": "Trivial" },
       { "playerLevel": 1, "con": "Red" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a cemetery rat",
@@ -1170,7 +1198,10 @@
       { "item": "Giant Fire Beetle Eye" },
       { "item": "Giant Fire Beetle Legs" }
     ],
-    "lastUpdated": "2026-08-10"
+    "conObservations": [
+      { "playerLevel": 29, "con": "Trivial" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a ghost",
@@ -1193,7 +1224,12 @@
   {
     "name": "a palm hunter",
     "slug": "a-palm-hunter",
-    "image": "images/Monsters/a-palm-hunter.jpg"
+    "image": "images/Monsters/a-palm-hunter.jpg",
+    "maps": ["Sungreet Strand"],
+    "conObservations": [
+      { "playerLevel": 29, "con": "Dark Blue" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "an ashira shaman",
@@ -1307,7 +1343,7 @@
       { "item": "Wisp Dust" },
       { "item": "Burnt-Out Lightstone" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a Dustrend priest",
@@ -3747,6 +3783,14 @@
     "lastUpdated": "2026-07-24"
   },
   {
+    "name": "Porbin o' the Patch",
+    "slug": "porbin-o-the-patch",
+    "image": "images/Monsters/porbin-o-the-patch.jpg",
+    "named": true,
+    "maps": ["Glass Flats"],
+    "lastUpdated": "2026-08-11"
+  },
+  {
     "name": "Quartermaster Girault",
     "slug": "quartermaster-girault",
     "named": true,
@@ -6013,9 +6057,11 @@
     "maps": ["Sungreet Strand"],
     "areas": ["Quarry"],
     "conObservations": [
-      { "playerLevel": 24, "con": "Green" }
+      { "playerLevel": 24, "con": "Green" },
+      { "playerLevel": 29, "con": "Green" },
+      { "playerLevel": 29, "con": "Trivial" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a cinder worker",
@@ -6053,9 +6099,10 @@
     "maps": ["Sungreet Strand"],
     "areas": ["Quarry"],
     "conObservations": [
-      { "playerLevel": 24, "con": "Yellow" }
+      { "playerLevel": 24, "con": "Yellow" },
+      { "playerLevel": 29, "con": "Light Blue" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a goblin claim jumper",
@@ -6437,9 +6484,10 @@
       { "playerLevel": 26, "con": "Yellow" },
       { "playerLevel": 26, "con": "Yellow" },
       { "playerLevel": 26, "con": "Yellow" },
-      { "playerLevel": 27, "con": "Light Blue" }
+      { "playerLevel": 27, "con": "Light Blue" },
+      { "playerLevel": 29, "con": "Light Blue" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "an old elven skeleton",
@@ -6736,9 +6784,10 @@
       { "playerLevel": 28, "con": "Dark Blue" },
       { "playerLevel": 28, "con": "Dark Blue" },
       { "playerLevel": 28, "con": "Dark Blue" },
-      { "playerLevel": 28, "con": "Green" }
+      { "playerLevel": 28, "con": "Green" },
+      { "playerLevel": 29, "con": "Green" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "an ashira preserver",
