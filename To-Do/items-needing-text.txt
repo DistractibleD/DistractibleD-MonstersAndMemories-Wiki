@@ -506,3 +506,11 @@ which the user confirmed every new character starts with regardless of class/rac
 seen three times across the batch, every copy cut off right after "Class: DRU RNG SHM" with
 no Race line visible at all -- `race` left unset rather than assumed ALL, same as every other
 scrollbar/crop-cut Class-but-no-Race case in this file.
+
+2026-08-10, images/inbox batch (Vale of Zintar Dustrend camp loot log): another "Tattered
+Cotton" drop turned up ("Tattered Cotton Boots" from a Dustrend sacramir), same unresolved
+question as the earlier Plagueborn-camp sighting -- items.json's real family is "Tattered
+Cloth", not "Cotton", and it's still unclear whether the loot-log text just uses a looser
+material name or "Tattered Cotton" is a genuinely distinct, not-yet-carded tier. Recorded
+verbatim as seen rather than silently linked to Tattered Cloth; still renders as unlinked
+plain text until this is resolved with an in-game look or a real item card.
