@@ -71,10 +71,11 @@
   {
     "name": "Rich Silver Vein",
     "slug": "rich-silver-vein",
+    "image": "images/gathering/rich-silver-vein.jpg",
     "tradeskill": "Mining",
     "minSkill": 110,
     "trivialSkill": 160,
-    "results": ["Silver Ore"],
+    "results": ["Silver Ore", "Jagged Stone"],
     "locations": ["Sungreet Strand", "Vale of Zintar", "Scarwood"]
   },
   {
