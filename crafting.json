@@ -5840,12 +5840,19 @@
     "name": "Crocodile Steak",
     "slug": "crocodile-steak",
     "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
     "components": [
       { "item": "Raw Crocodile Meat", "quantity": 1 },
       { "item": "Butter", "quantity": 1 },
-      { "item": "Basil", "quantity": 1 }
+      { "item": "Basil", "quantity": 1 },
+      { "item": "Sea Salt", "quantity": 1 }
     ],
-    "recipeSkillLevel": 10
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 10,
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Fish Bones",
@@ -5870,106 +5877,168 @@
     "name": "Pan Fried Whitefish",
     "slug": "pan-fried-whitefish",
     "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
     "components": [
       { "item": "Cooked Whitefish Fillet", "quantity": 1 },
       { "item": "Butter", "quantity": 1 }
     ],
-    "recipeSkillLevel": 15
+    "difficultyColor": "White",
+    "difficultyText": "Your skills make this a complex task.",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 15,
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Roasted Rat with Onion",
     "slug": "roasted-rat-with-onion",
     "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
     "components": [
       { "item": "Raw Rat Meat", "quantity": 1 },
       { "item": "Onion", "quantity": 1 },
       { "item": "Black Pepper", "quantity": 1 }
     ],
-    "recipeSkillLevel": 15
+    "difficultyColor": "White",
+    "difficultyText": "Your skills make this a complex task.",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 15,
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Boiled Scarab Legs",
     "slug": "boiled-scarab-legs",
     "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
     "components": [
       { "item": "Scarab Leg", "quantity": 2 }
     ],
-    "recipeSkillLevel": 20
+    "difficultyColor": "Yellow",
+    "difficultyText": "Your skills make this a daunting task.",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 20,
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Cabbage Stew",
     "slug": "cabbage-stew",
     "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
     "components": [
       { "item": "Cabbage", "quantity": 1 },
       { "item": "Onion", "quantity": 1 },
       { "item": "Stock", "quantity": 1 }
     ],
-    "recipeSkillLevel": 20
+    "difficultyColor": "Yellow",
+    "difficultyText": "Your skills make this a daunting task.",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 20,
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Peppered Wolf Meat",
     "slug": "peppered-wolf-meat",
     "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
     "components": [
       { "item": "Raw Wolf Meat", "quantity": 1 },
       { "item": "Black Pepper", "quantity": 2 }
     ],
-    "recipeSkillLevel": 20
+    "difficultyColor": "Yellow",
+    "difficultyText": "Your skills make this a daunting task.",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 20,
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Bat Jerky",
     "slug": "bat-jerky",
     "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
     "components": [
       { "item": "Raw Bat Meat", "quantity": 1 },
-      { "item": "Black Pepper", "quantity": 2 }
+      { "item": "Black Pepper", "quantity": 1 },
+      { "item": "Sea Salt", "quantity": 1 }
     ],
-    "recipeSkillLevel": 25
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 25,
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Cured Jackal Meat",
     "slug": "cured-jackal-meat",
     "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
     "components": [
       { "item": "Raw Jackal Meat", "quantity": 1 },
-      { "item": "Crystallized Salt", "quantity": 2 }
+      { "item": "Sea Salt", "quantity": 2 }
     ],
-    "recipeSkillLevel": 30
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 30,
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Spiced Snake Cutlet",
     "slug": "spiced-snake-cutlet",
     "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
     "components": [
       { "item": "Raw Snake Meat", "quantity": 1 },
       { "item": "Garlic", "quantity": 1 },
       { "item": "Basil", "quantity": 1 },
-      { "item": "Paprika", "quantity": 1 }
+      { "item": "Paprika", "quantity": 1 },
+      { "item": "Sea Salt", "quantity": 1 }
     ],
-    "recipeSkillLevel": 40
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 40,
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Garlic Rat Haunch",
     "slug": "garlic-rat-haunch",
     "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
     "components": [
       { "item": "Raw Rat Fillet", "quantity": 1 },
       { "item": "Garlic", "quantity": 1 },
       { "item": "Butter", "quantity": 1 }
     ],
-    "recipeSkillLevel": 45
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 45,
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Lemon Basa Fillet",
     "slug": "lemon-basa-fillet",
     "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
     "components": [
       { "item": "Raw Basa Fillet", "quantity": 1 },
       { "item": "Lemon", "quantity": 1 },
-      { "item": "Crystallized Salt", "quantity": 1 }
+      { "item": "Sea Salt", "quantity": 1 }
     ],
-    "recipeSkillLevel": 45
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 45,
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Spicy Scarab Stew",
@@ -6042,13 +6111,85 @@
     "name": "Creamy Grouper Stew",
     "slug": "creamy-grouper-stew",
     "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
     "components": [
       { "item": "Grouper Fillet", "quantity": 2 },
       { "item": "Garlic", "quantity": 1 },
       { "item": "Mushshroom", "quantity": 1 },
       { "item": "Stock", "quantity": 1 },
       { "item": "Carrot", "quantity": 1 }
-    ]
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 0,
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Smoked Bear Flank",
+    "slug": "smoked-bear-flank",
+    "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
+    "components": [
+      { "item": "Raw Bear Meat", "quantity": 1 },
+      { "item": "Thyme", "quantity": 1 },
+      { "item": "Black Pepper", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 0,
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Stuffed Peppers",
+    "slug": "stuffed-peppers",
+    "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
+    "components": [
+      { "item": "Bell Pepper", "quantity": 1 },
+      { "item": "Onion", "quantity": 1 },
+      { "item": "Rice", "quantity": 2 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 0,
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Wolf Jerky",
+    "slug": "wolf-jerky",
+    "tradeskill": "Cooking",
+    "weight": 0.25,
+    "size": "Small",
+    "components": [
+      { "item": "Raw Wolf Meat", "quantity": 1 },
+      { "item": "Black Pepper", "quantity": 1 },
+      { "item": "Sea Salt", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 0,
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Baked Redfin",
+    "slug": "baked-redfin",
+    "tradeskill": "Cooking",
+    "description": "Baked redfin pike.",
+    "weight": 1.0,
+    "size": "Small",
+    "components": [
+      { "item": "Redfin Pike", "quantity": 1 },
+      { "item": "Sea Salt", "quantity": 1 },
+      { "item": "Butter", "quantity": 1 },
+      { "item": "Onion", "quantity": 1 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 0,
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Enchanted Powder (x1-5) & Mote of Magic (x0-2)",

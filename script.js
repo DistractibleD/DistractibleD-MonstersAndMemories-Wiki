@@ -12,6 +12,7 @@ let tradeskillsData = null; // cached contents of tradeskills.json
 let gatheringData = null; // cached contents of gathering-nodes.json
 let gemstonesData = null; // cached contents of gemstones.json
 let monstersData = null; // cached contents of monsters.json
+let vendorsData = null; // cached contents of vendors.json
 let companionsData = null; // cached contents of companions.json
 let levelingData = null; // cached contents of leveling-locations.json
 let companionSkillsData = null; // cached contents of companion-skills.json
@@ -125,6 +126,15 @@ async function ensureMonstersData() {
     monstersData = await res.json();
   }
   return monstersData;
+}
+
+async function ensureVendorsData() {
+  if (!vendorsData) {
+    const res = await fetch('vendors.json');
+    if (!res.ok) throw new Error('Could not load vendors.json');
+    vendorsData = await res.json();
+  }
+  return vendorsData;
 }
 
 async function ensureCompanionsData() {
@@ -302,6 +312,7 @@ async function init() {
   ensureItemsData().catch(() => {});
   ensureCraftingData().catch(() => {});
   ensureMonstersData().catch(() => {});
+  ensureVendorsData().catch(() => {});
   ensureCompanionsData().catch(() => {});
   ensureSpellsData().catch(() => {});
 
@@ -1113,6 +1124,17 @@ function findMonstersDroppingItem(itemName) {
       if (d.family) return d.family === itemFamily;
       return d.item.toLowerCase() === itemName.toLowerCase();
     })
+  );
+}
+
+// Reverse lookup for an item card's "Dropped by" line — every vendor whose
+// own `sells` list names this item (vendors.json, same reverse-lookup shape
+// as findMonstersDroppingItem's `drops`, just one level simpler since a
+// vendor's stock is always a flat list of exact item names, no family/quality
+// grouping like monster drops).
+function findVendorsSellingItem(itemName) {
+  return (vendorsData || []).filter(v =>
+    (v.sells || []).some(s => s.toLowerCase() === itemName.toLowerCase())
   );
 }
 
@@ -2306,7 +2328,13 @@ function renderItemCardHTML(item, opts = {}) {
             : escapeAttr(m.name)
           );
           const gatheringTradeskills = findGatheringTradeskillsForItem(item.name).map(escapeAttr);
-          const parts = [...monsterLinks, ...gatheringTradeskills, ...(item.foundAt ? [escapeAttr(item.foundAt)] : [])];
+          const vendors = findVendorsSellingItem(item.name);
+          const vendorPart = vendors.length === 1
+            ? `${escapeAttr(vendors[0].name)} (${escapeAttr(vendors[0].location)})`
+            : vendors.length > 1
+              ? `<details class="item-card-vendor-details"><summary>${vendors.length} vendors</summary><ul class="item-card-vendor-list">${vendors.map(v => `<li>${escapeAttr(v.name)} (${escapeAttr(v.location)})</li>`).join('')}</ul></details>`
+              : '';
+          const parts = [...monsterLinks, ...gatheringTradeskills, ...(vendorPart ? [vendorPart] : []), ...(item.foundAt ? [escapeAttr(item.foundAt)] : [])];
           return `
         <div class="item-card-section${parts.length ? '' : ' item-card-muted'}">
           Dropped by &middot; ${parts.length ? parts.join(', ') : 'not yet known'}
@@ -2529,6 +2557,7 @@ function setupItemViewer() {
 
 async function openItemViewer(item) {
   await ensureCraftingData();
+  await ensureVendorsData();
   setupItemViewer();
 
   const viewer = document.getElementById('item-viewer');

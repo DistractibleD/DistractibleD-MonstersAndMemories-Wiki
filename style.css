@@ -1413,6 +1413,29 @@ body:not(.site-entered) .sidebar {
 .item-card-muted {
   color: #6b6c72;
 }
+/* Multi-vendor "Dropped by" entry (findVendorsSellingItem) — a single
+   vendor renders as plain inline text alongside monster/gathering links, but
+   2+ vendors collapse into this <details> toggle instead of spelling out a
+   long name list. Native <details>/<summary> rather than the JS-driven
+   .craft-station-toggle pattern used elsewhere — this is a single inline
+   list item, not a whole page section, so the free browser-native disclosure
+   behavior is simpler than wiring up state. */
+.item-card-vendor-details {
+  display: inline;
+}
+.item-card-vendor-details summary {
+  display: inline;
+  cursor: pointer;
+  color: var(--accent);
+}
+.item-card-vendor-details summary:hover {
+  text-decoration: underline;
+}
+.item-card-vendor-list {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0 0 0 12px;
+}
 .item-card-needs-info {
   color: #ff6b6b;
   font-weight: 600;

@@ -396,43 +396,35 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   whenever inbox data confirms ≥1 gem drop from a node, same as the monster-drops rule —
   no need to re-request each time. Record it as a compact `results` entry (below), not by
   listing every gem name.
-- **Herbalism Frond skill-threshold inference** (confirmed 2026-08-06, corrected 2026-08-08):
-  a node yielding a given Frond tier as a bonus result means every Herbalism node with
-  `minSkill` **less than or equal to** that node's own `minSkill` can *also* yield that same
-  tier — "the higher the skill, the higher the frond" (user's own framing), so this is a
-  skill-ordering rule, not a quality-set/name-prefix rule like gemstones above. Applies
-  automatically whenever inbox data confirms a new highest-`minSkill` node for a tier —
-  re-scan every Herbalism node at or below that `minSkill` and add that tier to `results` if
-  not already there.
-  **Do NOT fill the gap between two different confirmed tiers** — an earlier version of this
-  rule assumed everything between the previous tier's ceiling and a new tier's confirmed node
-  shifted to the new tier (e.g. treating Whispering Sage/Ironroot/Moonveil/Stranglevine as
-  Enchanted Frond just because they sat between Nomad's Grace-tier-1 and Gadolvine-tier-2).
-  **This was proven wrong 2026-08-07**: Whispering Sage (`minSkill` 15) was directly observed
-  yielding Magic Frond, not Enchanted Frond, despite sitting in that "gap." Every node in an
-  unconfirmed gap must stay unconfirmed (no Frond tier in `results`) until its own screenshot
-  comes in — never assume it inherits the higher neighboring tier.
+- **Herbalism Frond skill-threshold inference** (confirmed 2026-08-06, corrected 2026-08-08,
+  precisely restated 2026-08-11 — this is the current rule, supersedes all earlier phrasings):
+  a Frond tier fills the gap **between two already-confirmed same-tier nodes**, bracketed by
+  `minSkill` — if a lower-`minSkill` node and a higher-`minSkill` node are *both* confirmed
+  yielding the same Frond tier, every Herbalism node strictly between them (by `minSkill`)
+  also gets that tier added to `results`. **Requires both endpoints confirmed** — a single
+  confirmation (even the current highest-`minSkill` one for that tier) never extrapolates
+  outward past itself in either direction, only inward once a second same-tier confirmation
+  brackets a range. This is deliberately narrower than an earlier "≤ the highest confirmed
+  node" version of the rule, which was proven wrong 2026-08-07: Whispering Sage (`minSkill`
+  15) was directly observed yielding Magic Frond, not Enchanted, despite sitting below
+  Gadolvine (80, Enchanted) with no lower Enchanted-tier confirmation to bracket it — a single
+  high endpoint alone said nothing about the nodes below it. A node outside every bracketed
+  range (below the lowest confirmed node of a tier, above the highest, or in a gap between two
+  *different* tiers with no matching second endpoint) stays unconfirmed until its own
+  screenshot comes in.
   **Current confirmed state**: Magic Frond — Lionleaf (1), Ghost Poppy (1), Selstie Kelp (1),
   Sylvine (1), Nomad's Grace (10), Whispering Sage (15). Enchanted Frond — Ironroot (30,
-  confirmed 2026-08-10) and Gadolvine (80); Moonveil/Stranglevine remain unconfirmed (no
-  automatic backfill applied to them — Ironroot's confirmation wasn't a new *highest*
-  minSkill for the tier, so it only updates Ironroot's own entry, not a re-scan downward).
-  Arcane
-  Frond — Duneleaf (90) only. If a node is ever confirmed yielding a *lower* tier than a
-  higher-`minSkill` node already has, that's fine and expected (skill only sets a floor, not
-  an exact tier) — but still only apply the >=-removal step (below) when a strictly *higher*
-  tier is confirmed at or above an existing lower-tier node's `minSkill`.
-  **Tier supersession still applies exactly as before**: the instant a node is confirmed
-  yielding a higher tier, remove the lower tier from every node with `minSkill` >= that
-  node's own `minSkill` (nothing has hit this case yet — every higher-tier confirmation so
-  far has been strictly above the previous tier's ceiling, so no removals have actually been
-  needed). No evidence yet of a 4th tier beyond Arcane — don't extrapolate ahead of actual
-  inbox confirmation, and don't backfill an unconfirmed gap under any circumstances now that
-  Whispering Sage has shown that guess to be unreliable.
+  confirmed 2026-08-10) and Gadolvine (80) bracket Moonveil (35) and Stranglevine (55),
+  backfilled 2026-08-11 once both endpoints existed. Arcane Frond — Duneleaf (90) only, no
+  second endpoint yet so nothing to bracket.
+  **Tier supersession still applies as before**: the instant a node is confirmed yielding a
+  higher tier, remove the lower tier from every node with `minSkill` >= that node's own
+  `minSkill` (nothing has hit this case yet). No evidence yet of a 4th tier beyond Arcane —
+  don't extrapolate ahead of actual inbox confirmation.
 - **Mining Crystallized Magic skill-threshold inference** (confirmed 2026-08-07, same
   mechanic as Frond above, applied to ore veins instead of herbs): Copper Vein (`minSkill` 1)
   and Limestone Deposit (`minSkill` 40) both confirmed yielding Clouded Crystallized Magic —
-  apply the same less-than-or-equal-`minSkill` inference and gap-avoidance rules as Frond.
+  apply the same bracket-between-two-confirmed-same-tier-endpoints rule as Frond (above).
   Tin Vein (`minSkill` 75) was also confirmed yielding **Limestone** itself as a bonus result
   (a non-Crystallized-Magic cross-node material) plus **Jagged Stone** — record both
   literally rather than assuming a skill-threshold pattern, since neither is a tiered magic
@@ -646,19 +638,40 @@ reference source, don't get saved anywhere — process and delete, don't move to
 5. Delete screenshot(s) once processed — never moved anywhere.
 
 **Vendor screenshots** (NPC buy/sell list — names + prices only, no stat card): confirms an
-item *exists*, reveals no real data — process for names, delete, don't save.
+item *exists* and, since 2026-08-11, is recorded persistently in `vendors.json` so the item's
+own card can show where to buy it — no longer just "process for names, delete."
 
-1. Per item name: check `items.json` (name or obvious slug match). Already exists → no
-   action (note in `To-Do/predicted-missing-items.txt` if it confirms/contradicts a tracked
-   prediction).
-2. New name → minimal entry: `name`, `slug`, `type`, `tags: []`, `"needsInfo": true`. Only
+1. **`vendors.json`** — flat array, one object per vendor: `name`, `slug`, `location` (the
+   city/zone they're found in, plain string — a vendor is one fixed NPC in one spot, unlike a
+   monster's `maps` array), `sells` (array of exact item names, same dynamic-linking
+   convention as a monster's `drops` — no family/quality-set grouping, just a flat name list).
+   New vendor → new entry. Vendor already exists → append newly-seen names to its `sells`
+   array (dedupe against what's already there) and bump `lastUpdated`. A vendor's roster
+   builds up over multiple screenshot batches, same "grows over time" precedent as gathering
+   nodes — a batch not showing every item the vendor sells is expected, not an error.
+2. Per item name: check `items.json` (name or obvious slug match). Already exists → no data
+   action needed beyond adding it to the vendor's `sells` list (note in
+   `To-Do/predicted-missing-items.txt` if it confirms/contradicts a tracked prediction).
+3. New name → minimal entry: `name`, `slug`, `type`, `tags: []`, `"needsInfo": true`. Only
    add more when safely inferable from an established pattern (weapon `skill`/`twoHanded`/
-   `slot` matching same-type siblings; armor `slot` from piece-type name). **Never** infer
-   `damage`/`delay`/`weight`/`size`/`ac`/`classes`/`race` — those vary by tier, a vendor
+   `slot` matching same-type siblings; armor `slot` from piece-type name; `type: "Food"` for
+   a "Cooked/Boiled/Roasted <X>" name matching an existing Cooking recipe result). **Never**
+   infer `damage`/`delay`/`weight`/`size`/`ac`/`classes`/`race` — those vary by tier, a vendor
    listing gives no basis.
-3. Same treatment for a recipe name on a vendor list (`crafting.json`'s minimal shape:
+4. Same treatment for a recipe name on a vendor list (`crafting.json`'s minimal shape:
    `name`/`slug`/`tradeskill`/`needsInfo: true`).
-4. Delete screenshot(s) once processed.
+5. Delete screenshot(s) once processed — same as before, `vendors.json` is the only thing
+   that persists from these, never an image.
+
+**Item card "Dropped by" line also shows vendor availability** — `findVendorsSellingItem`
+does the reverse lookup (which vendor(s) have this item name in their `sells` array), folded
+into the same "Dropped by" section as monster drops/gathering tradeskills (user's own
+request, rather than a separate line). A single vendor renders inline as `Vendor Name
+(Location)`; 2+ vendors collapse into a native `<details>`/`<summary>` toggle (`N vendors`,
+expands to one `Name (Location)` per line) instead of spelling out a long name list —
+`.item-card-vendor-details`/`.item-card-vendor-list` in `style.css`. `vendorsData` loads the
+same way as `monstersData`/`gatheringData` (`ensureVendorsData()`, prefetched in `init()` and
+awaited by `openItemViewer`).
 
 **Game link code lists** (`.txt` file in the inbox, not a screenshot — see `item.gameLinkCode`
 in "Adding an item to the Item Database"): user copies each code from linking the item in

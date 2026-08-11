@@ -402,7 +402,7 @@
     "slug": "moonveil",
     "tradeskill": "Herbalism",
     "minSkill": 35,
-    "results": ["Moonveil"],
+    "results": ["Moonveil", "Enchanted Frond"],
     "locations": ["Evershade Weald", "Keeper's Bight", "Shallow Shoals"],
     "note": "Only spawns at night, at 6pm in-game. Trivial is somewhere between 77 and 88 (exact value unknown) — shown as \"88>?>77\" on the source table."
   },
@@ -412,7 +412,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 55,
     "trivialSkill": 105,
-    "results": ["Stranglevine"],
+    "results": ["Stranglevine", "Enchanted Frond"],
     "locations": ["Fallen Pass"],
     "image": "images/gathering/stranglevine.jpg"
   },

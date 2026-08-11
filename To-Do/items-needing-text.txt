@@ -554,3 +554,15 @@ Cloth", not "Cotton", and it's still unclear whether the loot-log text just uses
 material name or "Tattered Cotton" is a genuinely distinct, not-yet-carded tier. Recorded
 verbatim as seen rather than silently linked to Tattered Cloth; still renders as unlinked
 plain text until this is resolved with an in-game look or a real item card.
+
+2026-08-11, images/inbox batch (Fallen Pass/Sungreet Strand drop confirmations): "Athame of
+the Plague Maker"'s card was cut off at the very bottom -- "Class: ARC BRD BST ELE ENC FTR
+INQ NEC RNG ROG SHD" then a second line "SHM SPB WIZ" right at the image edge, legible but
+tight, and no "Race:" line visible at all afterward. Recorded the full 14-class list as read
+(both lines), but `race` left unset rather than assumed ALL, per the usual crop caution --
+flag if the class list turns out wrong or a fuller card ever comes in. Also: the card's own
+"Skill:" field literally read "STA", which doesn't match any known weapon skill -- recorded
+as `"skill": "Stabbing"` on the assumption this is the game abbreviating "Stabbing" to fit
+the line (the item is explicitly "a dark metal ceremonial dagger", and no separate STA stat
+bonus appears elsewhere on the card to suggest "STA" meant the stat instead). Worth
+double-checking against a future clean screenshot of the same item.

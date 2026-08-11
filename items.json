@@ -1912,6 +1912,227 @@
     "race": ["ALL"]
   },
   {
+    "name": "Pan Fried Whitefish",
+    "slug": "pan-fried-whitefish",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal. Freshly grilled whitefish fillet.",
+    "effect": "Pan Fried Whitefish (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Roasted Rat with Onion",
+    "slug": "roasted-rat-with-onion",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal. Whole roasted rat, with a sampling of grilled onion.",
+    "effect": "Roasted Rat With Onion (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Boiled Scarab Legs",
+    "slug": "boiled-scarab-legs",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Boiled Scarab Legs (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Cabbage Stew",
+    "slug": "cabbage-stew",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Cabbage Stew (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Peppered Wolf Meat",
+    "slug": "peppered-wolf-meat",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Peppered Wolf Meat (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Bat Jerky",
+    "slug": "bat-jerky",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Bat Jerky (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Creamy Grouper Stew",
+    "slug": "creamy-grouper-stew",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Creamy Grouper Stew (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Crocodile Steak",
+    "slug": "crocodile-steak",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Crocodile Steak (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Cured Jackal Meat",
+    "slug": "cured-jackal-meat",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Cured Jackal Meat (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Smoked Bear Flank",
+    "slug": "smoked-bear-flank",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Smoked Bear Flank (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Stuffed Peppers",
+    "slug": "stuffed-peppers",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Stuffed Peppers (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "stats": { "STA": 1, "AGI": 1, "INT": 2 },
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Wolf Jerky",
+    "slug": "wolf-jerky",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Wolf Jerky (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Spiced Snake Cutlet",
+    "slug": "spiced-snake-cutlet",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Spiced Snake Cutlet (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "stats": { "STA": 1, "AGI": 1, "DEX": 2 },
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Baked Redfin",
+    "slug": "baked-redfin",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal. Baked redfin pike.",
+    "effect": "Baked Redfin (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "weight": 1.0,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Garlic Rat Haunch",
+    "slug": "garlic-rat-haunch",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Garlic Rat Haunch (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Lemon Basa Fillet",
+    "slug": "lemon-basa-fillet",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Lemon Basa Fillet (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-10"
+  },
+  {
+    "name": "Bat Wing Crisps",
+    "slug": "bat-wing-crisps",
+    "type": "Food",
+    "tags": [],
+    "stats": { "AGI": 4, "DEX": 4 },
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-10"
+  },
+  {
     "name": "Copper Plate Gauntlets",
     "slug": "copper-plate-gauntlets",
     "image": "images/items/copper-plate-gauntlets.jpg",
@@ -7474,6 +7695,36 @@
     "resists": { "FIRE": 1 },
     "effect": "Weak Poison (Chance On Hit. Level: 15)",
     "description": "A dark iron blade with a cannelure that coats the blade in debilitating poison when thrust outward."
+  },
+  {
+    "name": "Athame of the Plague Maker",
+    "slug": "athame-of-the-plague-maker",
+    "lastUpdated": "2026-08-11",
+    "type": "Weapon",
+    "tags": ["MAGIC", "UNIQUE"],
+    "slot": "Primary / Secondary",
+    "damage": 15,
+    "delay": 23,
+    "skill": "Stabbing",
+    "stats": { "AGI": 2, "INT": 6, "WIS": 6, "HP": 10, "MANA": 15 },
+    "description": "A dark metal ceremonial dagger, etched with the symbol of Trimminax.",
+    "weight": 3.0,
+    "size": "Small",
+    "classes": ["ARC", "BRD", "BST", "ELE", "ENC", "FTR", "INQ", "NEC", "RNG", "ROG", "SHD", "SHM", "SPB", "WIZ"]
+  },
+  {
+    "name": "Dusktanned Vest",
+    "slug": "dusktanned-vest",
+    "lastUpdated": "2026-08-11",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Chest",
+    "ac": 11,
+    "stats": { "STR": 3, "HP": 5 },
+    "weight": 3.0,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Coal",
@@ -20212,5 +20463,589 @@
     "size": "Medium",
     "classes": ["ELE", "ENC", "INQ", "NEC", "SHD", "SPB", "WIZ"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Cooked Ashira Meat",
+    "slug": "cooked-ashira-meat",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cooked Bat Meat",
+    "slug": "cooked-bat-meat",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cooked Bear Meat",
+    "slug": "cooked-bear-meat",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cooked Beetle Meat",
+    "slug": "cooked-beetle-meat",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cooked Crocodile Meat",
+    "slug": "cooked-crocodile-meat",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cooked Goblin Meat",
+    "slug": "cooked-goblin-meat",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cooked Human Meat",
+    "slug": "cooked-human-meat",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cooked Jackal Meat",
+    "slug": "cooked-jackal-meat",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cooked Ogre Meat",
+    "slug": "cooked-ogre-meat",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cooked Rat Meat",
+    "slug": "cooked-rat-meat",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cooked Snake Meat",
+    "slug": "cooked-snake-meat",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cooked Wolf Meat",
+    "slug": "cooked-wolf-meat",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Basil",
+    "slug": "basil",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Black Pepper",
+    "slug": "black-pepper",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Butter",
+    "slug": "butter",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cleaver",
+    "slug": "cleaver",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cooking Sage",
+    "slug": "cooking-sage",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Milk",
+    "slug": "milk",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Paprika",
+    "slug": "paprika",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Parsley",
+    "slug": "parsley",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Rice",
+    "slug": "rice",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Stock",
+    "slug": "stock",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Thyme",
+    "slug": "thyme",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Wheat Flour",
+    "slug": "wheat-flour",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Agile Spider Legs",
+    "slug": "agile-spider-legs",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Bat Tooth",
+    "slug": "bat-tooth",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Bottle of High-Quality Olive Oil",
+    "slug": "bottle-of-high-quality-olive-oil",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Camp Kitchen",
+    "slug": "camp-kitchen",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Carrion Beetle Eye",
+    "slug": "carrion-beetle-eye",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Carrion Beetle Legs",
+    "slug": "carrion-beetle-legs",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cellar of Sea Salt",
+    "slug": "cellar-of-sea-salt",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cinder Beetle Eye",
+    "slug": "cinder-beetle-eye",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cinder Beetle Gland",
+    "slug": "cinder-beetle-gland",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cinder Beetle Legs",
+    "slug": "cinder-beetle-legs",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Clawed Spider Legs",
+    "slug": "clawed-spider-legs",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Crocodile Tooth",
+    "slug": "crocodile-tooth",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Crystallized Bone Chips",
+    "slug": "crystallized-bone-chips",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Deep Sea Devourer",
+    "slug": "deep-sea-devourer",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Drake Fang",
+    "slug": "drake-fang",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Drake Scale",
+    "slug": "drake-scale",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Snake Fang",
+    "slug": "snake-fang",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Spider Legs",
+    "slug": "spider-legs",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Spider Venom Sac",
+    "slug": "spider-venom-sac",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Spiderling Eye",
+    "slug": "spiderling-eye",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Tainted Guppy",
+    "slug": "tainted-guppy",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Tender Beetle Legs",
+    "slug": "tender-beetle-legs",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Large Bat Wing",
+    "slug": "large-bat-wing",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Poisonous Spider Venom Sac",
+    "slug": "poisonous-spider-venom-sac",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Dusty Scarab Eye",
+    "slug": "dusty-scarab-eye",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Dusty Scarab Leg",
+    "slug": "dusty-scarab-leg",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Fire Beetle Gland",
+    "slug": "fire-beetle-gland",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Fire Beetle Legs",
+    "slug": "fire-beetle-legs",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Giant Cinder Beetle Eye",
+    "slug": "giant-cinder-beetle-eye",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Giant Cinder Beetle Leg",
+    "slug": "giant-cinder-beetle-leg",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Raw Basa Fillet",
+    "slug": "raw-basa-fillet",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Raw Beetle Fillet",
+    "slug": "raw-beetle-fillet",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Raw Beetle Meat",
+    "slug": "raw-beetle-meat",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Raw Crocodile Meat",
+    "slug": "raw-crocodile-meat",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Raw Snake Meat",
+    "slug": "raw-snake-meat",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Raw Wolf Meat",
+    "slug": "raw-wolf-meat",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Scarab Eye",
+    "slug": "scarab-eye",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Scarab Leg",
+    "slug": "scarab-leg",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Scorched Skeletal Remains",
+    "slug": "scorched-skeletal-remains",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Shattered Skeleton Femur",
+    "slug": "shattered-skeleton-femur",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Raw Dwarf Meat",
+    "slug": "raw-dwarf-meat",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Raw Gnome Meat",
+    "slug": "raw-gnome-meat",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Raw Goblin Meat",
+    "slug": "raw-goblin-meat",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Raw Ogre Meat",
+    "slug": "raw-ogre-meat",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Giant Scarab Eye",
+    "slug": "giant-scarab-eye",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Giant Scarab Leg",
+    "slug": "giant-scarab-leg",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Immature Snake Venom Sac",
+    "slug": "immature-snake-venom-sac",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Intact Grain Beetle Leg",
+    "slug": "intact-grain-beetle-leg",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Large Bat Eye",
+    "slug": "large-bat-eye",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
   }
 ]

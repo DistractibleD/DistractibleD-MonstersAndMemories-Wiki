@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Chef Daisy",
+    "slug": "chef-daisy",
+    "location": "Night Harbor",
+    "sells": [
+      "Basil", "Black Pepper", "Butter", "Cleaver", "Cooking Sage", "Milk", "Paprika",
+      "Parsley", "Rice", "Stock", "Thyme", "Wheat Flour"
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Chef Belle",
+    "slug": "chef-belle",
+    "location": "Night Harbor",
+    "sells": [
+      "Agile Spider Legs", "Ashira Tail", "Ashira Tooth", "Bat Eye", "Bat Fur", "Bat Tooth",
+      "Bat Wing", "Bell Pepper", "Black Pepper", "Boiled Scarab Legs", "Bone Chips",
+      "Bottle of High-Quality Olive Oil", "Broken Grain Beetle Legs", "Cabbage",
+      "Camp Kitchen", "Carrion Beetle Eye", "Carrion Beetle Legs", "Carrot", "Celery",
+      "Cellar of Sea Salt", "Cheese", "Cinder Beetle Eye", "Cinder Beetle Gland",
+      "Cinder Beetle Legs", "Clawed Spider Legs", "Cleaver", "Cooked Ashira Meat",
+      "Cooked Bat Meat", "Cooked Bear Meat", "Cooked Beetle Meat", "Cooked Crocodile Meat",
+      "Cooked Goblin Meat", "Cooked Human Meat", "Cooked Jackal Meat", "Cooked Ogre Meat",
+      "Cooked Orc Meat", "Cooked Rat Meat", "Cooked Snake Meat", "Cooked Wolf Meat",
+      "Crocodile Steak", "Crocodile Tooth", "Crypt Scarab Eye", "Crypt Scarab Leg",
+      "Crystallized Bone Chips", "Cured Jackal Meat", "Deep Sea Devourer", "Drake Claw",
+      "Drake Fang", "Drake Scale", "Dusty Scarab Eye", "Dusty Scarab Leg", "Fire Beetle Eye",
+      "Fire Beetle Gland", "Fire Beetle Legs", "Giant Cinder Beetle Eye",
+      "Giant Cinder Beetle Leg", "Giant Fire Beetle Legs", "Giant Scarab Eye",
+      "Giant Scarab Leg", "Immature Snake Venom Sac", "Intact Grain Beetle Leg",
+      "Jackal Tooth", "Large Bat Eye", "Large Bat Wing", "Lemon",
+      "Poisonous Spider Venom Sac", "Potato", "Ration", "Rat Ear", "Rat Foot", "Rat Tooth",
+      "Raw Ashira Meat", "Raw Basa Fillet", "Raw Bat Meat", "Raw Beetle Fillet",
+      "Raw Beetle Meat", "Raw Crocodile Meat", "Raw Dwarf Meat", "Raw Gnome Meat",
+      "Raw Goblin Meat", "Raw Human Meat", "Raw Jackal Meat", "Raw Ogre Meat",
+      "Raw Orc Meat", "Raw Rat Meat", "Raw Snake Meat", "Raw Wolf Meat", "Scarab Eye",
+      "Scarab Leg", "Scorched Skeletal Remains", "Shattered Skeleton Femur",
+      "Skeleton Jawbone", "Snake Egg", "Snake Fang", "Spiced Snake Cutlet", "Spider Legs",
+      "Spider Venom Sac", "Spiderling Eye", "Stock", "Stuffed Peppers", "Tainted Guppy",
+      "Tender Beetle Legs", "Tomato", "Wasp Wing", "Water Flask", "Wolf Tooth"
+    ],
+    "lastUpdated": "2026-08-11"
+  }
+]
