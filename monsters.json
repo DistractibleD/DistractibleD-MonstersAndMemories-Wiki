@@ -242,7 +242,10 @@
     "drops": [
       { "item": "Raw Beetle Meat" }
     ],
-    "lastUpdated": "2026-08-05"
+    "conObservations": [
+      { "playerLevel": 29, "con": "Dark Blue" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "an ashira warrior",
@@ -5710,7 +5713,10 @@
       { "copper": 83 },
       { "copper": 77 }
     ],
-    "lastUpdated": "2026-08-05"
+    "conObservations": [
+      { "playerLevel": 29, "con": "Green" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a devotee",
@@ -6767,18 +6773,20 @@
     "slug": "a-zintari-asp",
     "maps": ["Vale of Zintar"],
     "conObservations": [
-      { "playerLevel": 28, "con": "Dark Blue" }
+      { "playerLevel": 28, "con": "Dark Blue" },
+      { "playerLevel": 29, "con": "Dark Blue" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a giant tomb burrower",
     "slug": "a-giant-tomb-burrower",
     "maps": ["Vale of Zintar"],
     "conObservations": [
-      { "playerLevel": 28, "con": "Red" }
+      { "playerLevel": 28, "con": "Red" },
+      { "playerLevel": 29, "con": "Red" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Obsib",
@@ -6795,9 +6803,19 @@
     "slug": "an-elder-tomb-burrower",
     "maps": ["Vale of Zintar"],
     "conObservations": [
-      { "playerLevel": 28, "con": "Red" }
+      { "playerLevel": 28, "con": "Red" },
+      { "playerLevel": 29, "con": "Red" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a tomb burrower",
+    "slug": "a-tomb-burrower",
+    "maps": ["Vale of Zintar"],
+    "conObservations": [
+      { "playerLevel": 29, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a Dustrend patroller",
@@ -6813,9 +6831,10 @@
     ],
     "conObservations": [
       { "playerLevel": 28, "con": "Yellow" },
-      { "playerLevel": 28, "con": "Yellow" }
+      { "playerLevel": 28, "con": "Yellow" },
+      { "playerLevel": 29, "con": "White" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a dire wolf patroller",

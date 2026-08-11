@@ -4752,6 +4752,16 @@
     "size": "Tiny"
   },
   {
+    "name": "Selstie Kelp",
+    "slug": "selstie-kelp",
+    "lastUpdated": "2026-08-11",
+    "type": "Misc",
+    "tags": [],
+    "description": "A common river kelp found in the waters of Evershade Weald.",
+    "weight": 0.1,
+    "size": "Tiny"
+  },
+  {
     "name": "Lionleaf",
     "slug": "lionleaf",
     "image": "images/items/lionleaf.jpg",
