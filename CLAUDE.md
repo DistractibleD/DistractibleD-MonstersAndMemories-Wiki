@@ -1064,6 +1064,32 @@ The page renders an empty state ("No faction data recorded yet") until the first
 "structurally ready, fills in over time" precedent as `conObservations` when that system was
 first added.
 
+**Bulk-imported from the fan wiki's own per-faction pages** (2026-08-11, at the user's
+request — `monstersandmemories.miraheze.org/wiki/<Faction Name>`, one page per faction,
+each listing "Mobs you can kill to raise/lower the faction"). Same weaker-than-a-screenshot
+caveat as every other fan-wiki source in this file: **only ever fills a gap, never touches a
+monster that already has `factionEffects`** — a monster the user has directly confirmed via
+their own "Your faction standing with X got better/worse" screenshot keeps that data exactly
+as recorded, even if the wiki disagrees or is incomplete (e.g. the wiki's own "Steel Talons"
+page doesn't list the Dustrend-camp mobs, but the user's own screenshots already confirmed
+Dustrend kills raise Steel Talons — that confirmed bundle was left untouched). A same-monster
+spelling mismatch between the two sources (e.g. the wiki's "Sivah Arjun" vs. this site's
+already-confirmed "Sivah Arujan") was matched by hand rather than skipped, keeping this
+site's spelling. Direct `WebFetch` to this domain returns 403 Forbidden — use the in-app
+browser (`mcp__Claude_Browser__navigate` +
+`get_page_text`) for any future visit to this wiki instead.
+
+**Follow-up the same day: the user explicitly asked to also create monster entries for every
+wiki-only name that had no match** — a deliberate, one-time exception to "monster existence
+requires the user's own screenshot/statement," scoped to this specific bulk import at the
+user's own direction, not a standing policy change. Added as minimal stubs (`name`, `slug`,
+`named` when the naming style implies a boss — capitalized, no leading "a"/"an" — `maps`/
+`areas` only where the wiki page had an explicit per-mob zone tag, `factionEffects`,
+`needsInfo: true`). Slugs were checked against existing monsters first — one wiki name
+("High-Priest of Muurtu") turned out to be the same monster as the already-existing "High
+Priest Of Muurtu" under different punctuation (slugified to the same string); merged into
+the existing entry instead of creating a duplicate.
+
 ## Leveling Suggestions page
 
 A curated leveling guide (`pages.json` `"type": "leveling"`, own top-level sidebar entry) —

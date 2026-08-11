@@ -129,14 +129,26 @@
       { "item": "Tattered Cloth Boots" },
       { "item": "Tattered Cloth Robe" },
       { "item": "Tattered Cloth Veil" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a Bloodynose sergeant",
     "slug": "a-bloodynose-sergeant",
     "drops": [
       { "item": "Tomato" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Night Terror",
@@ -384,7 +396,12 @@
       { "item": "Ironwood Shortsword" },
       { "item": "Fernstep Greaves" },
       { "item": "Ripped Leather Mask" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Benu Memza", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Onis the Elder",
@@ -442,7 +459,13 @@
       { "item": "Carved Spirit Totem" },
       { "item": "Driftwood Crown" },
       { "item": "Paua Shell Earring" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Corrupted Zintari Giants", "effect": "positive" },
+      { "faction": "Zintari Giants", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Hadir the Shipbreaker",
@@ -465,7 +488,13 @@
       { "item": "Stirring Stick" },
       { "item": "Polished Sandstone" },
       { "item": "Scholar's Shoulderpads" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Corrupted Zintari Giants", "effect": "positive" },
+      { "faction": "Zintari Giants", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Seshena the Lost",
@@ -489,10 +518,13 @@
     "named": true,
     "maps": ["Shaded Dunes"],
     "levelRange": "~16",
-    "lastUpdated": "2026-07-30",
+    "lastUpdated": "2026-08-11",
     "drops": [
       { "item": "Chompers' Tooth" },
       { "item": "Chompers Hide Tunic" }
+    ],
+    "conObservations": [
+      { "playerLevel": 30, "con": "Green" }
     ]
   },
   {
@@ -504,7 +536,16 @@
     "drops": [
       { "item": "Claw of the Ashira Hunter" },
       { "item": "Spitemaw's Ring" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Benu Memza", "effect": "negative" },
+      { "faction": "Clan Bloodynose", "effect": "positive" },
+      { "faction": "Langsdorfian League", "effect": "positive" },
+      { "faction": "Red Mantles", "effect": "positive" },
+      { "faction": "Thorns of the Bloom", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Toma the Two-Faced",
@@ -602,7 +643,11 @@
     "drops": [
       { "item": "Ironhide Girdle" },
       { "item": "Ironhide Bracers" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "The Pale", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Captain Caspian",
@@ -612,7 +657,11 @@
     "drops": [
       { "item": "Moonveil Bracer" },
       { "item": "Thirstbound Grips" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "The Pale", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Manciple Daphne",
@@ -622,7 +671,11 @@
     "drops": [
       { "item": "Charmweaver Robe" },
       { "item": "Echo Stone" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "The Pale", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a cunning privateer",
@@ -657,7 +710,11 @@
     "drops": [
       { "item": "Phantom Stein" },
       { "item": "Twilight Cap" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "The Pale", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Cormac Renshaw",
@@ -685,7 +742,11 @@
       { "item": "Savage Heartplate" },
       { "item": "Heartplate Scout Cap" },
       { "item": "Sturdy Battle Axe" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Bends Garrison", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "an ashira scout",
@@ -709,7 +770,12 @@
       { "playerLevel": 4, "con": "Light Blue" },
       { "playerLevel": 1, "con": "Yellow" }
     ],
-    "lastUpdated": "2026-08-10"
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Benu Memza", "effect": "negative" },
+      { "faction": "Clan Bloodynose", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a dunes scarab",
@@ -820,7 +886,15 @@
       { "item": "Rusty Maul" },
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a spiderling",
@@ -889,6 +963,9 @@
     "conObservations": [
       { "playerLevel": 29, "con": "Green" },
       { "playerLevel": 29, "con": "Green" }
+    ],
+    "factionEffects": [
+      { "faction": "Cult of the Wyrm", "effect": "negative" }
     ],
     "lastUpdated": "2026-08-11"
   },
@@ -1057,7 +1134,7 @@
     "name": "a smuggler",
     "slug": "a-smuggler",
     "image": "images/Monsters/a-smuggler.jpg",
-    "maps": ["Shaded Dunes", "Night Harbor", "Sungreet Strand"],
+    "maps": ["Shaded Dunes", "Night Harbor", "Sungreet Strand", "Fallen Pass"],
     "areas": ["Smugglers Camp", "The Bends"],
     "drops": [
       { "item": "Rusty Great Scythe" },
@@ -1080,25 +1157,65 @@
       { "item": "Rusty Long Spear" },
       { "item": "Mushroom" },
       { "item": "Wool Scraps" },
-      { "family": "Tattered Hide" }
+      { "family": "Tattered Hide" },
+      { "family": "Rusty Iron" },
+      { "item": "Potato" },
+      { "item": "Carrot" },
+      { "item": "Iron Scraps" },
+      { "item": "Cotton Scraps" },
+      { "item": "Lemon" },
+      { "item": "Raw Human Meat" },
+      { "item": "Leather Scraps" },
+      { "item": "Worn Ironbark Bow" }
     ],
     "coinDrops": [
       { "copper": 78 },
       { "silver": 1, "copper": 13 },
       { "copper": 95 },
-      { "copper": 88 }
+      { "copper": 88 },
+      { "silver": 3, "copper": 6 },
+      { "silver": 3, "copper": 39 },
+      { "silver": 2, "copper": 54 },
+      { "silver": 2, "copper": 65 },
+      { "silver": 3, "copper": 23 },
+      { "silver": 2, "copper": 73 },
+      { "silver": 3, "copper": 3 },
+      { "silver": 2, "copper": 70 },
+      { "silver": 2, "copper": 50 },
+      { "silver": 3, "copper": 21 },
+      { "silver": 2, "copper": 58 },
+      { "silver": 3, "copper": 37 },
+      { "silver": 2, "copper": 77 },
+      { "silver": 2, "copper": 74 },
+      { "silver": 2, "copper": 92 },
+      { "silver": 3, "copper": 40 },
+      { "silver": 2, "copper": 26 },
+      { "silver": 2, "copper": 70 },
+      { "silver": 3, "copper": 44 }
     ],
     "conObservations": [
       { "playerLevel": 28, "con": "Red" },
-      { "playerLevel": 28, "con": "Red" }
+      { "playerLevel": 28, "con": "Red" },
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 30, "con": "Yellow" },
+      { "playerLevel": 30, "con": "White" }
     ],
-    "lastUpdated": "2026-08-10"
+    "factionEffects": [
+      { "faction": "Bends Garrison", "effect": "positive" },
+      { "faction": "Serpent Sashes", "effect": "positive" },
+      { "faction": "Gilded Claw", "effect": "positive" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a wererat",
     "slug": "a-wererat",
     "image": "images/Monsters/a-wererat.jpg",
-    "maps": ["Shaded Dunes"],
+    "maps": ["Shaded Dunes", "Fallen Pass"],
     "areas": ["Smugglers Camp"],
     "drops": [
       { "item": "Wererat Pelt" },
@@ -1142,7 +1259,12 @@
       { "item": "Rusty Greatsword" },
       { "item": "Rusty Tower Shield" },
       { "item": "Rusty Long Spear" }
-    ]
+    ],
+    "conObservations": [
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 30, "con": "Trivial" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a crocodile",
@@ -1239,7 +1361,15 @@
     "drops": [
       { "item": "Lemon" },
       { "item": "Onion" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a hired thug",
@@ -1332,7 +1462,14 @@
       { "silver": 0, "copper": 29 },
       { "silver": 0, "copper": 41 }
     ],
-    "lastUpdated": "2026-07-30"
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a willowisp",
@@ -1548,19 +1685,34 @@
       { "item": "Bone Chips" },
       { "item": "Eth-ur Arboreal Journal Page" },
       { "item": "Cloth Scraps" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a skeletal warrior",
     "slug": "a-skeletal-warrior",
     "image": "images/Monsters/a-skeletal-warrior.jpg",
-    "maps": ["Tomb of the Last Wyrmsbane"]
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a skeletal cavalier",
     "slug": "a-skeletal-cavalier",
     "image": "images/Monsters/a-skeletal-cavalier.jpg",
-    "maps": ["Tomb of the Last Wyrmsbane"]
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a skeletal cleric",
@@ -1585,7 +1737,12 @@
       { "item": "Tattered Rawhide Bracer" },
       { "item": "Tattered Rawhide Boots" },
       { "item": "Tattered Rawhide Vest" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a skeletal marksman",
@@ -1613,7 +1770,12 @@
       { "item": "Tattered Rawhide Bracer" },
       { "item": "Tattered Rawhide Boots" },
       { "item": "Tattered Rawhide Vest" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Gherhart Graves",
@@ -1649,7 +1811,12 @@
       { "item": "Rusty Greatsword" },
       { "item": "Rusty Maul" },
       { "item": "Rusty Tower Shield" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "High Marshal Fionna Bromm",
@@ -1658,7 +1825,12 @@
     "maps": ["Tomb of the Last Wyrmsbane"],
     "drops": [
       { "item": "Kazessthra's Bane" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a Wyrmsbane crusader",
@@ -1667,7 +1839,12 @@
     "drops": [
       { "item": "Spectral Dust" },
       { "item": "Cloth Scraps" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Timmon Bell",
@@ -1682,12 +1859,22 @@
       { "item": "Enchanted Battleworn Mace" },
       { "item": "Knucklehide Chausses" },
       { "item": "Wyrmsbane Clergy Rosary" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a skeletal knight",
     "slug": "a-skeletal-knight",
-    "image": "images/Monsters/a-skeletal-knight.jpg"
+    "image": "images/Monsters/a-skeletal-knight.jpg",
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a skeletal monk",
@@ -1706,7 +1893,12 @@
       { "item": "Tattered Cloth Bracer" },
       { "item": "Tattered Cloth Boots" },
       { "item": "Tattered Cloth Veil" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Lieutenant Gregan Snyde",
@@ -1721,13 +1913,23 @@
       { "item": "Lieutenant's Hunting Pants" },
       { "item": "Lieutenant's Legplates" },
       { "item": "Wyrmsbane Lieutenant's Medallion" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Quartermaster Boothroy",
     "slug": "quartermaster-boothroy",
     "named": true,
-    "maps": ["Tomb of the Last Wyrmsbane"]
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Jakob Geffrey",
@@ -1738,7 +1940,12 @@
       { "item": "Penitential Veil" },
       { "item": "Ring of the Deacon" },
       { "item": "Whispering Hours Pendant" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Bone Construct",
@@ -1749,7 +1956,12 @@
       { "item": "Chain of the Construct" },
       { "item": "Giant Femur" },
       { "item": "Idol of Bone" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Dario Numas",
@@ -1760,7 +1972,12 @@
       { "item": "Bow of the Fallen Ranger" },
       { "item": "Dagger of the Damned" },
       { "item": "Fallen Ranger Hide Bracers" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Ariblast the Wicked",
@@ -1772,7 +1989,12 @@
       { "item": "Moldering Robes" },
       { "item": "Skeletal Sight" },
       { "item": "Wicked Longbow" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Grandmaster Gildas",
@@ -1784,7 +2006,12 @@
       { "item": "Oak Wood Bo Staff" },
       { "item": "Swift Brawler's Cloak" },
       { "item": "Wyrmsbane Grandmaster's Earring" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Grandmaster Obadiah",
@@ -1795,7 +2022,12 @@
       { "item": "Obadiah's Marchers" },
       { "item": "Shawl of Piety" },
       { "item": "Swift Brawler's Cloak" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Zakariah Shriki",
@@ -1817,7 +2049,10 @@
   {
     "name": "a priestess of Kravvin",
     "slug": "a-priestess-of-kravvin",
-    "lastUpdated": "2026-07-18",
+    "factionEffects": [
+      { "faction": "Cult of Kravvin", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["The Grain Cellar"],
     "levelRange": "32",
@@ -1834,7 +2069,10 @@
   {
     "name": "Khalid al-Bahri",
     "slug": "khalid-al-bahri",
-    "lastUpdated": "2026-07-18",
+    "factionEffects": [
+      { "faction": "Cult of Kravvin", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["The Grain Cellar"],
     "levelRange": "~34-35",
@@ -1843,7 +2081,10 @@
   {
     "name": "Leila al-Bahri",
     "slug": "leila-al-bahri",
-    "lastUpdated": "2026-07-18",
+    "factionEffects": [
+      { "faction": "Cult of Kravvin", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["The Grain Cellar"],
     "levelRange": "~33-34",
@@ -1880,14 +2121,20 @@
   {
     "name": "a craven cultist",
     "slug": "a-craven-cultist",
-    "lastUpdated": "2026-07-18",
+    "factionEffects": [
+      { "faction": "Cult of Kravvin", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11",
     "maps": ["The Grain Cellar"],
     "levelRange": "~31-32"
   },
   {
     "name": "a devoted cultist",
     "slug": "a-devoted-cultist",
-    "lastUpdated": "2026-07-18",
+    "factionEffects": [
+      { "faction": "Cult of Kravvin", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11",
     "maps": ["The Grain Cellar"],
     "levelRange": "~31-32"
   },
@@ -1930,7 +2177,10 @@
   {
     "name": "a nefarious cultist",
     "slug": "a-nefarious-cultist",
-    "lastUpdated": "2026-07-18",
+    "factionEffects": [
+      { "faction": "Cult of Kravvin", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11",
     "maps": ["The Grain Cellar"],
     "levelRange": "~31-32",
     "drops": [{ "item": "Dark Harvest" }]
@@ -2255,7 +2505,10 @@
   {
     "name": "Softpaws",
     "slug": "softpaws",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Court of Summer", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Glinting Hollow"],
     "drops": [{ "item": "Wolfclaws" }]
@@ -2295,7 +2548,11 @@
   {
     "name": "Bloatbelly",
     "slug": "bloatbelly",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Grimtide Sanctum"],
     "drops": [
@@ -2306,7 +2563,11 @@
   {
     "name": "Braggla The Spawnkeeper",
     "slug": "braggla-the-spawnkeeper",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Grimtide Sanctum"],
     "drops": [
@@ -2319,7 +2580,11 @@
   {
     "name": "Devourhymn Glomenda",
     "slug": "devourhymn-glomenda",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Grimtide Sanctum"],
     "drops": [
@@ -2342,7 +2607,11 @@
   {
     "name": "Tidecaller Selka",
     "slug": "tidecaller-selka",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Grimtide Sanctum"],
     "drops": [
@@ -2361,7 +2630,11 @@
   {
     "name": "Vesska The Bloodbound",
     "slug": "vesska-the-bloodbound",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Grimtide Sanctum"],
     "drops": [
@@ -2507,7 +2780,11 @@
   {
     "name": "Scout Grimgaze",
     "slug": "scout-grimgaze",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Citizens of Faelindral", "effect": "positive" },
+      { "faction": "Defenders of Faelindral", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Evershade Weald"],
     "drops": [
@@ -2546,7 +2823,10 @@
   {
     "name": "Vorkuul Blighteye",
     "slug": "vorkuul-blighteye",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Fellstone Orcs", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Evershade Weald"],
     "drops": [{ "item": "Diseased Wolf Mantle" }]
@@ -2588,7 +2868,10 @@
   {
     "name": "Brukk Goldgut",
     "slug": "brukk-goldgut",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Village of Penshaw", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Keeper's Bight"],
     "drops": [
@@ -2624,7 +2907,11 @@
   {
     "name": "Mirella Nighthorn",
     "slug": "mirella-nighthorn",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Sangrel Fist", "effect": "negative" },
+      { "faction": "Village of Penshaw", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Keeper's Bight"],
     "drops": [
@@ -2637,7 +2924,11 @@
   {
     "name": "Poacher Garrus",
     "slug": "poacher-garrus",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Poachers of Calafrey", "effect": "negative" },
+      { "faction": "Village of Penshaw", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Keeper's Bight"],
     "drops": [{ "item": "Boots of Vengeful Resolve" }]
@@ -2645,7 +2936,11 @@
   {
     "name": "Poacher Wilna",
     "slug": "poacher-wilna",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Poachers of Calafrey", "effect": "negative" },
+      { "faction": "Village of Penshaw", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Keeper's Bight"],
     "drops": [{ "item": "Wilna's Ring" }]
@@ -2653,7 +2948,10 @@
   {
     "name": "Ranger Rylin",
     "slug": "ranger-rylin",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Poachers of Calafrey", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Keeper's Bight"],
     "drops": [{ "item": "High Keeper's Vambrace" }]
@@ -2766,7 +3064,10 @@
   {
     "name": "Balindor Silvertrowel",
     "slug": "balindor-silvertrowel",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Smallfolk Alliance", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Sungreet Strand"],
     "drops": [
@@ -2777,7 +3078,12 @@
   {
     "name": "Best Appraiser Bibic",
     "slug": "best-appraiser-bibic",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Sungreet Strand"],
     "drops": [
@@ -2853,7 +3159,12 @@
   {
     "name": "Ixelda Jackalfang",
     "slug": "ixelda-jackalfang",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Circle of Scarce Rains", "effect": "positive" },
+      { "faction": "Seekers of the Lost Eye", "effect": "positive" },
+      { "faction": "Skintakers of Szuur", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Sungreet Strand"],
     "drops": [
@@ -2864,7 +3175,12 @@
   {
     "name": "Klimpi The Feared",
     "slug": "klimpi-the-feared",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Sungreet Strand"],
     "drops": [
@@ -2950,7 +3266,12 @@
   {
     "name": "Warlord Muggrah",
     "slug": "warlord-muggrah",
-    "lastUpdated": "2026-07-19",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "maps": ["Sungreet Strand"],
     "drops": [{ "item": "Muggrah's Brazier Torc" }]
@@ -3015,7 +3336,13 @@
       { "item": "Ancient Zintari Seal" },
       { "item": "Gaze of Empire" },
       { "item": "Grand Vizier's Coif" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Corrupted Zintari Giants", "effect": "positive" },
+      { "faction": "Zintari Giants", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "King Mahraad",
@@ -3029,7 +3356,13 @@
     "slug": "old-scar",
     "named": true,
     "maps": ["Vale of Zintar"],
-    "drops": [{ "item": "Stained Apostle's Cloak" }]
+    "drops": [{ "item": "Stained Apostle's Cloak" }],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Corrupted Zintari Giants", "effect": "positive" },
+      { "faction": "Zintari Giants", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Sularfaan The Flamekeeper",
@@ -3087,7 +3420,13 @@
       { "item": "Ayip's Chopper" },
       { "item": "Rat Bone Earring" },
       { "item": "Rat Hide Jerkin" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Benu Memza", "effect": "negative" },
+      { "faction": "Clan Bloodynose", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Bloodynose Hag",
@@ -3097,7 +3436,13 @@
     "drops": [
       { "item": "Freaky Pantaloons" },
       { "item": "Messy Voodoo Doll" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Duneseer Hadi",
@@ -3136,7 +3481,13 @@
       { "item": "Nose Bleeder" },
       { "item": "Overlord's Plate Helm" },
       { "item": "Ring of the Bloodynose Clan" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Hadhraman, First Among Alphas",
@@ -3147,7 +3498,13 @@
       { "item": "Amulet of the First" },
       { "item": "Hadhraman's Maul" },
       { "item": "Hadhraman's Ring" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Benu Memza", "effect": "negative" },
+      { "faction": "Clan Bloodynose", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Herbalist Qirfa",
@@ -3197,7 +3554,13 @@
     "drops": [
       { "item": "Huntress's Bow" },
       { "item": "Stillglow Chausses" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Benu Memza", "effect": "negative" },
+      { "faction": "Clan Bloodynose", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Tanner Daba",
@@ -3230,7 +3593,13 @@
       { "item": "Sandwalker's Leggings" },
       { "item": "Tribal Spear" },
       { "item": "Yapalan Veil" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Benu Memza", "effect": "negative" },
+      { "faction": "Clan Bloodynose", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Zalia The Fierce",
@@ -3257,7 +3626,12 @@
     "relatedMonsters": [
       { "label": "a Claw aide", "slug": "a-claw-aide" }
     ],
-    "lastUpdated": "2026-08-07"
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "negative" },
+      { "faction": "Slaves of the Pasha", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Darius Brask",
@@ -3268,7 +3642,11 @@
       { "item": "Bonebreaker Club" },
       { "item": "Cognitive Wristguard" },
       { "item": "Interrogator's Clasp" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Bends Garrison", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Jailer Benedict",
@@ -3310,7 +3688,13 @@
       { "item": "Gilded Claw Cloak" },
       { "item": "Pasha's Blade" },
       { "item": "Pasha's Favor" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "negative" },
+      { "faction": "Slaves of the Pasha", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Vikar Brask",
@@ -3326,7 +3710,10 @@
       { "item": "Lemon" },
       { "item": "Mushroom" }
     ],
-    "lastUpdated": "2026-08-05"
+    "factionEffects": [
+      { "faction": "Bends Garrison", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Guard Atep",
@@ -3382,7 +3769,13 @@
       { "item": "Muurtu Shield" },
       { "item": "Shadowy Chain Gloves" },
       { "item": "Vile Stud" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Elder Mahir Sultaan",
@@ -3448,7 +3841,13 @@
       { "item": "Ceremonial Greaves" },
       { "item": "Thoughtweaver's Wrap" },
       { "item": "Waistguard of Fervor" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "High-Mother Haathala",
@@ -3543,7 +3942,13 @@
       { "item": "Dexterous Wristguard" },
       { "item": "Hellblade Scout Gloves" },
       { "item": "Infernal Helm" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Witchguard Primus",
@@ -3554,7 +3959,13 @@
       { "item": "Blade of the Witchguard" },
       { "item": "Kreshka Treads" },
       { "item": "Witchguard Gauntlets" }
-    ]
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Witchlord Kruurgal",
@@ -3594,7 +4005,12 @@
       { "item": "Dented Black Enamel Helm" },
       { "item": "Reinforced Boiled Leather Buckler" }
     ],
-    "lastUpdated": "2026-07-24"
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Bishop Aybram",
@@ -3646,7 +4062,12 @@
       { "item": "Robe of the Veiled Doctrine" },
       { "item": "Shard of Obscured Insight" }
     ],
-    "lastUpdated": "2026-07-24"
+    "factionEffects": [
+      { "faction": "Brotherhood of the Wyrm", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Ebon Order", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Emissary Irina",
@@ -3657,7 +4078,10 @@
       { "item": "Amulet of the Accord" },
       { "item": "Emissary's Veil of Persuasion" }
     ],
-    "lastUpdated": "2026-07-24"
+    "factionEffects": [
+      { "faction": "Brotherhood of the Wyrm", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Esaneq",
@@ -3709,7 +4133,12 @@
       { "item": "Rider's Chainmail Leggings" },
       { "item": "Scarred Crusader Shield" }
     ],
-    "lastUpdated": "2026-07-24"
+    "factionEffects": [
+      { "faction": "Brotherhood of the Wyrm", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Ebon Order", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Horvarth Ezzadel",
@@ -3750,7 +4179,10 @@
       { "item": "Shardglass Dagger" },
       { "item": "Vest of the Glass Viper" }
     ],
-    "lastUpdated": "2026-07-24"
+    "factionEffects": [
+      { "faction": "Crag Serpents", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Master Tracker Lark",
@@ -3866,7 +4298,10 @@
       { "item": "Sand-Polished Shield" },
       { "item": "Suave Bandit's Loop" }
     ],
-    "lastUpdated": "2026-07-24"
+    "factionEffects": [
+      { "faction": "Crag Serpents", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Stormcaller Tabigan",
@@ -3910,7 +4345,14 @@
   {
     "name": "Zahid the Calm",
     "slug": "zahid-the-calm",
-    "lastUpdated": "2026-07-27",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "named": true,
     "image": "images/Monsters/zahid-the-calm.jpg",
     "needsInfo": true
@@ -3957,7 +4399,10 @@
   {
     "name": "a shady farmer",
     "slug": "a-shady-farmer",
-    "lastUpdated": "2026-07-28",
+    "factionEffects": [
+      { "faction": "Red Mantles", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11",
     "drops": [{ "item": "Sangrel Rite II" }]
   },
   {
@@ -4456,7 +4901,13 @@
       { "item": "Smuggler's Jerkin" },
       { "item": "Woven Rat Hide Belt" }
     ],
-    "lastUpdated": "2026-07-28"
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Rotfang",
@@ -4554,7 +5005,15 @@
       { "item": "Moonlit Strides" },
       { "item": "Staff of Sigils" }
     ],
-    "lastUpdated": "2026-07-28"
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Gilded Claw", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pymos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a werejackal sister",
@@ -4642,7 +5101,10 @@
       { "item": "Rusty Iron Warhammer" },
       { "item": "Rusty Iron Tower Shield" }
     ],
-    "lastUpdated": "2026-07-30"
+    "factionEffects": [
+      { "faction": "Crag Serpents", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a highwayman prospect",
@@ -4651,7 +5113,10 @@
       { "item": "Leather Scraps" },
       { "item": "Cotton Scraps" }
     ],
-    "lastUpdated": "2026-07-30"
+    "factionEffects": [
+      { "faction": "Crag Serpents", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a road captain",
@@ -4704,7 +5169,10 @@
     "coinDrops": [
       { "silver": 6, "copper": 88 }
     ],
-    "lastUpdated": "2026-07-30"
+    "factionEffects": [
+      { "faction": "Crag Serpents", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a grizzled raider",
@@ -4754,7 +5222,10 @@
       { "item": "Rusty Iron Warhammer" },
       { "item": "Rusty Iron Tower Shield" }
     ],
-    "lastUpdated": "2026-07-30"
+    "factionEffects": [
+      { "faction": "Crag Serpents", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a Benu Dhai sister",
@@ -4804,7 +5275,10 @@
       { "item": "Cheese" },
       { "item": "Celery" }
     ],
-    "lastUpdated": "2026-07-30"
+    "factionEffects": [
+      { "faction": "Crag Serpents", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "Father Rau",
@@ -5720,7 +6194,11 @@
       { "item": "Hexwoven Handwraps" },
       { "item": "Midnight Anklet" }
     ],
-    "lastUpdated": "2026-08-05"
+    "factionEffects": [
+      { "faction": "Congregation of Trem", "effect": "positive" },
+      { "faction": "Onyx Outlaw Gang", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a goblin overseer",
@@ -5733,7 +6211,11 @@
     "conObservations": [
       { "playerLevel": 24, "con": "Green" }
     ],
-    "lastUpdated": "2026-08-10"
+    "factionEffects": [
+      { "faction": "Congregation of Trem", "effect": "positive" },
+      { "faction": "Onyx Outlaw Gang", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a dusty skeleton",
@@ -6061,6 +6543,9 @@
       { "playerLevel": 29, "con": "Green" },
       { "playerLevel": 29, "con": "Trivial" }
     ],
+    "factionEffects": [
+      { "faction": "Congregation of Trem", "effect": "positive" }
+    ],
     "lastUpdated": "2026-08-11"
   },
   {
@@ -6101,6 +6586,9 @@
     "conObservations": [
       { "playerLevel": 24, "con": "Yellow" },
       { "playerLevel": 29, "con": "Light Blue" }
+    ],
+    "factionEffects": [
+      { "faction": "Congregation of Trem", "effect": "positive" }
     ],
     "lastUpdated": "2026-08-11"
   },
@@ -6154,7 +6642,11 @@
     "conObservations": [
       { "playerLevel": 24, "con": "Green" }
     ],
-    "lastUpdated": "2026-08-10"
+    "factionEffects": [
+      { "faction": "Congregation of Trem", "effect": "positive" },
+      { "faction": "Onyx Outlaw Gang", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a Fellstone scout",
@@ -6167,7 +6659,12 @@
       { "copper": 3 },
       { "copper": 3 }
     ],
-    "lastUpdated": "2026-08-06"
+    "factionEffects": [
+      { "faction": "Citizens of Faelindral", "effect": "positive" },
+      { "faction": "Defenders of Faelindral", "effect": "positive" },
+      { "faction": "Fellstone Orcs", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a Fellstone warrior",
@@ -6182,7 +6679,12 @@
     "coinDrops": [
       { "copper": 9 }
     ],
-    "lastUpdated": "2026-08-08"
+    "factionEffects": [
+      { "faction": "Citizens of Faelindral", "effect": "positive" },
+      { "faction": "Defenders of Faelindral", "effect": "positive" },
+      { "faction": "Fellstone Orcs", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a corrupted ashira",
@@ -6276,7 +6778,11 @@
       { "silver": 1, "copper": 67 },
       { "silver": 2, "copper": 11 }
     ],
-    "lastUpdated": "2026-08-10"
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Benu Memza", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a corrupted adept",
@@ -6300,7 +6806,11 @@
       { "silver": 1, "copper": 60 },
       { "silver": 2, "copper": 28 }
     ],
-    "lastUpdated": "2026-08-10"
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Benu Memza", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a corrupted warrior",
@@ -6353,7 +6863,10 @@
       { "copper": 75 },
       { "copper": 97 }
     ],
-    "lastUpdated": "2026-08-07"
+    "factionEffects": [
+      { "faction": "Bends Garrison", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a river pirate",
@@ -6399,7 +6912,12 @@
       { "playerLevel": 28, "con": "Dark Blue" },
       { "playerLevel": 28, "con": "Dark Blue" }
     ],
-    "lastUpdated": "2026-08-10"
+    "factionEffects": [
+      { "faction": "Bends Garrison", "effect": "positive" },
+      { "faction": "Serpent Sashes", "effect": "positive" },
+      { "faction": "Ten Hooks", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a sea witch",
@@ -6430,11 +6948,17 @@
     "relatedMonsters": [
       { "label": "Aide Aida", "slug": "aide-aida" }
     ],
-    "lastUpdated": "2026-08-07"
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "negative" },
+      { "faction": "Slaves of the Pasha", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a smuggler lookout",
     "slug": "a-smuggler-lookout",
+    "maps": ["Fallen Pass"],
     "drops": [
       { "item": "Cotton Scraps" },
       { "family": "Rusty Iron" }
@@ -6442,12 +6966,68 @@
     "coinDrops": [
       { "silver": 3, "copper": 25 }
     ],
-    "lastUpdated": "2026-08-07"
+    "conObservations": [
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 29, "con": "Red" },
+      { "playerLevel": 29, "con": "White" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a druidic cultist",
+    "slug": "a-druidic-cultist",
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "family": "Tattered Leather" },
+      { "item": "Worn Ironbark Buckler" }
+    ],
+    "coinDrops": [
+      { "silver": 2, "copper": 26 }
+    ],
+    "conObservations": [
+      { "playerLevel": 29, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a hired spellslinger",
+    "slug": "a-hired-spellslinger",
+    "maps": ["Fallen Pass"],
+    "drops": [
+      { "item": "Cotton Scraps" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a cultist adept",
+    "slug": "a-cultist-adept",
+    "maps": ["Fallen Pass"],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "positive" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a seaweary spiritist",
+    "slug": "a-seaweary-spiritist",
+    "maps": ["Fallen Pass"],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "positive" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a hired tracker",
     "slug": "a-hired-tracker",
-    "maps": ["Sungreet Strand"],
+    "maps": ["Sungreet Strand", "Fallen Pass"],
     "areas": ["Farmhands Camp"],
     "drops": [
       { "item": "Raw Human Meat" },
@@ -6485,7 +7065,15 @@
       { "playerLevel": 26, "con": "Yellow" },
       { "playerLevel": 26, "con": "Yellow" },
       { "playerLevel": 27, "con": "Light Blue" },
-      { "playerLevel": 29, "con": "Light Blue" }
+      { "playerLevel": 29, "con": "Light Blue" },
+      { "playerLevel": 29, "con": "Red" }
+    ],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "positive" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "negative" }
     ],
     "lastUpdated": "2026-08-11"
   },
@@ -6787,6 +7375,9 @@
       { "playerLevel": 28, "con": "Green" },
       { "playerLevel": 29, "con": "Green" }
     ],
+    "factionEffects": [
+      { "faction": "Benu Memza", "effect": "negative" }
+    ],
     "lastUpdated": "2026-08-11"
   },
   {
@@ -6883,6 +7474,11 @@
       { "playerLevel": 28, "con": "Yellow" },
       { "playerLevel": 29, "con": "White" }
     ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
     "lastUpdated": "2026-08-11"
   },
   {
@@ -6942,6 +7538,1989 @@
     "conObservations": [
       { "playerLevel": 29, "con": "Yellow" }
     ],
-    "lastUpdated": "2026-08-10"
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a beguiled bluecap",
+    "slug": "a-beguiled-bluecap",
+    "factionEffects": [
+      { "faction": "Circle of Spores", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a beguiled water elemental",
+    "slug": "a-beguiled-water-elemental",
+    "factionEffects": [
+      { "faction": "Circle of Spores", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a beguiled wolf",
+    "slug": "a-beguiled-wolf",
+    "factionEffects": [
+      { "faction": "Circle of Spores", "effect": "positive" },
+      { "faction": "Fossergrim", "effect": "negative" },
+      { "faction": "Naelira's Court", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Blacktide acolyte",
+    "slug": "a-blacktide-acolyte",
+    "factionEffects": [
+      { "faction": "Blacktide Orcs", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" },
+      { "faction": "Lost Sisters of Etheralis", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Blacktide bowman",
+    "slug": "a-blacktide-bowman",
+    "factionEffects": [
+      { "faction": "Blacktide Orcs", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" },
+      { "faction": "Lost Sisters of Etheralis", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Blacktide brute",
+    "slug": "a-blacktide-brute",
+    "factionEffects": [
+      { "faction": "Blacktide Orcs", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" },
+      { "faction": "Lost Sisters of Etheralis", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Blacktide chef",
+    "slug": "a-blacktide-chef",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Blacktide cleric",
+    "slug": "a-blacktide-cleric",
+    "factionEffects": [
+      { "faction": "Blacktide Orcs", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" },
+      { "faction": "Lost Sisters of Etheralis", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Blacktide guard",
+    "slug": "a-blacktide-guard",
+    "factionEffects": [
+      { "faction": "Blacktide Orcs", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" },
+      { "faction": "Lost Sisters of Etheralis", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Blacktide overseer",
+    "slug": "a-blacktide-overseer",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Blacktide raider",
+    "slug": "a-blacktide-raider",
+    "factionEffects": [
+      { "faction": "Blacktide Orcs", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" },
+      { "faction": "Lost Sisters of Etheralis", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Blacktide seer",
+    "slug": "a-blacktide-seer",
+    "factionEffects": [
+      { "faction": "Blacktide Orcs", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" },
+      { "faction": "Lost Sisters of Etheralis", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Blacktide slaver",
+    "slug": "a-blacktide-slaver",
+    "factionEffects": [
+      { "faction": "Blacktide Orcs", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" },
+      { "faction": "Lost Sisters of Etheralis", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Blacktide tracker",
+    "slug": "a-blacktide-tracker",
+    "factionEffects": [
+      { "faction": "Blacktide Orcs", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" },
+      { "faction": "Lost Sisters of Etheralis", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodchain guard",
+    "slug": "a-bloodchain-guard",
+    "factionEffects": [
+      { "faction": "Bloodchain Orcs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodchain mender",
+    "slug": "a-bloodchain-mender",
+    "factionEffects": [
+      { "faction": "Bloodchain Orcs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodchain mindbreaker",
+    "slug": "a-bloodchain-mindbreaker",
+    "factionEffects": [
+      { "faction": "Bloodchain Orcs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodchain overseer",
+    "slug": "a-bloodchain-overseer",
+    "factionEffects": [
+      { "faction": "Bloodchain Orcs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodchain sentry",
+    "slug": "a-bloodchain-sentry",
+    "factionEffects": [
+      { "faction": "Bloodchain Orcs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodchain soulherder",
+    "slug": "a-bloodchain-soulherder",
+    "factionEffects": [
+      { "faction": "Bloodchain Orcs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodchain taskmaster",
+    "slug": "a-bloodchain-taskmaster",
+    "factionEffects": [
+      { "faction": "Bloodchain Orcs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodynose captain",
+    "slug": "a-bloodynose-captain",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodynose frightener",
+    "slug": "a-bloodynose-frightener",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodynose fumer",
+    "slug": "a-bloodynose-fumer",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodynose healer",
+    "slug": "a-bloodynose-healer",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodynose scarer",
+    "slug": "a-bloodynose-scarer",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodynose spooker",
+    "slug": "a-bloodynose-spooker",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodynose stabber",
+    "slug": "a-bloodynose-stabber",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodynose trainer",
+    "slug": "a-bloodynose-trainer",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodynose voodooist",
+    "slug": "a-bloodynose-voodooist",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Bloodynose witch doctor",
+    "slug": "a-bloodynose-witch-doctor",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Claw blackguard",
+    "slug": "a-claw-blackguard",
+    "maps": ["Night Harbor"],
+    "areas": ["Gilded Claw Compound"],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "negative" },
+      { "faction": "Slaves of the Pasha", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Claw enforcer",
+    "slug": "a-claw-enforcer",
+    "maps": ["Night Harbor"],
+    "areas": ["Gilded Claw Compound"],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "negative" },
+      { "faction": "Slaves of the Pasha", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Claw henchman",
+    "slug": "a-claw-henchman",
+    "maps": ["Night Harbor"],
+    "areas": ["Gilded Claw Compound"],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "negative" },
+      { "faction": "Slaves of the Pasha", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Claw rhetor",
+    "slug": "a-claw-rhetor",
+    "maps": ["Night Harbor"],
+    "areas": ["Gilded Claw Compound"],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "negative" },
+      { "faction": "Slaves of the Pasha", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Claw shafi",
+    "slug": "a-claw-shafi",
+    "maps": ["Night Harbor"],
+    "areas": ["Gilded Claw Compound"],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "negative" },
+      { "faction": "Slaves of the Pasha", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Claw steward",
+    "slug": "a-claw-steward",
+    "maps": ["Night Harbor"],
+    "areas": ["Gilded Claw Compound"],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "negative" },
+      { "faction": "Slaves of the Pasha", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Claw vilicus",
+    "slug": "a-claw-vilicus",
+    "maps": ["Night Harbor"],
+    "areas": ["Gilded Claw Compound"],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "negative" },
+      { "faction": "Slaves of the Pasha", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a cultist guard",
+    "slug": "a-cultist-guard",
+    "factionEffects": [
+      { "faction": "Brotherhood of the Wyrm", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a cultist lookout",
+    "slug": "a-cultist-lookout",
+    "factionEffects": [
+      { "faction": "Brotherhood of the Wyrm", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a dawn pixie",
+    "slug": "a-dawn-pixie",
+    "factionEffects": [
+      { "faction": "Court of Summer", "effect": "negative" },
+      { "faction": "Court of Winter", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a degenerating Mur'Hua",
+    "slug": "a-degenerating-murhua",
+    "factionEffects": [
+      { "faction": "Mur'Hua", "effect": "positive" },
+      { "faction": "Skri'Var", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a docile bluecap",
+    "slug": "a-docile-bluecap",
+    "factionEffects": [
+      { "faction": "Circle of Spores", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a drowned knight",
+    "slug": "a-drowned-knight",
+    "factionEffects": [
+      { "faction": "Brotherhood of the Wyrm", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Ebon Order", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a ebon acolyte",
+    "slug": "a-ebon-acolyte",
+    "factionEffects": [
+      { "faction": "Brotherhood of the Wyrm", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Ebon Order", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Fellstone corrupter",
+    "slug": "a-fellstone-corrupter",
+    "maps": ["Evershade Weald"],
+    "factionEffects": [
+      { "faction": "Fellstone Orcs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Fellstone defiler",
+    "slug": "a-fellstone-defiler",
+    "maps": ["Evershade Weald"],
+    "factionEffects": [
+      { "faction": "Fellstone Orcs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Fellstone necromancer",
+    "slug": "a-fellstone-necromancer",
+    "maps": ["Evershade Weald"],
+    "factionEffects": [
+      { "faction": "Fellstone Orcs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Fellstone ragecaller",
+    "slug": "a-fellstone-ragecaller",
+    "maps": ["Evershade Weald"],
+    "factionEffects": [
+      { "faction": "Fellstone Orcs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Fellstone shaman",
+    "slug": "a-fellstone-shaman",
+    "maps": ["Evershade Weald"],
+    "factionEffects": [
+      { "faction": "Citizens of Faelindral", "effect": "positive" },
+      { "faction": "Defenders of Faelindral", "effect": "positive" },
+      { "faction": "Fellstone Orcs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a flourishing treant",
+    "slug": "a-flourishing-treant",
+    "factionEffects": [
+      { "faction": "Court of Summer", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Fossergrim Watcher",
+    "slug": "a-fossergrim-watcher",
+    "factionEffects": [
+      { "faction": "Circle of Spores", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a giant wolf",
+    "slug": "a-giant-wolf",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Corrupted Zintari Giants", "effect": "positive" },
+      { "faction": "Zintari Giants", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Grimtide deepseeress",
+    "slug": "a-grimtide-deepseeress",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Grimtide echohexer",
+    "slug": "a-grimtide-echohexer",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Grimtide fangbearer",
+    "slug": "a-grimtide-fangbearer",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Grimtide kelpweaver",
+    "slug": "a-grimtide-kelpweaver",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Grimtide moondrowner",
+    "slug": "a-grimtide-moondrowner",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Grimtide reefshaper",
+    "slug": "a-grimtide-reefshaper",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Grimtide shellcaller",
+    "slug": "a-grimtide-shellcaller",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Grimtide tidewatcher",
+    "slug": "a-grimtide-tidewatcher",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a grizzled smuggler",
+    "slug": "a-grizzled-smuggler",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Gilded Claw", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a heretical zealot",
+    "slug": "a-heretical-zealot",
+    "factionEffects": [
+      { "faction": "Brotherhood of the Wyrm", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Ebon Order", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Mezzatrain scion",
+    "slug": "a-mezzatrain-scion",
+    "factionEffects": [
+      { "faction": "Citizens of Faelindral", "effect": "positive" },
+      { "faction": "Defenders of Faelindral", "effect": "positive" },
+      { "faction": "Mezzatria's Cluster", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Mezzatrian broodling",
+    "slug": "a-mezzatrian-broodling",
+    "factionEffects": [
+      { "faction": "Citizens of Faelindral", "effect": "positive" },
+      { "faction": "Defenders of Faelindral", "effect": "positive" },
+      { "faction": "Mezzatria's Cluster", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Muggrah bonecollector",
+    "slug": "a-muggrah-bonecollector",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Muggrah bonekeeper",
+    "slug": "a-muggrah-bonekeeper",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Muggrah bonestealer",
+    "slug": "a-muggrah-bonestealer",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Muggrah brawler",
+    "slug": "a-muggrah-brawler",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Muggrah frightener",
+    "slug": "a-muggrah-frightener",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Muggrah mindstealer",
+    "slug": "a-muggrah-mindstealer",
+    "factionEffects": [
+      { "faction": "Muggrah Goblins", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Muggrah raider",
+    "slug": "a-muggrah-raider",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Muggrah robber",
+    "slug": "a-muggrah-robber",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Muggrah scavenger",
+    "slug": "a-muggrah-scavenger",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Muggrah scrapper",
+    "slug": "a-muggrah-scrapper",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Muggrah shaman",
+    "slug": "a-muggrah-shaman",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Muggrah spiritcaller",
+    "slug": "a-muggrah-spiritcaller",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Muggrah spiritseer",
+    "slug": "a-muggrah-spiritseer",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Muggrah stabber",
+    "slug": "a-muggrah-stabber",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Muggrah Goblins", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Mur'Hua harvester",
+    "slug": "a-murhua-harvester",
+    "factionEffects": [
+      { "faction": "Mur'Hua", "effect": "positive" },
+      { "faction": "Skri'Var", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Mur'Hua slave",
+    "slug": "a-murhua-slave",
+    "factionEffects": [
+      { "faction": "Mur'Hua", "effect": "positive" },
+      { "faction": "Skri'Var", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a pale cook",
+    "slug": "a-pale-cook",
+    "factionEffects": [
+      { "faction": "The Pale", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a pale guard",
+    "slug": "a-pale-guard",
+    "factionEffects": [
+      { "faction": "The Pale", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a poacher",
+    "slug": "a-poacher",
+    "factionEffects": [
+      { "faction": "Poachers of Calafrey", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a poacher bruiser",
+    "slug": "a-poacher-bruiser",
+    "factionEffects": [
+      { "faction": "Poachers of Calafrey", "effect": "negative" },
+      { "faction": "Village of Penshaw", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a poacher herbalist",
+    "slug": "a-poacher-herbalist",
+    "factionEffects": [
+      { "faction": "Poachers of Calafrey", "effect": "negative" },
+      { "faction": "Village of Penshaw", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a poacher pathfinder",
+    "slug": "a-poacher-pathfinder",
+    "factionEffects": [
+      { "faction": "Poachers of Calafrey", "effect": "negative" },
+      { "faction": "Village of Penshaw", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a prowling wolf",
+    "slug": "a-prowling-wolf",
+    "factionEffects": [
+      { "faction": "Court of Summer", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a researcher",
+    "slug": "a-researcher",
+    "factionEffects": [
+      { "faction": "SCEAS", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a river pirate captain",
+    "slug": "a-river-pirate-captain",
+    "factionEffects": [
+      { "faction": "Vermahn's Brood", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a roving ghoul",
+    "slug": "a-roving-ghoul",
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a sanctum elemental",
+    "slug": "a-sanctum-elemental",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" },
+      { "faction": "Islanders of Shallow Shoals", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a sanctum shark",
+    "slug": "a-sanctum-shark",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a sand giant bandit",
+    "slug": "a-sand-giant-bandit",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Corrupted Zintari Giants", "effect": "positive" },
+      { "faction": "Zintari Giants", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a sand giant brigand",
+    "slug": "a-sand-giant-brigand",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Corrupted Zintari Giants", "effect": "positive" },
+      { "faction": "Zintari Giants", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a sand giant fakir",
+    "slug": "a-sand-giant-fakir",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Corrupted Zintari Giants", "effect": "positive" },
+      { "faction": "Zintari Giants", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a sand giant geomancer",
+    "slug": "a-sand-giant-geomancer",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Corrupted Zintari Giants", "effect": "positive" },
+      { "faction": "Zintari Giants", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a sand giant suncaller",
+    "slug": "a-sand-giant-suncaller",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Corrupted Zintari Giants", "effect": "positive" },
+      { "faction": "Zintari Giants", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Sangrel arcanist",
+    "slug": "a-sangrel-arcanist",
+    "factionEffects": [
+      { "faction": "Sangrel Fist", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Sangrel entangler",
+    "slug": "a-sangrel-entangler",
+    "factionEffects": [
+      { "faction": "Sangrel Fist", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Sangrel grappler",
+    "slug": "a-sangrel-grappler",
+    "factionEffects": [
+      { "faction": "Sangrel Fist", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Sangrel hunter",
+    "slug": "a-sangrel-hunter",
+    "factionEffects": [
+      { "faction": "Sangrel Fist", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Sangrel shadowblade",
+    "slug": "a-sangrel-shadowblade",
+    "factionEffects": [
+      { "faction": "Sangrel Fist", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Sangrel striker",
+    "slug": "a-sangrel-striker",
+    "factionEffects": [
+      { "faction": "Sangrel Fist", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a seasoned marauder",
+    "slug": "a-seasoned-marauder",
+    "factionEffects": [
+      { "faction": "Crag Serpents", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a seasoned spellslinger",
+    "slug": "a-seasoned-spellslinger",
+    "factionEffects": [
+      { "faction": "Crag Serpents", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a senior researcher",
+    "slug": "a-senior-researcher",
+    "factionEffects": [
+      { "faction": "SCEAS", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a shadowed scribe",
+    "slug": "a-shadowed-scribe",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Ebon Order", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a skeletal archer",
+    "slug": "a-skeletal-archer",
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a skeletal champion",
+    "slug": "a-skeletal-champion",
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a skeletal deacon",
+    "slug": "a-skeletal-deacon",
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a skeletal defender",
+    "slug": "a-skeletal-defender",
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a skeletal fighter",
+    "slug": "a-skeletal-fighter",
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a skeletal vicar",
+    "slug": "a-skeletal-vicar",
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a skintaker bravo",
+    "slug": "a-skintaker-bravo",
+    "maps": ["Sungreet Strand"],
+    "factionEffects": [
+      { "faction": "Circle of Scarce Rains", "effect": "positive" },
+      { "faction": "Seekers of the Lost Eye", "effect": "positive" },
+      { "faction": "Skintakers of Szuur", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a skintaker pet",
+    "slug": "a-skintaker-pet",
+    "maps": ["Sungreet Strand"],
+    "factionEffects": [
+      { "faction": "Circle of Scarce Rains", "effect": "positive" },
+      { "faction": "Seekers of the Lost Eye", "effect": "positive" },
+      { "faction": "Skintakers of Szuur", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a skintaker ritualist",
+    "slug": "a-skintaker-ritualist",
+    "maps": ["Sungreet Strand"],
+    "factionEffects": [
+      { "faction": "Circle of Scarce Rains", "effect": "positive" },
+      { "faction": "Seekers of the Lost Eye", "effect": "positive" },
+      { "faction": "Skintakers of Szuur", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a skintaker sneak",
+    "slug": "a-skintaker-sneak",
+    "maps": ["Sungreet Strand"],
+    "factionEffects": [
+      { "faction": "Circle of Scarce Rains", "effect": "positive" },
+      { "faction": "Seekers of the Lost Eye", "effect": "positive" },
+      { "faction": "Skintakers of Szuur", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Skri'Var guard",
+    "slug": "a-skrivar-guard",
+    "factionEffects": [
+      { "faction": "Mur'Hua", "effect": "positive" },
+      { "faction": "Skri'Var", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Skri'Var mystic",
+    "slug": "a-skrivar-mystic",
+    "factionEffects": [
+      { "faction": "Mur'Hua", "effect": "positive" },
+      { "faction": "Skri'Var", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Skri'Var raider",
+    "slug": "a-skrivar-raider",
+    "factionEffects": [
+      { "faction": "Mur'Hua", "effect": "positive" },
+      { "faction": "Skri'Var", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Skri'Var taskmaster",
+    "slug": "a-skrivar-taskmaster",
+    "factionEffects": [
+      { "faction": "Mur'Hua", "effect": "positive" },
+      { "faction": "Skri'Var", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a Skri'Var tracker",
+    "slug": "a-skrivar-tracker",
+    "factionEffects": [
+      { "faction": "Mur'Hua", "effect": "positive" },
+      { "faction": "Skri'Var", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a slithering serpent",
+    "slug": "a-slithering-serpent",
+    "factionEffects": [
+      { "faction": "Clan Grimtide", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a smuggler laborer",
+    "slug": "a-smuggler-laborer",
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a snarling wolf",
+    "slug": "a-snarling-wolf",
+    "factionEffects": [
+      { "faction": "Court of Summer", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a sojourner",
+    "slug": "a-sojourner",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Circle of Scarce Rains", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a summer pixie",
+    "slug": "a-summer-pixie",
+    "factionEffects": [
+      { "faction": "Citizens of Faelindral", "effect": "negative" },
+      { "faction": "Court of Summer", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a sweaty Bloodynose goblin",
+    "slug": "a-sweaty-bloodynose-goblin",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "positive" },
+      { "faction": "Benu Memza", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a theologian",
+    "slug": "a-theologian",
+    "factionEffects": [
+      { "faction": "SCEAS", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a treant",
+    "slug": "a-treant",
+    "factionEffects": [
+      { "faction": "Court of Summer", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a trixie pixie",
+    "slug": "a-trixie-pixie",
+    "factionEffects": [
+      { "faction": "Court of Summer", "effect": "negative" },
+      { "faction": "Court of Winter", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a veiled emissary",
+    "slug": "a-veiled-emissary",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Cult of Trimminax", "effect": "negative" },
+      { "faction": "Ebon Order", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a visiting cultist",
+    "slug": "a-visiting-cultist",
+    "factionEffects": [
+      { "faction": "Brotherhood of the Wyrm", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Ebon Order", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a whispering adapt",
+    "slug": "a-whispering-adapt",
+    "factionEffects": [
+      { "faction": "Brotherhood of the Wyrm", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Ebon Order", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a witchguard cultor",
+    "slug": "a-witchguard-cultor",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a witchguard princeps",
+    "slug": "a-witchguard-princeps",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a witchguard serverat",
+    "slug": "a-witchguard-serverat",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a witchguard signifer",
+    "slug": "a-witchguard-signifer",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a witchguard velite",
+    "slug": "a-witchguard-velite",
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a wyrmseer",
+    "slug": "a-wyrmseer",
+    "factionEffects": [
+      { "faction": "Brotherhood of the Wyrm", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Ebon Order", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a wyrmseer vizier",
+    "slug": "a-wyrmseer-vizier",
+    "factionEffects": [
+      { "faction": "Brotherhood of the Wyrm", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a zombie laborer",
+    "slug": "a-zombie-laborer",
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a zombie provisioner",
+    "slug": "a-zombie-provisioner",
+    "maps": ["Tomb of the Last Wyrmsbane"],
+    "factionEffects": [
+      { "faction": "Denizens of Wyrmsbane Tomb", "effect": "negative" },
+      { "faction": "Easthymn Freebooters", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an abyssal emissary",
+    "slug": "an-abyssal-emissary",
+    "factionEffects": [
+      { "faction": "Brotherhood of the Wyrm", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Ebon Order", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an archaeologist",
+    "slug": "an-archaeologist",
+    "factionEffects": [
+      { "faction": "SCEAS", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an ashen knight",
+    "slug": "an-ashen-knight",
+    "factionEffects": [
+      { "faction": "Brotherhood of the Wyrm", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Ebon Order", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an ashira adept",
+    "slug": "an-ashira-adept",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an ashira ain guard",
+    "slug": "an-ashira-ain-guard",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Benu Memza", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an ashira alpha",
+    "slug": "an-ashira-alpha",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an ashira huntmaster",
+    "slug": "an-ashira-huntmaster",
+    "factionEffects": [
+      { "faction": "Benu Memza", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an ashira mystic",
+    "slug": "an-ashira-mystic",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Benu Memza", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an ashira naturalist",
+    "slug": "an-ashira-naturalist",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an ashira oracle",
+    "slug": "an-ashira-oracle",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an ashira pathfinder",
+    "slug": "an-ashira-pathfinder",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an ashira shapeshifter",
+    "slug": "an-ashira-shapeshifter",
+    "factionEffects": [
+      { "faction": "Clan Bloodynose", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an ashira wanderer",
+    "slug": "an-ashira-wanderer",
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an emissary",
+    "slug": "an-emissary",
+    "maps": ["Night Harbor"],
+    "areas": ["Gilded Claw Compound"],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "negative" },
+      { "faction": "Slaves of the Pasha", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an Iron Emissaries envoy",
+    "slug": "an-iron-emissaries-envoy",
+    "factionEffects": [
+      { "faction": "Iron Emissaries", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Animist Wafi",
+    "slug": "animist-wafi",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Benu Lakhim", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Clan Bloodynose", "effect": "positive" },
+      { "faction": "Night Harbor Garrison", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Anlisia Silvereye",
+    "slug": "anlisia-silvereye",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Stewards of the Reliquary", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Bloodchain Champion",
+    "slug": "bloodchain-champion",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Bloodchain Orcs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Chieftain Raka'Matar",
+    "slug": "chieftain-rakamatar",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Mur'Hua", "effect": "positive" },
+      { "faction": "Skri'Var", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Cormac Brask",
+    "slug": "cormac-brask",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Bends Garrison", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Dubar Falshim",
+    "slug": "dubar-falshim",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Council of Aldermen", "effect": "negative" },
+      { "faction": "Iron Emissaries", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Errol Shrewtender",
+    "slug": "errol-shrewtender",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Seekers of the Lost Eye", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Eskander Akhtar",
+    "slug": "eskander-akhtar",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Seekers of the Lost Eye", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Head Researcher Aashir",
+    "slug": "head-researcher-aashir",
+    "named": true,
+    "factionEffects": [
+      { "faction": "SCEAS", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Herald of Muurtu",
+    "slug": "herald-of-muurtu",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "High Sister of Sarinius",
+    "slug": "high-sister-of-sarinius",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Jumthem",
+    "slug": "jumthem",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Masoumeh Akhtar",
+    "slug": "masoumeh-akhtar",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Seekers of the Lost Eye", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Mayana",
+    "slug": "mayana",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Mezzatrian Boneweaver",
+    "slug": "mezzatrian-boneweaver",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Citizens of Faelindral", "effect": "positive" },
+      { "faction": "Defenders of Faelindral", "effect": "positive" },
+      { "faction": "Mezzatria's Cluster", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Muleda Murktoe",
+    "slug": "muleda-murktoe",
+    "named": true,
+    "maps": ["Evershade Weald"],
+    "factionEffects": [
+      { "faction": "Fellstone Orcs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Poacher Tolan",
+    "slug": "poacher-tolan",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Poachers of Calafrey", "effect": "negative" },
+      { "faction": "Village of Penshaw", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Ruffian",
+    "slug": "ruffian",
+    "named": true,
+    "maps": ["Night Harbor"],
+    "areas": ["Night Harbor Market (at night)"],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Sahir Muzalal",
+    "slug": "sahir-muzalal",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Bends Garrison", "effect": "positive" },
+      { "faction": "Residents of the Bends", "effect": "negative" },
+      { "faction": "Serpent Sashes", "effect": "negative" },
+      { "faction": "Ten Hooks", "effect": "negative" },
+      { "faction": "Waterdogs", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Sangrel",
+    "slug": "sangrel",
+    "named": true,
+    "maps": ["Keeper's Bight"],
+    "factionEffects": [
+      { "faction": "Red Mantles", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Tok'Nor",
+    "slug": "toknor",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Mur'Hua", "effect": "positive" },
+      { "faction": "Skri'Var", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Whiskey",
+    "slug": "whiskey",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Benu Memza", "effect": "negative" },
+      { "faction": "Citizens of Night Harbor", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "negative" },
+      { "faction": "Vermahn's Brood", "effect": "positive" },
+      { "faction": "Zintari Giants", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Wily Rufga",
+    "slug": "wily-rufga",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Benu Memza", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Witchguard Kruurgal",
+    "slug": "witchguard-kruurgal",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Zubair Goldtongue",
+    "slug": "zubair-goldtongue",
+    "named": true,
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Corrupted Zintari Giants", "effect": "positive" },
+      { "faction": "Zintari Giants", "effect": "negative" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-11"
   }
 ]
