@@ -6834,27 +6834,8 @@
     "lastUpdated": "2026-08-10"
   },
   {
-    "name": "Dustrend Sacramir",
-    "slug": "dustrend-sacramir",
-    "named": true,
-    "maps": ["Vale of Zintar"],
-    "relatedMonsters": [
-      { "label": "a Dustrend sacramir", "slug": "a-dustrend-sacramir" }
-    ],
-    "factionEffects": [
-      { "faction": "Citizens of Night Harbor", "effect": "positive" },
-      { "faction": "Orcs", "effect": "negative" },
-      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
-      { "faction": "Steel Talons", "effect": "positive" }
-    ],
-    "lastUpdated": "2026-08-10"
-  },
-  {
     "name": "a Dustrend sacramir",
     "slug": "a-dustrend-sacramir",
-    "relatedMonsters": [
-      { "label": "Dustrend Sacramir", "slug": "dustrend-sacramir" }
-    ],
     "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Iron Scraps" },
@@ -6867,6 +6848,12 @@
     "conObservations": [
       { "playerLevel": 29, "con": "Yellow" },
       { "playerLevel": 29, "con": "Yellow" }
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Orcs", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
     ],
     "lastUpdated": "2026-08-10"
   },
