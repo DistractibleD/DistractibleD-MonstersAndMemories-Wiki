@@ -482,6 +482,46 @@ with the in-game item card): Landing Loop (Shallow Shoals, dropped by a Quest --
 different, bot-style "New Item" layout rather than the usual in-game overlay, so it's unclear
 whether that layout ever shows Class/Race or if this one was simply cropped -- left both
 unset rather than guessed, watch for another card in this same layout to tell which it is.
+RESOLVED 2026-08-11: a second Landing Loop card in this same layout came through the inbox
+(exact duplicate, same missing section) -- two-for-two confirms this bot-style layout simply
+never shows Class/Race, not a crop. No change to the recorded data; just closing the watch.
+
+2026-08-11, images/inbox batch (Fallen Pass named-boss cards, direct in-game screenshots):
+several items already in items.json turned out to be recorded under a guessed/site-derived
+name rather than the card's own title -- corrected using the same "card title is the
+authoritative source" rule as every other name mismatch in this file, name only unless
+stated otherwise (stats already matched):
+- Dougal's Chain Britches -> Boneyard Britches (Dougal Brom)
+- Thrym's Mantlepiece -> Mantle of Forsaken Tradition (Ivor Thrym)
+- Steward's Cuirass -> House Loyal's Cuirass (Steward Grimaldi)
+- Stablemaster's Claymore -> Shoe-Iron Claymore (Stablemaster Tomaz)
+- Thrym's Cuirass -> Dust-Worn Cuirass (Aidan Thrym)
+- Thrym's Fury -> Staff of Storied Lineage (Aidan Thrym, damage also corrected 16->24 --
+  the new card's description line was a copy-paste glitch showing Dust-Worn Cuirass's own
+  text on a staff, left unset rather than recorded as wrong flavor text)
+- Scribe's Cuffs -> Scribe's Cuff (Alaric Brom) -- **reverses** the 2026-07-28 Fallen Pass
+  sweep's own "Scribe's Cuff (site) is actually Scribe's Cuffs (card, plural)" correction;
+  this new screenshot is a direct capture of the real in-game card and clearly reads
+  singular "SCRIBE'S CUFF," so the earlier correction was itself wrong -- also updated
+  stats (AC 9->12, WIS+5->INT+6/HP+15/Mana+20, weight 0.5->0.25) per newest-wins.
+- Steward's Coif -> Coif of the Composed (Steward Grimaldi), description changed to "A
+  stitched linen coif worn by those with a penchant for composure and grace." Stats
+  (AC16/INT+7/Mana+30) matched the original 2026-07-18 entry exactly, not the 2026-07-19
+  mnmdrops.com scrape's INT+5/Mana+5 reading -- this is the "in-game look" that 2026-07-28's
+  note said would resolve that conflict; the original entry was correct all along.
+
+Two more stat-only updates from the same batch, "newest screenshot wins": Bane of the Twin
+Drakes (Nyxx) damage 13->19; Brood Dagger (Chaim The Herald) damage 9->13. And one large,
+flagged-not-just-updated conflict: Gaze of Empire (Grand Vizier Al'kithar) went from AC
+18/STR+6/STA+6/CHA+6/HP+30/SV Magic+12/weight 1.0 down to AC 11/STR+6/STA+5/CHA+4/HP+20/no
+resist line at all/weight 0.25 -- applied per policy, but flagging since a resist vanishing
+outright alongside every other stat dropping is more than a typical correction.
+
+Floral Frock (Yvette Gardener, Back slot, "flower petals" flavor) was added as a new,
+separate drop rather than merged into either of Yvette Gardener's two existing Back-slot
+items (Verdant Mantle, Yvette's Cape) -- genuinely unclear which (if either) it duplicates,
+and unlike the renames above there was no exact stat match to confirm one. Worth a look if a
+future card clarifies.
 
 Two stat conflicts resolved per "newest screenshot wins," both already linked from an
 existing monster's drops so this was a data update, not a new discovery: Protector's Mask

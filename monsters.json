@@ -3922,10 +3922,10 @@
       { "item": "Greaves of Courage" },
       { "item": "Oathband of House Thyrm" },
       { "item": "Silentstep Slippers" },
-      { "item": "Thrym's Cuirass" },
-      { "item": "Thrym's Fury" }
+      { "item": "Dust-Worn Cuirass" },
+      { "item": "Staff of Storied Lineage" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Alaric Brom",
@@ -3935,7 +3935,7 @@
     "drops": [
       { "item": "Gauntlets of Hearty Strength" },
       { "item": "Pounce Bag" },
-      { "item": "Scribe's Cuffs" }
+      { "item": "Scribe's Cuff" }
     ],
     "lastUpdated": "2026-07-28"
   },
@@ -4001,9 +4001,10 @@
     "drops": [
       { "item": "Festerclasp" },
       { "item": "Filthstriders" },
-      { "item": "Zirat's Blackwire Cuffs" }
+      { "item": "Zirat's Blackwire Cuffs" },
+      { "item": "Flayer of Renewed Purpose" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Captain Belvoir",
@@ -4078,10 +4079,10 @@
     "drops": [
       { "item": "Bromm's Bracers" },
       { "item": "Chainfall Gauntlets" },
-      { "item": "Dougal's Chain Britches" },
+      { "item": "Boneyard Britches" },
       { "item": "Helm of the Last Roar" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Edric Torvald",
@@ -4129,9 +4130,10 @@
     "maps": ["Fallen Pass"],
     "drops": [
       { "item": "Faylan's Gambeson" },
-      { "item": "Squire's Rondel" }
+      { "item": "Squire's Rondel" },
+      { "item": "Curtailed Bracer" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Felix Rathmere",
@@ -4156,9 +4158,10 @@
       { "item": "Handmaiden's Robe" },
       { "item": "Mira's Soft Buskins" },
       { "item": "Mourning Mantilla" },
-      { "item": "Silver Comb of House Torvald" }
+      { "item": "Silver Comb of House Torvald" },
+      { "item": "Handmaid's Needler" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "High Watchman Albury",
@@ -4181,9 +4184,9 @@
       { "item": "Ivor's Battle Bracer" },
       { "item": "Ivor's Blood Bracer" },
       { "item": "Spellbound Tome of Shielding" },
-      { "item": "Thrym's Mantlepiece" }
+      { "item": "Mantle of Forsaken Tradition" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Jailer Kur'mak",
@@ -4459,11 +4462,11 @@
     "maps": ["Fallen Pass"],
     "drops": [
       { "item": "Grimaldi's Padded Mantle" },
-      { "item": "Steward's Coif" },
-      { "item": "Steward's Cuirass" },
+      { "item": "Coif of the Composed" },
+      { "item": "House Loyal's Cuirass" },
       { "item": "The Red Book" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Stablemaster Tomaz",
@@ -4473,11 +4476,11 @@
     "drops": [
       { "item": "Frayed Rope" },
       { "item": "Pale Handlamp" },
-      { "item": "Stablemaster's Claymore" },
+      { "item": "Shoe-Iron Claymore" },
       { "item": "Stableplate Greaves" },
       { "item": "Workman's Leather Gloves" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Sorchan Yazmul",
@@ -5602,9 +5605,10 @@
       { "item": "Gardener's Hauberk" },
       { "item": "Verdant Mantle" },
       { "item": "Workhorse Saddle" },
-      { "item": "Yvette's Cape" }
+      { "item": "Yvette's Cape" },
+      { "item": "Floral Frock" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-08-10"
   },
   {
     "name": "Yeoman Borin Smythe",
