@@ -139,6 +139,16 @@ Every type uses the same `renderItemsList`. Armor additionally gets a "Material"
 `pendingItemCategory` + `pendingItemQuery` so the Item Database opens on that item's type
 with search pre-filled. Recipe component/result links go through the same `goToItem` path.
 
+**Table header cells are icons, not words** (2026-08-12, user's own request — long labels like
+"Capacity / Max Size" were wrapping/stacking) — every column except Name renders a small
+`currentColor` glyph (`HEADER_ICON_DEFS`/`colHeaderIcon()`, sized for an 18px `<th>`, no
+colored background circle unlike `svgIcon()`'s card badges) or a bare symbol (Stats = `#`,
+Ratio = `∶`), with a native `title` attribute on the `<th>` spelling out the column in plain
+text on hover. Mobile's stacked-card view (<640px) hides `<thead>` entirely and reads labels
+from each `<td>`'s own `data-label` instead, so these icons never had to double as the mobile
+label — safe to redesign without touching that path. Add a header icon the same way for any
+future column: one `HEADER_ICON_DEFS` entry + `title` on the `<th>`.
+
 ## Item screenshot format
 
 New items/recipes don't get screenshots archived at all (2026-08-04) — this section now

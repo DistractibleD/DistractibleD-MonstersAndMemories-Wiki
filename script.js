@@ -1567,6 +1567,31 @@ function svgIcon(key) {
   return `<svg viewBox="0 0 24 24" class="type-icon"><circle cx="12" cy="12" r="11.5" fill="${bg}"/><g fill="#f3e9d6">${glyph}</g></svg>`;
 }
 
+// Item Database table header icons (2026-08-12) — small flat glyphs, no
+// colored background circle (unlike svgIcon()'s card-sized badges), meant to
+// render at ~18px inside a table <th> so column headers stop word-wrapping/
+// stacking. `currentColor` so they inherit the header's existing --accent
+// color for free. Paired with a `title` attribute on the <th> for a native
+// hover tooltip spelling out the column in plain text — the table's mobile
+// stacked-card view (<640px) hides <thead> entirely and reads its labels
+// from each <td>'s own data-label instead, so these icons never need to
+// double as the mobile label.
+const HEADER_ICON_DEFS = {
+  type: `<rect x="3" y="3" width="7.5" height="7.5" rx="1.2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.2"/>`,
+  slot: `<path d="M8.2 5 C8.6 6.8 10.1 7.6 12 7.6 C13.9 7.6 15.4 6.8 15.8 5 L17.3 9.5 L16.5 21 L7.5 21 L6.7 9.5 Z"/>`,
+  ac: `<path fill-rule="evenodd" d="M12 2.2 L19 4.8 L19 11.5 C19 17 15.5 20.3 12 21.8 C8.5 20.3 5 17 5 11.5 L5 4.8 Z M11.6 5.2 L12.4 5.2 L12.4 16.3 L11.6 16.3 Z"/>`,
+  damage: `<g transform="rotate(45 12 12)"><path d="M12 1.5 L13 4.5 L12.5 15 L11.5 15 L11 4.5 Z"/><rect x="8.3" y="15" width="7.4" height="1.5"/><rect x="11" y="16.5" width="2" height="4.3"/><circle cx="12" cy="21.7" r="1.3"/></g>`,
+  delay: `<path fill-rule="evenodd" d="M12 2.5 A9.5 9.5 0 1 0 12.01 2.5 Z M12 5 A7 7 0 1 1 11.99 5 Z"/><rect x="11.3" y="6.5" width="1.4" height="6" rx="0.5"/><rect x="11.3" y="11.3" width="4.2" height="1.4" rx="0.5" transform="rotate(45 12 12)"/>`,
+  weight: `<rect x="9" y="11" width="6" height="2" rx="0.5"/><rect x="3.2" y="8" width="2.4" height="8" rx="0.8"/><rect x="1" y="9.5" width="1.6" height="5" rx="0.6"/><rect x="18.4" y="8" width="2.4" height="8" rx="0.8"/><rect x="21.4" y="9.5" width="1.6" height="5" rx="0.6"/>`,
+  capacity: `<path d="M4 8 L12 4 L20 8 L12 12 Z"/><path d="M4 8 L4 16 L12 20 L12 12 Z"/><path d="M20 8 L20 16 L12 20 L12 12 Z"/>`,
+  classes: `<circle cx="12" cy="6" r="3"/><path d="M12 9 C7 9 5 13 5 21 L19 21 C19 13 17 9 12 9 Z"/>`,
+  race: `<circle cx="8" cy="13" r="5"/><circle cx="16" cy="12" r="4.5"/><path d="M13 8 L14.5 5 L15.5 8 Z"/><path d="M17.5 8 L19 5 L19.5 8.3 Z"/><path d="M19.5 12 L22 12.5 L19.8 13.8 Z"/>`,
+};
+
+function colHeaderIcon(key) {
+  return `<svg viewBox="0 0 24 24" class="col-header-svg" aria-hidden="true"><g fill="currentColor">${HEADER_ICON_DEFS[key]}</g></svg>`;
+}
+
 // Weapon icon is keyed off the reference sheet's own (coarser) categories —
 // 1H/2H × Bludgeoning/Slashing/Piercing, plus Archery/Throwing — derived
 // from the existing skill/twoHanded fields, no separate schema field to
@@ -1982,17 +2007,17 @@ function renderItemsList(container, category) {
         <thead>
           <tr>
             <th data-sort-key="name" class="sortable">Name</th>
-            ${showTypeColumn ? '<th data-sort-key="type" class="sortable">Type</th>' : ''}
-            <th data-sort-key="slot" class="sortable">Slot</th>
-            <th data-sort-key="ac" class="sortable">AC</th>
-            <th data-sort-key="stats" class="sortable">Stats</th>
-            <th data-sort-key="damage" class="sortable">Damage</th>
-            <th data-sort-key="delay" class="sortable">Delay</th>
-            <th data-sort-key="ratio" class="sortable">Ratio</th>
-            <th data-sort-key="weight" class="sortable">Weight / Size</th>
-            <th data-sort-key="capacity" class="sortable">Capacity / Max Size</th>
-            <th data-sort-key="classes" class="sortable">Classes</th>
-            <th data-sort-key="race" class="sortable">Race</th>
+            ${showTypeColumn ? `<th data-sort-key="type" class="sortable col-header-icon-cell" title="Type">${colHeaderIcon('type')}</th>` : ''}
+            <th data-sort-key="slot" class="sortable col-header-icon-cell" title="Slot">${colHeaderIcon('slot')}</th>
+            <th data-sort-key="ac" class="sortable col-header-icon-cell" title="Armor Class (AC)">${colHeaderIcon('ac')}</th>
+            <th data-sort-key="stats" class="sortable col-header-icon-cell" title="Stats"><span class="col-header-symbol">#</span></th>
+            <th data-sort-key="damage" class="sortable col-header-icon-cell" title="Damage">${colHeaderIcon('damage')}</th>
+            <th data-sort-key="delay" class="sortable col-header-icon-cell" title="Delay (time between attacks)">${colHeaderIcon('delay')}</th>
+            <th data-sort-key="ratio" class="sortable col-header-icon-cell" title="Damage / Delay Ratio"><span class="col-header-symbol">&#8758;</span></th>
+            <th data-sort-key="weight" class="sortable col-header-icon-cell" title="Weight / Size">${colHeaderIcon('weight')}</th>
+            <th data-sort-key="capacity" class="sortable col-header-icon-cell" title="Capacity / Max Size">${colHeaderIcon('capacity')}</th>
+            <th data-sort-key="classes" class="sortable col-header-icon-cell" title="Classes">${colHeaderIcon('classes')}</th>
+            <th data-sort-key="race" class="sortable col-header-icon-cell" title="Race">${colHeaderIcon('race')}</th>
           </tr>
         </thead>
         <tbody id="items-tbody"></tbody>

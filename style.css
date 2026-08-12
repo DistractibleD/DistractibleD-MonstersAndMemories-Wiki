@@ -817,17 +817,17 @@ body:not(.site-entered) .sidebar {
 }
 /* Column proportions, tuned so short-but-unbreakable words (e.g. "Medium",
    "Weapon") fit without splitting mid-word. Overridden for mobile below. */
-.col-name { width: 18%; }
-.col-type { width: 8%; }
-.col-slot { width: 10%; }
-.col-ac { width: 6%; }
-.col-stats { width: 13%; }
+.col-name { width: 20%; }
+.col-type { width: 5%; }
+.col-slot { width: 6%; }
+.col-ac { width: 4%; }
+.col-stats { width: 12%; }
 .col-damage { width: 4%; }
 .col-delay { width: 4%; }
 .col-ratio { width: 4%; }
 .col-weight { width: 8%; }
-.col-capacity { width: 10%; }
-.col-classes { width: 15%; }
+.col-capacity { width: 9%; }
+.col-classes { width: 16%; }
 .col-race { width: 8%; }
 .col-monster-name { width: 100%; }
 .col-gathering-name { width: 22%; }
@@ -909,6 +909,26 @@ body:not(.site-entered) .sidebar {
 .items-table th.sorted-desc::after {
   content: '\25BC';
   margin-left: 4px;
+}
+/* Icon-only column headers (2026-08-12) — replaces most text labels (Slot,
+   AC, Damage, Delay, Weight/Size, etc.) with a small glyph so long words
+   stop wrapping/stacking inside narrow columns; a native `title` attribute
+   on the <th> supplies the plain-text meaning on hover. Name stays plain
+   text (nothing shorter reads as clearly), Stats/Ratio use a bare symbol
+   (#, ∶) instead of a drawn icon per the user's own suggestion. */
+.items-table th.col-header-icon-cell {
+  text-align: center;
+}
+.col-header-svg {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  fill: currentColor;
+}
+.col-header-symbol {
+  font-size: 1.05rem;
+  font-weight: 700;
+  vertical-align: middle;
 }
 .items-quick-search {
   position: relative;
@@ -2439,18 +2459,18 @@ body:not(.site-entered) .sidebar {
   .content-inner .items-table { font-size: 0.78rem; }
   .content-inner .items-table th, .content-inner .items-table td { padding: 6px 6px; }
   /* Give the short-word columns relatively more room at narrow widths. */
-  .col-name { width: 15%; }
-  .col-type { width: 9%; }
-  .col-slot { width: 10%; }
-  .col-ac { width: 5%; }
-  .col-stats { width: 11%; }
-  .col-damage { width: 3%; }
-  .col-delay { width: 3%; }
-  .col-ratio { width: 3%; }
+  .col-name { width: 17%; }
+  .col-type { width: 4%; }
+  .col-slot { width: 6%; }
+  .col-ac { width: 4%; }
+  .col-stats { width: 12%; }
+  .col-damage { width: 4%; }
+  .col-delay { width: 4%; }
+  .col-ratio { width: 4%; }
   .col-weight { width: 9%; }
-  .col-capacity { width: 9%; }
-  .col-classes { width: 14%; }
-  .col-race { width: 9%; }
+  .col-capacity { width: 10%; }
+  .col-classes { width: 16%; }
+  .col-race { width: 10%; }
   .maps-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
   .map-card img.map-card-thumb { height: 110px; }
   #map-viewer-close { top: 10px; right: 12px; width: 34px; height: 34px; font-size: 1.2rem; }
