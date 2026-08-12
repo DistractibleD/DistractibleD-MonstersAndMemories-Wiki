@@ -921,27 +921,27 @@
     "tradeskill": "Fletching",
     "listOrder": 9,
     "difficultyColor": "Green",
-    "observedAtSkill": 45,
+    "observedAtSkill": 55,
     "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Copper Scraps", "quantity": 1 }],
     "recipeSkillLevel": 50
   },
   {
     "name": "Copperhead Arrow x1000",
     "slug": "copperhead-arrow-x1000",
-    "lastUpdated": "2026-07-27",
+    "lastUpdated": "2026-08-11",
     "tradeskill": "Fletching",
     "listOrder": 10,
     "difficultyColor": "Green",
-    "observedAtSkill": 46
+    "observedAtSkill": 61
   },
   {
     "name": "Copperhead Arrow x500",
     "slug": "copperhead-arrow-x500",
-    "lastUpdated": "2026-07-27",
+    "lastUpdated": "2026-08-11",
     "tradeskill": "Fletching",
     "listOrder": 11,
     "difficultyColor": "Green",
-    "observedAtSkill": 46,
+    "observedAtSkill": 50,
     "components": [{ "item": "Wood", "quantity": 5 }, { "item": "Copper Scraps", "quantity": 5 }],
     "recipeSkillLevel": 50
   },
@@ -966,8 +966,8 @@
     "lastUpdated": "2026-08-11",
     "tradeskill": "Fletching",
     "listOrder": 12,
-    "difficultyColor": "Red",
-    "observedAtSkill": 45,
+    "difficultyColor": "Green",
+    "observedAtSkill": 75,
     "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Bronze Scraps", "quantity": 1 }],
     "recipeSkillLevel": 75
   },
@@ -978,8 +978,8 @@
     "image": "images/crafting/bronzehead-arrow-x1000.jpg",
     "tradeskill": "Fletching",
     "listOrder": 13,
-    "difficultyColor": "Red",
-    "observedAtSkill": 45,
+    "difficultyColor": "Green",
+    "observedAtSkill": 75,
     "components": [{ "item": "Wood", "quantity": 10 }, { "item": "Bronze Scraps", "quantity": 10 }]
   },
   {
@@ -988,8 +988,8 @@
     "lastUpdated": "2026-08-11",
     "tradeskill": "Fletching",
     "listOrder": 14,
-    "difficultyColor": "Red",
-    "observedAtSkill": 45,
+    "difficultyColor": "Green",
+    "observedAtSkill": 75,
     "components": [{ "item": "Wood", "quantity": 5 }, { "item": "Bronze Scraps", "quantity": 5 }],
     "recipeSkillLevel": 75
   },
@@ -999,8 +999,8 @@
     "lastUpdated": "2026-08-11",
     "tradeskill": "Fletching",
     "listOrder": 15,
-    "difficultyColor": "Red",
-    "observedAtSkill": 45,
+    "difficultyColor": "Green",
+    "observedAtSkill": 75,
     "weight": 3.0,
     "size": "Medium",
     "components": [{ "item": "Wood Board", "quantity": 9 }, { "item": "Bolt of Cloth", "quantity": 1 }]
@@ -1019,18 +1019,38 @@
   {
     "name": "Ironhead Arrow x100",
     "slug": "ironhead-arrow-x100",
-    "lastUpdated": "2026-07-20",
+    "lastUpdated": "2026-08-11",
     "tradeskill": "Fletching",
+    "difficultyColor": "Orange",
+    "observedAtSkill": 75,
     "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Iron Scraps", "quantity": 1 }],
     "recipeSkillLevel": 100
   },
   {
     "name": "Ironhead Arrow x500",
     "slug": "ironhead-arrow-x500",
-    "lastUpdated": "2026-07-20",
+    "lastUpdated": "2026-08-11",
     "tradeskill": "Fletching",
+    "difficultyColor": "Orange",
+    "observedAtSkill": 75,
     "components": [{ "item": "Wood", "quantity": 5 }, { "item": "Iron Scraps", "quantity": 5 }],
     "recipeSkillLevel": 100
+  },
+  {
+    "name": "Ironhead Arrow x1000",
+    "slug": "ironhead-arrow-x1000",
+    "lastUpdated": "2026-08-11",
+    "tradeskill": "Fletching",
+    "difficultyColor": "Orange",
+    "observedAtSkill": 75
+  },
+  {
+    "name": "Fine Wood Longbow",
+    "slug": "fine-wood-longbow",
+    "lastUpdated": "2026-08-11",
+    "tradeskill": "Fletching",
+    "difficultyColor": "Red",
+    "observedAtSkill": 75
   },
   {
     "name": "Steelhead Arrow x100",
@@ -1051,10 +1071,10 @@
   {
     "name": "Fine Wood Bow",
     "slug": "fine-wood-bow",
-    "lastUpdated": "2026-07-27",
+    "lastUpdated": "2026-08-11",
     "tradeskill": "Fletching",
-    "difficultyColor": "Red",
-    "observedAtSkill": 46,
+    "difficultyColor": "White",
+    "observedAtSkill": 75,
     "weight": 4.0,
     "size": "Medium",
     "components": [{ "item": "Fine Wood Board", "quantity": 5 }, { "item": "Bolt of Wool", "quantity": 1 }]
@@ -1062,10 +1082,10 @@
   {
     "name": "Fine Wood Buckler",
     "slug": "fine-wood-buckler",
-    "lastUpdated": "2026-07-27",
+    "lastUpdated": "2026-08-11",
     "tradeskill": "Fletching",
-    "difficultyColor": "Red",
-    "observedAtSkill": 46,
+    "difficultyColor": "White",
+    "observedAtSkill": 75,
     "components": [{ "item": "Fine Wood Board", "quantity": 5 }, { "item": "Bronze Bar", "quantity": 1 }, { "item": "Hide Strap", "quantity": 1 }]
   },
   {

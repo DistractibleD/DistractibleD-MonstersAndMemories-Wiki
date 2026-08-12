@@ -6261,7 +6261,10 @@
       { "silver": 1, "copper": 2 },
       { "copper": 81 }
     ],
-    "lastUpdated": "2026-08-07"
+    "conObservations": [
+      { "playerLevel": 30, "con": "Green" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a lawbreaker",
@@ -6295,7 +6298,10 @@
       { "copper": 63 },
       { "copper": 84 }
     ],
-    "lastUpdated": "2026-08-07"
+    "conObservations": [
+      { "playerLevel": 30, "con": "Green" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "an enforcer",
@@ -6318,7 +6324,96 @@
       { "copper": 55 },
       { "copper": 89 }
     ],
-    "lastUpdated": "2026-08-05"
+    "factionEffects": [
+      { "faction": "Residents of the Bends", "effect": "negative" },
+      { "faction": "Bends Garrison", "effect": "positive" },
+      { "faction": "Serpent Sashes", "effect": "positive" },
+      { "faction": "Ten Hooks", "effect": "negative" },
+      { "faction": "Waterdogs", "effect": "positive" }
+    ],
+    "conObservations": [
+      { "playerLevel": 30, "con": "Green" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a hooded figure",
+    "slug": "a-hooded-figure",
+    "maps": ["Night Harbor"],
+    "conObservations": [
+      { "playerLevel": 30, "con": "Red" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a swarthy sorcerer",
+    "slug": "a-swarthy-sorcerer",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "conObservations": [
+      { "playerLevel": 30, "con": "Green" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a corrupt priest",
+    "slug": "a-corrupt-priest",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "conObservations": [
+      { "playerLevel": 30, "con": "Trivial" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a drunken dockworker",
+    "slug": "a-drunken-dockworker",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "conObservations": [
+      { "playerLevel": 30, "con": "Trivial" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a market peddler",
+    "slug": "a-market-peddler",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "conObservations": [
+      { "playerLevel": 30, "con": "Trivial" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a sellsword",
+    "slug": "a-sellsword",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "conObservations": [
+      { "playerLevel": 30, "con": "Dark Blue" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a hierophant",
+    "slug": "a-hierophant",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "conObservations": [
+      { "playerLevel": 30, "con": "Dark Blue" }
+    ],
+    "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "a thug",
+    "slug": "a-thug",
+    "maps": ["Night Harbor"],
+    "areas": ["The Bends"],
+    "conObservations": [
+      { "playerLevel": 30, "con": "Green" }
+    ],
+    "lastUpdated": "2026-08-11"
   },
   {
     "name": "a goon",

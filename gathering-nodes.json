@@ -306,9 +306,39 @@
     "name": "Raw Thorn Sturgeon",
     "slug": "raw-thorn-sturgeon",
     "tradeskill": "Fishing",
+    "minSkill": 30,
     "results": ["Raw Thorn Sturgeon"],
-    "locations": ["Night Harbor", "Evershade Weald"],
+    "locations": ["Night Harbor", "Evershade Weald", "Keeper's Bight"],
     "rarity": "Very Rare",
+    "baitRequired": "?"
+  },
+  {
+    "name": "Raw Redfin Pike",
+    "slug": "raw-redfin-pike",
+    "tradeskill": "Fishing",
+    "minSkill": 30,
+    "results": ["Raw Redfin Pike"],
+    "locations": ["Night Harbor", "Evershade Weald", "Keeper's Bight"],
+    "rarity": "Very Rare",
+    "baitRequired": "?"
+  },
+  {
+    "name": "Raw River Trout",
+    "slug": "raw-river-trout",
+    "tradeskill": "Fishing",
+    "results": ["Raw River Trout"],
+    "locations": ["Keeper's Bight"],
+    "rarity": "Uncommon",
+    "baitRequired": "?",
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+  },
+  {
+    "name": "Raw Moontide Salmon",
+    "slug": "raw-moontide-salmon",
+    "tradeskill": "Fishing",
+    "results": ["Raw Moontide Salmon"],
+    "locations": ["Keeper's Bight"],
+    "rarity": "Rare",
     "baitRequired": "?",
     "note": "Fishing skill required not yet known — the source table shows \"???\"."
   },
@@ -322,6 +352,16 @@
     "note": "Fishing skill required not yet known — the source table shows \"???\"."
   },
   {
+    "name": "Raw Sunscale Skimmer",
+    "slug": "raw-sunscale-skimmer",
+    "tradeskill": "Fishing",
+    "results": ["Raw Sunscale Skimmer"],
+    "locations": ["Shallow Shoals"],
+    "rarity": "Uncommon",
+    "baitRequired": "?",
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+  },
+  {
     "name": "Deep Sea Devourer",
     "slug": "deep-sea-devourer",
     "tradeskill": "Fishing",
@@ -330,6 +370,46 @@
     "rarity": "Very Rare",
     "baitRequired": "?",
     "note": "Fishing skill required only given as an uncertain value on the source table: \"95?\"."
+  },
+  {
+    "name": "Raw Mossveil Catfish",
+    "slug": "raw-mossveil-catfish",
+    "tradeskill": "Fishing",
+    "results": ["Raw Mossveil Catfish"],
+    "locations": ["Scarwood"],
+    "rarity": "Uncommon",
+    "baitRequired": "?",
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+  },
+  {
+    "name": "Raw Jumping Damselfish",
+    "slug": "raw-jumping-damselfish",
+    "tradeskill": "Fishing",
+    "results": ["Raw Jumping Damselfish"],
+    "locations": ["Vale of Zintar", "Scarwood", "Fallen Pass"],
+    "rarity": "Uncommon",
+    "baitRequired": "?",
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+  },
+  {
+    "name": "Raw Leytouched Mackerel",
+    "slug": "raw-leytouched-mackerel",
+    "tradeskill": "Fishing",
+    "results": ["Raw Leytouched Mackerel"],
+    "locations": ["Vale of Zintar", "Fallen Pass"],
+    "rarity": "Rare",
+    "baitRequired": "?",
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+  },
+  {
+    "name": "Raw Crimsonscale Carp",
+    "slug": "raw-crimsonscale-carp",
+    "tradeskill": "Fishing",
+    "results": ["Raw Crimsonscale Carp"],
+    "locations": ["Vale of Zintar"],
+    "rarity": "Rare",
+    "baitRequired": "?",
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
   },
   {
     "name": "Lionleaf",
