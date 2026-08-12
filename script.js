@@ -1589,7 +1589,14 @@ const HEADER_ICON_DEFS = {
 };
 
 function colHeaderIcon(key) {
-  return `<svg viewBox="0 0 24 24" class="col-header-svg" aria-hidden="true"><g fill="currentColor">${HEADER_ICON_DEFS[key]}</g></svg>`;
+  return `<span class="col-header-icon-wrap"><svg viewBox="0 0 24 24" class="col-header-svg" aria-hidden="true"><g fill="currentColor">${HEADER_ICON_DEFS[key]}</g></svg></span>`;
+}
+
+// Bare-symbol header (Stats "#", Ratio "∶") — wrapped in the same
+// fixed-size .col-header-icon-wrap box as colHeaderIcon() so both kinds of
+// header content land on an identical line-height/vertical-align box.
+function colHeaderSymbol(symbol) {
+  return `<span class="col-header-icon-wrap"><span class="col-header-symbol">${symbol}</span></span>`;
 }
 
 // Weapon icon is keyed off the reference sheet's own (coarser) categories —
@@ -2010,10 +2017,10 @@ function renderItemsList(container, category) {
             ${showTypeColumn ? `<th data-sort-key="type" class="sortable col-header-icon-cell" title="Type">${colHeaderIcon('type')}</th>` : ''}
             <th data-sort-key="slot" class="sortable col-header-icon-cell" title="Slot">${colHeaderIcon('slot')}</th>
             <th data-sort-key="ac" class="sortable col-header-icon-cell" title="Armor Class (AC)">${colHeaderIcon('ac')}</th>
-            <th data-sort-key="stats" class="sortable col-header-icon-cell" title="Stats"><span class="col-header-symbol">#</span></th>
+            <th data-sort-key="stats" class="sortable col-header-icon-cell" title="Stats">${colHeaderSymbol('#')}</th>
             <th data-sort-key="damage" class="sortable col-header-icon-cell" title="Damage">${colHeaderIcon('damage')}</th>
             <th data-sort-key="delay" class="sortable col-header-icon-cell" title="Delay (time between attacks)">${colHeaderIcon('delay')}</th>
-            <th data-sort-key="ratio" class="sortable col-header-icon-cell" title="Damage / Delay Ratio"><span class="col-header-symbol">&#8758;</span></th>
+            <th data-sort-key="ratio" class="sortable col-header-icon-cell" title="Damage / Delay Ratio">${colHeaderSymbol('&#8758;')}</th>
             <th data-sort-key="weight" class="sortable col-header-icon-cell" title="Weight / Size">${colHeaderIcon('weight')}</th>
             <th data-sort-key="capacity" class="sortable col-header-icon-cell" title="Capacity / Max Size">${colHeaderIcon('capacity')}</th>
             <th data-sort-key="classes" class="sortable col-header-icon-cell" title="Classes">${colHeaderIcon('classes')}</th>

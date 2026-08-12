@@ -915,20 +915,56 @@ body:not(.site-entered) .sidebar {
    stop wrapping/stacking inside narrow columns; a native `title` attribute
    on the <th> supplies the plain-text meaning on hover. Name stays plain
    text (nothing shorter reads as clearly), Stats/Ratio use a bare symbol
-   (#, ∶) instead of a drawn icon per the user's own suggestion. */
+   (#, ∶) instead of a drawn icon per the user's own suggestion.
+   Every icon/symbol is wrapped in `.col-header-icon-wrap`, a fixed-size
+   inline-flex box, so an SVG (with its own viewBox metrics) and a bare text
+   symbol (with its own font metrics) both end up in an identically sized
+   box before vertical-align applies.
+   That alone wasn't enough (2026-08-12, user-reported "icons all over the
+   place") — the real cause was the shared `th.sortable::after` sort-arrow
+   placeholder (reserves 0.6em of inline width even unsorted): in the
+   narrowest icon columns (AC/Damage/Delay/Ratio etc., ~4-6% width) a 30px
+   icon plus that reserved width don't fit on one line, so it wraps below
+   the icon, making that cell's content two lines tall instead of one — and
+   `vertical-align: middle` then centers the *whole two-line block*, landing
+   the icon several px higher than in a wider column where the arrow still
+   fits beside it on one line. Fixed by taking the arrow out of icon
+   columns' inline flow entirely (absolutely positioned corner badge
+   instead) so every icon column is always exactly one line tall. */
 .items-table th.col-header-icon-cell {
+  position: relative;
   text-align: center;
 }
-.col-header-svg {
-  width: 18px;
-  height: 18px;
+.items-table th.col-header-icon-cell::after {
+  display: none;
+}
+.items-table th.col-header-icon-cell.sorted-asc::after,
+.items-table th.col-header-icon-cell.sorted-desc::after {
+  display: block;
+  position: absolute;
+  right: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 0;
+  font-size: 0.62rem;
+}
+.col-header-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
   vertical-align: middle;
+}
+.col-header-svg {
+  width: 26px;
+  height: 26px;
   fill: currentColor;
 }
 .col-header-symbol {
-  font-size: 1.05rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  vertical-align: middle;
+  line-height: 1;
 }
 .items-quick-search {
   position: relative;
