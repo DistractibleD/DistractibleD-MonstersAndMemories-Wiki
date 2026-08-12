@@ -2553,6 +2553,10 @@ body:not(.site-entered) .sidebar {
 .faction-card-column li {
   margin-bottom: 4px;
 }
+.faction-monster-zone {
+  color: var(--text-dim);
+  font-size: 0.82em;
+}
 .faction-positive, .faction-negative {
   margin: 0;
   font-size: 0.85rem;

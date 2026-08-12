@@ -1201,13 +1201,13 @@
       { "playerLevel": 30, "con": "White" }
     ],
     "factionEffects": [
-      { "faction": "Bends Garrison", "effect": "positive" },
-      { "faction": "Serpent Sashes", "effect": "positive" },
-      { "faction": "Gilded Claw", "effect": "positive" },
-      { "faction": "Citizens of Night Harbor", "effect": "positive" },
-      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
-      { "faction": "Steel Talons", "effect": "positive" },
-      { "faction": "Vermahn's Brood", "effect": "negative" }
+      { "faction": "Bends Garrison", "effect": "positive", "zone": "Night Harbor" },
+      { "faction": "Serpent Sashes", "effect": "positive", "zone": "Night Harbor" },
+      { "faction": "Gilded Claw", "effect": "positive", "zone": "Fallen Pass" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive", "zone": "Fallen Pass" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive", "zone": "Fallen Pass" },
+      { "faction": "Steel Talons", "effect": "positive", "zone": "Fallen Pass" },
+      { "faction": "Vermahn's Brood", "effect": "negative", "zone": "Fallen Pass" }
     ],
     "lastUpdated": "2026-08-11"
   },
@@ -7008,9 +7008,9 @@
       { "playerLevel": 28, "con": "Dark Blue" }
     ],
     "factionEffects": [
-      { "faction": "Bends Garrison", "effect": "positive" },
-      { "faction": "Serpent Sashes", "effect": "positive" },
-      { "faction": "Ten Hooks", "effect": "positive" }
+      { "faction": "Bends Garrison", "effect": "positive", "zone": "Night Harbor" },
+      { "faction": "Serpent Sashes", "effect": "positive", "zone": "Night Harbor" },
+      { "faction": "Ten Hooks", "effect": "positive", "zone": "Night Harbor" }
     ],
     "lastUpdated": "2026-08-11"
   },
@@ -7164,11 +7164,11 @@
       { "playerLevel": 29, "con": "Red" }
     ],
     "factionEffects": [
-      { "faction": "Gilded Claw", "effect": "positive" },
-      { "faction": "Citizens of Night Harbor", "effect": "positive" },
-      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
-      { "faction": "Steel Talons", "effect": "positive" },
-      { "faction": "Vermahn's Brood", "effect": "negative" }
+      { "faction": "Gilded Claw", "effect": "positive", "zone": "Fallen Pass" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive", "zone": "Fallen Pass" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive", "zone": "Fallen Pass" },
+      { "faction": "Steel Talons", "effect": "positive", "zone": "Fallen Pass" },
+      { "faction": "Vermahn's Brood", "effect": "negative", "zone": "Fallen Pass" }
     ],
     "lastUpdated": "2026-08-11"
   },

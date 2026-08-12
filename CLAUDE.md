@@ -1040,9 +1040,41 @@ class to land on, since a multi-class spell doesn't have one canonical class pag
 Own top-level page (`pages.json` `"type": "faction"`, no group) listing which monsters raise
 or lower standing with a given faction. **No dedicated data file** — reuses `monsters.json`
 via an optional `factionEffects` array on a monster entry: `[{ "faction": "Faction Name",
-"effect": "positive" | "negative" }]`. `renderFactionPage` scans every monster for this field
-at render time and groups the results by faction name into two columns (raises/lowers) —
-nothing is precomputed or stored elsewhere, same as `groupMonsterDrops`'s reverse lookups.
+"effect": "positive" | "negative", "zone": "Zone Name" }]` (`zone` optional — see below).
+`renderFactionPage` scans every monster for this field at render time and groups the results
+by faction name into two columns (raises/lowers) — nothing is precomputed or stored
+elsewhere, same as `groupMonsterDrops`'s reverse lookups.
+
+**Each monster shown in a faction's list displays which zone it's found in** (2026-08-12,
+user's own request) — `renderFactionMonsterLiHTML` resolves this per entry: a `factionEffects`
+entry's own `"zone"` wins if set, otherwise it falls back to the monster's own `maps` list
+(joined, so a monster confirmed in several zones just shows all of them). Only worth setting
+`zone` explicitly on the effect when it's needed to **disambiguate** — see next paragraph;
+don't add it to every entry as a matter of course, since the `maps` fallback already covers
+the unambiguous majority for free.
+
+**Same monster name, different zone, different faction — this is a real, confirmed case, not
+hypothetical.** A monster name shared across zones (per the existing "same exact name across
+zones = same monster entry" convention) can genuinely give *different* faction effects
+depending on which zone's spawn was actually killed — e.g. "a smuggler" exists in Shaded
+Dunes/Night Harbor/Sungreet Strand/Fallen Pass, but only the **Night Harbor** one is
+confirmed to affect Bends Garrison/Serpent Sashes (per the wiki's own "Zones in which you can
+raise the faction: Night Harbor" on both those faction pages) while only the **Fallen Pass**
+one is confirmed to affect Gilded Claw/Citizens of Night Harbor/Pyrmos Mercenaries/Steel
+Talons/Vermahn's Brood (from the user's own Fallen-Pass-specific screenshots — the wiki
+doesn't even list "a smuggler" on those faction pages at all). Merging all of a shared-name
+monster's `factionEffects` into one undifferentiated list would silently claim the *wrong*
+zone's kills raise/lower each faction. Whenever a monster has both (a) `factionEffects` and
+(b) more than one entry in `maps`, check whether the effects are actually zone-universal or
+zone-specific before merging — if zone-specific, set `"zone"` on each affected entry
+individually rather than leaving it to the `maps` fallback (which would incorrectly imply
+*every* zone the monster spawns in shares the same faction effects). Confirmed so far: **a
+smuggler** (Night Harbor: Bends Garrison/Serpent Sashes; Fallen Pass: Gilded Claw/Citizens of
+Night Harbor/Pyrmos Mercenaries/Steel Talons/Vermahn's Brood), **a hired tracker** (Fallen
+Pass only: same Gilded-Claw-bundle as above — its Sungreet Strand spawn has no confirmed
+faction effects at all), **a river pirate** (Night Harbor: Bends Garrison/Serpent
+Sashes/Ten Hooks). Check any *other* multi-zone monster that later gains `factionEffects`
+the same way before assuming its effects apply everywhere it spawns.
 
 **Workflow once a faction-change screenshot/chat message comes in**: identify which monster
 was killed and which faction changed (and which direction), then append one `factionEffects`

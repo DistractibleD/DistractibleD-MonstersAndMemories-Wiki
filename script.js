@@ -5129,6 +5129,20 @@ async function renderSpellsPage(container) {
 // via CSS, since some factions carry 50+ monsters and there's no reason to
 // pay for that markup before it's ever shown) — see renderFactionPage's
 // collapsedFactions Set.
+// Renders one <li> in a faction's raise/lower list — `entry.zone` is either
+// the specific zone that `factionEffects` entry was confirmed in (set when
+// a monster name is shared across zones that don't give the same faction,
+// e.g. "a smuggler" in Night Harbor vs. Fallen Pass — see CLAUDE.md
+// "Faction") or, when no disambiguation was needed, falls back to the
+// monster's own `maps` list so a zone still shows for the common case of an
+// unambiguous single- or multi-zone monster. No zone at all (neither the
+// effect nor the monster has one recorded) renders nothing extra.
+function renderFactionMonsterLiHTML(entry) {
+  const { monster: m, zone } = entry;
+  const zoneHTML = zone ? ` <span class="faction-monster-zone">(${escapeAttr(zone)})</span>` : '';
+  return `<li><a href="#" class="item-name-hover faction-monster-link" data-slug="${escapeAttr(m.slug)}">${escapeAttr(m.name)}</a>${zoneHTML}</li>`;
+}
+
 function renderFactionCardHTML(name, group, isCollapsed) {
   return `
     <div class="gem-reference faction-card">
@@ -5142,13 +5156,13 @@ function renderFactionCardHTML(name, group, isCollapsed) {
         <div class="faction-card-column">
           <h3 class="faction-positive">Increases this faction</h3>
           <ul>
-            ${group.positive.length ? group.positive.map(m => `<li><a href="#" class="item-name-hover faction-monster-link" data-slug="${escapeAttr(m.slug)}">${escapeAttr(m.name)}</a></li>`).join('') : '<li class="item-card-muted">None known yet</li>'}
+            ${group.positive.length ? group.positive.map(renderFactionMonsterLiHTML).join('') : '<li class="item-card-muted">None known yet</li>'}
           </ul>
         </div>
         <div class="faction-card-column">
           <h3 class="faction-negative">Decreases this faction</h3>
           <ul>
-            ${group.negative.length ? group.negative.map(m => `<li><a href="#" class="item-name-hover faction-monster-link" data-slug="${escapeAttr(m.slug)}">${escapeAttr(m.name)}</a></li>`).join('') : '<li class="item-card-muted">None known yet</li>'}
+            ${group.negative.length ? group.negative.map(renderFactionMonsterLiHTML).join('') : '<li class="item-card-muted">None known yet</li>'}
           </ul>
         </div>
       </div>
@@ -5165,7 +5179,12 @@ async function renderFactionPage(container) {
     (m.factionEffects || []).forEach(fe => {
       if (!factions.has(fe.faction)) factions.set(fe.faction, { positive: [], negative: [] });
       const group = factions.get(fe.faction);
-      (fe.effect === 'negative' ? group.negative : group.positive).push(m);
+      // `fe.zone` (set only when the same monster name gives different
+      // factions in different zones) wins; otherwise fall back to the
+      // monster's own `maps` so an unambiguous monster still shows where
+      // it's found.
+      const zone = fe.zone || (m.maps && m.maps.length ? m.maps.join(', ') : null);
+      (fe.effect === 'negative' ? group.negative : group.positive).push({ monster: m, zone });
     });
   });
 
