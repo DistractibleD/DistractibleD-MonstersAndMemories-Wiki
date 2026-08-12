@@ -5124,10 +5124,20 @@ async function renderSpellsPage(container) {
    "structurally ready, data fills in over time" precedent as conObservations
    when that system was first added.
    ============================================ */
-function renderFactionCardHTML(name, group) {
+// `isCollapsed` controls whether the two raise/lower columns render at all
+// (collapsed factions skip rendering their list content, not just hide it
+// via CSS, since some factions carry 50+ monsters and there's no reason to
+// pay for that markup before it's ever shown) — see renderFactionPage's
+// collapsedFactions Set.
+function renderFactionCardHTML(name, group, isCollapsed) {
   return `
     <div class="gem-reference faction-card">
-      <h2>${escapeAttr(name)}</h2>
+      <h2 class="faction-card-heading">
+        <button type="button" class="craft-station-toggle faction-toggle" data-faction="${escapeAttr(name)}" aria-expanded="${!isCollapsed}">
+          <span class="craft-station-toggle-arrow">&#9656;</span> ${escapeAttr(name)}
+        </button>
+      </h2>
+      ${isCollapsed ? '' : `
       <div class="faction-card-columns">
         <div class="faction-card-column">
           <h3 class="faction-positive">Increases this faction</h3>
@@ -5142,6 +5152,7 @@ function renderFactionCardHTML(name, group) {
           </ul>
         </div>
       </div>
+      `}
     </div>
   `;
 }
@@ -5160,22 +5171,64 @@ async function renderFactionPage(container) {
 
   const names = [...factions.keys()].sort((a, b) => a.localeCompare(b));
 
+  if (!names.length) {
+    container.innerHTML = `
+      <h1>Faction</h1>
+      <p class="items-empty">No faction data recorded yet — this fills in as monster kills are confirmed to affect a faction.</p>
+    `;
+    return;
+  }
+
   container.innerHTML = `
     <h1>Faction</h1>
-    <p>Which monsters raise or lower your standing with a given faction, confirmed from
-    in-game faction-change messages.</p>
-    ${names.length
-      ? names.map(name => renderFactionCardHTML(name, factions.get(name))).join('')
-      : '<p class="items-empty">No faction data recorded yet — this fills in as monster kills are confirmed to affect a faction.</p>'}
+    <div class="items-toolbar">
+      <input type="search" id="faction-search" class="items-search" placeholder="Search factions..." autocomplete="off">
+      <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="faction-search">Clear</button>
+    </div>
+    <p class="items-count" id="faction-count"></p>
+    <div id="faction-list"></div>
   `;
 
-  container.querySelectorAll('.faction-monster-link').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const monster = monstersData.find(m => m.slug === link.dataset.slug);
-      if (monster) goToMonster(monster);
+  const searchBox = container.querySelector('#faction-search');
+  const countEl = container.querySelector('#faction-count');
+  const listEl = container.querySelector('#faction-list');
+
+  // Every faction starts collapsed — with 60+ of them now on file, a
+  // visitor searches for the one they want rather than scanning a long
+  // always-expanded list (2026-08-11, user's own request). State lives in
+  // this render's own closure, same pattern as renderTradeskillSection's
+  // collapsedStations — survives re-render while searching, resets fresh
+  // next time this page opens.
+  const collapsedFactions = new Set(names);
+
+  function update() {
+    const query = searchBox.value.toLowerCase().trim();
+    const filtered = query ? names.filter(n => n.toLowerCase().includes(query)) : names;
+
+    countEl.textContent = query ? `Showing ${filtered.length} of ${names.length} factions` : '';
+    listEl.innerHTML = filtered.length
+      ? filtered.map(name => renderFactionCardHTML(name, factions.get(name), collapsedFactions.has(name))).join('')
+      : '<p class="items-empty">No factions match your search.</p>';
+
+    listEl.querySelectorAll('.faction-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const faction = btn.dataset.faction;
+        if (collapsedFactions.has(faction)) collapsedFactions.delete(faction);
+        else collapsedFactions.add(faction);
+        update();
+      });
     });
-  });
+    listEl.querySelectorAll('.faction-monster-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const monster = monstersData.find(m => m.slug === link.dataset.slug);
+        if (monster) goToMonster(monster);
+      });
+    });
+  }
+
+  searchBox.addEventListener('input', update);
+  update();
 }
 
 /* ============================================

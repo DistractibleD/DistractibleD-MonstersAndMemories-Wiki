@@ -2533,6 +2533,13 @@ body:not(.site-entered) .sidebar {
 .faction-card h2 {
   color: var(--accent);
 }
+.faction-card-heading {
+  margin: 0;
+}
+.faction-card-heading .faction-toggle {
+  width: 100%;
+  text-align: left;
+}
 .faction-card-columns {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
