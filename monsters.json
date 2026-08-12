@@ -1198,7 +1198,8 @@
       { "playerLevel": 28, "con": "Red" },
       { "playerLevel": 29, "con": "Yellow" },
       { "playerLevel": 30, "con": "Yellow" },
-      { "playerLevel": 30, "con": "White" }
+      { "playerLevel": 30, "con": "White" },
+      { "playerLevel": 31, "con": "White" }
     ],
     "factionEffects": [
       { "faction": "Bends Garrison", "effect": "positive", "zone": "Night Harbor" },
@@ -1209,7 +1210,7 @@
       { "faction": "Steel Talons", "effect": "positive", "zone": "Fallen Pass" },
       { "faction": "Vermahn's Brood", "effect": "negative", "zone": "Fallen Pass" }
     ],
-    "lastUpdated": "2026-08-11"
+    "lastUpdated": "2026-08-12"
   },
   {
     "name": "a wererat",
@@ -7064,9 +7065,10 @@
     "conObservations": [
       { "playerLevel": 29, "con": "Yellow" },
       { "playerLevel": 29, "con": "Red" },
-      { "playerLevel": 29, "con": "White" }
+      { "playerLevel": 29, "con": "White" },
+      { "playerLevel": 31, "con": "Light Blue" }
     ],
-    "lastUpdated": "2026-08-11"
+    "lastUpdated": "2026-08-12"
   },
   {
     "name": "a druidic cultist",

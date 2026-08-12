@@ -419,7 +419,7 @@
     "minSkill": 1,
     "trivialSkill": 15,
     "results": ["Lionleaf", "Magic Frond"],
-    "locations": ["Evershade Weald", "Night Harbor", "Shaded Dunes"]
+    "locations": ["Evershade Weald", "Night Harbor", "Shaded Dunes", "Sungreet Strand"]
   },
   {
     "name": "Ghost Poppy",
@@ -468,7 +468,7 @@
     "minSkill": 15,
     "trivialSkill": 65,
     "results": ["Whispering Sage", "Magic Frond"],
-    "locations": ["Evershade Weald", "Shaded Dunes"]
+    "locations": ["Evershade Weald", "Shaded Dunes", "Sungreet Strand"]
   },
   {
     "name": "Ironroot",
