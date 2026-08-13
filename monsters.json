@@ -2354,6 +2354,7 @@
       { "item": "Cotton Scraps" },
       { "item": "Iron Scraps" },
       { "item": "Worn Ironbark Buckler" },
+      { "item": "Raw Orc Meat" },
       { "family": "Rusty Iron" }
     ],
     "coinDrops": [
@@ -2364,7 +2365,8 @@
       { "silver": 3, "copper": 9 },
       { "silver": 2, "copper": 29 },
       { "silver": 2, "copper": 64 },
-      { "silver": 2, "copper": 22 }
+      { "silver": 2, "copper": 22 },
+      { "silver": 3, "copper": 31 }
     ],
     "conObservations": [
       { "playerLevel": 28, "con": "Yellow" },
@@ -2377,7 +2379,9 @@
       { "playerLevel": 29, "con": "Yellow" },
       { "playerLevel": 29, "con": "Yellow" },
       { "playerLevel": 29, "con": "Yellow" },
-      { "playerLevel": 29, "con": "Yellow" }
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 31, "con": "Light Blue" },
+      { "playerLevel": 31, "con": "White" }
     ],
     "factionEffects": [
       { "faction": "Citizens of Night Harbor", "effect": "positive" },
@@ -2385,7 +2389,7 @@
       { "faction": "Pyrmos Mercenaries", "effect": "positive" },
       { "faction": "Steel Talons", "effect": "positive" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Librarian Gallier",
@@ -7511,9 +7515,10 @@
     "maps": ["Vale of Zintar"],
     "conObservations": [
       { "playerLevel": 28, "con": "Dark Blue" },
-      { "playerLevel": 29, "con": "Dark Blue" }
+      { "playerLevel": 29, "con": "Dark Blue" },
+      { "playerLevel": 31, "con": "Dark Blue" }
     ],
-    "lastUpdated": "2026-08-11"
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "a giant tomb burrower",
@@ -7569,14 +7574,15 @@
     "conObservations": [
       { "playerLevel": 28, "con": "Yellow" },
       { "playerLevel": 28, "con": "Yellow" },
-      { "playerLevel": 29, "con": "White" }
+      { "playerLevel": 29, "con": "White" },
+      { "playerLevel": 31, "con": "Light Blue" }
     ],
     "factionEffects": [
       { "faction": "Citizens of Night Harbor", "effect": "positive" },
       { "faction": "Night Harbor Garrison", "effect": "positive" },
       { "faction": "Pyrmos Mercenaries", "effect": "positive" }
     ],
-    "lastUpdated": "2026-08-11"
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "a dire wolf patroller",
@@ -7596,9 +7602,10 @@
     "conObservations": [
       { "playerLevel": 28, "con": "Yellow" },
       { "playerLevel": 29, "con": "Yellow" },
-      { "playerLevel": 29, "con": "Yellow" }
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 31, "con": "Light Blue" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "a Dustrend sacramir",
@@ -7607,6 +7614,7 @@
     "drops": [
       { "item": "Iron Scraps" },
       { "item": "Tattered Cotton Boots" },
+      { "item": "Cotton Scraps" },
       { "family": "Rusty Iron" }
     ],
     "coinDrops": [
@@ -7626,21 +7634,43 @@
       { "faction": "Pyrmos Mercenaries", "effect": "positive" },
       { "faction": "Steel Talons", "effect": "positive" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "a Dustrend venator",
     "slug": "a-dustrend-venator",
     "maps": ["Vale of Zintar"],
+    "coinDrops": [
+      { "silver": 3, "copper": 61 }
+    ],
     "conObservations": [
-      { "playerLevel": 29, "con": "Yellow" }
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 31, "con": "Light Blue" }
     ],
     "factionEffects": [
       { "faction": "Citizens of Night Harbor", "effect": "positive" },
       { "faction": "Night Harbor Garrison", "effect": "positive" },
       { "faction": "Pyrmos Mercenaries", "effect": "positive" }
     ],
-    "lastUpdated": "2026-08-11"
+    "lastUpdated": "2026-08-13"
+  },
+  {
+    "name": "a Dustrend cultor",
+    "slug": "a-dustrend-cultor",
+    "maps": ["Vale of Zintar"],
+    "coinDrops": [
+      { "silver": 3, "copper": 55 }
+    ],
+    "conObservations": [
+      { "playerLevel": 31, "con": "Yellow" }
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Orcs", "effect": "negative" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "a beguiled bluecap",
