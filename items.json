@@ -6527,7 +6527,13 @@
     "slot": "Primary",
     "twoHanded": true,
     "skill": "Slashing",
-    "needsInfo": true
+    "damage": 16,
+    "delay": 44,
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["BST", "DRU", "FTR", "INQ", "NEC", "RNG", "SHD", "SPB"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Bronze Greatsword",
@@ -6537,7 +6543,13 @@
     "slot": "Primary",
     "twoHanded": true,
     "skill": "Slashing",
-    "needsInfo": true
+    "damage": 17,
+    "delay": 48,
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "SHD", "SPB"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Bronze Longsword",
@@ -6546,7 +6558,13 @@
     "tags": [],
     "slot": "Primary / Secondary",
     "skill": "Slashing",
-    "needsInfo": true
+    "damage": 10,
+    "delay": 36,
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB", "WIZ"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Bronze Mace",
@@ -6555,7 +6573,13 @@
     "tags": [],
     "slot": "Primary / Secondary",
     "skill": "Blunt",
-    "needsInfo": true
+    "damage": 11,
+    "delay": 38,
+    "weight": 7.0,
+    "size": "Large",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Bronze Maul",
@@ -6574,7 +6598,13 @@
     "tags": [],
     "slot": "Primary / Secondary",
     "skill": "Slashing",
-    "needsInfo": true
+    "damage": 10,
+    "delay": 34,
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "DRU", "FTR", "INQ", "PAL", "RNG", "SHD", "SPB", "WIZ"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Bronze Scythe",
@@ -6601,7 +6631,13 @@
     "tags": [],
     "slot": "Primary / Secondary",
     "skill": "Stabbing",
-    "needsInfo": true
+    "damage": 9,
+    "delay": 30,
+    "weight": 7.0,
+    "size": "Large",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Bronze War Lance",
@@ -6611,7 +6647,13 @@
     "slot": "Primary",
     "twoHanded": true,
     "skill": "Stabbing",
-    "needsInfo": true
+    "damage": 16,
+    "delay": 46,
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Bronze Warhammer",
@@ -6943,7 +6985,13 @@
     "slot": "Primary",
     "twoHanded": true,
     "skill": "Slashing",
-    "needsInfo": true
+    "damage": 13,
+    "delay": 48,
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "SHD", "SPB"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Copper Tower Shield",
@@ -7673,7 +7721,13 @@
     "slot": "Primary",
     "twoHanded": true,
     "skill": "Stabbing",
-    "needsInfo": true
+    "damage": 13,
+    "delay": 46,
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Iron Battle Axe",
