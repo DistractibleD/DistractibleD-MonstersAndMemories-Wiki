@@ -1546,6 +1546,35 @@ session-scoped scratchpad path; won't survive past the session.
 User is non-technical, relies on Claude for all commits/pushes. **Changes are not pushed
 automatically — wait for an explicit request (e.g. "push") before `git push`.**
 
+**Every push adds one `changelog.json` entry first** (2026-08-13, user's own request — see
+"Home page" below for where it's displayed). Before running `git push`, prepend one `{
+"timestamp": "YYYY-MM-DDTHH:MM", "summary": "..." }` object to the *top* of the array (get
+the real current time via `date "+%Y-%m-%dT%H:%M"` in Bash, don't guess it). One entry per
+push covering everything in that push, not one per file/commit. `summary` is plain language
+about what changed on *this site* — "added new fishing info", "fixed Item Database header
+icons overlapping on narrow screens" — **never name an external source site** even if the
+underlying data came from one (e.g. a fan-wiki import is "added faction info for Bends
+Garrison", not "imported from Miraheze"). No cap on how many entries accumulate in the file
+— see Home page below for how the growing list is actually displayed.
+
+## Home page
+
+First entry in `pages.json` (`"type": "home"`, `renderHomePage` in `script.js`) — a static
+welcome heading plus the "Latest Changes" list read from `changelog.json`. Being first in
+`pages.json` makes it both the top sidebar link and, for free, `init()`'s existing landing
+page: `init()` already falls back to `allPages[0]` whenever the URL's hash doesn't match a
+real page (e.g. a bare visit to the site), so putting Home first was the only change needed
+to make it "land here on a fresh visit" — a reload on a specific page (`#items` etc.) still
+stays there, nothing new needed for that half either.
+
+**"Latest Changes" shows the 20 most recent entries** (`HOME_CHANGELOG_PREVIEW`), each with a
+`formatChangelogTimestamp()`-formatted date+time and its plain-language summary. If more than
+20 exist, a "Show all N updates" button reveals the complete remaining history in place (no
+second page, no further pagination — deliberate, see CLAUDE-HISTORY.md-style reasoning: an
+entry costs nothing to store or render even at a few hundred, so a second arbitrary cap would
+just be more to maintain for no benefit). `changelog.json` itself has no size cap — see Git
+workflow above for the one-entry-per-push convention that grows it.
+
 ## Community submissions
 
 **Visitors submit through a real form on the wiki — never linked out to GitHub, no GitHub

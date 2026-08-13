@@ -1,4 +1,5 @@
 [
+  { "title": "Home", "file": "home", "category": "Home", "type": "home" },
   { "title": "New Player Guide", "file": "new-player-guide.md", "category": "New Player Guide" },
   { "title": "Useful Links", "file": "useful-links.md", "category": "Useful Links" },
   { "title": "Item Database", "file": "items", "category": "Items", "type": "items" },

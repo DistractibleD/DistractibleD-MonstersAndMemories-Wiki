@@ -1277,6 +1277,36 @@ body:not(.site-entered) .sidebar {
   color: var(--text-dim);
   text-align: center !important;
 }
+/* Home page's "Latest Changes" list (2026-08-13) — see renderHomePage in
+   script.js. Each entry is a timestamp + plain-language summary; the
+   timestamp is deliberately muted/small so the summary text (what actually
+   changed) reads as the primary content, same visual hierarchy as
+   .last-updated-badge elsewhere on the site. */
+.changelog-list {
+  list-style: none;
+  margin: 10px 0 16px;
+  padding: 0;
+}
+.changelog-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: baseline;
+}
+.changelog-list li:last-child {
+  border-bottom: none;
+}
+.changelog-date {
+  flex: 0 0 auto;
+  font-size: 0.74rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.changelog-summary {
+  flex: 1 1 240px;
+}
 .badge-tag {
   display: inline-block;
   background: var(--accent-dim);

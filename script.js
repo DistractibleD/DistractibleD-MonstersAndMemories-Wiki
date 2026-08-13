@@ -716,6 +716,8 @@ async function loadPage(file) {
       await renderFactionPage(contentInner);
     } else if (page && page.type === 'submit') {
       await renderSubmitPage(contentInner);
+    } else if (page && page.type === 'home') {
+      await renderHomePage(contentInner);
     } else {
       const res = await fetch('pages/' + file);
       if (!res.ok) throw new Error('Page not found');
@@ -1482,6 +1484,10 @@ const ICON_DEFS = {
   // Faction nav icon (2026-08-10) — a balance scale, the standard "standing/
   // reputation" symbol.
   factionicon: `<rect x="11.3" y="2" width="1.4" height="18"/><path d="M12 2 L14 4.5 L10 4.5 Z"/><rect x="3.5" y="6.5" width="5" height="1"/><rect x="13.5" y="6.5" width="5" height="1"/><path d="M4 7.5 L8 7.5 L6 13 C6 14.1 6.9 15 8 15 C9.1 15 10 14.1 10 13 Z"/><path d="M14 7.5 L18 7.5 L16 13 C16 14.1 16.9 15 18 15 C19.1 15 20 14.1 20 13 Z"/><rect x="8" y="19.3" width="8" height="1.4" rx="0.4"/>`,
+  // Home nav icon (2026-08-13) — a plain house-with-door silhouette, the
+  // standard "this is the landing page" symbol. Door cut via fill-rule
+  // evenodd, same technique as firstaid's cross.
+  homeicon: `<path fill-rule="evenodd" d="M12 2.5 L21 10.2 L21 21 L3 21 L3 10.2 Z M10.2 14.5 L13.8 14.5 L13.8 21 L10.2 21 Z"/>`,
 };
 
 // Background circle color per icon key — approximated from the reference
@@ -1521,6 +1527,7 @@ const ICON_BG = {
   guideicon: '#3f5f45',
   spellsicon: '#3a2f5c',
   factionicon: '#5a4a2e',
+  homeicon: '#4a5568',
 };
 
 // Maps a tradeskill name (tradeskills.json) to one of the icons above — used
@@ -1588,6 +1595,7 @@ const TRADESKILL_ICON = {
 // their own tradeskill card and in "Most Visited" via TRADESKILL_ICON,
 // which is keyed by tradeskill name rather than page file.
 const NAV_ICON = {
+  home: 'homeicon',
   'new-player-guide.md': 'guideicon',
   'useful-links.md': 'links',
   items: 'itemdb',
@@ -5286,6 +5294,64 @@ function renderFactionCardHTML(name, group, isCollapsed) {
       `}
     </div>
   `;
+}
+
+// Home page (2026-08-13, user's own request) — first entry in pages.json,
+// so it's both the top sidebar link and the fallback init() already loads
+// when the URL has no matching hash (a bare visit to the site). A reload on
+// a specific page (e.g. #items) still stays on that page — this relies
+// entirely on init()'s existing "no hash match -> allPages[0]" fallback,
+// nothing new needed there.
+//
+// "Latest Changes" reads changelog.json — a flat, newest-first array of
+// { timestamp, summary }, growing forever (no cap on what's stored, only on
+// what's shown by default). Whenever a change is committed/pushed, add ONE
+// new entry to the *top* of that array (see CLAUDE.md's Git workflow
+// section) — plain-language, phrased around what changed on this site
+// (e.g. "added new fishing info"), never naming an external source site.
+const HOME_CHANGELOG_PREVIEW = 20;
+
+function formatChangelogTimestamp(ts) {
+  if (!ts) return '';
+  const d = new Date(ts);
+  if (isNaN(d)) return ts;
+  const datePart = d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  const timePart = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  return `${datePart}, ${timePart}`;
+}
+
+async function renderHomePage(container) {
+  let changelog = [];
+  try {
+    const res = await fetch('changelog.json');
+    changelog = await res.json();
+  } catch (err) {
+    changelog = [];
+  }
+
+  const preview = changelog.slice(0, HOME_CHANGELOG_PREVIEW);
+  const rest = changelog.slice(HOME_CHANGELOG_PREVIEW);
+  const entryHTML = e => `<li><span class="changelog-date">${formatChangelogTimestamp(e.timestamp)}</span><span class="changelog-summary">${escapeAttr(e.summary)}</span></li>`;
+
+  container.innerHTML = `
+    <h1>Welcome to Petrichor's Monsters and Memories Wiki</h1>
+    <h2>Latest Changes</h2>
+    ${changelog.length ? `
+      <ul class="changelog-list" id="changelog-preview">${preview.map(entryHTML).join('')}</ul>
+      ${rest.length ? `
+        <ul class="changelog-list" id="changelog-rest" style="display: none;">${rest.map(entryHTML).join('')}</ul>
+        <button type="button" id="changelog-show-more" class="items-clear-btn">Show all ${changelog.length} updates</button>
+      ` : ''}
+    ` : `<p class="items-empty">No updates recorded yet.</p>`}
+  `;
+
+  const showMoreBtn = container.querySelector('#changelog-show-more');
+  if (showMoreBtn) {
+    showMoreBtn.addEventListener('click', () => {
+      container.querySelector('#changelog-rest').style.display = '';
+      showMoreBtn.remove();
+    });
+  }
 }
 
 async function renderFactionPage(container) {
