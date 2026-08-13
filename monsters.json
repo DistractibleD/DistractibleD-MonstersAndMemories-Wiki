@@ -550,6 +550,7 @@
   {
     "name": "Toma the Two-Faced",
     "slug": "toma-the-two-faced",
+    "image": "images/Monsters/toma-the-two-faced.jpg",
     "named": true,
     "maps": ["Shaded Dunes"],
     "areas": ["Smugglers Camp"],
@@ -561,6 +562,7 @@
       { "item": "Smuggler's Greaves" },
       { "item": "Cloth Scraps" },
       { "item": "Torch" },
+      { "item": "Rawhide Scraps" },
       { "item": "Tattered Rawhide Gloves" },
       { "item": "Tattered Rawhide Gorget" },
       { "item": "Tattered Rawhide Belt" },
@@ -569,7 +571,21 @@
       { "item": "Tattered Rawhide Boots" },
       { "item": "Tattered Rawhide Vest" },
       { "item": "Tattered Rawhide Shoulderpads" }
-    ]
+    ],
+    "coinDrops": [
+      { "copper": 43 }
+    ],
+    "conObservations": [
+      { "playerLevel": 31, "con": "Trivial" }
+    ],
+    "factionEffects": [
+      { "faction": "Gilded Claw", "effect": "positive" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive" },
+      { "faction": "Steel Talons", "effect": "positive" },
+      { "faction": "Vermahn's Brood", "effect": "negative" }
+    ],
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Yezkiel the Gatekeeper",
@@ -1208,9 +1224,23 @@
       { "faction": "Citizens of Night Harbor", "effect": "positive", "zone": "Fallen Pass" },
       { "faction": "Pyrmos Mercenaries", "effect": "positive", "zone": "Fallen Pass" },
       { "faction": "Steel Talons", "effect": "positive", "zone": "Fallen Pass" },
-      { "faction": "Vermahn's Brood", "effect": "negative", "zone": "Fallen Pass" }
+      { "faction": "Vermahn's Brood", "effect": "negative", "zone": "Fallen Pass" },
+      { "faction": "Gilded Claw", "effect": "positive", "zone": "Shaded Dunes" },
+      { "faction": "Citizens of Night Harbor", "effect": "positive", "zone": "Shaded Dunes" },
+      { "faction": "Pyrmos Mercenaries", "effect": "positive", "zone": "Shaded Dunes" },
+      { "faction": "Steel Talons", "effect": "positive", "zone": "Shaded Dunes" },
+      { "faction": "Vermahn's Brood", "effect": "negative", "zone": "Shaded Dunes" }
     ],
-    "lastUpdated": "2026-08-12"
+    "lastUpdated": "2026-08-13"
+  },
+  {
+    "name": "a sand giant scout",
+    "slug": "a-sand-giant-scout",
+    "maps": ["Shaded Dunes"],
+    "conObservations": [
+      { "playerLevel": 31, "con": "Red" }
+    ],
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "a wererat",
