@@ -2560,6 +2560,44 @@ body:not(.site-entered) .sidebar {
   #map-viewer-next { right: 8px; }
 }
 
+/* ---------- Wide portrait screens (2026-08-13) ----------
+   A screen can be wide enough for the normal desktop side-by-side layout
+   (>900px, so none of the width breakpoints above ever fire) yet still be
+   *portrait* — e.g. a 1080x1920 monitor. The fixed 230px sidebar eats a
+   bigger relative share of 1080px than it does on a typical landscape
+   monitor, leaving wide data tables (Item Database) cramped even though
+   the window is technically "desktop width."
+   `orientation: portrait` only matches when height > width, so this block
+   never fires for a landscape window at any size — landscape users get
+   zero change here, by construction, not just by choice of numbers.
+   `min-width: 900px` keeps this from double-firing together with the
+   width breakpoint above (phones are already portrait *and* narrow, and
+   get the stacked/card treatment from the max-width queries instead).
+   Reuses the same icon/column sizing already proven at ~850px table width
+   in the max-width:900px block above, since a 1080px portrait window with
+   a trimmed sidebar lands in a similar ~800-850px content width. */
+@media (orientation: portrait) and (min-width: 900px) {
+  .sidebar { width: 190px; }
+  .layout { gap: 24px; }
+  .content-inner .items-table { font-size: 0.8rem; }
+  .content-inner .items-table th, .content-inner .items-table td { padding: 7px 8px; }
+  .col-name { width: 16%; }
+  .col-type { width: 6%; }
+  .col-slot { width: 7%; }
+  .col-ac { width: 5%; }
+  .col-stats { width: 11%; }
+  .col-damage { width: 5%; }
+  .col-delay { width: 5%; }
+  .col-ratio { width: 5%; }
+  .col-weight { width: 9%; }
+  .col-capacity { width: 10%; }
+  .col-classes { width: 14%; }
+  .col-race { width: 7%; }
+  .col-header-icon-wrap { width: 24px; height: 24px; }
+  .col-header-svg { width: 21px; height: 21px; }
+  .col-header-symbol { font-size: 1.3rem; }
+}
+
 /* On narrow/vertical screens a fixed multi-column table (Item Database has
    9) squeezes every column too thin, forcing mid-word wraps ("Small" ->
    "Smal"/"l"). Below this width, each row becomes a stacked card instead:

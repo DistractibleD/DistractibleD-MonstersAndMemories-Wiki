@@ -1389,6 +1389,36 @@ Three changes, scoped to media queries (desktop >900px untouched):
   `background-attachment: scroll` (fixed background is janky on mobile browsers, pointless
   once panels fill nearly the whole viewport anyway).
 
+## Wide portrait screens (e.g. a 1080x1920 monitor)
+
+A screen can be wide enough for the normal desktop side-by-side layout (>900px, so none of
+the width breakpoints above fire) yet still be *portrait* — the fixed 230px sidebar eats a
+bigger relative share of that width than it would on a landscape monitor, leaving wide data
+tables (Item Database) cramped despite the window being "desktop width." Confirmed 2026-08-13
+via a user report on a 1080x1920 monitor.
+
+**Explicit user requirement: never change anything for landscape users, at any width** — an
+earlier attempt at this fix (raising the *width* breakpoint itself to 1150px) was rejected
+outright ("i don't like those changes at all, revert") specifically because it also changed
+behavior for landscape windows in the 900-1150px range. The orientation-based fix below was
+approved instead, specifically because `orientation: portrait` only matches when height >
+width — it cannot fire for a landscape window at any size, by construction, not just by
+choice of numbers.
+
+**`@media (orientation: portrait) and (min-width: 900px)`** (separate from, and evaluated
+alongside, the width-based queries above — `min-width: 900px` keeps phones out, since a
+portrait phone is already narrow enough to hit the width breakpoints' stacked/card layout
+instead):
+- Sidebar narrows from 230px to 190px, `.layout` gap 32px -> 24px — frees width for content
+  without changing the sidebar's own vertical-list design (still side-by-side with content,
+  never switches to the stacked pill-nav — the user explicitly wants to keep the sidebar
+  exactly as it behaves on desktop).
+- Item Database table reuses the same icon/column sizing already proven at the ~850px table
+  width of the `max-width: 900px` tablet block (a 1080px portrait window with the trimmed
+  sidebar lands in a similar ~800-850px content width): smaller header icons
+  (`.col-header-icon-wrap`/`.col-header-svg`/`.col-header-symbol`), rebalanced `<col>`
+  percentages, reduced table font-size/padding.
+
 ## Splash screen
 
 Full-viewport gate (`#splash-screen` in `index.html`) on every fresh load — site's actual
