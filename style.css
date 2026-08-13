@@ -2495,18 +2495,26 @@ body:not(.site-entered) .sidebar {
   .content-inner .items-table { font-size: 0.78rem; }
   .content-inner .items-table th, .content-inner .items-table td { padding: 6px 6px; }
   /* Give the short-word columns relatively more room at narrow widths. */
-  .col-name { width: 17%; }
-  .col-type { width: 4%; }
-  .col-slot { width: 6%; }
-  .col-ac { width: 4%; }
-  .col-stats { width: 12%; }
-  .col-damage { width: 4%; }
-  .col-delay { width: 4%; }
-  .col-ratio { width: 4%; }
-  .col-weight { width: 9%; }
-  .col-capacity { width: 10%; }
-  .col-classes { width: 16%; }
-  .col-race { width: 10%; }
+  .col-name { width: 15%; }
+  .col-type { width: 6%; }
+  .col-slot { width: 7%; }
+  .col-ac { width: 6%; }
+  .col-stats { width: 10%; }
+  .col-damage { width: 6%; }
+  .col-delay { width: 6%; }
+  .col-ratio { width: 6%; }
+  .col-weight { width: 8%; }
+  .col-capacity { width: 9%; }
+  .col-classes { width: 13%; }
+  .col-race { width: 8%; }
+  /* The desktop icon size (30px wrap / 26px svg) doesn't fit inside these
+     narrower % columns once the table itself is only 640-900px wide (a 4%
+     column can be ~30px total, no room left for icon + padding) — icons
+     overlapped their cell borders and looked crammed/misaligned. Shrink
+     back down at this breakpoint; still bigger than the original 18px. */
+  .col-header-icon-wrap { width: 22px; height: 22px; }
+  .col-header-svg { width: 19px; height: 19px; }
+  .col-header-symbol { font-size: 1.15rem; }
   .maps-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
   .map-card img.map-card-thumb { height: 110px; }
   #map-viewer-close { top: 10px; right: 12px; width: 34px; height: 34px; font-size: 1.2rem; }
