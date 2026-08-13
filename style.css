@@ -359,7 +359,7 @@ body:not(.site-entered) .sidebar {
    a left border acting as a folder-tree "trunk" line, and each nested link
    gets a short horizontal "branch" tick (::before) connecting it back to
    that trunk, so the group reads visually as a set of items under one
-   parent. On mobile (see the max-width: 900px query below), .sidebar-group
+   parent. On mobile (see the max-width: 1150px query below), .sidebar-group
    switches to `display: contents` instead so its child links behave as if
    they were direct children of #sidebar for layout purposes — needed so the
    flex-wrap pill row wraps them normally instead of stacking the whole group
@@ -965,6 +965,42 @@ body:not(.site-entered) .sidebar {
   font-size: 1.6rem;
   font-weight: 700;
   line-height: 1;
+}
+/* Custom instant tooltip for the header icons (2026-08-12) — a native
+   `title` attribute waits ~1s+ before showing (browser-controlled, can't be
+   sped up via CSS), so the meaning-on-hover here comes from `data-tooltip`
+   + this ::before bubble instead, which appears the moment CSS applies
+   :hover with no transition to wait on. `aria-label` (set alongside
+   data-tooltip in script.js, no `title` attribute at all now) keeps the
+   same text available to screen readers. Uses ::before since ::after on
+   this <th> is already the sort-arrow corner badge above. */
+.items-table th.col-header-icon-cell[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 6px;
+  background: var(--bg-panel);
+  border: 1px solid var(--accent-dim);
+  color: var(--text);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.72rem;
+  text-transform: none;
+  letter-spacing: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 20;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+.items-table th.col-header-icon-cell[data-tooltip]:hover::before {
+  opacity: 1;
+  visibility: visible;
 }
 .items-quick-search {
   position: relative;
@@ -2427,13 +2463,21 @@ body:not(.site-entered) .sidebar {
 }
 
 /* ---------- Mobile ----------
-   Threshold raised from 780 to 900 (was leaving an awkward zone — a
-   narrow-but->780px browser window, e.g. ~800px, still got the fixed
-   230px desktop sidebar squeezing content into a cramped single column
-   while background art bled through the leftover space on both sides).
-   900px comfortably covers that zone; iPad portrait (768) and anything
-   narrower already hit this breakpoint the same as before. */
-@media (max-width: 900px) {
+   Threshold raised 780 -> 900 -> 1150 over time.
+   780->900: was leaving an awkward zone — a narrow-but->780px browser
+   window, e.g. ~800px, still got the fixed 230px desktop sidebar squeezing
+   content into a cramped single column while background art bled through
+   the leftover space on both sides.
+   900->1150 (2026-08-13, user-reported on a 1080x1920 portrait monitor):
+   900px only accounts for the *window* width, not how much of it survives
+   after the fixed sidebar — at 1080px wide the sidebar+content side-by-side
+   layout was still active, leaving barely ~700-750px for wide data tables
+   (Item Database), so columns like Classes/Name/Weight wrapped onto 5+
+   lines each and rows ballooned. 1150px pushes that whole zone into the
+   stacked layout instead, handing data tables closer to the window's full
+   width. iPad portrait (768) and anything narrower already hit this
+   breakpoint the same as before either way. */
+@media (max-width: 1150px) {
   /* .layout's align-items: flex-start (set for the desktop row layout, so
      the sidebar column doesn't stretch to match content's height) has a
      side effect once flex-direction flips to column: width becomes the
@@ -2508,7 +2552,7 @@ body:not(.site-entered) .sidebar {
   .col-classes { width: 13%; }
   .col-race { width: 8%; }
   /* The desktop icon size (30px wrap / 26px svg) doesn't fit inside these
-     narrower % columns once the table itself is only 640-900px wide (a 4%
+     narrower % columns once the table itself is only 640-1150px wide (a 4%
      column can be ~30px total, no room left for icon + padding) — icons
      overlapped their cell borders and looked crammed/misaligned. Shrink
      back down at this breakpoint; still bigger than the original 18px. */

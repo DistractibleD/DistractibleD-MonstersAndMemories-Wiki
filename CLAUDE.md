@@ -1375,11 +1375,16 @@ harmless hardening (not shown to be part of the actual cause).
 
 ## Mobile / narrow-viewport layout
 
-Three changes, scoped to media queries (desktop >900px untouched):
+Three changes, scoped to media queries (desktop >1150px untouched):
 
-- **Structural breakpoint at 900px** (`.layout { flex-direction: column }`, sidebar
-  stacking, table/column-width tweaks) — raised from 780px, which left a dead zone where the
-  sidebar still took its fixed 230px column alongside content.
+- **Structural breakpoint at 1150px** (`.layout { flex-direction: column }`, sidebar
+  stacking, table/column-width tweaks) — raised 780px -> 900px (dead zone where the sidebar
+  still took its fixed 230px column alongside content) -> 1150px (2026-08-13, user-reported
+  on a 1080x1920 portrait monitor: at 900px, a 1080px-wide window still got the side-by-side
+  desktop layout, but the sidebar ate ~250-300px of it, leaving wide data tables like the
+  Item Database only ~700-750px to work with — columns wrapped onto 5+ lines and rows
+  ballooned. 1150px pushes that zone into the stacked layout instead, handing tables closer
+  to the window's full width).
 - **The `.layout` width fix above** — the actual root cause of a narrow-format layout bug,
   not just the breakpoint threshold.
 - **Sidebar nav in stacked mode = rounded pill chips** (`.sidebar-link` gets background +

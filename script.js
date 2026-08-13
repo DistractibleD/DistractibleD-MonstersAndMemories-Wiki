@@ -2014,17 +2014,17 @@ function renderItemsList(container, category) {
         <thead>
           <tr>
             <th data-sort-key="name" class="sortable">Name</th>
-            ${showTypeColumn ? `<th data-sort-key="type" class="sortable col-header-icon-cell" title="Type">${colHeaderIcon('type')}</th>` : ''}
-            <th data-sort-key="slot" class="sortable col-header-icon-cell" title="Slot">${colHeaderIcon('slot')}</th>
-            <th data-sort-key="ac" class="sortable col-header-icon-cell" title="Armor Class (AC)">${colHeaderIcon('ac')}</th>
-            <th data-sort-key="stats" class="sortable col-header-icon-cell" title="Stats">${colHeaderSymbol('#')}</th>
-            <th data-sort-key="damage" class="sortable col-header-icon-cell" title="Damage">${colHeaderIcon('damage')}</th>
-            <th data-sort-key="delay" class="sortable col-header-icon-cell" title="Delay (time between attacks)">${colHeaderIcon('delay')}</th>
-            <th data-sort-key="ratio" class="sortable col-header-icon-cell" title="Damage / Delay Ratio">${colHeaderSymbol('&#8758;')}</th>
-            <th data-sort-key="weight" class="sortable col-header-icon-cell" title="Weight / Size">${colHeaderIcon('weight')}</th>
-            <th data-sort-key="capacity" class="sortable col-header-icon-cell" title="Capacity / Max Size">${colHeaderIcon('capacity')}</th>
-            <th data-sort-key="classes" class="sortable col-header-icon-cell" title="Classes">${colHeaderIcon('classes')}</th>
-            <th data-sort-key="race" class="sortable col-header-icon-cell" title="Race">${colHeaderIcon('race')}</th>
+            ${showTypeColumn ? `<th data-sort-key="type" class="sortable col-header-icon-cell" data-tooltip="Type" aria-label="Type">${colHeaderIcon('type')}</th>` : ''}
+            <th data-sort-key="slot" class="sortable col-header-icon-cell" data-tooltip="Slot" aria-label="Slot">${colHeaderIcon('slot')}</th>
+            <th data-sort-key="ac" class="sortable col-header-icon-cell" data-tooltip="Armor Class (AC)" aria-label="Armor Class (AC)">${colHeaderIcon('ac')}</th>
+            <th data-sort-key="stats" class="sortable col-header-icon-cell" data-tooltip="Stats" aria-label="Stats">${colHeaderSymbol('#')}</th>
+            <th data-sort-key="damage" class="sortable col-header-icon-cell" data-tooltip="Damage" aria-label="Damage">${colHeaderIcon('damage')}</th>
+            <th data-sort-key="delay" class="sortable col-header-icon-cell" data-tooltip="Delay (time between attacks)" aria-label="Delay (time between attacks)">${colHeaderIcon('delay')}</th>
+            <th data-sort-key="ratio" class="sortable col-header-icon-cell" data-tooltip="Damage / Delay Ratio" aria-label="Damage / Delay Ratio">${colHeaderSymbol('&#8758;')}</th>
+            <th data-sort-key="weight" class="sortable col-header-icon-cell" data-tooltip="Weight / Size" aria-label="Weight / Size">${colHeaderIcon('weight')}</th>
+            <th data-sort-key="capacity" class="sortable col-header-icon-cell" data-tooltip="Capacity / Max Size" aria-label="Capacity / Max Size">${colHeaderIcon('capacity')}</th>
+            <th data-sort-key="classes" class="sortable col-header-icon-cell" data-tooltip="Classes" aria-label="Classes">${colHeaderIcon('classes')}</th>
+            <th data-sort-key="race" class="sortable col-header-icon-cell" data-tooltip="Race" aria-label="Race">${colHeaderIcon('race')}</th>
           </tr>
         </thead>
         <tbody id="items-tbody"></tbody>
