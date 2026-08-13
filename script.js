@@ -2333,9 +2333,15 @@ function renderItemRows(tbody, items, showTypeColumn) {
     const ratioCell = ratio != null ? ratio.toFixed(2) : '—';
     const acCell = item.ac != null ? item.ac : '—';
     const capacityCell = formatCapacity(item);
-    const weightSizeCell = (item.weight != null || item.size)
+    // "Medium" abbreviated to "Med" in this column specifically
+    // (2026-08-13, user-reported wrapping — "6 / Medium" split across two
+    // lines even with nowrap+ellipsis below) — display-only, item.size
+    // itself stays the real "Medium" value everywhere else (filters, item
+    // cards, search).
+    const weightSizeFull = (item.weight != null || item.size)
       ? `${item.weight != null ? item.weight : '—'} / ${item.size || '—'}`
       : '—';
+    const weightSizeCell = weightSizeFull.replace('Medium', 'Med');
 
     return `
       <tr data-slug="${escapeAttr(item.slug || '')}">
@@ -2343,14 +2349,14 @@ function renderItemRows(tbody, items, showTypeColumn) {
           <span class="item-name-hover" data-alt="${item.name}">${(item.tags || []).map(t => `<span class="badge-tag">${t}</span> `).join('')}${item.name}</span>${item.needsInfo ? ' <span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}
         </td>
         ${showTypeColumn ? `<td data-label="Type">${escapeAttr(ITEM_TYPE_LABELS[item.type] || item.type)}</td>` : ''}
-        <td data-label="Slot"${formatSlot(item) === '—' ? ' class="cell-empty"' : ''}>${formatSlot(item)}</td>
+        <td data-label="Slot" class="cell-nowrap${formatSlot(item) === '—' ? ' cell-empty' : ''}" title="${escapeAttr(formatSlot(item))}">${formatSlot(item)}</td>
         <td data-label="AC"${acCell === '—' ? ' class="cell-empty"' : ''}>${acCell}</td>
         <td data-label="Stats"${formatStats(item) === '—' ? ' class="cell-empty"' : ''}>${formatStatsHTML(item)}</td>
         <td data-label="Damage"${damageCell === '—' ? ' class="cell-empty"' : ''}>${damageCell}</td>
         <td data-label="Delay"${delayCell === '—' ? ' class="cell-empty"' : ''}>${delayCell}</td>
         <td data-label="Ratio"${ratioCell === '—' ? ' class="cell-empty"' : ''}>${ratioCell}</td>
-        <td data-label="Weight / Size"${weightSizeCell === '—' ? ' class="cell-empty"' : ''}>${weightSizeCell}</td>
-        <td data-label="Capacity / Max Size"${capacityCell === '—' ? ' class="cell-empty"' : ''}>${capacityCell}</td>
+        <td data-label="Weight / Size" class="cell-nowrap${weightSizeCell === '—' ? ' cell-empty' : ''}" title="${escapeAttr(weightSizeFull)}">${weightSizeCell}</td>
+        <td data-label="Capacity / Max Size" class="cell-nowrap${capacityCell === '—' ? ' cell-empty' : ''}" title="${escapeAttr(capacityCell)}">${capacityCell}</td>
         <td data-label="Classes"${formatList(item.classes) === '—' ? ' class="cell-empty"' : ''}>${formatList(item.classes)}</td>
         <td data-label="Race"${formatList(item.race) === '—' ? ' class="cell-empty"' : ''}>${formatList(item.race)}</td>
       </tr>

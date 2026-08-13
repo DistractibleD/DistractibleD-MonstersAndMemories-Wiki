@@ -839,6 +839,24 @@ body:not(.site-entered) .sidebar {
 .stat-entry {
   white-space: nowrap;
 }
+/* Slot / Weight-Size / Capacity-Max-Size columns (2026-08-13, user-reported)
+   — same root cause and same fix as .stat-entry above, just simpler: unlike
+   Stats (a comma list that should still wrap *between* entries), these
+   columns hold exactly one short "X / Y" value (e.g. "Primary / Secondary",
+   "3 / Small") that should never wrap internally at all, so the whole cell
+   gets white-space:nowrap directly instead of per-entry spans.
+   overflow:hidden + text-overflow:ellipsis handle the case where the full
+   value still doesn't fit a genuinely narrow column (e.g. "Primary /
+   Secondary" in a ~54px column, confirmed by testing on a 1080px portrait
+   window): without these, the nowrap text just spilled straight into the
+   next cell and rendered on top of its content — ellipsis truncation
+   ("Primary / S…") is far cleaner, and a `title` attribute on the cell
+   (set in script.js) still exposes the full value on hover. */
+.cell-nowrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /* Column proportions, tuned so short-but-unbreakable words (e.g. "Medium",
    "Weapon") fit without splitting mid-word. Overridden for mobile below. */
 .col-name { width: 20%; }
