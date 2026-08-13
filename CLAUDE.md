@@ -1494,26 +1494,6 @@ any of this CSS outside that media query.
   to fall back on, so there's nothing sensible to show in a 52px rail. Still fully available by
   expanding.
 
-## Splash screen
-
-Full-viewport gate (`#splash-screen` in `index.html`) on every fresh load — site's actual
-name "Petrichor's Monsters and Memories Wiki" lives here (header/`<title>` still say "Game
-Wiki", untouched). Background: `images/splash-hero.jpg`.
-**Note for future `.webp` input:** `System.Drawing` (GDI+) can't load `.webp` at all ("Out of
-memory" is the misleading error) — use `System.Windows.Media.Imaging.BitmapDecoder` (WPF,
-`Add-Type -AssemblyName PresentationCore`) instead, goes through OS WIC codecs
-(`BitmapDecoder` to load, `JpegBitmapEncoder` to save).
-
-Clicking **Enter** adds `.site-entered` to `<body>` (`setupSplashScreen()`) — everything else
-driven off that class in CSS: splash fades out while sidebar slides in from the left
-(`transform`, not display/layout, so no content-column jump). `body:not(.site-entered) {
-overflow: hidden }` blocks background scrolling while splash is up.
-
-**Temporarily disabled** (2026-08-13, user's own request, "might bring it back later") via one
-flag — `const SPLASH_SCREEN_ENABLED = false;` right above `setupSplashScreen()`. When false,
-`.site-entered` is added immediately instead of waiting for the Enter click, so the splash
-never shows — but its HTML/CSS/JS are all still fully intact, untouched. Flip the flag back to
-`true` to restore it exactly as it was; don't remove any splash markup/styling while it's off.
 
 **Shows on every load, not just once per visitor** — no session/localStorage "already
 entered" check (deliberate simplest reading of the original request; revisit only if the
@@ -1546,6 +1526,11 @@ No Node/Python in this environment's PATH. Spin up a throwaway static file serve
 small PowerShell `HttpListener` script) rather than assuming `python -m http.server`/`npx
 serve` work — check first. Don't commit a `.claude/launch.json` pointing at a
 session-scoped scratchpad path; won't survive past the session.
+
+**`.webp` input:** `System.Drawing` (GDI+) can't load `.webp` at all ("Out of memory" is the
+misleading error) — use `System.Windows.Media.Imaging.BitmapDecoder` (WPF, `Add-Type
+-AssemblyName PresentationCore`) instead, goes through OS WIC codecs (`BitmapDecoder` to load,
+`JpegBitmapEncoder` to save).
 
 ## Git workflow
 

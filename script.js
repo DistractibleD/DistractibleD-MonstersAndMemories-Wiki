@@ -178,33 +178,6 @@ async function ensureLevelingData() {
   return levelingData;
 }
 
-// Splash screen shown on every fresh load (see #splash-screen in
-// index.html) — clicking Enter adds .site-entered to <body>, which both
-// fades the splash out and slides the sidebar in (both driven from that one
-// class, see style.css). Intentionally shows every time rather than
-// remembering "already entered" in sessionStorage/localStorage — it's meant
-// to be a recurring welcome, not a one-time onboarding step.
-//
-// Temporarily disabled (2026-08-13, user's own request — "might bring it
-// back later") by flipping this one flag rather than deleting any
-// HTML/CSS/JS: when false, .site-entered is added immediately instead of
-// waiting for the Enter click, so the splash markup/styling stays fully
-// intact and ready — just skipped. Flip back to true to restore it exactly
-// as it was.
-const SPLASH_SCREEN_ENABLED = false;
-
-function setupSplashScreen() {
-  if (!SPLASH_SCREEN_ENABLED) {
-    document.body.classList.add('site-entered');
-    return;
-  }
-  const btn = document.getElementById('splash-enter-btn');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    document.body.classList.add('site-entered');
-  });
-}
-
 // A floating "Back to top" button, mainly meant for the long recipe/node
 // lists on the Crafting/Gathering pages (2026-07-30, user's own request) —
 // built once here rather than per-page since the whole site scrolls the
@@ -296,7 +269,6 @@ function updateSidebarMaxHeight() {
 }
 
 async function init() {
-  setupSplashScreen();
   setupBackToTopButton();
 
   const res = await fetch('pages.json');
