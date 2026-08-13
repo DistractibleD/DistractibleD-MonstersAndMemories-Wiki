@@ -1350,6 +1350,24 @@ like `.some-class` is `(0,1,0)` and loses silently. If a new img-related style d
 to apply, check this first — raise specificity (`.content-inner .my-class`) or control
 visibility via inline styles from JS instead of a CSS class toggle.
 
+**`overflow-x`/`overflow-y` can't be set independently to `visible` vs. non-`visible`.** Per
+the CSS overflow spec, if one axis is anything other than `visible` (e.g. `auto`), the other
+axis's computed value becomes `auto` too — **even if it's explicitly declared `visible` in the
+source**, the declaration is silently overruled (confirmed by testing: `.items-table-wrap`
+had `overflow-x: auto` + an explicit `overflow-y: visible`, and `getComputedStyle` still
+reported `overflowY: "auto"`). This has bitten two absolutely-positioned tooltips so far —
+`.sidebar` (`overflow-y: auto` alone) and `.items-table-wrap` (`overflow-x: auto` alone) —
+both silently clip anything positioned outside their own box on the *other* axis. Two known
+fixes, pick whichever fits: (1) if the element truly never needs to scroll on either axis in
+the relevant state, set the `overflow` shorthand to `visible` outright (both axes at once —
+this is what the sidebar's collapsed-rail tooltip does); (2) if one axis's scroll is load-
+bearing (like `.items-table-wrap`'s horizontal scroll), don't fight the ancestor at all —
+reposition the popover to stay *inside* the ancestor's own box instead (the Item Database
+header tooltips now render `top: 100%` instead of `bottom: 100%`, overlapping the table's own
+first row rather than exceeding the wrap's top edge, so no clipping is possible regardless of
+overflow). Check this first any time a `position: absolute` popover renders partially (a
+border/corner peeking through but the content itself invisible) inside a scrollable ancestor.
+
 **`.layout` needs an explicit `width: 100%`.** `.layout` is `display: flex` +
 `align-items: flex-start` (desktop sidebar+content row) + `margin: 0 auto` (1600px
 desktop-centering) while itself a flex item of `<body>` (sticky-footer trick). Per the

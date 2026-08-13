@@ -991,10 +991,23 @@ body:not(.site-entered) .sidebar {
 .items-table th.col-header-icon-cell[data-tooltip]::before {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: 100%;
+  /* Below the header row (top:100%), not above (bottom:100%) — .items-
+     table-wrap sets overflow-x:auto, and per the CSS overflow spec, one
+     axis set to non-'visible' silently forces the OTHER axis to compute as
+     'auto' too, even if that axis is explicitly declared 'visible' in the
+     source (confirmed by testing — `overflow-y: visible` here still
+     computed as 'auto', the declaration is simply overruled). A tooltip
+     positioned above the header row exceeds the wrap's own top edge and
+     gets clipped there — only its rounded top border peeked out, the text
+     itself was invisible (2026-08-13, user-reported). Positioning it below
+     instead keeps it entirely inside the wrap's box (overlapping the first
+     table row, which `pointer-events: none` + the box-shadow/opaque
+     background already make harmless), so no clipping is possible
+     regardless of the wrap's overflow settings. */
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  margin-bottom: 6px;
+  margin-top: 6px;
   background: var(--bg-panel);
   border: 1px solid var(--accent-dim);
   color: var(--text);
