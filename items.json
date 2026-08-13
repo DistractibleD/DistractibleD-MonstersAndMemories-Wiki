@@ -1918,11 +1918,12 @@
     "tags": [],
     "description": "This is a substantial meal. Freshly grilled whitefish fillet.",
     "effect": "Pan Fried Whitefish (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "stats": { "INT": 2, "STA": 1 },
     "weight": 0.25,
     "size": "Small",
     "classes": ["ALL"],
     "race": ["ALL"],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Roasted Rat with Onion",
@@ -2115,11 +2116,12 @@
     "tags": [],
     "description": "This is a substantial meal.",
     "effect": "Lemon Basa Fillet (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "stats": { "WIS": 2, "CHA": 1 },
     "weight": 0.25,
     "size": "Small",
     "classes": ["ALL"],
     "race": ["ALL"],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Bat Wing Crisps",
@@ -15491,14 +15493,13 @@
   {
     "name": "Crystal Bauble",
     "slug": "crystal-bauble",
-    "lastUpdated": "2026-07-24",
+    "lastUpdated": "2026-08-13",
     "image": "images/items/crystal-bauble.jpg",
     "type": "Jewelry",
     "tags": ["MAGIC", "UNIQUE"],
     "slot": "Ear",
     "ac": 1,
-    "stats": { "INT": 6, "WIS": 6, "MANA": 30 },
-    "resists": { "MAGIC": 5 },
+    "stats": { "INT": 5, "WIS": 4, "MANA": 25 },
     "weight": 0.1,
     "size": "Small",
     "classes": ["ARC", "BST", "FTR", "INQ", "MNK", "PAL", "RNG", "SHD", "SPB"],
@@ -21076,5 +21077,20 @@
     "tags": [],
     "needsInfo": true,
     "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "Etched Bone Mask",
+    "slug": "etched-bone-mask",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Face",
+    "ac": 10,
+    "stats": { "WIS": 4, "MANA": 30 },
+    "resists": { "COLD": 2 },
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["BST", "CLR", "DRU", "PAL", "RNG", "SHM"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-13"
   }
 ]
