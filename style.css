@@ -493,6 +493,20 @@ body:not(.site-entered) .sidebar {
   padding: 5px 8px 1px;
   line-height: 1.3;
 }
+/* Collapsible icon-rail sidebar toggle (2026-08-13) — the button itself is
+   always built (buildSidebar in script.js) but only ever made visible in
+   the wide-portrait media query further down, so a landscape visitor never
+   sees or can trigger it, matching the "only for portrait" requirement
+   structurally rather than by convention. Normal document flow (prepended
+   as the sidebar's first child), not position:absolute — .sidebar already
+   sets overflow-y:auto, which per the CSS overflow spec also computes
+   overflow-x to 'auto' (not 'visible') the moment only one axis is set to
+   something other than visible, so anything positioned outside the
+   sidebar's own box would get silently clipped. Staying in normal flow
+   sidesteps that entirely. */
+.sidebar-toggle-btn {
+  display: none;
+}
 
 /* ---------- Content ---------- */
 .content {
@@ -2579,6 +2593,135 @@ body:not(.site-entered) .sidebar {
 @media (orientation: portrait) and (min-width: 900px) {
   .sidebar { width: 190px; }
   .layout { gap: 24px; }
+
+  /* ---- Collapsible icon-rail sidebar (2026-08-13) ----
+     User's own request: "shrinkable/expandable... only expanding as we
+     hover" / "collapsible windows... click them, stay open until clicked
+     back" — landed on a click-toggle icon rail (not hover, which can
+     flicker) since every sidebar link already has a NAV_ICON built for it,
+     so collapsing loses nothing but the text label. Explicitly scoped to
+     stay inside this orientation:portrait query only — landscape users at
+     any width get none of this, matching the direct instruction not to
+     touch their experience. */
+  .sidebar-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 7px 10px;
+    margin-bottom: 8px;
+    background: none;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    color: var(--text-dim);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.85rem;
+  }
+  .sidebar-toggle-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--bg-panel-hover);
+  }
+  .sidebar-toggle-icon {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 auto;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.2s ease;
+  }
+  body.sidebar-collapsed .sidebar {
+    width: 52px;
+    /* .sidebar's own overflow-y:auto implicitly computes overflow-x to
+       'auto' too (CSS overflow spec: only one axis set to non-visible
+       makes the other 'auto', never stays 'visible') — that would clip
+       the hover tooltips below, which intentionally render outside the
+       rail's own 52px box. The collapsed rail's content (~13 page icons,
+       no History/Recently boxes) is short enough not to need its own
+       scrollbar in practice, so trading it away here is a safe swap. */
+    overflow: visible;
+  }
+  body.sidebar-collapsed .sidebar-toggle-btn {
+    justify-content: center;
+  }
+  body.sidebar-collapsed .sidebar-toggle-icon {
+    transform: rotate(180deg);
+  }
+  body.sidebar-collapsed .sidebar-link {
+    justify-content: center;
+    gap: 0;
+    padding: 8px;
+    position: relative;
+  }
+  body.sidebar-collapsed .sidebar-link-text {
+    display: none;
+  }
+  body.sidebar-collapsed .sidebar-group-heading,
+  body.sidebar-collapsed .sidebar-visits-title {
+    display: none;
+  }
+  body.sidebar-collapsed .sidebar-group {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+  }
+  /* Force every nested group's icons to always show while the rail itself
+     is collapsed, regardless of that group's own individual expand/collapse
+     state — every page already has its own icon, so flattening into one
+     unbroken icon list (rather than hiding pages behind a second toggle
+     inside a 52px rail) keeps every destination reachable. Specificity
+     (3 classes) beats the base .sidebar-group.sidebar-group-collapsed rule
+     (2 classes) outright, no !important needed. */
+  body.sidebar-collapsed .sidebar-group.sidebar-group-collapsed {
+    display: block;
+  }
+  body.sidebar-collapsed .sidebar-link-nested::before {
+    display: none;
+  }
+  /* Most Visited / Recently Updated have no per-item icons of their own
+     (dynamically generated from visit counts / lastUpdated dates), so
+     there's nothing sensible to show as a bare icon — hidden while
+     collapsed rather than rendered as unreadable tiny text. Still fully
+     available by expanding the rail. */
+  body.sidebar-collapsed #sidebar-visits-wrapper,
+  body.sidebar-collapsed #sidebar-recent-wrapper {
+    display: none;
+  }
+  /* Instant hover tooltip for a collapsed link's title — same ::before +
+     data-tooltip pattern as the Item Database header icons, just anchored
+     to the link's right edge instead of centered above it. */
+  body.sidebar-collapsed .sidebar-link[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 8px;
+    background: var(--bg-panel);
+    border: 1px solid var(--accent-dim);
+    color: var(--text);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    text-transform: none;
+    letter-spacing: normal;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 30;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+  body.sidebar-collapsed .sidebar-link[data-tooltip]:hover::before {
+    opacity: 1;
+    visibility: visible;
+  }
   .content-inner .items-table { font-size: 0.8rem; }
   .content-inner .items-table th, .content-inner .items-table td { padding: 7px 8px; }
   .col-name { width: 16%; }

@@ -1419,6 +1419,41 @@ instead):
   (`.col-header-icon-wrap`/`.col-header-svg`/`.col-header-symbol`), rebalanced `<col>`
   percentages, reduced table font-size/padding.
 
+**Collapsible icon-rail sidebar** (2026-08-13, user's own request, same `orientation:portrait
+and min-width:900px` query as above) — a click-toggle button (`.sidebar-toggle-btn`, built in
+`setupSidebarCollapseToggle`/`buildSidebar` in `script.js`, prepended as the sidebar's first
+child) shrinks `.sidebar` from 190px to a 52px icon-only rail. State lives in
+`localStorage` (`mnmwiki-sidebar-collapsed`) and is applied as a `sidebar-collapsed` class on
+`<body>` — but **every actual style change is nested inside the same portrait+wide media
+query**, so a landscape visitor never sees the toggle button (`display:none` outside that
+query) and the stored class has zero visual effect for them regardless of what's in their
+localStorage. This was a direct, explicit requirement ("but only make this change for the
+portrait version of the site, the landscape version has more than enough room") — don't move
+any of this CSS outside that media query.
+
+- Collapsing hides text labels (`.sidebar-link-text`) and group headings, but never hides a
+  *destination* — every page (including ones nested under Tradeskilling/Monsters) already has
+  its own `NAV_ICON`, so nested groups are forced open (`.sidebar-group.sidebar-group-collapsed
+  { display: block }`, 3-class specificity beats the base 2-class rule with no `!important`
+  needed) rather than adding a second collapse layer inside an already-collapsed rail.
+- Hovering a collapsed link shows its title via the same instant `::before` + `data-tooltip`
+  CSS tooltip pattern as the Item Database header icons (`link.dataset.tooltip = page.title`,
+  set unconditionally in `buildSidebar`'s page loop — costs nothing when expanded, since the
+  tooltip CSS itself is also scoped inside `body.sidebar-collapsed`).
+- **Gotcha:** `.sidebar` sets `overflow-y: auto` but never `overflow-x` — per the CSS overflow
+  spec, setting only one axis to non-`visible` computes the *other* axis to `auto` too, not
+  `visible`. That silently clips anything positioned outside the sidebar's own box (the hover
+  tooltips above, and an earlier draft of the toggle button that tried `position:absolute;
+  right:-14px`). Fixed two ways: the toggle button stays in normal document flow (prepended,
+  not absolutely positioned) so it never needs to exceed the box; the collapsed state sets
+  `.sidebar { overflow: visible }` outright, safe because the collapsed rail's content (~13
+  page icons, no History/Recently boxes) is short enough not to need its own scroll in
+  practice.
+- **Most Visited Tradeskills / Recently Updated hide entirely while collapsed** — their
+  entries are dynamically generated (visit counts / `lastUpdated` dates) with no per-item icon
+  to fall back on, so there's nothing sensible to show in a 52px rail. Still fully available by
+  expanding.
+
 ## Splash screen
 
 Full-viewport gate (`#splash-screen` in `index.html`) on every fresh load — site's actual

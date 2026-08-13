@@ -424,6 +424,11 @@ function buildSidebar(pages) {
     const navIcon = NAV_ICON[page.file];
     link.innerHTML = (navIcon ? svgIcon(navIcon) : '') + `<span class="sidebar-link-text">${escapeAttr(page.title)}</span>`;
     link.dataset.file = page.file;
+    // Only ever shown/read in the collapsed icon-rail state (see the
+    // sidebar-collapsed CSS below) — every link already carries its own
+    // title, so this costs nothing to set unconditionally here rather than
+    // threading a "are we collapsed" check through this loop.
+    link.dataset.tooltip = page.title;
     link.addEventListener('click', () => loadPage(page.file));
     (groupContainer || sidebar).appendChild(link);
   }
@@ -462,6 +467,51 @@ function buildSidebar(pages) {
   `;
   sidebar.appendChild(recentWrapper);
   updateRecentlyUpdatedSidebar();
+
+  setupSidebarCollapseToggle(sidebar);
+}
+
+// Collapsible icon-rail sidebar (2026-08-13, user's own request) — desktop
+// side-by-side layout (sidebar + content in a row) has plenty of width on a
+// normal landscape monitor, but a wide *portrait* screen (e.g. 1080x1920)
+// has much less room to spare, so the whole feature is CSS-gated to only
+// ever be visible under the same `@media (orientation: portrait) and
+// (min-width: 900px)` query the sidebar-narrowing fix already uses (see
+// style.css) — the toggle button is `display: none` everywhere else, so a
+// landscape visitor can't even see or trigger this, regardless of what's in
+// their localStorage. Collapsing doesn't hide any page — every link
+// (including nested ones) already has its own NAV_ICON, so the collapsed
+// rail just hides the text labels and group headings, leaving a flat list
+// of icons; hovering one shows its title via the same instant CSS tooltip
+// pattern as the Item Database header icons (data-tooltip + ::before).
+const SIDEBAR_COLLAPSED_KEY = 'mnmwiki-sidebar-collapsed';
+
+function setupSidebarCollapseToggle(sidebar) {
+  const collapsed = localStorage.getItem(SIDEBAR_COLLAPSED_KEY) === 'true';
+  document.body.classList.toggle('sidebar-collapsed', collapsed);
+
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'sidebar-toggle-btn';
+  // Reuses .sidebar-link-text for the label so it hides for free under the
+  // same `body.sidebar-collapsed .sidebar-link-text { display: none }` rule
+  // every nav link's own label already relies on, instead of a second rule.
+  btn.innerHTML = '<svg viewBox="0 0 24 24" class="sidebar-toggle-icon"><path d="M15 5 L9 12 L15 19"/></svg><span class="sidebar-link-text"></span>';
+  const labelSpan = btn.querySelector('.sidebar-link-text');
+  const updateLabel = () => {
+    const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+    const label = isCollapsed ? 'Expand sidebar' : 'Collapse sidebar';
+    btn.setAttribute('aria-label', label);
+    btn.title = label;
+    labelSpan.textContent = isCollapsed ? 'Expand' : 'Collapse';
+  };
+  updateLabel();
+  btn.addEventListener('click', () => {
+    const isCollapsed = document.body.classList.toggle('sidebar-collapsed');
+    localStorage.setItem(SIDEBAR_COLLAPSED_KEY, isCollapsed ? 'true' : 'false');
+    updateLabel();
+  });
+  sidebar.insertBefore(btn, sidebar.firstChild);
 }
 
 // Combines items/monsters/crafting recipes/companions into one newest-first
