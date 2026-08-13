@@ -184,7 +184,20 @@ async function ensureLevelingData() {
 // class, see style.css). Intentionally shows every time rather than
 // remembering "already entered" in sessionStorage/localStorage — it's meant
 // to be a recurring welcome, not a one-time onboarding step.
+//
+// Temporarily disabled (2026-08-13, user's own request — "might bring it
+// back later") by flipping this one flag rather than deleting any
+// HTML/CSS/JS: when false, .site-entered is added immediately instead of
+// waiting for the Enter click, so the splash markup/styling stays fully
+// intact and ready — just skipped. Flip back to true to restore it exactly
+// as it was.
+const SPLASH_SCREEN_ENABLED = false;
+
 function setupSplashScreen() {
+  if (!SPLASH_SCREEN_ENABLED) {
+    document.body.classList.add('site-entered');
+    return;
+  }
   const btn = document.getElementById('splash-enter-btn');
   if (!btn) return;
   btn.addEventListener('click', () => {

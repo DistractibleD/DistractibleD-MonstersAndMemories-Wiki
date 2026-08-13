@@ -1509,6 +1509,12 @@ driven off that class in CSS: splash fades out while sidebar slides in from the 
 (`transform`, not display/layout, so no content-column jump). `body:not(.site-entered) {
 overflow: hidden }` blocks background scrolling while splash is up.
 
+**Temporarily disabled** (2026-08-13, user's own request, "might bring it back later") via one
+flag — `const SPLASH_SCREEN_ENABLED = false;` right above `setupSplashScreen()`. When false,
+`.site-entered` is added immediately instead of waiting for the Enter click, so the splash
+never shows — but its HTML/CSS/JS are all still fully intact, untouched. Flip the flag back to
+`true` to restore it exactly as it was; don't remove any splash markup/styling while it's off.
+
 **Shows on every load, not just once per visitor** — no session/localStorage "already
 entered" check (deliberate simplest reading of the original request; revisit only if the
 user says the repetition is annoying).
