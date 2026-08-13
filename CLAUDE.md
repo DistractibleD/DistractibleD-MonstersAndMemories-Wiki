@@ -149,21 +149,23 @@ from each `<td>`'s own `data-label` instead, so these icons never had to double 
 label — safe to redesign without touching that path. Add a header icon the same way for any
 future column: one `HEADER_ICON_DEFS` entry + `title` on the `<th>`.
 
-**Row cells don't split a value mid-word/mid-entry either** (2026-08-13, user-reported —
-narrow columns were breaking "Primary / Secondary" into "Primar-y / Secon-dary", and the
-Stats list into "STA" stranded from its own "+2"). Two variants, same underlying idea (force
-one atomic unit onto one line, let the browser wrap/truncate around it instead of through
-it):
-- **Stats** (a comma list that should still wrap *between* entries) — `formatStatsHTML()`
-  wraps each `"Label +N"` pair in its own `<span class="stat-entry">` (plain
-  `white-space: nowrap`); `formatStats()` itself stays plain text, still used for the search
-  haystack and sort-by-stats.
-- **Slot / Weight-Size / Capacity-Max-Size** (each cell is exactly one short `"X / Y"` value
-  that should never wrap at all) — `class="cell-nowrap"` directly on the `<td>`
-  (`white-space: nowrap` + `overflow: hidden` + `text-overflow: ellipsis`, so a genuinely too-
-  narrow column truncates cleanly — "Primary / S…" — instead of spilling into the next cell,
-  which is what plain `nowrap` alone did). Each of these three cells also carries a `title`
-  attribute with the untruncated value, so the full text is still one hover away.
+**Row cells don't split a value mid-word/mid-entry either** (2026-08-13, user-reported twice
+in a row — first that narrow columns were breaking "Primary / Secondary" into "Primar-y /
+Secon-dary" and the Stats list into "STA" stranded from its own "+2"; then, after a first fix
+attempt forced the whole value onto one line with `overflow: hidden` + `text-overflow:
+ellipsis`, that short values like "0.1 / Small" started getting truncated to "0.1 / S…" even
+though they'd have fit fine wrapped onto two lines — ellipsis was hiding real data, not just
+reformatting it). Landed on one consistent approach for both cases: wrap each piece that must
+never split in its own `<span class="stat-entry">` (plain `white-space: nowrap`), joined by
+ordinary breakable text — a line can still wrap *between* pieces, just never *inside* one,
+and nothing is ever hidden behind an ellipsis.
+- **Stats** (a comma list) — `formatStatsHTML()` wraps each `"Label +N"` pair in its own
+  `.stat-entry`, joined by `, `. `formatStats()` itself stays plain text, still used for the
+  search haystack and sort-by-stats.
+- **Slot / Weight-Size / Capacity-Max-Size** (each cell is one `"X / Y"` value) —
+  `noSplitSlashParts()` splits on `" / "` and wraps each side in its own `.stat-entry`,
+  rejoined with a plain `" / "`. Each of these three cells also carries a `title` attribute
+  with the full value, mostly redundant now but harmless to keep.
 - **Weight/Size column abbreviates "Medium" to "Med"** (display-only, user's own request) —
   `item.size` itself is untouched everywhere else (filters, item cards, search); only this
   one cell's rendered text swaps it, and the cell's `title` attribute still shows the

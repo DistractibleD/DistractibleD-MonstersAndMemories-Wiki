@@ -1856,6 +1856,21 @@ function formatStatsHTML(item) {
     : '—';
 }
 
+// Same idea as formatStatsHTML above, for the Slot / Weight-Size /
+// Capacity-Max-Size columns' "X / Y" values (2026-08-13, user-reported
+// twice: first that "Primary / Secondary" was splitting mid-word, then —
+// after a first attempt forced the whole value onto one line with
+// text-overflow:ellipsis — that short values like "0.1 / Small" were now
+// getting truncated to "0.1 / S…" even though they'd have fit fine
+// wrapped onto two lines. Ellipsis was hiding real data. This wraps each
+// " / "-separated piece in its own .stat-entry span instead: a line can
+// still wrap between "Primary" and "Secondary" (or between "0.1" and
+// "Small"), just never *inside* one of those pieces — same tradeoff Stats
+// already makes, and it never hides text behind "…".
+function noSplitSlashParts(text) {
+  return text.split(' / ').map(part => `<span class="stat-entry">${part}</span>`).join(' / ');
+}
+
 // Does this item carry a given buff (an ITEM_BUFF_OPTIONS value)? Used by
 // the Item Database's "search by buff" dropdowns so someone can find e.g.
 // "every item with both STA and HP" without knowing exact bonus numbers.
@@ -2349,14 +2364,14 @@ function renderItemRows(tbody, items, showTypeColumn) {
           <span class="item-name-hover" data-alt="${item.name}">${(item.tags || []).map(t => `<span class="badge-tag">${t}</span> `).join('')}${item.name}</span>${item.needsInfo ? ' <span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}
         </td>
         ${showTypeColumn ? `<td data-label="Type">${escapeAttr(ITEM_TYPE_LABELS[item.type] || item.type)}</td>` : ''}
-        <td data-label="Slot" class="cell-nowrap${formatSlot(item) === '—' ? ' cell-empty' : ''}" title="${escapeAttr(formatSlot(item))}">${formatSlot(item)}</td>
+        <td data-label="Slot"${formatSlot(item) === '—' ? ' class="cell-empty"' : ''} title="${escapeAttr(formatSlot(item))}">${noSplitSlashParts(formatSlot(item))}</td>
         <td data-label="AC"${acCell === '—' ? ' class="cell-empty"' : ''}>${acCell}</td>
         <td data-label="Stats"${formatStats(item) === '—' ? ' class="cell-empty"' : ''}>${formatStatsHTML(item)}</td>
         <td data-label="Damage"${damageCell === '—' ? ' class="cell-empty"' : ''}>${damageCell}</td>
         <td data-label="Delay"${delayCell === '—' ? ' class="cell-empty"' : ''}>${delayCell}</td>
         <td data-label="Ratio"${ratioCell === '—' ? ' class="cell-empty"' : ''}>${ratioCell}</td>
-        <td data-label="Weight / Size" class="cell-nowrap${weightSizeCell === '—' ? ' cell-empty' : ''}" title="${escapeAttr(weightSizeFull)}">${weightSizeCell}</td>
-        <td data-label="Capacity / Max Size" class="cell-nowrap${capacityCell === '—' ? ' cell-empty' : ''}" title="${escapeAttr(capacityCell)}">${capacityCell}</td>
+        <td data-label="Weight / Size"${weightSizeCell === '—' ? ' class="cell-empty"' : ''} title="${escapeAttr(weightSizeFull)}">${noSplitSlashParts(weightSizeCell)}</td>
+        <td data-label="Capacity / Max Size"${capacityCell === '—' ? ' class="cell-empty"' : ''} title="${escapeAttr(capacityCell)}">${noSplitSlashParts(capacityCell)}</td>
         <td data-label="Classes"${formatList(item.classes) === '—' ? ' class="cell-empty"' : ''}>${formatList(item.classes)}</td>
         <td data-label="Race"${formatList(item.race) === '—' ? ' class="cell-empty"' : ''}>${formatList(item.race)}</td>
       </tr>
