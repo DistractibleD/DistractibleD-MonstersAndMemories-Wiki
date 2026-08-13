@@ -966,6 +966,42 @@ body:not(.site-entered) .sidebar {
   font-weight: 700;
   line-height: 1;
 }
+/* Custom instant tooltip for the header icons (2026-08-12) — a native
+   `title` attribute waits ~1s+ before showing (browser-controlled, can't be
+   sped up via CSS), so the meaning-on-hover here comes from `data-tooltip`
+   + this ::before bubble instead, which appears the moment CSS applies
+   :hover with no transition to wait on. `aria-label` (set alongside
+   data-tooltip in script.js, no `title` attribute at all now) keeps the
+   same text available to screen readers. Uses ::before since ::after on
+   this <th> is already the sort-arrow corner badge above. */
+.items-table th.col-header-icon-cell[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 6px;
+  background: var(--bg-panel);
+  border: 1px solid var(--accent-dim);
+  color: var(--text);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.72rem;
+  text-transform: none;
+  letter-spacing: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 20;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+.items-table th.col-header-icon-cell[data-tooltip]:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
 .items-quick-search {
   position: relative;
   margin: 18px 0 0;
