@@ -1842,6 +1842,20 @@ function formatStats(item) {
   return entries.length ? entries.map(e => `${e.label} ${e.value}`).join(', ') : '—';
 }
 
+// Display-only variant of formatStats() for the Item Database table cell
+// (2026-08-13, user-reported) — plain formatStats() is also used for the
+// search haystack and for sort-by-stats, where it needs to stay real plain
+// text, not HTML. Wraps each "Label +N" pair in its own span so a narrow
+// column wraps the *list* between entries (after a comma) but never splits
+// a single stat in half mid-entry (e.g. "STA" stranded on one line, "+2" on
+// the next) — .stat-entry is just white-space:nowrap in style.css.
+function formatStatsHTML(item) {
+  const entries = statEntries(item);
+  return entries.length
+    ? entries.map(e => `<span class="stat-entry">${e.label} ${e.value}</span>`).join(', ')
+    : '—';
+}
+
 // Does this item carry a given buff (an ITEM_BUFF_OPTIONS value)? Used by
 // the Item Database's "search by buff" dropdowns so someone can find e.g.
 // "every item with both STA and HP" without knowing exact bonus numbers.
@@ -2331,7 +2345,7 @@ function renderItemRows(tbody, items, showTypeColumn) {
         ${showTypeColumn ? `<td data-label="Type">${escapeAttr(ITEM_TYPE_LABELS[item.type] || item.type)}</td>` : ''}
         <td data-label="Slot"${formatSlot(item) === '—' ? ' class="cell-empty"' : ''}>${formatSlot(item)}</td>
         <td data-label="AC"${acCell === '—' ? ' class="cell-empty"' : ''}>${acCell}</td>
-        <td data-label="Stats"${formatStats(item) === '—' ? ' class="cell-empty"' : ''}>${formatStats(item)}</td>
+        <td data-label="Stats"${formatStats(item) === '—' ? ' class="cell-empty"' : ''}>${formatStatsHTML(item)}</td>
         <td data-label="Damage"${damageCell === '—' ? ' class="cell-empty"' : ''}>${damageCell}</td>
         <td data-label="Delay"${delayCell === '—' ? ' class="cell-empty"' : ''}>${delayCell}</td>
         <td data-label="Ratio"${ratioCell === '—' ? ' class="cell-empty"' : ''}>${ratioCell}</td>

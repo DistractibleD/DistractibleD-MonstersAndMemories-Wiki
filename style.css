@@ -829,6 +829,16 @@ body:not(.site-entered) .sidebar {
   text-align: left;
   overflow-wrap: break-word;
 }
+/* Stats column (2026-08-13, user-reported): overflow-wrap: break-word above
+   lets a narrow column wrap the comma-separated stat list, but with no
+   other hint the browser would just as happily break *inside* one entry
+   ("STA" on one line, "+2" on the next) as between entries. Each "Label
+   +N" pair is wrapped in its own .stat-entry span (formatStatsHTML in
+   script.js) so the line can only break at the plain-text comma between
+   spans, never inside one. */
+.stat-entry {
+  white-space: nowrap;
+}
 /* Column proportions, tuned so short-but-unbreakable words (e.g. "Medium",
    "Weapon") fit without splitting mid-word. Overridden for mobile below. */
 .col-name { width: 20%; }
