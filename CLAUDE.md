@@ -884,7 +884,10 @@ drill-down. `goToMonster` picks `monsters-named`/`monsters-regular` from the mon
 **Standing rule:** "If a monster drops 1 piece of an item quality set (like Rusty weapons or
 Tattered armor), assume that mob can drop any of the other items in that quality range."
 Applies automatically whenever inbox data confirms ≥1 item from a recognized family — no
-need to re-request each time.
+need to re-request each time. **Extended to vendors 2026-08-14** — the same inference and the
+same `{ "family": ... }` compact entry apply to a vendor's `sells` list (see "Vendors &
+Trainers" above for the vendor-side rendering/lookup details); the families/rosters below are
+shared by both monsters and vendors.
 
 A "quality set" = shared name prefix denoting a tier/material, not a literal in-game
 grouping. **Confirmed families and current rosters** (check longest-prefix-first — "Rusty
@@ -1266,6 +1269,25 @@ are looking for what's available in their own current zone.
   (`ensureVendorsData`). Cards stay compact (name, location/area, item count); clicking the
   name opens the existing Vendor Viewer modal (`openVendorViewer`) for the full sold-item
   list — same modal, same entry point as clicking a vendor from an item card.
+  - **A vendor's `sells` list uses the same compact `{ "family": "Name", "label"?: "..." }`
+    entry as a monster's `drops`** (added 2026-08-14, user's own explanation: "vendors will
+    always sell items from the same group, tattered leather, chipped gemstones and so on. If
+    they buy 1 piece, they can buy all those pieces (and sell them)") — confirming a vendor
+    sells any one piece of a known quality-set family (`QUALITY_SET_FAMILIES`, same list
+    monsters/gathering use) means recording/assuming the *entire* current roster, same
+    standing inference rule as "Quality-set drop inference" below, just applied to vendor
+    stock instead of monster loot. `groupVendorSells()` (mirrors `groupMonsterDrops`) splits
+    a vendor's `sells` into plain singles + compact families at render time;
+    `vendorSellCount()` sums a family's live `familyItemCount()` into the card's displayed
+    item count instead of counting the one compact entry. Rendered as a `.vendor-family-link`
+    (modal) — same dotted-underline/count styling as a monster's `.monster-drop-family-link`
+    — that jumps to the Item Database pre-filtered to that family
+    (`goToItemSearch`), closing the vendor modal first. `findVendorsSellingItem` (an item
+    card's own "Vendors" section, reverse lookup) also resolves through `qualitySetFamilyFor`
+    so an item covered only by a vendor's compact family entry still shows that vendor.
+    First applied to A Shifty Gnome, whose confirmed sells list included one piece each of
+    Corroded Bronze, Rusty, Tattered Cloth, and Tattered Hide — compacted to 4 family entries
+    instead of listing every piece.
   - **Optional `description`** (added 2026-08-14) — free-text flavor line shown under
     location/area on both the compact card and the modal (`.vendor-card-description`/
     `.vt-vendor-description`, italic, gold-accent border on the modal). First use: **Greedy

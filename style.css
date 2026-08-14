@@ -1851,6 +1851,21 @@ body {
   font-weight: 400;
   font-size: 0.85em;
 }
+.vendor-family-link {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent-dim);
+  cursor: pointer;
+  font-weight: 600;
+}
+.vendor-family-link:hover {
+  text-decoration: none;
+}
+.vendor-family-count {
+  color: var(--text-dim);
+  font-weight: 400;
+  font-size: 0.85em;
+}
 /* Only shown in the hover tooltip (see renderMonsterCardHTML's isTooltip
    option), not the full viewer modal — a small nudge that the card itself is
    clickable for the full picture/drop-table view. */

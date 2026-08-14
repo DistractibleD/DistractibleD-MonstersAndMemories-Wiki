@@ -152,18 +152,20 @@
       "Blister Beetle Gland", "Bone Chips", "Brittle Dressing Stone", "Brittle Stone",
       "Broken Grain Beetle Legs", "Cabbage", "Candle", "Charcoal", "Cooked Ashira Meat",
       "Cooked Bat Meat", "Cooked Jackal Meat", "Cooked Snake Meat",
-      "Corroded Bronze Chain Gambeson", "Corroded Bronze Maul", "Corroded Bronze War Lance",
+      { "family": "Corroded Bronze", "label": "Corroded Bronze Gear" },
       "Crocodile Hide", "Crocodile Tooth", "Crude Handmade Torch", "Crypt Scarab Carapace",
       "Crypt Scarab Leg", "Dirty Sea Sponge", "Diseased Bat Blood", "Diseased Rat Blood",
       "Diseased Snake Blood", "Dispel Stone", "Eth-ur Arboreal Journal Page",
       "Fire Beetle Carapace", "Fire Beetle Gland", "Jackal Tooth", "Lantern", "Lantern Fuel",
       "Lock Pick", "Lumberjack Axe", "Malleable Bone Ornamented Coffin", "Multhele Root",
       "Parchment", "Pungent Healing Herbs", "Rat Ear", "Ration", "Rattlesnake Skin",
-      "Raw Beetle Meat", "Raw Snake Meat", "Rusty Dagger", "Rusty Scimitar", "Rusty Scythe",
+      "Raw Beetle Meat", "Raw Snake Meat", { "family": "Rusty", "label": "Rusty Weapons" },
       "Scarab Leg", "Scorched Skeletal Remains", "Shattered Skeleton Femur",
       "Skeleton Jawbone", "Snake Egg", "Snake Fang", "Snake Skin", "Spider Legs",
-      "Spider Silk", "Spirit World Ch. 1", "Spirit World Ch. 5", "Tattered Cloth Gorget",
-      "Tattered Hide Mask", "Torch", "Unusual Jackal Pelt", "Volatile Rift Potion",
+      "Spider Silk", "Spirit World Ch. 1", "Spirit World Ch. 5",
+      { "family": "Tattered Cloth", "label": "Tattered Cloth Armor" },
+      { "family": "Tattered Hide", "label": "Tattered Hide Armor" },
+      "Torch", "Unusual Jackal Pelt", "Volatile Rift Potion",
       "Wasp Worker Wax", "Water Flask", "Wisp Dust", "Wolf Blood", "Worn Fine Wood Great Staff"
     ],
     "lastUpdated": "2026-08-14"
@@ -207,6 +209,17 @@
     "sells": [
       "Backpack", "Cracked Amphora", "Dispel Stone", "Malleable Bone Ornamented Coffin",
       "Unguent of Revealing", "Volatile Rift Potion"
+    ],
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "A Miner",
+    "slug": "a-miner",
+    "location": "Night Harbor",
+    "area": "Sojourner's Camp",
+    "sells": [
+      "Amber", "Black Pearl", "Black Sapphire", "Bloodstone", "Blue Diamond", "Brittle Stone",
+      "Carnelian"
     ],
     "lastUpdated": "2026-08-14"
   }

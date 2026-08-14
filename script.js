@@ -1200,13 +1200,17 @@ function findMonstersDroppingItem(itemName) {
 }
 
 // Reverse lookup for an item card's "Dropped by" line — every vendor whose
-// own `sells` list names this item (vendors.json, same reverse-lookup shape
-// as findMonstersDroppingItem's `drops`, just one level simpler since a
-// vendor's stock is always a flat list of exact item names, no family/quality
-// grouping like monster drops).
+// own `sells` list names this item (vendors.json), either directly (a plain
+// string) or via a compact quality-set `family` reference (see
+// groupVendorSells) that covers this item because its name falls under that
+// family's prefix — same shape/lookup as findMonstersDroppingItem's `drops`.
 function findVendorsSellingItem(itemName) {
+  const itemFamily = qualitySetFamilyFor(itemName);
   return (vendorsData || []).filter(v =>
-    (v.sells || []).some(s => s.toLowerCase() === itemName.toLowerCase())
+    (v.sells || []).some(s => {
+      if (typeof s === 'string') return s.toLowerCase() === itemName.toLowerCase();
+      return s.family === itemFamily;
+    })
   );
 }
 
@@ -4805,15 +4809,21 @@ function qualitySetFamilyFor(itemName) {
   return QUALITY_SET_FAMILIES.find(f => itemName.startsWith(f + ' ')) || null;
 }
 
-// How many items.json entries currently share a given family's name prefix —
-// computed live rather than stored, so a family's count on every monster's
+// How many items.json entries currently belong to a given family — computed
+// live rather than stored, so a family's count on every monster's/vendor's
 // card automatically grows the moment a new piece is added to items.json
 // (this is exactly what happened 2026-07-30 when Corroded Bronze turned out
-// to be 42 pieces, not the 19 originally documented — every monster with a
+// to be 42 pieces, not the 19 originally documented — every card with a
 // compact `family` reference picked up the correct new count for free, with
-// no monsters.json edit needed).
+// no data-file edit needed). Resolves each item through qualitySetFamilyFor
+// (longest-prefix-first) rather than a bare startsWith(familyName) check —
+// "Rusty " is itself a prefix of "Rusty Iron "/"Rusty Steel ", so a naive
+// prefix filter for the plain "Rusty" family would double-count every Rusty
+// Iron/Steel piece too (caught 2026-08-14 when a vendor's sells list first
+// used the compact "Rusty" family and its displayed count came out at 101
+// instead of 18).
 function familyItemCount(familyName) {
-  return (itemsData || []).filter(i => i.name.startsWith(familyName + ' ')).length;
+  return (itemsData || []).filter(i => qualitySetFamilyFor(i.name) === familyName).length;
 }
 
 // Splits a monster's drops into ordinary single-item entries plus grouped
@@ -4862,6 +4872,37 @@ function groupMonsterDrops(drops) {
       .map(([name, count]) => ({ name, count }))
   ];
   return { singles, families };
+}
+
+// Same compact-family grouping as groupMonsterDrops, applied to a vendor's
+// `sells` list (vendors.json) — 2026-08-14, user's own explanation: "vendors
+// will always sell items from the same group... if they buy 1 piece, they
+// can buy all those pieces (and sell them)." So a vendor confirmed selling
+// any one piece of a quality set (Rusty, Corroded Bronze, Tattered X,
+// Chipped/Flawed/Imperfect gems, ...) is assumed to trade the entire current
+// roster, recorded as one compact `{ "family": "Name", "label"?: "..." }`
+// entry instead of spelling out every piece — same shape/rendering as a
+// monster's compact drop family, just simpler since a vendor's `sells` array
+// never had a "legacy expanded" form to reconcile against.
+function groupVendorSells(sells) {
+  const singles = [];
+  const families = [];
+  (sells || []).forEach(s => {
+    if (typeof s === 'string') {
+      singles.push(s);
+    } else if (s.family) {
+      families.push({ name: s.family, label: s.label || s.family, count: familyItemCount(s.family) });
+    }
+  });
+  return { singles, families };
+}
+
+// Total distinct items a vendor effectively stocks — plain entries count as
+// one each, a compact family entry expands to its live items.json count
+// (same never-store-a-computed-value precedent as familyItemCount itself).
+function vendorSellCount(vendor) {
+  const grouped = groupVendorSells(vendor.sells);
+  return grouped.singles.length + grouped.families.reduce((sum, f) => sum + f.count, 0);
 }
 
 function averageCoinDrop(monster) {
@@ -5036,7 +5077,11 @@ function closeMonsterViewer() {
 // same "resolves at render time" convention as a recipe's components or a
 // monster's drops.
 function renderVendorCardHTML(vendor) {
-  const items = (vendor.sells || []).map(name => {
+  const grouped = groupVendorSells(vendor.sells);
+  const familyItems = grouped.families.map(f =>
+    `<li><a href="#" class="vendor-family-link" data-family="${escapeAttr(f.name)}">${escapeAttr(f.label)} <span class="vendor-family-count">(${f.count} items)</span></a></li>`
+  ).join('');
+  const singleItems = grouped.singles.map(name => {
     const item = findItemByName(name);
     return item
       ? `<li><a href="#" class="vendor-item-link" data-slug="${escapeAttr(item.slug)}">${escapeAttr(name)}</a></li>`
@@ -5048,7 +5093,7 @@ function renderVendorCardHTML(vendor) {
       <p class="vendor-card-location">${escapeAttr(vendor.location)}${vendor.area ? ' &middot; ' + escapeAttr(vendor.area) : ''}</p>
       ${vendor.description ? `<p class="vendor-card-description">${escapeAttr(vendor.description)}</p>` : ''}
       <ul class="vendor-card-item-list">
-        ${items || '<li class="item-card-muted">Nothing recorded yet.</li>'}
+        ${familyItems}${singleItems}${(grouped.families.length || grouped.singles.length) ? '' : '<li class="item-card-muted">Nothing recorded yet.</li>'}
       </ul>
     </div>
   `;
@@ -5081,6 +5126,13 @@ function setupVendorViewer() {
         closeVendorViewer();
         goToItem(item, { kind: 'vendor', name: vendor.name, slug: vendor.slug });
       }
+      return;
+    }
+    const familyLink = e.target.closest('.vendor-family-link');
+    if (familyLink) {
+      e.preventDefault();
+      closeVendorViewer();
+      goToItemSearch(familyLink.dataset.family);
     }
   });
 
@@ -5158,18 +5210,20 @@ async function renderVendorsTrainersPage(container) {
 
   // A vendor whose sells list includes any "Scroll: <name>" ability/spell
   // scroll (e.g. An Archer Instructor) is a spell vendor, shown in its own
-  // section instead of mixed in with general-goods vendors.
+  // section instead of mixed in with general-goods vendors. Family entries
+  // (see groupVendorSells) are never scrolls, so only test plain strings.
   function vendorIsSpellVendor(v) {
-    return (v.sells || []).some(s => /^Scroll:/i.test(s));
+    return (v.sells || []).some(s => typeof s === 'string' && /^Scroll:/i.test(s));
   }
 
   function renderVendorCard(v) {
+    const count = vendorSellCount(v);
     return `
       <div class="vt-vendor-card">
         <a href="#" class="vt-vendor-link" data-slug="${escapeAttr(v.slug)}">${escapeAttr(v.name)}</a>
         <span class="vt-location">${escapeAttr(v.location)}${v.area ? ' &middot; ' + escapeAttr(v.area) : ''}</span>
         ${v.description ? `<span class="vt-vendor-description">${escapeAttr(v.description)}</span>` : ''}
-        <span class="vt-count">${(v.sells || []).length} item${(v.sells || []).length === 1 ? '' : 's'}</span>
+        <span class="vt-count">${count} item${count === 1 ? '' : 's'}</span>
       </div>
     `;
   }
@@ -5197,7 +5251,7 @@ async function renderVendorsTrainersPage(container) {
         v.name.toLowerCase().includes(query) ||
         v.location.toLowerCase().includes(query) ||
         (v.area || '').toLowerCase().includes(query) ||
-        (v.sells || []).some(s => s.toLowerCase().includes(query))
+        (v.sells || []).some(s => (typeof s === 'string' ? s : (s.label || s.family)).toLowerCase().includes(query))
       )
       .sort((a, b) => a.name.localeCompare(b.name));
     const vendors = allVendors.filter(v => !vendorIsSpellVendor(v));
