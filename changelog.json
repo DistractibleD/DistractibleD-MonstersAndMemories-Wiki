@@ -1,5 +1,4 @@
 [
-  { "timestamp": "2026-08-14T10:41", "summary": "Fixed a duplicate crafting recipe entry for Enchant Necklace: Lesser Intelligence" },
   { "timestamp": "2026-08-14T09:38", "summary": "Updated Alchemy and Fletching skill-ups from the crafting window; renamed sidebar's Recently Updated box to Recently Updated Items" },
   { "timestamp": "2026-08-13T23:29", "summary": "Added Toma the Two-Faced picture/drops/faction info, new sand giant scout, and a smuggler's Shaded Dunes faction data" },
   { "timestamp": "2026-08-13T23:26", "summary": "Removed the splash screen (was causing a visible flash on load)" },

@@ -8247,7 +8247,6 @@
   {
     "name": "Enchant Necklace: Lesser Intelligence",
     "slug": "enchant-necklace-lesser-intelligence",
-    "lastUpdated": "2026-07-27",
     "image": "images/crafting/enchant-necklace-lesser-intelligence.jpg",
     "tradeskill": "Enchanting",
     "enchantSlot": "Necklace",
@@ -9164,6 +9163,20 @@
     "tradeskill": "Alchemy",
     "difficultyColor": "Red",
     "observedAtSkill": 92
+  },
+  {
+    "name": "Enchant Necklace: Lesser Intelligence",
+    "slug": "enchant-necklace-lesser-intelligence",
+    "lastUpdated": "2026-07-27",
+    "image": "images/crafting/enchant-necklace-lesser-intelligence.jpg",
+    "tradeskill": "Enchanting",
+    "enchantSlot": "Necklace",
+    "craftType": "Scroll",
+    "difficultyColor": "Red",
+    "effect": "Enchant Necklace: Lesser Intelligence +2 INT (On Click. Any Slot. Cast Time: 5s, Level: 1)",
+    "weight": 0.0,
+    "size": "Small",
+    "components": [{ "item": "Magic Powder", "quantity": 6 }]
   },
   {
     "name": "Enchanted Leather",
