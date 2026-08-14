@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-14T14:50", "summary": "Added Night Harbor's North Gate vendors and trainers (A Smelter, A Rider, A Stablemaster, Rider Kalil, Smelter Harris)" },
   { "timestamp": "2026-08-14T14:39", "summary": "Split spell/ability scroll sellers into their own Spell Vendors section, and stopped showing an inaccurate skill cap number on trainer cards" },
   { "timestamp": "2026-08-14T13:10", "summary": "Added a Zone filter to the Vendors & Trainers page" },
   { "timestamp": "2026-08-14T13:00", "summary": "Added Stygian Moss and Silver Ore items; fixed Rich Tin Vein and Rich Silver Vein to list the same gem/material drops as their normal counterparts" },

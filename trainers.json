@@ -39,5 +39,25 @@
       { "skill": "Tracking", "observedAtSkill": 124, "cap": 155, "cost": { "platinum": 0, "gold": 7, "silver": 18, "copper": 75 } }
     ],
     "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Rider Kalil",
+    "slug": "rider-kalil",
+    "location": "Night Harbor",
+    "area": "North Gate",
+    "trains": [
+      { "skill": "Riding", "observedAtSkill": 0, "cap": 30, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 4 } }
+    ],
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Smelter Harris",
+    "slug": "smelter-harris",
+    "location": "Night Harbor",
+    "area": "North Gate",
+    "trains": [
+      { "skill": "Smelting", "observedAtSkill": 25, "cap": 300, "cost": { "platinum": 0, "gold": 0, "silver": 31, "copper": 9 } }
+    ],
+    "lastUpdated": "2026-08-14"
   }
 ]

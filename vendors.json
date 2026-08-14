@@ -107,5 +107,37 @@
       "Tender Beetle Legs", "Tomato", "Wasp Wing", "Water Flask", "Wolf Tooth"
     ],
     "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "A Smelter",
+    "slug": "a-smelter",
+    "location": "Night Harbor",
+    "area": "North Gate",
+    "sells": [
+      "Antique Billon Coin", "Crude Ingot Mold", "Hardened Ingot Mold",
+      "Masterwork Ingot Mold", "Sturdy Ingot Mold", "Tempered Ingot Mold"
+    ],
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "A Rider",
+    "slug": "a-rider",
+    "location": "Night Harbor",
+    "area": "North Gate",
+    "sells": ["Basic Pack Rigging"],
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "A Stablemaster",
+    "slug": "a-stablemaster",
+    "location": "Night Harbor",
+    "area": "North Gate",
+    "sells": [
+      "a black donkey", "a brown donkey", "a brown light horse", "a brown pony",
+      "a brown stock horse", "a gray donkey", "a gray light horse", "a gray pony",
+      "a gray stock horse", "a spotted light horse", "a spotted pony",
+      "a spotted stock horse", "a white light horse", "a white pony", "a white stock horse"
+    ],
+    "lastUpdated": "2026-08-14"
   }
 ]

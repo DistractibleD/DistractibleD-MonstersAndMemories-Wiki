@@ -21660,5 +21660,54 @@
     "weight": 0.25,
     "size": "Small",
     "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Basic Pack Rigging",
+    "slug": "basic-pack-rigging",
+    "type": "Misc",
+    "tags": [],
+    "slot": "Rigging",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Crude Ingot Mold",
+    "slug": "crude-ingot-mold",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Hardened Ingot Mold",
+    "slug": "hardened-ingot-mold",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Masterwork Ingot Mold",
+    "slug": "masterwork-ingot-mold",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Sturdy Ingot Mold",
+    "slug": "sturdy-ingot-mold",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Tempered Ingot Mold",
+    "slug": "tempered-ingot-mold",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
   }
 ]
