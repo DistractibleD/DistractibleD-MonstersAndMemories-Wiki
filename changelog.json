@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-14T10:34", "summary": "Added Survivalist Jabool to Vendors & Trainers" },
   { "timestamp": "2026-08-14T10:30", "summary": "Added a new Vendors & Trainers page, plus new Night Harbor vendors and trainers" },
   { "timestamp": "2026-08-14T10:09", "summary": "Temporarily hid the Companions section" },
   { "timestamp": "2026-08-14T09:58", "summary": "Split item cards' Vendors info into its own section, with clickable vendor names showing everything they sell" },

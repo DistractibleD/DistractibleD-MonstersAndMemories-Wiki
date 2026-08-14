@@ -1,5 +1,15 @@
 [
   {
+    "name": "Survivalist Jabool",
+    "slug": "survivalist-jabool",
+    "location": "Night Harbor",
+    "area": "By the North gate",
+    "trains": [
+      { "skill": "Survival", "observedAtSkill": 3, "cap": 155, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 73 } }
+    ],
+    "lastUpdated": "2026-08-14"
+  },
+  {
     "name": "Fletcher Razma",
     "slug": "fletcher-razma",
     "location": "Night Harbor",
