@@ -528,7 +528,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 110,
     "trivialSkill": 160,
-    "results": ["Dragon's Vigil"],
+    "results": ["Dragon's Vigil", "Arcane Frond"],
     "locations": ["Evershade Weald", "Keeper's Bight"]
   },
   {
@@ -538,7 +538,7 @@
     "tradeskill": "Herbalism",
     "minSkill": 125,
     "trivialSkill": 175,
-    "results": ["Stygian Moss"],
+    "results": ["Stygian Moss", "Arcane Frond"],
     "locations": ["Sungreet Strand", "Fallen Pass"],
     "note": "In the dwarven caves for Sungreet Strand, in the undead caves for Fallen Pass."
   },

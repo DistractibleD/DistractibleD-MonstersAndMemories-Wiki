@@ -8519,13 +8519,17 @@
   {
     "name": "a Muggrah scrapper",
     "slug": "a-muggrah-scrapper",
+    "maps": ["Sungreet Strand"],
     "factionEffects": [
       { "faction": "Citizens of Night Harbor", "effect": "positive" },
       { "faction": "Muggrah Goblins", "effect": "negative" },
       { "faction": "Pyrmos Mercenaries", "effect": "positive" }
     ],
+    "coinDrops": [
+      { "silver": 1, "copper": 20 }
+    ],
     "needsInfo": true,
-    "lastUpdated": "2026-08-11"
+    "lastUpdated": "2026-08-14"
   },
   {
     "name": "a Muggrah shaman",

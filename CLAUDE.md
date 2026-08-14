@@ -447,8 +447,9 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   **Current confirmed state**: Magic Frond — Lionleaf (1), Ghost Poppy (1), Selstie Kelp (1),
   Sylvine (1), Nomad's Grace (10), Whispering Sage (15). Enchanted Frond — Ironroot (30,
   confirmed 2026-08-10) and Gadolvine (80) bracket Moonveil (35) and Stranglevine (55),
-  backfilled 2026-08-11 once both endpoints existed. Arcane Frond — Duneleaf (90) only, no
-  second endpoint yet so nothing to bracket.
+  backfilled 2026-08-11 once both endpoints existed. Arcane Frond — Duneleaf (90) and Stygian
+  Moss (125, confirmed 2026-08-14) bracket Dragon's Vigil (110), backfilled 2026-08-14 once
+  both endpoints existed.
   **Tier supersession still applies as before**: the instant a node is confirmed yielding a
   higher tier, remove the lower tier from every node with `minSkill` >= that node's own
   `minSkill` (nothing has hit this case yet). No evidence yet of a 4th tier beyond Arcane —
