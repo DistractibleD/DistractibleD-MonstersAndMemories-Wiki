@@ -447,7 +447,7 @@ function buildSidebar(pages) {
   recentWrapper.id = 'sidebar-recent-wrapper';
   recentWrapper.style.display = 'none';
   recentWrapper.innerHTML = `
-    <div class="sidebar-visits-title">Recently Updated</div>
+    <div class="sidebar-visits-title">Recently Updated Items</div>
     <div class="sidebar-group" id="sidebar-recent-list"></div>
   `;
   sidebar.appendChild(recentWrapper);

@@ -996,11 +996,11 @@
   {
     "name": "Recurve Bow",
     "slug": "recurve-bow",
-    "lastUpdated": "2026-08-11",
+    "lastUpdated": "2026-08-13",
     "tradeskill": "Fletching",
     "listOrder": 15,
     "difficultyColor": "Green",
-    "observedAtSkill": 75,
+    "observedAtSkill": 83,
     "weight": 3.0,
     "size": "Medium",
     "components": [{ "item": "Wood Board", "quantity": 9 }, { "item": "Bolt of Cloth", "quantity": 1 }]
@@ -1019,44 +1019,46 @@
   {
     "name": "Ironhead Arrow x100",
     "slug": "ironhead-arrow-x100",
-    "lastUpdated": "2026-08-11",
+    "lastUpdated": "2026-08-13",
     "tradeskill": "Fletching",
-    "difficultyColor": "Orange",
-    "observedAtSkill": 75,
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 83,
     "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Iron Scraps", "quantity": 1 }],
     "recipeSkillLevel": 100
   },
   {
     "name": "Ironhead Arrow x500",
     "slug": "ironhead-arrow-x500",
-    "lastUpdated": "2026-08-11",
+    "lastUpdated": "2026-08-13",
     "tradeskill": "Fletching",
-    "difficultyColor": "Orange",
-    "observedAtSkill": 75,
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 83,
     "components": [{ "item": "Wood", "quantity": 5 }, { "item": "Iron Scraps", "quantity": 5 }],
     "recipeSkillLevel": 100
   },
   {
     "name": "Ironhead Arrow x1000",
     "slug": "ironhead-arrow-x1000",
-    "lastUpdated": "2026-08-11",
+    "lastUpdated": "2026-08-13",
     "tradeskill": "Fletching",
-    "difficultyColor": "Orange",
-    "observedAtSkill": 75
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 83
   },
   {
     "name": "Fine Wood Longbow",
     "slug": "fine-wood-longbow",
-    "lastUpdated": "2026-08-11",
+    "lastUpdated": "2026-08-13",
     "tradeskill": "Fletching",
     "difficultyColor": "Red",
-    "observedAtSkill": 75
+    "observedAtSkill": 83
   },
   {
     "name": "Steelhead Arrow x100",
     "slug": "steelhead-arrow-x100",
-    "lastUpdated": "2026-07-20",
+    "lastUpdated": "2026-08-13",
     "tradeskill": "Fletching",
+    "difficultyColor": "Red",
+    "observedAtSkill": 83,
     "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Steel Scraps", "quantity": 1 }],
     "recipeSkillLevel": 125
   },
@@ -1071,10 +1073,10 @@
   {
     "name": "Fine Wood Bow",
     "slug": "fine-wood-bow",
-    "lastUpdated": "2026-08-11",
+    "lastUpdated": "2026-08-13",
     "tradeskill": "Fletching",
-    "difficultyColor": "White",
-    "observedAtSkill": 75,
+    "difficultyColor": "Dark Blue",
+    "observedAtSkill": 83,
     "weight": 4.0,
     "size": "Medium",
     "components": [{ "item": "Fine Wood Board", "quantity": 5 }, { "item": "Bolt of Wool", "quantity": 1 }]
@@ -1082,10 +1084,10 @@
   {
     "name": "Fine Wood Buckler",
     "slug": "fine-wood-buckler",
-    "lastUpdated": "2026-08-11",
+    "lastUpdated": "2026-08-13",
     "tradeskill": "Fletching",
-    "difficultyColor": "White",
-    "observedAtSkill": 75,
+    "difficultyColor": "Dark Blue",
+    "observedAtSkill": 83,
     "components": [{ "item": "Fine Wood Board", "quantity": 5 }, { "item": "Bronze Bar", "quantity": 1 }, { "item": "Hide Strap", "quantity": 1 }]
   },
   {
@@ -7129,8 +7131,9 @@
       { "item": "Moonveil Powder", "quantity": 2 },
       { "item": "Annealed Vial", "quantity": 1 }
     ],
-    "difficultyColor": "Red",
-    "observedAtSkill": 50
+    "difficultyColor": "Green",
+    "observedAtSkill": 90,
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Lesser Serum of Charisma",
@@ -7148,8 +7151,9 @@
       { "item": "Annealed Vial", "quantity": 1 }
     ],
     "recipeSkillLevel": 90,
-    "difficultyColor": "Red",
-    "observedAtSkill": 50
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 90,
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Lesser Serum of Strength",
@@ -7167,13 +7171,14 @@
       { "item": "Annealed Vial", "quantity": 1 }
     ],
     "recipeSkillLevel": 90,
-    "difficultyColor": "Red",
-    "observedAtSkill": 50
+    "difficultyColor": "Green",
+    "observedAtSkill": 95,
+    "lastUpdated": "2026-08-13"
   },
   {
     "name": "Lesser Tincture of Wrath",
     "slug": "lesser-tincture-of-wrath",
-    "lastUpdated": "2026-07-18",
+    "lastUpdated": "2026-08-13",
     "tradeskill": "Alchemy",
     "station": "Cauldron",
     "image": "images/crafting/lesser-tincture-of-wrath.jpg",
@@ -7187,14 +7192,15 @@
       { "item": "Annealed Vial", "quantity": 1 }
     ],
     "recipeSkillLevel": 105,
-    "difficultyColor": "Red"
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 95
   },
   {
     "name": "Lesser Serum of Intelligence",
     "slug": "lesser-serum-of-intelligence",
-    "lastUpdated": "2026-07-27",
-    "difficultyColor": "Red",
-    "observedAtSkill": 61,
+    "lastUpdated": "2026-08-13",
+    "difficultyColor": "Dark Blue",
+    "observedAtSkill": 95,
     "tradeskill": "Alchemy",
     "station": "Cauldron",
     "description": "Focus yourself, increasing your Intelligence by 10 for 1 hour.",
@@ -7208,9 +7214,9 @@
   {
     "name": "Lesser Serum of Stamina",
     "slug": "lesser-serum-of-stamina",
-    "lastUpdated": "2026-07-27",
-    "difficultyColor": "Red",
-    "observedAtSkill": 61,
+    "lastUpdated": "2026-08-13",
+    "difficultyColor": "White",
+    "observedAtSkill": 95,
     "tradeskill": "Alchemy",
     "station": "Cauldron",
     "description": "Harden yourself, increasing your Stamina by 10 for 1 hour.",
@@ -7241,9 +7247,9 @@
   {
     "name": "Potion of Tranquility",
     "slug": "potion-of-tranquility",
-    "lastUpdated": "2026-07-28",
+    "lastUpdated": "2026-08-13",
     "difficultyColor": "Red",
-    "observedAtSkill": 92,
+    "observedAtSkill": 95,
     "tradeskill": "Alchemy",
     "station": "Cauldron",
     "description": "Sooth your mind, increasing your Mana Regeneration by 2 for 20 minutes.",
@@ -7259,9 +7265,9 @@
   {
     "name": "Lesser Stoneskin Tincture",
     "slug": "lesser-stoneskin-tincture",
-    "lastUpdated": "2026-07-27",
+    "lastUpdated": "2026-08-13",
     "difficultyColor": "Red",
-    "observedAtSkill": 92,
+    "observedAtSkill": 95,
     "tradeskill": "Alchemy",
     "station": "Cauldron",
     "description": "Harden your skin, reducing all damage received by 15%, and decreasing your movement speed by 50% for 20 seconds.",
@@ -7277,9 +7283,9 @@
   {
     "name": "Serum of Dexterity",
     "slug": "serum-of-dexterity",
-    "lastUpdated": "2026-07-27",
+    "lastUpdated": "2026-08-13",
     "difficultyColor": "Red",
-    "observedAtSkill": 92,
+    "observedAtSkill": 95,
     "tradeskill": "Alchemy",
     "station": "Cauldron",
     "description": "Balance yourself, increasing your Dexterity by 15 for 1 hour.",
@@ -7295,8 +7301,9 @@
   {
     "name": "Serum of Wisdom",
     "slug": "serum-of-wisdom",
-    "lastUpdated": "2026-07-27",
+    "lastUpdated": "2026-08-13",
     "difficultyColor": "Red",
+    "observedAtSkill": 95,
     "tradeskill": "Alchemy",
     "station": "Cauldron",
     "description": "Center yourself, increasing your Wisdom by 15 for 1 hour.",
