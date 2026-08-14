@@ -5142,6 +5142,9 @@ async function renderVendorsTrainersPage(container) {
     </div>
     <h2>Vendors</h2>
     <div class="vt-vendor-grid" id="vt-vendor-grid"></div>
+    <h2>Spell Vendors</h2>
+    <p>Sell spell/ability scrolls rather than general goods.</p>
+    <div class="vt-vendor-grid" id="vt-spell-vendor-grid"></div>
     <h2>Trainers</h2>
     <div class="vt-trainer-list" id="vt-trainer-list"></div>
   `;
@@ -5149,7 +5152,15 @@ async function renderVendorsTrainersPage(container) {
   const searchBox = container.querySelector('#vt-search');
   const zoneFilter = container.querySelector('#vt-filter-zone');
   const vendorGrid = container.querySelector('#vt-vendor-grid');
+  const spellVendorGrid = container.querySelector('#vt-spell-vendor-grid');
   const trainerList = container.querySelector('#vt-trainer-list');
+
+  // A vendor whose sells list includes any "Scroll: <name>" ability/spell
+  // scroll (e.g. An Archer Instructor) is a spell vendor, shown in its own
+  // section instead of mixed in with general-goods vendors.
+  function vendorIsSpellVendor(v) {
+    return (v.sells || []).some(s => /^Scroll:/i.test(s));
+  }
 
   function renderVendorCard(v) {
     return `
@@ -5163,7 +5174,7 @@ async function renderVendorsTrainersPage(container) {
 
   function renderTrainerCard(t) {
     const skillTags = (t.trains || [])
-      .map(s => `<span class="trainer-skill-tag">${escapeAttr(s.skill)}${s.cap != null ? ` (${s.cap})` : ''}</span>`)
+      .map(s => `<span class="trainer-skill-tag">${escapeAttr(s.skill)}</span>`)
       .join('');
     return `
       <div class="vt-trainer-card">
@@ -5177,7 +5188,7 @@ async function renderVendorsTrainersPage(container) {
   function update() {
     const query = searchBox.value.toLowerCase().trim();
     const zone = zoneFilter.value;
-    const vendors = (vendorsData || [])
+    const allVendors = (vendorsData || [])
       .filter(v => !zone || v.location === zone)
       .filter(v =>
         !query ||
@@ -5187,6 +5198,8 @@ async function renderVendorsTrainersPage(container) {
         (v.sells || []).some(s => s.toLowerCase().includes(query))
       )
       .sort((a, b) => a.name.localeCompare(b.name));
+    const vendors = allVendors.filter(v => !vendorIsSpellVendor(v));
+    const spellVendors = allVendors.filter(v => vendorIsSpellVendor(v));
     const trainers = (trainersData || [])
       .filter(t => !zone || t.location === zone)
       .filter(t =>
@@ -5198,6 +5211,7 @@ async function renderVendorsTrainersPage(container) {
       )
       .sort((a, b) => a.name.localeCompare(b.name));
     vendorGrid.innerHTML = vendors.length ? vendors.map(renderVendorCard).join('') : '<p class="items-empty">No vendors found.</p>';
+    spellVendorGrid.innerHTML = spellVendors.length ? spellVendors.map(renderVendorCard).join('') : '<p class="items-empty">No spell vendors found.</p>';
     trainerList.innerHTML = trainers.length ? trainers.map(renderTrainerCard).join('') : '<p class="items-empty">No trainers found.</p>';
   }
 

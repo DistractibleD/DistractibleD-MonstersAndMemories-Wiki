@@ -1258,24 +1258,38 @@ Own top-level page (`pages.json` `"type": "vendorstrainers"`, `renderVendorsTrai
 `script.js`, right after Item Database in the sidebar) — added 2026-08-14 at the user's own
 request: "makes it easier for our users to find the items and trainers they are looking
 for." One shared search box filters both sections at once by name, location, area, item
-sold, or skill taught — no separate search per section.
+sold, or skill taught. A **Zone** dropdown (options built from every vendor's/trainer's own
+`location`, deduped/sorted) narrows all three sections to one city at once — most visitors
+are looking for what's available in their own current zone.
 
 - **Vendors** — same `vendors.json` data the item-card "Vendors" section already uses
   (`ensureVendorsData`). Cards stay compact (name, location/area, item count); clicking the
   name opens the existing Vendor Viewer modal (`openVendorViewer`) for the full sold-item
   list — same modal, same entry point as clicking a vendor from an item card.
+- **Spell Vendors** — a vendor whose `sells` list includes any `"Scroll: <name>"` entry
+  (`vendorIsSpellVendor`, a simple `/^Scroll:/` test) renders in this section instead of
+  the plain Vendors one — confirmed 2026-08-14 via An Archer Instructor, whose sold list is
+  mostly ability/spell scrolls alongside a few Schematics. Same card/modal as a regular
+  vendor, just grouped separately since the shopping intent is different (train a new
+  ability, not gear up). Nothing new stored on the vendor entry itself — purely a render-time
+  split of `vendors.json`, same never-store-a-computed-classification precedent as
+  `estimateRecipeSkill`.
 - **Trainers** — new `trainers.json`, flat array: `name`, `slug`, `location`, optional
   `area` (a more specific in-zone description, e.g. "Garrison, by the West wall"), `trains`
   (array of `{ skill, observedAtSkill, cap, cost: { platinum, gold, silver, copper } }`).
   `observedAtSkill`/`cap` come straight off the trainer window's own "`X / Y`" per-skill
-  line — `cap` might be a fixed fact about the skill itself rather than something specific
-  to that one trainer (unconfirmed either way so far, only one trainer per skill seen to
-  date); record it as shown regardless, a second trainer for the same skill will settle it.
-  `cost` is the PP/GP/SP/CP row shown next to each skill's own Train button. No Trainer
-  Viewer modal yet (unlike vendors) — cards just list every taught skill inline as small
-  pill tags (`.trainer-skill-tag`, showing `Skill (cap)`), since the skill counts seen so
-  far (1-12) are short enough not to need one. `ensureTrainersData()` follows the exact same
-  cache-on-first-fetch pattern as `ensureVendorsData()`.
+  line. **`cap` is not a fixed fact about the skill** (corrected 2026-08-14, user's own
+  statement — an earlier note here had this unconfirmed either way) — it reflects that one
+  character's own current trainable ceiling, not a value every visitor would see the same
+  way, so it's invalid to present as general info. Still recorded in the JSON (harmless raw
+  data, may clarify once more trainers/characters are seen), but **not rendered** — trainer
+  cards list each taught skill as a bare pill tag (`.trainer-skill-tag`, just the skill name,
+  no number) instead of the old `Skill (cap)` format. Same caution likely extends to crafting
+  recipes gated by player level rather than skill — the user flagged this and plans to send
+  screenshots from a lower-level character later; no data captures this yet. No Trainer
+  Viewer modal (unlike vendors) — the skill counts seen so far (1-12) are short enough not to
+  need one. `ensureTrainersData()` follows the exact same cache-on-first-fetch pattern as
+  `ensureVendorsData()`.
 
 ## Header search box
 
