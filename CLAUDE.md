@@ -1266,6 +1266,27 @@ are looking for what's available in their own current zone.
   (`ensureVendorsData`). Cards stay compact (name, location/area, item count); clicking the
   name opens the existing Vendor Viewer modal (`openVendorViewer`) for the full sold-item
   list — same modal, same entry point as clicking a vendor from an item card.
+  - **Optional `description`** (added 2026-08-14) — free-text flavor line shown under
+    location/area on both the compact card and the modal (`.vendor-card-description`/
+    `.vt-vendor-description`, italic, gold-accent border on the modal). First use: **Greedy
+    Merchants** — a distinct NPC category, confirmed via the user's own screenshots of A
+    Shifty Gnome (Night Harbor, Newbie Yard near the West Gate) plus fan-wiki pages the user
+    brought in themselves (external source used here to fill a gap the user explicitly
+    pointed at, not to override anything): one page listing all four Night Harbor Greedy
+    Merchants (A Shifty Gnome, A Greedy Halfling, A Suspicious Salesman, Clint the Innocent),
+    a second page for A Shady Trader in Faelindral (By a caravan near the stables) — so this
+    is a cross-zone NPC category, not Night-Harbor-specific. Every Greedy Merchant gets the
+    same `description`: "A Greedy Merchant — buys a wider selection of items than a regular
+    vendor, but at reduced prices." A Shifty Gnome (11 scrolled sell-window screenshots) and
+    A Shady Trader (full sell list off its own wiki page) have real `sells` lists; the three
+    Night Harbor stubs (Greedy Halfling/Suspicious Salesman/Clint) are `needsInfo: true` with
+    `sells: []` and no screenshot yet — same wiki-name-with-no-screenshot-yet precedent as
+    the Faction page's bulk monster import.
+  - **Not yet built: a per-vendor "what this vendor buys from you" note** — the user's
+    stated intent, but explicitly undecided on shape ("not sure how we will implement this
+    yet as some vendors don't really buy much, and names can be inconsistent"). Don't
+    invent a schema for this until the user settles on one; `description` above is a
+    separate, already-decided field and isn't a placeholder for it.
 - **Spell Vendors** — a vendor whose `sells` list includes any `"Scroll: <name>"` entry
   (`vendorIsSpellVendor`, a simple `/^Scroll:/` test) renders in this section instead of
   the plain Vendors one — confirmed 2026-08-14 via An Archer Instructor, whose sold list is

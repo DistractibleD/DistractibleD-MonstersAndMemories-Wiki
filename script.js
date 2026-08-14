@@ -5045,7 +5045,8 @@ function renderVendorCardHTML(vendor) {
   return `
     <div class="vendor-card">
       <h2 class="vendor-card-name">${escapeAttr(vendor.name)}</h2>
-      <p class="vendor-card-location">${escapeAttr(vendor.location)}</p>
+      <p class="vendor-card-location">${escapeAttr(vendor.location)}${vendor.area ? ' &middot; ' + escapeAttr(vendor.area) : ''}</p>
+      ${vendor.description ? `<p class="vendor-card-description">${escapeAttr(vendor.description)}</p>` : ''}
       <ul class="vendor-card-item-list">
         ${items || '<li class="item-card-muted">Nothing recorded yet.</li>'}
       </ul>
@@ -5167,7 +5168,8 @@ async function renderVendorsTrainersPage(container) {
       <div class="vt-vendor-card">
         <a href="#" class="vt-vendor-link" data-slug="${escapeAttr(v.slug)}">${escapeAttr(v.name)}</a>
         <span class="vt-location">${escapeAttr(v.location)}${v.area ? ' &middot; ' + escapeAttr(v.area) : ''}</span>
-        <span class="vt-count">${v.sells.length} item${v.sells.length === 1 ? '' : 's'}</span>
+        ${v.description ? `<span class="vt-vendor-description">${escapeAttr(v.description)}</span>` : ''}
+        <span class="vt-count">${(v.sells || []).length} item${(v.sells || []).length === 1 ? '' : 's'}</span>
       </div>
     `;
   }

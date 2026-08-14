@@ -1750,7 +1750,17 @@ body {
 .vendor-card-location {
   color: var(--text-dim);
   font-size: 0.88rem;
+  margin: 0 0 8px;
+}
+.vendor-card-description {
   margin: 0 0 16px;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  font-style: italic;
 }
 .vendor-card-item-list {
   list-style: none;
@@ -2178,6 +2188,11 @@ body {
 .vt-location {
   color: var(--text-dim);
   font-size: 0.82rem;
+}
+.vt-vendor-description {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  font-style: italic;
 }
 .vt-count {
   color: var(--text-dim);

@@ -21709,5 +21709,206 @@
     "tags": [],
     "needsInfo": true,
     "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Ashira Medicinal Herbs",
+    "slug": "ashira-medicinal-herbs",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Blister Beetle Gland",
+    "slug": "blister-beetle-gland",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Brittle Dressing Stone",
+    "slug": "brittle-dressing-stone",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Candle",
+    "slug": "candle",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Charcoal",
+    "slug": "charcoal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Crocodile Hide",
+    "slug": "crocodile-hide",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Crypt Scarab Carapace",
+    "slug": "crypt-scarab-carapace",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Dirty Sea Sponge",
+    "slug": "dirty-sea-sponge",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Diseased Bat Blood",
+    "slug": "diseased-bat-blood",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Diseased Rat Blood",
+    "slug": "diseased-rat-blood",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Diseased Snake Blood",
+    "slug": "diseased-snake-blood",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Dispel Stone",
+    "slug": "dispel-stone",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Fire Beetle Carapace",
+    "slug": "fire-beetle-carapace",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Lantern",
+    "slug": "lantern",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Lantern Fuel",
+    "slug": "lantern-fuel",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Lock Pick",
+    "slug": "lock-pick",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Parchment",
+    "slug": "parchment",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Pungent Healing Herbs",
+    "slug": "pungent-healing-herbs",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Rattlesnake Skin",
+    "slug": "rattlesnake-skin",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Snake Skin",
+    "slug": "snake-skin",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Spirit World Ch. 5",
+    "slug": "spirit-world-ch-5",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Unusual Jackal Pelt",
+    "slug": "unusual-jackal-pelt",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Wasp Worker Wax",
+    "slug": "wasp-worker-wax",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Backpack",
+    "slug": "backpack",
+    "type": "Container",
+    "slot": "Backpack",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Cracked Amphora",
+    "slug": "cracked-amphora",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
   }
 ]

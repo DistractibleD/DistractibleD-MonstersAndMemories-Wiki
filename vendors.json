@@ -139,5 +139,75 @@
       "a spotted stock horse", "a white light horse", "a white pony", "a white stock horse"
     ],
     "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "A Shifty Gnome",
+    "slug": "a-shifty-gnome",
+    "location": "Night Harbor",
+    "area": "Newbie Yard near the West Gate, by a campfire",
+    "description": "A Greedy Merchant — buys a wider selection of items than a regular vendor, but at reduced prices.",
+    "sells": [
+      "Antique Ceramic Fragment", "Apoptosis Journal Page", "Ashira Medicinal Herbs",
+      "Ashira Tail", "Ashira Warrior Pelt", "Bat Fur", "Bat Tooth", "Bat Wing", "Bell Pepper",
+      "Blister Beetle Gland", "Bone Chips", "Brittle Dressing Stone", "Brittle Stone",
+      "Broken Grain Beetle Legs", "Cabbage", "Candle", "Charcoal", "Cooked Ashira Meat",
+      "Cooked Bat Meat", "Cooked Jackal Meat", "Cooked Snake Meat",
+      "Corroded Bronze Chain Gambeson", "Corroded Bronze Maul", "Corroded Bronze War Lance",
+      "Crocodile Hide", "Crocodile Tooth", "Crude Handmade Torch", "Crypt Scarab Carapace",
+      "Crypt Scarab Leg", "Dirty Sea Sponge", "Diseased Bat Blood", "Diseased Rat Blood",
+      "Diseased Snake Blood", "Dispel Stone", "Eth-ur Arboreal Journal Page",
+      "Fire Beetle Carapace", "Fire Beetle Gland", "Jackal Tooth", "Lantern", "Lantern Fuel",
+      "Lock Pick", "Lumberjack Axe", "Malleable Bone Ornamented Coffin", "Multhele Root",
+      "Parchment", "Pungent Healing Herbs", "Rat Ear", "Ration", "Rattlesnake Skin",
+      "Raw Beetle Meat", "Raw Snake Meat", "Rusty Dagger", "Rusty Scimitar", "Rusty Scythe",
+      "Scarab Leg", "Scorched Skeletal Remains", "Shattered Skeleton Femur",
+      "Skeleton Jawbone", "Snake Egg", "Snake Fang", "Snake Skin", "Spider Legs",
+      "Spider Silk", "Spirit World Ch. 1", "Spirit World Ch. 5", "Tattered Cloth Gorget",
+      "Tattered Hide Mask", "Torch", "Unusual Jackal Pelt", "Volatile Rift Potion",
+      "Wasp Worker Wax", "Water Flask", "Wisp Dust", "Wolf Blood", "Worn Fine Wood Great Staff"
+    ],
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "A Greedy Halfling",
+    "slug": "a-greedy-halfling",
+    "location": "Night Harbor",
+    "area": "Tucked away in a ruined building within the Sojourner's Camp",
+    "description": "A Greedy Merchant — buys a wider selection of items than a regular vendor, but at reduced prices.",
+    "sells": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "A Suspicious Salesman",
+    "slug": "a-suspicious-salesman",
+    "location": "Night Harbor",
+    "area": "Just inside the North Gate, to the west, tucked in an alley",
+    "description": "A Greedy Merchant — buys a wider selection of items than a regular vendor, but at reduced prices.",
+    "sells": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Clint the Innocent",
+    "slug": "clint-the-innocent",
+    "location": "Night Harbor",
+    "area": "Just outside the North Gate, to the east",
+    "description": "A Greedy Merchant — buys a wider selection of items than a regular vendor, but at reduced prices.",
+    "sells": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "A Shady Trader",
+    "slug": "a-shady-trader",
+    "location": "Faelindral",
+    "area": "By a caravan near the stables",
+    "description": "A Greedy Merchant — buys a wider selection of items than a regular vendor, but at reduced prices.",
+    "sells": [
+      "Backpack", "Cracked Amphora", "Dispel Stone", "Malleable Bone Ornamented Coffin",
+      "Unguent of Revealing", "Volatile Rift Potion"
+    ],
+    "lastUpdated": "2026-08-14"
   }
 ]
