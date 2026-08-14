@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-14T13:10", "summary": "Added a Zone filter to the Vendors & Trainers page" },
   { "timestamp": "2026-08-14T13:00", "summary": "Added Stygian Moss and Silver Ore items; fixed Rich Tin Vein and Rich Silver Vein to list the same gem/material drops as their normal counterparts" },
   { "timestamp": "2026-08-14T12:02", "summary": "Added Muggrah scrapper zone/coin data and Arcane Frond herb info for Dragon's Vigil and Stygian Moss" },
   { "timestamp": "2026-08-14T11:20", "summary": "Added a Rich Limestone Deposit picture, an ashira lookout's zone/picture, and a clearer jackal pup picture" },

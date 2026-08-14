@@ -5124,11 +5124,20 @@ async function renderVendorsTrainersPage(container) {
   await ensureVendorsData();
   await ensureTrainersData();
 
+  const zones = [...new Set([
+    ...(vendorsData || []).map(v => v.location),
+    ...(trainersData || []).map(t => t.location),
+  ].filter(Boolean))].sort();
+
   container.innerHTML = `
     <h1>Vendors &amp; Trainers</h1>
     <p>Find where to buy an item or train a skill.</p>
     <div class="items-toolbar">
       <input type="search" id="vt-search" class="items-search" placeholder="Search vendor, trainer, item, or skill..." autocomplete="off">
+      <select id="vt-filter-zone" class="items-select">
+        <option value="">All Zones</option>
+        ${zones.map(z => `<option value="${escapeAttr(z)}">${escapeAttr(z)}</option>`).join('')}
+      </select>
       <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="vt-search">Clear</button>
     </div>
     <h2>Vendors</h2>
@@ -5138,6 +5147,7 @@ async function renderVendorsTrainersPage(container) {
   `;
 
   const searchBox = container.querySelector('#vt-search');
+  const zoneFilter = container.querySelector('#vt-filter-zone');
   const vendorGrid = container.querySelector('#vt-vendor-grid');
   const trainerList = container.querySelector('#vt-trainer-list');
 
@@ -5166,7 +5176,9 @@ async function renderVendorsTrainersPage(container) {
 
   function update() {
     const query = searchBox.value.toLowerCase().trim();
+    const zone = zoneFilter.value;
     const vendors = (vendorsData || [])
+      .filter(v => !zone || v.location === zone)
       .filter(v =>
         !query ||
         v.name.toLowerCase().includes(query) ||
@@ -5176,6 +5188,7 @@ async function renderVendorsTrainersPage(container) {
       )
       .sort((a, b) => a.name.localeCompare(b.name));
     const trainers = (trainersData || [])
+      .filter(t => !zone || t.location === zone)
       .filter(t =>
         !query ||
         t.name.toLowerCase().includes(query) ||
@@ -5189,6 +5202,7 @@ async function renderVendorsTrainersPage(container) {
   }
 
   searchBox.addEventListener('input', update);
+  zoneFilter.addEventListener('change', update);
   container.addEventListener('click', e => {
     const link = e.target.closest('.vt-vendor-link');
     if (link) {
