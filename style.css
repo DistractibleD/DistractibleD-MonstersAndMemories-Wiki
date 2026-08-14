@@ -2146,6 +2146,74 @@ body {
   gap: 14px;
   margin-top: 12px;
 }
+/* Vendors & Trainers page (2026-08-14) — vendor cards stay compact (name,
+   location, item count) since the full sold-item list opens in the
+   existing Vendor Viewer modal on click; trainer cards list every taught
+   skill inline as small pill tags instead, since there's no equivalent
+   modal for trainers yet and the skill counts seen so far are short enough
+   to just show directly. */
+.vt-vendor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 12px 0 28px;
+}
+.vt-vendor-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.vt-vendor-card a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.vt-vendor-card a:hover {
+  text-decoration: underline;
+}
+.vt-location {
+  color: var(--text-dim);
+  font-size: 0.82rem;
+}
+.vt-count {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+}
+.vt-trainer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 12px 0 20px;
+}
+.vt-trainer-card {
+  padding: 12px 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.vt-trainer-name {
+  font-weight: 600;
+  color: var(--text);
+}
+.vt-trainer-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.trainer-skill-tag {
+  display: inline-block;
+  background: var(--bg-panel-hover);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
 /* Reuses .gem-reference's box styling for the "shared by every companion"
    callout, but in the gold item accent rather than gem-reference's teal
    crafting accent, since companion cards use the plain gold .item-card

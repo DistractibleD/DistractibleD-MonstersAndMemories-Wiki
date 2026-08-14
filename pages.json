@@ -3,6 +3,7 @@
   { "title": "New Player Guide", "file": "new-player-guide.md", "category": "New Player Guide" },
   { "title": "Useful Links", "file": "useful-links.md", "category": "Useful Links" },
   { "title": "Item Database", "file": "items", "category": "Items", "type": "items" },
+  { "title": "Vendors & Trainers", "file": "vendors-trainers", "category": "Vendors & Trainers", "type": "vendorstrainers" },
   { "title": "Maps", "file": "maps", "category": "Maps", "type": "maps" },
   { "title": "Gathering", "file": "gathering", "category": "Gathering", "type": "gathering", "group": "Tradeskilling" },
   { "title": "Crafting", "file": "crafting", "category": "Crafting", "type": "crafting", "group": "Tradeskilling" },

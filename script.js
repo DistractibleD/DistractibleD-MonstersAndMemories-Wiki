@@ -13,6 +13,7 @@ let gatheringData = null; // cached contents of gathering-nodes.json
 let gemstonesData = null; // cached contents of gemstones.json
 let monstersData = null; // cached contents of monsters.json
 let vendorsData = null; // cached contents of vendors.json
+let trainersData = null; // cached contents of trainers.json
 let companionsData = null; // cached contents of companions.json
 let levelingData = null; // cached contents of leveling-locations.json
 let companionSkillsData = null; // cached contents of companion-skills.json
@@ -138,6 +139,15 @@ async function ensureVendorsData() {
     vendorsData = await res.json();
   }
   return vendorsData;
+}
+
+async function ensureTrainersData() {
+  if (!trainersData) {
+    const res = await fetch('trainers.json');
+    if (!res.ok) throw new Error('Could not load trainers.json');
+    trainersData = await res.json();
+  }
+  return trainersData;
 }
 
 async function ensureCompanionsData() {
@@ -687,7 +697,7 @@ async function loadPage(file) {
 
   // Data-driven pages (Item Database, Maps, Crafting, Monsters) use the full
   // content width instead of the narrower reading width used for prose pages.
-  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'gathering' || page.type === 'crafting' || page.type === 'monsters' || page.type === 'companions' || page.type === 'leveling' || page.type === 'spells' || page.type === 'faction')));
+  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'gathering' || page.type === 'crafting' || page.type === 'monsters' || page.type === 'companions' || page.type === 'leveling' || page.type === 'spells' || page.type === 'faction' || page.type === 'vendorstrainers')));
 
   try {
     if (page && page.type === 'items') {
@@ -712,6 +722,8 @@ async function loadPage(file) {
       await renderSubmitPage(contentInner);
     } else if (page && page.type === 'home') {
       await renderHomePage(contentInner);
+    } else if (page && page.type === 'vendorstrainers') {
+      await renderVendorsTrainersPage(contentInner);
     } else {
       const res = await fetch('pages/' + file);
       if (!res.ok) throw new Error('Page not found');
@@ -1496,6 +1508,9 @@ const ICON_DEFS = {
   // standard "this is the landing page" symbol. Door cut via fill-rule
   // evenodd, same technique as firstaid's cross.
   homeicon: `<path fill-rule="evenodd" d="M12 2.5 L21 10.2 L21 21 L3 21 L3 10.2 Z M10.2 14.5 L13.8 14.5 L13.8 21 L10.2 21 Z"/>`,
+  // Vendors & Trainers nav icon (2026-08-14) — a simple tied money bag, the
+  // standard "commerce" symbol.
+  vendoricon: `<path d="M12 2 C10.5 2 9.5 3.3 10 4.8 L8.5 6.5 C4.5 8 2.5 12 2.5 15.5 C2.5 19.5 6.5 22 12 22 C17.5 22 21.5 19.5 21.5 15.5 C21.5 12 19.5 8 15.5 6.5 L14 4.8 C14.5 3.3 13.5 2 12 2 Z"/>`,
 };
 
 // Background circle color per icon key — approximated from the reference
@@ -1536,6 +1551,7 @@ const ICON_BG = {
   spellsicon: '#3a2f5c',
   factionicon: '#5a4a2e',
   homeicon: '#4a5568',
+  vendoricon: '#6a5228',
 };
 
 // Maps a tradeskill name (tradeskills.json) to one of the icons above — used
@@ -1607,6 +1623,7 @@ const NAV_ICON = {
   'new-player-guide.md': 'guideicon',
   'useful-links.md': 'links',
   items: 'itemdb',
+  'vendors-trainers': 'vendoricon',
   maps: 'navigation',
   gathering: 'gatheringicon',
   crafting: 'blacksmithing',
@@ -5089,6 +5106,99 @@ function closeVendorViewer() {
   if (!viewer) return;
   viewer.classList.remove('open');
   document.body.style.overflow = '';
+}
+
+/* ============================================
+   Vendors & Trainers
+   ============================================ */
+// Standalone lookup page (2026-08-14, user's own request) — "makes it
+// easier for our users to find the items and trainers they are looking
+// for." One shared search box filters both sections at once (vendor/
+// trainer name, location, area, item sold, or skill taught). Vendor cards
+// stay compact (name/location/item count) and reuse the existing Vendor
+// Viewer modal for the full sold-item list on click — same click-to-see-more
+// pattern as an item card's own "Vendors" section. Trainer cards show every
+// taught skill inline instead, since there's no equivalent modal yet and
+// the skill counts seen so far (1-12) are short enough to just list.
+async function renderVendorsTrainersPage(container) {
+  await ensureVendorsData();
+  await ensureTrainersData();
+
+  container.innerHTML = `
+    <h1>Vendors &amp; Trainers</h1>
+    <p>Find where to buy an item or train a skill.</p>
+    <div class="items-toolbar">
+      <input type="search" id="vt-search" class="items-search" placeholder="Search vendor, trainer, item, or skill..." autocomplete="off">
+      <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="vt-search">Clear</button>
+    </div>
+    <h2>Vendors</h2>
+    <div class="vt-vendor-grid" id="vt-vendor-grid"></div>
+    <h2>Trainers</h2>
+    <div class="vt-trainer-list" id="vt-trainer-list"></div>
+  `;
+
+  const searchBox = container.querySelector('#vt-search');
+  const vendorGrid = container.querySelector('#vt-vendor-grid');
+  const trainerList = container.querySelector('#vt-trainer-list');
+
+  function renderVendorCard(v) {
+    return `
+      <div class="vt-vendor-card">
+        <a href="#" class="vt-vendor-link" data-slug="${escapeAttr(v.slug)}">${escapeAttr(v.name)}</a>
+        <span class="vt-location">${escapeAttr(v.location)}${v.area ? ' &middot; ' + escapeAttr(v.area) : ''}</span>
+        <span class="vt-count">${v.sells.length} item${v.sells.length === 1 ? '' : 's'}</span>
+      </div>
+    `;
+  }
+
+  function renderTrainerCard(t) {
+    const skillTags = (t.trains || [])
+      .map(s => `<span class="trainer-skill-tag">${escapeAttr(s.skill)}${s.cap != null ? ` (${s.cap})` : ''}</span>`)
+      .join('');
+    return `
+      <div class="vt-trainer-card">
+        <div class="vt-trainer-name">${escapeAttr(t.name)}</div>
+        <span class="vt-location">${escapeAttr(t.location)}${t.area ? ' &middot; ' + escapeAttr(t.area) : ''}</span>
+        <div class="vt-trainer-skills">${skillTags}</div>
+      </div>
+    `;
+  }
+
+  function update() {
+    const query = searchBox.value.toLowerCase().trim();
+    const vendors = (vendorsData || [])
+      .filter(v =>
+        !query ||
+        v.name.toLowerCase().includes(query) ||
+        v.location.toLowerCase().includes(query) ||
+        (v.area || '').toLowerCase().includes(query) ||
+        (v.sells || []).some(s => s.toLowerCase().includes(query))
+      )
+      .sort((a, b) => a.name.localeCompare(b.name));
+    const trainers = (trainersData || [])
+      .filter(t =>
+        !query ||
+        t.name.toLowerCase().includes(query) ||
+        t.location.toLowerCase().includes(query) ||
+        (t.area || '').toLowerCase().includes(query) ||
+        (t.trains || []).some(s => s.skill.toLowerCase().includes(query))
+      )
+      .sort((a, b) => a.name.localeCompare(b.name));
+    vendorGrid.innerHTML = vendors.length ? vendors.map(renderVendorCard).join('') : '<p class="items-empty">No vendors found.</p>';
+    trainerList.innerHTML = trainers.length ? trainers.map(renderTrainerCard).join('') : '<p class="items-empty">No trainers found.</p>';
+  }
+
+  searchBox.addEventListener('input', update);
+  container.addEventListener('click', e => {
+    const link = e.target.closest('.vt-vendor-link');
+    if (link) {
+      e.preventDefault();
+      const vendor = (vendorsData || []).find(v => v.slug === link.dataset.slug);
+      if (vendor) openVendorViewer(vendor);
+    }
+  });
+
+  update();
 }
 
 /* ============================================

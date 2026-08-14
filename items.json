@@ -21146,5 +21146,501 @@
     "classes": ["BST", "CLR", "DRU", "PAL", "RNG", "SHM"],
     "race": ["ALL"],
     "lastUpdated": "2026-08-13"
+  },
+  {
+    "name": "Black Feather Whiskey",
+    "slug": "black-feather-whiskey",
+    "type": "Drink",
+    "tags": [],
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Crab Leg Stew",
+    "slug": "crab-leg-stew",
+    "type": "Food",
+    "tags": [],
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Langsdorf Pale Ale",
+    "slug": "langsdorf-pale-ale",
+    "type": "Drink",
+    "tags": [],
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Weak Beer",
+    "slug": "weak-beer",
+    "type": "Drink",
+    "tags": [],
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Fletching Kit",
+    "slug": "fletching-kit",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Schematic: Alarm Trap",
+    "slug": "schematic-alarm-trap",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Schematic: Immobilizing Trap",
+    "slug": "schematic-immobilizing-trap",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Schematic: Oil Trap I",
+    "slug": "schematic-oil-trap-i",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Schematic: Oil Trap II",
+    "slug": "schematic-oil-trap-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Schematic: Oil Trap III",
+    "slug": "schematic-oil-trap-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Schematic: Poison Gas Trap I",
+    "slug": "schematic-poison-gas-trap-i",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Schematic: Poison Gas Trap II",
+    "slug": "schematic-poison-gas-trap-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Anticipate",
+    "slug": "scroll-anticipate",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Barbed Arrow I",
+    "slug": "scroll-barbed-arrow-i",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Barbed Arrow II",
+    "slug": "scroll-barbed-arrow-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Barbed Arrow III",
+    "slug": "scroll-barbed-arrow-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Barbed Arrow IV",
+    "slug": "scroll-barbed-arrow-iv",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Barbed Arrow V",
+    "slug": "scroll-barbed-arrow-v",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Barbed Arrow VI",
+    "slug": "scroll-barbed-arrow-vi",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Caltrops",
+    "slug": "scroll-caltrops",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Deadeye",
+    "slug": "scroll-deadeye",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Disengagement",
+    "slug": "scroll-disengagement",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Exposing Shot",
+    "slug": "scroll-exposing-shot",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Flare",
+    "slug": "scroll-flare",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Flurry of Arrows",
+    "slug": "scroll-flurry-of-arrows",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Illuminating Shot",
+    "slug": "scroll-illuminating-shot",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Interrupting Shot",
+    "slug": "scroll-interrupting-shot",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Marksman",
+    "slug": "scroll-marksman",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Net Shot",
+    "slug": "scroll-net-shot",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Piercing Shot I",
+    "slug": "scroll-piercing-shot-i",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Piercing Shot II",
+    "slug": "scroll-piercing-shot-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Piercing Shot III",
+    "slug": "scroll-piercing-shot-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Piercing Shot IV",
+    "slug": "scroll-piercing-shot-iv",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Piercing Shot VI",
+    "slug": "scroll-piercing-shot-vi",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Point Blank I",
+    "slug": "scroll-point-blank-i",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Point Blank II",
+    "slug": "scroll-point-blank-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Point Blank III",
+    "slug": "scroll-point-blank-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Point Blank IV",
+    "slug": "scroll-point-blank-iv",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Point Blank V",
+    "slug": "scroll-point-blank-v",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Point Blank VI",
+    "slug": "scroll-point-blank-vi",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Quick Shot I",
+    "slug": "scroll-quick-shot-i",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Quick Shot II",
+    "slug": "scroll-quick-shot-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Quick Shot III",
+    "slug": "scroll-quick-shot-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Quick Shot IV",
+    "slug": "scroll-quick-shot-iv",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Quick Shot V",
+    "slug": "scroll-quick-shot-v",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Quick Shot VI",
+    "slug": "scroll-quick-shot-vi",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Relocate",
+    "slug": "scroll-relocate",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Salvage Arrows (15)",
+    "slug": "scroll-salvage-arrows-15",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Skirmisher",
+    "slug": "scroll-skirmisher",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Smoke Bomb Arrow",
+    "slug": "scroll-smoke-bomb-arrow",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Snaring Shot",
+    "slug": "scroll-snaring-shot",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Sniper's Blind",
+    "slug": "scroll-snipers-blind",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Splintering Shot I",
+    "slug": "scroll-splintering-shot-i",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Splintering Shot II",
+    "slug": "scroll-splintering-shot-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Splintering Shot III",
+    "slug": "scroll-splintering-shot-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Splintering Shot IV",
+    "slug": "scroll-splintering-shot-iv",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Splintering Shot V",
+    "slug": "scroll-splintering-shot-v",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Strafing Barrage I",
+    "slug": "scroll-strafing-barrage-i",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Strafing Barrage II",
+    "slug": "scroll-strafing-barrage-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Strafing Barrage III",
+    "slug": "scroll-strafing-barrage-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Scroll: Strafing Barrage IV",
+    "slug": "scroll-strafing-barrage-iv",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-14"
   }
 ]

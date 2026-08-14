@@ -1,5 +1,71 @@
 [
   {
+    "name": "A Cook",
+    "slug": "a-cook",
+    "location": "Night Harbor",
+    "sells": [
+      "Basil", "Black Pepper", "Butter", "Cleaver", "Cooking Sage", "Milk", "Paprika",
+      "Parsley", "Rice", "Stock", "Thyme", "Wheat Flour"
+    ],
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "A Bowyer",
+    "slug": "a-bowyer",
+    "location": "Night Harbor",
+    "sells": [
+      "Arrow", "Bow", "Hip Quiver", "Large Back Quiver", "Recipe: Net Arrow (x20)",
+      "Recipe: Pitch-Wrapped Arrow (x20)", "Recipe: Smoke Bomb Arrow (x20)",
+      "Small Back Quiver", "Throwing Dagger", "Worn Bow", "Worn Fine Wood Bow"
+    ],
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "A Fletcher",
+    "slug": "a-fletcher",
+    "location": "Night Harbor",
+    "sells": ["Arrow", "Fletching Kit", "Recipe: Smoke Bomb Arrow (x20)"],
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "An Archer Instructor",
+    "slug": "an-archer-instructor",
+    "location": "Night Harbor",
+    "area": "Garrison",
+    "sells": [
+      "Schematic: Alarm Trap", "Schematic: Immobilizing Trap", "Schematic: Oil Trap I",
+      "Schematic: Oil Trap II", "Schematic: Oil Trap III", "Schematic: Poison Gas Trap I",
+      "Schematic: Poison Gas Trap II", "Scroll: Anticipate", "Scroll: Barbed Arrow I",
+      "Scroll: Barbed Arrow II", "Scroll: Barbed Arrow III", "Scroll: Barbed Arrow IV",
+      "Scroll: Barbed Arrow V", "Scroll: Barbed Arrow VI", "Scroll: Caltrops",
+      "Scroll: Deadeye", "Scroll: Disengagement", "Scroll: Exposing Shot", "Scroll: Flare",
+      "Scroll: Flurry of Arrows", "Scroll: Illuminating Shot", "Scroll: Interrupting Shot",
+      "Scroll: Marksman", "Scroll: Net Shot", "Scroll: Piercing Shot I",
+      "Scroll: Piercing Shot II", "Scroll: Piercing Shot III", "Scroll: Piercing Shot IV",
+      "Scroll: Piercing Shot VI", "Scroll: Point Blank I", "Scroll: Point Blank II",
+      "Scroll: Point Blank III", "Scroll: Point Blank IV", "Scroll: Point Blank V",
+      "Scroll: Point Blank VI", "Scroll: Quick Shot I", "Scroll: Quick Shot II",
+      "Scroll: Quick Shot III", "Scroll: Quick Shot IV", "Scroll: Quick Shot V",
+      "Scroll: Quick Shot VI", "Scroll: Relocate", "Scroll: Salvage Arrows (15)",
+      "Scroll: Skirmisher", "Scroll: Smoke Bomb Arrow", "Scroll: Snaring Shot",
+      "Scroll: Sniper's Blind", "Scroll: Splintering Shot I", "Scroll: Splintering Shot II",
+      "Scroll: Splintering Shot III", "Scroll: Splintering Shot IV",
+      "Scroll: Splintering Shot V", "Scroll: Strafing Barrage I", "Scroll: Strafing Barrage II",
+      "Scroll: Strafing Barrage III", "Scroll: Strafing Barrage IV"
+    ],
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Halrinn Grimsul",
+    "slug": "halrinn-grimsul",
+    "location": "Night Harbor",
+    "sells": [
+      "Black Feather Whiskey", "Crab Leg Stew", "Langsdorf Pale Ale", "Ration",
+      "Water Flask", "Weak Beer"
+    ],
+    "lastUpdated": "2026-08-14"
+  },
+  {
     "name": "Chef Daisy",
     "slug": "chef-daisy",
     "location": "Night Harbor",

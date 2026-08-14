@@ -1,0 +1,33 @@
+[
+  {
+    "name": "Fletcher Razma",
+    "slug": "fletcher-razma",
+    "location": "Night Harbor",
+    "area": "Garrison, by the West wall",
+    "trains": [
+      { "skill": "Fletching", "observedAtSkill": 84, "cap": 300, "cost": { "platinum": 0, "gold": 3, "silver": 32, "copper": 35 } }
+    ],
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Foss Dunestrider",
+    "slug": "foss-dunestrider",
+    "location": "Night Harbor",
+    "area": "Ramparts above the West gate",
+    "trains": [
+      { "skill": "Abjuration", "observedAtSkill": 101, "cap": 155, "cost": { "platinum": 0, "gold": 4, "silver": 78, "copper": 58 } },
+      { "skill": "Alteration", "observedAtSkill": 155, "cap": 155, "cost": { "platinum": 0, "gold": 11, "silver": 19, "copper": 45 } },
+      { "skill": "Channeling", "observedAtSkill": 155, "cap": 155, "cost": { "platinum": 0, "gold": 11, "silver": 19, "copper": 45 } },
+      { "skill": "Conjuration", "observedAtSkill": 62, "cap": 155, "cost": { "platinum": 0, "gold": 1, "silver": 82, "copper": 57 } },
+      { "skill": "Divination", "observedAtSkill": 61, "cap": 155, "cost": { "platinum": 0, "gold": 1, "silver": 76, "copper": 82 } },
+      { "skill": "Dodge", "observedAtSkill": 71, "cap": 93, "cost": { "platinum": 0, "gold": 2, "silver": 38, "copper": 46 } },
+      { "skill": "Double Attack", "observedAtSkill": 160, "cap": 160, "cost": { "platinum": 0, "gold": 11, "silver": 92, "copper": 36 } },
+      { "skill": "Dual Wield", "observedAtSkill": 160, "cap": 160, "cost": { "platinum": 0, "gold": 11, "silver": 92, "copper": 36 } },
+      { "skill": "Evocation", "observedAtSkill": 19, "cap": 155, "cost": { "platinum": 0, "gold": 0, "silver": 18, "copper": 40 } },
+      { "skill": "Meditation", "observedAtSkill": 106, "cap": 155, "cost": { "platinum": 0, "gold": 5, "silver": 26, "copper": 65 } },
+      { "skill": "Parry", "observedAtSkill": 61, "cap": 103, "cost": { "platinum": 0, "gold": 1, "silver": 76, "copper": 82 } },
+      { "skill": "Tracking", "observedAtSkill": 124, "cap": 155, "cost": { "platinum": 0, "gold": 7, "silver": 18, "copper": 75 } }
+    ],
+    "lastUpdated": "2026-08-14"
+  }
+]

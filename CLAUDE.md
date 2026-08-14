@@ -1251,6 +1251,31 @@ Active-link highlighting doesn't apply here — a tradeskill's link is left perm
 non-active rather than approximated (no single top-level `baseFile` correctly highlights
 just one tradeskill sharing `#crafting`/`#gathering`).
 
+## Vendors & Trainers
+
+Own top-level page (`pages.json` `"type": "vendorstrainers"`, `renderVendorsTrainersPage` in
+`script.js`, right after Item Database in the sidebar) — added 2026-08-14 at the user's own
+request: "makes it easier for our users to find the items and trainers they are looking
+for." One shared search box filters both sections at once by name, location, area, item
+sold, or skill taught — no separate search per section.
+
+- **Vendors** — same `vendors.json` data the item-card "Vendors" section already uses
+  (`ensureVendorsData`). Cards stay compact (name, location/area, item count); clicking the
+  name opens the existing Vendor Viewer modal (`openVendorViewer`) for the full sold-item
+  list — same modal, same entry point as clicking a vendor from an item card.
+- **Trainers** — new `trainers.json`, flat array: `name`, `slug`, `location`, optional
+  `area` (a more specific in-zone description, e.g. "Garrison, by the West wall"), `trains`
+  (array of `{ skill, observedAtSkill, cap, cost: { platinum, gold, silver, copper } }`).
+  `observedAtSkill`/`cap` come straight off the trainer window's own "`X / Y`" per-skill
+  line — `cap` might be a fixed fact about the skill itself rather than something specific
+  to that one trainer (unconfirmed either way so far, only one trainer per skill seen to
+  date); record it as shown regardless, a second trainer for the same skill will settle it.
+  `cost` is the PP/GP/SP/CP row shown next to each skill's own Train button. No Trainer
+  Viewer modal yet (unlike vendors) — cards just list every taught skill inline as small
+  pill tags (`.trainer-skill-tag`, showing `Skill (cap)`), since the skill counts seen so
+  far (1-12) are short enough not to need one. `ensureTrainersData()` follows the exact same
+  cache-on-first-fetch pattern as `ensureVendorsData()`.
+
 ## Header search box
 
 Searches everything, not just page titles — also `items.json` (`itemSearchHaystack`) and
