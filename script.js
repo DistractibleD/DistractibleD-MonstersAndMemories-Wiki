@@ -43,6 +43,9 @@ let pendingReturnToRecipe = null;
 // Same idea as pendingReturnToRecipe, but for jumping to an item from a
 // monster's drop table instead of a recipe's component list.
 let pendingReturnToMonster = null;
+// Same idea again, but for jumping to an item from a vendor's own sold-item
+// list (see the Vendor Viewer / .vendor-item-link).
+let pendingReturnToVendor = null;
 // Set by the header search box (or the Monsters page's own quick search) when
 // jumping straight to a specific monster, then consumed by renderMonstersPage
 // so its search box is pre-filled — same pattern as pendingItemQuery.
@@ -960,20 +963,24 @@ function renderSearchResults(query) {
 }
 
 // `returnTo` is either a recipe object (from a recipe's own component list —
-// the existing case) or `{ kind: 'monster', name, slug }` (from a monster's
-// drop table) — distinguished by the `kind` tag so the two "back to X" links
-// on the Item Database don't collide. Recipe callers predate the `kind` tag
-// and don't set it, so the absence of `kind` still means "recipe".
+// the existing case), `{ kind: 'monster', name, slug }` (from a monster's
+// drop table), or `{ kind: 'vendor', name, slug }` (from a vendor's sold-item
+// list) — distinguished by the `kind` tag so the three "back to X" links on
+// the Item Database don't collide. Recipe callers predate the `kind` tag and
+// don't set it, so the absence of `kind` still means "recipe".
 function goToItem(item, returnTo) {
   pendingItemQuery = item.name;
   pendingItemCategory = item.type;
   pendingHighlightItem = item.slug;
+  pendingReturnToRecipe = null;
+  pendingReturnToMonster = null;
+  pendingReturnToVendor = null;
   if (returnTo && returnTo.kind === 'monster') {
-    pendingReturnToRecipe = null;
     pendingReturnToMonster = returnTo;
+  } else if (returnTo && returnTo.kind === 'vendor') {
+    pendingReturnToVendor = returnTo;
   } else {
     pendingReturnToRecipe = returnTo || null;
-    pendingReturnToMonster = null;
   }
   const alreadyThere = location.hash.replace('#', '') === 'items';
   location.hash = 'items';
@@ -989,6 +996,7 @@ function goToItemSearch(query) {
   pendingItemCategory = null;
   pendingReturnToRecipe = null;
   pendingReturnToMonster = null;
+  pendingReturnToVendor = null;
   pendingHighlightItem = null;
   const alreadyThere = location.hash.replace('#', '') === 'items';
   location.hash = 'items';
@@ -1003,6 +1011,7 @@ function goToItemCategory(type) {
   pendingItemCategory = type;
   pendingReturnToRecipe = null;
   pendingReturnToMonster = null;
+  pendingReturnToVendor = null;
   pendingHighlightItem = null;
   const alreadyThere = location.hash.replace('#', '') === 'items';
   location.hash = 'items';
@@ -1994,6 +2003,10 @@ function renderItemsList(container, category) {
   const returnToMonster = pendingReturnToMonster;
   pendingReturnToMonster = null;
 
+  // Same idea, but for a vendor's sold-item list.
+  const returnToVendor = pendingReturnToVendor;
+  pendingReturnToVendor = null;
+
   // Landed here from a search result for one specific item — flash its row
   // once the table renders, same idea as pendingHighlightRecipe on the
   // Crafting page.
@@ -2018,6 +2031,7 @@ function renderItemsList(container, category) {
   container.innerHTML = `
     ${returnToRecipe ? `<p class="items-back-link"><a href="#" id="items-back-to-recipe">&larr; Back to ${escapeAttr(returnToRecipe.name)}</a></p>` : ''}
     ${returnToMonster ? `<p class="items-back-link"><a href="#" id="items-back-to-monster">&larr; Back to ${escapeAttr(returnToMonster.name)}</a></p>` : ''}
+    ${returnToVendor ? `<p class="items-back-link"><a href="#" id="items-back-to-vendor">&larr; Back to ${escapeAttr(returnToVendor.name)}</a></p>` : ''}
     <h1>Item Database</h1>
     <p>Browse, search, filter, and sort ${escapeAttr(subtitleLabel)}${subtitleSuffix}. Hover an item's name to see its full card.</p>
     <div class="items-toolbar">
@@ -2166,6 +2180,14 @@ function renderItemsList(container, category) {
     container.querySelector('#items-back-to-monster').addEventListener('click', e => {
       e.preventDefault();
       goToMonster(returnToMonster);
+    });
+  }
+
+  if (returnToVendor) {
+    container.querySelector('#items-back-to-vendor').addEventListener('click', e => {
+      e.preventDefault();
+      const vendor = (vendorsData || []).find(v => v.slug === returnToVendor.slug) || returnToVendor;
+      openVendorViewer(vendor);
     });
   }
 
@@ -2438,16 +2460,21 @@ function renderItemCardHTML(item) {
             `<a href="#" class="item-monster-drop-link" data-slug="${escapeAttr(m.slug)}">${escapeAttr(m.name)}</a>`
           );
           const gatheringTradeskills = findGatheringTradeskillsForItem(item.name).map(escapeAttr);
-          const vendors = findVendorsSellingItem(item.name);
-          const vendorPart = vendors.length === 1
-            ? `${escapeAttr(vendors[0].name)} (${escapeAttr(vendors[0].location)})`
-            : vendors.length > 1
-              ? `<details class="item-card-vendor-details"><summary>${vendors.length} vendors</summary><ul class="item-card-vendor-list">${vendors.map(v => `<li>${escapeAttr(v.name)} (${escapeAttr(v.location)})</li>`).join('')}</ul></details>`
-              : '';
-          const parts = [...monsterLinks, ...gatheringTradeskills, ...(vendorPart ? [vendorPart] : []), ...(item.foundAt ? [escapeAttr(item.foundAt)] : [])];
+          const parts = [...monsterLinks, ...gatheringTradeskills, ...(item.foundAt ? [escapeAttr(item.foundAt)] : [])];
           return `
         <div class="item-card-section${parts.length ? '' : ' item-card-muted'}">
           Dropped by &middot; ${parts.length ? parts.join(', ') : 'not yet known'}
+        </div>`;
+        })()}
+        ${(() => {
+          const vendors = findVendorsSellingItem(item.name);
+          if (!vendors.length) return '';
+          const vendorLinks = vendors.map(v =>
+            `<a href="#" class="item-vendor-link" data-slug="${escapeAttr(v.slug)}">${escapeAttr(v.name)}</a> (${escapeAttr(v.location)})`
+          );
+          return `
+        <div class="item-card-section">
+          Vendors &middot; ${vendorLinks.join(', ')}
         </div>`;
         })()}
         <div class="item-card-section item-card-gamelink">
@@ -2548,6 +2575,16 @@ function setupItemViewer() {
       if (monster) {
         closeItemViewer();
         goToMonster(monster);
+      }
+      return;
+    }
+    const vendorLink = e.target.closest('.item-vendor-link');
+    if (vendorLink) {
+      e.preventDefault();
+      const vendor = (vendorsData || []).find(v => v.slug === vendorLink.dataset.slug);
+      if (vendor) {
+        closeItemViewer();
+        openVendorViewer(vendor);
       }
     }
   });
@@ -4955,6 +4992,86 @@ function openMonsterViewer(monster) {
 
 function closeMonsterViewer() {
   const viewer = document.getElementById('monster-viewer');
+  if (!viewer) return;
+  viewer.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Vendor viewer (2026-08-14, user's own request) — clicking a vendor's name
+// in an item card's own "Vendors" section (see renderItemCardHTML) opens
+// this modal, showing everything that vendor sells. Same shell pattern as
+// #monster-viewer. Each sold item name links dynamically to a real
+// items.json entry when one exists (findItemByName), plain text otherwise —
+// same "resolves at render time" convention as a recipe's components or a
+// monster's drops.
+function renderVendorCardHTML(vendor) {
+  const items = (vendor.sells || []).map(name => {
+    const item = findItemByName(name);
+    return item
+      ? `<li><a href="#" class="vendor-item-link" data-slug="${escapeAttr(item.slug)}">${escapeAttr(name)}</a></li>`
+      : `<li>${escapeAttr(name)}</li>`;
+  }).join('');
+  return `
+    <div class="vendor-card">
+      <h2 class="vendor-card-name">${escapeAttr(vendor.name)}</h2>
+      <p class="vendor-card-location">${escapeAttr(vendor.location)}</p>
+      <ul class="vendor-card-item-list">
+        ${items || '<li class="item-card-muted">Nothing recorded yet.</li>'}
+      </ul>
+    </div>
+  `;
+}
+
+function setupVendorViewer() {
+  if (document.getElementById('vendor-viewer')) return;
+
+  const viewer = document.createElement('div');
+  viewer.id = 'vendor-viewer';
+  viewer.innerHTML = `
+    <button id="vendor-viewer-close" aria-label="Close">&times;</button>
+    <div id="vendor-viewer-panel">
+      <div id="vendor-viewer-card"></div>
+    </div>
+  `;
+  document.body.appendChild(viewer);
+
+  viewer.addEventListener('click', e => {
+    if (e.target === viewer) {
+      closeVendorViewer();
+      return;
+    }
+    const link = e.target.closest('.vendor-item-link');
+    if (link) {
+      e.preventDefault();
+      const item = (itemsData || []).find(i => i.slug === link.dataset.slug);
+      const vendor = viewer._vendor;
+      if (item && vendor) {
+        closeVendorViewer();
+        goToItem(item, { kind: 'vendor', name: vendor.name, slug: vendor.slug });
+      }
+    }
+  });
+
+  viewer.querySelector('#vendor-viewer-close').addEventListener('click', closeVendorViewer);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeVendorViewer();
+  });
+}
+
+function openVendorViewer(vendor) {
+  setupVendorViewer();
+
+  const viewer = document.getElementById('vendor-viewer');
+  viewer._vendor = vendor;
+  viewer.querySelector('#vendor-viewer-card').innerHTML = renderVendorCardHTML(vendor);
+
+  viewer.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVendorViewer() {
+  const viewer = document.getElementById('vendor-viewer');
   if (!viewer) return;
   viewer.classList.remove('open');
   document.body.style.overflow = '';

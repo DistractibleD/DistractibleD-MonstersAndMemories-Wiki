@@ -695,15 +695,28 @@ own card can show where to buy it — no longer just "process for names, delete.
 5. Delete screenshot(s) once processed — same as before, `vendors.json` is the only thing
    that persists from these, never an image.
 
-**Item card "Dropped by" line also shows vendor availability** — `findVendorsSellingItem`
-does the reverse lookup (which vendor(s) have this item name in their `sells` array), folded
-into the same "Dropped by" section as monster drops/gathering tradeskills (user's own
-request, rather than a separate line). A single vendor renders inline as `Vendor Name
-(Location)`; 2+ vendors collapse into a native `<details>`/`<summary>` toggle (`N vendors`,
-expands to one `Name (Location)` per line) instead of spelling out a long name list —
-`.item-card-vendor-details`/`.item-card-vendor-list` in `style.css`. `vendorsData` loads the
-same way as `monstersData`/`gatheringData` (`ensureVendorsData()`, prefetched in `init()` and
-awaited by `openItemViewer`).
+**Item card has its own separate "Vendors" section** (2026-08-14, user's own request —
+previously folded into "Dropped by", split out since vendor availability is conceptually
+different from a drop source) — `findVendorsSellingItem` does the reverse lookup (which
+vendor(s) have this item name in their `sells` array). Renders only when at least one vendor
+exists (unlike "Dropped by", which always renders with a "not yet known" fallback — most
+items have no vendor at all, so an empty placeholder section would just be noise). Each
+vendor name is a clickable `.item-vendor-link` (`data-slug`) opening the Vendor Viewer.
+`vendorsData` loads the same way as `monstersData`/`gatheringData` (`ensureVendorsData()`,
+prefetched in `init()` and awaited by `openItemViewer`).
+
+**Vendor Viewer** (`#vendor-viewer`, `renderVendorCardHTML`/`setupVendorViewer`/
+`openVendorViewer`/`closeVendorViewer`) — same modal shell as `#monster-viewer`, opened by
+clicking a vendor name in an item card's "Vendors" section. Shows the vendor's name/location
+and every item in their `sells` array, each a clickable `.vendor-item-link` when a matching
+`items.json` entry exists (`findItemByName`, plain text otherwise — same dynamic-linking
+convention as a recipe's components). Clicking a sold item closes the vendor viewer and
+calls `goToItem(item, { kind: 'vendor', name, slug })` — the third `kind` value alongside the
+existing `'monster'`/plain-recipe cases, each with its own `pendingReturnTo*` variable and
+"&larr; Back to X" link on the Item Database page (`renderItemsList`). Clicking that back
+link re-resolves the full vendor via `vendorsData` (the pending object only carries
+`name`/`slug`) and reopens the Vendor Viewer, mirroring `goToMonster`'s own
+minimal-shape-lookup pattern.
 
 **Game link code lists** (`.txt` file in the inbox, not a screenshot — see `item.gameLinkCode`
 in "Adding an item to the Item Database"): user copies each code from linking the item in

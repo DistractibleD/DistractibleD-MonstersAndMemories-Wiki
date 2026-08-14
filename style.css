@@ -1453,29 +1453,6 @@ body {
 .item-card-muted {
   color: #6b6c72;
 }
-/* Multi-vendor "Dropped by" entry (findVendorsSellingItem) — a single
-   vendor renders as plain inline text alongside monster/gathering links, but
-   2+ vendors collapse into this <details> toggle instead of spelling out a
-   long name list. Native <details>/<summary> rather than the JS-driven
-   .craft-station-toggle pattern used elsewhere — this is a single inline
-   list item, not a whole page section, so the free browser-native disclosure
-   behavior is simpler than wiring up state. */
-.item-card-vendor-details {
-  display: inline;
-}
-.item-card-vendor-details summary {
-  display: inline;
-  cursor: pointer;
-  color: var(--accent);
-}
-.item-card-vendor-details summary:hover {
-  text-decoration: underline;
-}
-.item-card-vendor-list {
-  list-style: none;
-  margin: 4px 0 0;
-  padding: 0 0 0 12px;
-}
 .item-card-needs-info {
   color: #ff6b6b;
   font-weight: 600;
@@ -1717,6 +1694,70 @@ body {
 }
 #monster-viewer-close:hover {
   color: var(--accent);
+}
+
+/* Vendor viewer (2026-08-14) — click a vendor's name in an item card's
+   "Vendors" section to see everything they sell. Same modal shell as
+   #monster-viewer, just a plain name/location/list instead of a picture
+   card, since a vendor has no other card fields. */
+#vendor-viewer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 11, 14, 0.85);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+#vendor-viewer.open {
+  display: flex;
+}
+#vendor-viewer-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  max-width: min(420px, 92vw);
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  padding: 24px;
+}
+#vendor-viewer-close {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+#vendor-viewer-close:hover {
+  color: var(--accent);
+}
+#vendor-viewer-card a {
+  color: var(--accent);
+}
+.vendor-card-name {
+  margin: 0 0 4px;
+  font-family: 'Sora', sans-serif;
+}
+.vendor-card-location {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  margin: 0 0 16px;
+}
+.vendor-card-item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
 }
 .monster-card-image {
   display: block;
