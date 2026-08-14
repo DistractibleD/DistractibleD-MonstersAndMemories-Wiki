@@ -32,6 +32,7 @@
   {
     "name": "Rich Limestone Deposit",
     "slug": "rich-limestone-deposit",
+    "image": "images/gathering/rich-limestone-deposit.jpg",
     "tradeskill": "Mining",
     "minSkill": 60,
     "trivialSkill": 90,
