@@ -1000,6 +1000,17 @@ shape.
 
 ## Adding a Beastmaster companion
 
+**Currently hidden from the site** (2026-08-14, user's own request — "might bring it back
+later with more types of pets") by removing its one `pages.json` entry — nothing else was
+touched, `companions.json`/`companion-skills.json`/every render function below is fully
+intact and ready the instant that entry is restored. Since the sidebar, header search, and
+"Recently Updated Items" all either derive directly from `pages.json` or gate on
+`allPages.some(p => p.type === 'companions')` (`renderSearchResults`,
+`updateRecentlyUpdatedSidebar`), re-adding that one line brings back all three with nothing
+else to remember to flip. A stale `#companions` link/bookmark falls back to `allPages[0]`
+(Home) via `init()`'s existing no-match fallback, not an error page — same graceful behavior
+as any other unrecognized hash.
+
 Companions page (`pages.json` `"type": "companions"`) shows every tamed-pet type, rendered
 as item-card-style cards (`renderCompanionCardHTML`, reusing the plain gold `.item-card`
 style, not teal recipe variant) rather than raw screenshots.

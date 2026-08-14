@@ -531,9 +531,15 @@ async function updateRecentlyUpdatedSidebar() {
   (craftingData || []).forEach((recipe, idx) => {
     if (recipe.lastUpdated) entries.push({ date: recipe.lastUpdated, idx, title: recipe.name, go: () => goToRecipe(recipe) });
   });
-  (companionsData || []).forEach((companion, idx) => {
-    if (companion.lastUpdated) entries.push({ date: companion.lastUpdated, idx, title: companion.name, go: () => goToCompanion(companion) });
-  });
+  // Skipped while the Companions page is hidden from the sidebar (see the
+  // same companionsPageEnabled check in renderSearchResults) — no point
+  // surfacing a "recently updated" link to a page nobody can navigate to
+  // from anywhere else.
+  if (allPages.some(p => p.type === 'companions')) {
+    (companionsData || []).forEach((companion, idx) => {
+      if (companion.lastUpdated) entries.push({ date: companion.lastUpdated, idx, title: companion.name, go: () => goToCompanion(companion) });
+    });
+  }
 
   if (!entries.length) {
     wrapper.style.display = 'none';
@@ -826,10 +832,18 @@ function renderSearchResults(query) {
     .filter(m => monsterSearchHaystack(m).includes(query))
     .sort((a, b) => a.name.localeCompare(b.name))
     .slice(0, 8);
-  const matchedCompanions = (companionsData || [])
-    .filter(c => companionSearchHaystack(c).includes(query))
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .slice(0, 8);
+  // Companions page is currently hidden from the sidebar (pages.json has no
+  // entry for it, 2026-08-14, user's own request — "might bring it back
+  // later with more types of pets") — gating the search results on the same
+  // check means re-adding that one pages.json entry brings this back too,
+  // with nothing else to remember to flip.
+  const companionsPageEnabled = allPages.some(p => p.type === 'companions');
+  const matchedCompanions = companionsPageEnabled
+    ? (companionsData || [])
+        .filter(c => companionSearchHaystack(c).includes(query))
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .slice(0, 8)
+    : [];
   const matchedSpells = (spellsData || [])
     .filter(s => spellSearchHaystack(s).includes(query))
     .sort((a, b) => a.name.localeCompare(b.name))
