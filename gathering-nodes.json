@@ -56,7 +56,7 @@
     "tradeskill": "Mining",
     "minSkill": 85,
     "trivialSkill": 135,
-    "results": ["Tin Ore", "Jagged Stone", "Limestone"],
+    "results": ["Tin Ore", "Jagged Stone", "Limestone", { "family": "Flawed", "label": "Flawed Gems" }],
     "locations": ["Sungreet Strand", "Vale of Zintar", "Scarwood"]
   },
   {
@@ -76,7 +76,7 @@
     "tradeskill": "Mining",
     "minSkill": 110,
     "trivialSkill": 160,
-    "results": ["Silver Ore", "Jagged Stone"],
+    "results": ["Silver Ore", "Jagged Stone", "Glinting Crystallized Magic", { "family": "Flawed", "label": "Flawed Gems" }],
     "locations": ["Sungreet Strand", "Vale of Zintar", "Scarwood"]
   },
   {

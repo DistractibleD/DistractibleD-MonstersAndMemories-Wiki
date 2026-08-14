@@ -21642,5 +21642,23 @@
     "tags": [],
     "needsInfo": true,
     "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Stygian Moss",
+    "slug": "stygian-moss",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.1,
+    "size": "Tiny",
+    "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Silver Ore",
+    "slug": "silver-ore",
+    "type": "Misc",
+    "tags": [],
+    "weight": 0.25,
+    "size": "Small",
+    "lastUpdated": "2026-08-14"
   }
 ]
