@@ -21910,5 +21910,1157 @@
     "tags": [],
     "needsInfo": true,
     "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Murcanthrope Blade",
+    "slug": "murcanthrope-blade",
+    "lastUpdated": "2026-08-15",
+    "type": "Weapon",
+    "tags": ["MAGIC"],
+    "slot": "Primary / Secondary",
+    "damage": 13,
+    "delay": 29,
+    "skill": "Slashing",
+    "stats": { "STR": 6, "DEX": 2 },
+    "resists": { "DISEASE": -8 },
+    "effect": "Rat Form (On Click. Must Equip. Cast Time: Instant. Level: 30)",
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["BST"]
+  },
+  {
+    "name": "Duelist's Mask",
+    "slug": "duelists-mask",
+    "lastUpdated": "2026-08-15",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Face",
+    "ac": 8,
+    "stats": { "STR": 3, "DEX": 4 },
+    "resists": { "COLD": 1, "DISEASE": 2 },
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SPB"],
+    "race": ["ALL"]
+  },
+  {
+    "name": "Intact Diseased Bat Bile Duct",
+    "slug": "intact-diseased-bat-bile-duct",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Blessed Beeswax Candle",
+    "slug": "blessed-beeswax-candle",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Noxious Toxin Extract",
+    "slug": "noxious-toxin-extract",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Prayer Beads",
+    "slug": "prayer-beads",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Quill",
+    "slug": "quill",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Spellbook",
+    "slug": "spellbook",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Tablet of the Elements",
+    "slug": "tablet-of-the-elements",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Vial of Anointing Oil",
+    "slug": "vial-of-anointing-oil",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Zombie Skin",
+    "slug": "zombie-skin",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Harvallen Root",
+    "slug": "harvallen-root",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Herb Pouch",
+    "slug": "herb-pouch",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Sickle",
+    "slug": "sickle",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Token of Deliverance",
+    "slug": "token-of-deliverance",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Token of Devotion",
+    "slug": "token-of-devotion",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Token of Divinity",
+    "slug": "token-of-divinity",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Abolish Magic",
+    "slug": "scroll-abolish-magic",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Atonement",
+    "slug": "scroll-atonement",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Beset the Dead",
+    "slug": "scroll-beset-the-dead",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Blessed Barrier",
+    "slug": "scroll-blessed-barrier",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Blessed Barrier II",
+    "slug": "scroll-blessed-barrier-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Blessed Barrier III",
+    "slug": "scroll-blessed-barrier-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Blessed Barrier IV",
+    "slug": "scroll-blessed-barrier-iv",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Blessing of Dedication",
+    "slug": "scroll-blessing-of-dedication",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Blessing of Devotion",
+    "slug": "scroll-blessing-of-devotion",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Blessing of Divinity",
+    "slug": "scroll-blessing-of-divinity",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Blind",
+    "slug": "scroll-blind",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Circle of Healing",
+    "slug": "scroll-circle-of-healing",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Circle of Healing II",
+    "slug": "scroll-circle-of-healing-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Circle of Healing III",
+    "slug": "scroll-circle-of-healing-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Circle of Restoration",
+    "slug": "scroll-circle-of-restoration",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Circle of Restoration II",
+    "slug": "scroll-circle-of-restoration-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Circle of Restoration III",
+    "slug": "scroll-circle-of-restoration-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Cleanse Disease",
+    "slug": "scroll-cleanse-disease",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Cleanse Poison",
+    "slug": "scroll-cleanse-poison",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Conjure Drink",
+    "slug": "scroll-conjure-drink",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Conjure Food",
+    "slug": "scroll-conjure-food",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Consecrated Barrier",
+    "slug": "scroll-consecrated-barrier",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Corruption Protection",
+    "slug": "scroll-corruption-protection",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Corruption Resistance",
+    "slug": "scroll-corruption-resistance",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Cure Disease",
+    "slug": "scroll-cure-disease",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Cure Poison",
+    "slug": "scroll-cure-poison",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Defense",
+    "slug": "scroll-defense",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Devastate the Dead",
+    "slug": "scroll-devastate-the-dead",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Devastate the Dead II",
+    "slug": "scroll-devastate-the-dead-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Disease Protection",
+    "slug": "scroll-disease-protection",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Disease Resistance",
+    "slug": "scroll-disease-resistance",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Dispel Magic",
+    "slug": "scroll-dispel-magic",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Divine Aegis",
+    "slug": "scroll-divine-aegis",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Divine Barrier",
+    "slug": "scroll-divine-barrier",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Divine Barrier II",
+    "slug": "scroll-divine-barrier-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Divine Barrier III",
+    "slug": "scroll-divine-barrier-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Divine Barrier IV",
+    "slug": "scroll-divine-barrier-iv",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Divine Heal",
+    "slug": "scroll-divine-heal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Exceptional Heal",
+    "slug": "scroll-exceptional-heal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Exceptional Pacify",
+    "slug": "scroll-exceptional-pacify",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Fear the Dead",
+    "slug": "scroll-fear-the-dead",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Gate",
+    "slug": "scroll-gate",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Greater Heal",
+    "slug": "scroll-greater-heal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Greater Pacify",
+    "slug": "scroll-greater-pacify",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Greater Redemption",
+    "slug": "scroll-greater-redemption",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Greater Resilience",
+    "slug": "scroll-greater-resilience",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Greater Resolution",
+    "slug": "scroll-greater-resolution",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Greater Resurrection",
+    "slug": "scroll-greater-resurrection",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Healing Light",
+    "slug": "scroll-healing-light",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Healing Light II",
+    "slug": "scroll-healing-light-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Healing Light III",
+    "slug": "scroll-healing-light-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Healing Radiance",
+    "slug": "scroll-healing-radiance",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Healing Radiance II",
+    "slug": "scroll-healing-radiance-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Healing Radiance III",
+    "slug": "scroll-healing-radiance-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Healing Radiance IV",
+    "slug": "scroll-healing-radiance-iv",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Holy Strike",
+    "slug": "scroll-holy-strike",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Hymn of Greater Resilience",
+    "slug": "scroll-hymn-of-greater-resilience",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Hymn of Greater Resolution",
+    "slug": "scroll-hymn-of-greater-resolution",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Hymn of Lesser Resolution",
+    "slug": "scroll-hymn-of-lesser-resolution",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Hymn of Resolution",
+    "slug": "scroll-hymn-of-resolution",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Inhibit Pain",
+    "slug": "scroll-inhibit-pain",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Invisibility versus Undead",
+    "slug": "scroll-invisibility-versus-undead",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Lesser Blessing of Devotion",
+    "slug": "scroll-lesser-blessing-of-devotion",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Lesser Heal",
+    "slug": "scroll-lesser-heal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Lesser Pacify",
+    "slug": "scroll-lesser-pacify",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Lesser Redemption",
+    "slug": "scroll-lesser-redemption",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Lesser Resilience",
+    "slug": "scroll-lesser-resilience",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Lesser Resolution",
+    "slug": "scroll-lesser-resolution",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Lesser Resurrection",
+    "slug": "scroll-lesser-resurrection",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Minor Heal",
+    "slug": "scroll-minor-heal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Oath of Protection",
+    "slug": "scroll-oath-of-protection",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Pacify",
+    "slug": "scroll-pacify",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Poison Protection",
+    "slug": "scroll-poison-protection",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Poison Resistance",
+    "slug": "scroll-poison-resistance",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Polar Alignment: North",
+    "slug": "scroll-polar-alignment-north",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Prayer of the Faithful I",
+    "slug": "scroll-prayer-of-the-faithful-i",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Prayer of the Faithful II",
+    "slug": "scroll-prayer-of-the-faithful-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Prayer of the Faithful III",
+    "slug": "scroll-prayer-of-the-faithful-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Prayer of the Faithful IV",
+    "slug": "scroll-prayer-of-the-faithful-iv",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Prayer of the Faithful V",
+    "slug": "scroll-prayer-of-the-faithful-v",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Prayer of the Faithful VI",
+    "slug": "scroll-prayer-of-the-faithful-vi",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Prayer of the Faithful VII",
+    "slug": "scroll-prayer-of-the-faithful-vii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Prayer of the Faithful VIII",
+    "slug": "scroll-prayer-of-the-faithful-viii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Promise of Mending",
+    "slug": "scroll-promise-of-mending",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Promise of Mending II",
+    "slug": "scroll-promise-of-mending-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Promise of Mending III",
+    "slug": "scroll-promise-of-mending-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Promise of Renewal",
+    "slug": "scroll-promise-of-renewal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Promise of Renewal II",
+    "slug": "scroll-promise-of-renewal-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Promise of Renewal III",
+    "slug": "scroll-promise-of-renewal-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Promise of Renewal IV",
+    "slug": "scroll-promise-of-renewal-iv",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Rebuke",
+    "slug": "scroll-rebuke",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Rebuke II",
+    "slug": "scroll-rebuke-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Rebuke III",
+    "slug": "scroll-rebuke-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Reckoning",
+    "slug": "scroll-reckoning",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Reckoning II",
+    "slug": "scroll-reckoning-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Reckoning III",
+    "slug": "scroll-reckoning-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Redemption",
+    "slug": "scroll-redemption",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Resilience",
+    "slug": "scroll-resilience",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Resolution",
+    "slug": "scroll-resolution",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Resurrection",
+    "slug": "scroll-resurrection",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Resuscitation",
+    "slug": "scroll-resuscitation",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Retribution",
+    "slug": "scroll-retribution",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Retribution II",
+    "slug": "scroll-retribution-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Retribution III",
+    "slug": "scroll-retribution-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Retribution IV",
+    "slug": "scroll-retribution-iv",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Scourge the Dead",
+    "slug": "scroll-scourge-the-dead",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Scourge the Dead II",
+    "slug": "scroll-scourge-the-dead-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Scourge the Dead III",
+    "slug": "scroll-scourge-the-dead-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Shackle",
+    "slug": "scroll-shackle",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Smite the Dead",
+    "slug": "scroll-smite-the-dead",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Smite the Dead II",
+    "slug": "scroll-smite-the-dead-ii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Smite the Dead III",
+    "slug": "scroll-smite-the-dead-iii",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Snare the Dead",
+    "slug": "scroll-snare-the-dead",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Soulbind",
+    "slug": "scroll-soulbind",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Stun",
+    "slug": "scroll-stun",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Sublime Heal",
+    "slug": "scroll-sublime-heal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Summon Drink",
+    "slug": "scroll-summon-drink",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Summon Food",
+    "slug": "scroll-summon-food",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Summon Hammer of the Divine",
+    "slug": "scroll-summon-hammer-of-the-divine",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Summon Hammer of the Heavens",
+    "slug": "scroll-summon-hammer-of-the-heavens",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Summon Hammer of the Pious",
+    "slug": "scroll-summon-hammer-of-the-pious",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Summon Hammer of the Righteous",
+    "slug": "scroll-summon-hammer-of-the-righteous",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Summon Hammer of the Virtuous",
+    "slug": "scroll-summon-hammer-of-the-virtuous",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Superior Heal",
+    "slug": "scroll-superior-heal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Scroll: Supreme Heal",
+    "slug": "scroll-supreme-heal",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-15"
   }
 ]

@@ -59,5 +59,25 @@
       { "skill": "Smelting", "observedAtSkill": 25, "cap": 300, "cost": { "platinum": 0, "gold": 0, "silver": 31, "copper": 9 } }
     ],
     "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "Medic Zafira",
+    "slug": "medic-zafira",
+    "location": "Night Harbor",
+    "area": "Sojourner's Camp",
+    "trains": [
+      { "skill": "Bind Wound", "observedAtSkill": 26, "cap": 155, "cost": { "platinum": 0, "gold": 0, "silver": 33, "copper": 53 } }
+    ],
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Herbalist Zaarid",
+    "slug": "herbalist-zaarid",
+    "location": "Night Harbor",
+    "area": "Sojourner's Camp",
+    "trains": [
+      { "skill": "Herbalism", "observedAtSkill": 171, "cap": 300, "cost": { "platinum": 0, "gold": 13, "silver": 60, "copper": 86 } }
+    ],
+    "lastUpdated": "2026-08-15"
   }
 ]

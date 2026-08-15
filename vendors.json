@@ -222,5 +222,96 @@
       "Carnelian"
     ],
     "lastUpdated": "2026-08-14"
+  },
+  {
+    "name": "A Medic",
+    "slug": "a-medic",
+    "location": "Night Harbor",
+    "area": "Sojourner's Camp",
+    "sells": [
+      "Cloth Bandage", "Heavy Cloth Bandage", "Wool Bandage"
+    ],
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "An Herbalist",
+    "slug": "an-herbalist",
+    "location": "Night Harbor",
+    "area": "Sojourner's Camp",
+    "sells": [
+      "Ghost Poppy", "Harvallen Root", "Herb Pouch", "Lionleaf", "Sickle", "Stygian Moss"
+    ],
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "A Reagent Vendor",
+    "slug": "a-reagent-vendor",
+    "location": "Night Harbor",
+    "area": "Cleric and Paladin trainer area, near Sojourner's Camp",
+    "sells": [
+      "Bat Wing", "Blessed Beeswax Candle", "Fire Beetle Gland", "Ghoul Skin", "Holy Water",
+      "Multhele Root", "Noxious Toxin Extract", "Prayer Beads", "Quill", "Resin", "Spellbook",
+      "Tablet of the Elements", "Vial of Anointing Oil", "Zombie Skin"
+    ],
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "A Cleric Scribe",
+    "slug": "a-cleric-scribe",
+    "location": "Night Harbor",
+    "area": "Cleric and Paladin trainer area, near Sojourner's Camp",
+    "sells": [
+      "Blister Beetle Gland", "Immature Snake Venom Sac", "Intact Diseased Bat Bile Duct",
+      "Spellbook", "Token of Deliverance", "Token of Devotion", "Token of Divinity",
+      "Scroll: Abolish Magic", "Scroll: Atonement", "Scroll: Beset the Dead",
+      "Scroll: Blessed Barrier", "Scroll: Blessed Barrier II", "Scroll: Blessed Barrier III",
+      "Scroll: Blessed Barrier IV", "Scroll: Blessing of Dedication",
+      "Scroll: Blessing of Devotion", "Scroll: Blessing of Divinity", "Scroll: Blind",
+      "Scroll: Circle of Healing", "Scroll: Circle of Healing II",
+      "Scroll: Circle of Healing III", "Scroll: Circle of Restoration",
+      "Scroll: Circle of Restoration II", "Scroll: Circle of Restoration III",
+      "Scroll: Cleanse Disease", "Scroll: Cleanse Poison", "Scroll: Conjure Drink",
+      "Scroll: Conjure Food", "Scroll: Consecrated Barrier", "Scroll: Corruption Protection",
+      "Scroll: Corruption Resistance", "Scroll: Cure Disease", "Scroll: Cure Poison",
+      "Scroll: Defense", "Scroll: Devastate the Dead", "Scroll: Devastate the Dead II",
+      "Scroll: Disease Protection", "Scroll: Disease Resistance", "Scroll: Dispel Magic",
+      "Scroll: Divine Aegis", "Scroll: Divine Barrier", "Scroll: Divine Barrier II",
+      "Scroll: Divine Barrier III", "Scroll: Divine Barrier IV", "Scroll: Divine Heal",
+      "Scroll: Exceptional Heal", "Scroll: Exceptional Pacify", "Scroll: Fear the Dead",
+      "Scroll: Gate", "Scroll: Greater Heal", "Scroll: Greater Pacify",
+      "Scroll: Greater Redemption", "Scroll: Greater Resilience", "Scroll: Greater Resolution",
+      "Scroll: Greater Resurrection", "Scroll: Heal", "Scroll: Healing Light",
+      "Scroll: Healing Light II", "Scroll: Healing Light III", "Scroll: Healing Radiance",
+      "Scroll: Healing Radiance II", "Scroll: Healing Radiance III",
+      "Scroll: Healing Radiance IV", "Scroll: Holy Strike",
+      "Scroll: Hymn of Greater Resilience", "Scroll: Hymn of Greater Resolution",
+      "Scroll: Hymn of Lesser Resolution", "Scroll: Hymn of Resolution",
+      "Scroll: Inhibit Pain", "Scroll: Invisibility versus Undead",
+      "Scroll: Lesser Blessing of Devotion", "Scroll: Lesser Heal", "Scroll: Lesser Pacify",
+      "Scroll: Lesser Redemption", "Scroll: Lesser Resilience", "Scroll: Lesser Resolution",
+      "Scroll: Lesser Resurrection", "Scroll: Minor Heal", "Scroll: Oath of Protection",
+      "Scroll: Pacify", "Scroll: Poison Protection", "Scroll: Poison Resistance",
+      "Scroll: Polar Alignment: North", "Scroll: Prayer of the Faithful I",
+      "Scroll: Prayer of the Faithful II", "Scroll: Prayer of the Faithful III",
+      "Scroll: Prayer of the Faithful IV", "Scroll: Prayer of the Faithful V",
+      "Scroll: Prayer of the Faithful VI", "Scroll: Prayer of the Faithful VII",
+      "Scroll: Prayer of the Faithful VIII", "Scroll: Promise of Mending",
+      "Scroll: Promise of Mending II", "Scroll: Promise of Mending III",
+      "Scroll: Promise of Renewal", "Scroll: Promise of Renewal II",
+      "Scroll: Promise of Renewal III", "Scroll: Promise of Renewal IV", "Scroll: Rebuke",
+      "Scroll: Rebuke II", "Scroll: Rebuke III", "Scroll: Reckoning", "Scroll: Reckoning II",
+      "Scroll: Reckoning III", "Scroll: Redemption", "Scroll: Resilience",
+      "Scroll: Resolution", "Scroll: Resurrection", "Scroll: Resuscitation",
+      "Scroll: Retribution", "Scroll: Retribution II", "Scroll: Retribution III",
+      "Scroll: Retribution IV", "Scroll: Scourge the Dead", "Scroll: Scourge the Dead II",
+      "Scroll: Scourge the Dead III", "Scroll: Shackle", "Scroll: Smite the Dead",
+      "Scroll: Smite the Dead II", "Scroll: Smite the Dead III", "Scroll: Snare the Dead",
+      "Scroll: Soulbind", "Scroll: Stun", "Scroll: Sublime Heal", "Scroll: Summon Drink",
+      "Scroll: Summon Food", "Scroll: Summon Hammer of the Divine",
+      "Scroll: Summon Hammer of the Heavens", "Scroll: Summon Hammer of the Pious",
+      "Scroll: Summon Hammer of the Righteous", "Scroll: Summon Hammer of the Virtuous",
+      "Scroll: Superior Heal", "Scroll: Supreme Heal"
+    ],
+    "lastUpdated": "2026-08-15"
   }
 ]

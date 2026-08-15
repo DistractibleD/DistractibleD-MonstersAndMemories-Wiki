@@ -566,3 +566,11 @@ as `"skill": "Stabbing"` on the assumption this is the game abbreviating "Stabbi
 the line (the item is explicitly "a dark metal ceremonial dagger", and no separate STA stat
 bonus appears elsewhere on the card to suggest "STA" meant the stat instead). Worth
 double-checking against a future clean screenshot of the same item.
+
+2026-08-15, images/inbox batch (Night Harbor Sojourner's Camp vendors): Murcanthrope Blade's
+card showed no Race line at all -- ended right after "Class: BST" with nothing below it, no
+visible scrollbar either. Left `race` unset rather than assumed ALL, per the usual
+missing-Race-line caution. Also recorded a huge batch (~125) of Cleric spell scroll names
+confirmed via "A Cleric Scribe" (Sojourner's Camp, Night Harbor)'s sell list -- name/price
+only, no scroll cards -- all added as `needsInfo: true` stubs. Same for several reagent/
+tradeskill items confirmed via "A Reagent Vendor" and "An Herbalist" at the same camp.
