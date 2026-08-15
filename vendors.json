@@ -313,5 +313,25 @@
       "Scroll: Superior Heal", "Scroll: Supreme Heal"
     ],
     "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "A Survivalist",
+    "slug": "a-survivalist",
+    "location": "Night Harbor",
+    "area": "Sojourner's Camp",
+    "sells": [
+      "Burnt-Out Lightstone", "Crude Handmade Torch", "Handmade Torch", "Resin", "Torch"
+    ],
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "A Lumberjack",
+    "slug": "a-lumberjack",
+    "location": "Night Harbor",
+    "area": "Sojourner's Camp",
+    "sells": [
+      "Lumberjack Axe", "Lumberjack Pouch", "Resin"
+    ],
+    "lastUpdated": "2026-08-15"
   }
 ]

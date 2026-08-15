@@ -79,5 +79,35 @@
       { "skill": "Herbalism", "observedAtSkill": 171, "cap": 300, "cost": { "platinum": 0, "gold": 13, "silver": 60, "copper": 86 } }
     ],
     "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Survivalist Faiza",
+    "slug": "survivalist-faiza",
+    "location": "Night Harbor",
+    "area": "Sojourner's Camp",
+    "trains": [
+      { "skill": "Survival", "observedAtSkill": 3, "cap": 155, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 73 } }
+    ],
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Lumberjack Bubir",
+    "slug": "lumberjack-bubir",
+    "location": "Night Harbor",
+    "area": "Sojourner's Camp",
+    "trains": [
+      { "skill": "Lumberjacking", "observedAtSkill": 86, "cap": 300, "cost": { "platinum": 0, "gold": 3, "silver": 48, "copper": 17 } }
+    ],
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Outdoorsman Gahira",
+    "slug": "outdoorsman-gahira",
+    "location": "Night Harbor",
+    "area": "Sojourner's Camp",
+    "trains": [
+      { "skill": "Wilderness", "observedAtSkill": 0, "cap": 155, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 4 } }
+    ],
+    "lastUpdated": "2026-08-15"
   }
 ]
