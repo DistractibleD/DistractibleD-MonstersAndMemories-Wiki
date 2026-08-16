@@ -7175,8 +7175,8 @@
     ],
     "recipeSkillLevel": 90,
     "difficultyColor": "Green",
-    "observedAtSkill": 95,
-    "lastUpdated": "2026-08-13"
+    "observedAtSkill": 101,
+    "lastUpdated": "2026-08-16"
   },
   {
     "name": "Lesser Tincture of Wrath",
@@ -7195,15 +7195,16 @@
       { "item": "Annealed Vial", "quantity": 1 }
     ],
     "recipeSkillLevel": 105,
-    "difficultyColor": "Light Blue",
-    "observedAtSkill": 95
+    "difficultyColor": "Green",
+    "observedAtSkill": 101,
+    "lastUpdated": "2026-08-16"
   },
   {
     "name": "Lesser Serum of Intelligence",
     "slug": "lesser-serum-of-intelligence",
-    "lastUpdated": "2026-08-13",
-    "difficultyColor": "Dark Blue",
-    "observedAtSkill": 95,
+    "lastUpdated": "2026-08-16",
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 101,
     "tradeskill": "Alchemy",
     "station": "Cauldron",
     "description": "Focus yourself, increasing your Intelligence by 10 for 1 hour.",
@@ -7217,9 +7218,9 @@
   {
     "name": "Lesser Serum of Stamina",
     "slug": "lesser-serum-of-stamina",
-    "lastUpdated": "2026-08-13",
-    "difficultyColor": "White",
-    "observedAtSkill": 95,
+    "lastUpdated": "2026-08-16",
+    "difficultyColor": "Dark Blue",
+    "observedAtSkill": 101,
     "tradeskill": "Alchemy",
     "station": "Cauldron",
     "description": "Harden yourself, increasing your Stamina by 10 for 1 hour.",
@@ -7250,9 +7251,9 @@
   {
     "name": "Potion of Tranquility",
     "slug": "potion-of-tranquility",
-    "lastUpdated": "2026-08-13",
-    "difficultyColor": "Red",
-    "observedAtSkill": 95,
+    "lastUpdated": "2026-08-16",
+    "difficultyColor": "Orange",
+    "observedAtSkill": 101,
     "tradeskill": "Alchemy",
     "station": "Cauldron",
     "description": "Sooth your mind, increasing your Mana Regeneration by 2 for 20 minutes.",
@@ -7268,9 +7269,9 @@
   {
     "name": "Lesser Stoneskin Tincture",
     "slug": "lesser-stoneskin-tincture",
-    "lastUpdated": "2026-08-13",
+    "lastUpdated": "2026-08-16",
     "difficultyColor": "Red",
-    "observedAtSkill": 95,
+    "observedAtSkill": 101,
     "tradeskill": "Alchemy",
     "station": "Cauldron",
     "description": "Harden your skin, reducing all damage received by 15%, and decreasing your movement speed by 50% for 20 seconds.",
@@ -7286,9 +7287,9 @@
   {
     "name": "Serum of Dexterity",
     "slug": "serum-of-dexterity",
-    "lastUpdated": "2026-08-13",
+    "lastUpdated": "2026-08-16",
     "difficultyColor": "Red",
-    "observedAtSkill": 95,
+    "observedAtSkill": 101,
     "tradeskill": "Alchemy",
     "station": "Cauldron",
     "description": "Balance yourself, increasing your Dexterity by 15 for 1 hour.",
@@ -7304,9 +7305,9 @@
   {
     "name": "Serum of Wisdom",
     "slug": "serum-of-wisdom",
-    "lastUpdated": "2026-08-13",
+    "lastUpdated": "2026-08-16",
     "difficultyColor": "Red",
-    "observedAtSkill": 95,
+    "observedAtSkill": 101,
     "tradeskill": "Alchemy",
     "station": "Cauldron",
     "description": "Center yourself, increasing your Wisdom by 15 for 1 hour.",
