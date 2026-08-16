@@ -2432,7 +2432,10 @@
       { "playerLevel": 32, "con": "Yellow" },
       { "playerLevel": 32, "con": "Yellow" },
       { "playerLevel": 32, "con": "Light Blue" },
-      { "playerLevel": 32, "con": "Yellow" }
+      { "playerLevel": 32, "con": "Yellow" },
+      { "playerLevel": 32, "con": "Light Blue" },
+      { "playerLevel": 32, "con": "Yellow" },
+      { "playerLevel": 32, "con": "White" }
     ],
     "factionEffects": [
       { "faction": "Citizens of Night Harbor", "effect": "positive" },
@@ -6188,9 +6191,11 @@
       { "silver": 7, "copper": 8 }
     ],
     "conObservations": [
-      { "playerLevel": 29, "con": "Red" }
+      { "playerLevel": 29, "con": "Red" },
+      { "playerLevel": 32, "con": "Red" },
+      { "playerLevel": 32, "con": "Red" }
     ],
-    "lastUpdated": "2026-08-10"
+    "lastUpdated": "2026-08-16"
   },
   {
     "name": "Yvette Gardener",

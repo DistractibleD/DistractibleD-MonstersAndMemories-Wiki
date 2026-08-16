@@ -898,27 +898,28 @@ are three separate families, don't merge or assume one's roster implies another'
 - **Rusty** (18, weapons + Tower Shield): Axe, Battle Axe, Dagger, Great Scythe, Greatsword,
   Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar, Scythe, Shortsword, Spear, Tower
   Shield, Trident, War Lance, Warhammer.
-- **Tattered Cloth** (13, armor): Cap, Gorget, Pantaloons, Shirt, Gloves, Bracer, Boots,
-  Robe, Veil, Belt, Cape, Mantle, Tunic.
-- **Tattered Cotton** (8 armor pieces so far, confirmed 2026-08-16): Boots, Bracer, Cap,
-  Cape, Gloves, Mantle, Shirt, Tunic. A genuinely **separate tier from Tattered Cloth**, not
-  a looser/casual name for the same items — user confirmed directly: Tattered Cloth is tier
-  1, Tattered Wool is tier 2, Tattered Cotton is tier 3, all distinct item sets. This closes
-  a question flagged across several earlier sessions (2026-07-30 through 2026-08-16) where
-  loot-log chat text kept naming "Tattered Cotton \<piece>" drops that share piece names with
-  the Tattered Cloth roster (Cap/Boots/Cape/Mantle/Tunic/Shirt/Bracer all overlap), and
-  without an actual item card to check against, it was left unresolved rather than guessed
-  either way. "Tattered Cotton Gloves" already had a real items.json card (AC 4, Hands,
-  weight 0.25, Small, ALL classes/race) that had gone unrecognized as this family's own
-  piece until the tier question was resolved. Backfilled onto every monster with a confirmed
-  piece (a Dustrend legionary, a Benu Dhai sister, a Plagueborn citizen, a Plagueborn
-  constable, a Plagueborn patrolman, a sand giant fisher, a Dustrend sacramir, a Dustrend
-  serverat) via the standing inference rule. Roster likely grows past 8 the same way every
-  other Tattered tier did — watch for new pieces.
+- **Tattered Cloth / Tattered Cotton / Tattered Wool** — three separate tiers (confirmed by
+  the user, 2026-08-16: Cloth is tier 1, Wool is tier 2, Cotton is tier 3) that all share the
+  **exact same 13-piece roster**, differing only in stats: Cap, Gorget, Pantaloons, Shirt,
+  Gloves, Bracer, Boots, Robe, Veil, Belt, Cape, Mantle, Tunic. Not a looser/casual naming
+  variance — genuinely three distinct item sets with the same piece names. This closes a
+  question flagged across several earlier sessions (2026-07-30 through 2026-08-16) where
+  loot-log chat text kept naming "Tattered Cotton \<piece>" drops sharing names with the
+  Tattered Cloth roster, and without an actual item card to check against it was left
+  unresolved rather than guessed. "Tattered Cotton Gloves" already had a real items.json card
+  (AC 4, Hands, weight 0.25, Small, ALL classes/race) that had gone unrecognized as this
+  family's own piece until the tier question was resolved. Tattered Cotton backfilled onto
+  every monster with a confirmed piece (a Dustrend legionary, a Benu Dhai sister, a Plagueborn
+  citizen, a Plagueborn constable, a Plagueborn patrolman, a sand giant fisher, a Dustrend
+  sacramir, a Dustrend serverat, Zakariah Shriki) via the standing inference rule — same as
+  any other quality-set family, `family: "Tattered Cotton"`/`"Tattered Wool"`/`"Tattered
+  Cloth"` on a monster's drops always means the complete 13-piece roster now, not just
+  whatever's been individually sighted. Only a handful of the 39 total piece/tier
+  combinations have a real items.json card so far; the rest render as plain text on the
+  family badge until a screenshot comes in for each — same "grows over time" precedent as
+  every other family, just with a known target size now instead of an open-ended one.
 - **Tattered Rawhide** (8, armor): Gorget, Belt, Mask, Gloves, Bracer, Boots, Vest,
   Shoulderpads.
-- **Tattered Wool** (11, armor): Belt, Boots, Bracer, Cap, Gloves, Gorget, Mantle, Robe,
-  Shirt, Tunic, Veil.
 - **Tattered Hide** (11, armor): Cap, Gorget, Mask, Vest, Shoulderpads, Belt, Leggings, Bracer,
   Gloves, Cloak, Tunic.
 - **Tattered Leather** (5, armor, confirmed 2026-08-10): Belt, Boots, Cloak, Bracer,

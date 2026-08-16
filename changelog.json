@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-16T21:55", "summary": "Added more level-32 con data for a Dustrend legionary and a sand giant raider in Vale of Zintar" },
   { "timestamp": "2026-08-16T20:58", "summary": "Confirmed Tattered Cotton is its own separate armor tier (not the same as Tattered Cloth) and grouped its drops into one compact family entry across 9 monsters" },
   { "timestamp": "2026-08-16T20:05", "summary": "Added a Dustrend deshpar and more coin/con/drop data for the Vale of Zintar Dustrend camp monsters, now up to level 32" },
   { "timestamp": "2026-08-16T18:52", "summary": "Removed a mistaken monster entry (Bigshow is a player, not a monster)" },
