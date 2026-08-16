@@ -6922,9 +6922,9 @@
     ],
     "recipeSkillLevel": 55,
     "difficultyColor": "Green",
-    "observedAtSkill": 20,
+    "observedAtSkill": 101,
     "lastUpdated": "2026-08-16",
-    "note": "Previously recorded as \"Potion of the Sense Magic\" -- corrected 2026-07-14 to match the recipe card's actual title (\"Potion of Sense Magic\", no \"the\") once a full card came in. 2026-08-16: a fresh card showed this recipe as Green (trivial) with no skill number visible on the card itself -- difficultyColor updated per newest-wins, but observedAtSkill (20) is stale from the earlier Red observation and doesn't reflect the crafter's current skill."
+    "note": "Previously recorded as \"Potion of the Sense Magic\" -- corrected 2026-07-14 to match the recipe card's actual title (\"Potion of Sense Magic\", no \"the\") once a full card came in. 2026-08-16: a fresh card showed this recipe as Green (trivial); observedAtSkill updated to 101, the crafter's stated current Alchemy skill."
   },
   {
     "name": "Minor Stoneskin Tincture",
@@ -7061,9 +7061,9 @@
     ],
     "recipeSkillLevel": 75,
     "difficultyColor": "Green",
-    "observedAtSkill": 50,
+    "observedAtSkill": 101,
     "lastUpdated": "2026-08-16",
-    "note": "The description/effect/components here were previously sourced from an external reference table that turned out to differ from the real card in several ways -- corrected 2026-07-15 once an actual in-game card came in (description/effect text, and Wisp Dust x2->x3, Annealed Vial x2->1). 2026-08-16: a fresh card showed different components again (Wisp Dust x3->x1, plus a new Moontide Salmon x1 not seen before) and difficultyColor Red->Green -- updated per newest-wins, but flagging since the component swap is a bigger change than a typical crop/re-read difference and no skill number was visible on this card, so observedAtSkill (50) is stale and doesn't reflect the crafter's current skill."
+    "note": "The description/effect/components here were previously sourced from an external reference table that turned out to differ from the real card in several ways -- corrected 2026-07-15 once an actual in-game card came in (description/effect text, and Wisp Dust x2->x3, Annealed Vial x2->1). 2026-08-16: the recipe itself changed in-game (user-confirmed) -- Wisp Dust x3->x1, plus a new Moontide Salmon x1 component, and difficultyColor Red->Green. observedAtSkill updated to 101, the crafter's stated current Alchemy skill."
   },
   {
     "name": "Clear Fish Oil",
