@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-16T18:50", "summary": "Added coin drops, con levels, and faction info for several Fallen Pass and Vale of Zintar monsters, plus a new Dustrend serverat and Bigshow entry" },
   { "timestamp": "2026-08-16T18:07", "summary": "Updated 8 Alchemy recipes' difficulty and skill level from a fresh crafting-window screenshot at skill 101" },
   { "timestamp": "2026-08-16T17:50", "summary": "Recorded the crafter's current Alchemy skill on Lunar Shroud Potion and Potion of Sense Magic, and confirmed Lunar Shroud Potion's recipe genuinely changed in-game" },
   { "timestamp": "2026-08-16T17:48", "summary": "Updated Lunar Shroud Potion and Potion of Sense Magic (Alchemy) with fresher recipe card data" },

@@ -2388,6 +2388,7 @@
     "drops": [
       { "item": "Cotton Scraps" },
       { "item": "Iron Scraps" },
+      { "item": "Leather Scraps" },
       { "item": "Worn Ironbark Buckler" },
       { "item": "Raw Orc Meat" },
       { "family": "Rusty Iron" }
@@ -2401,7 +2402,9 @@
       { "silver": 2, "copper": 29 },
       { "silver": 2, "copper": 64 },
       { "silver": 2, "copper": 22 },
-      { "silver": 3, "copper": 31 }
+      { "silver": 3, "copper": 31 },
+      { "silver": 3, "copper": 54 },
+      { "silver": 2, "copper": 17 }
     ],
     "conObservations": [
       { "playerLevel": 28, "con": "Yellow" },
@@ -2416,7 +2419,8 @@
       { "playerLevel": 29, "con": "Yellow" },
       { "playerLevel": 29, "con": "Yellow" },
       { "playerLevel": 31, "con": "Light Blue" },
-      { "playerLevel": 31, "con": "White" }
+      { "playerLevel": 31, "con": "White" },
+      { "playerLevel": 31, "con": "Light Blue" }
     ],
     "factionEffects": [
       { "faction": "Citizens of Night Harbor", "effect": "positive" },
@@ -2424,7 +2428,7 @@
       { "faction": "Pyrmos Mercenaries", "effect": "positive" },
       { "faction": "Steel Talons", "effect": "positive" }
     ],
-    "lastUpdated": "2026-08-13"
+    "lastUpdated": "2026-08-16"
   },
   {
     "name": "Librarian Gallier",
@@ -5727,9 +5731,16 @@
       { "silver": 4, "copper": 84 },
       { "silver": 5, "copper": 2 },
       { "silver": 3, "copper": 31 },
-      { "silver": 4, "copper": 85 }
+      { "silver": 4, "copper": 85 },
+      { "silver": 4, "copper": 94 },
+      { "silver": 3, "copper": 64 },
+      { "silver": 4, "copper": 93 },
+      { "silver": 4, "copper": 90 }
     ],
-    "lastUpdated": "2026-07-30"
+    "conObservations": [
+      { "playerLevel": 31, "con": "Red" }
+    ],
+    "lastUpdated": "2026-08-16"
   },
   {
     "name": "a Plagueborn scholar",
@@ -5974,6 +5985,7 @@
       { "item": "Ghoul Bile" },
       { "item": "Ghoul Skin" },
       { "item": "Iron Scraps" },
+      { "item": "Leather Scraps" },
       { "item": "Tattered Cotton Gloves" },
       { "item": "Rusty Iron Axe" },
       { "item": "Rusty Iron Battle Axe" },
@@ -6019,9 +6031,21 @@
       { "item": "Rusty Iron Tower Shield" }
     ],
     "coinDrops": [
-      { "silver": 3, "copper": 60 }
+      { "silver": 3, "copper": 60 },
+      { "silver": 4, "copper": 41 },
+      { "silver": 4, "copper": 56 },
+      { "silver": 4, "copper": 19 },
+      { "silver": 4, "copper": 32 },
+      { "silver": 4, "copper": 40 }
     ],
-    "lastUpdated": "2026-07-30"
+    "conObservations": [
+      { "playerLevel": 31, "con": "Red" },
+      { "playerLevel": 31, "con": "Red" },
+      { "playerLevel": 31, "con": "Red" },
+      { "playerLevel": 31, "con": "Red" },
+      { "playerLevel": 31, "con": "Red" }
+    ],
+    "lastUpdated": "2026-08-16"
   },
   {
     "name": "a sand giant fisher",
@@ -7562,9 +7586,21 @@
     "maps": ["Vale of Zintar"],
     "conObservations": [
       { "playerLevel": 28, "con": "Red" },
-      { "playerLevel": 29, "con": "Red" }
+      { "playerLevel": 29, "con": "Red" },
+      { "playerLevel": 31, "con": "Yellow" },
+      { "playerLevel": 31, "con": "Yellow" }
     ],
-    "lastUpdated": "2026-08-11"
+    "lastUpdated": "2026-08-16"
+  },
+  {
+    "name": "Bigshow",
+    "slug": "bigshow",
+    "named": true,
+    "conObservations": [
+      { "playerLevel": 31, "con": "Light Blue" }
+    ],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-16"
   },
   {
     "name": "Obsib",
@@ -7591,9 +7627,10 @@
     "slug": "a-tomb-burrower",
     "maps": ["Vale of Zintar"],
     "conObservations": [
-      { "playerLevel": 29, "con": "Yellow" }
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 31, "con": "White" }
     ],
-    "lastUpdated": "2026-08-11"
+    "lastUpdated": "2026-08-16"
   },
   {
     "name": "a Dustrend patroller",
@@ -7651,6 +7688,7 @@
       { "item": "Iron Scraps" },
       { "item": "Tattered Cotton Boots" },
       { "item": "Cotton Scraps" },
+      { "item": "Leather Scraps" },
       { "family": "Rusty Iron" }
     ],
     "coinDrops": [
@@ -7658,11 +7696,13 @@
       { "silver": 3, "copper": 60 },
       { "silver": 2, "copper": 25 },
       { "silver": 3, "copper": 14 },
-      { "silver": 2, "copper": 33 }
+      { "silver": 2, "copper": 33 },
+      { "silver": 2, "copper": 79 }
     ],
     "conObservations": [
       { "playerLevel": 29, "con": "Yellow" },
-      { "playerLevel": 29, "con": "Yellow" }
+      { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 31, "con": "White" }
     ],
     "factionEffects": [
       { "faction": "Citizens of Night Harbor", "effect": "positive" },
@@ -7670,7 +7710,29 @@
       { "faction": "Pyrmos Mercenaries", "effect": "positive" },
       { "faction": "Steel Talons", "effect": "positive" }
     ],
-    "lastUpdated": "2026-08-13"
+    "lastUpdated": "2026-08-16"
+  },
+  {
+    "name": "a Dustrend serverat",
+    "slug": "a-dustrend-serverat",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Tattered Cotton Cape" },
+      { "family": "Rusty Iron" }
+    ],
+    "coinDrops": [
+      { "silver": 4, "copper": 58 }
+    ],
+    "conObservations": [
+      { "playerLevel": 31, "con": "Red" }
+    ],
+    "factionEffects": [
+      { "faction": "Citizens of Night Harbor", "effect": "positive" },
+      { "faction": "Orcs", "effect": "negative" },
+      { "faction": "Steel Talons", "effect": "positive" }
+    ],
+    "note": "This kill's faction message printed only 3 lines (Citizens of Night Harbor/Orcs/Steel Talons), not the usual 4-faction Dustrend-camp bundle that includes Pyrmos Mercenaries -- unclear if that's specific to this monster or just this kill. Also, the Orcs line read \"Your faction standing with Orcs cannot possibly get any worse\" rather than the usual \"...got worse\" -- recorded as effect: negative (same direction), the wording just means that faction is already at its floor.",
+    "lastUpdated": "2026-08-16"
   },
   {
     "name": "a Dustrend venator",
