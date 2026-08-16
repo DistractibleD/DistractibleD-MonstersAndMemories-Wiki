@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-16T17:32", "summary": "Added Prowler's Wristguard (Fenrix Lightfoot drop, Glass Flats) and a more specific spawn location for a shimmering shadow in Shaded Dunes" },
   { "timestamp": "2026-08-15T11:54", "summary": "Added more Night Harbor Sojourner's Camp vendors and trainers (A Survivalist, A Lumberjack, Survivalist Faiza, Lumberjack Bubir, Outdoorsman Gahira)" },
   { "timestamp": "2026-08-15T10:43", "summary": "Added more Night Harbor Sojourner's Camp vendors and trainers (A Medic, An Herbalist, A Reagent Vendor, A Cleric Scribe, Medic Zafira, Herbalist Zaarid) plus two new magic items" },
   { "timestamp": "2026-08-14T15:51", "summary": "Grouped a vendor's quality-set item groups (Rusty weapons, Tattered armor, etc.) into one compact entry instead of listing every piece; added A Miner (Night Harbor gem vendor)" },

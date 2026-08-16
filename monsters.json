@@ -637,13 +637,15 @@
     "slug": "a-shimmering-shadow",
     "named": true,
     "maps": ["Shaded Dunes"],
+    "areas": ["West of the cultists' AC area"],
     "levelRange": "~30",
     "drops": [
       { "item": "Shimmering Shadow Veil" },
       { "item": "Moonwhisper Knot" },
       { "item": "Shimmering Scimitar" },
       { "item": "Umbracast Greaves" }
-    ]
+    ],
+    "lastUpdated": "2026-08-16"
   },
   {
     "name": "Noel Klares",
@@ -4140,10 +4142,11 @@
       { "item": "Crimson Silk Robe" },
       { "item": "Prowler Boots" },
       { "item": "Prowler's Mailbands" },
+      { "item": "Prowler's Wristguard" },
       { "item": "Stalker's Linked Gauntlets" },
       { "item": "Wolf Tooth Earring" }
     ],
-    "lastUpdated": "2026-07-24"
+    "lastUpdated": "2026-08-16"
   },
   {
     "name": "Guillome The Accursed",

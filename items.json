@@ -23070,5 +23070,19 @@
     "tags": [],
     "needsInfo": true,
     "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Prowler's Wristguard",
+    "slug": "prowlers-wristguard",
+    "lastUpdated": "2026-08-16",
+    "type": "Armor",
+    "tags": ["MAGIC"],
+    "slot": "Wrist",
+    "ac": 23,
+    "stats": { "STA": 5, "WIS": 5, "MANA": 10 },
+    "weight": 1.4,
+    "size": "Small",
+    "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"]
   }
 ]
