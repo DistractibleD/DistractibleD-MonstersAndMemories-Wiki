@@ -581,10 +581,21 @@ Cotton Cape" from a Dustrend serverat, Vale of Zintar) -- same unresolved questi
 text until resolved.
 
 2026-08-16, second batch same day: yet another "Tattered Cotton" drop ("Tattered Cotton Cap"
-from a Dustrend legionary, Vale of Zintar) -- same unresolved question, recorded verbatim.
-This batch also introduced a new monster, a Dustrend deshpar (Vale of Zintar, part of the
-same Dustrend camp as legionary/sacramir/serverat/venator/cultor) with coin/con data but no
-confirmed faction message yet.
+from a Dustrend legionary, Vale of Zintar) -- recorded verbatim. This batch also introduced a
+new monster, a Dustrend deshpar (Vale of Zintar, part of the same Dustrend camp as
+legionary/sacramir/serverat/venator/cultor) with coin/con data but no confirmed faction
+message yet.
+
+2026-08-16 RESOLVED: the "Tattered Cotton vs. Tattered Cloth" question flagged repeatedly
+above (2026-07-30 through today) is settled -- user confirmed directly that Tattered Cloth,
+Tattered Wool, and Tattered Cotton are three separate tiers (tier 1/2/3 respectively), not
+one family with inconsistent naming. "Tattered Cotton" is now a real tracked quality-set
+family in CLAUDE.md (8 pieces confirmed so far: Boots, Bracer, Cap, Cape, Gloves, Mantle,
+Shirt, Tunic), backfilled via the standing inference rule onto every monster that had any
+piece recorded (a Dustrend legionary, a Benu Dhai sister, a Plagueborn citizen, a Plagueborn
+constable, a Plagueborn patrolman, a sand giant fisher, a Dustrend sacramir, a Dustrend
+serverat, and Zakariah Shriki's older unspecified-piece "Tattered Cotton" drop). No further
+action needed unless a new piece name turns up outside the current 8-piece roster.
 
 2026-08-16 correction: "Bigshow" was initially added as a named monster from a con-check chat
 line ("Bigshow regards you as a comrade -- It might prove to be a difficult battle."), but the
