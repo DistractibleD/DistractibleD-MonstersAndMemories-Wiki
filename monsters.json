@@ -7593,16 +7593,6 @@
     "lastUpdated": "2026-08-16"
   },
   {
-    "name": "Bigshow",
-    "slug": "bigshow",
-    "named": true,
-    "conObservations": [
-      { "playerLevel": 31, "con": "Light Blue" }
-    ],
-    "needsInfo": true,
-    "lastUpdated": "2026-08-16"
-  },
-  {
     "name": "Obsib",
     "slug": "obsib",
     "named": true,

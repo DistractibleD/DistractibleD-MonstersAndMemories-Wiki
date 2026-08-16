@@ -578,7 +578,12 @@ tradeskill items confirmed via "A Reagent Vendor" and "An Herbalist" at the same
 2026-08-16, images/inbox loot-log batch: another "Tattered Cotton" drop turned up ("Tattered
 Cotton Cape" from a Dustrend serverat, Vale of Zintar) -- same unresolved question as the
 2026-07-30 and 2026-08-10 sightings noted above. Recorded verbatim, renders as unlinked plain
-text until resolved. Also: "Bigshow" was added as a new named monster from a con-check chat
-line alone (Light Blue at player level 31) -- no zone/map info was visible in that screenshot
-(it appeared in a mixed batch alongside both Fallen Pass and Vale of Zintar monsters), so
-`maps` was left unset rather than guessed; needs a real sighting with zone context to place it.
+text until resolved.
+
+2026-08-16 correction: "Bigshow" was initially added as a named monster from a con-check chat
+line ("Bigshow regards you as a comrade -- It might prove to be a difficult battle."), but the
+user clarified Bigshow is a player, not a monster -- that "regards you as a comrade" phrasing
+is the player-to-player consider result, distinct from the hostile-mob con phrases ("seethes
+at you"/"seems indifferent to your presence") used elsewhere in this same screenshot. The
+monsters.json entry was deleted; watch for this "regards you as a comrade" wording as a signal
+that a con-check line names a player, not a mob, before adding future entries from chat logs.
