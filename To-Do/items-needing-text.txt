@@ -580,6 +580,12 @@ Cotton Cape" from a Dustrend serverat, Vale of Zintar) -- same unresolved questi
 2026-07-30 and 2026-08-10 sightings noted above. Recorded verbatim, renders as unlinked plain
 text until resolved.
 
+2026-08-16, second batch same day: yet another "Tattered Cotton" drop ("Tattered Cotton Cap"
+from a Dustrend legionary, Vale of Zintar) -- same unresolved question, recorded verbatim.
+This batch also introduced a new monster, a Dustrend deshpar (Vale of Zintar, part of the
+same Dustrend camp as legionary/sacramir/serverat/venator/cultor) with coin/con data but no
+confirmed faction message yet.
+
 2026-08-16 correction: "Bigshow" was initially added as a named monster from a con-check chat
 line ("Bigshow regards you as a comrade -- It might prove to be a difficult battle."), but the
 user clarified Bigshow is a player, not a monster -- that "regards you as a comrade" phrasing

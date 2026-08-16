@@ -2389,6 +2389,7 @@
       { "item": "Cotton Scraps" },
       { "item": "Iron Scraps" },
       { "item": "Leather Scraps" },
+      { "item": "Tattered Cotton Cap" },
       { "item": "Worn Ironbark Buckler" },
       { "item": "Raw Orc Meat" },
       { "family": "Rusty Iron" }
@@ -2404,7 +2405,13 @@
       { "silver": 2, "copper": 22 },
       { "silver": 3, "copper": 31 },
       { "silver": 3, "copper": 54 },
-      { "silver": 2, "copper": 17 }
+      { "silver": 2, "copper": 17 },
+      { "silver": 3, "copper": 23 },
+      { "silver": 2, "copper": 48 },
+      { "silver": 5, "copper": 24 },
+      { "silver": 5, "copper": 62 },
+      { "silver": 5, "copper": 38 },
+      { "silver": 3, "copper": 55 }
     ],
     "conObservations": [
       { "playerLevel": 28, "con": "Yellow" },
@@ -2420,7 +2427,12 @@
       { "playerLevel": 29, "con": "Yellow" },
       { "playerLevel": 31, "con": "Light Blue" },
       { "playerLevel": 31, "con": "White" },
-      { "playerLevel": 31, "con": "Light Blue" }
+      { "playerLevel": 31, "con": "Light Blue" },
+      { "playerLevel": 31, "con": "Yellow" },
+      { "playerLevel": 32, "con": "Yellow" },
+      { "playerLevel": 32, "con": "Yellow" },
+      { "playerLevel": 32, "con": "Light Blue" },
+      { "playerLevel": 32, "con": "Yellow" }
     ],
     "factionEffects": [
       { "faction": "Citizens of Night Harbor", "effect": "positive" },
@@ -7687,12 +7699,16 @@
       { "silver": 2, "copper": 25 },
       { "silver": 3, "copper": 14 },
       { "silver": 2, "copper": 33 },
-      { "silver": 2, "copper": 79 }
+      { "silver": 2, "copper": 79 },
+      { "silver": 3, "copper": 67 }
     ],
     "conObservations": [
       { "playerLevel": 29, "con": "Yellow" },
       { "playerLevel": 29, "con": "Yellow" },
-      { "playerLevel": 31, "con": "White" }
+      { "playerLevel": 31, "con": "White" },
+      { "playerLevel": 31, "con": "Yellow" },
+      { "playerLevel": 31, "con": "Yellow" },
+      { "playerLevel": 32, "con": "Yellow" }
     ],
     "factionEffects": [
       { "faction": "Citizens of Night Harbor", "effect": "positive" },
@@ -7708,12 +7724,18 @@
     "maps": ["Vale of Zintar"],
     "drops": [
       { "item": "Tattered Cotton Cape" },
+      { "item": "Worn Ironbark Great Staff" },
+      { "item": "Iron Scraps" },
       { "family": "Rusty Iron" }
     ],
     "coinDrops": [
-      { "silver": 4, "copper": 58 }
+      { "silver": 4, "copper": 58 },
+      { "silver": 3, "copper": 94 },
+      { "silver": 3, "copper": 13 },
+      { "silver": 2, "copper": 90 }
     ],
     "conObservations": [
+      { "playerLevel": 31, "con": "Red" },
       { "playerLevel": 31, "con": "Red" }
     ],
     "factionEffects": [
@@ -7733,6 +7755,7 @@
     ],
     "conObservations": [
       { "playerLevel": 29, "con": "Yellow" },
+      { "playerLevel": 31, "con": "Light Blue" },
       { "playerLevel": 31, "con": "Light Blue" }
     ],
     "factionEffects": [
@@ -7740,14 +7763,19 @@
       { "faction": "Night Harbor Garrison", "effect": "positive" },
       { "faction": "Pyrmos Mercenaries", "effect": "positive" }
     ],
-    "lastUpdated": "2026-08-13"
+    "lastUpdated": "2026-08-16"
   },
   {
     "name": "a Dustrend cultor",
     "slug": "a-dustrend-cultor",
     "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Cotton Scraps" },
+      { "item": "Worn Ironbark Great Staff" }
+    ],
     "coinDrops": [
-      { "silver": 3, "copper": 55 }
+      { "silver": 3, "copper": 55 },
+      { "silver": 4, "copper": 39 }
     ],
     "conObservations": [
       { "playerLevel": 31, "con": "Yellow" }
@@ -7758,7 +7786,32 @@
       { "faction": "Pyrmos Mercenaries", "effect": "positive" },
       { "faction": "Steel Talons", "effect": "positive" }
     ],
-    "lastUpdated": "2026-08-13"
+    "lastUpdated": "2026-08-16"
+  },
+  {
+    "name": "a Dustrend deshpar",
+    "slug": "a-dustrend-deshpar",
+    "maps": ["Vale of Zintar"],
+    "drops": [
+      { "item": "Iron Scraps" },
+      { "item": "Raw Orc Meat" },
+      { "item": "Leather Scraps" },
+      { "item": "Worn Ironbark Great Staff" },
+      { "family": "Rusty Iron" }
+    ],
+    "coinDrops": [
+      { "silver": 3, "copper": 59 },
+      { "silver": 4, "copper": 75 },
+      { "silver": 3, "copper": 95 },
+      { "silver": 3, "copper": 50 },
+      { "silver": 4, "copper": 43 }
+    ],
+    "conObservations": [
+      { "playerLevel": 31, "con": "Red" },
+      { "playerLevel": 31, "con": "Red" },
+      { "playerLevel": 32, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-16"
   },
   {
     "name": "a beguiled bluecap",
