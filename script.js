@@ -1266,6 +1266,20 @@ function findVendorsSellingItem(itemName) {
   );
 }
 
+// Same idea as findVendorsSellingItem, but for a vendor's optional `buys`
+// list (2026-08-17) — not every vendor buys everything, so knowing who
+// actually buys a given item is its own useful lookup, same as knowing who
+// sells it. Same string-or-compact-family shape as `sells`.
+function findVendorsBuyingItem(itemName) {
+  const itemFamily = qualitySetFamilyFor(itemName);
+  return (vendorsData || []).filter(v =>
+    (v.buys || []).some(b => {
+      if (typeof b === 'string') return b.toLowerCase() === itemName.toLowerCase();
+      return b.family === itemFamily;
+    })
+  );
+}
+
 // Reverse lookup for an item card's "Dropped by" line — which gathering
 // tradeskill(s) yield this item as a node result (gatheringData is loaded
 // alongside crafting/tradeskills by ensureCraftingData, already called
@@ -2641,6 +2655,24 @@ function renderItemCardHTML(item) {
           return `
         <div class="item-card-section">
           Vendors &middot; ${vendorLinks.join(', ')}
+        </div>`;
+        })()}
+        ${(() => {
+          // Mirrors the "Vendors" section above but for the reverse
+          // direction — not every vendor buys everything, so knowing who
+          // actually accepts a given item is its own useful lookup
+          // (2026-08-17, user's own request). Only renders once at least
+          // one vendor has a recorded `buys` list containing this item —
+          // most vendors don't have one yet, same "most items have no
+          // vendor at all" precedent the Vendors section above follows.
+          const buyers = findVendorsBuyingItem(item.name);
+          if (!buyers.length) return '';
+          const buyerLinks = buyers.map(v =>
+            `<a href="#" class="item-vendor-link" data-slug="${escapeAttr(v.slug)}">${escapeAttr(v.name)}</a> (${escapeAttr(v.location)})`
+          );
+          return `
+        <div class="item-card-section">
+          Bought by &middot; ${buyerLinks.join(', ')}
         </div>`;
         })()}
         <div class="item-card-section item-card-gamelink">
@@ -5015,10 +5047,10 @@ function groupMonsterDrops(drops) {
 // entry instead of spelling out every piece — same shape/rendering as a
 // monster's compact drop family, just simpler since a vendor's `sells` array
 // never had a "legacy expanded" form to reconcile against.
-function groupVendorSells(sells) {
+function groupCompactItemList(list) {
   const singles = [];
   const families = [];
-  (sells || []).forEach(s => {
+  (list || []).forEach(s => {
     if (typeof s === 'string') {
       singles.push(s);
     } else if (s.family) {
@@ -5028,11 +5060,32 @@ function groupVendorSells(sells) {
   return { singles, families };
 }
 
+function groupVendorSells(sells) {
+  return groupCompactItemList(sells);
+}
+
+// Same compact-family shape as `sells` (2026-08-17) — not every vendor buys
+// everything, and which items a given vendor accepts can be genuinely
+// useful to know before hauling a stack of something across the map to
+// sell. First seen on An elemental quartermaster's own reference page (a
+// clean, structured buy list — the shape the user'd previously flagged as
+// undecided, "not sure how we will implement this yet as some vendors don't
+// really buy much, and names can be inconsistent", now has a real example
+// to go on). Same quality-set-family inference as `sells` applies here too.
+function groupVendorBuys(buys) {
+  return groupCompactItemList(buys);
+}
+
 // Total distinct items a vendor effectively stocks — plain entries count as
 // one each, a compact family entry expands to its live items.json count
 // (same never-store-a-computed-value precedent as familyItemCount itself).
 function vendorSellCount(vendor) {
   const grouped = groupVendorSells(vendor.sells);
+  return grouped.singles.length + grouped.families.reduce((sum, f) => sum + f.count, 0);
+}
+
+function vendorBuyCount(vendor) {
+  const grouped = groupVendorBuys(vendor.buys);
   return grouped.singles.length + grouped.families.reduce((sum, f) => sum + f.count, 0);
 }
 
@@ -5207,8 +5260,7 @@ function closeMonsterViewer() {
 // items.json entry when one exists (findItemByName), plain text otherwise —
 // same "resolves at render time" convention as a recipe's components or a
 // monster's drops.
-function renderVendorCardHTML(vendor) {
-  const grouped = groupVendorSells(vendor.sells);
+function renderVendorItemListHTML(grouped) {
   const familyItems = grouped.families.map(f =>
     `<li><a href="#" class="vendor-family-link" data-family="${escapeAttr(f.name)}">${escapeAttr(f.label)} <span class="vendor-family-count">(${f.count} items)</span></a></li>`
   ).join('');
@@ -5218,14 +5270,27 @@ function renderVendorCardHTML(vendor) {
       ? `<li><a href="#" class="vendor-item-link" data-slug="${escapeAttr(item.slug)}">${escapeAttr(name)}</a></li>`
       : `<li>${escapeAttr(name)}</li>`;
   }).join('');
+  return `<ul class="vendor-card-item-list">${familyItems}${singleItems}${(grouped.families.length || grouped.singles.length) ? '' : '<li class="item-card-muted">Nothing recorded yet.</li>'}</ul>`;
+}
+
+function renderVendorCardHTML(vendor) {
+  const sellsGrouped = groupVendorSells(vendor.sells);
+  // `buys` (2026-08-17) is optional and often just plain isn't recorded —
+  // most vendors don't have this section yet, so it's skipped entirely
+  // rather than showing an empty "Nothing recorded yet" Buys heading that
+  // would just be noise on every vendor without one.
+  const buysGrouped = groupVendorBuys(vendor.buys);
+  const hasBuys = buysGrouped.singles.length || buysGrouped.families.length;
   return `
     <div class="vendor-card">
       <h2 class="vendor-card-name">${escapeAttr(vendor.name)}</h2>
       <p class="vendor-card-location">${escapeAttr(vendor.location)}${vendor.area ? ' &middot; ' + escapeAttr(vendor.area) : ''}</p>
       ${vendor.description ? `<p class="vendor-card-description">${escapeAttr(vendor.description)}</p>` : ''}
-      <ul class="vendor-card-item-list">
-        ${familyItems}${singleItems}${(grouped.families.length || grouped.singles.length) ? '' : '<li class="item-card-muted">Nothing recorded yet.</li>'}
-      </ul>
+      <h3 class="vendor-card-section-heading">Sells</h3>
+      ${renderVendorItemListHTML(sellsGrouped)}
+      ${hasBuys ? `
+      <h3 class="vendor-card-section-heading">Buys</h3>
+      ${renderVendorItemListHTML(buysGrouped)}` : ''}
     </div>
   `;
 }

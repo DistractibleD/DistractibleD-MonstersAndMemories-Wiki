@@ -23505,5 +23505,37 @@
     "tags": [],
     "needsInfo": true,
     "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Basic Mortar",
+    "slug": "basic-mortar",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Coarse Sand",
+    "slug": "coarse-sand",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Golden Palm Resin",
+    "slug": "golden-palm-resin",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Small Incense Stick",
+    "slug": "small-incense-stick",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
   }
 ]

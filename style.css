@@ -1769,6 +1769,19 @@ body {
   display: grid;
   gap: 6px;
 }
+/* "Sells" always shows now that "Buys" (2026-08-17) can appear too — a bare
+   heading-less list read fine when it was the only section, but would be
+   ambiguous once a second one exists below it. */
+.vendor-card-section-heading {
+  margin: 18px 0 8px;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.vendor-card-section-heading:first-of-type {
+  margin-top: 12px;
+}
 .monster-card-image {
   display: block;
   width: 100%;

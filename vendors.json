@@ -378,6 +378,11 @@
     "sells": [
       "Crushed Malachite", "Water Flask"
     ],
+    "buys": [
+      "Basic Mortar", "Bone Chips", "Coarse Sand", "Chipped Malachite",
+      "Fire Beetle Eye", "Fire Beetle Gland", "Golden Palm Resin", "Limestone",
+      "Multhele Root", "Resin", "Small Incense Stick", "Water Flask", "Zombie Skin"
+    ],
     "lastUpdated": "2026-08-17"
   }
 ]

@@ -1396,11 +1396,25 @@ are looking for what's available in their own current zone.
     Night Harbor stubs (Greedy Halfling/Suspicious Salesman/Clint) are `needsInfo: true` with
     `sells: []` and no screenshot yet — same wiki-name-with-no-screenshot-yet precedent as
     the Faction page's bulk monster import.
-  - **Not yet built: a per-vendor "what this vendor buys from you" note** — the user's
-    stated intent, but explicitly undecided on shape ("not sure how we will implement this
-    yet as some vendors don't really buy much, and names can be inconsistent"). Don't
-    invent a schema for this until the user settles on one; `description` above is a
-    separate, already-decided field and isn't a placeholder for it.
+  - **`buys`** (2026-08-17) — optional, same shape/dynamic-linking/compact-family
+    convention as `sells` (a flat array of exact item names and/or `{ "family": ... }`
+    entries). Resolves the "not sure how we will implement this yet" uncertainty noted here
+    previously — a real example (An elemental quartermaster's own reference page, a clean
+    structured buy list) settled the shape once it existed. Most vendors don't have a `buys`
+    list yet and that's expected, same as most vendors having no `description`. Rendered as
+    its own "Buys" section on the Vendor Viewer card (`renderVendorItemListHTML`, factored
+    out of the old inline `sells`-only markup so both sections render identically), right
+    below a now-always-shown "Sells" heading — a heading-less list read fine when `sells` was
+    the only section, but not once `buys` could appear underneath it too. Only rendered when
+    non-empty (`hasBuys` check) — an empty "Buys" heading on every other vendor would just be
+    noise. `groupVendorBuys`/`vendorBuyCount` mirror `groupVendorSells`/`vendorSellCount`
+    exactly (both now call a shared `groupCompactItemList` helper). **Reverse lookup on the
+    item card**: `findVendorsBuyingItem` mirrors `findVendorsSellingItem` — an item with at
+    least one vendor willing to buy it gets a "Bought by" section (reuses the same
+    `.item-vendor-link` click handler/Vendor Viewer as the existing "Vendors" section, so no
+    new wiring needed there). Not every vendor buys everything, so this is deliberately its
+    own lookup rather than folded into "Vendors" — knowing who sells an item doesn't tell you
+    who'll buy it back.
 - **Spell Vendors** — a vendor whose `sells` list includes any `"Scroll: <name>"` entry
   (`vendorIsSpellVendor`, a simple `/^Scroll:/` test) renders in this section instead of
   the plain Vendors one — confirmed 2026-08-14 via An Archer Instructor, whose sold list is

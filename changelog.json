@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-17T19:43", "summary": "Vendors can now record what they buy, not just what they sell (added An elemental quartermaster's full buy list) - items show which vendors will buy them" },
   { "timestamp": "2026-08-17T19:38", "summary": "Added An elemental quartermaster (Night Harbor's School of the Fourfold Path)" },
   { "timestamp": "2026-08-17T19:24", "summary": "Added Noura the Tailor and Tenebrim Tam (Elementalist trainer) to Night Harbor's Night Market, A Baker vendor, and noted trainer skills that need a certain level instead of a skill number" },
   { "timestamp": "2026-08-17T19:18", "summary": "Vendors & Trainers now groups each section by zone with collapsible headers, so you can find your zone without scrolling past every other one" },
