@@ -978,6 +978,32 @@ body {
   opacity: 1;
   visibility: visible;
 }
+/* Horizontal counterpart to the top:100% fix above (2026-08-17,
+   user-reported: the Ratio column's tooltip, "Damage / Delay Ratio", got
+   clipped/cut off on the right). Ratio is the last column, and Type/Slot
+   are the first — a tooltip centered under a narrow edge column
+   (`left: 50%; transform: translateX(-50%)`) can be wider than the column
+   itself and extend past .items-table-wrap's left/right edge, where the
+   same overflow-x:auto clipping already documented above cuts it off. Fix
+   is the same idea as the vertical one: don't fight the ancestor, keep the
+   popover inside its box — the first icon column (Type when shown, else
+   Slot) anchors from its own left edge and grows rightward; the last three
+   (Damage/Delay/Ratio, consistently narrow and clustered at the right
+   since the 2026-08-17 Weight/Capacity/Classes/Race column removal) anchor
+   from their own right edge and grow leftward. Middle columns (AC, Stats)
+   keep the centered default — safely clear of both edges. */
+.items-table th.col-header-icon-cell[data-tooltip="Type"]::before,
+.items-table th.col-header-icon-cell[data-tooltip="Slot"]::before {
+  left: 0;
+  transform: none;
+}
+.items-table th.col-header-icon-cell[data-tooltip="Damage"]::before,
+.items-table th.col-header-icon-cell[data-tooltip="Delay (time between attacks)"]::before,
+.items-table th.col-header-icon-cell[data-tooltip="Damage / Delay Ratio"]::before {
+  left: auto;
+  right: 0;
+  transform: none;
+}
 .items-quick-search {
   position: relative;
   margin: 18px 0 0;

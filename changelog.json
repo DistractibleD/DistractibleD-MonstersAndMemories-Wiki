@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-17T20:43", "summary": "Fixed a table header tooltip (Ratio column) getting cut off at the edge of the Item Database" },
   { "timestamp": "2026-08-17T20:28", "summary": "Removed the Weight/Size, Capacity/Max Size, Classes, and Race columns from the Item Database table to fix bad text wrapping on narrow screens - that info is still on each item's own card, and still filterable" },
   { "timestamp": "2026-08-17T20:08", "summary": "Recorded data for Antharite, an Elementalist's summoned pet (the Companions page itself is still hidden for now, but ready for more pet types like this one)" },
   { "timestamp": "2026-08-17T19:50", "summary": "Added a Calafrey & Szurr Regions overview map, with a zone-connections diagram you can flip to from the same map viewer" },
