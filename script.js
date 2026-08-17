@@ -2095,7 +2095,7 @@ function renderItemsList(container, category) {
   // discover it by noticing the headers just don't respond to clicks.
   const subtitleAction = showTypeColumn ? 'Browse, search, and filter' : 'Browse, search, filter, and sort';
   const subtitleHint = showTypeColumn
-    ? "Click an item's name to see its full card. Pick a Type above to sort by column."
+    ? "Click an item's name to see its full card. Pick a Type below to sort by column."
     : "Click an item's name to see its full card.";
   // Options for the Type dropdown always list every type regardless of
   // which one is currently selected — unlike Slot/Class/etc. below, which
