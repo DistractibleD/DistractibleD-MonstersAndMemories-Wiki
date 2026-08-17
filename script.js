@@ -2170,7 +2170,11 @@ function renderItemsList(container, category) {
       <button type="button" id="items-clear-filters" class="items-clear-btn">Clear all filters</button>
     </div>
     <p class="items-count" id="items-count"></p>
-    <div class="items-table-wrap">
+    <div class="items-empty-state" id="items-empty-state">
+      <p>Search or pick a filter above to browse ${escapeAttr(subtitleLabel)}${subtitleSuffix} — or</p>
+      <button type="button" id="items-show-all-btn" class="items-clear-btn">Show all ${categoryItems.length} ${showTypeColumn ? 'items' : escapeAttr(subtitleLabel) + ' items'}</button>
+    </div>
+    <div class="items-table-wrap" id="items-table-wrap" style="display: none;">
       <table class="items-table">
         <colgroup>
           <col class="col-name">
@@ -2329,6 +2333,17 @@ function renderItemsList(container, category) {
     });
   });
 
+  // Rendering all ~1900 items unfiltered builds a couple-MB table in one
+  // synchronous DOM write (confirmed 2026-08-17 — a user report of the Item
+  // Database specifically hanging/triggering the browser's slow-page warning,
+  // reproduced in two different browsers, traced to this). `showAll` lets the
+  // full list still be shown on request (a deliberate one-time cost from an
+  // explicit click), but the page no longer renders it automatically just
+  // from landing here — the moment any search/filter is actually active the
+  // result set is normally far smaller anyway, so this only guards the
+  // unfiltered "browse everything" case.
+  let showAll = false;
+
   function update() {
     const query = searchBox.value.toLowerCase().trim();
     const slot = slotFilter.value;
@@ -2340,6 +2355,20 @@ function renderItemsList(container, category) {
     const maxSize = maxSizeFilter.value;
     const needsInfo = needsInfoFilter.checked;
     const buffs = buffDropdown.getSelected();
+    const anyFilterActive = !!(query || slot || handedness || material || cls || race || tag || maxSize || needsInfo || buffs.length);
+
+    const emptyState = container.querySelector('#items-empty-state');
+    const tableWrap = container.querySelector('#items-table-wrap');
+    const countEl = container.querySelector('#items-count');
+
+    if (!anyFilterActive && !showAll) {
+      emptyState.style.display = '';
+      tableWrap.style.display = 'none';
+      countEl.textContent = '';
+      return;
+    }
+    emptyState.style.display = 'none';
+    tableWrap.style.display = '';
 
     let filtered = categoryItems.filter(item => {
       if (slot && item.slot !== slot) return false;
@@ -2369,9 +2398,13 @@ function renderItemsList(container, category) {
 
     updateSortIndicators();
     renderItemRows(container.querySelector('#items-tbody'), filtered, showTypeColumn);
-    container.querySelector('#items-count').textContent =
-      `Showing ${filtered.length} of ${categoryItems.length} items`;
+    countEl.textContent = `Showing ${filtered.length} of ${categoryItems.length} items`;
   }
+
+  container.querySelector('#items-show-all-btn').addEventListener('click', () => {
+    showAll = true;
+    update();
+  });
 
   [searchBox].forEach(el => el.addEventListener('input', update));
   [slotFilter, handednessFilter, materialFilter, classFilter, raceFilter, tagFilter, maxSizeFilter].filter(Boolean).forEach(el => el.addEventListener('change', update));

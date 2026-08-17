@@ -131,6 +131,23 @@ filter options narrow too), carrying *other* filter values across via `pendingIt
 sets this from the search box, so a typed search survives switching Type) — one hop only,
 doesn't follow through a second switch.
 
+**The table itself doesn't render until a search/filter is active, or "Show all" is clicked**
+(2026-08-17, fixed a real user-reported hang — landing on the Item Database with no
+query/filters used to render every item unfiltered immediately, a single synchronous
+`tbody.innerHTML` write of ~2MB / tens of thousands of DOM nodes at the current ~1900-item
+count, confirmed to freeze the page for minutes on a slower machine and trigger the browser's
+own slow-script warning; reproduced in two different browsers, ruling out an extension). Now
+`update()` computes `anyFilterActive` (true the moment any search text, dropdown, needs-info
+toggle, or buff filter is set) and only calls `renderItemRows` when that's true or the user
+has clicked **"Show all N items"** (`#items-show-all-btn`, a persistent `showAll` flag scoped
+to this render). Otherwise it shows `#items-empty-state` (a plain "search or filter above, or
+show everything" prompt) and leaves `#items-table-wrap` hidden — the expensive render never
+happens at all, not just visually hidden after the fact. A header-search landing (which
+pre-fills the search box via `pendingItemQuery` before `update()`'s first call) still shows
+results immediately since `anyFilterActive` is already true by then; "Clear all filters"
+returns to the empty/prompt state, same as a fresh landing. Apply the same guard to any future
+page that might render a similarly large unfiltered table by default.
+
 Every type uses the same `renderItemsList`. Armor additionally gets a "Material" dropdown
 (Cloth/Leather/Chain/Plate/Other, from `armorIconKey`/`ARMOR_MATERIAL_ORDER`/
 `ARMOR_MATERIAL_LABELS`) — same conditional-dropdown pattern as Weapon's handedness dropdown.
