@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-17T19:24", "summary": "Added Noura the Tailor and Tenebrim Tam (Elementalist trainer) to Night Harbor's Night Market, A Baker vendor, and noted trainer skills that need a certain level instead of a skill number" },
   { "timestamp": "2026-08-17T19:18", "summary": "Vendors & Trainers now groups each section by zone with collapsible headers, so you can find your zone without scrolling past every other one" },
   { "timestamp": "2026-08-17T18:59", "summary": "Fixed the Item Database's new instructions pointing the wrong direction (said 'above' when the Type dropdown is below the text)" },
   { "timestamp": "2026-08-17T18:48", "summary": "Updated the Item Database's instructions to match how it actually works now (click, not hover, to see a card; sorting needs a Type picked)" },

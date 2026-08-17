@@ -1419,12 +1419,21 @@ are looking for what's available in their own current zone.
   way, so it's invalid to present as general info. Still recorded in the JSON (harmless raw
   data, may clarify once more trainers/characters are seen), but **not rendered** — trainer
   cards list each taught skill as a bare pill tag (`.trainer-skill-tag`, just the skill name,
-  no number) instead of the old `Skill (cap)` format. Same caution likely extends to crafting
-  recipes gated by player level rather than skill — the user flagged this and plans to send
-  screenshots from a lower-level character later; no data captures this yet. No Trainer
-  Viewer modal (unlike vendors) — the skill counts seen so far (1-12) are short enough not to
-  need one. `ensureTrainersData()` follows the exact same cache-on-first-fetch pattern as
+  no number) instead of the old `Skill (cap)` format. No Trainer Viewer modal (unlike
+  vendors) — the skill counts seen so far (1-12) are short enough not to need one.
+  `ensureTrainersData()` follows the exact same cache-on-first-fetch pattern as
   `ensureVendorsData()`.
+  - **A skill can be gated by player level instead of a trainable skill number** (confirmed
+    2026-08-17 — Tenebrim Tam's trainer window showed "Level 4 required" in place of the
+    usual "`X / Y`" line for Channeling and Meditation specifically, while his other five
+    skills showed a normal `0 / 10`). Unlike `cap`, this genuinely is a fixed fact about the
+    skill (a level gate, not a character-specific ceiling) and **is** worth surfacing.
+    Recorded as `levelRequired` on that one `trains` entry instead of `observedAtSkill`/
+    `cap` (neither was shown) — `{ "skill": "Channeling", "levelRequired": 4, "cost": {...} }`.
+    Rendered on the pill tag itself, `"<Skill> (Level N required)"`, the one case where a
+    trainer's pill tag does show a number — everything else about `levelRequired` follows the
+    same "record whatever the window shows, per-trainer, no cross-trainer inference" rule as
+    `observedAtSkill`.
 
 ## Header search box
 

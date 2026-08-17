@@ -23457,5 +23457,45 @@
     "tags": [],
     "needsInfo": true,
     "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Halva",
+    "slug": "halva",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Harissa",
+    "slug": "harissa",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Knafeh",
+    "slug": "knafeh",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Mountain Flatbread",
+    "slug": "mountain-flatbread",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Szuur's Famous Foods",
+    "slug": "szuurs-famous-foods",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
   }
 ]

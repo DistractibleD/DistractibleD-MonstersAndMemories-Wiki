@@ -5404,8 +5404,14 @@ async function renderVendorsTrainersPage(container) {
   }
 
   function renderTrainerCard(t) {
+    // A skill can be gated by player level instead of a trainable skill
+    // number (confirmed 2026-08-17, Tenebrim Tam's Channeling/Meditation
+    // both showed "Level 4 required" in place of the usual "X / Y" line) -
+    // levelRequired is recorded instead of observedAtSkill/cap for those,
+    // and called out on the pill tag since it's the one thing about that
+    // skill actually worth knowing at a glance.
     const skillTags = (t.trains || [])
-      .map(s => `<span class="trainer-skill-tag">${escapeAttr(s.skill)}</span>`)
+      .map(s => `<span class="trainer-skill-tag">${escapeAttr(s.skill)}${s.levelRequired != null ? ` (Level ${s.levelRequired} required)` : ''}</span>`)
       .join('');
     return `
       <div class="vt-trainer-card">

@@ -359,5 +359,15 @@
       "Pinch of Saffron", "Sesame Seeds", "Sumac Berries"
     ],
     "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "A Baker",
+    "slug": "a-baker",
+    "location": "Night Harbor",
+    "area": "Night Market",
+    "sells": [
+      "Halva", "Harissa", "Knafeh", "Mountain Flatbread", "Szuur's Famous Foods"
+    ],
+    "lastUpdated": "2026-08-17"
   }
 ]

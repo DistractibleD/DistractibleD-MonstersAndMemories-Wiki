@@ -119,5 +119,31 @@
       { "skill": "Brewing", "observedAtSkill": 0, "cap": 300, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 4 } }
     ],
     "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Noura the Tailor",
+    "slug": "noura-the-tailor",
+    "location": "Night Harbor",
+    "area": "Night Market",
+    "trains": [
+      { "skill": "Tailoring", "observedAtSkill": 0, "cap": 300, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 5 } }
+    ],
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Tenebrim Tam",
+    "slug": "tenebrim-tam",
+    "location": "Night Harbor",
+    "area": "School of the Fourfold Path, south of Saltbreeze Park",
+    "trains": [
+      { "skill": "Abjuration", "observedAtSkill": 0, "cap": 10, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 5 } },
+      { "skill": "Alteration", "observedAtSkill": 0, "cap": 10, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 5 } },
+      { "skill": "Channeling", "levelRequired": 4, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 5 } },
+      { "skill": "Conjuration", "observedAtSkill": 0, "cap": 10, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 5 } },
+      { "skill": "Divination", "observedAtSkill": 0, "cap": 10, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 5 } },
+      { "skill": "Evocation", "observedAtSkill": 0, "cap": 10, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 5 } },
+      { "skill": "Meditation", "levelRequired": 4, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 5 } }
+    ],
+    "lastUpdated": "2026-08-17"
   }
 ]
