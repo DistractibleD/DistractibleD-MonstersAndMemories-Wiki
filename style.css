@@ -738,21 +738,6 @@ body {
   font-size: 0.82rem;
   margin: 6px 0 14px;
 }
-/* The Item Database's unfiltered "browse everything" state — deliberately
-   not rendered by default (2026-08-17, see the update() comment in
-   script.js for why: ~1900 unfiltered rows is a couple-MB single DOM write
-   that could freeze the page on a slower machine). Shown until a search/
-   filter is active or "Show all" is clicked. */
-.items-empty-state {
-  text-align: center;
-  padding: 40px 20px;
-  border: 1px dashed var(--border);
-  border-radius: 8px;
-  color: var(--text-dim);
-}
-.items-empty-state p {
-  margin: 0 0 14px;
-}
 .items-table-wrap {
   overflow-x: auto;
   max-width: 100%;

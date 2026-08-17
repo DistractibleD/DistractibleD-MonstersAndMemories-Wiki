@@ -120,7 +120,7 @@ game feature, not something the wiki computes or calls an API for.
 **Item Database browsing:** one view, `renderItemsList` in `script.js` — search box, "Type"
 dropdown (Weapon/Armor/Jewelry/Container/Food/Drink/Misc/All Types), Slot/Class/Race/Tag/Max
 Size dropdowns, stat/buff checkbox dropdown, "Show only items that need info" toggle, above
-a sortable table. **"Clear all filters"** re-renders via `renderItemsList(container, null)`
+a table. **"Clear all filters"** re-renders via `renderItemsList(container, null)`
 with `pendingItemQuery`/`pendingItemFilters` cleared, rather than resetting fields
 individually — Type can't reset in place (its own option list is scoped per-type), so this
 also means the button never needs updating when a new filter field is added.
@@ -131,30 +131,45 @@ filter options narrow too), carrying *other* filter values across via `pendingIt
 sets this from the search box, so a typed search survives switching Type) — one hop only,
 doesn't follow through a second switch.
 
-**The table itself doesn't render a result set larger than `ITEMS_RENDER_CAP` (200) unless
-"Show all" is clicked** (2026-08-17, fixed a real user-reported hang — landing on the Item
-Database with no query/filters used to render every item unfiltered immediately, a single
-synchronous `tbody.innerHTML` write of ~2MB / tens of thousands of DOM nodes at the current
-~1900-item count, confirmed to freeze the page for minutes on a slower machine and trigger
-the browser's own slow-script warning; reproduced in two different browsers, ruling out an
-extension). **First fix attempt gated on "is any filter active" instead of result count, and
-was itself still broken** — a single-letter search still substring-matches most of the ~1900
-items, so typing one character into an empty search box reproduced the exact same hang on the
-very first keystroke, caught immediately by the same user. The real fix has to key off
-`filtered.length` itself, not "did the user touch a control": `update()` always computes
-`filtered` first, and only calls `renderItemRows` when `filtered.length <= ITEMS_RENDER_CAP`
-or the user has clicked **"Show all N matching items"** (`#items-show-all-btn`, sets a
-`showAll` flag). Otherwise it shows `#items-empty-state` with a live count ("N items match —
-keep narrowing, or Show all N") and leaves `#items-table-wrap` hidden — the expensive render
-never happens at all, not just visually hidden after the fact. `showAll` resets to `false` on
-every subsequent filter/search change (`onFilterChange`, wired to every filter control instead
-of `update` directly) — clicking "Show all" is a one-time bypass for *that* result set, not a
-standing opt-out, so a freshly-broadened query has to be confirmed again rather than silently
-riding the earlier click. A header-search landing (pre-fills the search box via
-`pendingItemQuery` before `update()`'s first call) still shows results immediately whenever
-that specific match count is small, same as typing it by hand would. Apply the same
-result-count guard (not an "any filter active" guard) to any future page that might render a
-similarly large table by default.
+**The table only ever puts a bounded number of rows in the DOM at once — infinite scroll,
+not a hard cap that blocks browsing** (2026-08-17, third and final iteration of a fix for a
+real user-reported hang). Original bug: landing on the Item Database rendered every item
+unfiltered immediately, a single synchronous `tbody.innerHTML` write of ~2MB / tens of
+thousands of DOM nodes at the current ~1900-item count, confirmed to freeze the page for
+minutes and trigger the browser's own slow-script warning in two different browsers (ruling
+out an extension). **Two earlier fix attempts were each broken in their own way and fully
+replaced, not layered on:** gating on "is any filter active" still let a single-letter search
+match most of the ~1900 items and reproduce the exact same hang on the first keystroke; a
+hard `ITEMS_RENDER_CAP` (200) with a "Show all N matching items" escape hatch avoided the
+freeze but meant landing on the page — or narrowing a search — showed nothing until the user
+either filtered further or explicitly asked to see everything, not how anyone wants to browse
+a catalog. **Current design:** `update()` always filters+sorts the *full* matching set (cheap
+at any size — arrays, not DOM), but only renders `filtered.slice(0, visibleCount)` via
+`renderItemRows` — `visibleCount` starts at one `ITEMS_CHUNK_SIZE` (200) and grows by one
+chunk whenever an `IntersectionObserver` (`rootMargin: '400px'`) sees `#items-load-sentinel`
+(a bare div right after the table) scroll into view — same "the whole site scrolls the window
+itself" assumption `setupBackToTopButton` already relies on. `onFilterChange` (wired to every
+filter control instead of `update` directly, including the buff dropdown's `onChange`) resets
+`visibleCount` back to one chunk before re-filtering, so a narrower query doesn't leave stale
+extra rows in the DOM. The count line reads "Showing X of Y items" (+ "— scroll for more"
+while `X < Y`) — this is the part of the fix that has to hold indefinitely as items.json keeps
+growing: DOM node count is bounded by how far someone has actually scrolled, never by dataset
+size. Apply the same bounded-DOM-via-scroll approach (not a cap-and-confirm dialog) to any
+future page that might render a similarly large table by default.
+
+**Column-header sorting is disabled entirely on "All Types" and only enables once a specific
+Type is picked** (same 2026-08-17 change, user's own call: "There are no good arguments for
+sorting the entire item database by header [when mixing types]... We need a solution that
+works now and in the future"). Sorting a mixed-type list by a column like AC/Damage/Ratio
+isn't meaningful (most rows just show "—"), and disabling it also means sort never has to
+reason about the whole, ever-growing unfiltered database — only about one Type's worth at a
+time. `showTypeColumn` (true only for "All Types") gates a `sortableClass`/`sortDisabledTitle`
+pair applied to every `<th>`: with a Type selected, headers get the `sortable` class and a
+click handler (clicking resets `visibleCount` to one chunk too, same as any other filter
+change); on "All Types" they render as plain static headers — no `sortable` class, no click
+handler attached at all (not one that silently no-ops) — plus a `title="Pick a Type above to
+sort by column"` tooltip. `sortKey`/`sortDir` stay at their initial `'name'`/`'asc'` the whole
+time "All Types" is showing, since nothing can move them.
 
 Every type uses the same `renderItemsList`. Armor additionally gets a "Material" dropdown
 (Cloth/Leather/Chain/Plate/Other, from `armorIconKey`/`ARMOR_MATERIAL_ORDER`/

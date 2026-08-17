@@ -2077,6 +2077,17 @@ function renderItemsList(container, category) {
   // "all items" already ends in "items", so it skips the template's own
   // trailing "items." below to avoid "all items items."
   const subtitleSuffix = showTypeColumn ? '' : ' items';
+  // Sorting a mixed bag of every item type by a column like AC/Damage/Ratio
+  // isn't meaningful (most rows would just show "—" for whatever column
+  // isn't relevant to them) — and disabling it here also means sort never
+  // has to reason about the whole, ever-growing unfiltered database, only
+  // about one Type at a time (2026-08-17, user's own call). Columns stay in
+  // the fixed default order (name, ascending — sortKey/sortDir below never
+  // move away from their initial value while showTypeColumn is true, since
+  // no click handler gets attached to change them) until a specific Type is
+  // picked from the dropdown.
+  const sortableClass = showTypeColumn ? '' : 'sortable';
+  const sortDisabledTitle = showTypeColumn ? ' title="Pick a Type above to sort by column"' : '';
   // Options for the Type dropdown always list every type regardless of
   // which one is currently selected — unlike Slot/Class/etc. below, which
   // are scoped to categoryItems, this one has to stay unscoped so switching
@@ -2170,11 +2181,7 @@ function renderItemsList(container, category) {
       <button type="button" id="items-clear-filters" class="items-clear-btn">Clear all filters</button>
     </div>
     <p class="items-count" id="items-count"></p>
-    <div class="items-empty-state" id="items-empty-state">
-      <p id="items-empty-state-text">Search or pick a filter above to browse ${escapeAttr(subtitleLabel)}${subtitleSuffix} — or</p>
-      <button type="button" id="items-show-all-btn" class="items-clear-btn">Show all ${categoryItems.length} ${showTypeColumn ? 'items' : escapeAttr(subtitleLabel) + ' items'}</button>
-    </div>
-    <div class="items-table-wrap" id="items-table-wrap" style="display: none;">
+    <div class="items-table-wrap" id="items-table-wrap">
       <table class="items-table">
         <colgroup>
           <col class="col-name">
@@ -2192,22 +2199,23 @@ function renderItemsList(container, category) {
         </colgroup>
         <thead>
           <tr>
-            <th data-sort-key="name" class="sortable">Name</th>
-            ${showTypeColumn ? `<th data-sort-key="type" class="sortable col-header-icon-cell" data-tooltip="Type" aria-label="Type">${colHeaderIcon('type')}</th>` : ''}
-            <th data-sort-key="slot" class="sortable col-header-icon-cell" data-tooltip="Slot" aria-label="Slot">${colHeaderIcon('slot')}</th>
-            <th data-sort-key="ac" class="sortable col-header-icon-cell" data-tooltip="Armor Class (AC)" aria-label="Armor Class (AC)">${colHeaderIcon('ac')}</th>
-            <th data-sort-key="stats" class="sortable col-header-icon-cell" data-tooltip="Stats" aria-label="Stats">${colHeaderSymbol('#')}</th>
-            <th data-sort-key="damage" class="sortable col-header-icon-cell" data-tooltip="Damage" aria-label="Damage">${colHeaderIcon('damage')}</th>
-            <th data-sort-key="delay" class="sortable col-header-icon-cell" data-tooltip="Delay (time between attacks)" aria-label="Delay (time between attacks)">${colHeaderIcon('delay')}</th>
-            <th data-sort-key="ratio" class="sortable col-header-icon-cell" data-tooltip="Damage / Delay Ratio" aria-label="Damage / Delay Ratio">${colHeaderSymbol('&#8758;')}</th>
-            <th data-sort-key="weight" class="sortable col-header-icon-cell" data-tooltip="Weight / Size" aria-label="Weight / Size">${colHeaderIcon('weight')}</th>
-            <th data-sort-key="capacity" class="sortable col-header-icon-cell" data-tooltip="Capacity / Max Size" aria-label="Capacity / Max Size">${colHeaderIcon('capacity')}</th>
-            <th data-sort-key="classes" class="sortable col-header-icon-cell" data-tooltip="Classes" aria-label="Classes">${colHeaderIcon('classes')}</th>
-            <th data-sort-key="race" class="sortable col-header-icon-cell" data-tooltip="Race" aria-label="Race">${colHeaderIcon('race')}</th>
+            <th data-sort-key="name" class="${sortableClass}"${sortDisabledTitle}>Name</th>
+            ${showTypeColumn ? `<th data-sort-key="type" class="${sortableClass} col-header-icon-cell" data-tooltip="Type" aria-label="Type"${sortDisabledTitle}>${colHeaderIcon('type')}</th>` : ''}
+            <th data-sort-key="slot" class="${sortableClass} col-header-icon-cell" data-tooltip="Slot" aria-label="Slot"${sortDisabledTitle}>${colHeaderIcon('slot')}</th>
+            <th data-sort-key="ac" class="${sortableClass} col-header-icon-cell" data-tooltip="Armor Class (AC)" aria-label="Armor Class (AC)"${sortDisabledTitle}>${colHeaderIcon('ac')}</th>
+            <th data-sort-key="stats" class="${sortableClass} col-header-icon-cell" data-tooltip="Stats" aria-label="Stats"${sortDisabledTitle}>${colHeaderSymbol('#')}</th>
+            <th data-sort-key="damage" class="${sortableClass} col-header-icon-cell" data-tooltip="Damage" aria-label="Damage"${sortDisabledTitle}>${colHeaderIcon('damage')}</th>
+            <th data-sort-key="delay" class="${sortableClass} col-header-icon-cell" data-tooltip="Delay (time between attacks)" aria-label="Delay (time between attacks)"${sortDisabledTitle}>${colHeaderIcon('delay')}</th>
+            <th data-sort-key="ratio" class="${sortableClass} col-header-icon-cell" data-tooltip="Damage / Delay Ratio" aria-label="Damage / Delay Ratio"${sortDisabledTitle}>${colHeaderSymbol('&#8758;')}</th>
+            <th data-sort-key="weight" class="${sortableClass} col-header-icon-cell" data-tooltip="Weight / Size" aria-label="Weight / Size"${sortDisabledTitle}>${colHeaderIcon('weight')}</th>
+            <th data-sort-key="capacity" class="${sortableClass} col-header-icon-cell" data-tooltip="Capacity / Max Size" aria-label="Capacity / Max Size"${sortDisabledTitle}>${colHeaderIcon('capacity')}</th>
+            <th data-sort-key="classes" class="${sortableClass} col-header-icon-cell" data-tooltip="Classes" aria-label="Classes"${sortDisabledTitle}>${colHeaderIcon('classes')}</th>
+            <th data-sort-key="race" class="${sortableClass} col-header-icon-cell" data-tooltip="Race" aria-label="Race"${sortDisabledTitle}>${colHeaderIcon('race')}</th>
           </tr>
         </thead>
         <tbody id="items-tbody"></tbody>
       </table>
+      <div id="items-load-sentinel"></div>
     </div>
   `;
 
@@ -2235,7 +2243,7 @@ function renderItemsList(container, category) {
   // onChange (live), not onClose — this page's own update() only touches
   // the results table/count, so the panel itself is never torn down and
   // there's no reason to wait for close to re-filter.
-  const buffDropdown = setupBuffDropdown(container, 'items-filter', { onChange: update });
+  const buffDropdown = setupBuffDropdown(container, 'items-filter', { onChange: onFilterChange });
   const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
 
   // Landed here from a header search result — pre-fill the search box with
@@ -2320,34 +2328,48 @@ function renderItemsList(container, category) {
     });
   }
 
-  sortHeaders.forEach(th => {
-    th.addEventListener('click', () => {
-      const key = th.dataset.sortKey;
-      if (key === sortKey) {
-        sortDir = sortDir === 'asc' ? 'desc' : 'asc';
-      } else {
-        sortKey = key;
-        sortDir = ITEM_SORT_NUMERIC.includes(key) ? 'desc' : 'asc';
-      }
-      update();
+  // Disabled entirely on the "All Types" view (see sortableClass above) —
+  // headers render without the sortable class/cursor there and just don't
+  // get a click handler, rather than attaching one that silently no-ops.
+  if (!showTypeColumn) {
+    sortHeaders.forEach(th => {
+      th.addEventListener('click', () => {
+        const key = th.dataset.sortKey;
+        if (key === sortKey) {
+          sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+        } else {
+          sortKey = key;
+          sortDir = ITEM_SORT_NUMERIC.includes(key) ? 'desc' : 'asc';
+        }
+        visibleCount = ITEMS_CHUNK_SIZE;
+        update();
+      });
     });
-  });
+  }
 
-  // Rendering a large result set builds a multi-MB table in one synchronous
-  // DOM write (confirmed 2026-08-17 — a user report of the Item Database
-  // hanging/triggering the browser's slow-page warning, reproduced in two
-  // different browsers, traced to this). The first fix gated the render on
-  // "is any filter active" — but a single-letter search still matches most
-  // of the ~1900 items (plain substring match), so that alone still
-  // triggered the same near-full render on the very first keystroke
-  // (caught immediately by the same user). Gating on the *result count*
-  // instead, regardless of how it was reached, is the real fix: `showAll`
-  // bypasses the cap for one deliberate render (a real cost, but from an
-  // explicit click, not a surprise on every keystroke/page load), and
-  // resets on the next filter/search change so a fresh broad query has to
-  // be confirmed again rather than silently riding the earlier bypass.
-  const ITEMS_RENDER_CAP = 200;
-  let showAll = false;
+  // Rendering the full result set in one go builds a multi-MB table in a
+  // single synchronous DOM write (confirmed 2026-08-17 — a user report of
+  // the Item Database hanging/triggering the browser's slow-page warning,
+  // reproduced in two different browsers, traced to this). Two earlier fix
+  // attempts here were each still broken in their own way: gating on "is any
+  // filter active" didn't help since a single-letter search still matches
+  // most of the ~1900 items; gating on a hard result-count cap (with a
+  // "Show all" escape hatch) avoided the freeze but meant landing on the
+  // page — or narrowing a search down — showed nothing until you either
+  // filtered further or explicitly asked to see everything, which isn't how
+  // anyone actually wants to browse a catalog.
+  //
+  // The real fix is to never put more than a bounded number of rows in the
+  // DOM at once, regardless of how many *logically* match — i.e. paginate.
+  // `visibleCount` starts at one chunk and grows by one chunk at a time as
+  // the user scrolls near the bottom (see the IntersectionObserver below),
+  // so the total DOM cost is always proportional to how far someone has
+  // actually scrolled, never to how large items.json has grown. This is the
+  // one part of the fix that has to hold indefinitely as the database keeps
+  // growing — filtering/sorting a JS array stays cheap at any size, DOM
+  // node count is the only thing that doesn't.
+  const ITEMS_CHUNK_SIZE = 200;
+  let visibleCount = ITEMS_CHUNK_SIZE;
 
   function update() {
     const query = searchBox.value.toLowerCase().trim();
@@ -2360,12 +2382,7 @@ function renderItemsList(container, category) {
     const maxSize = maxSizeFilter.value;
     const needsInfo = needsInfoFilter.checked;
     const buffs = buffDropdown.getSelected();
-    const anyFilterActive = !!(query || slot || handedness || material || cls || race || tag || maxSize || needsInfo || buffs.length);
 
-    const emptyState = container.querySelector('#items-empty-state');
-    const emptyStateText = container.querySelector('#items-empty-state-text');
-    const showAllBtn = container.querySelector('#items-show-all-btn');
-    const tableWrap = container.querySelector('#items-table-wrap');
     const countEl = container.querySelector('#items-count');
 
     let filtered = categoryItems.filter(item => {
@@ -2384,19 +2401,10 @@ function renderItemsList(container, category) {
       return true;
     });
 
-    if (!showAll && filtered.length > ITEMS_RENDER_CAP) {
-      emptyState.style.display = '';
-      tableWrap.style.display = 'none';
-      emptyStateText.textContent = anyFilterActive
-        ? `${filtered.length} items match — keep narrowing your search/filters, or`
-        : `Search or pick a filter above to browse ${subtitleLabel}${subtitleSuffix} — or`;
-      showAllBtn.textContent = `Show all ${filtered.length} matching items`;
-      countEl.textContent = '';
-      return;
-    }
-    emptyState.style.display = 'none';
-    tableWrap.style.display = '';
-
+    // Sorting is disabled while showTypeColumn is true (sortKey/sortDir never
+    // move from their initial 'name'/'asc' in that case — see sortableClass
+    // above), so this always runs, it just has nothing to do until a Type is
+    // picked.
     filtered.sort((a, b) => {
       const av = itemSortValue(a, sortKey);
       const bv = itemSortValue(b, sortKey);
@@ -2408,17 +2416,29 @@ function renderItemsList(container, category) {
     });
 
     updateSortIndicators();
-    renderItemRows(container.querySelector('#items-tbody'), filtered, showTypeColumn);
-    countEl.textContent = `Showing ${filtered.length} of ${categoryItems.length} items`;
+    const shown = Math.min(visibleCount, filtered.length);
+    renderItemRows(container.querySelector('#items-tbody'), filtered.slice(0, shown), showTypeColumn);
+    countEl.textContent = `Showing ${shown} of ${filtered.length} items` + (shown < filtered.length ? ' — scroll for more' : '');
   }
 
-  container.querySelector('#items-show-all-btn').addEventListener('click', () => {
-    showAll = true;
+  // Loads the next chunk once the sentinel just past the table's bottom
+  // scrolls into view — same "the whole site scrolls the window itself, no
+  // per-page inner scroll container" setup every other scroll-driven bit of
+  // this site already assumes (see setupBackToTopButton). rootMargin starts
+  // the load a couple hundred px early so the next chunk is usually ready
+  // before the user actually reaches the bottom. Disconnects on its own the
+  // moment everything currently matching is already shown — nothing to
+  // observe for until the result set grows again (a new/broader
+  // filter resets visibleCount, see onFilterChange below).
+  const loadMoreObserver = new IntersectionObserver(entries => {
+    if (!entries.some(e => e.isIntersecting)) return;
+    visibleCount += ITEMS_CHUNK_SIZE;
     update();
-  });
+  }, { rootMargin: '400px' });
+  loadMoreObserver.observe(container.querySelector('#items-load-sentinel'));
 
   function onFilterChange() {
-    showAll = false;
+    visibleCount = ITEMS_CHUNK_SIZE;
     update();
   }
   [searchBox].forEach(el => el.addEventListener('input', onFilterChange));
