@@ -5955,6 +5955,7 @@ async function renderHomePage(container) {
     <h2 class="home-changelog-heading" id="home-changelog-toggle">
       <svg viewBox="0 0 24 24" class="home-changelog-chevron"><path d="M8 5 L16 12 L8 19 Z"/></svg>
       Latest Changes
+      <span class="home-changelog-hint" id="home-changelog-hint">(click to expand)</span>
     </h2>
     <div id="home-changelog-body" class="home-changelog-body home-changelog-collapsed">
       ${changelog.length ? `
@@ -5979,9 +5980,11 @@ async function renderHomePage(container) {
   // same as every other collapsible section on this site.
   const changelogToggle = container.querySelector('#home-changelog-toggle');
   const changelogBody = container.querySelector('#home-changelog-body');
+  const changelogHint = container.querySelector('#home-changelog-hint');
   changelogToggle.addEventListener('click', () => {
     const collapsed = changelogBody.classList.toggle('home-changelog-collapsed');
     changelogToggle.classList.toggle('expanded', !collapsed);
+    changelogHint.textContent = collapsed ? '(click to expand)' : '(click to collapse)';
   });
 
   const showMoreBtn = container.querySelector('#changelog-show-more');

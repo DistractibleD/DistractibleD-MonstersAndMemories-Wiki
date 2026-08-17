@@ -1299,6 +1299,11 @@ body {
   fill: var(--accent);
   transform: rotate(90deg);
 }
+.home-changelog-hint {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--text-dim);
+}
 .home-changelog-body.home-changelog-collapsed {
   display: none;
 }
