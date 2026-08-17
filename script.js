@@ -1743,10 +1743,6 @@ const HEADER_ICON_DEFS = {
   ac: `<path fill-rule="evenodd" d="M12 2.2 L19 4.8 L19 11.5 C19 17 15.5 20.3 12 21.8 C8.5 20.3 5 17 5 11.5 L5 4.8 Z M11.6 5.2 L12.4 5.2 L12.4 16.3 L11.6 16.3 Z"/>`,
   damage: `<g transform="rotate(45 12 12)"><path d="M12 1.5 L13 4.5 L12.5 15 L11.5 15 L11 4.5 Z"/><rect x="8.3" y="15" width="7.4" height="1.5"/><rect x="11" y="16.5" width="2" height="4.3"/><circle cx="12" cy="21.7" r="1.3"/></g>`,
   delay: `<path fill-rule="evenodd" d="M12 2.5 A9.5 9.5 0 1 0 12.01 2.5 Z M12 5 A7 7 0 1 1 11.99 5 Z"/><rect x="11.3" y="6.5" width="1.4" height="6" rx="0.5"/><rect x="11.3" y="11.3" width="4.2" height="1.4" rx="0.5" transform="rotate(45 12 12)"/>`,
-  weight: `<rect x="9" y="11" width="6" height="2" rx="0.5"/><rect x="3.2" y="8" width="2.4" height="8" rx="0.8"/><rect x="1" y="9.5" width="1.6" height="5" rx="0.6"/><rect x="18.4" y="8" width="2.4" height="8" rx="0.8"/><rect x="21.4" y="9.5" width="1.6" height="5" rx="0.6"/>`,
-  capacity: `<path d="M4 8 L12 4 L20 8 L12 12 Z"/><path d="M4 8 L4 16 L12 20 L12 12 Z"/><path d="M20 8 L20 16 L12 20 L12 12 Z"/>`,
-  classes: `<circle cx="12" cy="6" r="3"/><path d="M12 9 C7 9 5 13 5 21 L19 21 C19 13 17 9 12 9 Z"/>`,
-  race: `<circle cx="8" cy="13" r="5"/><circle cx="16" cy="12" r="4.5"/><path d="M13 8 L14.5 5 L15.5 8 Z"/><path d="M17.5 8 L19 5 L19.5 8.3 Z"/><path d="M19.5 12 L22 12.5 L19.8 13.8 Z"/>`,
 };
 
 function colHeaderIcon(key) {
@@ -1996,10 +1992,6 @@ function itemHasBuff(item, buffValue) {
   return true;
 }
 
-function formatCapacity(item) {
-  return item.capacity != null ? `${item.capacity} / ${item.maxSize}` : '—';
-}
-
 function formatSlot(item) {
   if (!item.slot) return '—';
   return item.twoHanded ? `${item.slot} (2H)` : item.slot;
@@ -2223,10 +2215,6 @@ function renderItemsList(container, category) {
           <col class="col-damage">
           <col class="col-delay">
           <col class="col-ratio">
-          <col class="col-weight">
-          <col class="col-capacity">
-          <col class="col-classes">
-          <col class="col-race">
         </colgroup>
         <thead>
           <tr>
@@ -2238,10 +2226,6 @@ function renderItemsList(container, category) {
             <th data-sort-key="damage" class="${sortableClass} col-header-icon-cell" data-tooltip="Damage" aria-label="Damage"${sortDisabledTitle}>${colHeaderIcon('damage')}</th>
             <th data-sort-key="delay" class="${sortableClass} col-header-icon-cell" data-tooltip="Delay (time between attacks)" aria-label="Delay (time between attacks)"${sortDisabledTitle}>${colHeaderIcon('delay')}</th>
             <th data-sort-key="ratio" class="${sortableClass} col-header-icon-cell" data-tooltip="Damage / Delay Ratio" aria-label="Damage / Delay Ratio"${sortDisabledTitle}>${colHeaderSymbol('&#8758;')}</th>
-            <th data-sort-key="weight" class="${sortableClass} col-header-icon-cell" data-tooltip="Weight / Size" aria-label="Weight / Size"${sortDisabledTitle}>${colHeaderIcon('weight')}</th>
-            <th data-sort-key="capacity" class="${sortableClass} col-header-icon-cell" data-tooltip="Capacity / Max Size" aria-label="Capacity / Max Size"${sortDisabledTitle}>${colHeaderIcon('capacity')}</th>
-            <th data-sort-key="classes" class="${sortableClass} col-header-icon-cell" data-tooltip="Classes" aria-label="Classes"${sortDisabledTitle}>${colHeaderIcon('classes')}</th>
-            <th data-sort-key="race" class="${sortableClass} col-header-icon-cell" data-tooltip="Race" aria-label="Race"${sortDisabledTitle}>${colHeaderIcon('race')}</th>
           </tr>
         </thead>
         <tbody id="items-tbody"></tbody>
@@ -2533,7 +2517,7 @@ function escapeAttr(str) {
 
 function renderItemRows(tbody, items, showTypeColumn) {
   if (!items.length) {
-    tbody.innerHTML = `<tr><td colspan="${showTypeColumn ? 12 : 11}" class="items-empty">No items match your filters.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="${showTypeColumn ? 8 : 7}" class="items-empty">No items match your filters.</td></tr>`;
     return;
   }
 
@@ -2544,22 +2528,22 @@ function renderItemRows(tbody, items, showTypeColumn) {
   // (2026-07-14) only appears in the unscoped "All Items" list reached from
   // the category grid's own filter dropdowns — a normal per-category list
   // already implies its type, so it stays out of the way there.
+  //
+  // Weight/Size, Capacity/Max Size, Classes, and Race columns removed from
+  // this table entirely (2026-08-17, user's own request, made while
+  // investigating a narrow-portrait-layout wrapping complaint) — the data
+  // itself is untouched and still shows on the item's own full card
+  // (renderItemCardHTML's `fields`, a separate code path from this table),
+  // and Classes/Race stay as filter dropdowns above the table even without
+  // their own column. Freed-up width was handed to Stats/Slot (see
+  // .col-stats/.col-slot in style.css), the two columns the original
+  // wrapping complaint was actually about.
   tbody.innerHTML = items.map(item => {
     const ratio = itemRatio(item);
     const damageCell = item.damage != null ? item.damage : '—';
     const delayCell = item.delay != null ? item.delay : '—';
     const ratioCell = ratio != null ? ratio.toFixed(2) : '—';
     const acCell = item.ac != null ? item.ac : '—';
-    const capacityCell = formatCapacity(item);
-    // "Medium" abbreviated to "Med" in this column specifically
-    // (2026-08-13, user-reported wrapping — "6 / Medium" split across two
-    // lines even with nowrap+ellipsis below) — display-only, item.size
-    // itself stays the real "Medium" value everywhere else (filters, item
-    // cards, search).
-    const weightSizeFull = (item.weight != null || item.size)
-      ? `${item.weight != null ? item.weight : '—'} / ${item.size || '—'}`
-      : '—';
-    const weightSizeCell = weightSizeFull.replace('Medium', 'Med');
 
     return `
       <tr data-slug="${escapeAttr(item.slug || '')}">
@@ -2573,10 +2557,6 @@ function renderItemRows(tbody, items, showTypeColumn) {
         <td data-label="Damage"${damageCell === '—' ? ' class="cell-empty"' : ''}>${damageCell}</td>
         <td data-label="Delay"${delayCell === '—' ? ' class="cell-empty"' : ''}>${delayCell}</td>
         <td data-label="Ratio"${ratioCell === '—' ? ' class="cell-empty"' : ''}>${ratioCell}</td>
-        <td data-label="Weight / Size"${weightSizeCell === '—' ? ' class="cell-empty"' : ''} title="${escapeAttr(weightSizeFull)}">${noSplitSlashParts(weightSizeCell)}</td>
-        <td data-label="Capacity / Max Size"${capacityCell === '—' ? ' class="cell-empty"' : ''} title="${escapeAttr(capacityCell)}">${noSplitSlashParts(capacityCell)}</td>
-        <td data-label="Classes"${formatList(item.classes) === '—' ? ' class="cell-empty"' : ''}>${formatList(item.classes)}</td>
-        <td data-label="Race"${formatList(item.race) === '—' ? ' class="cell-empty"' : ''}>${formatList(item.race)}</td>
       </tr>
     `;
   }).join('');

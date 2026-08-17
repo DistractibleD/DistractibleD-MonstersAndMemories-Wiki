@@ -767,29 +767,31 @@ body {
 .stat-entry {
   white-space: nowrap;
 }
-/* Slot / Weight-Size / Capacity-Max-Size columns reuse .stat-entry too
-   (noSplitSlashParts() in script.js splits "Primary / Secondary" into two
-   spans joined by a plain " / ") — an earlier attempt forced the whole
-   value onto one line with overflow:hidden + text-overflow:ellipsis
-   instead, which stopped mid-word splitting but then started truncating
-   short values like "0.1 / Small" to "0.1 / S…" on a narrow column
-   (2026-08-13, user-reported both problems in turn). Letting it wrap
-   between " / "-separated pieces, same as Stats, never hides data behind
-   an ellipsis and still never breaks a word in half. */
-/* Column proportions, tuned so short-but-unbreakable words (e.g. "Medium",
-   "Weapon") fit without splitting mid-word. Overridden for mobile below. */
-.col-name { width: 20%; }
-.col-type { width: 5%; }
-.col-slot { width: 6%; }
-.col-ac { width: 4%; }
-.col-stats { width: 12%; }
-.col-damage { width: 4%; }
-.col-delay { width: 4%; }
-.col-ratio { width: 4%; }
-.col-weight { width: 8%; }
-.col-capacity { width: 9%; }
-.col-classes { width: 16%; }
-.col-race { width: 8%; }
+/* Slot column reuses .stat-entry too (noSplitSlashParts() in script.js
+   splits "Primary / Secondary" into two spans joined by a plain " / ") — an
+   earlier attempt forced the whole value onto one line with overflow:hidden
+   + text-overflow:ellipsis instead, which stopped mid-word splitting but
+   then started truncating short values on a narrow column (2026-08-13,
+   user-reported both problems in turn). Letting it wrap between
+   " / "-separated pieces, same as Stats, never hides data behind an
+   ellipsis and still never breaks a word in half. */
+/* Weight/Size, Capacity/Max Size, Classes, and Race columns removed from
+   the Item Database table entirely (2026-08-17, user's own request) — that
+   data still shows on an item's own full card, and Classes/Race are still
+   filterable via their dropdowns above the table, just no longer their own
+   column here. Freed-up width went to Stats and Slot, the two columns a
+   narrow-portrait-layout wrapping complaint was actually about (see the
+   `orientation: portrait` block below, where the problem was worst).
+   Column proportions tuned so short-but-unbreakable words (e.g. "Weapon")
+   fit without splitting mid-word. Overridden for mobile below. */
+.col-name { width: 32%; }
+.col-type { width: 8%; }
+.col-slot { width: 14%; }
+.col-ac { width: 6%; }
+.col-stats { width: 24%; }
+.col-damage { width: 6%; }
+.col-delay { width: 5%; }
+.col-ratio { width: 5%; }
 .col-monster-name { width: 100%; }
 .col-gathering-name { width: 22%; }
 .col-gathering-skill { width: 10%; }
@@ -2734,19 +2736,17 @@ body {
   .items-search { flex-basis: 100%; }
   .content-inner .items-table { font-size: 0.78rem; }
   .content-inner .items-table th, .content-inner .items-table td { padding: 6px 6px; }
-  /* Give the short-word columns relatively more room at narrow widths. */
-  .col-name { width: 15%; }
-  .col-type { width: 6%; }
-  .col-slot { width: 7%; }
+  /* Give the short-word columns relatively more room at narrow widths.
+     Weight/Capacity/Classes/Race no longer have their own columns (see the
+     removal note near .col-name above) — freed width went to Name/Slot/Stats. */
+  .col-name { width: 30%; }
+  .col-type { width: 7%; }
+  .col-slot { width: 15%; }
   .col-ac { width: 6%; }
-  .col-stats { width: 10%; }
-  .col-damage { width: 6%; }
+  .col-stats { width: 24%; }
+  .col-damage { width: 7%; }
   .col-delay { width: 6%; }
-  .col-ratio { width: 6%; }
-  .col-weight { width: 8%; }
-  .col-capacity { width: 9%; }
-  .col-classes { width: 13%; }
-  .col-race { width: 8%; }
+  .col-ratio { width: 5%; }
   /* The desktop icon size (30px wrap / 26px svg) doesn't fit inside these
      narrower % columns once the table itself is only 640-900px wide (a 4%
      column can be ~30px total, no room left for icon + padding) — icons
@@ -2914,18 +2914,18 @@ body {
   }
   .content-inner .items-table { font-size: 0.8rem; }
   .content-inner .items-table th, .content-inner .items-table td { padding: 7px 8px; }
-  .col-name { width: 16%; }
-  .col-type { width: 6%; }
-  .col-slot { width: 7%; }
-  .col-ac { width: 5%; }
-  .col-stats { width: 11%; }
-  .col-damage { width: 5%; }
-  .col-delay { width: 5%; }
-  .col-ratio { width: 5%; }
-  .col-weight { width: 9%; }
-  .col-capacity { width: 10%; }
-  .col-classes { width: 14%; }
-  .col-race { width: 7%; }
+  /* Weight/Capacity/Classes/Race no longer have their own columns (see the
+     removal note near .col-name earlier in this file) — freed width went to
+     Name/Slot/Stats, the columns a narrow-portrait wrapping complaint was
+     actually about (this is the exact layout that complaint was reported in). */
+  .col-name { width: 28%; }
+  .col-type { width: 8%; }
+  .col-slot { width: 16%; }
+  .col-ac { width: 6%; }
+  .col-stats { width: 24%; }
+  .col-damage { width: 6%; }
+  .col-delay { width: 6%; }
+  .col-ratio { width: 6%; }
   .col-header-icon-wrap { width: 24px; height: 24px; }
   .col-header-svg { width: 21px; height: 21px; }
   .col-header-symbol { font-size: 1.3rem; }

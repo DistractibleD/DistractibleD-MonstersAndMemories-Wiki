@@ -213,14 +213,24 @@ and nothing is ever hidden behind an ellipsis.
 - **Stats** (a comma list) — `formatStatsHTML()` wraps each `"Label +N"` pair in its own
   `.stat-entry`, joined by `, `. `formatStats()` itself stays plain text, still used for the
   search haystack and sort-by-stats.
-- **Slot / Weight-Size / Capacity-Max-Size** (each cell is one `"X / Y"` value) —
+- **Slot** (the one remaining `"X / Y"`-shaped cell in this table — see below) —
   `noSplitSlashParts()` splits on `" / "` and wraps each side in its own `.stat-entry`,
-  rejoined with a plain `" / "`. Each of these three cells also carries a `title` attribute
-  with the full value, mostly redundant now but harmless to keep.
-- **Weight/Size column abbreviates "Medium" to "Med"** (display-only, user's own request) —
-  `item.size` itself is untouched everywhere else (filters, item cards, search); only this
-  one cell's rendered text swaps it, and the cell's `title` attribute still shows the
-  unabbreviated `"N / Medium"` on hover.
+  rejoined with a plain `" / "`. Also carries a `title` attribute with the full value, mostly
+  redundant now but harmless to keep.
+
+**Weight/Size, Capacity/Max Size, Classes, and Race no longer have their own columns in this
+table** (2026-08-17, user's own request, raised while investigating a narrow-portrait-layout
+wrapping complaint — see "Wide portrait screens" below). The data isn't gone: it still shows
+on an item's own full card (`renderItemCardHTML`'s `fields` array is a separate code path
+from this table and was never touched), and Classes/Race stay as filter dropdowns above the
+table even without a column of their own — only the table *columns* were removed, not the
+data or the ability to filter by them. `renderItemRows`'s colspan for the empty-state row
+dropped from 12/11 to 8/7 to match. The freed width was handed to Name/Slot/Stats across all
+three responsive column-width blocks (default, ≤900px tablet, portrait) — Stats in
+particular roughly doubled (12%→24% desktop), since a multi-stat item wrapping to 4-5 lines
+in an 11-12%-wide column was the actual complaint that started this. The old "Weight/Size
+column abbreviates 'Medium' to 'Med'" display trick no longer applies now that the column
+itself is gone — removed along with `formatCapacity()`, both now-dead code.
 
 ## Item screenshot format
 
@@ -1775,9 +1785,12 @@ line length); data-driven pages (Item Database, Maps, Crafting, Monsters) get a
 `page.type` check for any future full-width page.
 
 Item Database table: `table-layout: fixed` + explicit `<colgroup>` (percentage widths in
-`renderItemsPage`), no `white-space: nowrap` — long cells (Classes, Stats) wrap instead of
+`renderItemsPage`), no `white-space: nowrap` — long cells (Stats, Name) wrap instead of
 forcing horizontal scroll. Adding a column needs a proportional `<col>`, not auto-sizing
-(auto-sizing caused the original horizontal-scroll problem).
+(auto-sizing caused the original horizontal-scroll problem). Current columns: Name, Type
+(All Types view only), Slot, AC, Stats, Damage, Delay, Ratio — Weight/Size, Capacity/Max
+Size, Classes, and Race were removed as columns 2026-08-17 (still filterable/still on the
+item's own card, see "Row cells don't split a value mid-word" above).
 
 ## Back to top button
 
