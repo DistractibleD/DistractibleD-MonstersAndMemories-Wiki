@@ -1921,6 +1921,37 @@ body {
 }
 
 /* ---------- Maps ---------- */
+/* Reference maps that cover more than one place (2026-08-17, user's own
+   request) — pinned above the alphabetical grid in their own bordered
+   panel, sized to hug its 1-2 cards (width: fit-content) rather than
+   stretching edge-to-edge like the main grid below, so it visually reads as
+   its own small callout box, not just another full-width grid row. Same
+   bordered-box language as .gem-reference elsewhere on the site, but gold
+   --accent instead of that panel's teal --accent-craft, matching this
+   page's own (non-crafting) accent color. */
+.maps-featured {
+  margin-top: 18px;
+  width: fit-content;
+  max-width: 100%;
+  padding: 14px 16px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.maps-featured h2 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  color: var(--accent);
+}
+.maps-featured-note {
+  margin: 0 0 12px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+.maps-grid-featured {
+  margin-top: 0;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 220px));
+}
 .maps-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));

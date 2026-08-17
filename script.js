@@ -2870,6 +2870,25 @@ function groupMapsByArea(maps) {
     .sort((a, b) => a.base.localeCompare(b.base));
 }
 
+// One map card's markup — shared by the pinned featured panel and the
+// regular grid below it, so both stay wired to the exact same click
+// handlers (matched by `data-group-index` into the outer `groups` array,
+// untouched by which container the card actually renders in).
+function renderMapCardHTML(g, gi) {
+  const primary = g.entries[0];
+  const variants = g.entries.slice(1);
+  return `
+    <div class="map-card" data-group-index="${gi}">
+      <img class="map-card-thumb" src="${primary.thumbnail || primary.image}" alt="${g.base}" loading="lazy">
+      <div class="map-card-name">${g.base}</div>
+      ${variants.length ? `
+        <div class="map-card-variants">
+          ${variants.map((v, vi) => `<a href="#" class="map-card-variant-link" data-group-index="${gi}" data-variant-index="${vi + 1}">${mapVariantLabel(v.name)}</a>`).join('')}
+        </div>
+      ` : ''}
+    </div>`;
+}
+
 async function renderMapsPage(container) {
   await ensureMapsData();
 
@@ -2881,24 +2900,39 @@ async function renderMapsPage(container) {
     return;
   }
 
+  // A couple of maps are wide-scope reference material rather than "a place
+  // you'd look up," so they're pinned in their own panel above the
+  // alphabetical grid instead of sorting in with everywhere else (user's
+  // own request, 2026-08-17): "Calafrey & Szurr Regions" (the
+  // zone-connections diagram covering every other map on this page) and
+  // "Aethoril" (the entire world map — "not really usable for anything yet"
+  // in the user's own words, but still worth surfacing rather than burying
+  // alphabetically). `FEATURED_MAP_NAMES` fixes the display order (this one
+  // first, not alphabetical) — extend the same way if another
+  // whole-world/whole-region reference map shows up later. Matched by base
+  // name, same lookup convention every other map-name reference on this
+  // page already uses (see `pendingMapOpen` below). Indices into `groups`
+  // stay the same array position regardless of which container a card
+  // renders in, so the existing click-handler wiring below needs no
+  // special-casing.
+  const FEATURED_MAP_NAMES = ['Calafrey & Szurr Regions', 'Aethoril'];
+  const featuredIndexes = FEATURED_MAP_NAMES
+    .map(name => groups.findIndex(g => g.base === name))
+    .filter(gi => gi !== -1);
+
   container.innerHTML = `
     <h1>Maps</h1>
     <p>Click a map to view it full size. Scroll to zoom, click and drag to pan.</p>
+    ${featuredIndexes.length ? `
+    <div class="maps-featured">
+      <h2>Regional Overview</h2>
+      <p class="maps-featured-note">Reference maps covering more than one place — zone connections, the world map.</p>
+      <div class="maps-grid maps-grid-featured">
+        ${featuredIndexes.map(gi => renderMapCardHTML(groups[gi], gi)).join('')}
+      </div>
+    </div>` : ''}
     <div class="maps-grid">
-      ${groups.map((g, gi) => {
-        const primary = g.entries[0];
-        const variants = g.entries.slice(1);
-        return `
-        <div class="map-card" data-group-index="${gi}">
-          <img class="map-card-thumb" src="${primary.thumbnail || primary.image}" alt="${g.base}" loading="lazy">
-          <div class="map-card-name">${g.base}</div>
-          ${variants.length ? `
-            <div class="map-card-variants">
-              ${variants.map((v, vi) => `<a href="#" class="map-card-variant-link" data-group-index="${gi}" data-variant-index="${vi + 1}">${mapVariantLabel(v.name)}</a>`).join('')}
-            </div>
-          ` : ''}
-        </div>`;
-      }).join('')}
+      ${groups.map((g, gi) => featuredIndexes.includes(gi) ? '' : renderMapCardHTML(g, gi)).join('')}
     </div>
   `;
 
