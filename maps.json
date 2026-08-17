@@ -2,6 +2,8 @@
   { "name": "Aethoril", "slug": "aethoril", "image": "images/Maps/aethoril.webp", "thumbnail": "images/Maps/thumbs/aethoril.jpg" },
   { "name": "Ancient Crypt", "slug": "ancient-crypt", "image": "images/Maps/ancient-crypt.png", "thumbnail": "images/Maps/thumbs/ancient-crypt.jpg" },
   { "name": "Blacktide Bay", "slug": "blacktide-bay", "image": "images/Maps/blacktide-bay.jpg", "thumbnail": "images/Maps/thumbs/blacktide-bay.jpg" },
+  { "name": "Calafrey & Szurr Regions", "slug": "calafrey-szurr-regions", "image": "images/Maps/calafrey-szurr-regions.png", "thumbnail": "images/Maps/thumbs/calafrey-szurr-regions.jpg" },
+  { "name": "Calafrey & Szurr Regions (Zone Connections)", "slug": "calafrey-szurr-regions-zone-connections", "image": "images/Maps/calafrey-szurr-regions-zone-connections.png", "thumbnail": "images/Maps/thumbs/calafrey-szurr-regions-zone-connections.jpg" },
   { "name": "Caves of Irem", "slug": "deep-dunes", "image": "images/Maps/deep-dunes.png", "thumbnail": "images/Maps/thumbs/deep-dunes.jpg" },
   { "name": "Evershade Weald", "slug": "evershade-weald", "image": "images/Maps/evershade-weald.jpg", "thumbnail": "images/Maps/thumbs/evershade-weald.jpg" },
   { "name": "Faelindral", "slug": "faelindral", "image": "images/Maps/faelindral.jpg", "thumbnail": "images/Maps/thumbs/faelindral.jpg" },
