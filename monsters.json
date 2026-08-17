@@ -1110,12 +1110,19 @@
     "maps": ["Shaded Dunes", "Night Harbor"],
     "areas": ["North Gate"],
     "drops": [
-      { "item": "Rawhide Scraps" }
+      { "item": "Rawhide Scraps" },
+      { "item": "Cloth Scraps" },
+      { "family": "Rusty" },
+      { "family": "Tattered Cloth" }
     ],
     "coinDrops": [
-      { "copper": 18 }
+      { "copper": 18 },
+      { "copper": 27 },
+      { "copper": 23 },
+      { "copper": 28 },
+      { "copper": 27 }
     ],
-    "lastUpdated": "2026-08-07"
+    "lastUpdated": "2026-08-17"
   },
   {
     "name": "a restless ghoul",
@@ -1148,8 +1155,16 @@
     "maps": ["Shaded Dunes"],
     "drops": [
       { "item": "Rawhide Scraps" },
-      { "item": "Vibroplasmic Residue" }
-    ]
+      { "item": "Vibroplasmic Residue" },
+      { "item": "Cloth Scraps" },
+      { "family": "Tattered Cloth" }
+    ],
+    "coinDrops": [
+      { "copper": 31 },
+      { "copper": 38 },
+      { "copper": 25 }
+    ],
+    "lastUpdated": "2026-08-17"
   },
   {
     "name": "a smuggler",

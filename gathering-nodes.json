@@ -560,8 +560,9 @@
     "tradeskill": "Herbalism",
     "minSkill": 150,
     "trivialSkill": 200,
-    "results": ["Magebloom"],
-    "locations": ["Shaded Dunes", "Fallen Pass", "Glass Flats"]
+    "results": ["Magebloom", "Arcane Frond"],
+    "locations": ["Shaded Dunes", "Fallen Pass", "Glass Flats"],
+    "lastUpdated": "2026-08-17"
   },
   {
     "name": "Last Breath",

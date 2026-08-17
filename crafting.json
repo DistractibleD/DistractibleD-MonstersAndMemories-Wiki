@@ -996,11 +996,11 @@
   {
     "name": "Recurve Bow",
     "slug": "recurve-bow",
-    "lastUpdated": "2026-08-13",
+    "lastUpdated": "2026-08-17",
     "tradeskill": "Fletching",
     "listOrder": 15,
     "difficultyColor": "Green",
-    "observedAtSkill": 83,
+    "observedAtSkill": 85,
     "weight": 3.0,
     "size": "Medium",
     "components": [{ "item": "Wood Board", "quantity": 9 }, { "item": "Bolt of Cloth", "quantity": 1 }]
@@ -1019,64 +1019,91 @@
   {
     "name": "Ironhead Arrow x100",
     "slug": "ironhead-arrow-x100",
-    "lastUpdated": "2026-08-13",
+    "lastUpdated": "2026-08-17",
     "tradeskill": "Fletching",
-    "difficultyColor": "Yellow",
-    "observedAtSkill": 83,
+    "listOrder": 18,
+    "difficultyColor": "Green",
+    "observedAtSkill": 105,
     "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Iron Scraps", "quantity": 1 }],
     "recipeSkillLevel": 100
   },
   {
     "name": "Ironhead Arrow x500",
     "slug": "ironhead-arrow-x500",
-    "lastUpdated": "2026-08-13",
+    "lastUpdated": "2026-08-17",
     "tradeskill": "Fletching",
-    "difficultyColor": "Yellow",
-    "observedAtSkill": 83,
+    "listOrder": 20,
+    "difficultyColor": "Green",
+    "observedAtSkill": 105,
     "components": [{ "item": "Wood", "quantity": 5 }, { "item": "Iron Scraps", "quantity": 5 }],
     "recipeSkillLevel": 100
   },
   {
     "name": "Ironhead Arrow x1000",
     "slug": "ironhead-arrow-x1000",
-    "lastUpdated": "2026-08-13",
+    "lastUpdated": "2026-08-17",
     "tradeskill": "Fletching",
-    "difficultyColor": "Yellow",
-    "observedAtSkill": 83
+    "listOrder": 19,
+    "difficultyColor": "Green",
+    "observedAtSkill": 105
   },
   {
     "name": "Fine Wood Longbow",
     "slug": "fine-wood-longbow",
-    "lastUpdated": "2026-08-13",
+    "lastUpdated": "2026-08-17",
     "tradeskill": "Fletching",
-    "difficultyColor": "Red",
-    "observedAtSkill": 83
+    "listOrder": 21,
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 105
   },
   {
     "name": "Steelhead Arrow x100",
     "slug": "steelhead-arrow-x100",
-    "lastUpdated": "2026-08-13",
+    "lastUpdated": "2026-08-17",
     "tradeskill": "Fletching",
-    "difficultyColor": "Red",
-    "observedAtSkill": 83,
+    "listOrder": 22,
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 105,
     "components": [{ "item": "Wood", "quantity": 1 }, { "item": "Steel Scraps", "quantity": 1 }],
     "recipeSkillLevel": 125
   },
   {
+    "name": "Steelhead Arrow x1000",
+    "slug": "steelhead-arrow-x1000",
+    "lastUpdated": "2026-08-17",
+    "tradeskill": "Fletching",
+    "listOrder": 23,
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 105
+  },
+  {
     "name": "Steelhead Arrow x500",
     "slug": "steelhead-arrow-x500",
-    "lastUpdated": "2026-07-20",
+    "lastUpdated": "2026-08-17",
     "tradeskill": "Fletching",
+    "listOrder": 24,
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 105,
     "components": [{ "item": "Wood", "quantity": 5 }, { "item": "Steel Scraps", "quantity": 5 }],
     "recipeSkillLevel": 125
   },
   {
+    "name": "Fine Wood Recurve Bow",
+    "slug": "fine-wood-recurve-bow",
+    "lastUpdated": "2026-08-17",
+    "tradeskill": "Fletching",
+    "listOrder": 25,
+    "difficultyColor": "Red",
+    "observedAtSkill": 105
+  },
+  {
     "name": "Fine Wood Bow",
     "slug": "fine-wood-bow",
-    "lastUpdated": "2026-08-13",
+    "lastUpdated": "2026-08-17",
     "tradeskill": "Fletching",
-    "difficultyColor": "Dark Blue",
-    "observedAtSkill": 83,
+    "listOrder": 16,
+    "difficultyColor": "Green",
+    "observedAtSkill": 90,
     "weight": 4.0,
     "size": "Medium",
     "components": [{ "item": "Fine Wood Board", "quantity": 5 }, { "item": "Bolt of Wool", "quantity": 1 }]
@@ -1084,10 +1111,11 @@
   {
     "name": "Fine Wood Buckler",
     "slug": "fine-wood-buckler",
-    "lastUpdated": "2026-08-13",
+    "lastUpdated": "2026-08-17",
     "tradeskill": "Fletching",
-    "difficultyColor": "Dark Blue",
-    "observedAtSkill": 83,
+    "listOrder": 17,
+    "difficultyColor": "Green",
+    "observedAtSkill": 100,
     "components": [{ "item": "Fine Wood Board", "quantity": 5 }, { "item": "Bronze Bar", "quantity": 1 }, { "item": "Hide Strap", "quantity": 1 }]
   },
   {

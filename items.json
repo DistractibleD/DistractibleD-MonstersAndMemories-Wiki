@@ -23084,5 +23084,15 @@
     "size": "Small",
     "classes": ["BRD", "CLR", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SHM"],
     "race": ["ALL"]
+  },
+  {
+    "name": "Magebloom",
+    "slug": "magebloom",
+    "type": "Misc",
+    "tags": [],
+    "description": "An iridescent herb that absorbs and nullifies ambient magical energy.",
+    "weight": 0.1,
+    "size": "Tiny",
+    "lastUpdated": "2026-08-17"
   }
 ]
