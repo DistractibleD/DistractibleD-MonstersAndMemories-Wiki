@@ -333,5 +333,31 @@
       "Lumberjack Axe", "Lumberjack Pouch", "Resin"
     ],
     "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "A Cobbler",
+    "slug": "a-cobbler",
+    "location": "Night Harbor",
+    "area": "Night Market",
+    "sells": [
+      "Patched Cloth Boots",
+      { "family": "Tattered Cloth" },
+      { "family": "Tattered Cotton" },
+      { "family": "Tattered Hide" },
+      { "family": "Tattered Rawhide" }
+    ],
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "A Spicemonger",
+    "slug": "a-spicemonger",
+    "location": "Night Harbor",
+    "area": "Night Market",
+    "sells": [
+      "Cardamom Pods", "Cayenne Peppers", "Coriander Seeds", "Cumin Seeds",
+      "Dried Dragon's Breath Peppers", "Dried Garlic", "Fenugreek Seeds", "Paprika",
+      "Pinch of Saffron", "Sesame Seeds", "Sumac Berries"
+    ],
+    "lastUpdated": "2026-08-17"
   }
 ]

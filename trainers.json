@@ -109,5 +109,15 @@
       { "skill": "Wilderness", "observedAtSkill": 0, "cap": 155, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 4 } }
     ],
     "lastUpdated": "2026-08-15"
+  },
+  {
+    "name": "Brewer Gromni",
+    "slug": "brewer-gromni",
+    "location": "Night Harbor",
+    "area": "Night Market",
+    "trains": [
+      { "skill": "Brewing", "observedAtSkill": 0, "cap": 300, "cost": { "platinum": 0, "gold": 0, "silver": 0, "copper": 4 } }
+    ],
+    "lastUpdated": "2026-08-17"
   }
 ]

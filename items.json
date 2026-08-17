@@ -7769,10 +7769,18 @@
 {
     "name": "Black Feather Arrow",
     "slug": "black-feather-arrow",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Ammo",
-    "needsInfo": true
+    "damage": 3,
+    "delay": 0,
+    "skill": "Archery",
+    "description": "An arrow for use with a bow.",
+    "weight": 0.01,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"]
   },
   {
     "name": "Brittle Stone",
@@ -23341,6 +23349,113 @@
     "description": "An iridescent herb that absorbs and nullifies ambient magical energy.",
     "weight": 0.1,
     "size": "Tiny",
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Patched Cloth Boots",
+    "slug": "patched-cloth-boots",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Feet",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Tattered Cotton Boots",
+    "slug": "tattered-cotton-boots",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Feet",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Tattered Hide Boots",
+    "slug": "tattered-hide-boots",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Feet",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Cardamom Pods",
+    "slug": "cardamom-pods",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Cayenne Peppers",
+    "slug": "cayenne-peppers",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Coriander Seeds",
+    "slug": "coriander-seeds",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Cumin Seeds",
+    "slug": "cumin-seeds",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Dried Dragon's Breath Peppers",
+    "slug": "dried-dragons-breath-peppers",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Dried Garlic",
+    "slug": "dried-garlic",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Fenugreek Seeds",
+    "slug": "fenugreek-seeds",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Pinch of Saffron",
+    "slug": "pinch-of-saffron",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Sesame Seeds",
+    "slug": "sesame-seeds",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Sumac Berries",
+    "slug": "sumac-berries",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
     "lastUpdated": "2026-08-17"
   }
 ]
