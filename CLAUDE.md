@@ -891,6 +891,28 @@ same `{ "family": ... }` compact entry apply to a vendor's `sells` list (see "Ve
 Trainers" above for the vendor-side rendering/lookup details); the families/rosters below are
 shared by both monsters and vendors.
 
+**Every material tier of a given equipment category shares one item roster, confirmed
+2026-08-17** — the user's own words: "All the different tiers of metal armor and weapons have
+all the different items... metal items have tiers, so do wood, all with different prefix
+(rusty, rusty iron, rusty steel, tarnished, tarnished bronze, salt encrusted and so on). So it
+is safe to fill in the missing pieces." This is the same principle already confirmed for
+Tattered Cloth/Cotton/Wool (below), generalized to every weapon/armor material-tier family —
+Rusty, Rusty Iron, Rusty Steel, Tarnished, Tarnished Bronze, Tarnished Iron, Bronze, Corroded
+Bronze, Copper, Iron, and the Worn/Cracked wood-staff-and-bow tiers (Fine Wood, Elderwood,
+Ironbark, plain) all differ from each other **only in stats**, not in which pieces exist. The
+42-piece Corroded Bronze/Rusty Iron roster (18 weapons + Tower Shield + 12 Chain + 12 Plate,
+see below) is the fullest confirmed example of "the" roster a full metal tier has. Practical
+effect: once any one piece of a tier is confirmed, every other piece in that tier's roster is
+safe to add as a `needsInfo: true` items.json stub (same as any other quality-set backfill) and
+a monster/vendor's drop list for that tier should use the compact `{ "family": ... }` entry
+instead of naming pieces individually, **even if only 1-2 pieces of that tier have actually
+been directly confirmed for that specific monster** — the roster-sharing confirmation means
+"this monster drops a Rusty Steel weapon" is now good enough to imply the whole Rusty Steel
+family the same way it already worked for Rusty/Rusty Iron/Corroded Bronze. Full retroactive
+items.json backfill across every tier to the 42-piece roster hasn't been done in one sweep
+(large, still in progress) — apply this rule going forward whenever a tier's pieces come up,
+same incremental-growth precedent as every other family.
+
 A "quality set" = shared name prefix denoting a tier/material, not a literal in-game
 grouping. **Confirmed families and current rosters** (check longest-prefix-first — "Rusty
 Iron"/"Rusty Steel" before plain "Rusty" — so a Rusty Iron piece is never miscounted into
@@ -965,13 +987,14 @@ are three separate families, don't merge or assume one's roster implies another'
   Gloves/Gorget/Leggings/Mask/Shoulderguards/Tunic/Waistguard/Wristguard; Plate Arming
   Doublet/Boots/Bracer/Breastplate/Cloak/Collar/Gauntlets/Girdle/Greaves/Helm/Pauldrons/
   Visor.
-- **Rusty Steel** (41 — has a Tower Shield that Rusty Iron... has too, but no Chain
-  Gambeson unlike Rusty Iron; recorded verbatim, not assumed symmetric): Axe, Battle Axe,
-  Dagger, Great Scythe, Greatsword, Kite Shield, Long Spear, Longsword, Mace, Maul, Scimitar,
-  Scythe, Shortsword, Spear, Tower Shield, Trident, War Lance, Warhammer; Chain Boots/Cloak/
-  Coif/Gloves/Gorget/Leggings/Mask/Shoulderguards/Tunic/Waistguard/Wristguard; Plate Arming
-  Doublet/Boots/Bracer/Breastplate/Cloak/Collar/Gauntlets/Girdle/Greaves/Helm/Pauldrons/
-  Visor.
+- **Rusty Steel** (42, same shape as Corroded Bronze/Rusty Iron — Chain Gambeson backfilled
+  2026-08-17 once the "every metal tier shares one roster" rule was confirmed; previously
+  recorded as 41 with Chain Gambeson deliberately left out as an unconfirmed asymmetry, no
+  longer applicable): Axe, Battle Axe, Dagger, Great Scythe, Greatsword, Kite Shield, Long
+  Spear, Longsword, Mace, Maul, Scimitar, Scythe, Shortsword, Spear, Tower Shield, Trident,
+  War Lance, Warhammer; Chain Boots/Cloak/Coif/Gambeson/Gloves/Gorget/Leggings/Mask/
+  Shoulderguards/Tunic/Waistguard/Wristguard; Plate Arming Doublet/Boots/Bracer/Breastplate/
+  Cloak/Collar/Gauntlets/Girdle/Greaves/Helm/Pauldrons/Visor.
 
 Treat a new shared prefix as its own family the same way. Rosters grow over time as new
 screenshots turn up pieces not previously known (e.g. Corroded Bronze: 19→42, Rusty Iron

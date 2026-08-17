@@ -6494,11 +6494,17 @@
   {
     "name": "Bronze Axe",
     "slug": "bronze-axe",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 11,
+    "delay": 40,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 6.0,
+    "size": "Medium",
+    "classes": ["BST", "FTR", "INQ", "PAL", "RNG", "SHD", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Bronze Battle Axe",
@@ -6513,11 +6519,17 @@
   {
     "name": "Bronze Dagger",
     "slug": "bronze-dagger",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 6,
+    "delay": 22,
     "skill": "Stabbing",
-    "needsInfo": true
+    "weight": 3.0,
+    "size": "Small",
+    "classes": ["ARC", "BRD", "BST", "ELE", "ENC", "FTR", "INQ", "NEC", "RNG", "ROG", "SHD", "SHM", "SPB", "WIZ"],
+    "race": ["ALL"]
   },
   {
     "name": "Bronze Great Scythe",
@@ -6609,11 +6621,17 @@
   {
     "name": "Bronze Scythe",
     "slug": "bronze-scythe",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 7,
+    "delay": 26,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 5.0,
+    "size": "Medium",
+    "classes": ["BST", "DRU", "FTR", "INQ", "NEC", "RNG", "SHD", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Bronze Shortsword",
@@ -6658,30 +6676,48 @@
   {
     "name": "Bronze Warhammer",
     "slug": "bronze-warhammer",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 8,
+    "delay": 28,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Large",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Iron Axe",
     "slug": "rusty-iron-axe",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 11,
+    "delay": 42,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 6.0,
+    "size": "Medium",
+    "classes": ["BST", "FTR", "INQ", "PAL", "RNG", "SHD", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Iron Battle Axe",
     "slug": "rusty-iron-battle-axe",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
     "twoHanded": true,
+    "damage": 18,
+    "delay": 54,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["BST", "FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Iron Dagger",
@@ -6754,21 +6790,33 @@
   {
     "name": "Rusty Iron Maul",
     "slug": "rusty-iron-maul",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
     "twoHanded": true,
+    "damage": 18,
+    "delay": 52,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Iron Scimitar",
     "slug": "rusty-iron-scimitar",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 10,
+    "delay": 36,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "DRU", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB", "WIZ"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Iron Scythe",
@@ -6798,11 +6846,17 @@
   {
     "name": "Rusty Iron Trident",
     "slug": "rusty-iron-trident",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 9,
+    "delay": 32,
     "skill": "Stabbing",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Large",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Iron War Lance",
@@ -6824,11 +6878,17 @@
   {
     "name": "Rusty Iron Warhammer",
     "slug": "rusty-iron-warhammer",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 8,
+    "delay": 30,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Large",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Iron Kite Shield",
@@ -6851,20 +6911,32 @@
   {
     "name": "Rusty Iron Spear",
     "slug": "rusty-iron-spear",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 9,
+    "delay": 34,
     "skill": "Stabbing",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Large",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"]
   },
   {
     "name": "Iron Dagger",
     "slug": "iron-dagger",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 8,
+    "delay": 22,
     "skill": "Stabbing",
-    "needsInfo": true
+    "weight": 3.0,
+    "size": "Small",
+    "classes": ["ARC", "BRD", "BST", "ELE", "ENC", "FTR", "INQ", "NEC", "RNG", "ROG", "SHD", "SHM", "SPB", "WIZ"],
+    "race": ["ALL"]
   },
   {
     "name": "Iron Great Scythe",
@@ -6879,29 +6951,47 @@
   {
     "name": "Iron Longsword",
     "slug": "iron-longsword",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 13,
+    "delay": 36,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB", "WIZ"],
+    "race": ["ALL"]
   },
   {
     "name": "Iron Mace",
     "slug": "iron-mace",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 13,
+    "delay": 38,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Large",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Iron Scythe",
     "slug": "iron-scythe",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 9,
+    "delay": 26,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 5.0,
+    "size": "Medium",
+    "classes": ["BST", "DRU", "FTR", "INQ", "NEC", "RNG", "SHD", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Iron Shortsword",
@@ -6933,49 +7023,79 @@
   {
     "name": "Iron War Lance",
     "slug": "iron-war-lance",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
     "twoHanded": true,
+    "damage": 20,
+    "delay": 46,
     "skill": "Stabbing",
-    "needsInfo": true
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"]
   },
   {
     "name": "Corroded Bronze Mace",
     "slug": "corroded-bronze-mace",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 8,
+    "delay": 40,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Corroded Bronze Spear",
     "slug": "corroded-bronze-spear",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 7,
+    "delay": 34,
     "skill": "Stabbing",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Large",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"]
   },
   {
     "name": "Corroded Bronze War Lance",
     "slug": "corroded-bronze-war-lance",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
     "twoHanded": true,
+    "damage": 12,
+    "delay": 48,
     "skill": "Stabbing",
-    "needsInfo": true
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"]
   },
   {
     "name": "Corroded Bronze Warhammer",
     "slug": "corroded-bronze-warhammer",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 6,
+    "delay": 30,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Large",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Copper Greatsword",
@@ -7004,20 +7124,32 @@
   {
     "name": "Rusty Longsword",
     "slug": "rusty-longsword",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 6,
+    "delay": 38,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB", "WIZ"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Mace",
     "slug": "rusty-mace",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 6,
+    "delay": 40,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Large",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Steel Axe",
@@ -7031,31 +7163,49 @@
   {
     "name": "Rusty Steel Battle Axe",
     "slug": "rusty-steel-battle-axe",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
     "twoHanded": true,
+    "damage": 23,
+    "delay": 54,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["BST", "FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Steel Dagger",
     "slug": "rusty-steel-dagger",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 8,
+    "delay": 24,
     "skill": "Stabbing",
-    "needsInfo": true
+    "weight": 3.0,
+    "size": "Small",
+    "classes": ["ARC", "BRD", "BST", "ELE", "ENC", "FTR", "INQ", "NEC", "RNG", "ROG", "SHD", "SHM", "SPB", "WIZ"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Steel Great Scythe",
     "slug": "rusty-steel-great-scythe",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
     "twoHanded": true,
+    "damage": 19,
+    "delay": 46,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["BST", "DRU", "FTR", "INQ", "NEC", "RNG", "SHD", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Steel Greatsword",
@@ -7079,11 +7229,17 @@
   {
     "name": "Rusty Steel Mace",
     "slug": "rusty-steel-mace",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 13,
+    "delay": 40,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Steel Maul",
@@ -7098,20 +7254,32 @@
   {
     "name": "Rusty Steel Scimitar",
     "slug": "rusty-steel-scimitar",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 12,
+    "delay": 36,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "DRU", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB", "WIZ"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Steel Scythe",
     "slug": "rusty-steel-scythe",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 9,
+    "delay": 28,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 5.0,
+    "size": "Medium",
+    "classes": ["BST", "DRU", "FTR", "INQ", "NEC", "RNG", "SHD", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Steel Shortsword",
@@ -7144,11 +7312,17 @@
   {
     "name": "Rusty Steel Warhammer",
     "slug": "rusty-steel-warhammer",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 10,
+    "delay": 30,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Large",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Steel Kite Shield",
@@ -7171,11 +7345,17 @@
   {
     "name": "Rusty Steel Spear",
     "slug": "rusty-steel-spear",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 11,
+    "delay": 34,
     "skill": "Stabbing",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Large",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "RNG", "ROG", "SHD", "SHM"],
+    "race": ["ALL"]
   },
   {
     "name": "Rusty Steel Tower Shield",
@@ -7254,12 +7434,18 @@
   {
     "name": "Tarnished Maul",
     "slug": "tarnished-maul",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
     "twoHanded": true,
+    "damage": 10,
+    "delay": 50,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Tarnished Scimitar",
@@ -7273,11 +7459,17 @@
   {
     "name": "Tarnished Scythe",
     "slug": "tarnished-scythe",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 4,
+    "delay": 26,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 5.0,
+    "size": "Medium",
+    "classes": ["BST", "DRU", "FTR", "INQ", "NEC", "RNG", "SHD", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Tarnished Shortsword",
@@ -7337,21 +7529,33 @@
   {
     "name": "Tarnished Bronze War Lance",
     "slug": "tarnished-bronze-war-lance",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
     "twoHanded": true,
+    "damage": 12,
+    "delay": 46,
     "skill": "Stabbing",
-    "needsInfo": true
+    "weight": 13.0,
+    "size": "Large",
+    "classes": ["FTR", "INQ", "PAL", "SHD"],
+    "race": ["ALL"]
   },
   {
     "name": "Tarnished Bronze Warhammer",
     "slug": "tarnished-bronze-warhammer",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 6,
+    "delay": 28,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Large",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Tarnished Iron Greatsword",
@@ -7366,11 +7570,17 @@
   {
     "name": "Worn Elderwood Bow",
     "slug": "worn-elderwood-bow",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Range",
+    "damage": 17,
+    "delay": 40,
     "skill": "Archery",
-    "needsInfo": true
+    "weight": 4.0,
+    "size": "Medium",
+    "classes": ["ARC", "BST", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Worn Elderwood Buckler",
@@ -7383,12 +7593,18 @@
   {
     "name": "Worn Elderwood Great Staff",
     "slug": "worn-elderwood-great-staff",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
     "twoHanded": true,
+    "damage": 19,
+    "delay": 46,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 9.0,
+    "size": "Large",
+    "classes": ["BST", "CLR", "DRU", "ELE", "ENC", "FTR", "MNK", "NEC", "PAL", "SHM", "SPB", "WIZ"],
+    "race": ["ALL"]
   },
   {
     "name": "Worn Ironbark Bow",
@@ -7441,12 +7657,18 @@
   {
     "name": "Worn Great Staff",
     "slug": "worn-great-staff",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary",
     "twoHanded": true,
+    "damage": 10,
+    "delay": 39,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 9.0,
+    "size": "Large",
+    "classes": ["BST", "CLR", "DRU", "ELE", "ENC", "FTR", "MNK", "NEC", "PAL", "SHM", "SPB", "WIZ"],
+    "race": ["ALL"]
   },
   {
     "name": "Bow",
@@ -7516,11 +7738,17 @@
   {
     "name": "Salt-Crusted Hammer",
     "slug": "salt-crusted-hammer",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 4,
+    "delay": 27,
     "skill": "Blunt",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Skinning Knife",
@@ -7742,11 +7970,17 @@
   {
     "name": "Iron Scimitar",
     "slug": "iron-scimitar",
+    "lastUpdated": "2026-08-17",
     "type": "Weapon",
     "tags": [],
     "slot": "Primary / Secondary",
+    "damage": 12,
+    "delay": 34,
     "skill": "Slashing",
-    "needsInfo": true
+    "weight": 7.0,
+    "size": "Medium",
+    "classes": ["ARC", "BRD", "BST", "DRU", "FTR", "INQ", "PAL", "RNG", "ROG", "SHD", "SPB", "WIZ"],
+    "race": ["ALL"]
   },
   {
     "name": "Dizzik's Wicked Dagger",
@@ -7904,9 +8138,12 @@
   {
     "name": "Rivet Cutters",
     "slug": "rivet-cutters",
+    "lastUpdated": "2026-08-17",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "description": "A tool used to deconstruct plate and chain armor.",
+    "weight": 2.0,
+    "size": "Medium"
   },
   {
     "name": "Jade",
@@ -8380,18 +8617,20 @@
   {
     "name": "Smithing Hammer",
     "slug": "smithing-hammer",
-    "type": "Weapon",
+    "lastUpdated": "2026-08-17",
+    "type": "Misc",
     "tags": [],
-    "slot": "Primary / Secondary",
-    "skill": "Blunt",
-    "needsInfo": true
+    "weight": 5.0,
+    "size": "Large"
   },
   {
     "name": "Smithing Pliers",
     "slug": "smithing-pliers",
+    "lastUpdated": "2026-08-17",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true
+    "weight": 2.0,
+    "size": "Medium"
   },
   {
     "name": "Bronze Scraps",
@@ -8698,6 +8937,15 @@
     "type": "Armor",
     "tags": [],
     "slot": "Head",
+    "needsInfo": true
+  },
+  {
+    "name": "Rusty Steel Chain Gambeson",
+    "slug": "rusty-steel-chain-gambeson",
+    "lastUpdated": "2026-08-17",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shirt",
     "needsInfo": true
   },
   {

@@ -45,9 +45,14 @@ the older notes just means "no full entry with real stats yet," not "not on the 
 - Lunar Festival Trousers — missing `race`. Screenshot cuts off right after Class, no
   "Race:" line visible; every other armor card in its batch had one, so this is likely a
   crop issue rather than a real absence. Update if a fuller screenshot comes in.
-- Rusty Throwing Dagger, Rusty Longsword, Rusty Mace — the last 3 of the 18-piece Rusty
-  set with no items.json entry yet (name inferred from the set's naming pattern, no stats
-  confirmed). Every other Rusty piece already has a full card.
+- Rusty Throwing Dagger — the last piece of the 18-piece Rusty set with no items.json entry
+  yet (name inferred from the set's naming pattern, no stats confirmed). RESOLVED 2026-08-17
+  for its two siblings, Rusty Longsword and Rusty Mace, which got real cards in a big
+  images/inbox batch that filled in ~42 previously-stub weapon/tool entries across the
+  Rusty/Rusty Iron/Rusty Steel/Bronze/Iron/Tarnished/Tarnished Bronze/Corroded Bronze/Worn/
+  Cracked material tiers (see CLAUDE.md's quality-set section for the confirmation that all
+  these material tiers share one item roster, differing only in stats). Every other Rusty
+  piece already has a full card.
 - Tattered Cloth Belt, Tattered Cloth Cape, Tattered Cloth Mantle, Tattered Cloth Tunic —
   confirmed to exist 2026-07-14 via a vendor's sell-back list (name + price only, no
   weight/size/AC), completing the Tattered Cloth armor line at 13 pieces total (the other 9
@@ -604,3 +609,31 @@ is the player-to-player consider result, distinct from the hostile-mob con phras
 at you"/"seems indifferent to your presence") used elsewhere in this same screenshot. The
 monsters.json entry was deleted; watch for this "regards you as a comrade" wording as a signal
 that a con-check line names a player, not a mob, before adding future entries from chat logs.
+
+2026-08-17, images/inbox batch (~50 screenshots, mostly full item cards for the tiered
+weapon/tool system): filled in real stats for 42 previously-`needsInfo` weapon/tool stubs
+across the Rusty, Rusty Iron, Rusty Steel, Bronze, Iron, Tarnished, Tarnished Bronze, Corroded
+Bronze, Worn, and Cracked material tiers (e.g. Bronze Dagger, Rusty Mace, Iron Longsword,
+Tarnished Bronze War Lance, Rusty Steel Battle Axe, Worn Elderwood Great Staff -- see the git
+commit for the full list). Corrected one wrong stub in the process: "Smithing Hammer" had been
+guessed as a Blunt weapon from its name, but its real card shows no Slot/DMG/Class/Race line
+at all -- it's a plain crafting tool (type: Misc), same treatment as "Smithing Pliers"/"Rivet
+Cutters". Two size outliers recorded verbatim rather than "corrected" to match siblings: Rusty
+Steel Mace and Corroded Bronze Mace both card-confirmed as Size: MEDIUM, while every other
+Mace variant (Rusty/Iron/Bronze/Tarnished Bronze) is Large.
+
+This batch also prompted the user to confirm a much bigger rule (now in CLAUDE.md's
+Quality-set section): every material tier of a given weapon/armor category shares the exact
+same item roster, differing only in stats -- same principle as Tattered Cloth/Cotton/Wool,
+now generalized to Rusty/Rusty Iron/Rusty Steel/Tarnished/Bronze/Corroded Bronze/etc. This
+supersedes the 2026-08-16 note above that described Tattered Cotton as "8 pieces confirmed so
+far" -- it's actually the full 13-piece roster like Cloth/Wool, already corrected in CLAUDE.md.
+Rusty Steel's roster also grew 41->42 (added the previously-withheld Chain Gambeson) now that
+tier-symmetry is confirmed rather than assumed risky. All ~38 monsters with an expanded
+weapon-tier or Tattered-family drop list (individually spelling out 15-42 pieces) were
+compacted to the single `{ "family": ... }` form per the user's explicit request to save
+space -- full list in the git commit. **Not done in this sweep**: retroactively filling
+Rusty/Tarnished/Tarnished Bronze/Bronze/Iron/Copper's items.json rosters up to the full
+42-piece shape (Rusty is still only 18 confirmed pieces, no chain/plate yet, for example) --
+apply the same-roster rule going forward as pieces come up, rather than fabricating hundreds
+of stub entries with no sighting at all.

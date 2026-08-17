@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-17T14:31", "summary": "Added real stats to 42 weapon/tool items, confirmed all metal/wood equipment tiers share one item set, and compacted ~38 monsters' drop lists to save space" },
   { "timestamp": "2026-08-17T10:12", "summary": "Updated Fletching recipe skill levels through 105, added Shaded Dunes loot drops, and confirmed Magebloom also yields Arcane Frond" },
   { "timestamp": "2026-08-16T21:55", "summary": "Added more level-32 con data for a Dustrend legionary and a sand giant raider in Vale of Zintar" },
   { "timestamp": "2026-08-16T20:58", "summary": "Confirmed Tattered Cotton is its own separate armor tier (not the same as Tattered Cloth) and grouped its drops into one compact family entry across 9 monsters" },
