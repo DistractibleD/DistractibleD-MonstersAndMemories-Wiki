@@ -369,5 +369,15 @@
       "Halva", "Harissa", "Knafeh", "Mountain Flatbread", "Szuur's Famous Foods"
     ],
     "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "An elemental quartermaster",
+    "slug": "an-elemental-quartermaster",
+    "location": "Night Harbor",
+    "area": "School of the Fourfold Path (ELE/MNK guildhall), bottom alcove",
+    "sells": [
+      "Crushed Malachite", "Water Flask"
+    ],
+    "lastUpdated": "2026-08-17"
   }
 ]
