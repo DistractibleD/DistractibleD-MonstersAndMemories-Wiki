@@ -1233,6 +1233,75 @@ body {
   color: var(--text-dim);
   text-align: center !important;
 }
+/* Home page as a "1 stop for all" landing page (2026-08-17, user's own
+   request) — a button to every other page, reusing the same
+   icon-badge-in-a-card language as .craft-card (Crafting/Gathering category
+   grids), but its own class rather than reusing .craft-card directly: this
+   grid isn't tradeskill content, so it uses the general gold --accent
+   instead of --accent-craft's teal, keeping the same "item cards are gold,
+   recipe cards are teal" accent-by-content-type convention the rest of the
+   site already follows. */
+.home-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+  margin: 18px 0 28px;
+}
+.home-nav-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+.home-nav-card:hover {
+  border-color: var(--accent-dim);
+}
+.home-nav-card-icon {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+}
+.home-nav-card-icon .type-icon {
+  width: 100%;
+  height: 100%;
+}
+.home-nav-card-name {
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  min-width: 0;
+}
+.home-nav-card:hover .home-nav-card-name {
+  color: var(--accent);
+}
+/* "Latest Changes" starts collapsed underneath the nav grid above (same
+   2026-08-17 request) — clickable heading + rotating chevron, same
+   expand/collapse language as .sidebar-group-chevron. */
+.home-changelog-heading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.home-changelog-chevron {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 auto;
+  fill: var(--text-dim);
+  transition: transform 0.15s ease;
+}
+.home-changelog-heading.expanded .home-changelog-chevron {
+  fill: var(--accent);
+  transform: rotate(90deg);
+}
+.home-changelog-body.home-changelog-collapsed {
+  display: none;
+}
 /* Home page's "Latest Changes" list (2026-08-13) — see renderHomePage in
    script.js. Each entry is a timestamp + plain-language summary; the
    timestamp is deliberately muted/small so the summary text (what actually

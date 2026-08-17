@@ -5927,17 +5927,62 @@ async function renderHomePage(container) {
   const rest = changelog.slice(HOME_CHANGELOG_PREVIEW);
   const entryHTML = e => `<li><span class="changelog-date">${formatChangelogTimestamp(e.timestamp)}</span><span class="changelog-summary">${escapeAttr(e.summary)}</span></li>`;
 
+  // Home is meant to be a one-stop landing page (2026-08-17, user's own
+  // request) — a button to every other page on the site, reusing the same
+  // NAV_ICON/svgIcon badges the sidebar already shows next to each link, so
+  // a visitor recognizes the same icon in both places. Pulls straight from
+  // `allPages` (pages.json) rather than hardcoding a list, so a future page
+  // addition/removal/rename shows up here for free, same as the sidebar
+  // itself. Excludes Home (nothing to link to itself) — order otherwise
+  // follows pages.json exactly, same order the sidebar renders in, just
+  // without the Tradeskilling/Monsters group nesting (a flat one-tap grid
+  // is the point here, not reproducing the sidebar's own hierarchy).
+  const navPages = allPages.filter(p => p.type !== 'home');
+  const navCardHTML = p => {
+    const navIcon = NAV_ICON[p.file];
+    return `
+      <div class="home-nav-card" data-file="${escapeAttr(p.file)}">
+        <div class="home-nav-card-icon">${navIcon ? svgIcon(navIcon) : ''}</div>
+        <div class="home-nav-card-name">${escapeAttr(p.title)}</div>
+      </div>`;
+  };
+
   container.innerHTML = `
     <h1>Welcome to Petrichor's Monsters and Memories Wiki</h1>
-    <h2>Latest Changes</h2>
-    ${changelog.length ? `
-      <ul class="changelog-list" id="changelog-preview">${preview.map(entryHTML).join('')}</ul>
-      ${rest.length ? `
-        <ul class="changelog-list" id="changelog-rest" style="display: none;">${rest.map(entryHTML).join('')}</ul>
-        <button type="button" id="changelog-show-more" class="items-clear-btn">Show all ${changelog.length} updates</button>
-      ` : ''}
-    ` : `<p class="items-empty">No updates recorded yet.</p>`}
+    <div class="home-nav-grid">
+      ${navPages.map(navCardHTML).join('')}
+    </div>
+    <h2 class="home-changelog-heading" id="home-changelog-toggle">
+      <svg viewBox="0 0 24 24" class="home-changelog-chevron"><path d="M8 5 L16 12 L8 19 Z"/></svg>
+      Latest Changes
+    </h2>
+    <div id="home-changelog-body" class="home-changelog-body home-changelog-collapsed">
+      ${changelog.length ? `
+        <ul class="changelog-list" id="changelog-preview">${preview.map(entryHTML).join('')}</ul>
+        ${rest.length ? `
+          <ul class="changelog-list" id="changelog-rest" style="display: none;">${rest.map(entryHTML).join('')}</ul>
+          <button type="button" id="changelog-show-more" class="items-clear-btn">Show all ${changelog.length} updates</button>
+        ` : ''}
+      ` : `<p class="items-empty">No updates recorded yet.</p>`}
+    </div>
   `;
+
+  container.querySelectorAll('.home-nav-card').forEach(card => {
+    card.addEventListener('click', () => loadPage(card.dataset.file));
+  });
+
+  // Starts collapsed (see .home-changelog-collapsed above) — the nav grid
+  // is the actual "1 stop for all" landing content now; Latest Changes is
+  // useful but secondary, same reasoning as Alchemy's Mortar-and-Pestle
+  // station starting collapsed on its own page. Plain class toggle, no
+  // stored preference — resets to collapsed next time Home loads fresh,
+  // same as every other collapsible section on this site.
+  const changelogToggle = container.querySelector('#home-changelog-toggle');
+  const changelogBody = container.querySelector('#home-changelog-body');
+  changelogToggle.addEventListener('click', () => {
+    const collapsed = changelogBody.classList.toggle('home-changelog-collapsed');
+    changelogToggle.classList.toggle('expanded', !collapsed);
+  });
 
   const showMoreBtn = container.querySelector('#changelog-show-more');
   if (showMoreBtn) {

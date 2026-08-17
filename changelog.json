@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-17T21:06", "summary": "Redesigned the Home page as a one-stop landing page with a button to every other page, and moved Latest Changes below it (now collapsed by default)" },
   { "timestamp": "2026-08-17T20:59", "summary": "Added Squirming Worm and Expert Fishing Pole (fishing gear), an ashira fisher and Finnel Tidehook, and confirmed a couple more monster drops (Murcanthrope Blade, Duelist's Mask)" },
   { "timestamp": "2026-08-17T20:49", "summary": "Pinned Calafrey & Szurr Regions and Aethoril (the world map) above the rest of the Maps page in their own Regional Overview panel, since they cover more than just one place" },
   { "timestamp": "2026-08-17T20:43", "summary": "Fixed a table header tooltip (Ratio column) getting cut off at the edge of the Item Database" },
