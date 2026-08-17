@@ -1548,6 +1548,14 @@ const ICON_DEFS = {
   crocodile: `<path d="M2 14 L4 11 L6 13.5 L8 10.5 L10 13 L12 10.5 L14 13 L16 11 L19 12 L23 11.5 L23 13.7 L19 14.5 L14.5 16.3 L9 16.8 L4.5 16.3 Z"/><circle cx="18.3" cy="11.6" r="0.6"/><path d="M6.5 16.6 L6 19.3 L7.6 19.3 L7.7 16.7 Z"/><path d="M12.5 16.7 L12.2 19.4 L13.8 19.4 L13.7 16.6 Z"/>`,
   spider: `<circle cx="12" cy="15" r="4.4"/><circle cx="12" cy="8.7" r="2.8"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(55 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(25 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(-25 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(-55 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(125 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(155 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(205 12 12)"/><rect x="12" y="11.3" width="9" height="1.3" transform="rotate(235 12 12)"/>`,
   wolf: `<circle cx="12" cy="14" r="6.5"/><path d="M5 9 L7.5 4 L9.5 8.5 Z"/><path d="M19 9 L16.5 4 L14.5 8.5 Z"/><ellipse cx="12" cy="17" rx="2.6" ry="2.1"/>`,
+  // Elementalist summoned pet (2026-08-17, first seen: Antharite, an earth
+  // elemental) — first non-Beastmaster companion type, so it needed its own
+  // silhouette rather than an animal shape: a tapering humanoid form with a
+  // dark core where a head would be, matching the floating/headless look on
+  // the actual pet screenshot (and on An elemental quartermaster's own
+  // icon). Extend with another element key (fire/water/air) the same way if
+  // a different elemental type is confirmed later.
+  elemental: `<path d="M12 3 C10.3 3 9.3 4.8 10.2 6.4 L8.5 11.5 L6 21 L9.2 21 L11.2 13.5 L11.2 21 L12.8 21 L12.8 13.5 L14.8 21 L18 21 L15.5 11.5 L13.8 6.4 C14.7 4.8 13.7 3 12 3 Z"/><circle cx="12" cy="5.2" r="1.1"/>`,
   // Monsters page section icons — boss (skull) vs. regular (paw print),
   // used on the zone-grid cards in each section (see renderMonstersCategories).
   boss: `<path d="M12 3 C7 3 4 6.5 4 11 C4 13.5 5 15.5 6.5 17 L6.5 19.5 C6.5 20.3 7.1 21 8 21 L9 21 L9 19 L10 19 L10 21 L14 21 L14 19 L15 19 L15 21 L16 21 C16.9 21 17.5 20.3 17.5 19.5 L17.5 17 C19 15.5 20 13.5 20 11 C20 6.5 17 3 12 3 Z"/><circle cx="8.7" cy="11" r="1.8"/><circle cx="15.3" cy="11" r="1.8"/><path d="M11.3 12.7 L12.7 12.7 L12 15.2 Z"/>`,
@@ -1612,7 +1620,7 @@ const ICON_BG = {
   tanning: '#4a3520', tinkering: '#6a5a2e', wagoneering: '#4a3820',
   wilderness: '#2a3a24', woodworking: '#4a3820',
   bear: '#4a3323', rat: '#5c5347', crocodile: '#33472c', spider: '#241f30',
-  wolf: '#3a3f47',
+  wolf: '#3a3f47', elemental: '#5a4a30',
   boss: '#5a1f1f', paw: '#3f4f30',
   links: '#455060', itemdb: '#7a5a2a', gatheringicon: '#455a2e', submiticon: '#3a3a45',
   levelingicon: '#2e6b3f',
@@ -5594,7 +5602,7 @@ function renderCompanionCardHTML(companion) {
         <div class="item-card-icon">${svgIcon(companion.animal)}</div>
         <div class="item-card-titles">
           <div class="item-card-name">${escapeAttr(companion.name)}</div>
-          <div class="item-card-category">Beastmaster Companion</div>
+          <div class="item-card-category">${escapeAttr(companion.class || 'Beastmaster')} Companion</div>
           ${formatLastUpdated(companion.lastUpdated)}
         </div>
       </div>
@@ -5618,11 +5626,12 @@ async function renderCompanionsPage(container) {
   await ensureCompanionsData();
 
   container.innerHTML = `
-    <h1>Beastmaster Companions</h1>
-    <p>Pets tamed and summoned by the Beastmaster class. Every companion shares the two
-    abilities below regardless of animal type, plus one or more unique abilities of its own.</p>
+    <h1>Companions</h1>
+    <p>Pets tamed or summoned by classes with a companion of their own (Beastmaster,
+    Elementalist, ...). Most companions share the abilities below regardless of type, plus
+    one or more unique abilities of its own.</p>
     <div class="gem-reference companion-shared-abilities">
-      <h2>Shared Abilities (Every Companion)</h2>
+      <h2>Shared Abilities (Most Companions)</h2>
       <div class="companion-skills">
         ${companionSkillsData.map(renderCompanionSkillHTML).join('')}
       </div>

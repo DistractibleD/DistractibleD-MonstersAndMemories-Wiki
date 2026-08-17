@@ -76,5 +76,34 @@
         "range": "30 meters"
       }
     ]
+  },
+  {
+    "name": "Antharite",
+    "slug": "antharite",
+    "class": "Elementalist",
+    "animal": "elemental",
+    "skills": [
+      {
+        "name": "Earthen Toughness",
+        "type": "Alteration Ability",
+        "description": "Envelop your group in earthen toughness, increasing their Stamina by 2 (L1) to 30 (L60). This ability persists until canceled.",
+        "castTime": "Instant"
+      },
+      {
+        "name": "Earthen Skin",
+        "type": "Abjuration Ability",
+        "description": "Shield yourself with elemental earth, increasing your maximum Health by 5 (L1) to 500 (L60) and Armor Class by 5 (L1) to 25 (L60).",
+        "castTime": "Instant"
+      },
+      {
+        "name": "Elemental Root",
+        "type": "Alteration Ability",
+        "description": "Root your target with elemental tendrils, immobilizing them for 30 seconds. This spell has a chance to be removed by damage. This spell has a very strong chance to end early.",
+        "castTime": "Instant",
+        "cooldown": "8.0 seconds",
+        "range": "20 meters"
+      }
+    ],
+    "lastUpdated": "2026-08-17"
   }
 ]

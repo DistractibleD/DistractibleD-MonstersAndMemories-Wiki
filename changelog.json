@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-17T20:08", "summary": "Recorded data for Antharite, an Elementalist's summoned pet (the Companions page itself is still hidden for now, but ready for more pet types like this one)" },
   { "timestamp": "2026-08-17T19:50", "summary": "Added a Calafrey & Szurr Regions overview map, with a zone-connections diagram you can flip to from the same map viewer" },
   { "timestamp": "2026-08-17T19:43", "summary": "Vendors can now record what they buy, not just what they sell (added An elemental quartermaster's full buy list) - items show which vendors will buy them" },
   { "timestamp": "2026-08-17T19:38", "summary": "Added An elemental quartermaster (Night Harbor's School of the Fourfold Path)" },

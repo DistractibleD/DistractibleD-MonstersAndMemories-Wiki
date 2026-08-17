@@ -1094,7 +1094,7 @@ silently swallowed by `loadPage`'s catch, surfacing as blank "Page not found" in
 visible error. Check this if a future pending-scope feature hits the same silent-failure
 shape.
 
-## Adding a Beastmaster companion
+## Adding a companion (pet)
 
 **Currently hidden from the site** (2026-08-14, user's own request — "might bring it back
 later with more types of pets") by removing its one `pages.json` entry — nothing else was
@@ -1107,31 +1107,57 @@ else to remember to flip. A stale `#companions` link/bookmark falls back to `all
 (Home) via `init()`'s existing no-match fallback, not an error page — same graceful behavior
 as any other unrecognized hash.
 
-Companions page (`pages.json` `"type": "companions"`) shows every tamed-pet type, rendered
+**Not Beastmaster-only** (confirmed 2026-08-17, first non-Beastmaster entry: Antharite, an
+Elementalist-summoned earth elemental — the exact "more types of pets" scenario the 2026-08-14
+hide already anticipated). Page `<h1>`/intro copy reads "Companions" generically, not
+"Beastmaster Companions" — nothing else needed touching since the page has no live
+`pages.json` entry to rename. Companions page shows every tamed/summoned pet type, rendered
 as item-card-style cards (`renderCompanionCardHTML`, reusing the plain gold `.item-card`
 style, not teal recipe variant) rather than raw screenshots.
 
 Two flat-array data files:
 
-- `companions.json` — one entry per animal type: `name` (e.g. "A Bear Companion"), `slug`,
-  `animal` (lowercase icon key), `observedAtLevel` (recorded as an observation, not asserted
-  as fixed per-species), `skills` (that companion's own unique abilities only).
-- `companion-skills.json` — abilities every companion shares: **Provoke** (Martial Ability,
+- `companions.json` — one entry per pet: `name` (e.g. "A Bear Companion", or the pet's own
+  proper name like "Antharite" for a class whose summon has one), `slug`, `animal` (lowercase
+  icon key — despite the field name, also covers non-animal types like `elemental`),
+  `observedAtLevel` (optional, recorded as an observation not asserted as fixed per-species),
+  `skills` (that companion's own unique abilities only). Optional `class` (e.g.
+  "Elementalist") — unset means Beastmaster, the original/default type; `renderCompanionCardHTML`
+  falls back to `'Beastmaster'` when absent rather than requiring every legacy entry to be
+  backfilled.
+- `companion-skills.json` — abilities *most* companions share: **Provoke** (Martial Ability,
   threat) and **Bite** (Might Ability, physical damage). Recorded once, rendered as a
-  "Shared Abilities (Every Companion)" block above the grid.
+  "Shared Abilities (Most Companions)" block above the grid. **Not universal, confirmed
+  2026-08-17** — Antharite's own Pet window has Provoke (identical description/cooldown/range
+  to the recorded shared entry, confirming it really is the same ability across classes) but
+  no Bite at all (only 4 ability slots total, all accounted for by Earthen Toughness/Provoke/
+  Earthen Skin/Elemental Root) — an earth elemental has no mouth to bite with. Copy was
+  softened from "Every Companion" to "Most Companions" for exactly this reason. No per-companion
+  tracking of *which* shared skills it actually has (would need a real field/schema) — the
+  one known exception is documented here instead, revisit if a second exception shows up.
 
 Skill object (both files): `{ name, type, description, castTime, cooldown, range }` — `type`
-= "Martial Ability"/"Might Ability", `range` omitted for self-cast/no-range. Drops
-boilerplate tooltip lines (Innate, Does Not Trigger Global Cooldown) true of every ability —
-only what varies is captured.
+= "Martial Ability"/"Might Ability"/"Alteration Ability"/"Abjuration Ability" (Antharite
+introduced the latter two — a summoned pet's kit isn't limited to the two Martial/Might types
+Beastmaster companions happened to use), `range`/`cooldown` omitted when the tooltip doesn't
+show one (e.g. Antharite's Earthen Toughness/Earthen Skin, both self/group-target with no
+listed cooldown). Drops boilerplate tooltip lines (Innate, Does Not Trigger Global Cooldown,
+Cannot Fizzle, Resist Element, AOE Type) true of every ability — only what varies is
+captured; a meaningfully unique behavioral note (Elemental Root's "chance to be removed by
+damage"/"very strong chance to end early") gets folded into that skill's own `description`
+instead of dropped, same as any other flavor-text convention on this site.
 
 **Screenshots not archived for this category** — a pet's batch is several stacked UI windows
 (Pet window + one tooltip per ability), processed for data and deleted, not moved anywhere.
 
-**Icons:** `ICON_DEFS`/`ICON_BG` keys `bear`/`rat`/`crocodile`/`spider`, same
-flat-silhouette-in-circle style as everything else — card icon is `svgIcon(companion.animal)`
-directly (`animal` doubles as the icon key). Add another animal key the same way for a new
-type.
+**Icons:** `ICON_DEFS`/`ICON_BG` keys `bear`/`rat`/`crocodile`/`spider`/`wolf`/`elemental`,
+same flat-silhouette-in-circle style as everything else — card icon is
+`svgIcon(companion.animal)` directly (`animal` doubles as the icon key regardless of whether
+the pet is literally an animal). Add another key the same way for a new type — `elemental`'s
+own silhouette (tapering humanoid shape with a dark core, no head) is deliberately generic
+enough it could be reused or lightly varied for another element (fire/water/air) rather than
+needing a from-scratch redesign each time, until a second elemental type actually shows up to
+confirm whether that reuse is warranted.
 
 Own local search box, wired into header search like Monsters (`goToCompanion`,
 `pendingHighlightCompanion`, `.card-flash` gold-accent animation since `.recipe-flash`'s
