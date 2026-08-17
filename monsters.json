@@ -4466,9 +4466,10 @@
     "drops": [
       { "item": "Amulet of Disease Protection" },
       { "item": "Rat Clawed Idol" },
-      { "item": "Sculpted Vermin Helm" }
+      { "item": "Sculpted Vermin Helm" },
+      { "item": "Murcanthrope Blade" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-08-17"
   },
   {
     "name": "Pustulax",
@@ -5164,9 +5165,10 @@
     "drops": [
       { "item": "Cruel Mail Belt" },
       { "item": "Hood of the Iron Lash" },
-      { "item": "Taskmaster's Leathers" }
+      { "item": "Taskmaster's Leathers" },
+      { "item": "Duelist's Mask" }
     ],
-    "lastUpdated": "2026-07-28"
+    "lastUpdated": "2026-08-17"
   },
   {
     "name": "Seeric of Maelsin Thrys",
@@ -8701,5 +8703,24 @@
     ],
     "needsInfo": true,
     "lastUpdated": "2026-08-11"
+  },
+  {
+    "name": "an ashira fisher",
+    "slug": "an-ashira-fisher",
+    "maps": ["Tel Ekir"],
+    "drops": [
+      { "item": "Squirming Worm" }
+    ],
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Finnel Tidehook",
+    "slug": "finnel-tidehook",
+    "named": true,
+    "maps": ["Shallow Shoals"],
+    "drops": [
+      { "item": "Expert Fishing Pole" }
+    ],
+    "lastUpdated": "2026-08-17"
   }
 ]

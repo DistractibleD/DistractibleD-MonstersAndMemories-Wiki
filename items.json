@@ -23537,5 +23537,32 @@
     "tags": [],
     "needsInfo": true,
     "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Squirming Worm",
+    "slug": "squirming-worm",
+    "type": "Weapon",
+    "tags": [],
+    "slot": "Ammo",
+    "description": "A lively worm. It must be great for catching fish!",
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Expert Fishing Pole",
+    "slug": "expert-fishing-pole",
+    "type": "Weapon",
+    "tags": ["MAGIC"],
+    "slot": "Primary",
+    "stats": { "STA": 3, "AGI": 3, "CHA": 3 },
+    "description": "With this in hand, you are sure to get a bite!",
+    "weight": 0.5,
+    "size": "Large",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-17"
   }
 ]
