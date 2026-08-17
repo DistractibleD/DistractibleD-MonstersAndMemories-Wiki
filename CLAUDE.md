@@ -131,22 +131,30 @@ filter options narrow too), carrying *other* filter values across via `pendingIt
 sets this from the search box, so a typed search survives switching Type) — one hop only,
 doesn't follow through a second switch.
 
-**The table itself doesn't render until a search/filter is active, or "Show all" is clicked**
-(2026-08-17, fixed a real user-reported hang — landing on the Item Database with no
-query/filters used to render every item unfiltered immediately, a single synchronous
-`tbody.innerHTML` write of ~2MB / tens of thousands of DOM nodes at the current ~1900-item
-count, confirmed to freeze the page for minutes on a slower machine and trigger the browser's
-own slow-script warning; reproduced in two different browsers, ruling out an extension). Now
-`update()` computes `anyFilterActive` (true the moment any search text, dropdown, needs-info
-toggle, or buff filter is set) and only calls `renderItemRows` when that's true or the user
-has clicked **"Show all N items"** (`#items-show-all-btn`, a persistent `showAll` flag scoped
-to this render). Otherwise it shows `#items-empty-state` (a plain "search or filter above, or
-show everything" prompt) and leaves `#items-table-wrap` hidden — the expensive render never
-happens at all, not just visually hidden after the fact. A header-search landing (which
-pre-fills the search box via `pendingItemQuery` before `update()`'s first call) still shows
-results immediately since `anyFilterActive` is already true by then; "Clear all filters"
-returns to the empty/prompt state, same as a fresh landing. Apply the same guard to any future
-page that might render a similarly large unfiltered table by default.
+**The table itself doesn't render a result set larger than `ITEMS_RENDER_CAP` (200) unless
+"Show all" is clicked** (2026-08-17, fixed a real user-reported hang — landing on the Item
+Database with no query/filters used to render every item unfiltered immediately, a single
+synchronous `tbody.innerHTML` write of ~2MB / tens of thousands of DOM nodes at the current
+~1900-item count, confirmed to freeze the page for minutes on a slower machine and trigger
+the browser's own slow-script warning; reproduced in two different browsers, ruling out an
+extension). **First fix attempt gated on "is any filter active" instead of result count, and
+was itself still broken** — a single-letter search still substring-matches most of the ~1900
+items, so typing one character into an empty search box reproduced the exact same hang on the
+very first keystroke, caught immediately by the same user. The real fix has to key off
+`filtered.length` itself, not "did the user touch a control": `update()` always computes
+`filtered` first, and only calls `renderItemRows` when `filtered.length <= ITEMS_RENDER_CAP`
+or the user has clicked **"Show all N matching items"** (`#items-show-all-btn`, sets a
+`showAll` flag). Otherwise it shows `#items-empty-state` with a live count ("N items match —
+keep narrowing, or Show all N") and leaves `#items-table-wrap` hidden — the expensive render
+never happens at all, not just visually hidden after the fact. `showAll` resets to `false` on
+every subsequent filter/search change (`onFilterChange`, wired to every filter control instead
+of `update` directly) — clicking "Show all" is a one-time bypass for *that* result set, not a
+standing opt-out, so a freshly-broadened query has to be confirmed again rather than silently
+riding the earlier click. A header-search landing (pre-fills the search box via
+`pendingItemQuery` before `update()`'s first call) still shows results immediately whenever
+that specific match count is small, same as typing it by hand would. Apply the same
+result-count guard (not an "any filter active" guard) to any future page that might render a
+similarly large table by default.
 
 Every type uses the same `renderItemsList`. Armor additionally gets a "Material" dropdown
 (Cloth/Leather/Chain/Plate/Other, from `armorIconKey`/`ARMOR_MATERIAL_ORDER`/

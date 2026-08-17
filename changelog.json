@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-17T17:17", "summary": "Fixed a follow-up freeze: a single typed letter still matched most items and reloaded the same huge table. Now any search/filter result over 200 items also asks before rendering" },
   { "timestamp": "2026-08-17T17:08", "summary": "Fixed the real cause of the Item Database freezing the page: it no longer loads all ~1900 items automatically. Search, filter, or press \"Show all\" to see items" },
   { "timestamp": "2026-08-17T15:53", "summary": "Added Night Harbor's Night Market vendors and trainer (A Cobbler, A Spicemonger, Brewer Gromni) and filled in Black Feather Arrow's stats" },
   { "timestamp": "2026-08-17T15:44", "summary": "Fixed a bug causing every page's data to load twice, which could make the site hang on load. Also moved shields/bucklers into the Weapons category and updated Tailoring recipe info" },
