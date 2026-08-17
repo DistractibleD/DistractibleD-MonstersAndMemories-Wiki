@@ -5325,12 +5325,12 @@ async function renderVendorsTrainersPage(container) {
       <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="vt-search">Clear</button>
     </div>
     <h2>Vendors</h2>
-    <div class="vt-vendor-grid" id="vt-vendor-grid"></div>
+    <div id="vt-vendor-grid"></div>
     <h2>Spell Vendors</h2>
     <p>Sell spell/ability scrolls rather than general goods.</p>
-    <div class="vt-vendor-grid" id="vt-spell-vendor-grid"></div>
+    <div id="vt-spell-vendor-grid"></div>
     <h2>Trainers</h2>
-    <div class="vt-trainer-list" id="vt-trainer-list"></div>
+    <div id="vt-trainer-list"></div>
   `;
 
   const searchBox = container.querySelector('#vt-search');
@@ -5338,6 +5338,50 @@ async function renderVendorsTrainersPage(container) {
   const vendorGrid = container.querySelector('#vt-vendor-grid');
   const spellVendorGrid = container.querySelector('#vt-spell-vendor-grid');
   const trainerList = container.querySelector('#vt-trainer-list');
+
+  // When browsing "All Zones", each section groups its cards under a
+  // per-zone collapsible heading instead of one long flat list/grid — lets a
+  // visitor scan the zone names and open just their own, instead of
+  // scrolling past every vendor in every zone to find it (2026-08-17, user's
+  // own request). Opt-in Set (default = collapsed) so a newly-seen zone
+  // doesn't need to be enumerated ahead of time; keyed `section:zone` since
+  // the same zone name can appear in more than one section. Once the Zone
+  // dropdown narrows to one specific zone, that *is* the category pick, so
+  // grouping/headings are skipped entirely and it just renders flat (same
+  // as this page always has). Survives a search/filter re-render (this Set
+  // lives in the outer closure, not rebuilt by update()) but resets to
+  // all-collapsed the next time this page is opened fresh — same precedent
+  // as Alchemy's collapsedStations.
+  const expandedZoneGroups = new Set();
+
+  function renderZoneGroupedHTML(items, sectionKey, renderCard, gridClass, query, zoneScope) {
+    if (!items.length) return '';
+    if (zoneScope) {
+      // A specific zone is already picked via the dropdown — it's already
+      // the one category shown, no extra heading/toggle needed.
+      return `<div class="${gridClass}">${items.map(renderCard).join('')}</div>`;
+    }
+    const itemZones = [...new Set(items.map(i => i.location))].sort();
+    return itemZones.map(z => {
+      const inZone = items.filter(i => i.location === z);
+      const key = `${sectionKey}:${z}`;
+      // Actively searching force-shows every zone with a match, regardless
+      // of its stored collapse state — otherwise a result could land inside
+      // a collapsed group and look like no match was found at all. Doesn't
+      // touch the stored state itself, so it reverts to however the user
+      // left it once the search is cleared.
+      const isCollapsed = !query && !expandedZoneGroups.has(key);
+      return `
+        <h3 class="vt-zone-heading">
+          <button type="button" class="vt-zone-toggle" data-zone-key="${escapeAttr(key)}" aria-expanded="${!isCollapsed}">
+            <span class="vt-zone-toggle-arrow">&#9656;</span> ${escapeAttr(z)}
+            <span class="vt-zone-toggle-count">(${inZone.length})</span>
+          </button>
+        </h3>
+        <div class="${gridClass}${isCollapsed ? ' vt-zone-group-collapsed' : ''}">${inZone.map(renderCard).join('')}</div>
+      `;
+    }).join('');
+  }
 
   // A vendor whose sells list includes any "Scroll: <name>" ability/spell
   // scroll (e.g. An Archer Instructor) is a spell vendor, shown in its own
@@ -5397,9 +5441,24 @@ async function renderVendorsTrainersPage(container) {
         (t.trains || []).some(s => s.skill.toLowerCase().includes(query))
       )
       .sort((a, b) => a.name.localeCompare(b.name));
-    vendorGrid.innerHTML = vendors.length ? vendors.map(renderVendorCard).join('') : '<p class="items-empty">No vendors found.</p>';
-    spellVendorGrid.innerHTML = spellVendors.length ? spellVendors.map(renderVendorCard).join('') : '<p class="items-empty">No spell vendors found.</p>';
-    trainerList.innerHTML = trainers.length ? trainers.map(renderTrainerCard).join('') : '<p class="items-empty">No trainers found.</p>';
+    vendorGrid.innerHTML = vendors.length
+      ? renderZoneGroupedHTML(vendors, 'vendor', renderVendorCard, 'vt-vendor-grid', query, zone)
+      : '<p class="items-empty">No vendors found.</p>';
+    spellVendorGrid.innerHTML = spellVendors.length
+      ? renderZoneGroupedHTML(spellVendors, 'spell', renderVendorCard, 'vt-vendor-grid', query, zone)
+      : '<p class="items-empty">No spell vendors found.</p>';
+    trainerList.innerHTML = trainers.length
+      ? renderZoneGroupedHTML(trainers, 'trainer', renderTrainerCard, 'vt-trainer-list', query, zone)
+      : '<p class="items-empty">No trainers found.</p>';
+
+    container.querySelectorAll('.vt-zone-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.zoneKey;
+        if (expandedZoneGroups.has(key)) expandedZoneGroups.delete(key);
+        else expandedZoneGroups.add(key);
+        update();
+      });
+    });
   }
 
   searchBox.addEventListener('input', update);

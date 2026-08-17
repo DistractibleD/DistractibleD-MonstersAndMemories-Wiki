@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-17T19:18", "summary": "Vendors & Trainers now groups each section by zone with collapsible headers, so you can find your zone without scrolling past every other one" },
   { "timestamp": "2026-08-17T18:59", "summary": "Fixed the Item Database's new instructions pointing the wrong direction (said 'above' when the Type dropdown is below the text)" },
   { "timestamp": "2026-08-17T18:48", "summary": "Updated the Item Database's instructions to match how it actually works now (click, not hover, to see a card; sorting needs a Type picked)" },
   { "timestamp": "2026-08-17T17:43", "summary": "Redesigned the Item Database so it never freezes: it now loads items in batches as you scroll instead of all at once, and column sorting is enabled once you pick a specific item type" },

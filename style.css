@@ -2213,6 +2213,54 @@ body {
   color: var(--text-dim);
   font-size: 0.78rem;
 }
+/* Per-zone collapsible group headings (2026-08-17) — same collapse/expand
+   toggle pattern as .craft-station-toggle, reused here so a visitor can scan
+   zone names and open just their own instead of scrolling every vendor in
+   every zone. Only appears when "All Zones" is selected; picking one
+   specific zone from the dropdown already narrows to a single category, so
+   grouping/headings are skipped in that case. */
+.vt-zone-heading {
+  margin: 20px 0 0;
+}
+.vt-zone-heading:first-child {
+  margin-top: 12px;
+}
+.vt-zone-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.vt-zone-toggle-arrow {
+  display: inline-block;
+  color: var(--accent);
+  transition: transform 0.15s ease;
+  font-size: 0.85em;
+}
+.vt-zone-toggle[aria-expanded="true"] .vt-zone-toggle-arrow {
+  transform: rotate(90deg);
+}
+.vt-zone-toggle-count {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--text-dim);
+}
+/* Two classes tied at (0,1,0) specificity — .vt-trainer-list's own
+   display:flex is defined later in this file and would otherwise win over
+   this rule for a collapsed trainer group (same class of bug as
+   .content-inner img, see "Known CSS gotchas" in CLAUDE.md). Compound
+   selector raises this to (0,2,0) so it always wins regardless of source
+   order. */
+.vt-vendor-grid.vt-zone-group-collapsed,
+.vt-trainer-list.vt-zone-group-collapsed {
+  display: none;
+}
 .vt-trainer-list {
   display: flex;
   flex-direction: column;
