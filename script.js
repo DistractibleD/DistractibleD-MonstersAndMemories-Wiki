@@ -2088,6 +2088,15 @@ function renderItemsList(container, category) {
   // picked from the dropdown.
   const sortableClass = showTypeColumn ? '' : 'sortable';
   const sortDisabledTitle = showTypeColumn ? ' title="Pick a Type above to sort by column"' : '';
+  // No hover preview anywhere on the site anymore (2026-08-11) — this
+  // subtitle used to say "Hover an item's name..." which stopped being true
+  // once that was removed. Also doubles as the one place explaining *why*
+  // sorting is unavailable on "All Types", instead of leaving the visitor to
+  // discover it by noticing the headers just don't respond to clicks.
+  const subtitleAction = showTypeColumn ? 'Browse, search, and filter' : 'Browse, search, filter, and sort';
+  const subtitleHint = showTypeColumn
+    ? "Click an item's name to see its full card. Pick a Type above to sort by column."
+    : "Click an item's name to see its full card.";
   // Options for the Type dropdown always list every type regardless of
   // which one is currently selected — unlike Slot/Class/etc. below, which
   // are scoped to categoryItems, this one has to stay unscoped so switching
@@ -2133,7 +2142,7 @@ function renderItemsList(container, category) {
     ${returnToMonster ? `<p class="items-back-link"><a href="#" id="items-back-to-monster">&larr; Back to ${escapeAttr(returnToMonster.name)}</a></p>` : ''}
     ${returnToVendor ? `<p class="items-back-link"><a href="#" id="items-back-to-vendor">&larr; Back to ${escapeAttr(returnToVendor.name)}</a></p>` : ''}
     <h1>Item Database</h1>
-    <p>Browse, search, filter, and sort ${escapeAttr(subtitleLabel)}${subtitleSuffix}. Hover an item's name to see its full card.</p>
+    <p>${subtitleAction} ${escapeAttr(subtitleLabel)}${subtitleSuffix}. ${subtitleHint}</p>
     <div class="items-toolbar">
       <input type="search" id="items-search" class="items-search" placeholder="Search name, stat, class..." autocomplete="off">
       <select id="items-filter-type" class="items-select">

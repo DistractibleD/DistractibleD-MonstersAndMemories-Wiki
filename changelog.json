@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-17T18:48", "summary": "Updated the Item Database's instructions to match how it actually works now (click, not hover, to see a card; sorting needs a Type picked)" },
   { "timestamp": "2026-08-17T17:43", "summary": "Redesigned the Item Database so it never freezes: it now loads items in batches as you scroll instead of all at once, and column sorting is enabled once you pick a specific item type" },
   { "timestamp": "2026-08-17T17:17", "summary": "Fixed a follow-up freeze: a single typed letter still matched most items and reloaded the same huge table. Now any search/filter result over 200 items also asks before rendering" },
   { "timestamp": "2026-08-17T17:08", "summary": "Fixed the real cause of the Item Database freezing the page: it no longer loads all ~1900 items automatically. Search, filter, or press \"Show all\" to see items" },
