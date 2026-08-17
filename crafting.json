@@ -660,8 +660,8 @@
       { "item": "Rough Thread", "quantity": 3 },
       { "item": "Copper Fasteners", "quantity": 3 }
     ],
-    "difficultyColor": "Yellow",
-    "observedAtSkill": 50
+    "difficultyColor": "Green",
+    "observedAtSkill": 70
   },
   {
     "name": "Enchanted Cloth Tunic",
@@ -676,8 +676,8 @@
       { "item": "Rough Thread", "quantity": 3 },
       { "item": "Copper Fasteners", "quantity": 3 }
     ],
-    "difficultyColor": "Orange",
-    "observedAtSkill": 50
+    "difficultyColor": "Light Blue",
+    "observedAtSkill": 70
   },
   {
     "name": "Bolt of Wool",
@@ -690,8 +690,8 @@
     "components": [
       { "item": "Wool Scraps", "quantity": 6 }
     ],
-    "difficultyColor": "Orange",
-    "observedAtSkill": 50
+    "difficultyColor": "Dark Blue",
+    "observedAtSkill": 70
   },
   {
     "name": "Wool Padding",
@@ -704,8 +704,8 @@
     "components": [
       { "item": "Wool Scraps", "quantity": 2 }
     ],
-    "difficultyColor": "Red",
-    "observedAtSkill": 56
+    "difficultyColor": "Dark Blue",
+    "observedAtSkill": 70
   },
   {
     "name": "Fine Wool Bracer",
@@ -720,8 +720,8 @@
       { "item": "Rough Thread", "quantity": 1 },
       { "item": "Bronze Fasteners", "quantity": 2 }
     ],
-    "difficultyColor": "Red",
-    "observedAtSkill": 56
+    "difficultyColor": "White",
+    "observedAtSkill": 70
   },
   {
     "name": "Fine Wool Gorget",
@@ -736,8 +736,8 @@
       { "item": "Rough Thread", "quantity": 1 },
       { "item": "Bronze Fasteners", "quantity": 2 }
     ],
-    "difficultyColor": "Red",
-    "observedAtSkill": 56
+    "difficultyColor": "White",
+    "observedAtSkill": 70
   },
   {
     "name": "Fine Wool Cape",
@@ -752,8 +752,8 @@
       { "item": "Rough Thread", "quantity": 2 },
       { "item": "Bronze Fasteners", "quantity": 2 }
     ],
-    "difficultyColor": "Red",
-    "observedAtSkill": 56
+    "difficultyColor": "Orange",
+    "observedAtSkill": 70
   },
   {
     "name": "Fine Wool Gloves",
@@ -768,8 +768,8 @@
       { "item": "Rough Thread", "quantity": 2 },
       { "item": "Bronze Fasteners", "quantity": 2 }
     ],
-    "difficultyColor": "Red",
-    "observedAtSkill": 56
+    "difficultyColor": "Orange",
+    "observedAtSkill": 70
   },
   {
     "name": "Wool Pouch",
@@ -784,7 +784,7 @@
       { "item": "Rough Thread", "quantity": 3 }
     ],
     "difficultyColor": "Red",
-    "observedAtSkill": 56
+    "observedAtSkill": 70
   },
   {
     "name": "Fine Wool Belt",
@@ -800,7 +800,7 @@
       { "item": "Bronze Fasteners", "quantity": 2 }
     ],
     "difficultyColor": "Red",
-    "observedAtSkill": 56
+    "observedAtSkill": 70
   },
   {
     "name": "Fine Wool Veil",
@@ -816,7 +816,25 @@
       { "item": "Bronze Fasteners", "quantity": 2 }
     ],
     "difficultyColor": "Red",
-    "observedAtSkill": 56
+    "observedAtSkill": 70
+  },
+  {
+    "name": "Wool Satchel",
+    "slug": "wool-satchel",
+    "tradeskill": "Tailoring",
+    "listOrder": 31,
+    "difficultyColor": "Red",
+    "observedAtSkill": 70,
+    "needsInfo": true
+  },
+  {
+    "name": "Fine Wool Boots",
+    "slug": "fine-wool-boots",
+    "tradeskill": "Tailoring",
+    "listOrder": 32,
+    "difficultyColor": "Red",
+    "observedAtSkill": 70,
+    "needsInfo": true
   },
   {
     "name": "Arrow x100",

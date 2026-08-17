@@ -134,7 +134,18 @@ doesn't follow through a second switch.
 Every type uses the same `renderItemsList`. Armor additionally gets a "Material" dropdown
 (Cloth/Leather/Chain/Plate/Other, from `armorIconKey`/`ARMOR_MATERIAL_ORDER`/
 `ARMOR_MATERIAL_LABELS`) — same conditional-dropdown pattern as Weapon's handedness dropdown.
-(See `CLAUDE-HISTORY.md` for the two drill-down UIs this replaced.) Header search box
+(See `CLAUDE-HISTORY.md` for the two drill-down UIs this replaced.)
+
+**Shields and bucklers are `"type": "Weapon"`, not `"Armor"`** (2026-08-17, user's own
+explicit call) — despite having `ac`/no `damage`/`delay`/`skill` fields, same as any other
+Secondary-slot item. They still render with the dedicated shield icon and still show their AC
+in the table (icon/AC rendering is gated on the field being present, not on `item.type`) —
+the one code change needed was teaching `weaponIconKey()` to check for `slot === 'Secondary'`
+or a name containing "shield"/"buckler" first, the same check `armorIconKey()` already used,
+so the icon doesn't fall through to a generic slashing-weapon glyph. In the Item Database, a
+shield now shows up under the Weapons category (with the Handedness dropdown, not the Armor
+Material dropdown) — a shield always reads "One-Handed" there since it's never `twoHanded`.
+Header search box
 (global) still works the same — clicking a result calls `goToItem`, which sets
 `pendingItemCategory` + `pendingItemQuery` so the Item Database opens on that item's type
 with search pre-filled. Recipe component/result links go through the same `goToItem` path.
@@ -1512,6 +1523,25 @@ Optional plain `"YYYY-MM-DD"` string on an entry in `items.json`, `monsters.json
   no `lastUpdated` rather than a guessed one. Same "starts fresh, builds up over time"
   precedent as visit tracking — don't try to backfill further if this area gets touched
   again, just keep setting the field going forward.
+
+## Known JS gotchas
+
+**Every `ensure*Data()` loader function must cache its in-flight *promise*, not just the
+resolved data variable** (fixed 2026-08-17, root-caused a user report of the site sometimes
+hanging/Firefox showing "this page is slowing down" on page load). The bug: each loader
+(`ensureItemsData`, `ensureCraftingData`, `ensureMonstersData`, etc.) guarded with `if
+(!itemsData) { await fetch(...) }` — but `itemsData` only gets set *after* the `await`
+resolves, so a second call arriving before the first one finishes (which happens routinely:
+`init()`'s background prefetch and whatever page the URL hash lands on both call the same
+loader within the same tick) sees the same "not loaded yet" state and kicks off its own
+redundant `fetch` + `JSON.parse` of the same file. Confirmed via network tab: every single
+data file was loading twice on any page reached directly by URL hash. As `items.json`/
+`monsters.json`/etc. have grown into the hundreds of KB, that doubled parse+render work is
+enough synchronous main-thread work to trip the browser's slow-script warning. Fixed by
+caching the in-flight promise itself (`let itemsDataPromise = null`, reused by a concurrent
+call instead of starting a new fetch) — the same pattern every loader now follows. Apply this
+pattern to any *new* `ensure*Data()`-style loader added later; the plain `if (!data)` guard
+alone is not sufficient once more than one caller can race to be first.
 
 ## Known CSS gotchas
 

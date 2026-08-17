@@ -86,109 +86,161 @@ let pendingSubmitContext = null;
 // pendingItemQuery.
 let pendingMapOpen = null;
 
+// Each ensure*Data function below is called both from init()'s prefetch and
+// from whatever page actually renders that data — often within the same
+// tick, before the first call's fetch has resolved. Guarding only on the
+// data variable (`if (!itemsData)`) doesn't prevent that: the variable is
+// still unset while the fetch is in flight, so a second call sees the same
+// "not loaded yet" state and starts its own redundant fetch+parse of the
+// same file (confirmed 2026-08-17 — every data file was loading twice on
+// pages reached directly by URL hash, doubling JSON-parse work on files that
+// have grown into the hundreds of KB and very plausibly the cause of
+// reported page hangs/slow-script warnings). Fixed by caching the in-flight
+// *promise*, not just the resolved data, so a concurrent call reuses the
+// same pending fetch instead of starting a new one.
+let itemsDataPromise = null;
 async function ensureItemsData() {
-  if (!itemsData) {
-    const res = await fetch('items.json');
-    if (!res.ok) throw new Error('Could not load items.json');
-    itemsData = await res.json();
+  if (itemsData) return itemsData;
+  if (!itemsDataPromise) {
+    itemsDataPromise = fetch('items.json').then(res => {
+      if (!res.ok) throw new Error('Could not load items.json');
+      return res.json();
+    }).then(data => { itemsData = data; return itemsData; });
   }
-  return itemsData;
+  return itemsDataPromise;
 }
 
+let craftingDataPromise = null;
 async function ensureCraftingData() {
-  if (!tradeskillsData) {
-    const res = await fetch('tradeskills.json');
-    if (!res.ok) throw new Error('Could not load tradeskills.json');
-    tradeskillsData = await res.json();
+  if (craftingData) return craftingData;
+  if (!craftingDataPromise) {
+    craftingDataPromise = Promise.all([
+      fetch('tradeskills.json').then(res => {
+        if (!res.ok) throw new Error('Could not load tradeskills.json');
+        return res.json();
+      }),
+      fetch('crafting.json').then(res => {
+        if (!res.ok) throw new Error('Could not load crafting.json');
+        return res.json();
+      }),
+      fetch('gathering-nodes.json').then(res => {
+        if (!res.ok) throw new Error('Could not load gathering-nodes.json');
+        return res.json();
+      })
+    ]).then(([tradeskills, crafting, gathering]) => {
+      tradeskillsData = tradeskills;
+      craftingData = crafting;
+      gatheringData = gathering;
+      return craftingData;
+    });
   }
-  if (!craftingData) {
-    const res = await fetch('crafting.json');
-    if (!res.ok) throw new Error('Could not load crafting.json');
-    craftingData = await res.json();
-  }
-  if (!gatheringData) {
-    const res = await fetch('gathering-nodes.json');
-    if (!res.ok) throw new Error('Could not load gathering-nodes.json');
-    gatheringData = await res.json();
-  }
-  return craftingData;
+  return craftingDataPromise;
 }
 
+let gemstonesDataPromise = null;
 async function ensureGemstonesData() {
-  if (!gemstonesData) {
-    const res = await fetch('gemstones.json');
-    if (!res.ok) throw new Error('Could not load gemstones.json');
-    gemstonesData = await res.json();
+  if (gemstonesData) return gemstonesData;
+  if (!gemstonesDataPromise) {
+    gemstonesDataPromise = fetch('gemstones.json').then(res => {
+      if (!res.ok) throw new Error('Could not load gemstones.json');
+      return res.json();
+    }).then(data => { gemstonesData = data; return gemstonesData; });
   }
-  return gemstonesData;
+  return gemstonesDataPromise;
 }
 
+let monstersDataPromise = null;
 async function ensureMonstersData() {
-  if (!monstersData) {
-    const res = await fetch('monsters.json');
-    if (!res.ok) throw new Error('Could not load monsters.json');
-    monstersData = await res.json();
+  if (monstersData) return monstersData;
+  if (!monstersDataPromise) {
+    monstersDataPromise = fetch('monsters.json').then(res => {
+      if (!res.ok) throw new Error('Could not load monsters.json');
+      return res.json();
+    }).then(data => { monstersData = data; return monstersData; });
   }
-  return monstersData;
+  return monstersDataPromise;
 }
 
+let vendorsDataPromise = null;
 async function ensureVendorsData() {
-  if (!vendorsData) {
-    const res = await fetch('vendors.json');
-    if (!res.ok) throw new Error('Could not load vendors.json');
-    vendorsData = await res.json();
+  if (vendorsData) return vendorsData;
+  if (!vendorsDataPromise) {
+    vendorsDataPromise = fetch('vendors.json').then(res => {
+      if (!res.ok) throw new Error('Could not load vendors.json');
+      return res.json();
+    }).then(data => { vendorsData = data; return vendorsData; });
   }
-  return vendorsData;
+  return vendorsDataPromise;
 }
 
+let trainersDataPromise = null;
 async function ensureTrainersData() {
-  if (!trainersData) {
-    const res = await fetch('trainers.json');
-    if (!res.ok) throw new Error('Could not load trainers.json');
-    trainersData = await res.json();
+  if (trainersData) return trainersData;
+  if (!trainersDataPromise) {
+    trainersDataPromise = fetch('trainers.json').then(res => {
+      if (!res.ok) throw new Error('Could not load trainers.json');
+      return res.json();
+    }).then(data => { trainersData = data; return trainersData; });
   }
-  return trainersData;
+  return trainersDataPromise;
 }
 
+let companionsDataPromise = null;
 async function ensureCompanionsData() {
-  if (!companionSkillsData) {
-    const res = await fetch('companion-skills.json');
-    if (!res.ok) throw new Error('Could not load companion-skills.json');
-    companionSkillsData = await res.json();
+  if (companionsData) return companionsData;
+  if (!companionsDataPromise) {
+    companionsDataPromise = Promise.all([
+      fetch('companion-skills.json').then(res => {
+        if (!res.ok) throw new Error('Could not load companion-skills.json');
+        return res.json();
+      }),
+      fetch('companions.json').then(res => {
+        if (!res.ok) throw new Error('Could not load companions.json');
+        return res.json();
+      })
+    ]).then(([skills, companions]) => {
+      companionSkillsData = skills;
+      companionsData = companions;
+      return companionsData;
+    });
   }
-  if (!companionsData) {
-    const res = await fetch('companions.json');
-    if (!res.ok) throw new Error('Could not load companions.json');
-    companionsData = await res.json();
-  }
-  return companionsData;
+  return companionsDataPromise;
 }
 
+let spellsDataPromise = null;
 async function ensureSpellsData() {
-  if (!spellsData) {
-    const res = await fetch('spells.json');
-    if (!res.ok) throw new Error('Could not load spells.json');
-    spellsData = await res.json();
+  if (spellsData) return spellsData;
+  if (!spellsDataPromise) {
+    spellsDataPromise = fetch('spells.json').then(res => {
+      if (!res.ok) throw new Error('Could not load spells.json');
+      return res.json();
+    }).then(data => { spellsData = data; return spellsData; });
   }
-  return spellsData;
+  return spellsDataPromise;
 }
 
+let mapsDataPromise = null;
 async function ensureMapsData() {
-  if (!mapsData) {
-    const res = await fetch('maps.json');
-    if (!res.ok) throw new Error('Could not load maps.json');
-    mapsData = await res.json();
+  if (mapsData) return mapsData;
+  if (!mapsDataPromise) {
+    mapsDataPromise = fetch('maps.json').then(res => {
+      if (!res.ok) throw new Error('Could not load maps.json');
+      return res.json();
+    }).then(data => { mapsData = data; return mapsData; });
   }
-  return mapsData;
+  return mapsDataPromise;
 }
 
+let levelingDataPromise = null;
 async function ensureLevelingData() {
-  if (!levelingData) {
-    const res = await fetch('leveling-locations.json');
-    if (!res.ok) throw new Error('Could not load leveling-locations.json');
-    levelingData = await res.json();
+  if (levelingData) return levelingData;
+  if (!levelingDataPromise) {
+    levelingDataPromise = fetch('leveling-locations.json').then(res => {
+      if (!res.ok) throw new Error('Could not load leveling-locations.json');
+      return res.json();
+    }).then(data => { levelingData = data; return levelingData; });
   }
-  return levelingData;
+  return levelingDataPromise;
 }
 
 // A floating "Back to top" button, mainly meant for the long recipe/node
@@ -1696,6 +1748,8 @@ function colHeaderSymbol(symbol) {
 // over that finer distinction. Falls back to 1H Slashing for anything that
 // doesn't match a known skill.
 function weaponIconKey(item) {
+  const name = (item.name || '').toLowerCase();
+  if (item.slot === 'Secondary' || name.includes('shield') || name.includes('buckler')) return 'shield';
   if (item.slot === 'Ammo') return 'ammo';
   if (item.skill === 'Archery') return 'archery';
   if (item.skill === 'Throwing') return 'throwing';
