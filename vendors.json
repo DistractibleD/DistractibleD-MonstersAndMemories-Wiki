@@ -384,5 +384,49 @@
       "Multhele Root", "Resin", "Small Incense Stick", "Water Flask", "Zombie Skin"
     ],
     "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "Quartermaster Obaid",
+    "slug": "quartermaster-obaid",
+    "location": "Night Harbor",
+    "area": "Garrison",
+    "description": "A general quartermaster who buys almost any item and sells a huge variety of goods.",
+    "sells": [
+      { "family": "Rusty" },
+      { "family": "Rusty Iron" },
+      { "family": "Rusty Steel" },
+      { "family": "Corroded Bronze" },
+      { "family": "Tarnished Bronze" },
+      { "family": "Tattered Cloth" },
+      { "family": "Tattered Cotton" },
+      { "family": "Tattered Wool" },
+      { "family": "Tattered Hide" },
+      { "family": "Tattered Rawhide" },
+      { "family": "Tattered Leather" },
+      { "family": "Tattered Padded Leather" },
+      { "family": "Patched Rawhide" },
+      { "family": "Patched Cloth" },
+      "Ashira Warrior Bracer", "Bell Pepper", "Bronze Longsword", "Bronze Maul",
+      "Bronze Plate Bracer", "Bronze Plate Cloak", "Buckler", "Cabbage", "Candle",
+      "Celery", "Cheese", "Cooked Ashira Meat", "Cooked Goblin Meat",
+      "Cooked Human Meat", "Cooked Rat Meat", "Copper Chain Boots", "Copper Mace",
+      "Copper Plate Pauldrons", "Copper Plate Visor", "Copper Scythe",
+      "Cracked Elderwood Staff", "Cracked Fine Wood Staff", "Cracked Ironbark Staff",
+      "Cracked Staff", "Fine Cloth Cape", "Garlic", "Hammer and Chisel",
+      "Harvallen Root", "Kite Shield", "Lemon", "Lumberjack Axe",
+      "Lunar Festival Meatloaf", "Multhele Root", "Potato", "Ration",
+      "Raw Snake Meat", "Raw Wolf Meat", "Rice", "Scarab Boots",
+      "Scarab Breastplate", "Scarab Greaves", "Scarab Helm", "Scarab Shell Shield",
+      "Small Field Pack", "Snake Egg", "Spider Silk Cape", "Tomato", "Torch",
+      "Tower Shield", "Water Flask", "Wild Carrots", "Worn Bow", "Worn Buckler",
+      "Worn Elderwood Bow", "Worn Elderwood Buckler", "Worn Elderwood Great Staff",
+      "Worn Fine Wood Bow", "Worn Fine Wood Buckler", "Worn Fine Wood Great Staff",
+      "Worn Great Staff", "Worn Ironbark Bow", "Worn Ironbark Buckler",
+      "Worn Ironbark Great Staff"
+    ],
+    "buys": [
+      "Tattered Cloth Gloves", "Worn Great Staff", "Water Flask", "Seam Ripper"
+    ],
+    "lastUpdated": "2026-08-18"
   }
 ]

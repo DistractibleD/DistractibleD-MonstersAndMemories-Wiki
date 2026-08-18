@@ -972,7 +972,12 @@ been directly confirmed for that specific monster** — the roster-sharing confi
 family the same way it already worked for Rusty/Rusty Iron/Corroded Bronze. Full retroactive
 items.json backfill across every tier to the 42-piece roster hasn't been done in one sweep
 (large, still in progress) — apply this rule going forward whenever a tier's pieces come up,
-same incremental-growth precedent as every other family.
+same incremental-growth precedent as every other family. **This is the game-mechanic
+principle — whether a given tier is actually safe to *register* as a compact
+`QUALITY_SET_FAMILIES` prefix is a separate, narrower question** (see "Not every same-prefix
+cluster is safe to register as a compact family" below): "Bronze" and "Copper" both share this
+same underlying roster but can't use the compact form because the bare prefix also matches
+unrelated raw materials — list their real pieces individually instead.
 
 A "quality set" = shared name prefix denoting a tier/material, not a literal in-game
 grouping. **Confirmed families and current rosters** (check longest-prefix-first — "Rusty
@@ -1003,19 +1008,34 @@ are three separate families, don't merge or assume one's roster implies another'
   combinations have a real items.json card so far; the rest render as plain text on the
   family badge until a screenshot comes in for each — same "grows over time" precedent as
   every other family, just with a known target size now instead of an open-ended one.
-- **Tattered Rawhide** (8, armor): Gorget, Belt, Mask, Gloves, Bracer, Boots, Vest,
-  Shoulderpads.
-- **Tattered Hide** (11, armor): Cap, Gorget, Mask, Vest, Shoulderpads, Belt, Leggings, Bracer,
-  Gloves, Cloak, Tunic.
-- **Tattered Leather** (5, armor, confirmed 2026-08-10): Belt, Boots, Cloak, Bracer,
-  Shoulderpads — pieces had been sitting as unlinked plain-text drops on four separate
-  monsters (a grizzled raider, a Plagueborn citizen, a Plagueborn worshipper, a sand giant
-  fisher) across multiple earlier sessions, never recognized as a shared family until a
-  Vale of Zintar batch confirmed a second piece (Cloak) dropping from the same monster
-  another family member already existed on — backfilled onto all five monsters at once
-  per the standing inference rule. Only 2 of the 5 named pieces (Boots, Cloak) have a real
-  items.json card so far; the rest render as plain text on the family badge until a
-  screenshot comes in for each.
+- **Tattered Rawhide** (11, armor; Cap/Cloak/Tunic added 2026-08-18 from Quartermaster
+  Obaid's sell list — previously 8): Gorget, Belt, Mask, Gloves, Bracer, Boots, Vest,
+  Shoulderpads, Cap, Cloak, Tunic.
+- **Tattered Hide** (12, armor; Boots added at some point without this count being updated,
+  caught 2026-08-18): Cap, Gorget, Mask, Vest, Shoulderpads, Belt, Leggings, Bracer, Gloves,
+  Cloak, Tunic, Boots.
+- **Tattered Leather** (10, armor; expanded 2026-08-18 from Quartermaster Obaid's sell list —
+  previously 5): Belt, Boots, Cloak, Bracer, Shoulderpads, Gorget, Leggings, Mask, Vest,
+  Gloves — pieces had been sitting as unlinked plain-text drops on four separate monsters (a
+  grizzled raider, a Plagueborn citizen, a Plagueborn worshipper, a sand giant fisher) across
+  multiple earlier sessions, never recognized as a shared family until a Vale of Zintar batch
+  confirmed a second piece (Cloak) dropping from the same monster another family member
+  already existed on — backfilled onto all five monsters at once per the standing inference
+  rule. Still only a handful of the 10 named pieces have a real items.json card; the rest
+  render as plain text on the family badge until a screenshot comes in for each.
+- **Tattered Padded Leather** (11, armor, confirmed 2026-08-18 — Quartermaster Obaid's own
+  sell list, a distinct tier from plain "Tattered Leather" despite the overlapping name, not
+  to be merged): Belt, Boots, Bracer, Cap, Cloak, Gloves, Gorget, Mask, Shoulderpads, Tunic,
+  Vest.
+- **Patched Rawhide** (6, armor, confirmed 2026-08-18): Belt, Bracelet, Cap, Gloves, Leggings,
+  Mask. Note the odd-one-out piece name — "Bracelet", not "Bracer" like every other tier's
+  wrist piece — card text confirmed, not a typo.
+- **Patched Cloth** (10, armor) — already had 10 real items.json cards (Belt, Boots, Bracer,
+  Cape, Gloves, Gorget, Mantle, Pantaloons, Tunic, Veil) but was never added to script.js's
+  `QUALITY_SET_FAMILIES` array, so a compact `family` reference to it would have silently
+  counted 0 items — caught 2026-08-18 while auditing Quartermaster Obaid's sell list before
+  giving him one. No known instance had actually used the compact form yet, so this was a
+  latent bug, not a live one.
 - **Corrupted Leather** (12 armor pieces, confirmed 2026-08-11): Cap, Mask, Gorget,
   Shoulderpads, Cloak, Tunic, Robe, Bracer, Leggings, Belt, Gloves, Boots — all 12 already
   had real items.json cards. **The family badge itself shows 13**, not 12 — unlike every
@@ -1056,6 +1076,35 @@ are three separate families, don't merge or assume one's roster implies another'
   War Lance, Warhammer; Chain Boots/Cloak/Coif/Gambeson/Gloves/Gorget/Leggings/Mask/
   Shoulderguards/Tunic/Waistguard/Wristguard; Plate Arming Doublet/Boots/Bracer/Breastplate/
   Cloak/Collar/Gauntlets/Girdle/Greaves/Helm/Pauldrons/Visor.
+- **Tarnished Bronze** (17 confirmed so far, weapons + chain + plate, same shape as the other
+  metal tiers but not yet backfilled to a full 42 — Plate Cloak added 2026-08-18): Axe,
+  Dagger, Greatsword, Longsword, Mace, Shortsword, War Lance, Warhammer; Chain Boots/Cloak/
+  Gloves/Mask; Plate Boots/Bracer/Cloak/Girdle/Helm.
+
+**Not every same-prefix cluster is safe to register as a compact `family`** — a family
+reference in `QUALITY_SET_FAMILIES` (script.js) counts *every* items.json entry starting with
+that prefix, and a few plausible-looking tier names collide with unrelated raw-material/
+component/drop items that happen to share the same first word (caught 2026-08-18, auditing
+Quartermaster Obaid's huge sell list before adding it — each of these would have silently
+inflated its own count):
+- **"Bronze"** (plain) — Bronze Bar/Wire/Scraps are crafting materials, not armor/weapon
+  pieces. Bronze's real weapon/armor pieces (Axe, Dagger, Greatsword, Longsword, Mace, Maul,
+  Scimitar, Scythe, Shortsword, Trident, War Lance, Warhammer, Great Scythe, Battle Axe, Spear,
+  Plate Bracer, Plate Cloak, Plate Gauntlets, Plate Collar, Plate Girdle, Chain Coif, Chain
+  Mask) have to be listed individually on a sell/drop list instead.
+- **"Copper"** — Copper Ore/Fasteners/Nails/Stirrups/Tread/Cauldron/Scraps/Plate are all raw
+  materials/components, 8 of them. Same individual-listing rule applies to its real pieces.
+- **"Scarab"** — Scarab Eye/Leg are creature-part drop materials, not the Scarab armor set
+  (Boots, Breastplate, Greaves, Helm, Shell Shield).
+- **"Worn"** — Worn Linen Mitts/Circle Tunic are unrelated starter gear, not part of the
+  Worn wood-staff/bow tier (Bow, Buckler, Great Staff, plus Fine Wood/Elderwood/Ironbark
+  variants of each).
+- **"Cracked"** — Cracked Amphora is broken pottery, not part of the Cracked wood-staff tier
+  (Staff, Fine Wood Staff, Ironbark Staff, Elderwood Staff).
+
+If a future family candidate has this problem, list its real pieces individually rather than
+registering the prefix — don't try to "fix" it with a `familyItemCount` exclusion list, that
+just moves the fragility into code instead of the data.
 
 Treat a new shared prefix as its own family the same way. Rosters grow over time as new
 screenshots turn up pieces not previously known (e.g. Corroded Bronze: 19→42, Rusty Iron

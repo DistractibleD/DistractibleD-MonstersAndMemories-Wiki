@@ -23593,5 +23593,408 @@
     "classes": ["ALL"],
     "race": ["ALL"],
     "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Cotton Belt",
+    "slug": "tattered-cotton-belt",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Waist",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Cotton Bracer",
+    "slug": "tattered-cotton-bracer",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Cotton Cap",
+    "slug": "tattered-cotton-cap",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Cotton Cape",
+    "slug": "tattered-cotton-cape",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Cotton Gorget",
+    "slug": "tattered-cotton-gorget",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Neck",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Cotton Mantle",
+    "slug": "tattered-cotton-mantle",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shoulders",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Cotton Pantaloons",
+    "slug": "tattered-cotton-pantaloons",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Legs",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Cotton Robe",
+    "slug": "tattered-cotton-robe",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Cotton Shirt",
+    "slug": "tattered-cotton-shirt",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shirt",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Cotton Tunic",
+    "slug": "tattered-cotton-tunic",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Cotton Veil",
+    "slug": "tattered-cotton-veil",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Face",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Wool Boots",
+    "slug": "tattered-wool-boots",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Feet",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Wool Robe",
+    "slug": "tattered-wool-robe",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Rawhide Cap",
+    "slug": "tattered-rawhide-cap",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Rawhide Cloak",
+    "slug": "tattered-rawhide-cloak",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Rawhide Tunic",
+    "slug": "tattered-rawhide-tunic",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Leather Belt",
+    "slug": "tattered-leather-belt",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Waist",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Leather Bracer",
+    "slug": "tattered-leather-bracer",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Leather Gorget",
+    "slug": "tattered-leather-gorget",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Neck",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Leather Gloves",
+    "slug": "tattered-leather-gloves",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Hands",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Leather Leggings",
+    "slug": "tattered-leather-leggings",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Legs",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Leather Mask",
+    "slug": "tattered-leather-mask",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Face",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Leather Shoulderpads",
+    "slug": "tattered-leather-shoulderpads",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shoulders",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Leather Vest",
+    "slug": "tattered-leather-vest",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shirt",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Padded Leather Belt",
+    "slug": "tattered-padded-leather-belt",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Waist",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Padded Leather Boots",
+    "slug": "tattered-padded-leather-boots",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Feet",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Padded Leather Bracer",
+    "slug": "tattered-padded-leather-bracer",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Padded Leather Cap",
+    "slug": "tattered-padded-leather-cap",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Padded Leather Cloak",
+    "slug": "tattered-padded-leather-cloak",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Padded Leather Gloves",
+    "slug": "tattered-padded-leather-gloves",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Hands",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Padded Leather Gorget",
+    "slug": "tattered-padded-leather-gorget",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Neck",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Padded Leather Mask",
+    "slug": "tattered-padded-leather-mask",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Face",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Padded Leather Shoulderpads",
+    "slug": "tattered-padded-leather-shoulderpads",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shoulders",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Padded Leather Tunic",
+    "slug": "tattered-padded-leather-tunic",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tattered Padded Leather Vest",
+    "slug": "tattered-padded-leather-vest",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Shirt",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Patched Rawhide Belt",
+    "slug": "patched-rawhide-belt",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Waist",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Patched Rawhide Bracelet",
+    "slug": "patched-rawhide-bracelet",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Wrist",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Patched Rawhide Cap",
+    "slug": "patched-rawhide-cap",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Head",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Patched Rawhide Gloves",
+    "slug": "patched-rawhide-gloves",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Hands",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Patched Rawhide Leggings",
+    "slug": "patched-rawhide-leggings",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Legs",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Patched Rawhide Mask",
+    "slug": "patched-rawhide-mask",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Face",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Scarab Breastplate",
+    "slug": "scarab-breastplate",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Chest",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Tarnished Bronze Plate Cloak",
+    "slug": "tarnished-bronze-plate-cloak",
+    "type": "Armor",
+    "tags": [],
+    "slot": "Back",
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Lunar Festival Meatloaf",
+    "slug": "lunar-festival-meatloaf",
+    "type": "Food",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Small Field Pack",
+    "slug": "small-field-pack",
+    "type": "Container",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
   }
 ]

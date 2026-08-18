@@ -4977,17 +4977,31 @@ function setupMonsterViewer() {
 // in-game grouping. Order matters: a more specific prefix (e.g. "Rusty Iron")
 // must be checked before a shorter one it also starts with ("Rusty"), or
 // every Rusty Iron/Steel piece would get miscounted as plain Rusty.
+// Deliberately excludes a few otherwise-plausible prefixes whose plain form
+// collides with unrelated raw-material/component item names, which would
+// silently inflate familyItemCount() with items that aren't part of the
+// armor/weapon set at all (confirmed 2026-08-18, auditing Quartermaster
+// Obaid's huge sell list before adding it): "Bronze" (Bronze Bar/Wire/
+// Scraps), "Copper" (Copper Ore/Fasteners/Nails/Stirrups/Tread/Cauldron/
+// Scraps/Plate), "Scarab" (Scarab Eye/Leg — creature-part drop materials),
+// "Worn" (Worn Linen Mitts/Circle Tunic — unrelated starter gear), "Cracked"
+// (Cracked Amphora — broken pottery). Those tiers' pieces get listed
+// individually wherever they'd otherwise use a compact family reference.
 const QUALITY_SET_FAMILIES = [
   'Rusty Iron',
   'Rusty Steel',
   'Rusty',
   'Corroded Bronze',
+  'Tarnished Bronze',
+  'Tattered Padded Leather',
   'Tattered Cloth',
   'Tattered Rawhide',
   'Tattered Leather',
   'Tattered Wool',
   'Tattered Hide',
-  'Tattered Cotton'
+  'Tattered Cotton',
+  'Patched Rawhide',
+  'Patched Cloth'
 ];
 
 function qualitySetFamilyFor(itemName) {
