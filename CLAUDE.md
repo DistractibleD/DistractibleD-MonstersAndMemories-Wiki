@@ -1141,14 +1141,19 @@ than this page** — it fills gaps, never overrides an already-confirmed drop):
   piece in `drops` (checked 2026-08-18), so this hasn't come up as a live conflict — if one
   ever does, ask before treating an existing Tarnished-tier drop record as wrong.
 
-**One existing data point flagged, not yet resolved:** Merrisam Copperhelm (a named Fallen
-Pass boss) has "Enchanted Bronze Battle Helm" recorded as a drop — the item's own description
-ties it directly to the boss's name/lore ("carrying the sparks of Merrisam's gnomish genius"),
-suggesting a deliberate unique boss-exclusive item that happens to reuse the Enchanted+tier
-naming convention rather than a generic crafted result. Raised with the user 2026-08-18;
-explicit instruction received: **do not remove this or any other previously-recorded boss
-drop without asking first** — this general crafting-only rule doesn't automatically override
-a specific, already-confirmed screenshot-sourced entry.
+**Resolved 2026-08-18 — Merrisam Copperhelm's "Enchanted Bronze Battle Helm" is a genuine
+unique named drop, not a mistake; kept as-is.** Two signals the user gave for telling a
+crafted piece from a unique/named one apart, useful for any future case like this: (1) a
+plain crafted piece's name is always just the bare piece type (Helm, Boots, Bracer, ...) —
+"Battle" isn't a word that appears in any crafted piece name, so its presence here already
+marks this as a one-off unique item, not the generic crafted result; (2) **crafted armor
+never has flavor text/a description at all** — this item does ("carrying the sparks of
+Merrisam's gnomish genius," directly tied to the boss's own name), which alone would have
+been enough to tell them apart. Apply both checks the same way to any future "does this
+Enchanted/plain-tier-looking item actually belong to a monster's drops" question — a bare
+tier-formula name with no description is crafted-only (flag it per the rule above), but a
+descriptive/flavor name and/or an actual `description` on the item card means it's a real
+unique drop, safe to keep.
 
 Treat a new shared prefix as its own family the same way. Rosters grow over time as new
 screenshots turn up pieces not previously known (e.g. Corroded Bronze: 19→42, Rusty Iron
