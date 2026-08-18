@@ -23564,5 +23564,34 @@
     "classes": ["ALL"],
     "race": ["ALL"],
     "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "First Degree Fourfold Sash",
+    "slug": "first-degree-fourfold-sash",
+    "type": "Armor",
+    "tags": ["MAGIC", "UNIQUE", "NODROP"],
+    "slot": "Waist",
+    "ac": 2,
+    "stats": { "INT": 2, "HP": 5, "MANA": 5 },
+    "description": "A simple sash affixed with a single emblem.",
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ELE"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Moonwhisper Circle",
+    "slug": "moonwhisper-circle",
+    "type": "Jewelry",
+    "tags": ["MAGIC"],
+    "slot": "Range",
+    "stats": { "WIS": 2, "MANA": 5 },
+    "description": "A delicate dreamcatcher woven with pale moonstones and owl feathers, softly stirring with nocturnal whispers.",
+    "weight": 3.0,
+    "size": "Medium",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-18"
   }
 ]
