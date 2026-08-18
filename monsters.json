@@ -854,7 +854,7 @@
     "name": "a skeleton",
     "slug": "a-skeleton",
     "image": "images/Monsters/a-skeleton.jpg",
-    "maps": ["Shaded Dunes", "Night Harbor"],
+    "maps": ["Shaded Dunes", "Night Harbor", "Evershade Weald"],
     "areas": ["North Gate"],
     "drops": [
       { "item": "Rawhide Scraps" },
@@ -869,7 +869,13 @@
       { "copper": 28 },
       { "copper": 27 }
     ],
-    "lastUpdated": "2026-08-17"
+    "conObservations": [
+      { "playerLevel": 1, "con": "Red" },
+      { "playerLevel": 1, "con": "Red" },
+      { "playerLevel": 1, "con": "Red" },
+      { "playerLevel": 1, "con": "Red" }
+    ],
+    "lastUpdated": "2026-08-18"
   },
   {
     "name": "a restless ghoul",
@@ -5532,6 +5538,7 @@
     ],
     "conObservations": [
       { "playerLevel": 1, "con": "Yellow" },
+      { "playerLevel": 1, "con": "Yellow" },
       { "playerLevel": 1, "con": "Yellow" }
     ],
     "lastUpdated": "2026-08-18"
@@ -5560,6 +5567,8 @@
     ],
     "conObservations": [
       { "playerLevel": 1, "con": "White" },
+      { "playerLevel": 1, "con": "White" },
+      { "playerLevel": 1, "con": "White" },
       { "playerLevel": 1, "con": "White" }
     ],
     "lastUpdated": "2026-08-18"
@@ -5573,6 +5582,9 @@
       { "item": "Royal Jelly" }
     ],
     "conObservations": [
+      { "playerLevel": 1, "con": "White" },
+      { "playerLevel": 1, "con": "White" },
+      { "playerLevel": 1, "con": "White" },
       { "playerLevel": 1, "con": "White" }
     ],
     "lastUpdated": "2026-08-18"
@@ -8766,6 +8778,8 @@
     "maps": ["Evershade Weald"],
     "conObservations": [
       { "playerLevel": 1, "con": "Yellow" },
+      { "playerLevel": 1, "con": "Yellow" },
+      { "playerLevel": 1, "con": "Yellow" },
       { "playerLevel": 1, "con": "Yellow" }
     ],
     "lastUpdated": "2026-08-18"
@@ -8775,7 +8789,28 @@
     "slug": "a-black-widow-hatchling",
     "maps": ["Evershade Weald"],
     "conObservations": [
+      { "playerLevel": 1, "con": "Yellow" },
+      { "playerLevel": 1, "con": "Yellow" },
       { "playerLevel": 1, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "a bat",
+    "slug": "a-bat",
+    "maps": ["Night Harbor"],
+    "areas": ["Saltbreeze Park"],
+    "conObservations": [
+      { "playerLevel": 1, "con": "White" }
+    ],
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "a rabid wolf",
+    "slug": "a-rabid-wolf",
+    "maps": ["Evershade Weald"],
+    "conObservations": [
+      { "playerLevel": 1, "con": "Red" }
     ],
     "lastUpdated": "2026-08-18"
   }

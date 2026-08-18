@@ -13032,25 +13032,6 @@
     "race": ["ALL"]
   },
   {
-    "name": "Grudgeheft",
-    "slug": "grudgeheft",
-    "lastUpdated": "2026-07-19",
-    "type": "Weapon",
-    "tags": ["MAGIC", "UNIQUE"],
-    "slot": "Primary",
-    "twoHanded": true,
-    "damage": 38,
-    "delay": 48,
-    "skill": "Bludgeoning",
-    "stats": { "STR": 14, "AGI": -2, "DEX": -2 },
-    "effect": "Crippling Surge (Chance On Hit. Level: 30)",
-    "description": "A titanic maul embodying agony transfigured into wrath, the source of a lifetime of suffering. Forged from the malformed shoulder bone of Edric \"the Lame\" Torvald.",
-    "weight": 14.0,
-    "size": "Large",
-    "classes": ["BST", "MNK", "RNG", "WIZ"],
-    "race": ["ALL"]
-  },
-  {
     "name": "Colorful Leather Vest",
     "slug": "colorful-leather-vest",
     "image": "images/items/colorful-leather-vest.jpg",
@@ -19837,7 +19818,11 @@
     "skill": "Bludgeoning",
     "stats": { "STR": 14, "AGI": -2, "DEX": -2 },
     "effect": "Crippling Surge (Chance On Hit. Level: 30)",
-    "description": "A titanic maul embodying agony transfigured into wrath, the source of a lifetime of suffering. Forged from the malformed shoulder bone of Edric \"the Lame\" Torvald."
+    "description": "A titanic maul embodying agony transfigured into wrath, the source of a lifetime of suffering. Forged from the malformed shoulder bone of Edric \"the Lame\" Torvald.",
+    "weight": 14.0,
+    "size": "Large",
+    "classes": ["BST", "MNK", "RNG", "WIZ"],
+    "race": ["ALL"]
   },
   {
     "name": "Leprotic Veil",

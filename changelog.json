@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-18T22:32", "summary": "Fixed a duplicate/misspelled item (Grudgeheft vs Grudgehaft) and added new level-1 con-check data for Night Harbor and Evershade Weald monsters" },
   { "timestamp": "2026-08-18T21:35", "summary": "Merged A Shady Trader back into one vendor - Faelindral is a city within Evershade Weald, not a separate zone, so it was the same vendor all along" },
   { "timestamp": "2026-08-18T20:56", "summary": "Split A Shady Trader into two separate vendors (Faelindral and Evershade Weald) instead of one combined entry" },
   { "timestamp": "2026-08-18T20:15", "summary": "Confirmed and highlighted the Blacksmithing Tarnished-upgrade recipe, added Evershade Weald monster/con data, and expanded A Shady Trader's sell list" },
