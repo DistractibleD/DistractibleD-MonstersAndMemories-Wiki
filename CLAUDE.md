@@ -1535,6 +1535,18 @@ are looking for what's available in their own current zone.
     Night Harbor stubs (Greedy Halfling/Suspicious Salesman/Clint) are `needsInfo: true` with
     `sells: []` and no screenshot yet — same wiki-name-with-no-screenshot-yet precedent as
     the Faction page's bulk monster import.
+    **Faelindral is a city *within* the Evershade Weald zone, not its own top-level zone**
+    (confirmed by the user 2026-08-18 — "Faelindral is the Wood Elf home city located within
+    the zone Evershade Weald... restricted to the Wood Elf and the Halfling"). A Shady
+    Trader's `location` is therefore `"Evershade Weald"` with `"area": "Faelindral, by a
+    caravan near the stables"` — matches the same `location`-is-the-zone/`area`-is-the-
+    specific-spot convention every other vendor already uses (e.g. Night Harbor's Garrison/
+    Sojourner's Camp/North Gate). A same-named "A Shady Trader" spotted again in a later,
+    separately-processed Evershade Weald batch was briefly (and wrongly) recorded as a second
+    vendor entry before this zone relationship was clarified — merged back into the one
+    entry once it was. `maps.json` still keeps its own standalone "Faelindral" map image
+    (a city layout is useful on its own regardless of the zone hierarchy) — only the
+    monster/vendor *zone bookkeeping* needed correcting, not the map itself.
   - **`buys`** (2026-08-17) — optional, same shape/dynamic-linking/compact-family
     convention as `sells` (a flat array of exact item names and/or `{ "family": ... }`
     entries). Resolves the "not sure how we will implement this yet" uncertainty noted here
