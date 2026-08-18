@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-18T20:56", "summary": "Split A Shady Trader into two separate vendors (Faelindral and Evershade Weald) instead of one combined entry" },
   { "timestamp": "2026-08-18T20:15", "summary": "Confirmed and highlighted the Blacksmithing Tarnished-upgrade recipe, added Evershade Weald monster/con data, and expanded A Shady Trader's sell list" },
   { "timestamp": "2026-08-18T18:38", "summary": "Added an unverified community note to Blacksmithing about upgrading corroded metal armor into its Tarnished counterpart" },
   { "timestamp": "2026-08-18T16:21", "summary": "Added notes to the Tailoring and Leatherworking pages explaining how to repair Tattered armor into its Patched counterpart" },
