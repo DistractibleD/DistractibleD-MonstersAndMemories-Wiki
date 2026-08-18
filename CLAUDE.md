@@ -1132,14 +1132,19 @@ than this page** — it fills gaps, never overrides an already-confirmed drop):
 - **"Enchanted `<tier>` `<piece>`" items are also player-made only** — crafted the same way as
   the plain tier above, but using an Enchanted-tier bar (Enchanted Copper Bar, etc., itself a
   product of the Enchanting tradeskill) instead of a plain one. Also never a monster drop.
-- **The fan wiki additionally describes "Tarnished `<metal>`" as a crafted *upgrade*, not a
-  separate drop tier** — a player combines a Corroded Bronze piece + matching Scraps at an
-  Anvil to produce the Tarnished Bronze version of the same piece. This is the one point where
-  the wiki adds real new information beyond what the user has stated directly, so treat it as
-  unverified/unconfirmed rather than acted on immediately — same "fills a gap, doesn't
-  override" caveat as above. No monster in `monsters.json` currently lists a Tarnished-tier
-  piece in `drops` (checked 2026-08-18), so this hasn't come up as a live conflict — if one
-  ever does, ask before treating an existing Tarnished-tier drop record as wrong.
+- **"Tarnished `<metal>`" is a crafted *upgrade*, not a separate drop tier — confirmed
+  in-game 2026-08-18** (the fan wiki described this first, treated as unverified until the
+  user tested it directly: combining Corroded Bronze Chain Boots + 1x Bronze Scraps at an
+  Anvil produced Tarnished Bronze Chain Boots). A player combines a Corroded `<metal>` piece
+  + matching Scraps at an Anvil to produce the Tarnished version of that same piece —
+  **the scrap quantity needed varies by the piece's size**, confirmed by the user directly
+  (not yet mapped exactly which pieces need how many). `tradeskills.json`'s Blacksmithing
+  entry carries this as its `note`, with `"noteHighlighted": true` (renders with a bordered/
+  tinted/star-icon treatment, `.craft-tradeskill-note-highlighted` in style.css, opt-in via
+  that boolean — every other tradeskill's `note` stays in the quieter default style) since
+  it's actionable info a visitor could otherwise miss. No monster in `monsters.json` lists a
+  Tarnished-tier piece in `drops` (checked 2026-08-18) — if one ever does, ask before
+  treating an existing Tarnished-tier drop record as wrong, same as any other tier.
 
 **Resolved 2026-08-18 — Merrisam Copperhelm's "Enchanted Bronze Battle Helm" is a genuine
 unique named drop, not a mistake; kept as-is.** Two signals the user gave for telling a

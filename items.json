@@ -23996,5 +23996,40 @@
     "tags": [],
     "needsInfo": true,
     "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Basilisk Scale",
+    "slug": "basilisk-scale",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Large Bat Fur",
+    "slug": "large-bat-fur",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Wasp Venom Sac",
+    "slug": "wasp-venom-sac",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Request for Aid",
+    "slug": "request-for-aid",
+    "type": "Misc",
+    "tags": ["UNIQUE", "NODROP"],
+    "description": "A request from High Keeper Caelen Stillbranch.",
+    "readText": "The balance of the Weald is threatened and the natural order disturbed.\n\nThose with a connection to the lands and its creatures are summoned to Rangers Rest upon Keepers Terrace.\n\nTo reach us, set out from the top of the Travelers Lift and venture past the inn, toward the Willows Whisper. Ascend the ramp on the left to Traders Terrace, where you will find the Rangers Rest across the span.\n\nAny of the Defenders of Faelindral can offer directions if asked.\n\nWhen you arrive, deliver this pamphlet to Captain Relgen Greenblade.\n\nFrom there, your talents shall benefit the preservation of all who call the Weald their home.\n\nHigh Keeper Caelen Stillbranch",
+    "weight": 0.1,
+    "size": "Small",
+    "lastUpdated": "2026-08-18"
   }
 ]

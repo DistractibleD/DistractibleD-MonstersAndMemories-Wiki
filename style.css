@@ -2163,6 +2163,31 @@ body {
   color: var(--text-dim);
   font-size: 0.88rem;
 }
+/* Opt-in extra-prominent variant (tradeskills.json's optional
+   `noteHighlighted: true`) — for a note carrying genuinely actionable info
+   a visitor could easily miss in the default quiet/muted style (2026-08-18,
+   first use: Blacksmithing's confirmed Tarnished-upgrade recipe). Full gold
+   border + tinted background + bolder text instead of just a thin left
+   accent line, and a small "tip" icon prefix so it visually reads as
+   "important" at a glance, not just more of the page's own text. */
+.craft-tradeskill-note-highlighted {
+  border: 1px solid var(--accent);
+  border-left-width: 4px;
+  background: rgba(224, 166, 64, 0.1);
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 500;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.craft-tradeskill-note-highlighted::before {
+  content: '★';
+  color: var(--accent);
+  font-weight: 700;
+  flex: 0 0 auto;
+  line-height: 1.4;
+}
 /* Disenchanting's magic-dust tier chart (renderDisenchantingDustTiersHTML) —
    styled after .gem-reference, the same "reference panel above the recipe
    grid" pattern Jewelcrafting's gemstone tables already use. */

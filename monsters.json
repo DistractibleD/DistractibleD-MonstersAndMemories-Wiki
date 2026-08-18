@@ -5530,7 +5530,11 @@
       { "copper": 5 },
       { "copper": 3 }
     ],
-    "lastUpdated": "2026-08-06"
+    "conObservations": [
+      { "playerLevel": 1, "con": "Yellow" },
+      { "playerLevel": 1, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-18"
   },
   {
     "name": "a green drakeling",
@@ -5554,7 +5558,11 @@
       { "item": "Raw Bat Meat" },
       { "item": "Bat Wing" }
     ],
-    "lastUpdated": "2026-08-06"
+    "conObservations": [
+      { "playerLevel": 1, "con": "White" },
+      { "playerLevel": 1, "con": "White" }
+    ],
+    "lastUpdated": "2026-08-18"
   },
   {
     "name": "a wasp drone",
@@ -5564,7 +5572,10 @@
       { "item": "Wasp Wing" },
       { "item": "Royal Jelly" }
     ],
-    "lastUpdated": "2026-08-06"
+    "conObservations": [
+      { "playerLevel": 1, "con": "White" }
+    ],
+    "lastUpdated": "2026-08-18"
   },
   {
     "name": "a timber wolf",
@@ -5754,7 +5765,11 @@
       { "faction": "Defenders of Faelindral", "effect": "positive" },
       { "faction": "Fellstone Orcs", "effect": "negative" }
     ],
-    "lastUpdated": "2026-08-11"
+    "conObservations": [
+      { "playerLevel": 1, "con": "Yellow" },
+      { "playerLevel": 1, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-18"
   },
   {
     "name": "a Fellstone warrior",
@@ -8734,5 +8749,34 @@
       { "item": "Expert Fishing Pole" }
     ],
     "lastUpdated": "2026-08-17"
+  },
+  {
+    "name": "a black wolf pup",
+    "slug": "a-black-wolf-pup",
+    "maps": ["Evershade Weald"],
+    "conObservations": [
+      { "playerLevel": 1, "con": "White" },
+      { "playerLevel": 1, "con": "White" }
+    ],
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "a large black bat",
+    "slug": "a-large-black-bat",
+    "maps": ["Evershade Weald"],
+    "conObservations": [
+      { "playerLevel": 1, "con": "Yellow" },
+      { "playerLevel": 1, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "a black widow hatchling",
+    "slug": "a-black-widow-hatchling",
+    "maps": ["Evershade Weald"],
+    "conObservations": [
+      { "playerLevel": 1, "con": "Yellow" }
+    ],
+    "lastUpdated": "2026-08-18"
   }
 ]

@@ -4028,7 +4028,7 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
       ${tradeskillName}
       ${tradeskill && tradeskill.status === 'planned' ? '<span class="badge-planned">Planned</span>' : ''}
     </${headingTag}>
-    ${tradeskill && tradeskill.note ? `<p class="craft-tradeskill-note">${escapeAttr(tradeskill.note)}</p>` : ''}
+    ${tradeskill && tradeskill.note ? `<p class="craft-tradeskill-note${tradeskill.noteHighlighted ? ' craft-tradeskill-note-highlighted' : ''}">${escapeAttr(tradeskill.note)}</p>` : ''}
     ${tradeskillName === 'Disenchanting' ? renderDisenchantingDustTiersHTML() : ''}
     ${renderGemstoneTablesHTML(tradeskillName)}
     ${
@@ -4335,7 +4335,7 @@ function renderGatheringNodes(container, tradeskillName) {
       ${tradeskillName}
       ${tradeskill && tradeskill.status === 'planned' ? '<span class="badge-planned">Planned</span>' : ''}
     </h1>
-    ${tradeskill && tradeskill.note ? `<p class="craft-tradeskill-note">${escapeAttr(tradeskill.note)}</p>` : ''}
+    ${tradeskill && tradeskill.note ? `<p class="craft-tradeskill-note${tradeskill.noteHighlighted ? ' craft-tradeskill-note-highlighted' : ''}">${escapeAttr(tradeskill.note)}</p>` : ''}
     ${
       tradeskill && tradeskill.status === 'planned'
         ? '<p>This tradeskill hasn\'t been implemented in the game yet.</p>'

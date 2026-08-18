@@ -208,9 +208,12 @@
     "description": "A Greedy Merchant — buys a wider selection of items than a regular vendor, but at reduced prices.",
     "sells": [
       "Backpack", "Cracked Amphora", "Dispel Stone", "Malleable Bone Ornamented Coffin",
-      "Unguent of Revealing", "Volatile Rift Potion"
+      "Unguent of Revealing", "Volatile Rift Potion", "Alunite Ore", "Basilisk Scale",
+      "Bat Eye", "Bat Fur", "Bat Tooth", "Bat Wing", "Flawed Diamond", "Flawed Jade",
+      "Flawed Ruby", "Large Bat Fur", "Multhele Root", { "family": "Tattered Leather" },
+      "Wasp Venom Sac", "Wolf Blood", "Wolf Tooth"
     ],
-    "lastUpdated": "2026-08-14"
+    "lastUpdated": "2026-08-18"
   },
   {
     "name": "A Miner",
