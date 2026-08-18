@@ -1106,6 +1106,50 @@ If a future family candidate has this problem, list its real pieces individually
 registering the prefix — don't try to "fix" it with a `familyItemCount` exclusion list, that
 just moves the fragility into code instead of the data.
 
+### Not every armor/weapon tier is a monster drop — some are player-crafted only
+
+Confirmed directly by the user (2026-08-18), and consistent with the fan wiki's own
+Blacksmithing page (`monstersandmemories.miraheze.org/wiki/Skill_Blacksmithing` — used here
+only to explain the naming logic/fill gaps, same weaker-than-a-screenshot caveat as any other
+fan-wiki source on this site; **the user's own screenshots are always newer/more authoritative
+than this page** — it fills gaps, never overrides an already-confirmed drop):
+
+- **"Patched" armor (Patched Cloth, Patched Rawhide, ...) is never a monster drop** — it's a
+  player-made *repair* of the matching "Tattered" tier, made using scraps of the appropriate
+  material (cloth/wool/cotton, etc.) at a Tailoring kit or Tailoring crafting station, not an
+  item that exists independently in the world. A monster's `drops` should never get a compact
+  `{ "family": "Patched ..." }` reference or an individual "Patched ..." item from this —
+  flag a future screenshot that seems to show one rather than recording it as confirmed.
+- **Plain metal-tier armor/weapons with no other prefix (Copper, Bronze, Iron, Steel, ..., not
+  Rusty/Corroded/Tarnished/Salt-Encrusted/Worn) are never a monster drop** — built entirely by
+  players from mined-and-smelted ore (Copper Ore → Copper Bar → Copper Plate/Chain Links →
+  armor, via Smelting then Blacksmithing). This is exactly why "Bronze"/"Copper" were excluded
+  from `QUALITY_SET_FAMILIES` above for a *different* reason (raw-material name collisions) —
+  now there's a second, independent reason they'd never legitimately show up in a monster's
+  `drops` at all. **Vendors are unaffected** — a vendor sells whatever players bring them
+  (Quartermaster Obaid's `sells` list legitimately includes plain Copper/Bronze pieces), this
+  rule is about `monsters.json` `drops` only.
+- **"Enchanted `<tier>` `<piece>`" items are also player-made only** — crafted the same way as
+  the plain tier above, but using an Enchanted-tier bar (Enchanted Copper Bar, etc., itself a
+  product of the Enchanting tradeskill) instead of a plain one. Also never a monster drop.
+- **The fan wiki additionally describes "Tarnished `<metal>`" as a crafted *upgrade*, not a
+  separate drop tier** — a player combines a Corroded Bronze piece + matching Scraps at an
+  Anvil to produce the Tarnished Bronze version of the same piece. This is the one point where
+  the wiki adds real new information beyond what the user has stated directly, so treat it as
+  unverified/unconfirmed rather than acted on immediately — same "fills a gap, doesn't
+  override" caveat as above. No monster in `monsters.json` currently lists a Tarnished-tier
+  piece in `drops` (checked 2026-08-18), so this hasn't come up as a live conflict — if one
+  ever does, ask before treating an existing Tarnished-tier drop record as wrong.
+
+**One existing data point flagged, not yet resolved:** Merrisam Copperhelm (a named Fallen
+Pass boss) has "Enchanted Bronze Battle Helm" recorded as a drop — the item's own description
+ties it directly to the boss's name/lore ("carrying the sparks of Merrisam's gnomish genius"),
+suggesting a deliberate unique boss-exclusive item that happens to reuse the Enchanted+tier
+naming convention rather than a generic crafted result. Raised with the user 2026-08-18;
+explicit instruction received: **do not remove this or any other previously-recorded boss
+drop without asking first** — this general crafting-only rule doesn't automatically override
+a specific, already-confirmed screenshot-sourced entry.
+
 Treat a new shared prefix as its own family the same way. Rosters grow over time as new
 screenshots turn up pieces not previously known (e.g. Corroded Bronze: 19→42, Rusty Iron
 gained Tower Shield, Tattered Wool: 7→11, Tattered Hide: 7→8→9→11) — when this happens, retroactively backfill the
