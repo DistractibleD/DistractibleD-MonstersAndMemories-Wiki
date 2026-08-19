@@ -5963,6 +5963,12 @@ async function renderHomePage(container) {
 
   container.innerHTML = `
     <h1>Welcome to Petrichor's Monsters and Memories Wiki</h1>
+    <p class="home-intro">Welcome! This is where we're gathering everything we come across while
+    playing Monsters and Memories — items, monsters, maps, crafting recipes, and more, all
+    pulled from real screenshots taken in-game. It's a work in progress, so you'll run into
+    gaps, mistakes, and the occasional outdated detail along the way. If you spot something
+    wrong or know something we don't, we'd love the help —
+    <a href="#submit">submit a screenshot or a note</a> and it'll get added in.</p>
     <div class="home-nav-grid">
       ${navPages.map(navCardHTML).join('')}
     </div>
