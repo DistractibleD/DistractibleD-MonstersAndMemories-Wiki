@@ -3358,59 +3358,37 @@ function renderCraftingCategories(container) {
 
   container.innerHTML = `
     <h1>Crafting</h1>
-    <p>Browse recipes by tradeskill, or search below to jump straight to a specific recipe.
+    <p>Search below to find a tradeskill, then browse its own recipes once you're inside.
     "Planned" tradeskills exist in the game's design but aren't usable yet.</p>
-    <div class="items-quick-search">
-      <div class="items-quick-search-row">
-        <input type="search" id="craft-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all recipes by name or tradeskill..." autocomplete="off">
-        <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="craft-quick-search-box">Clear</button>
-      </div>
-      <div id="craft-quick-search-results" class="items-quick-search-results"></div>
+    <div class="items-toolbar">
+      <input type="search" id="craft-quick-search-box" class="items-search" placeholder="Search tradeskills by name..." autocomplete="off">
+      <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="craft-quick-search-box">Clear</button>
     </div>
-    ${tradeskillGridHTML(crafted, false)}
+    <div id="craft-grid-wrap">${tradeskillGridHTML(crafted, false)}</div>
   `;
 
-  container.querySelectorAll('.craft-card').forEach(card => {
-    card.addEventListener('click', () => renderCraftingRecipes(container, card.dataset.tradeskill));
-  });
+  const gridWrap = container.querySelector('#craft-grid-wrap');
 
-  // A shortcut past the tradeskill grid for anyone who already knows which
-  // recipe they want: scoped to crafting.json only, clicking a result reuses
-  // goToRecipe for the same tradeskill-jump + card-flash behavior as a
-  // header search result.
+  function attachCardHandlers() {
+    gridWrap.querySelectorAll('.craft-card').forEach(card => {
+      card.addEventListener('click', () => renderCraftingRecipes(container, card.dataset.tradeskill));
+    });
+  }
+  attachCardHandlers();
+
+  // With 38 tradeskills on file, scanning the whole grid to find one by eye
+  // gets slow — this filters the grid itself down to matching tradeskill
+  // names as you type (2026-08-19, user's own request), rather than the
+  // recipe-level quick-search it replaced. Recipe search still exists, just
+  // one level down: pick a tradeskill here, then use its own search box.
   const quickSearchBox = container.querySelector('#craft-quick-search-box');
-  const quickSearchResults = container.querySelector('#craft-quick-search-results');
-
   quickSearchBox.addEventListener('input', () => {
     const query = quickSearchBox.value.toLowerCase().trim();
-    if (!query) {
-      quickSearchResults.classList.remove('open');
-      quickSearchResults.innerHTML = '';
-      return;
-    }
-
-    const matches = craftingData
-      .filter(r => `${r.name} ${r.tradeskill}`.toLowerCase().includes(query))
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .slice(0, 20);
-
-    quickSearchResults.innerHTML = matches.length
-      ? matches.map(m => `
-          <a href="#" class="search-result-link items-quick-search-result" data-slug="${escapeAttr(m.slug)}">
-            ${escapeAttr(m.name)}
-            <span class="items-quick-search-type">${escapeAttr(m.tradeskill)}</span>
-          </a>
-        `).join('')
-      : '<p class="search-results-empty">No recipes match.</p>';
-    quickSearchResults.classList.add('open');
-
-    quickSearchResults.querySelectorAll('.items-quick-search-result').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const recipe = craftingData.find(r => r.slug === link.dataset.slug);
-        if (recipe) goToRecipe(recipe);
-      });
-    });
+    const filtered = query ? crafted.filter(ts => ts.name.toLowerCase().includes(query)) : crafted;
+    gridWrap.innerHTML = filtered.length
+      ? tradeskillGridHTML(filtered, false)
+      : '<p class="items-empty">No tradeskills match your search.</p>';
+    attachCardHandlers();
   });
 }
 
@@ -3559,56 +3537,37 @@ function renderGatheringCategories(container) {
     <h1>Gathering</h1>
     <p>Resource nodes you interact with directly in the world instead of crafting from components —
     each one has a minimum skill to attempt it and a trivial skill where it stops giving skill-ups.
-    Search below to jump straight to a specific node.</p>
-    <div class="items-quick-search">
-      <div class="items-quick-search-row">
-        <input type="search" id="gathering-quick-search-box" class="items-search items-quick-search-box" placeholder="Search all gathering nodes by name or tradeskill..." autocomplete="off">
-        <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="gathering-quick-search-box">Clear</button>
-      </div>
-      <div id="gathering-quick-search-results" class="items-quick-search-results"></div>
+    Search below to find a tradeskill, then browse its own nodes once you're inside.</p>
+    <div class="items-toolbar">
+      <input type="search" id="gathering-quick-search-box" class="items-search" placeholder="Search tradeskills by name..." autocomplete="off">
+      <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="gathering-quick-search-box">Clear</button>
     </div>
-    ${tradeskillGridHTML(gathering, true)}
+    <div id="gathering-grid-wrap">${tradeskillGridHTML(gathering, true)}</div>
   `;
 
-  container.querySelectorAll('.craft-card').forEach(card => {
-    card.addEventListener('click', () => {
-      if (card.dataset.nodeBased === 'true') renderGatheringNodes(container, card.dataset.tradeskill);
-      else renderGatheringRecipes(container, card.dataset.tradeskill);
-    });
-  });
+  const gridWrap = container.querySelector('#gathering-grid-wrap');
 
-  const quickSearchBox = container.querySelector('#gathering-quick-search-box');
-  const quickSearchResults = container.querySelector('#gathering-quick-search-results');
-
-  quickSearchBox.addEventListener('input', () => {
-    const query = quickSearchBox.value.toLowerCase().trim();
-    if (!query) {
-      quickSearchResults.classList.remove('open');
-      quickSearchResults.innerHTML = '';
-      return;
-    }
-
-    const matches = gatheringData
-      .filter(n => `${n.name} ${n.tradeskill}`.toLowerCase().includes(query))
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .slice(0, 20);
-
-    quickSearchResults.innerHTML = matches.length
-      ? matches.map(m => `
-          <a href="#" class="search-result-link items-quick-search-result" data-tradeskill="${escapeAttr(m.tradeskill)}">
-            ${escapeAttr(m.name)}
-            <span class="items-quick-search-type">${escapeAttr(m.tradeskill)}</span>
-          </a>
-        `).join('')
-      : '<p class="search-results-empty">No gathering nodes match.</p>';
-    quickSearchResults.classList.add('open');
-
-    quickSearchResults.querySelectorAll('.items-quick-search-result').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        renderGatheringNodes(container, link.dataset.tradeskill);
+  function attachCardHandlers() {
+    gridWrap.querySelectorAll('.craft-card').forEach(card => {
+      card.addEventListener('click', () => {
+        if (card.dataset.nodeBased === 'true') renderGatheringNodes(container, card.dataset.tradeskill);
+        else renderGatheringRecipes(container, card.dataset.tradeskill);
       });
     });
+  }
+  attachCardHandlers();
+
+  // Same tradeskill-name grid filter as Crafting's own quick search
+  // (2026-08-19, user's own request) — find the tradeskill first here, then
+  // search its own nodes/recipes one level down.
+  const quickSearchBox = container.querySelector('#gathering-quick-search-box');
+  quickSearchBox.addEventListener('input', () => {
+    const query = quickSearchBox.value.toLowerCase().trim();
+    const filtered = query ? gathering.filter(ts => ts.name.toLowerCase().includes(query)) : gathering;
+    gridWrap.innerHTML = filtered.length
+      ? tradeskillGridHTML(filtered, true)
+      : '<p class="items-empty">No tradeskills match your search.</p>';
+    attachCardHandlers();
   });
 }
 

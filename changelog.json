@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-19T13:28", "summary": "Changed the Crafting and Gathering search boxes to filter tradeskills by name instead of searching recipes, since finding the right tradeskill among so many was the slow part" },
   { "timestamp": "2026-08-19T07:48", "summary": "Removed a redundant note under the sidebar's History section" },
   { "timestamp": "2026-08-19T07:44", "summary": "Added a welcome message to the Home page explaining what the wiki is and inviting visitors to help by submitting info" },
   { "timestamp": "2026-08-18T22:32", "summary": "Fixed a duplicate/misspelled item (Grudgeheft vs Grudgehaft) and added new level-1 con-check data for Night Harbor and Evershade Weald monsters" },
