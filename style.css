@@ -414,13 +414,6 @@ body {
   width: 13px;
   height: 13px;
 }
-.sidebar-visits-note {
-  font-size: 0.66rem;
-  font-style: italic;
-  color: var(--text-dim);
-  padding: 5px 8px 1px;
-  line-height: 1.3;
-}
 /* Collapsible icon-rail sidebar toggle (2026-08-13) — the button itself is
    always built (buildSidebar in script.js) but only ever made visible in
    the wide-portrait media query further down, so a landscape visitor never
@@ -2885,7 +2878,6 @@ body {
   .sidebar-link-nested::before { display: none; }
   #sidebar-visits-wrapper { display: contents; }
   #sidebar-recent-wrapper { display: contents; }
-  .sidebar-visits-note { flex-basis: 100%; }
   .content-inner { padding: 24px 22px; }
   #search-box { width: 140px; }
   .header-search .search-clear-btn { padding: 8px 10px; font-size: 0.8rem; }

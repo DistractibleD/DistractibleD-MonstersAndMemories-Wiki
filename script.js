@@ -494,7 +494,6 @@ function buildSidebar(pages) {
     <div class="sidebar-visits-title">History</div>
     <div class="sidebar-group-heading">Most Visited Tradeskills</div>
     <div class="sidebar-group" id="sidebar-most-visited"></div>
-    <p class="sidebar-visits-note">Stored only in this browser — not saved anywhere else.</p>
   `;
   sidebar.appendChild(visitsWrapper);
   updateVisitedSidebarSections();
