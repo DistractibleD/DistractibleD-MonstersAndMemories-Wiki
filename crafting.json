@@ -6848,13 +6848,14 @@
     "weight": 0.0,
     "size": "Small",
     "components": [
-      { "item": "Any Raw Fish", "quantity": 5 },
+      { "item": "Basa, Whitefish, or Grouper", "quantity": 5 },
       { "item": "Makeshift Vial", "quantity": 5 }
     ],
     "resultQuantity": 5,
     "recipeSkillLevel": 15,
     "difficultyColor": "Yellow",
-    "observedAtSkill": 1
+    "observedAtSkill": 1,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Crude Wood Finish",

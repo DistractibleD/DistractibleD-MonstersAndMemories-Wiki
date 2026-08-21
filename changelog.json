@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-21T23:13", "summary": "Specified which fish work in the Crude Fish Oil recipe (Basa, Whitefish, or Grouper)" },
   { "timestamp": "2026-08-21T22:25", "summary": "Cleaned up cluttered notes on the Fishing table so each fish only shows genuinely useful info" },
   { "timestamp": "2026-08-21T21:47", "summary": "Removed the unconfirmed \"Raw\" prefix from every Fishing catch, cleared out unconfirmed bait requirements, and added fresh notes on fish rarity from ongoing player testing" },
   { "timestamp": "2026-08-21T17:11", "summary": "Corrected two fish item names (Whitefish and Basa don't actually have a \"Raw\" prefix, despite an older source table saying otherwise) and added their item cards" },
