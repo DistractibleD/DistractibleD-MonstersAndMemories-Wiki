@@ -21146,8 +21146,10 @@
     "slug": "tainted-guppy",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true,
-    "lastUpdated": "2026-08-11"
+    "description": "A sickly, stunted fish, never growing beyond adolescence.",
+    "weight": 1.0,
+    "size": "Small",
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Tender Beetle Legs",
@@ -24025,6 +24027,40 @@
     "description": "A handy wrench for disassembling furniture. Hold this on your cursor and click a piece of furniture to remove it.",
     "weight": 1.0,
     "size": "Small",
+    "lastUpdated": "2026-08-21"
+  },
+  {
+    "name": "Oasis Perch",
+    "slug": "oasis-perch",
+    "type": "Misc",
+    "tags": [],
+    "description": "A bright blue fish, often found lazily swimming in the rare oasis waters of Szuur.",
+    "weight": 1.0,
+    "size": "Small",
+    "lastUpdated": "2026-08-21"
+  },
+  {
+    "name": "Spotted Angelfish",
+    "slug": "spotted-angelfish",
+    "type": "Misc",
+    "tags": [],
+    "description": "A spotted fish often found in large groups.",
+    "weight": 1.0,
+    "size": "Small",
+    "lastUpdated": "2026-08-21"
+  },
+  {
+    "name": "Radiant Charmer's Rune Earring",
+    "slug": "radiant-charmers-rune-earring",
+    "type": "Jewelry",
+    "tags": ["MAGIC"],
+    "slot": "Ear",
+    "stats": { "CHA": 3 },
+    "resists": { "MAGIC": 6 },
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
     "lastUpdated": "2026-08-21"
   }
 ]

@@ -5696,8 +5696,8 @@
     "slug": "wood-board",
     "tradeskill": "Woodworking",
     "listOrder": 1,
-    "difficultyColor": "Yellow",
-    "observedAtSkill": 6,
+    "difficultyColor": "Green",
+    "observedAtSkill": 25,
     "lastUpdated": "2026-08-21"
   },
   {
@@ -5706,7 +5706,7 @@
     "tradeskill": "Woodworking",
     "listOrder": 2,
     "difficultyColor": "Red",
-    "observedAtSkill": 6,
+    "observedAtSkill": 25,
     "lastUpdated": "2026-08-21"
   },
   {
