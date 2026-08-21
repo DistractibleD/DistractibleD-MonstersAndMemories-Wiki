@@ -4210,6 +4210,11 @@ function gatheringNodeSearchHaystack(node) {
 // from whichever optional fields any node of this tradeskill actually uses —
 // same "derive from data, no code change needed for the next tradeskill"
 // philosophy as the Item Database's filter dropdowns.
+// Hidden 2026-08-22 (user's own call) — every Fishing baitRequired value is currently "?",
+// so the column added nothing; data stays on every node, just flip this back on if real
+// values come back in.
+const SHOW_BAIT_REQUIRED_COLUMN = false;
+
 function gatheringColumns(nodes) {
   const columns = [
     { key: 'name', label: 'Name', sortable: true, colClass: 'col-gathering-name' },
@@ -4224,7 +4229,7 @@ function gatheringColumns(nodes) {
   if (nodes.some(n => n.rarity)) {
     columns.push({ key: 'rarity', label: 'Rarity', sortable: false, colClass: 'col-gathering-rarity' });
   }
-  if (nodes.some(n => n.baitRequired)) {
+  if (SHOW_BAIT_REQUIRED_COLUMN && nodes.some(n => n.baitRequired)) {
     columns.push({ key: 'baitRequired', label: 'Bait Required', sortable: false, colClass: 'col-gathering-bait' });
   }
   columns.push({ key: 'locations', label: 'Location', sortable: false, colClass: 'col-gathering-location' });

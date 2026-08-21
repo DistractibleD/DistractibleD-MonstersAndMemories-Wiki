@@ -555,11 +555,21 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   session as the fix above but caught separately, plus one more instance in `crafting.json`
   and a badly-mangled-encoding one in `monsters.json` that turned out not to even be
   rendered anywhere) — a visitor has no idea what "the source table" refers to; say the
-  actual fact plainly instead ("Fishing skill required not yet known", "Trivial skill is at
-  least 225 (exact value unknown)") rather than describing where the uncertainty came from.
-  Same goes for `changelog.json` summaries, which are just as publicly visible (Home page
-  "Latest Changes") — "much higher than previously listed" reads fine, "than the old source
-  table said" doesn't.
+  actual fact plainly instead ("Trivial skill is at least 225 (exact value unknown)") rather
+  than describing where the uncertainty came from. Same goes for `changelog.json` summaries,
+  which are just as publicly visible (Home page "Latest Changes") — "much higher than
+  previously listed" reads fine, "than the old source table said" doesn't.
+  **A `note` must add something the row's own columns don't already say** (2026-08-22, same
+  day, user's own follow-up correction) — `gatheringColumns()` already renders a bare `"?"`
+  for any unset `minSkill`/`trivialSkill`, so a note that only says "Fishing skill required
+  not yet known"/"Trivial skill not yet known"/"Neither min skill nor trivial skill is known
+  yet" with nothing else is pure noise, removed site-wide (9 Fishing entries + 4 Mining/
+  Lumberjacking entries). A note that instead narrows the unknown down — a floor ("Trivial
+  skill is at least 225"), a range ("somewhere between 77 and 88"), an uncertain single value
+  ("possibly around 95"), or an actual player observation ("no catches reported below skill
+  67, first confirmed catch at skill 70") — earns its place, since none of that is visible
+  from the bare `?` alone. The test: does this note say more than the column already says on
+  its own? If not, delete it; if yes, keep it.
 - **Optional `image` + `needsInfo`:** node picture at `images/gathering/<slug>.jpg`, same
   convention as item/recipe screenshots. Shows as a clickable thumbnail
   (`.gathering-node-thumb`). `needsInfo: true` = same meaning as items/crafting: confirmed

@@ -139,8 +139,7 @@
     "tradeskill": "Mining",
     "minSkill": 250,
     "results": ["Platinum Ore"],
-    "locations": ["Fallen Pass"],
-    "note": "Trivial skill not yet known."
+    "locations": ["Fallen Pass"]
   },
   {
     "name": "Rich Platinum Vein",
@@ -148,24 +147,21 @@
     "tradeskill": "Mining",
     "minSkill": 260,
     "results": ["Platinum Ore"],
-    "locations": ["Fallen Pass"],
-    "note": "Trivial skill not yet known."
+    "locations": ["Fallen Pass"]
   },
   {
     "name": "Mithril Vein",
     "slug": "mithril-vein",
     "tradeskill": "Mining",
     "results": ["Mithril Ore"],
-    "locations": [],
-    "note": "Neither min skill nor trivial skill is known yet."
+    "locations": []
   },
   {
     "name": "Rich Mithril Vein",
     "slug": "rich-mithril-vein",
     "tradeskill": "Mining",
     "results": ["Mithril Ore"],
-    "locations": [],
-    "note": "Neither min skill nor trivial skill is known yet."
+    "locations": []
   },
   {
     "name": "Wood Pile",
@@ -301,8 +297,7 @@
     "results": ["Bay Crab"],
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Rare",
-    "baitRequired": "?",
-    "note": "Fishing skill required not yet known."
+    "baitRequired": "?"
   },
   {
     "name": "Thorn Sturgeon",
@@ -331,8 +326,7 @@
     "results": ["River Trout"],
     "locations": ["Keeper's Bight"],
     "rarity": "Uncommon",
-    "baitRequired": "?",
-    "note": "Fishing skill required not yet known."
+    "baitRequired": "?"
   },
   {
     "name": "Moontide Salmon",
@@ -341,8 +335,7 @@
     "results": ["Moontide Salmon"],
     "locations": ["Keeper's Bight"],
     "rarity": "Rare",
-    "baitRequired": "?",
-    "note": "Fishing skill required not yet known."
+    "baitRequired": "?"
   },
   {
     "name": "Tide Minnow",
@@ -350,8 +343,7 @@
     "tradeskill": "Fishing",
     "results": ["Tide Minnow"],
     "locations": ["Shallow Shoals"],
-    "baitRequired": "?",
-    "note": "Fishing skill required not yet known."
+    "baitRequired": "?"
   },
   {
     "name": "Sunscale Skimmer",
@@ -361,7 +353,7 @@
     "locations": ["Shallow Shoals"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known. Only comes out during the day."
+    "note": "Only comes out during the day."
   },
   {
     "name": "Deep Sea Devourer",
@@ -380,8 +372,7 @@
     "results": ["Mossveil Catfish"],
     "locations": ["Scarwood"],
     "rarity": "Uncommon",
-    "baitRequired": "?",
-    "note": "Fishing skill required not yet known."
+    "baitRequired": "?"
   },
   {
     "name": "Jumping Damselfish",
@@ -390,8 +381,7 @@
     "results": ["Jumping Damselfish"],
     "locations": ["Vale of Zintar", "Scarwood", "Fallen Pass"],
     "rarity": "Uncommon",
-    "baitRequired": "?",
-    "note": "Fishing skill required not yet known."
+    "baitRequired": "?"
   },
   {
     "name": "Leytouched Mackerel",
@@ -400,8 +390,7 @@
     "results": ["Leytouched Mackerel"],
     "locations": ["Vale of Zintar", "Fallen Pass"],
     "rarity": "Rare",
-    "baitRequired": "?",
-    "note": "Fishing skill required not yet known."
+    "baitRequired": "?"
   },
   {
     "name": "Crimsonscale Carp",
@@ -410,8 +399,7 @@
     "results": ["Crimsonscale Carp"],
     "locations": ["Vale of Zintar"],
     "rarity": "Rare",
-    "baitRequired": "?",
-    "note": "Fishing skill required not yet known."
+    "baitRequired": "?"
   },
   {
     "name": "Tattered Cloth Boots",
@@ -660,7 +648,7 @@
     "tradeskill": "Mining",
     "results": ["Clouded Crystallized Magic"],
     "locations": [],
-    "note": "Skill level not yet known. All quality levels of crystallized magic (Clouded/Glinting/Shining/Brilliant) share this same in-game icon."
+    "note": "All quality levels of crystallized magic (Clouded/Glinting/Shining/Brilliant) share this same in-game icon."
   },
   {
     "name": "Glinting Crystallized Magic",
@@ -669,7 +657,7 @@
     "tradeskill": "Mining",
     "results": ["Glinting Crystallized Magic"],
     "locations": [],
-    "note": "Skill level not yet known. All quality levels of crystallized magic (Clouded/Glinting/Shining/Brilliant) share this same in-game icon."
+    "note": "All quality levels of crystallized magic (Clouded/Glinting/Shining/Brilliant) share this same in-game icon."
   },
   {
     "name": "Shining Crystallized Magic",
@@ -678,7 +666,7 @@
     "tradeskill": "Mining",
     "results": ["Shining Crystallized Magic"],
     "locations": [],
-    "note": "Skill level not yet known. All quality levels of crystallized magic (Clouded/Glinting/Shining/Brilliant) share this same in-game icon."
+    "note": "All quality levels of crystallized magic (Clouded/Glinting/Shining/Brilliant) share this same in-game icon."
   },
   {
     "name": "Brilliant Crystallized Magic",
@@ -687,6 +675,6 @@
     "tradeskill": "Mining",
     "results": ["Brilliant Crystallized Magic"],
     "locations": [],
-    "note": "Skill level not yet known. All quality levels of crystallized magic (Clouded/Glinting/Shining/Brilliant) share this same in-game icon."
+    "note": "All quality levels of crystallized magic (Clouded/Glinting/Shining/Brilliant) share this same in-game icon."
   }
 ]

@@ -1,4 +1,6 @@
 [
+  { "timestamp": "2026-08-22T00:16", "summary": "Hid the Fishing table's Bait Required column for now, since every value is currently unknown" },
+  { "timestamp": "2026-08-22T00:14", "summary": "Removed redundant Gathering page notes that just repeated what the Min Skill/Trivial columns already show" },
   { "timestamp": "2026-08-21T23:55", "summary": "Cleaned up wording on several Gathering page notes so they read naturally instead of referencing internal data sources" },
   { "timestamp": "2026-08-21T23:51", "summary": "Specified which fish work in the Refined Fish Oil recipe, filled in Deep Sea Devourer's card, and added Sunscale Skimmer (only comes out during the day)" },
   { "timestamp": "2026-08-21T23:16", "summary": "Gave Tattered Cloth Boots a rarity from fishing-yield testing, and corrected Grouper's minimum fishing skill (much higher than previously listed)" },
