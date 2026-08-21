@@ -7619,10 +7619,13 @@
     "weight": 0.0,
     "size": "Small",
     "components": [
-      { "item": "Any Raw Fish", "quantity": 5 },
+      { "item": "Sunscale Skimmer or Deep Sea Devourer", "quantity": 5 },
       { "item": "Tempered Vial", "quantity": 5 }
     ],
-    "resultQuantity": 5
+    "resultQuantity": 5,
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Refined Wood Finish",

@@ -21090,8 +21090,10 @@
     "slug": "deep-sea-devourer",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true,
-    "lastUpdated": "2026-08-11"
+    "description": "A sleek, threatening-looking fish with sharp fins and sharper teeth.",
+    "weight": 1.0,
+    "size": "Large",
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Drake Fang",
@@ -24097,6 +24099,16 @@
     "type": "Misc",
     "tags": [],
     "weight": 2.5,
+    "size": "Small",
+    "lastUpdated": "2026-08-21"
+  },
+  {
+    "name": "Sunscale Skimmer",
+    "slug": "sunscale-skimmer",
+    "type": "Misc",
+    "tags": [],
+    "description": "A vibrant, energetic fish which only comes out when the sun is high in the sky.",
+    "weight": 1.0,
     "size": "Small",
     "lastUpdated": "2026-08-21"
   }
