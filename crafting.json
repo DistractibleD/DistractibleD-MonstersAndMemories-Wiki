@@ -7585,7 +7585,7 @@
     "station": "Cauldron",
     "description": "Free your mind, increasing your Casting Speed by 25% and Spell Damage dealt by 15% for 20 seconds.",
     "effect": "Lesser Tincture of Sagacity (On Click. Any Slot. Cast Time: 0.5s, Level: 1)",
-    "note": "The effect line reads \"Lesser Tincture of Sagacity\" on the source table even though this recipe (unlike Minor/Lesser tier) has no \"Lesser\" in its own name â€” recorded verbatim rather than corrected, since the table may just be reusing the wrong tooltip text.",
+    "note": "The effect line reads \"Lesser Tincture of Sagacity\" even though this recipe (unlike the Minor/Lesser tiers) has no \"Lesser\" in its own name — possibly a mismatched tooltip in-game.",
     "weight": 1.0,
     "size": "Small",
     "components": [

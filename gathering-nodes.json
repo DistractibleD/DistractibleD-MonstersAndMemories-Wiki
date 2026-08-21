@@ -113,7 +113,7 @@
     "minSkill": 190,
     "results": ["Gold Ore"],
     "locations": ["Fallen Pass", "Glass Flats", "Shallow Shoals"],
-    "note": "Trivial only given as a floor on the source table: \"225+\"."
+    "note": "Trivial skill is at least 225 (exact value unknown)."
   },
   {
     "name": "Coal Vein",
@@ -140,7 +140,7 @@
     "minSkill": 250,
     "results": ["Platinum Ore"],
     "locations": ["Fallen Pass"],
-    "note": "Trivial not yet known — the source table shows \"???\"."
+    "note": "Trivial skill not yet known."
   },
   {
     "name": "Rich Platinum Vein",
@@ -149,7 +149,7 @@
     "minSkill": 260,
     "results": ["Platinum Ore"],
     "locations": ["Fallen Pass"],
-    "note": "Trivial not yet known — the source table shows \"???\"."
+    "note": "Trivial skill not yet known."
   },
   {
     "name": "Mithril Vein",
@@ -157,7 +157,7 @@
     "tradeskill": "Mining",
     "results": ["Mithril Ore"],
     "locations": [],
-    "note": "Neither min skill nor trivial is known yet — the source table shows \"???\" for both."
+    "note": "Neither min skill nor trivial skill is known yet."
   },
   {
     "name": "Rich Mithril Vein",
@@ -165,7 +165,7 @@
     "tradeskill": "Mining",
     "results": ["Mithril Ore"],
     "locations": [],
-    "note": "Neither min skill nor trivial is known yet — the source table shows \"???\" for both."
+    "note": "Neither min skill nor trivial skill is known yet."
   },
   {
     "name": "Wood Pile",
@@ -225,7 +225,7 @@
     "trivialSkill": 150,
     "results": ["Ironbark Wood"],
     "locations": ["Sungreet Strand"],
-    "note": "Min skill only given as a floor on the source table: \">92\"."
+    "note": "Minimum skill is at least 92 (exact value unknown)."
   },
   {
     "name": "Golden Palm Wood Pile",
@@ -261,7 +261,7 @@
     "minSkill": 75,
     "results": ["Whisperpine Wood"],
     "locations": ["Keeper's Bight"],
-    "note": "Trivial only given as a floor on the source table: \"110+\"."
+    "note": "Trivial skill is at least 110 (exact value unknown)."
   },
   {
     "name": "Whitefish",
@@ -302,7 +302,7 @@
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Rare",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+    "note": "Fishing skill required not yet known."
   },
   {
     "name": "Thorn Sturgeon",
@@ -332,7 +332,7 @@
     "locations": ["Keeper's Bight"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+    "note": "Fishing skill required not yet known."
   },
   {
     "name": "Moontide Salmon",
@@ -342,7 +342,7 @@
     "locations": ["Keeper's Bight"],
     "rarity": "Rare",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+    "note": "Fishing skill required not yet known."
   },
   {
     "name": "Tide Minnow",
@@ -351,7 +351,7 @@
     "results": ["Tide Minnow"],
     "locations": ["Shallow Shoals"],
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+    "note": "Fishing skill required not yet known."
   },
   {
     "name": "Sunscale Skimmer",
@@ -361,7 +361,7 @@
     "locations": ["Shallow Shoals"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\". Only comes out during the day."
+    "note": "Fishing skill required not yet known. Only comes out during the day."
   },
   {
     "name": "Deep Sea Devourer",
@@ -371,7 +371,7 @@
     "locations": ["Shallow Shoals"],
     "rarity": "Very Rare",
     "baitRequired": "?",
-    "note": "Fishing skill required only given as an uncertain value on the source table: \"95?\"."
+    "note": "Fishing skill required is uncertain, possibly around 95."
   },
   {
     "name": "Mossveil Catfish",
@@ -381,7 +381,7 @@
     "locations": ["Scarwood"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+    "note": "Fishing skill required not yet known."
   },
   {
     "name": "Jumping Damselfish",
@@ -391,7 +391,7 @@
     "locations": ["Vale of Zintar", "Scarwood", "Fallen Pass"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+    "note": "Fishing skill required not yet known."
   },
   {
     "name": "Leytouched Mackerel",
@@ -401,7 +401,7 @@
     "locations": ["Vale of Zintar", "Fallen Pass"],
     "rarity": "Rare",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+    "note": "Fishing skill required not yet known."
   },
   {
     "name": "Crimsonscale Carp",
@@ -411,7 +411,7 @@
     "locations": ["Vale of Zintar"],
     "rarity": "Rare",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\"."
+    "note": "Fishing skill required not yet known."
   },
   {
     "name": "Tattered Cloth Boots",
@@ -449,7 +449,7 @@
     "minSkill": 1,
     "results": ["Selstie Kelp", "Magic Frond"],
     "locations": ["Evershade Weald"],
-    "note": "Needed for the Bard Starter Quest (Faelindral); no observed skill-ups from harvesting. Trivial only given as a floor on the source table: \">20\"."
+    "note": "Needed for the Bard Starter Quest (Faelindral); no observed skill-ups from harvesting. Trivial skill is at least 20 (exact value unknown)."
   },
   {
     "name": "Sylvine",
@@ -498,7 +498,7 @@
     "minSkill": 35,
     "results": ["Moonveil", "Enchanted Frond"],
     "locations": ["Evershade Weald", "Keeper's Bight", "Shallow Shoals"],
-    "note": "Only spawns at night, at 6pm in-game. Trivial is somewhere between 77 and 88 (exact value unknown) — shown as \"88>?>77\" on the source table."
+    "note": "Only spawns at night, at 6pm in-game. Trivial skill is somewhere between 77 and 88 (exact value unknown)."
   },
   {
     "name": "Stranglevine",
@@ -618,7 +618,7 @@
     "trivialSkill": 250,
     "results": ["Flamestalk"],
     "locations": ["Vale of Zintar"],
-    "note": "In Giant City. Min skill given only as an uncertain value on the source table: \"250?\"."
+    "note": "In Giant City. Minimum skill is uncertain, possibly around 250."
   },
   {
     "name": "Unidentified Herb",

@@ -551,6 +551,15 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   message and/or this file, which visitors never see — it does not also need to live in the
   note field. Before adding or editing a `note`, ask: would a random visitor find this useful,
   or does it only make sense to someone who was in the room for the correction?
+  **This includes phrases like "the source table shows..."** (removed 2026-08-21, same
+  session as the fix above but caught separately, plus one more instance in `crafting.json`
+  and a badly-mangled-encoding one in `monsters.json` that turned out not to even be
+  rendered anywhere) — a visitor has no idea what "the source table" refers to; say the
+  actual fact plainly instead ("Fishing skill required not yet known", "Trivial skill is at
+  least 225 (exact value unknown)") rather than describing where the uncertainty came from.
+  Same goes for `changelog.json` summaries, which are just as publicly visible (Home page
+  "Latest Changes") — "much higher than previously listed" reads fine, "than the old source
+  table said" doesn't.
 - **Optional `image` + `needsInfo`:** node picture at `images/gathering/<slug>.jpg`, same
   convention as item/recipe screenshots. Shows as a clickable thumbnail
   (`.gathering-node-thumb`). `needsInfo: true` = same meaning as items/crafting: confirmed
