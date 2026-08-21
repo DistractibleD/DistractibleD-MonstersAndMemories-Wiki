@@ -541,6 +541,16 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
 - **Rendering:** `renderGatheringNodes(container, tradeskillName)` — sortable/searchable
   table (like `renderMonstersList`), not a card grid (no components to justify one). `note`
   (when set) renders as its own row underneath.
+- **`note` is visitor-facing content, not an internal data-provenance log** (2026-08-21,
+  user caught this live on the Fishing table — every row had a paragraph of "node name
+  corrected because the source table was wrong," "'Raw ' prefix dropped, see CLAUDE.md," and
+  similar research-diary text, all rendering under every fish for every visitor). `note`
+  should read like something a *player* would want to know (an unconfirmed skill requirement,
+  a spawn condition, a rarity observation) — never a change-history sentence, a reference to
+  "the user," or a pointer to this file. Data-correction history belongs in the git commit
+  message and/or this file, which visitors never see — it does not also need to live in the
+  note field. Before adding or editing a `note`, ask: would a random visitor find this useful,
+  or does it only make sense to someone who was in the room for the correction?
 - **Optional `image` + `needsInfo`:** node picture at `images/gathering/<slug>.jpg`, same
   convention as item/recipe screenshots. Shows as a clickable thumbnail
   (`.gathering-node-thumb`). `needsInfo: true` = same meaning as items/crafting: confirmed

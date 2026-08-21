@@ -272,7 +272,7 @@
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Common",
     "baitRequired": "?",
-    "note": "Node name corrected 2026-08-21 — the actual item card reads \"Whitefish\", not \"Raw Whitefish\" as the source table had it. Confirmed the most common fish caught in Night Harbor. User's suspicion (unconfirmed): also the most common catch overall between 0 and 50 fishing skill."
+    "note": "The most common fish caught in Night Harbor."
   },
   {
     "name": "Basa",
@@ -282,8 +282,7 @@
     "results": ["Basa"],
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Uncommon",
-    "baitRequired": "?",
-    "note": "Node name corrected 2026-08-21 — the actual item card reads \"Basa\", not \"Raw Basa\" as the source table had it. User's suspicion (unconfirmed): possible to catch under 50 fishing skill, but rare at that range."
+    "baitRequired": "?"
   },
   {
     "name": "Grouper",
@@ -294,7 +293,7 @@
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "Node name corrected 2026-08-21 — the actual item card reads \"Grouper\", not \"Raw Grouper\" as the source table had it. User first caught this species at fishing skill 70 in Night Harbor (same bait/rod/spot as their prior 60 bait between skill 0-67, which caught none) — suggests the real minimum skill may be well above the source table's stated 1, though not confirmed as an exact threshold."
+    "note": "Despite the minimum skill listed above, players haven't reported catching one before around skill 70 — treat that minimum as unconfirmed."
   },
   {
     "name": "Bay Crab",
@@ -304,7 +303,7 @@
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Rare",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\". \"Raw \" prefix dropped 2026-08-21 — not confirmed on this species' own item card yet, but consistent with every other fish species checked so far (see CLAUDE.md)."
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
   },
   {
     "name": "Thorn Sturgeon",
@@ -314,8 +313,7 @@
     "results": ["Thorn Sturgeon"],
     "locations": ["Night Harbor", "Evershade Weald", "Keeper's Bight"],
     "rarity": "Very Rare",
-    "baitRequired": "?",
-    "note": "\"Raw \" prefix dropped 2026-08-21 — not confirmed on this species' own item card yet, but consistent with every other fish species checked so far (see CLAUDE.md)."
+    "baitRequired": "?"
   },
   {
     "name": "Redfin Pike",
@@ -325,8 +323,7 @@
     "results": ["Redfin Pike"],
     "locations": ["Night Harbor", "Evershade Weald", "Keeper's Bight"],
     "rarity": "Very Rare",
-    "baitRequired": "?",
-    "note": "\"Raw \" prefix dropped 2026-08-21 — not confirmed on this species' own item card yet, but consistent with every other fish species checked so far (see CLAUDE.md)."
+    "baitRequired": "?"
   },
   {
     "name": "River Trout",
@@ -336,7 +333,7 @@
     "locations": ["Keeper's Bight"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\". Node name corrected 2026-08-21 — the actual item card reads \"River Trout\", not \"Raw River Trout\" as the source table had it."
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
   },
   {
     "name": "Moontide Salmon",
@@ -346,7 +343,7 @@
     "locations": ["Keeper's Bight"],
     "rarity": "Rare",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\". \"Raw \" prefix dropped 2026-08-21 — not confirmed on this species' own item card yet, but consistent with every other fish species checked so far (see CLAUDE.md)."
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
   },
   {
     "name": "Tide Minnow",
@@ -355,7 +352,7 @@
     "results": ["Tide Minnow"],
     "locations": ["Shallow Shoals"],
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\". \"Raw \" prefix dropped 2026-08-21 — not confirmed on this species' own item card yet, but consistent with every other fish species checked so far (see CLAUDE.md)."
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
   },
   {
     "name": "Sunscale Skimmer",
@@ -365,7 +362,7 @@
     "locations": ["Shallow Shoals"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\". \"Raw \" prefix dropped 2026-08-21 — not confirmed on this species' own item card yet, but consistent with every other fish species checked so far (see CLAUDE.md)."
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
   },
   {
     "name": "Deep Sea Devourer",
@@ -385,7 +382,7 @@
     "locations": ["Scarwood"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\". \"Raw \" prefix dropped 2026-08-21 — not confirmed on this species' own item card yet, but consistent with every other fish species checked so far (see CLAUDE.md)."
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
   },
   {
     "name": "Jumping Damselfish",
@@ -395,7 +392,7 @@
     "locations": ["Vale of Zintar", "Scarwood", "Fallen Pass"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\". \"Raw \" prefix dropped 2026-08-21 — not confirmed on this species' own item card yet, but consistent with every other fish species checked so far (see CLAUDE.md)."
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
   },
   {
     "name": "Leytouched Mackerel",
@@ -405,7 +402,7 @@
     "locations": ["Vale of Zintar", "Fallen Pass"],
     "rarity": "Rare",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\". \"Raw \" prefix dropped 2026-08-21 — not confirmed on this species' own item card yet, but consistent with every other fish species checked so far (see CLAUDE.md)."
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
   },
   {
     "name": "Crimsonscale Carp",
@@ -415,7 +412,7 @@
     "locations": ["Vale of Zintar"],
     "rarity": "Rare",
     "baitRequired": "?",
-    "note": "Fishing skill required not yet known — the source table shows \"???\". \"Raw \" prefix dropped 2026-08-21 — not confirmed on this species' own item card yet, but consistent with every other fish species checked so far (see CLAUDE.md)."
+    "note": "Fishing skill required not yet known — the source table shows \"???\"."
   },
   {
     "name": "Tattered Cloth Boots",
