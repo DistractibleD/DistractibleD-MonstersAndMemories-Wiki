@@ -769,8 +769,39 @@ reference source, don't get saved anywhere — process and delete, don't move to
    steadily Green→Red, never jump back and forth) is usually enough to infer it — but flag
    the uncertainty rather than presenting a guessed join as fact.
 4. Match difficulty color to the mapping above. Ambiguous shade (Light Blue vs Dark Blue) →
-   say so, record the generic color, don't silently pick one.
+   say so, record the generic color, don't silently pick one. **Reference palette below can
+   settle this** — see "Difficulty-color reference palette."
 5. Delete screenshot(s) once processed — never moved anywhere.
+
+**Difficulty-color reference palette** (sampled 2026-08-22 from the user's own crafting-window
+screenshots — each one paired a colored recipe name with its confirming sentence, e.g. "Your
+skills make this a moderate task." next to Dark Blue, so there's no ambiguity about which hex
+belongs to which tier). Sampled via PowerShell + `System.Drawing`: scan every pixel, keep only
+high-saturation/high-brightness ones (filters out the stone-texture background), take the
+most common resulting hex.
+
+| Color | Hex |
+|---|---|
+| Green (Trivial) | `#45FC00` |
+| Light Blue | `#00FCDF` |
+| Dark Blue | `#326EFF` |
+| White | *(not sampled yet)* |
+| Yellow | `#FCE800` |
+| Orange | `#E35300` |
+| Red | `#FF1C1C` |
+
+Sampled from **crafting recipe cards** specifically — monster con-check colors (see "Con color
+reference" below, a similar but not identical 7-tier system: no Orange, has a separate
+"Trivial" distinct from Green) haven't been confirmed to use the exact same hex values, so
+don't assume this table also covers con colors without checking.
+
+**When to actually use this** (2026-08-22, user's own scope — don't reach for it by default):
+only when (a) genuinely unsure from just looking at the image, (b) no confirming text is
+present to read instead (a crafting-window *list* view shows colored names with no sentence;
+an individual recipe/con-check line usually already states the tier in words, so just read
+that), and (c) the color is actually data we're recording (a difficulty tier, a con) — never
+for incidental color in a loot log or unrelated chat text. Most colors are obvious at a glance
+and don't need this at all.
 
 **A recipe confirmed missing from a current, complete crafting-window screenshot gets
 `"hidden": true`, never deleted** (2026-08-21, first used on 5 old Carpentry recipes — Elder
