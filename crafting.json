@@ -5932,7 +5932,7 @@
     "slug": "grouper-fillet",
     "tradeskill": "Cooking",
     "components": [
-      { "item": "Raw Grouper", "quantity": 1 },
+      { "item": "Grouper", "quantity": 1 },
       { "item": "Cleaver", "quantity": 1 }
     ]
   },
@@ -5950,7 +5950,7 @@
     "slug": "raw-tide-minnow-fillet",
     "tradeskill": "Cooking",
     "components": [
-      { "item": "Raw Tide Minnow", "quantity": 1 },
+      { "item": "Tide Minnow", "quantity": 1 },
       { "item": "Cleaver", "quantity": 1 }
     ]
   },
@@ -6249,7 +6249,7 @@
     "slug": "crab-cakes",
     "tradeskill": "Cooking",
     "components": [
-      { "item": "Raw Bay Crab", "quantity": 2 },
+      { "item": "Bay Crab", "quantity": 2 },
       { "item": "Lemon", "quantity": 1 },
       { "item": "Parsley", "quantity": 1 }
     ]

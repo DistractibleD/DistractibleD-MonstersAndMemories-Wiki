@@ -24068,7 +24068,7 @@
     "slug": "basa",
     "type": "Misc",
     "tags": [],
-    "description": "An ocean catfish favored fo",
+    "description": "An ocean catfish favored for its earthy flavor.",
     "weight": 2.0,
     "size": "Small",
     "lastUpdated": "2026-08-21"
@@ -24079,6 +24079,24 @@
     "type": "Misc",
     "tags": [],
     "weight": 1.0,
+    "size": "Small",
+    "lastUpdated": "2026-08-21"
+  },
+  {
+    "name": "River Trout",
+    "slug": "river-trout",
+    "type": "Misc",
+    "tags": [],
+    "weight": 1.0,
+    "size": "Small",
+    "lastUpdated": "2026-08-21"
+  },
+  {
+    "name": "Grouper",
+    "slug": "grouper",
+    "type": "Misc",
+    "tags": [],
+    "weight": 2.5,
     "size": "Small",
     "lastUpdated": "2026-08-21"
   }

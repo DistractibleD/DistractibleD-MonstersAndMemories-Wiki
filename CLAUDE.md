@@ -465,19 +465,21 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   the same result as its plain counterpart, not a different item — it's the same material at
   higher difficulty/yield, not a distinct tier. For Herbalism this is cross-confirmed by the
   Mortar and Pestle recipes (`crafting.json`), which consume `(2) <node name>` to produce
-  `<node name> Powder`. Most of these result item names don't have a real `items.json` card
-  yet and render as plain text until one comes in, same as any other unmatched dynamic link.
-  **Fishing node names in this file mostly carry a `"Raw "` prefix (e.g. "Raw Whitefish"),
-  copied wholesale from the same fan-wiki source table as their skill/rarity/bait data — this
-  was never actually confirmed against a real item card, and is now known to be wrong for at
-  least two species.** Whitefish and Basa (2026-08-21, an actual "Whitefish"/"Basa" item-card
-  screenshot from fishing in Night Harbor) both turned out to have no "Raw " in the real item
-  name — corrected in both `gathering-nodes.json` (node `name`/`slug`/`results`) and the
-  matching Cooking Fillet recipe's component in `crafting.json`. **Don't assume the same fix
-  applies to the rest of the still-"Raw "-prefixed Fishing entries** — correct each one
-  individually only once its own item card actually confirms the name, same as any other
-  unconfirmed field; a card disagreeing with the node's stored name doesn't imply every
-  sibling entry is wrong the same way.
+  `<node name> Powder`. **Fishing node names in this file no longer carry a `"Raw "` prefix**
+  (removed site-wide 2026-08-21, user's own call) — the prefix was copied wholesale from a
+  fan-wiki source table and never actually confirmed against a real item card; once 4 of the
+  ~16 species (Whitefish, Basa, Grouper, River Trout) were directly confirmed via real item
+  cards to have no "Raw " in their actual name, the user decided to drop it from the rest too
+  rather than wait for a card per species — "it's not very likely we pull a grilled fish out
+  of the sea." Every Fishing node's `name`/`slug`/`results` had "Raw " stripped; the ones
+  still unconfirmed by a card carry a `note` saying so. **"Raw " still belongs on the
+  *Cooking* side** — a caught fish is still raw until cooked, so `crafting.json` Cooking
+  recipes that consume one of these fish keep referencing the fish by its now-unprefixed name
+  (e.g. `{ "item": "Tide Minnow" }`), while a recipe's own *output* can still be named "Raw
+  `<X>` Fillet" (an uncooked fillet, a real distinct state) — that's a different, deliberate
+  use of "Raw", not the same mistake. Most of these result item names still don't have a real
+  `items.json` card yet and render as plain text until one comes in, same as any other
+  unmatched dynamic link.
 - **A `results` entry can also be a compact family reference** (2026-08-06, user's own
   request, mirrors monster `drops`' `{ "family": "Rusty Iron" }` form) —
   `{ "family": "Chipped", "label": "Chipped Gems" }` instead of spelling out all 25+
