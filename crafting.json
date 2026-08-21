@@ -5750,7 +5750,9 @@
     "components": [
       { "item": "Elder Wood Panel Board", "quantity": 6 }
     ],
-    "recipeSkillLevel": 10
+    "recipeSkillLevel": 10,
+    "hidden": true,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Elder Wood Panel Frame",
@@ -5760,7 +5762,9 @@
       { "item": "Elder Wood Panel Board", "quantity": 4 },
       { "item": "Bronze Bracket", "quantity": 4 }
     ],
-    "recipeSkillLevel": 15
+    "recipeSkillLevel": 15,
+    "hidden": true,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Wooden Stool",
@@ -5840,7 +5844,9 @@
       { "item": "Ironbark Board", "quantity": 4 },
       { "item": "Copper Bracket", "quantity": 4 }
     ],
-    "recipeSkillLevel": 20
+    "recipeSkillLevel": 20,
+    "hidden": true,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Ironbark Panel",
@@ -5849,7 +5855,9 @@
     "components": [
       { "item": "Ironbark Board", "quantity": 6 }
     ],
-    "recipeSkillLevel": 15
+    "recipeSkillLevel": 15,
+    "hidden": true,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Display Box",
@@ -5866,6 +5874,7 @@
     "effect": "A display box for your wares. Anyone can view it, but only you can open it. Right-click to place.",
     "difficultyColor": "Red",
     "difficultyText": "You will require all your skills to craft this.",
+    "hidden": true,
     "lastUpdated": "2026-08-21"
   },
   {

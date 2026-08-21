@@ -1226,12 +1226,12 @@ function findItemByName(name) {
 // Reverse lookups used by the item viewer's "Crafting" section: is this item
 // the result of a recipe, and/or a component in other recipes.
 function findRecipeForItem(itemName) {
-  return (craftingData || []).find(r => r.name.toLowerCase() === itemName.toLowerCase());
+  return (craftingData || []).find(r => !r.hidden && r.name.toLowerCase() === itemName.toLowerCase());
 }
 
 function findRecipesUsingItem(itemName) {
   return (craftingData || []).filter(r =>
-    (r.components || []).some(c => c.item.toLowerCase() === itemName.toLowerCase())
+    !r.hidden && (r.components || []).some(c => c.item.toLowerCase() === itemName.toLowerCase())
   );
 }
 
@@ -3309,7 +3309,7 @@ async function renderCraftingPage(container) {
 // crafting.json entries for it actually exist, same as Disenchanting.
 function gatheringTradeskillIsNodeBased(name) {
   if (gatheringData.some(n => n.tradeskill === name)) return true;
-  return craftingData.filter(r => r.tradeskill === name).length === 0;
+  return craftingData.filter(r => r.tradeskill === name && !r.hidden).length === 0;
 }
 
 // Shared by the Crafting and Gathering category grids (split into separate
@@ -3327,7 +3327,7 @@ function tradeskillGridHTML(list, isGathering) {
         const isNodeBased = isGathering && gatheringTradeskillIsNodeBased(ts.name);
         const count = isNodeBased
           ? gatheringData.filter(n => n.tradeskill === ts.name).length
-          : craftingData.filter(r => r.tradeskill === ts.name).length;
+          : craftingData.filter(r => r.tradeskill === ts.name && !r.hidden).length;
         const icon = TRADESKILL_ICON[ts.name] || 'material';
         return `
           <div class="craft-card" data-tradeskill="${escapeAttr(ts.name)}" data-node-based="${isNodeBased}">
@@ -3951,7 +3951,7 @@ async function renderTradeskillSection(rootEl, tradeskillName, opts = {}) {
   // switch the displayed order to alphabetical without touching this base
   // array.
   const allRecipes = craftingData
-    .filter(r => r.tradeskill === tradeskillName)
+    .filter(r => r.tradeskill === tradeskillName && !r.hidden)
     .sort((a, b) => {
       const ea = estimateRecipeSkill(a);
       const eb = estimateRecipeSkill(b);

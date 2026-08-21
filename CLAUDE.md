@@ -733,6 +733,20 @@ reference source, don't get saved anywhere — process and delete, don't move to
    say so, record the generic color, don't silently pick one.
 5. Delete screenshot(s) once processed — never moved anywhere.
 
+**A recipe confirmed missing from a current, complete crafting-window screenshot gets
+`"hidden": true`, never deleted** (2026-08-21, first used on 5 old Carpentry recipes — Elder
+Wood Panel, Elder Wood Panel Frame, Ironbark Frame, Ironbark Panel, Display Box — once the
+user confirmed a fresh 0-skill Carpentry window no longer listed them alongside the 7 that
+remained). Only apply this when the user explicitly says a window screenshot represents the
+*current complete* recipe list for that skill range — a screenshot might just be scrolled
+past a recipe rather than proving it's gone, so don't infer this from a partial-looking
+window on your own. `hidden` recipes keep every field (still restorable by removing the flag
+if the recipe reappears in a later screenshot) but drop out of the tradeskill's recipe grid,
+its recipe-count badge, and both `findRecipeForItem`/`findRecipesUsingItem` reverse lookups
+(script.js: `renderTradeskillSection`'s `allRecipes` filter, `tradeskillGridHTML`'s count,
+`gatheringTradeskillIsNodeBased`) — same "hide without deleting data" precedent as the
+Companions page's `pages.json` removal, just scoped to one recipe instead of a whole page.
+
 **Vendor screenshots** (NPC buy/sell list — names + prices only, no stat card): confirms an
 item *exists* and, since 2026-08-11, is recorded persistently in `vendors.json` so the item's
 own card can show where to buy it — no longer just "process for names, delete."
