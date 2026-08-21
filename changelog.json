@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-21T12:27", "summary": "Filled in weight, size, and difficulty info for Carpentry furniture recipes, added Woodworking's first two recipes, and added a new vendor (A Carpenter) and item (Furniture Wrench)" },
   { "timestamp": "2026-08-19T13:28", "summary": "Changed the Crafting and Gathering search boxes to filter tradeskills by name instead of searching recipes, since finding the right tradeskill among so many was the slow part" },
   { "timestamp": "2026-08-19T07:48", "summary": "Removed a redundant note under the sidebar's History section" },
   { "timestamp": "2026-08-19T07:44", "summary": "Added a welcome message to the Home page explaining what the wiki is and inviting visitors to help by submitting info" },

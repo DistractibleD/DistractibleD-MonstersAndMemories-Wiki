@@ -24016,5 +24016,15 @@
     "weight": 0.1,
     "size": "Small",
     "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "Furniture Wrench",
+    "slug": "furniture-wrench",
+    "type": "Misc",
+    "tags": [],
+    "description": "A handy wrench for disassembling furniture. Hold this on your cursor and click a piece of furniture to remove it.",
+    "weight": 1.0,
+    "size": "Small",
+    "lastUpdated": "2026-08-21"
   }
 ]

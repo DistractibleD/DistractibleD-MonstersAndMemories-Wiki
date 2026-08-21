@@ -1,5 +1,15 @@
 [
   {
+    "name": "A Carpenter",
+    "slug": "a-carpenter",
+    "location": "Night Harbor",
+    "area": "close to The Bends",
+    "sells": [
+      "Furniture Wrench"
+    ],
+    "lastUpdated": "2026-08-21"
+  },
+  {
     "name": "A Cook",
     "slug": "a-cook",
     "location": "Night Harbor",

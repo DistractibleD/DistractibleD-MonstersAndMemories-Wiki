@@ -1858,20 +1858,25 @@
       { "item": "Smithing Pliers", "quantity": 1 }
     ],
     "difficultyColor": "Light Blue",
-    "recipeSkillLevel": 5
+    "observedAtSkill": 5,
+    "recipeSkillLevel": 5,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Enchanted Copper Chain Links",
     "slug": "enchanted-copper-chain-links",
     "image": "images/crafting/enchanted-copper-chain-links.jpg",
     "tradeskill": "Blacksmithing",
+    "listOrder": 6,
     "weight": 0.1,
     "size": "Small",
     "components": [
       { "item": "Enchanted Copper Bar", "quantity": 6 }
     ],
     "difficultyColor": "Red",
-    "recipeSkillLevel": 40
+    "observedAtSkill": 5,
+    "recipeSkillLevel": 40,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Copper Plate",
@@ -1886,20 +1891,25 @@
       { "item": "Smithing Hammer", "quantity": 1 }
     ],
     "difficultyColor": "Light Blue",
-    "recipeSkillLevel": 5
+    "observedAtSkill": 5,
+    "recipeSkillLevel": 5,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Enchanted Copper Plate",
     "slug": "enchanted-copper-plate",
     "image": "images/crafting/enchanted-copper-plate.jpg",
     "tradeskill": "Blacksmithing",
+    "listOrder": 7,
     "weight": 0.1,
     "size": "Small",
     "components": [
       { "item": "Enchanted Copper Bar", "quantity": 6 }
     ],
     "difficultyColor": "Red",
-    "recipeSkillLevel": 40
+    "observedAtSkill": 5,
+    "recipeSkillLevel": 40,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Copper Fasteners",
@@ -1913,7 +1923,9 @@
       { "item": "Copper Bar", "quantity": 2 }
     ],
     "difficultyColor": "Light Blue",
-    "recipeSkillLevel": 5
+    "observedAtSkill": 5,
+    "recipeSkillLevel": 5,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Copper Nails",
@@ -5680,24 +5692,56 @@
     "needsInfo": true
   },
   {
+    "name": "Wood Board",
+    "slug": "wood-board",
+    "tradeskill": "Woodworking",
+    "listOrder": 1,
+    "difficultyColor": "Yellow",
+    "observedAtSkill": 6,
+    "lastUpdated": "2026-08-21"
+  },
+  {
+    "name": "Fine Wood Board",
+    "slug": "fine-wood-board",
+    "tradeskill": "Woodworking",
+    "listOrder": 2,
+    "difficultyColor": "Red",
+    "observedAtSkill": 6,
+    "lastUpdated": "2026-08-21"
+  },
+  {
     "name": "Wood Frame",
     "slug": "wood-frame",
     "tradeskill": "Carpentry",
+    "listOrder": 1,
+    "weight": 0.1,
+    "size": "Medium",
     "components": [
       { "item": "Wood Board", "quantity": 4 },
       { "item": "Bronze Bracket", "quantity": 4 }
     ],
-    "recipeSkillLevel": 5
+    "difficultyColor": "Light Blue",
+    "difficultyText": "Your skills make this a simple task.",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 5,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Wood Panel",
     "slug": "wood-panel",
     "tradeskill": "Carpentry",
+    "listOrder": 2,
+    "weight": 0.1,
+    "size": "Medium",
     "components": [
       { "item": "Wood Board", "quantity": 6 },
       { "item": "Crude Wood Finish", "quantity": 2 }
     ],
-    "recipeSkillLevel": 5
+    "difficultyColor": "Light Blue",
+    "difficultyText": "Your skills make this a simple task.",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 5,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Elder Wood Panel",
@@ -5722,43 +5766,71 @@
     "name": "Wooden Stool",
     "slug": "wooden-stool",
     "tradeskill": "Carpentry",
+    "listOrder": 3,
+    "weight": 0.0,
+    "size": "Large",
     "components": [
       { "item": "Copper Nails", "quantity": 2 },
       { "item": "Wood Board", "quantity": 2 },
       { "item": "Wood Panel", "quantity": 1 }
     ],
-    "recipeSkillLevel": 15
+    "difficultyColor": "White",
+    "difficultyText": "Your skills make this a complex task.",
+    "observedAtSkill": 0,
+    "recipeSkillLevel": 15,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Wooden Chair",
     "slug": "wooden-chair",
     "tradeskill": "Carpentry",
+    "listOrder": 4,
+    "weight": 0.0,
+    "size": "Large",
     "components": [
       { "item": "Copper Nails", "quantity": 2 },
       { "item": "Wood Board", "quantity": 4 },
       { "item": "Wood Panel", "quantity": 2 }
-    ]
+    ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 0,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Wooden Storage Crate",
     "slug": "wooden-storage-crate",
     "tradeskill": "Carpentry",
+    "listOrder": 5,
+    "weight": 0.0,
+    "size": "Large",
     "components": [
       { "item": "Copper Nails", "quantity": 2 },
       { "item": "Wood Panel", "quantity": 6 },
       { "item": "Wood Frame", "quantity": 1 }
-    ]
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 0,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Wooden Hand Cart",
     "slug": "wooden-hand-cart",
     "tradeskill": "Carpentry",
+    "listOrder": 6,
+    "weight": 0.0,
+    "size": "Large",
     "components": [
       { "item": "Copper Nails", "quantity": 1 },
       { "item": "Wood Frame", "quantity": 1 },
       { "item": "Wood Panel", "quantity": 2 },
       { "item": "Wood Board", "quantity": 2 }
-    ]
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 0,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Ironbark Frame",
@@ -5783,22 +5855,35 @@
     "name": "Display Box",
     "slug": "display-box",
     "tradeskill": "Carpentry",
+    "weight": 0.0,
+    "size": "Small",
     "components": [
       { "item": "Wood Frame", "quantity": 2 },
       { "item": "Wood Panel", "quantity": 2 },
       { "item": "Copper Nails", "quantity": 4 },
       { "item": "Crude Wood Finish", "quantity": 1 }
-    ]
+    ],
+    "effect": "A display box for your wares. Anyone can view it, but only you can open it. Right-click to place.",
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Wooden Table",
     "slug": "wooden-table",
     "tradeskill": "Carpentry",
+    "listOrder": 7,
+    "weight": 0.0,
+    "size": "Extra Large",
     "components": [
       { "item": "Copper Nails", "quantity": 2 },
-      { "item": "Wood Board", "quantity": 4 },
-      { "item": "Wood Panel", "quantity": 4 }
-    ]
+      { "item": "Wood Board", "quantity": 3 },
+      { "item": "Wood Panel", "quantity": 3 }
+    ],
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 0,
+    "lastUpdated": "2026-08-21"
   },
   {
     "name": "Cooked Ashira Meat",
