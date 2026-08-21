@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-21T16:50", "summary": "Added a note to the Gathering page: Tattered Cloth Boots can be caught while fishing in Night Harbor, not just found as monster loot" },
   { "timestamp": "2026-08-21T16:49", "summary": "Added new fish and jewelry items, filled in a missing fish item's description, and updated Woodworking recipe difficulty from a higher-skill observation" },
   { "timestamp": "2026-08-21T12:32", "summary": "Hid 5 old Carpentry recipes (Elder Wood Panel, Elder Wood Panel Frame, Ironbark Frame, Ironbark Panel, Display Box) that no longer appear in the game's current recipe list" },
   { "timestamp": "2026-08-21T12:27", "summary": "Filled in weight, size, and difficulty info for Carpentry furniture recipes, added Woodworking's first two recipes, and added a new vendor (A Carpenter) and item (Furniture Wrench)" },
