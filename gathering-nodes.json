@@ -288,12 +288,11 @@
     "name": "Grouper",
     "slug": "grouper",
     "tradeskill": "Fishing",
-    "minSkill": 1,
     "results": ["Grouper"],
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "Despite the minimum skill listed above, players haven't reported catching one before around skill 70 — treat that minimum as unconfirmed."
+    "note": "Minimum skill is higher than once thought — no catches reported below skill 67, first confirmed catch at skill 70."
   },
   {
     "name": "Bay Crab",
@@ -420,7 +419,8 @@
     "tradeskill": "Fishing",
     "results": ["Tattered Cloth Boots"],
     "locations": ["Night Harbor"],
-    "note": "Confirmed caught while fishing (fishing skill 40), not a monster drop — an equipment/junk catch rather than a fish species. Minimum skill and rarity not yet known."
+    "rarity": "Uncommon",
+    "note": "An equipment/junk catch rather than a fish species — not a monster drop. Rate appears similar regardless of fishing skill."
   },
   {
     "name": "Lionleaf",
