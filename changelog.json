@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-22T00:39", "summary": "Updated 8 Carpentry recipes' difficulty and skill level from a fresh crafting-window screenshot at skill 5, and restored Display Box which reappeared" },
   { "timestamp": "2026-08-22T00:16", "summary": "Hid the Fishing table's Bait Required column for now, since every value is currently unknown" },
   { "timestamp": "2026-08-22T00:14", "summary": "Removed redundant Gathering page notes that just repeated what the Min Skill/Trivial columns already show" },
   { "timestamp": "2026-08-21T23:55", "summary": "Cleaned up wording on several Gathering page notes so they read naturally instead of referencing internal data sources" },

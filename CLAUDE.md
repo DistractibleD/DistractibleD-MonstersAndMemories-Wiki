@@ -785,6 +785,16 @@ its recipe-count badge, and both `findRecipeForItem`/`findRecipesUsingItem` reve
 (script.js: `renderTradeskillSection`'s `allRecipes` filter, `tradeskillGridHTML`'s count,
 `gatheringTradeskillIsNodeBased`) — same "hide without deleting data" precedent as the
 Companions page's `pages.json` removal, just scoped to one recipe instead of a whole page.
+**Restoration actually happened, same day**: a skill-5 Carpentry window showed "Display Box"
+again, right after the trailing skill-7 recipe (Wooden Table) — un-hidden, given `listOrder:
+8`. This suggests the crafting window may be skill-*distance*-gated (recipes fade in as your
+skill approaches their requirement) rather than a fixed list that only shrinks, so a `hidden`
+call made from one low-skill window isn't necessarily permanent — worth rechecking against a
+higher-skill window if one comes in, rather than assuming a still-missing recipe is settled.
+The other 4 recipes from that same original batch (Elder Wood Panel/Elder Wood Panel Frame/
+Ironbark Frame/Ironbark Panel, `recipeSkillLevel` 10-20) stayed hidden after this same
+skill-5 window still didn't show them — consistent with them simply being further out than
+Display Box was.
 
 **Vendor screenshots** (NPC buy/sell list — names + prices only, no stat card): confirms an
 item *exists* and, since 2026-08-11, is recorded persistently in `vendors.json` so the item's
