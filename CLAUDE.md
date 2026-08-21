@@ -465,11 +465,19 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   the same result as its plain counterpart, not a different item — it's the same material at
   higher difficulty/yield, not a distinct tier. For Herbalism this is cross-confirmed by the
   Mortar and Pestle recipes (`crafting.json`), which consume `(2) <node name>` to produce
-  `<node name> Powder`. For Fishing, node names carry a `"Raw "` prefix (e.g. "Raw Whitefish")
-  because the catch is uncooked, not because "Raw" is a separate qualifier — the result name
-  keeps that prefix verbatim, still an exact match to the node's own name. Most of these
-  result item names don't have a real `items.json` card yet and render as plain text until
-  one comes in, same as any other unmatched dynamic link.
+  `<node name> Powder`. Most of these result item names don't have a real `items.json` card
+  yet and render as plain text until one comes in, same as any other unmatched dynamic link.
+  **Fishing node names in this file mostly carry a `"Raw "` prefix (e.g. "Raw Whitefish"),
+  copied wholesale from the same fan-wiki source table as their skill/rarity/bait data — this
+  was never actually confirmed against a real item card, and is now known to be wrong for at
+  least two species.** Whitefish and Basa (2026-08-21, an actual "Whitefish"/"Basa" item-card
+  screenshot from fishing in Night Harbor) both turned out to have no "Raw " in the real item
+  name — corrected in both `gathering-nodes.json` (node `name`/`slug`/`results`) and the
+  matching Cooking Fillet recipe's component in `crafting.json`. **Don't assume the same fix
+  applies to the rest of the still-"Raw "-prefixed Fishing entries** — correct each one
+  individually only once its own item card actually confirms the name, same as any other
+  unconfirmed field; a card disagreeing with the node's stored name doesn't imply every
+  sibling entry is wrong the same way.
 - **A `results` entry can also be a compact family reference** (2026-08-06, user's own
   request, mirrors monster `drops`' `{ "family": "Rusty Iron" }` form) —
   `{ "family": "Chipped", "label": "Chipped Gems" }` instead of spelling out all 25+

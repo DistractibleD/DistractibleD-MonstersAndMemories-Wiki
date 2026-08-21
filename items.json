@@ -24062,5 +24062,24 @@
     "classes": ["ALL"],
     "race": ["ALL"],
     "lastUpdated": "2026-08-21"
+  },
+  {
+    "name": "Basa",
+    "slug": "basa",
+    "type": "Misc",
+    "tags": [],
+    "description": "An ocean catfish favored fo",
+    "weight": 2.0,
+    "size": "Small",
+    "lastUpdated": "2026-08-21"
+  },
+  {
+    "name": "Whitefish",
+    "slug": "whitefish",
+    "type": "Misc",
+    "tags": [],
+    "weight": 1.0,
+    "size": "Small",
+    "lastUpdated": "2026-08-21"
   }
 ]

@@ -637,3 +637,7 @@ Rusty/Tarnished/Tarnished Bronze/Bronze/Iron/Copper's items.json rosters up to t
 42-piece shape (Rusty is still only 18 confirmed pieces, no chain/plate yet, for example) --
 apply the same-roster rule going forward as pieces come up, rather than fabricating hundreds
 of stub entries with no sighting at all.
+
+2026-08-21: "Basa" item card's description was cut off by the screenshot's own right edge
+mid-sentence — "An ocean catfish favored fo" is all that's legible, stored verbatim rather
+than guessed. Needs a fresh, uncropped screenshot to complete the sentence.

@@ -264,24 +264,26 @@
     "note": "Trivial only given as a floor on the source table: \"110+\"."
   },
   {
-    "name": "Raw Whitefish",
-    "slug": "raw-whitefish",
+    "name": "Whitefish",
+    "slug": "whitefish",
     "tradeskill": "Fishing",
     "minSkill": 1,
-    "results": ["Raw Whitefish"],
+    "results": ["Whitefish"],
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Common",
-    "baitRequired": "No at fishing skill 50"
+    "baitRequired": "No at fishing skill 50",
+    "note": "Node name corrected 2026-08-21 — the actual item card reads \"Whitefish\", not \"Raw Whitefish\" as the source table had it."
   },
   {
-    "name": "Raw Basa",
-    "slug": "raw-basa",
+    "name": "Basa",
+    "slug": "basa",
     "tradeskill": "Fishing",
     "minSkill": 1,
-    "results": ["Raw Basa"],
+    "results": ["Basa"],
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Uncommon",
-    "baitRequired": "No"
+    "baitRequired": "No",
+    "note": "Node name corrected 2026-08-21 — the actual item card reads \"Basa\", not \"Raw Basa\" as the source table had it."
   },
   {
     "name": "Raw Grouper",

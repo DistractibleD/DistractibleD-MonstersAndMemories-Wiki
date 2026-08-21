@@ -5923,7 +5923,7 @@
     "slug": "raw-basa-fillet",
     "tradeskill": "Cooking",
     "components": [
-      { "item": "Raw Basa", "quantity": 1 },
+      { "item": "Basa", "quantity": 1 },
       { "item": "Cleaver", "quantity": 1 }
     ]
   },
@@ -5941,7 +5941,7 @@
     "slug": "cooked-whitefish-fillet",
     "tradeskill": "Cooking",
     "components": [
-      { "item": "Raw Whitefish", "quantity": 1 },
+      { "item": "Whitefish", "quantity": 1 },
       { "item": "Cleaver", "quantity": 1 }
     ]
   },
