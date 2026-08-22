@@ -1218,6 +1218,15 @@ inflated its own count):
   variants of each).
 - **"Cracked"** — Cracked Amphora is broken pottery, not part of the Cracked wood-staff tier
   (Staff, Fine Wood Staff, Ironbark Staff, Elderwood Staff).
+- **"Tarnished"** (plain, weapon-only tier — confirmed 2026-08-22 as its own crafted upgrade:
+  a Rusty weapon + a sharpening stone at an Anvil produces the Tarnished version of that same
+  weapon, same mechanic as Corroded Bronze + Scraps → Tarnished Bronze but for the Rusty tier
+  specifically) — Tarnished Tinker's Ring is a unique named item, not part of this weapon set
+  (Axe, Battle Axe, Dagger, Great Scythe, Greatsword, Longsword, Mace, Maul, Scimitar, Scythe,
+  Shortsword, Spear, Trident, War Lance, Warhammer). List its real pieces individually, same
+  as Bronze/Copper/Scarab/Worn/Cracked above — don't confuse this with the already-registered
+  "Tarnished Bronze"/"Tarnished Iron" families, which have no such collision and stay safe to
+  use as compact `family` references.
 
 If a future family candidate has this problem, list its real pieces individually rather than
 registering the prefix — don't try to "fix" it with a `familyItemCount` exclusion list, that
