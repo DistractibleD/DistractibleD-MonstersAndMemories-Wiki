@@ -441,5 +441,15 @@
       "Tattered Cloth Gloves", "Worn Great Staff", "Water Flask", "Seam Ripper"
     ],
     "lastUpdated": "2026-08-18"
+  },
+  {
+    "name": "A Fishmonger",
+    "slug": "a-fishmonger",
+    "location": "Night Harbor",
+    "area": "Docks",
+    "sells": [
+      "Fisherman's Guide to Dinner", "Raw Bay Crab", "Raw Swordfish Steak"
+    ],
+    "lastUpdated": "2026-08-22"
   }
 ]

@@ -24125,5 +24125,29 @@
     "classes": ["ALL"],
     "race": ["ALL"],
     "lastUpdated": "2026-08-22"
+  },
+  {
+    "name": "Fisherman's Guide to Dinner",
+    "slug": "fishermans-guide-to-dinner",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-22"
+  },
+  {
+    "name": "Raw Bay Crab",
+    "slug": "raw-bay-crab",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-22"
+  },
+  {
+    "name": "Raw Swordfish Steak",
+    "slug": "raw-swordfish-steak",
+    "type": "Misc",
+    "tags": [],
+    "needsInfo": true,
+    "lastUpdated": "2026-08-22"
   }
 ]
