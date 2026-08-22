@@ -45,22 +45,33 @@ breakdown is 4 Basa + 3 Grouper.
 - Thorn Sturgeon: 0
 - Tattered Cloth Boots: 0
 
-Running totals (80 bait so far)
---------------------------------
-- Basa: 33
-- Whitefish: 84
-- Grouper: 9
+Stack 5 — skill 82 → 84
+------------------------
+Screenshot was cumulative with stack 4 (bags not emptied first) — totals shown were 12
+Basa/23 Whitefish/5 Grouper, so the stack-5-only catch is the difference from stack 4's
+4/13/3. Basa and Grouper again shared the round-blue icon; user confirmed the split by chat
+(12 Basa, 5 Grouper) rather than reading it off the picture.
+- Basa: 12 − 4 = 8
+- Whitefish: 23 − 13 = 10
+- Grouper: 5 − 3 = 2
+- Thorn Sturgeon: 0
+- Tattered Cloth Boots: 0
+
+Running totals (100 bait so far)
+---------------------------------
+- Basa: 41
+- Whitefish: 94
+- Grouper: 11
 - Thorn Sturgeon: 1
-- Tattered Cloth Boots: 9 (user's own stated total as of stack 3, not re-confirmed since —
-  see stack 3's note on why the per-stack breakdown undercounts it)
+- Tattered Cloth Boots: 9 (user's own stated total as of stack 3 — minSkill promoted to 1 on
+  the live site since it's been caught since stack 1)
 
 Approximate Tattered Cloth Boots drop rate
 -------------------------------------------
 9 boots across 60 bait through stack 3 ≈ **15% per bait** (see stack 3 for caveats on this
-being an approximation). Stack 4 caught zero — consistent with normal variance at this
-sample size, not necessarily a change. User also reports other fishermen at higher skill
-seeing boots drop at "about the same rate," which — if accurate — argues against this being
-skill-gated at all, unlike Grouper/Thorn Sturgeon.
+being an approximation). Stacks 4 and 5 both caught zero — two stacks running now, worth
+watching whether this is just variance or an actual slowdown at higher skill (would
+contradict the "flat across skill" secondhand report). Not enough yet to act on.
 
 Observations so far
 --------------------
@@ -68,9 +79,10 @@ Observations so far
 - Basa's share has held steady across all four stacks (not shrinking) — leans toward "just
   less common than Whitefish" rather than "skill-gated rarer under 50", matching the user's
   own revised suspicion.
-- Grouper first appeared in stack 3 (skill 67-79, 6 catches) and appeared again in stack 4
-  (skill 79-82, 3 more) — two stacks in a row now, despite 40 bait at skill 0-67 catching
-  none. Reinforces that it's reliably catchable past ~70, not just a fluke. Thorn Sturgeon
+- Grouper first appeared in stack 3 (skill 67-79, 6 catches) and has appeared in every stack
+  since (3 in stack 4, 2 in stack 5) — three stacks in a row now, despite 40 bait at skill
+  0-67 catching none. Reinforces that it's reliably catchable past ~70, not just a fluke.
+  Thorn Sturgeon
   only appeared once so far (stack 3, skill 77); its own "Very Rare" tag already explains an
   irregular catch pattern — no update needed, still minSkill 30.
   Grouper's minSkill was promoted to the live site 2026-08-21: removed the source table's
