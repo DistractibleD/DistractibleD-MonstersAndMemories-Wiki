@@ -33,30 +33,40 @@ Stack 3 — skill 67 → 79
 - Thorn Sturgeon: 1 (first-ever catch this stack, at skill 77)
 - Tattered Cloth Boots: 0
 
-Running totals (60 bait so far)
+Stack 4 — skill 79 → 82
+------------------------
+Bags fully emptied before this stack, so this is a clean, complete read (not undercounted
+like stack 3's boots were).
+- Basa: 4 + 3 = 7
+- Whitefish: 13
+- Grouper: 0
+- Thorn Sturgeon: 0
+- Tattered Cloth Boots: 0
+
+Running totals (80 bait so far)
 --------------------------------
-- Basa: 29
-- Whitefish: 71
+- Basa: 36
+- Whitefish: 84
 - Grouper: 6
 - Thorn Sturgeon: 1
-- Tattered Cloth Boots: 9 (user's own stated total, not the screenshot-derived 6 — they
-  discarded boots as they went rather than keeping every one until a screenshot, so the
-  per-stack breakdown above undercounts stack 3's true boot catches; 9 is the real total)
+- Tattered Cloth Boots: 9 (user's own stated total as of stack 3, not re-confirmed since —
+  see stack 3's note on why the per-stack breakdown undercounts it)
 
 Approximate Tattered Cloth Boots drop rate
 -------------------------------------------
-9 boots across 60 bait spent ≈ **15% per bait**, treating 1 Grub ≈ 1 catch attempt (not
-exactly true — total items caught per stack has run somewhat higher than 20 per 20-bait
-stack, so this is an approximation, not an exact rate). User also reports other fishermen at
-higher skill seeing boots drop at "about the same rate," which — if accurate — argues against
-this being skill-gated at all, unlike Grouper/Thorn Sturgeon.
+9 boots across 60 bait through stack 3 ≈ **15% per bait** (see stack 3 for caveats on this
+being an approximation). Stack 4 caught zero — consistent with normal variance at this
+sample size, not necessarily a change. User also reports other fishermen at higher skill
+seeing boots drop at "about the same rate," which — if accurate — argues against this being
+skill-gated at all, unlike Grouper/Thorn Sturgeon.
 
 Observations so far
 --------------------
-- Whitefish consistently the most common catch by a wide margin (~55-60% of every stack).
-- Basa's share has held steady or grown slightly across all three stacks (not shrinking) —
+- Whitefish consistently the most common catch by a wide margin (~55-65% of every stack).
+- Basa's share has held steady or grown slightly across all four stacks (not shrinking) —
   leans toward "just less common than Whitefish" rather than "skill-gated rarer under 50",
-  matching the user's own revised suspicion.
+  matching the user's own revised suspicion. Stack 4 (skill 79-82) had Basa's best showing
+  yet (7 of 20, 35%), reinforcing this.
 - Grouper and Thorn Sturgeon both appeared for the first time in stack 3 (skill 67-79),
   despite gathering-nodes.json's source-table `minSkill` values (1 and 30 respectively)
   implying they should've been catchable from stack 1. Thorn Sturgeon's absence until now is

@@ -24111,5 +24111,19 @@
     "weight": 1.0,
     "size": "Small",
     "lastUpdated": "2026-08-21"
+  },
+  {
+    "name": "Angelfish Bisque",
+    "slug": "angelfish-bisque",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Angelfish Bisque (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "stats": { "STA": 3, "WIS": 3 },
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-22"
   }
 ]
