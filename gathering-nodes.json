@@ -284,11 +284,12 @@
     "name": "Grouper",
     "slug": "grouper",
     "tradeskill": "Fishing",
+    "minSkill": 70,
     "results": ["Grouper"],
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "Minimum skill is higher than once thought — no catches reported below skill 67, first confirmed catch at skill 70."
+    "note": "Minimum skill inferred from player testing (not directly confirmed) — no catches reported below skill 67, consistent catches from skill 70 on."
   },
   {
     "name": "Bay Crab",

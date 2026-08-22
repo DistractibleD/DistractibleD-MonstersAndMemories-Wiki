@@ -535,6 +535,21 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   (a non-Crystallized-Magic cross-node material) plus **Jagged Stone** — record both
   literally rather than assuming a skill-threshold pattern, since neither is a tiered magic
   material.
+- **Multiples-of-5 tiebreaker for a narrowly-bracketed unknown skill threshold** (confirmed
+  2026-08-22, Fishing's Grouper — user's own reasoning, not a screenshot): every confirmed
+  skill requirement recorded on this site so far (recipeSkillLevel, minSkill, trivialSkill
+  alike) lands on a multiple of 5. When real catch/no-catch (or craft/no-craft) data brackets
+  an unknown threshold to a narrow range with exactly one multiple-of-5 candidate inside it,
+  that candidate is a confident inference — safe to write as the actual `minSkill`/
+  `recipeSkillLevel` value (not left as a vague range note), but still flag it as inferred
+  rather than a directly-confirmed number from a card/tooltip. Grouper: 40 bait spent at
+  skill 0-67 caught none, then catches starting at skill 70 — bracket is (67, 70], and 70 is
+  the only multiple of 5 in it (65 is ruled out by the skill-67 non-catches). This is a
+  narrower, more confident version of the Frond/Crystallized-Magic bracket-inference rules
+  above — those need two confirmed *same-tier* endpoints to bracket a range; this only needs
+  one narrow enough bracket plus the multiples-of-5 pattern to land on a single candidate.
+  Don't apply this if the bracket contains more than one multiple of 5 (e.g. a gap from 62 to
+  78 spans 65, 70, and 75) — then it's still genuinely ambiguous, back to a range/floor note.
 - Source tables so far are fan-wiki-style reference charts, same weaker-than-a-screenshot
   caveat as the Tanning/Leatherworking/Blacksmithing tables (see `CLAUDE-HISTORY.md`) —
   supersede without hesitation if the user's own observation disagrees.

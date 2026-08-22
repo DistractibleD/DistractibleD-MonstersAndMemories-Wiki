@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-22T08:26", "summary": "Set Grouper's minimum fishing skill to 70 based on player testing" },
   { "timestamp": "2026-08-22T08:12", "summary": "Added Angelfish Bisque, a new Cooking food item" },
   { "timestamp": "2026-08-22T00:39", "summary": "Updated 8 Carpentry recipes' difficulty and skill level from a fresh crafting-window screenshot at skill 5, and restored Display Box which reappeared" },
   { "timestamp": "2026-08-22T00:16", "summary": "Hid the Fishing table's Bait Required column for now, since every value is currently unknown" },
