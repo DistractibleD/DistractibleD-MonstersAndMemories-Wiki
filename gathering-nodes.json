@@ -314,11 +314,11 @@
     "name": "Redfin Pike",
     "slug": "redfin-pike",
     "tradeskill": "Fishing",
-    "minSkill": 30,
     "results": ["Redfin Pike"],
-    "locations": ["Night Harbor", "Evershade Weald", "Keeper's Bight"],
+    "locations": ["Evershade Weald", "Keeper's Bight"],
     "rarity": "Very Rare",
-    "baitRequired": "?"
+    "baitRequired": "?",
+    "note": "Not yet confirmed in Night Harbor despite extensive fishing there."
   },
   {
     "name": "River Trout",
@@ -406,6 +406,7 @@
     "name": "Tattered Cloth Boots",
     "slug": "tattered-cloth-boots-fishing-catch",
     "tradeskill": "Fishing",
+    "minSkill": 1,
     "results": ["Tattered Cloth Boots"],
     "locations": ["Night Harbor"],
     "rarity": "Uncommon",
