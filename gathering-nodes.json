@@ -288,7 +288,8 @@
     "results": ["Grouper"],
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals", "Shaded Dunes"],
     "rarity": "Uncommon",
-    "baitRequired": "?"
+    "baitRequired": "?",
+    "note": "The minimum skill of 70 is based on Night Harbor testing — in Shaded Dunes it's been caught at a much lower skill (30)."
   },
   {
     "name": "Bay Crab",

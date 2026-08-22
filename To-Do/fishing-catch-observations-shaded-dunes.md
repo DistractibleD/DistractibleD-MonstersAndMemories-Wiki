@@ -20,8 +20,8 @@ or fresh, and what row order fish are appearing in — these aren't guaranteed t
 Harbor's conventions (Basa/Whitefish/Grouper/Thorn Sturgeon rows) since the fish themselves
 may differ entirely.
 
-Stack 1 — skill 114 (fresh, 1 stack of Grub bait)
-----------------------------------------------------
+Main character — Stack 1 (skill 114, fresh, 1 stack of Grub bait)
+----------------------------------------------------------------------
 Same species as Night Harbor so far, no new species yet. User confirmed row order top to
 bottom: Basa, Whitefish, Grouper (same convention as Night Harbor). Promoted immediately to
 the live site: added "Shaded Dunes" to Basa/Whitefish/Grouper's `locations` in
@@ -46,3 +46,97 @@ Observations so far
   difference. Needs more stacks before drawing a conclusion.
 - No new species (no Thorn Sturgeon, no boots, nothing unknown) — everything caught so far
   already exists in gathering-nodes.json from Night Harbor.
+
+New skill-1 character — Stack 1 (skill 1 → 45, complete)
+-------------------------------------------------------------
+The user created a brand-new character (fishing skill 1) fishing in Shaded Dunes,
+specifically to see whether the catchable species/rarity differ at minimum skill vs. the
+main character (which only ever fished here starting at skill 114). This is a real test of
+whether Grouper's `minSkill: 70` (inferred from Night Harbor data) holds here too. Separate
+tally from the "Main character" stacks above — different character, track independently.
+
+Mid-stack notes (kept for the exact-skill data points, more precise than the final count
+alone): at 6 bait spent, skill 30, catches so far 4 Whitefish + 1 Grouper — the Grouper came
+in at skill 30, within the character's first 5 catches, not after a long grind. At 10 bait
+spent, skill 34 — first-ever Basa catch for this character.
+
+**Final stack total, skill 1→45:**
+- Whitefish: 8
+- Basa: 6
+- Grouper: 3
+(Basa/Grouper split confirmed by the user directly, since they share an icon.)
+
+This directly contradicts Night Harbor's `minSkill: 70` for Grouper — 3 catches within the
+first 20 bait of a skill-1 character, vs. 0 catches across 40 bait at skill 0-67 in Night
+Harbor. Much earlier and much easier here.
+
+New skill-1 character — Stack 2 (skill stayed at 45, cumulative, not emptied)
+------------------------------------------------------------------------------
+Bags not cleared after stack 1 — cumulative screenshot, same row convention as Night Harbor
+(top to bottom: Basa, Whitefish, Grouper). Shown totals: 9 Basa, 24 Whitefish (20+4), 5
+Grouper. Stack-2-only catch is the difference from stack 1's 6/8/3:
+- Basa: 9 − 6 = 3
+- Whitefish: 24 − 8 = 16
+- Grouper: 5 − 3 = 2
+
+Skill stayed at 45 for this whole stack (no skill-up between stacks 1 and 2) — consistent
+with the same fast-early/slows-down pattern seen on the main character, just compressed into
+fewer bait since this is a fresh character.
+
+New skill-1 character — Stack 3 (skill still 45, cumulative, not emptied)
+------------------------------------------------------------------------------
+Shown totals: 13 Basa, 39 Whitefish (20+19), 6 Grouper. Stack-3-only catch is the difference
+from stack 2's cumulative 9/24/5:
+- Basa: 13 − 9 = 4
+- Whitefish: 39 − 24 = 15
+- Grouper: 6 − 5 = 1
+
+Skill still hasn't moved past 45 — third stack in a row at the plateau (see the skill-up
+plateau note below).
+
+Running totals (3 stacks, 60 bait, skill 1→45)
+--------------------------------------------------
+- Basa: 13
+- Whitefish: 39
+- Grouper: 6
+
+Grouper per stack so far: 3, 2, 1 — trending downward, though 6 total is still a small
+sample to call a real trend rather than variance. Keep watching; if this keeps dropping
+while skill stays flat, that's a different pattern than "rare but steady."
+
+**Skill-up plateau, noticed 2026-08-22:** this character's skill stopped climbing after
+stack 1 (stayed flat at 45 through all of stack 2), and separately the main character
+gained *zero* skill from its own 1 stack in Shaded Dunes (labeled skill 114 both before and
+after). Both point at some kind of skill-up ceiling rather than random bad luck. User's own
+take: not worth chasing a bait-tier or fishing-rod explanation for this — "this is the Beta,
+and features are still being worked on," i.e. don't assume gear tier matters yet, and don't
+read too much into a plateau that might just be unfinished game systems rather than a real,
+stable mechanic worth documenting on the wiki.
+
+Two competing explanations (not yet distinguished):
+1. Grouper's real minSkill is zone-specific — much lower in Shaded Dunes than Night Harbor.
+2. There's no hard minSkill at all — catch probability just scales continuously with skill,
+   and Night Harbor's 0-in-40 was bad luck at a low-but-nonzero rate rather than proof of a
+   gate (would mean the "minSkill: 70" inference there was likely wrong to begin with).
+
+Testing plan: keep fishing this skill-1 character in Shaded Dunes and watch whether Grouper
+catches stay steady as skill climbs further (supports a real low/no threshold) or get
+noticeably more frequent at higher skill (supports a continuous scaling curve, which would
+undercut Night Harbor's "70" too). Screenshots with the skill-up notification (like the one
+that caught this Grouper) are the most useful — they pin the exact skill at each catch,
+better than a post-stack inventory count.
+
+**Live-site status:** Grouper's `minSkill: 70` is now known to be wrong for at least one
+zone. Not yet reverted — waiting for more of this character's data before deciding whether
+to walk it back to unconfirmed, or to see if the trend clarifies things first.
+
+**Possible Fishing page restructure (2026-08-22, user's own idea, deliberately deferred until
+there's a bigger dataset):** if it turns out species/rarity/minSkill genuinely differ by
+zone (not just Night Harbor vs. Shaded Dunes location tags on the same shared roster, but
+actually different *effective* thresholds and rates per zone), the current one-row-per-
+species table structure — a single `minSkill`/`rarity` per species shared across all its
+zones — stops being able to represent that. Would need either per-zone rows/fields, or a
+rethink of how the Fishing page presents this. **Do not act on this until the dataset
+actually supports it** — right now it's one skill-1 character's first 6 bait in one zone,
+nowhere near enough to justify a structural change. Revisit once both zones (and ideally a
+third data point) have enough hauls to see whether the pattern holds.
