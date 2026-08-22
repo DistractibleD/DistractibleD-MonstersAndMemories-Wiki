@@ -24149,5 +24149,15 @@
     "tags": [],
     "needsInfo": true,
     "lastUpdated": "2026-08-22"
+  },
+  {
+    "name": "Thorn Sturgeon",
+    "slug": "thorn-sturgeon",
+    "type": "Misc",
+    "tags": [],
+    "description": "A large spiny fish valued for its caviar.",
+    "weight": 4.0,
+    "size": "Large",
+    "lastUpdated": "2026-08-22"
   }
 ]

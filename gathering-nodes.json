@@ -353,7 +353,7 @@
     "locations": ["Shallow Shoals"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "Only comes out during the day."
+    "note": "Only comes out during the day, according to the item's description."
   },
   {
     "name": "Deep Sea Devourer",

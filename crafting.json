@@ -7217,7 +7217,7 @@
     "weight": 0.0,
     "size": "Small",
     "components": [
-      { "item": "Fish", "quantity": 5 },
+      { "item": "Thorn Sturgeon", "quantity": 5 },
       { "item": "Annealed Vial", "quantity": 5 }
     ],
     "resultQuantity": 5,

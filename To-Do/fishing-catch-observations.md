@@ -96,12 +96,25 @@ note above). Only 3 rows shown, no Thorn Sturgeon row this time.
 - Grouper: 2
 - Thorn Sturgeon: 0
 
-Running totals (140 bait so far)
----------------------------------
-- Basa: 57
-- Whitefish: 109
-- Grouper: 19
-- Thorn Sturgeon: 2
+Stacks 8-10 (combined) — skill 95 → 114
+-----------------------------------------
+Bulk run as planned — user did 3 stacks without emptying bags, one screenshot at the end.
+Cumulative since stack 7's baseline (7 Basa/11 Whitefish/2 Grouper/0 Thorn Sturgeon): shown
+totals were 30 Basa (20+10)/31 Whitefish (20+11)/19 Grouper/2 Thorn Sturgeon.
+- Basa: 30 − 7 = 23
+- Whitefish: 31 − 11 = 20
+- Grouper: 19 − 2 = 17
+- Thorn Sturgeon: 2 − 0 = 2
+
+**This reaches 200 total bait (10 stacks) — the target the user set for a "decent dataset
+for Night Harbor."** Check with the user before assuming more Night Harbor stacks are coming.
+
+Running totals (200 bait total — target reached)
+---------------------------------------------------
+- Basa: 80
+- Whitefish: 129
+- Grouper: 36
+- Thorn Sturgeon: 4
 - Tattered Cloth Boots: 9 (frozen as of stack 3 — user has stopped tracking/keeping boots as
   of stack 5 onward, so this total won't grow further; minSkill promoted to 1 on the live
   site since it was caught since stack 1)
@@ -136,3 +149,14 @@ Observations so far
 - Tattered Cloth Boots: ~15% approximate drop rate per bait through stack 3, apparently flat
   across skill levels per secondhand reports from other players — unlike Grouper, nothing
   here suggested a skill gate. No longer tracked past stack 5, so this is the final figure.
+- Thorn Sturgeon caught a 3rd and 4th time in stacks 8-10 (skill 95-114) — 4 total now,
+  consistent with "Very Rare" and no reason to suspect a wrong minSkill.
+
+200-bait milestone (2026-08-22) — final tallies for this Night Harbor dataset
+-------------------------------------------------------------------------------
+Basa 80, Whitefish 129, Grouper 36, Thorn Sturgeon 4, Boots 9 (frozen at stack 3).
+Whitefish:Basa ratio narrowed from ~3:1 in the earliest stacks to ~1.6:1 by the end — Basa's
+relative share grew throughout, continuing to support "just less common," not skill-gated.
+Both currently tagged Common/Uncommon on the live site; worth a look at whether that gap
+still feels right now that the ratio's this close, though rarity tagging is ultimately a
+judgment call for the site owner, not something to change unilaterally from this data alone.
