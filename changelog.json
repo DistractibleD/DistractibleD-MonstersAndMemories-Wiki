@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-22T17:51", "summary": "Refreshed 4 Carpentry recipes' difficulty from a higher-skill crafting window, and confirmed Basa/Whitefish/Grouper are also caught in Shaded Dunes" },
   { "timestamp": "2026-08-22T15:47", "summary": "Added more Carpentry recipes (Wooden Bed, Nightstand, Animal Cart) and refreshed difficulty colors at higher skill; added faction and loot info for a lawbreaker in Night Harbor" },
   { "timestamp": "2026-08-22T15:32", "summary": "Added Thorn Sturgeon as an item and linked it into the Clear Fish Oil recipe, and clarified the Deep Sea Devourer's day-only note" },
   { "timestamp": "2026-08-22T10:57", "summary": "Confirmed how to upgrade Rusty weapons to Tarnished (sharpening stone at an Anvil), added to the Blacksmithing note" },

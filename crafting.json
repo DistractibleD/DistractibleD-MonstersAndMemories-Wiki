@@ -5780,7 +5780,7 @@
     ],
     "difficultyColor": "Green",
     "difficultyText": "This recipe is trivial to you.",
-    "observedAtSkill": 15,
+    "observedAtSkill": 22,
     "recipeSkillLevel": 15,
     "lastUpdated": "2026-08-22"
   },
@@ -5796,9 +5796,9 @@
       { "item": "Wood Board", "quantity": 4 },
       { "item": "Wood Panel", "quantity": 2 }
     ],
-    "difficultyColor": "Dark Blue",
-    "difficultyText": "Your skills make this a moderate task.",
-    "observedAtSkill": 15,
+    "difficultyColor": "Light Blue",
+    "difficultyText": "Your skills make this a simple task.",
+    "observedAtSkill": 22,
     "lastUpdated": "2026-08-22"
   },
   {
@@ -5813,9 +5813,9 @@
       { "item": "Wood Panel", "quantity": 6 },
       { "item": "Wood Frame", "quantity": 1 }
     ],
-    "difficultyColor": "White",
-    "difficultyText": "Your skills make this a complex task.",
-    "observedAtSkill": 15,
+    "difficultyColor": "Dark Blue",
+    "difficultyText": "Your skills make this a moderate task.",
+    "observedAtSkill": 22,
     "lastUpdated": "2026-08-22"
   },
   {
@@ -5831,9 +5831,9 @@
       { "item": "Wood Panel", "quantity": 2 },
       { "item": "Wood Board", "quantity": 2 }
     ],
-    "difficultyColor": "Orange",
-    "difficultyText": "Your skills make this a herculean task.",
-    "observedAtSkill": 15,
+    "difficultyColor": "Yellow",
+    "difficultyText": "Your skills make this a daunting task.",
+    "observedAtSkill": 22,
     "lastUpdated": "2026-08-22"
   },
   {
@@ -5843,7 +5843,7 @@
     "listOrder": 9,
     "difficultyColor": "Red",
     "difficultyText": "You will require all your skills to craft this.",
-    "observedAtSkill": 15,
+    "observedAtSkill": 22,
     "lastUpdated": "2026-08-22"
   },
   {
@@ -5853,7 +5853,7 @@
     "listOrder": 10,
     "difficultyColor": "Red",
     "difficultyText": "You will require all your skills to craft this.",
-    "observedAtSkill": 15,
+    "observedAtSkill": 22,
     "lastUpdated": "2026-08-22"
   },
   {
@@ -5905,7 +5905,7 @@
     "effect": "A display box for your wares. Anyone can view it, but only you can open it. Right-click to place.",
     "difficultyColor": "Red",
     "difficultyText": "You will require all your skills to craft this.",
-    "observedAtSkill": 15,
+    "observedAtSkill": 22,
     "lastUpdated": "2026-08-22"
   },
   {
@@ -5920,9 +5920,9 @@
       { "item": "Wood Board", "quantity": 3 },
       { "item": "Wood Panel", "quantity": 3 }
     ],
-    "difficultyColor": "Orange",
-    "difficultyText": "Your skills make this a herculean task.",
-    "observedAtSkill": 15,
+    "difficultyColor": "Yellow",
+    "difficultyText": "Your skills make this a daunting task.",
+    "observedAtSkill": 22,
     "lastUpdated": "2026-08-22"
   },
   {

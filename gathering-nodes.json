@@ -265,7 +265,7 @@
     "tradeskill": "Fishing",
     "minSkill": 1,
     "results": ["Whitefish"],
-    "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
+    "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals", "Shaded Dunes"],
     "rarity": "Common",
     "baitRequired": "?",
     "note": "The most common fish caught in Night Harbor."
@@ -276,7 +276,7 @@
     "tradeskill": "Fishing",
     "minSkill": 1,
     "results": ["Basa"],
-    "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
+    "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals", "Shaded Dunes"],
     "rarity": "Uncommon",
     "baitRequired": "?"
   },
@@ -286,7 +286,7 @@
     "tradeskill": "Fishing",
     "minSkill": 70,
     "results": ["Grouper"],
-    "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
+    "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals", "Shaded Dunes"],
     "rarity": "Uncommon",
     "baitRequired": "?"
   },
