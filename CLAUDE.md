@@ -585,6 +585,14 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   67, first confirmed catch at skill 70") — earns its place, since none of that is visible
   from the bare `?` alone. The test: does this note say more than the column already says on
   its own? If not, delete it; if yes, keep it.
+  **Once a value is actually set (not `?`), don't hedge about it in the note either**
+  (2026-08-22, user's own follow-up: "if we 'set a min skill' we are happy with that until we
+  get proven wrong") — a note like "inferred from player testing, not directly confirmed"
+  attached to a real `minSkill` value undermines the number for no visitor benefit; either
+  the value is trusted enough to display plainly, or it isn't set at all. The uncertainty
+  framing ("first encountered at skill 77", "no catches below 67") belongs only while the
+  field is genuinely still `?` — the moment a real value gets set (Grouper's `minSkill: 70`),
+  drop the hedge note entirely rather than keep both.
 - **Optional `image` + `needsInfo`:** node picture at `images/gathering/<slug>.jpg`, same
   convention as item/recipe screenshots. Shows as a clickable thumbnail
   (`.gathering-node-thumb`). `needsInfo: true` = same meaning as items/crafting: confirmed

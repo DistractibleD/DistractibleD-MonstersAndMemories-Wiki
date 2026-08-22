@@ -288,8 +288,7 @@
     "results": ["Grouper"],
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals"],
     "rarity": "Uncommon",
-    "baitRequired": "?",
-    "note": "Minimum skill inferred from player testing (not directly confirmed) — no catches reported below skill 67, consistent catches from skill 70 on."
+    "baitRequired": "?"
   },
   {
     "name": "Bay Crab",
@@ -304,11 +303,11 @@
     "name": "Thorn Sturgeon",
     "slug": "thorn-sturgeon",
     "tradeskill": "Fishing",
-    "minSkill": 30,
     "results": ["Thorn Sturgeon"],
     "locations": ["Night Harbor", "Evershade Weald", "Keeper's Bight"],
     "rarity": "Very Rare",
-    "baitRequired": "?"
+    "baitRequired": "?",
+    "note": "First encountered at fishing skill 77."
   },
   {
     "name": "Redfin Pike",
@@ -410,7 +409,7 @@
     "results": ["Tattered Cloth Boots"],
     "locations": ["Night Harbor"],
     "rarity": "Uncommon",
-    "note": "An equipment/junk catch rather than a fish species — not a monster drop. Rate appears similar regardless of fishing skill."
+    "note": "An uncommon junk catch rather than a fish. Rate appears similar regardless of fishing skill."
   },
   {
     "name": "Lionleaf",

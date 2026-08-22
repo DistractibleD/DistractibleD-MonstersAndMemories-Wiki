@@ -13,6 +13,25 @@ same spirit as `crafting-skill-estimates.md` for tradeskill recipes. Only promot
 to the live site (rarity tag, a genuinely useful note) once it's confirmed enough to be
 worth a visitor's time — see CLAUDE.md for what counts.
 
+**Screenshot conventions, updated 2026-08-22 (stacks 5-6 cumulative, stack 7 fresh, stacks
+8-10 will be bulk-cumulative):** stacks 5 and 6 were cumulative (bags not emptied between
+them) — a stack's own catch was the difference from the previous cumulative total. Before
+stack 7, the user emptied their bags and did one fresh stack (7 Basa/11 Whitefish/2
+Grouper/0 Thorn Sturgeon). **The user then said they will NOT empty bags again and will do 3
+more stacks (8, 9, 10) in bulk before the next screenshot** — targeting 200 total bait as a
+"decent dataset for Night Harbor" (10 stacks × 20). So the next screenshot should be read as
+cumulative since stack 7's baseline, covering stacks 8-10 *combined* (not per-stack) —
+subtract stack 7's totals (7/11/2/0) from whatever the next screenshot shows to get the
+8-10 combined catch. After that, 200 bait may be treated as the end of this Night Harbor
+dataset (check chat for confirmation before assuming more stacks are coming). Fish are kept
+in fixed inventory rows regardless of whether bags are emptied, top to bottom: Basa,
+Whitefish, Grouper (Thorn
+Sturgeon joined as a 4th row once it started appearing, stack 6 onward) — this resolves the
+shared-icon ambiguity (Basa/Grouper share one icon, and Thorn Sturgeon turns out to share
+Whitefish's icon) without having to ask each time, as long as the row position is known.
+**Boots are no longer tracked** — the user discards them on the spot, so the running total
+below is frozen and future hauls won't include a boot count.
+
 Stack 1 — skill 0 → 42
 -----------------------
 - Basa: 5
@@ -57,21 +76,41 @@ Basa/23 Whitefish/5 Grouper, so the stack-5-only catch is the difference from st
 - Thorn Sturgeon: 0
 - Tattered Cloth Boots: 0
 
-Running totals (100 bait so far)
+Stack 6 — skill 84 → 92
+------------------------
+Cumulative screenshot again — totals shown were 21 Basa (20+1, two stacks)/27 Whitefish
+(20+7)/11 Grouper/1 Thorn Sturgeon, so the stack-6-only catch is the difference from stack
+5's cumulative 12/23/5/0. Thorn Sturgeon's second-ever catch, sharing Whitefish's icon —
+user identified it by chat (bottom row, a new species) rather than the picture alone.
+- Basa: 21 − 12 = 9
+- Whitefish: 27 − 23 = 4
+- Grouper: 11 − 5 = 6
+- Thorn Sturgeon: 1 − 0 = 1 (second-ever catch, first was stack 3 at skill 77)
+
+Stack 7 — skill 92 → 95
+------------------------
+Bags emptied before this stack (back to a fresh read, not cumulative — see the conventions
+note above). Only 3 rows shown, no Thorn Sturgeon row this time.
+- Basa: 7
+- Whitefish: 11
+- Grouper: 2
+- Thorn Sturgeon: 0
+
+Running totals (140 bait so far)
 ---------------------------------
-- Basa: 41
-- Whitefish: 94
-- Grouper: 11
-- Thorn Sturgeon: 1
-- Tattered Cloth Boots: 9 (user's own stated total as of stack 3 — minSkill promoted to 1 on
-  the live site since it's been caught since stack 1)
+- Basa: 57
+- Whitefish: 109
+- Grouper: 19
+- Thorn Sturgeon: 2
+- Tattered Cloth Boots: 9 (frozen as of stack 3 — user has stopped tracking/keeping boots as
+  of stack 5 onward, so this total won't grow further; minSkill promoted to 1 on the live
+  site since it was caught since stack 1)
 
 Approximate Tattered Cloth Boots drop rate
 -------------------------------------------
 9 boots across 60 bait through stack 3 ≈ **15% per bait** (see stack 3 for caveats on this
-being an approximation). Stacks 4 and 5 both caught zero — two stacks running now, worth
-watching whether this is just variance or an actual slowdown at higher skill (would
-contradict the "flat across skill" secondhand report). Not enough yet to act on.
+being an approximation). This is now a fixed data point — boots aren't tracked past stack 5,
+so this rate won't be refined further.
 
 Observations so far
 --------------------
@@ -80,17 +119,20 @@ Observations so far
   less common than Whitefish" rather than "skill-gated rarer under 50", matching the user's
   own revised suspicion.
 - Grouper first appeared in stack 3 (skill 67-79, 6 catches) and has appeared in every stack
-  since (3 in stack 4, 2 in stack 5) — three stacks in a row now, despite 40 bait at skill
-  0-67 catching none. Reinforces that it's reliably catchable past ~70, not just a fluke.
-  Thorn Sturgeon
-  only appeared once so far (stack 3, skill 77); its own "Very Rare" tag already explains an
-  irregular catch pattern — no update needed, still minSkill 30.
-  Grouper's minSkill was promoted to the live site 2026-08-21: removed the source table's
-  `minSkill: 1` (confirmed wrong). Updated again 2026-08-22 to `minSkill: 70` outright — the
-  bracket (67, 70] only has one multiple-of-5 candidate, and every other confirmed skill
-  threshold on this site lands on a multiple of 5, so 70 is a confident inference even though
-  it's not a directly-confirmed number from a card/tooltip. Noted as inferred on the live
-  site rather than presented as a flat fact.
-- Tattered Cloth Boots: ~15% approximate drop rate per bait, apparently flat across skill
-  levels per secondhand reports from other players — unlike Grouper, nothing here suggests a
-  skill gate.
+  since (3 in stack 4, 2 in stack 5, 6 in stack 6) — four stacks in a row now, despite 40
+  bait at skill 0-67 catching none. Reinforces that it's reliably catchable past ~70, not
+  just a fluke. Grouper's minSkill was promoted to the live site 2026-08-21: removed the
+  source table's `minSkill: 1` (confirmed wrong). Updated again 2026-08-22 to `minSkill: 70`
+  outright — the bracket (67, 70] only has one multiple-of-5 candidate, and every other
+  confirmed skill threshold on this site lands on a multiple of 5, so 70 is a confident
+  inference even though it's not a directly-confirmed number from a card/tooltip. Noted as
+  inferred on the live site rather than presented as a flat fact.
+- Thorn Sturgeon has now been caught twice (stack 3 at skill 77, stack 6 somewhere in
+  84-92), and stayed at 2 through stack 7 — its own "Very Rare" tag already explains the
+  gaps. 2026-08-22: removed the source table's unconfirmed `minSkill: 30` outright (unlike
+  Grouper, we don't have a clean not-caught-below-X bracket to infer a real number from —
+  only 2 total catches, both well above 30, isn't enough to say where the true floor is) and
+  replaced it with a plain note that it was first encountered at skill 77.
+- Tattered Cloth Boots: ~15% approximate drop rate per bait through stack 3, apparently flat
+  across skill levels per secondhand reports from other players — unlike Grouper, nothing
+  here suggested a skill gate. No longer tracked past stack 5, so this is the final figure.
