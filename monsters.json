@@ -5282,7 +5282,9 @@
       { "item": "Lemon" },
       { "item": "Bronze Scraps" },
       { "item": "Hide Scraps" },
-      { "item": "Flawed Ruby" }
+      { "item": "Flawed Ruby" },
+      { "item": "Tomato" },
+      { "item": "Mushroom" }
     ],
     "coinDrops": [
       { "copper": 59 },
@@ -5297,12 +5299,21 @@
       { "copper": 54 },
       { "copper": 77 },
       { "copper": 63 },
-      { "copper": 84 }
+      { "copper": 84 },
+      { "copper": 67 }
     ],
     "conObservations": [
-      { "playerLevel": 30, "con": "Green" }
+      { "playerLevel": 30, "con": "Green" },
+      { "playerLevel": 32, "con": "Green" }
     ],
-    "lastUpdated": "2026-08-11"
+    "factionEffects": [
+      { "faction": "Residents of the Bends", "effect": "negative" },
+      { "faction": "Bends Garrison", "effect": "positive" },
+      { "faction": "Serpent Sashes", "effect": "positive" },
+      { "faction": "Ten Hooks", "effect": "negative" },
+      { "faction": "Waterdogs", "effect": "positive" }
+    ],
+    "lastUpdated": "2026-08-22"
   },
   {
     "name": "an enforcer",

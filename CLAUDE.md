@@ -808,7 +808,7 @@ most common resulting hex.
 | Green (Trivial) | `#45FC00` |
 | Light Blue | `#00FCDF` |
 | Dark Blue | `#326EFF` |
-| White | *(not sampled yet)* |
+| White | `#FFFFFF` |
 | Yellow | `#FCE800` |
 | Orange | `#E35300` |
 | Red | `#FF1C1C` |

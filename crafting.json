@@ -5778,11 +5778,11 @@
       { "item": "Wood Board", "quantity": 2 },
       { "item": "Wood Panel", "quantity": 1 }
     ],
-    "difficultyColor": "Dark Blue",
-    "difficultyText": "Your skills make this a moderate task.",
-    "observedAtSkill": 5,
+    "difficultyColor": "Green",
+    "difficultyText": "This recipe is trivial to you.",
+    "observedAtSkill": 15,
     "recipeSkillLevel": 15,
-    "lastUpdated": "2026-08-21"
+    "lastUpdated": "2026-08-22"
   },
   {
     "name": "Wooden Chair",
@@ -5796,10 +5796,10 @@
       { "item": "Wood Board", "quantity": 4 },
       { "item": "Wood Panel", "quantity": 2 }
     ],
-    "difficultyColor": "Yellow",
-    "difficultyText": "Your skills make this a daunting task.",
-    "observedAtSkill": 5,
-    "lastUpdated": "2026-08-21"
+    "difficultyColor": "Dark Blue",
+    "difficultyText": "Your skills make this a moderate task.",
+    "observedAtSkill": 15,
+    "lastUpdated": "2026-08-22"
   },
   {
     "name": "Wooden Storage Crate",
@@ -5813,10 +5813,10 @@
       { "item": "Wood Panel", "quantity": 6 },
       { "item": "Wood Frame", "quantity": 1 }
     ],
-    "difficultyColor": "Orange",
-    "difficultyText": "Your skills make this a herculean task.",
-    "observedAtSkill": 5,
-    "lastUpdated": "2026-08-21"
+    "difficultyColor": "White",
+    "difficultyText": "Your skills make this a complex task.",
+    "observedAtSkill": 15,
+    "lastUpdated": "2026-08-22"
   },
   {
     "name": "Wooden Hand Cart",
@@ -5831,10 +5831,40 @@
       { "item": "Wood Panel", "quantity": 2 },
       { "item": "Wood Board", "quantity": 2 }
     ],
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 15,
+    "lastUpdated": "2026-08-22"
+  },
+  {
+    "name": "Wooden Bed",
+    "slug": "wooden-bed",
+    "tradeskill": "Carpentry",
+    "listOrder": 9,
     "difficultyColor": "Red",
     "difficultyText": "You will require all your skills to craft this.",
-    "observedAtSkill": 5,
-    "lastUpdated": "2026-08-21"
+    "observedAtSkill": 15,
+    "lastUpdated": "2026-08-22"
+  },
+  {
+    "name": "Wooden Nightstand",
+    "slug": "wooden-nightstand",
+    "tradeskill": "Carpentry",
+    "listOrder": 10,
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 15,
+    "lastUpdated": "2026-08-22"
+  },
+  {
+    "name": "Wooden Animal Cart",
+    "slug": "wooden-animal-cart",
+    "tradeskill": "Carpentry",
+    "listOrder": 11,
+    "difficultyColor": "Red",
+    "difficultyText": "You will require all your skills to craft this.",
+    "observedAtSkill": 15,
+    "lastUpdated": "2026-08-22"
   },
   {
     "name": "Ironbark Frame",
@@ -5875,8 +5905,8 @@
     "effect": "A display box for your wares. Anyone can view it, but only you can open it. Right-click to place.",
     "difficultyColor": "Red",
     "difficultyText": "You will require all your skills to craft this.",
-    "observedAtSkill": 5,
-    "lastUpdated": "2026-08-21"
+    "observedAtSkill": 15,
+    "lastUpdated": "2026-08-22"
   },
   {
     "name": "Wooden Table",
@@ -5890,10 +5920,10 @@
       { "item": "Wood Board", "quantity": 3 },
       { "item": "Wood Panel", "quantity": 3 }
     ],
-    "difficultyColor": "Red",
-    "difficultyText": "You will require all your skills to craft this.",
-    "observedAtSkill": 5,
-    "lastUpdated": "2026-08-21"
+    "difficultyColor": "Orange",
+    "difficultyText": "Your skills make this a herculean task.",
+    "observedAtSkill": 15,
+    "lastUpdated": "2026-08-22"
   },
   {
     "name": "Cooked Ashira Meat",
