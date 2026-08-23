@@ -30,6 +30,97 @@ contradict that yet.
 Distracted's own stack 1). Still no Grouper. Watching for whether it stays absent past
 Distracted's own skill-67 mark.
 
+**Third catch — breaks the pattern: skill 53, a Grouper.** This directly contradicts
+Distracted's own Night Harbor history (0 Grouper across 40 bait at skill 0-67 there) and is
+well below even the Shaded-Dunes-derived headline `minSkill: 30` currently on the live site.
+This is exactly the result the control test was designed to check for — it strongly suggests
+Distracted's original "Grouper locked out until ~70 in Night Harbor" pattern was itself just
+one character's noisy run, not a real Night-Harbor-specific threshold. Combined with
+Sungreet Strand and Shaded Dunes both showing Grouper reachable well under 70, Night
+Harbor's "70" now looks like the outlier that needs explaining, not the other zones' lower
+numbers. Worth revisiting the live site's Grouper note (currently says Night Harbor's is
+"much higher (70)") once more of this stack is in — this may need walking back rather than
+just re-flipping the headline number again.
+
+**Environmental conditions, noted by the user for this Fishdata session (2026-08-23):**
+night time, raining. User's own hedge: probably doesn't matter for any of the species seen
+so far, but worth having on record given Sunscale Skimmer is already confirmed day-only
+(Shallow Shoals) — if a pattern involving time-of-day/weather ever shows up, this session's
+conditions are already captured rather than lost. No action taken on this alone; just a
+data point to have if it becomes relevant later.
+
+Fishdata — Stack 1 complete, skill 1 → 53 (fresh, not cumulative)
+------------------------------------------------------------------
+Row order confirmed by the user, same convention as Distracted: Basa, Whitefish, Grouper.
+Final totals:
+- Basa: 3
+- Whitefish: 14
+- Grouper: 1
+
+The single Grouper here is the same skill-53 catch already logged above (third catch of the
+stack) — no additional Groupers after it. So this stack's real signal is just the one early
+catch, not a growing trend yet. Still a clean break from Distracted's Night Harbor history:
+Distracted's own first ~2.5 stacks (0-67, roughly 50+ bait) caught zero Grouper, while
+Fishdata got one within a single 20-bait stack. One character, one stack — not enough to
+redraw Night Harbor's Grouper minSkill on its own, but a real data point pointing away from
+"~70" as a hard floor. Keep fishing Fishdata to see whether more Groupers show up at
+similarly low skill, which would settle this more firmly.
+
+Running totals (Fishdata, 1 stack, 20 bait, skill 1→53)
+------------------------------------------------------------
+- Basa: 3
+- Whitefish: 14
+- Grouper: 1
+
+Fishdata — Stack 2 complete, skill 53 → 62 (cumulative, not cleared)
+-----------------------------------------------------------------------
+Shown totals: 9 Basa, 24 Whitefish (20+4), 4 Grouper. Stack-2-only catch is the difference
+from stack 1's cumulative 3/14/1:
+- Basa: 9 − 3 = 6
+- Whitefish: 24 − 14 = 10
+- Grouper: 4 − 1 = 3
+
+**3 more Grouper this stack, at skill 53-62** — not a one-off fluke catch, Grouper is
+genuinely present and repeatable at this skill range for Fishdata. This is now a real
+pattern (4 Grouper total across 2 stacks, skill 1-62), not just the single early catch from
+before. Strengthens the case that Distracted's original "locked out until ~70" result was
+that character's own noisy run rather than a real Night Harbor floor.
+
+Running totals (Fishdata, 2 stacks, 40 bait, skill 1→62)
+--------------------------------------------------------------
+- Basa: 9
+- Whitefish: 24
+- Grouper: 4
+
+**User's theory (2026-08-23): the real minSkill is 30 everywhere (matching the original
+external-wiki claim and the independently-confirmed Shaded Dunes value), and Night Harbor
+just has a lower effective catch rate at low skill on top of the same floor** — not a
+different, higher minSkill. Plausible and parsimonious, but not yet confirmed: Fishdata's
+first Night Harbor Grouper was at skill 53, not close to 30, so the data only tells us
+Night Harbor's real floor is *somewhere ≤53* — it's equally consistent with "floor 30, rare
+30-53 here" and "floor genuinely somewhere in the 30s-50s, just not as extreme as 70."
+
+**Multiples-of-5 tightening (user's own follow-up, same day):** since every confirmed skill
+threshold on this site lands on a multiple of 5, a catch at 53 rules out any threshold of 55
+or higher — the real Night Harbor floor must be **50 or lower**. Doesn't pin the exact value
+(still consistent with 30, 35, 40, 45, or 50), but narrows the upper bound from "≤53" to a
+clean "≤50."
+
+Would need either an earlier catch (closer to 30) or a lot of zero-catch bait spent
+specifically in the 30-50 range to pin the exact value. Live site updated to reflect what
+*is* confirmed (70 is dead, real floor ≤50) without asserting the unconfirmed part (that
+Night Harbor's floor is exactly 30) — Grouper's note now says the Night Harbor floor is "50
+or lower (a catch was confirmed at skill 53)."
+
+**New discovery, mid-stack 3: Soggy Marble Rye, skill 64.** A food item ("This is a light
+snack.") caught while fishing in Night Harbor — same "non-fish junk catch" category as
+Tattered Cloth Boots, but food instead of equipment. Genuinely new to the wiki (didn't exist
+anywhere). Added both an items.json card (type Food, weight 0.1/Small, no stats/effect shown
+on the card) and a gathering-nodes.json entry mirroring the boots' pattern, with a note
+that it was first confirmed at skill 64 — not asserting that as a minSkill, just the one
+observation so far, same caution as boots got before enough data came in to set minSkill 1
+there.
+
 Purpose: watch for patterns in relative catch rarity / effective skill gates that the
 fan-wiki source table's numbers (`minSkill`, `rarity`, `baitRequired`) may have gotten wrong,
 same spirit as `crafting-skill-estimates.md` for tradeskill recipes. Only promote a finding

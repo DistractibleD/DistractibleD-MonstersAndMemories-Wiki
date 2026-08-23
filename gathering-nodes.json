@@ -289,7 +289,7 @@
     "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals", "Shaded Dunes", "Sungreet Strand"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "The minimum skill of 30 is based on Shaded Dunes testing — in Night Harbor it's much higher (70)."
+    "note": "In Night Harbor this species seems much harder to catch at low skill — testing puts the effective floor there at 50 or lower (a catch was confirmed at skill 53), well below what was once assumed."
   },
   {
     "name": "Bay Crab",
@@ -419,6 +419,14 @@
     "locations": ["Night Harbor"],
     "rarity": "Uncommon",
     "note": "A junk drop."
+  },
+  {
+    "name": "Soggy Marble Rye",
+    "slug": "soggy-marble-rye-fishing-catch",
+    "tradeskill": "Fishing",
+    "results": ["Soggy Marble Rye"],
+    "locations": ["Night Harbor"],
+    "note": "A food item caught while fishing, not a fish species. First confirmed at skill 64."
   },
   {
     "name": "Lionleaf",

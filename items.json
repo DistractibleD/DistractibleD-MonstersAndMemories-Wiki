@@ -13286,7 +13286,12 @@
     "skill": "Slashing",
     "stats": { "STR": 7, "STA": 3, "AGI": 2, "DEX": 3, "HP": 10 },
     "effect": "Mana Burn II (Chance On Hit. Level: 30)",
-    "description": "A massive greatsword forged from both bronze and copper, whose slow, crushing arc ends every argument with each cleaving stroke."
+    "description": "A massive greatsword forged from both bronze and copper, whose slow, crushing arc ends every argument with each cleaving stroke.",
+    "weight": 17.0,
+    "size": "Large",
+    "classes": ["ARC", "BRD", "BST", "FTR", "INQ", "PAL", "RNG", "SHD", "SPB"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-23"
   },
   {
     "name": "Vakraar's Dustveil Hoop",
@@ -24192,6 +24197,18 @@
     "description": "A brightly colored pike with scarlet gills.",
     "weight": 1.0,
     "size": "Small",
+    "lastUpdated": "2026-08-23"
+  },
+  {
+    "name": "Soggy Marble Rye",
+    "slug": "soggy-marble-rye",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a light snack.",
+    "weight": 0.1,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
     "lastUpdated": "2026-08-23"
   }
 ]
