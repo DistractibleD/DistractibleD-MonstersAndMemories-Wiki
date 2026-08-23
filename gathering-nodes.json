@@ -276,7 +276,7 @@
     "tradeskill": "Fishing",
     "minSkill": 1,
     "results": ["Basa"],
-    "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals", "Shaded Dunes"],
+    "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals", "Shaded Dunes", "Sungreet Strand"],
     "rarity": "Uncommon",
     "baitRequired": "?"
   },
@@ -284,12 +284,12 @@
     "name": "Grouper",
     "slug": "grouper",
     "tradeskill": "Fishing",
-    "minSkill": 70,
+    "minSkill": 30,
     "results": ["Grouper"],
-    "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals", "Shaded Dunes"],
+    "locations": ["Night Harbor", "Evershade Weald", "Shallow Shoals", "Shaded Dunes", "Sungreet Strand"],
     "rarity": "Uncommon",
     "baitRequired": "?",
-    "note": "The minimum skill of 70 is based on Night Harbor testing — in Shaded Dunes it's been caught at a much lower skill (30)."
+    "note": "The minimum skill of 30 is based on Shaded Dunes testing — in Night Harbor it's much higher (70)."
   },
   {
     "name": "Bay Crab",
@@ -315,7 +315,7 @@
     "slug": "redfin-pike",
     "tradeskill": "Fishing",
     "results": ["Redfin Pike"],
-    "locations": ["Evershade Weald", "Keeper's Bight"],
+    "locations": ["Evershade Weald", "Keeper's Bight", "Vale of Zintar"],
     "rarity": "Very Rare",
     "baitRequired": "?",
     "note": "Not yet confirmed in Night Harbor despite extensive fishing there."
@@ -325,7 +325,7 @@
     "slug": "river-trout",
     "tradeskill": "Fishing",
     "results": ["River Trout"],
-    "locations": ["Keeper's Bight"],
+    "locations": ["Keeper's Bight", "Sungreet Strand"],
     "rarity": "Uncommon",
     "baitRequired": "?"
   },
@@ -400,6 +400,14 @@
     "results": ["Crimsonscale Carp"],
     "locations": ["Vale of Zintar"],
     "rarity": "Rare",
+    "baitRequired": "?"
+  },
+  {
+    "name": "Glimmerscale Herring",
+    "slug": "glimmerscale-herring",
+    "tradeskill": "Fishing",
+    "results": ["Glimmerscale Herring"],
+    "locations": ["Vale of Zintar"],
     "baitRequired": "?"
   },
   {

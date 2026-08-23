@@ -24159,5 +24159,39 @@
     "weight": 4.0,
     "size": "Large",
     "lastUpdated": "2026-08-22"
+  },
+  {
+    "name": "Crab Cakes",
+    "slug": "crab-cakes",
+    "type": "Food",
+    "tags": [],
+    "description": "This is a substantial meal.",
+    "effect": "Crab Cakes (On Click. Any Slot. Cast Time: Instant. Level: 1)",
+    "stats": { "AGI": 1, "INT": 5 },
+    "weight": 0.25,
+    "size": "Small",
+    "classes": ["ALL"],
+    "race": ["ALL"],
+    "lastUpdated": "2026-08-23"
+  },
+  {
+    "name": "Glimmerscale Herring",
+    "slug": "glimmerscale-herring",
+    "type": "Misc",
+    "tags": [],
+    "description": "A fish with gleaming golden scales, typically found in clear water.",
+    "weight": 1.0,
+    "size": "Small",
+    "lastUpdated": "2026-08-23"
+  },
+  {
+    "name": "Redfin Pike",
+    "slug": "redfin-pike",
+    "type": "Misc",
+    "tags": [],
+    "description": "A brightly colored pike with scarlet gills.",
+    "weight": 1.0,
+    "size": "Small",
+    "lastUpdated": "2026-08-23"
   }
 ]

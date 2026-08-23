@@ -1,11 +1,34 @@
 Fishing catch-rate observations (Night Harbor, Grub bait)
 =========================================================
 
-Raw per-stack haul data from the user's own fishing sessions, all in Night Harbor (at the
-harbor), all using 20x Grub bait per stack, same fishing rod throughout. Tracked here rather
-than as `note` text on gathering-nodes.json entries — those notes render live on the public
-Gathering page, and running research tallies like this aren't visitor-facing info (see
-CLAUDE.md's "note is visitor-facing content" rule). This file is not loaded by the site.
+Character: **Distracted** (the user's main/high-skill fisherman, 114+ by the end of this
+dataset), plus **Fishdata** (4th character overall, see below). Raw per-stack haul data from
+the user's own fishing sessions, all in Night Harbor (at the harbor), all using 20x Grub
+bait per stack, same fishing rod throughout. Tracked here rather than as `note` text on
+gathering-nodes.json entries — those notes render live on the public Gathering page, and
+running research tallies like this aren't visitor-facing info (see CLAUDE.md's "note is
+visitor-facing content" rule). This file is not loaded by the site.
+
+**2026-08-23 — Fishdata, a 4th character, skill 1 in Night Harbor:** before rolling out any
+Fishing page changes from the Shaded Dunes/Sungreet Strand findings (per-zone minSkill,
+zone-cap note — see the Sungreet Strand file for the pending recommendation), the user wants
+one more control test: this brand-new skill-1 character fishing in Night Harbor, to see
+whether Grouper stays locked out until ~skill 70 the same way it did for Distracted's own
+leveling history here, or whether that was itself just one noisy run. Expect this to reuse
+Night Harbor's established conventions (row order Basa/Whitefish/Grouper/Thorn Sturgeon)
+unless told otherwise, but confirm rather than assume, same caution as every other new
+character.
+
+**First catch:** skill 15, a **Whitefish** — unsurprising given Whitefish's minSkill: 1 and
+"most common fish in Night Harbor" note; consistent with Distracted's own early Night Harbor
+stacks, which also caught Whitefish/Basa freely from very low skill. The real test is
+whether Grouper stays absent through a much longer stretch (Distracted's own history: 0
+Grouper across 40 bait at skill 0-67) — one early Whitefish catch doesn't confirm or
+contradict that yet.
+
+**Second catch:** skill 28, a **Basa** — also expected (Basa: minSkill 1, present since
+Distracted's own stack 1). Still no Grouper. Watching for whether it stays absent past
+Distracted's own skill-67 mark.
 
 Purpose: watch for patterns in relative catch rarity / effective skill gates that the
 fan-wiki source table's numbers (`minSkill`, `rarity`, `baitRequired`) may have gotten wrong,
