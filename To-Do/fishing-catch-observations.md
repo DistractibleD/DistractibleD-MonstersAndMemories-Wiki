@@ -121,6 +121,53 @@ that it was first confirmed at skill 64 — not asserting that as a minSkill, ju
 observation so far, same caution as boots got before enough data came in to set minSkill 1
 there.
 
+Fishdata — Stack 3 complete, skill 62 → 67 (fresh, bags cleared)
+---------------------------------------------------------------------
+Totals dropped below the previous cumulative total (Whitefish 24 → 7), confirming bags were
+cleared before this stack even though the user didn't say so explicitly — inferred from the
+numbers themselves (a cumulative total can't decrease). Same row order as before.
+- Basa: 8
+- Whitefish: 7
+- Grouper: 5
+
+**5 more Grouper**, now 9 total across 3 stacks (60 bait) for Fishdata, all at skill ≤67 —
+continuing to firmly contradict the old "locked out until 70" result. Also notable: this is
+the first stack where Grouper's raw count (5) isn't dramatically behind Whitefish's (7) —
+close to even, unlike Distracted's early Night Harbor stacks where Whitefish dominated by a
+wide margin. Small sample, but worth watching whether this holds.
+
+Running totals (Fishdata, 3 stacks, 60 bait, skill 1→67)
+----------------------------------------------------------------
+- Basa: 17
+- Whitefish: 31
+- Grouper: 9
+
+Fishdata — Stack 4 complete, skill 67 → 70 (cumulative again, not cleared)
+-------------------------------------------------------------------------------
+Shown totals: 14 Basa, 17 Whitefish, 8 Grouper — all higher than stack 3's fresh totals, so
+cumulative this time (39 total would be impossible for a fresh 20-bait stack). Stack-4-only
+catch is the difference from stack 3's 8/7/5:
+- Basa: 14 − 8 = 6
+- Whitefish: 17 − 7 = 10
+- Grouper: 8 − 5 = 3
+
+Skill ended at exactly 70 — same number as Sungreet Strand's confirmed cap. Worth watching
+whether Night Harbor also plateaus here, or keeps climbing past it (Distracted's own history
+already shows Night Harbor skill climbing well past 70, so a genuine plateau here would be
+surprising — more likely just passing through on the way up, but flagging in case).
+
+Running totals (Fishdata, 4 stacks, 80 bait, skill 1→70)
+----------------------------------------------------------------
+- Basa: 23
+- Whitefish: 41
+- Grouper: 12
+
+**First-ever Thorn Sturgeon for Fishdata, skill 73** (mid-stack 5, after clearing inventory
+again per the last message). Consistent with Thorn Sturgeon's "Very Rare" tag and its own
+existing note (first encountered at skill 77 for Distracted) — a skill-73 first catch is in
+the same ballpark, not a contradiction like Grouper's old "70" was. No live-site change
+needed from this alone.
+
 Purpose: watch for patterns in relative catch rarity / effective skill gates that the
 fan-wiki source table's numbers (`minSkill`, `rarity`, `baitRequired`) may have gotten wrong,
 same spirit as `crafting-skill-estimates.md` for tradeskill recipes. Only promote a finding

@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-24T15:16", "summary": "Home page's Latest Changes now loads more entries as you scroll instead of all at once; added \"last updated\" dates to gathering nodes and vendors, plus a new EA checkmark badge for info confirmed after Early Access launches" },
   { "timestamp": "2026-08-23T23:23", "summary": "Added Soggy Marble Rye (a food item found while fishing), filled in weight/size/class/race for The Final Word, and narrowed Grouper's real minimum skill in Night Harbor" },
   { "timestamp": "2026-08-23T20:10", "summary": "Removed the MnM Classes Map link from Useful Links" },
   { "timestamp": "2026-08-23T20:06", "summary": "Added Crab Cakes, Glimmerscale Herring (a new fish), and confirmed Redfin Pike is also caught in Vale of Zintar; set Grouper's headline minimum fishing skill to the Shaded Dunes value" },

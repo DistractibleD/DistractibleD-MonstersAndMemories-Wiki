@@ -1476,10 +1476,46 @@ body {
   font-size: 0.68rem;
   color: #6b6c72;
   margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .monster-card-name + .last-updated-badge {
   margin-top: -8px;
   margin-bottom: 10px;
+}
+/* "EA" checkmark badge (2026-08-24) — appears once an entry's lastUpdated
+   lands on/after the Early Access launch date, see EA_LAUNCH_DATE in
+   script.js. Green (positive-signal) variant of the existing .badge-tag
+   pill; badge-ea-dot is the same idea shrunk further for the inline
+   table/list variant below, where even a full pill would be too wide. */
+.badge-ea {
+  background: #1f5a2e;
+  color: #8fffa0;
+}
+.badge-ea-dot {
+  display: inline-block;
+  background: #1f5a2e;
+  color: #8fffa0;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border-radius: 3px;
+  padding: 0 3px;
+}
+/* Compact single-line "last updated" for table rows / list items — see
+   formatLastUpdatedInline in script.js. Deliberately not a table column of
+   its own (same lesson as Weight/Size etc. being removed from the Item
+   Database table, see CLAUDE.md) — sits inline after whatever it's
+   labeling and wraps to its own line as one nowrap unit if the row is too
+   narrow, rather than a column forcing every row to reserve space for it. */
+.last-updated-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.66rem;
+  color: #6b6c72;
+  white-space: nowrap;
 }
 .item-card-name a {
   color: inherit;

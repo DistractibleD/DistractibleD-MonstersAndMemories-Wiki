@@ -1842,7 +1842,10 @@ this matters). Included in `itemSearchHaystack`. Use for any future readable boo
 ### `lastUpdated` — a "Last updated" badge, plus a site-wide "Recently Updated" list
 
 Optional plain `"YYYY-MM-DD"` string on an entry in `items.json`, `monsters.json`,
-`crafting.json`, or `companions.json`.
+`crafting.json`, `companions.json`, `gathering-nodes.json`, or `vendors.json` (the last two
+joined the convention 2026-08-24 — gathering nodes previously had no `lastUpdated` support
+at all beyond one stray pre-existing entry; vendors already stored it but nothing rendered
+it anywhere).
 
 - **Set to today's date whenever you add a new entry or edit an existing one's real data**
   (stats, drops, components, description, image — anything beyond the field itself). Applies
@@ -1863,6 +1866,32 @@ Optional plain `"YYYY-MM-DD"` string on an entry in `items.json`, `monsters.json
   no `lastUpdated` rather than a guessed one. Same "starts fresh, builds up over time"
   precedent as visit tracking — don't try to backfill further if this area gets touched
   again, just keep setting the field going forward.
+- **Gathering nodes and vendors, added 2026-08-24 (user's own request — "display more last
+  updated information... on harvesting nodes, drop lists and other places"):** same
+  `"YYYY-MM-DD"` convention, but rendered with `formatLastUpdatedInline()` instead of the
+  block-level `formatLastUpdated()` — a compact single-line `<span>` (`.last-updated-inline`)
+  meant for table rows and list-grid cards, not a full card. Deliberately **not** a new table
+  column (same lesson as Weight/Size etc. being removed from the Item Database table) — it
+  sits inline right after the name/count and wraps to its own line as one nowrap unit if the
+  row is too narrow, rather than forcing every row to reserve column space for it. Wired into
+  the Gathering table's Name cell (`gatheringCellHTML`) and the Vendors & Trainers page's
+  compact vendor cards (`renderVendorCard`); the full Vendor Viewer modal
+  (`renderVendorCardHTML`) uses the normal block-level badge instead, since it has card-style
+  room like items/monsters/companions do. Monster drops specifically don't get a *new*
+  display — a monster's own `lastUpdated` already renders on its card/tooltip via
+  `renderMonsterCardHTML`, which covers the drops section for free; drops themselves have no
+  per-item date to show (confirmed with the user — one date for the whole monster/vendor is
+  the intended granularity, not per-drop/per-sold-item).
+- **`EA_LAUNCH_DATE` checkmark badge (2026-08-24)** — the game moves from closed testing into
+  Early Access on **2026-10-01**. Any entry whose `lastUpdated` is on/after that date gets a
+  small green "EA ✓" badge (`eaBadgeHTML()`/`isEaConfirmed()`, `.badge-ea` in the block
+  badge, `.badge-ea-dot` in the inline variant) — a signal to visitors that this specific
+  fact was captured against the live EA build, not carried over from pre-EA testing. Computed
+  at render time from the existing `lastUpdated` string (plain `>=` on the ISO date strings)
+  — no new field to set, nothing to toggle manually once EA actually launches; the badge
+  starts appearing on its own the moment real edits get dated past the cutoff. Until then it
+  renders nothing anywhere, which is correct, not a bug — don't backdate anything to make it
+  show up early.
 
 ## Known JS gotchas
 

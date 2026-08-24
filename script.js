@@ -2015,12 +2015,45 @@ function formatList(values) {
 // human date. Entries added before this field existed simply have no
 // `lastUpdated` at all, so every call site only renders this when present
 // rather than showing a misleading fallback.
+//
+// EA_LAUNCH_DATE (2026-08-24, user's own call): the game moves from closed
+// testing into Early Access on 2026-10-01, and any entry confirmed/edited
+// on or after that date gets a small "EA" checkmark — a signal to visitors
+// that this specific piece of info was captured against the live EA build,
+// not carried over from pre-EA testing. Computed at render time from the
+// same lastUpdated string already being stored, same never-store-a-
+// computed-value precedent as estimateRecipeSkill/estimateMonsterLevel —
+// no new field, and the badge will simply start appearing on its own once
+// real edits get dated past the cutoff, nothing to toggle manually later.
+// ISO "YYYY-MM-DD" strings compare correctly with plain `>=`.
+const EA_LAUNCH_DATE = '2026-10-01';
+function isEaConfirmed(dateStr) {
+  return !!dateStr && dateStr >= EA_LAUNCH_DATE;
+}
+function eaBadgeHTML(dateStr) {
+  return isEaConfirmed(dateStr) ? '<span class="badge-tag badge-ea" title="Confirmed accurate during Early Access">EA &#10003;</span>' : '';
+}
 function formatLastUpdated(dateStr) {
   if (!dateStr) return '';
   const d = new Date(dateStr + 'T00:00:00');
   if (isNaN(d)) return '';
   const text = d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-  return `<div class="last-updated-badge">Last updated: ${text}</div>`;
+  return `<div class="last-updated-badge">Last updated: ${text} ${eaBadgeHTML(dateStr)}</div>`;
+}
+
+// Compact, single-line variant for table rows and list items where the
+// block-level badge above (its own line, "Last updated:" spelled out)
+// would be too tall/wide — the Gathering table and Vendor Viewer's
+// sell/buy lists in particular. Wrapped in its own nowrap span, same
+// "never split mid-entry" precedent as .stat-entry (see CLAUDE.md's "Row
+// cells don't split a value mid-word" note) — the whole date+badge moves
+// to a new line as one unit if the row is too narrow, never breaks apart.
+function formatLastUpdatedInline(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  if (isNaN(d)) return '';
+  const text = d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  return `<span class="last-updated-inline" title="Last updated ${escapeAttr(text)}">${isEaConfirmed(dateStr) ? '<span class="badge-ea-dot" title="Confirmed accurate during Early Access">EA</span> ' : ''}${text}</span>`;
 }
 
 function itemSearchHaystack(item) {
@@ -4251,7 +4284,8 @@ function gatheringCellHTML(node, key) {
       const thumb = images.length
         ? `<button type="button" class="gathering-node-thumb" data-images="${escapeAttr(JSON.stringify(images))}"><img src="${escapeAttr(images[0])}" alt="${escapeAttr(node.name)}"></button>`
         : '';
-      return `<td data-label="Name">${thumb}${escapeAttr(node.name)}${node.needsInfo ? ' <span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}</td>`;
+      const lastUpdated = formatLastUpdatedInline(node.lastUpdated);
+      return `<td data-label="Name">${thumb}${escapeAttr(node.name)}${node.needsInfo ? ' <span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}${lastUpdated ? `<br>${lastUpdated}` : ''}</td>`;
     }
     case 'minSkill':
     case 'trivialSkill':
@@ -5283,6 +5317,7 @@ function renderVendorCardHTML(vendor) {
   return `
     <div class="vendor-card">
       <h2 class="vendor-card-name">${escapeAttr(vendor.name)}</h2>
+      ${formatLastUpdated(vendor.lastUpdated)}
       <p class="vendor-card-location">${escapeAttr(vendor.location)}${vendor.area ? ' &middot; ' + escapeAttr(vendor.area) : ''}</p>
       ${vendor.description ? `<p class="vendor-card-description">${escapeAttr(vendor.description)}</p>` : ''}
       <h3 class="vendor-card-section-heading">Sells</h3>
@@ -5463,6 +5498,7 @@ async function renderVendorsTrainersPage(container) {
         <span class="vt-location">${escapeAttr(v.location)}${v.area ? ' &middot; ' + escapeAttr(v.area) : ''}</span>
         ${v.description ? `<span class="vt-vendor-description">${escapeAttr(v.description)}</span>` : ''}
         <span class="vt-count">${count} item${count === 1 ? '' : 's'}</span>
+        ${formatLastUpdatedInline(v.lastUpdated)}
       </div>
     `;
   }
@@ -5880,7 +5916,19 @@ function renderFactionCardHTML(name, group, isCollapsed) {
 // new entry to the *top* of that array (see CLAUDE.md's Git workflow
 // section) — plain-language, phrased around what changed on this site
 // (e.g. "added new fishing info"), never naming an external source site.
-const HOME_CHANGELOG_PREVIEW = 20;
+//
+// Same bounded-DOM-via-scroll approach as the Item Database (2026-08-24,
+// pre-emptive — the changelog only had a couple hundred entries at the
+// time, but it grows by one entry every push forever, and the Item
+// Database's freeze already proved that "dump everything into the DOM,
+// just hide most of it" doesn't scale even when the extra nodes are
+// invisible). Starts showing 5 newest; expanding the section reveals the
+// list, and scrolling near the bottom of what's shown loads another chunk
+// via IntersectionObserver, exactly like `renderItemsList`'s
+// `visibleCount`/`ITEMS_CHUNK_SIZE` pattern — DOM node count stays
+// proportional to how far someone has scrolled, never to how large
+// changelog.json has grown.
+const HOME_CHANGELOG_CHUNK = 5;
 
 function formatChangelogTimestamp(ts) {
   if (!ts) return '';
@@ -5900,8 +5948,6 @@ async function renderHomePage(container) {
     changelog = [];
   }
 
-  const preview = changelog.slice(0, HOME_CHANGELOG_PREVIEW);
-  const rest = changelog.slice(HOME_CHANGELOG_PREVIEW);
   const entryHTML = e => `<li><span class="changelog-date">${formatChangelogTimestamp(e.timestamp)}</span><span class="changelog-summary">${escapeAttr(e.summary)}</span></li>`;
 
   // Home is meant to be a one-stop landing page (2026-08-17, user's own
@@ -5942,11 +5988,9 @@ async function renderHomePage(container) {
     </h2>
     <div id="home-changelog-body" class="home-changelog-body home-changelog-collapsed">
       ${changelog.length ? `
-        <ul class="changelog-list" id="changelog-preview">${preview.map(entryHTML).join('')}</ul>
-        ${rest.length ? `
-          <ul class="changelog-list" id="changelog-rest" style="display: none;">${rest.map(entryHTML).join('')}</ul>
-          <button type="button" id="changelog-show-more" class="items-clear-btn">Show all ${changelog.length} updates</button>
-        ` : ''}
+        <ul class="changelog-list" id="changelog-list"></ul>
+        <p class="items-count" id="changelog-count"></p>
+        <div id="changelog-load-sentinel"></div>
       ` : `<p class="items-empty">No updates recorded yet.</p>`}
     </div>
   `;
@@ -5970,12 +6014,31 @@ async function renderHomePage(container) {
     changelogHint.textContent = collapsed ? '(click to expand)' : '(click to collapse)';
   });
 
-  const showMoreBtn = container.querySelector('#changelog-show-more');
-  if (showMoreBtn) {
-    showMoreBtn.addEventListener('click', () => {
-      container.querySelector('#changelog-rest').style.display = '';
-      showMoreBtn.remove();
-    });
+  // Bounded-DOM-via-scroll, same pattern as the Item Database's
+  // visibleCount/ITEMS_CHUNK_SIZE (see HOME_CHANGELOG_CHUNK's comment
+  // above) — only ever renders as many <li>s as the user has actually
+  // scrolled to, growing by one chunk whenever the sentinel just past the
+  // list scrolls into view. Sentinel sits inside the collapsed section, so
+  // nothing fires until the visitor actually expands it.
+  if (changelog.length) {
+    const listEl = container.querySelector('#changelog-list');
+    const countEl = container.querySelector('#changelog-count');
+    let visibleCount = HOME_CHANGELOG_CHUNK;
+
+    function updateChangelogList() {
+      const shown = Math.min(visibleCount, changelog.length);
+      listEl.innerHTML = changelog.slice(0, shown).map(entryHTML).join('');
+      countEl.textContent = `Showing ${shown} of ${changelog.length} updates` + (shown < changelog.length ? ' — scroll for more' : '');
+    }
+    updateChangelogList();
+
+    const changelogLoadObserver = new IntersectionObserver(entries => {
+      if (!entries.some(e => e.isIntersecting)) return;
+      if (visibleCount >= changelog.length) return;
+      visibleCount += HOME_CHANGELOG_CHUNK;
+      updateChangelogList();
+    }, { rootMargin: '400px' });
+    changelogLoadObserver.observe(container.querySelector('#changelog-load-sentinel'));
   }
 }
 
