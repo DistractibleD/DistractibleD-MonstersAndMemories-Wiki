@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-24T19:32", "summary": "Latest Changes on the Home page now shows the first 5 updates right away instead of needing a click to expand" },
   { "timestamp": "2026-08-24T15:16", "summary": "Home page's Latest Changes now loads more entries as you scroll instead of all at once; added \"last updated\" dates to gathering nodes and vendors, plus a new EA checkmark badge for info confirmed after Early Access launches" },
   { "timestamp": "2026-08-23T23:23", "summary": "Added Soggy Marble Rye (a food item found while fishing), filled in weight/size/class/race for The Final Word, and narrowed Grouper's real minimum skill in Night Harbor" },
   { "timestamp": "2026-08-23T20:10", "summary": "Removed the MnM Classes Map link from Useful Links" },

@@ -5981,12 +5981,12 @@ async function renderHomePage(container) {
     <div class="home-nav-grid">
       ${navPages.map(navCardHTML).join('')}
     </div>
-    <h2 class="home-changelog-heading" id="home-changelog-toggle">
+    <h2 class="home-changelog-heading expanded" id="home-changelog-toggle">
       <svg viewBox="0 0 24 24" class="home-changelog-chevron"><path d="M8 5 L16 12 L8 19 Z"/></svg>
       Latest Changes
-      <span class="home-changelog-hint" id="home-changelog-hint">(click to expand)</span>
+      <span class="home-changelog-hint" id="home-changelog-hint">(click to collapse)</span>
     </h2>
-    <div id="home-changelog-body" class="home-changelog-body home-changelog-collapsed">
+    <div id="home-changelog-body" class="home-changelog-body">
       ${changelog.length ? `
         <ul class="changelog-list" id="changelog-list"></ul>
         <p class="items-count" id="changelog-count"></p>
@@ -5999,12 +5999,11 @@ async function renderHomePage(container) {
     card.addEventListener('click', () => loadPage(card.dataset.file));
   });
 
-  // Starts collapsed (see .home-changelog-collapsed above) — the nav grid
-  // is the actual "1 stop for all" landing content now; Latest Changes is
-  // useful but secondary, same reasoning as Alchemy's Mortar-and-Pestle
-  // station starting collapsed on its own page. Plain class toggle, no
-  // stored preference — resets to collapsed next time Home loads fresh,
-  // same as every other collapsible section on this site.
+  // Starts expanded (2026-08-24 follow-up — collapsed-by-default was tried
+  // first but the user wanted the first chunk visible immediately, no click
+  // needed) — the collapse toggle itself stays, for anyone who wants to
+  // hide the section after seeing it. Plain class toggle, no stored
+  // preference — resets to expanded next time Home loads fresh.
   const changelogToggle = container.querySelector('#home-changelog-toggle');
   const changelogBody = container.querySelector('#home-changelog-body');
   const changelogHint = container.querySelector('#home-changelog-hint');
@@ -6018,8 +6017,9 @@ async function renderHomePage(container) {
   // visibleCount/ITEMS_CHUNK_SIZE (see HOME_CHANGELOG_CHUNK's comment
   // above) — only ever renders as many <li>s as the user has actually
   // scrolled to, growing by one chunk whenever the sentinel just past the
-  // list scrolls into view. Sentinel sits inside the collapsed section, so
-  // nothing fires until the visitor actually expands it.
+  // list scrolls into view. The section is visible by default now, but the
+  // sentinel still only fires once it's actually scrolled into view, so
+  // this stays just as cheap on first load as it was while collapsed.
   if (changelog.length) {
     const listEl = container.querySelector('#changelog-list');
     const countEl = container.querySelector('#changelog-count');

@@ -1271,9 +1271,9 @@ body {
 .home-nav-card:hover .home-nav-card-name {
   color: var(--accent);
 }
-/* "Latest Changes" starts collapsed underneath the nav grid above (same
-   2026-08-17 request) — clickable heading + rotating chevron, same
-   expand/collapse language as .sidebar-group-chevron. */
+/* "Latest Changes" sits underneath the nav grid above, expanded by default
+   (2026-08-24) — clickable heading + rotating chevron still lets a visitor
+   collapse it, same expand/collapse language as .sidebar-group-chevron. */
 .home-changelog-heading {
   display: inline-flex;
   align-items: center;
