@@ -6,18 +6,6 @@ dataset), plus **Fishdata** (4th character overall, see below). Raw per-stack ha
 the user's own fishing sessions, all in Night Harbor (at the harbor), all using 20x Grub
 bait per stack, same fishing rod throughout. Tracked here rather than as `note` text on
 gathering-nodes.json entries — those notes render live on the public Gathering page, and
-
-**2026-08-24 — back to Distracted, testing for a Night Harbor skill cap:** after Fishdata
-reached 100 bait (5 stacks) and confirmed the old Grouper minSkill: 70 was wrong (real floor
-≤50, exact value still unknown), the user is resuming fishing on **Distracted** specifically
-to test whether Night Harbor has a skill cap at all — neither character has found one yet
-(Distracted was already at 114, Fishdata still climbing at 74), unlike Shaded Dunes (45) and
-Sungreet Strand (70). Distracted has the most room to climb before hitting any plausible cap,
-so is the more efficient character for this specific question. Watch for skill plateauing;
-if it does, note the value (check whether it's a multiple of 5, same as the other two zones).
-Pinning Night Harbor's exact Grouper floor is a separate, lower-priority open question that
-would need a fresh low-skill character watching closely through skill 30-50 specifically —
-not what this round of testing is for.
 running research tallies like this aren't visitor-facing info (see CLAUDE.md's "note is
 visitor-facing content" rule). This file is not loaded by the site.
 
@@ -349,3 +337,48 @@ relative share grew throughout, continuing to support "just less common," not sk
 Both currently tagged Common/Uncommon on the live site; worth a look at whether that gap
 still feels right now that the ratio's this close, though rarity tagging is ultimately a
 judgment call for the site owner, not something to change unilaterally from this data alone.
+
+**2026-08-24 — back to Distracted, testing for a Night Harbor skill cap:** after Fishdata
+(see above) reached 100 bait (5 stacks) and confirmed the old Grouper minSkill: 70 was wrong
+(real floor ≤50, exact value still unknown), the user is resuming fishing on **Distracted**
+specifically to test whether Night Harbor has a skill cap at all — neither character has
+found one yet (Distracted was already at 114, Fishdata still climbing at 74), unlike Shaded
+Dunes (45) and Sungreet Strand (70). Distracted has the most room to climb before hitting
+any plausible cap, so is the more efficient character for this specific question. Watch for
+skill plateauing; if it does, note the value (check whether it's a multiple of 5, same as
+the other two zones). Pinning Night Harbor's exact Grouper floor is a separate, lower-
+priority open question that would need a fresh low-skill character watching closely through
+skill 30-50 specifically — not what this round of testing is for.
+
+Distracted — Cap-test Stack 1, skill 114 → 118 (fresh — bags cleared, inferred from the
+numbers, not explicitly stated)
+--------------------------------------------------------------------------------------------
+Row order: Basa, Whitefish, Grouper (no Thorn Sturgeon row this time). Totals far below the
+previous 200-bait cumulative tally (80/129/36), so this must be a fresh stack, not
+cumulative with the earlier milestone.
+- Basa: 7
+- Whitefish: 11
+- Grouper: 4
+
+**Skill moved from 114 to 118 — no plateau yet.** Still climbing, same as before. Keep
+watching.
+
+**Mechanic note (user's own observation):** the last Whitefish catch of this stack happened
+with **zero bait remaining** — an extra click past the last Grub in the stack still resolved
+into a catch. Suggests bait may be consumed *after* a catch resolves (or checked at cast
+time rather than pre-validated), meaning one "free" cast beyond your last bait is possible.
+
+**Follow-up speculation (user's own, explicitly labeled as pure speculation):** if high
+skill allows catching fish with no bait at all, and higher skill also biases toward rarer
+fish, maybe bait-less fishing specifically catches *more common* fish — a way to reverse the
+skill-driven rarity shift. Interesting idea, but the current data (n=1 bait-less catch, a
+Whitefish) can't actually test it — Whitefish is already the most common fish regardless of
+bait, so this one data point doesn't distinguish "bait-less catches skew common" from "bait-
+less catches are just normal catches that happened to be common, like most catches are
+anyway." Also connects to something already in the data model: the original (now-cleared,
+2026-08-22) source-table claim that Whitefish becomes bait-free "at fishing skill 50" —
+Distracted is well past that, so this could be the first real evidence that specific claim
+was right, independent of the rarity-reversal question. To actually test the rarity idea:
+deliberately fish with zero bait for a stretch and compare the species mix against a normal
+baited stack at the same skill — if Grouper never shows up bait-less while showing up
+normally with bait, that would support it. Not enough data yet either way.
