@@ -24144,8 +24144,10 @@
     "slug": "raw-bay-crab",
     "type": "Misc",
     "tags": [],
-    "needsInfo": true,
-    "lastUpdated": "2026-08-22"
+    "description": "A large crab fished from the Twilight Bay.",
+    "weight": 1.5,
+    "size": "Small",
+    "lastUpdated": "2026-08-24"
   },
   {
     "name": "Raw Swordfish Steak",

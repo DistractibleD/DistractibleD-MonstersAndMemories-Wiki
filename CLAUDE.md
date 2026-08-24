@@ -480,6 +480,13 @@ above Crafting in sidebar) and data file `gathering-nodes.json`.
   use of "Raw", not the same mistake. Most of these result item names still don't have a real
   `items.json` card yet and render as plain text until one comes in, same as any other
   unmatched dynamic link.
+  **Confirmed wrong for one species, 2026-08-24: Bay Crab's real name is "Raw Bay Crab"** —
+  its actual item card showed the prefix, contradicting the site-wide strip. Restored on that
+  one entry only (`name`/`slug`/`results`, plus the matching Crab Cakes recipe component and
+  its own items.json card). This is exactly the caveat the original strip already
+  anticipated (a species could turn out to genuinely have "Raw " in its name) — don't assume
+  every remaining species is safe just because four others confirmed clean; check each one
+  against its own card as it comes in, same as this one was.
 - **A `results` entry can also be a compact family reference** (2026-08-06, user's own
   request, mirrors monster `drops`' `{ "family": "Rusty Iron" }` form) —
   `{ "family": "Chipped", "label": "Chipped Gems" }` instead of spelling out all 25+

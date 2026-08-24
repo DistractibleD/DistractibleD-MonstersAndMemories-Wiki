@@ -363,22 +363,60 @@ cumulative with the earlier milestone.
 **Skill moved from 114 to 118 — no plateau yet.** Still climbing, same as before. Keep
 watching.
 
-**Mechanic note (user's own observation):** the last Whitefish catch of this stack happened
-with **zero bait remaining** — an extra click past the last Grub in the stack still resolved
-into a catch. Suggests bait may be consumed *after* a catch resolves (or checked at cast
-time rather than pre-validated), meaning one "free" cast beyond your last bait is possible.
+**Mechanic note — CONFIRMED, not speculation.** The user's first zero-bait Whitefish catch
+looked like it might just be a UI/ordering quirk (an extra click past the last Grub). It's
+not — the game shows an explicit message when casting with no bait at all: **"You cast your
+line without bait. It is unlikely you will succeed."** This is a real, intentional,
+repeatable mechanic: bait-less casting is an allowed choice with lower odds, not an accident.
+Confirmed via a second bait-less attempt (screenshot, same session): nibble, nibble, a skill-
+up (118→119), bite/start reeling, another skill-up (119→120), continue reeling twice, then
+**"You reel in an empty line"** — a failed catch despite going all the way through the
+minigame. So we now have 2 bait-less attempts total: 1 success (the earlier Whitefish), 1
+failure. Confirms skill-ups happen during bait-less casts too, independent of catch outcome
+— consistent with the existing multi-step-minigame mechanic (see above), and means grinding
+skill without spending bait is a real, if lower-odds, option.
 
-**Follow-up speculation (user's own, explicitly labeled as pure speculation):** if high
-skill allows catching fish with no bait at all, and higher skill also biases toward rarer
-fish, maybe bait-less fishing specifically catches *more common* fish — a way to reverse the
-skill-driven rarity shift. Interesting idea, but the current data (n=1 bait-less catch, a
-Whitefish) can't actually test it — Whitefish is already the most common fish regardless of
-bait, so this one data point doesn't distinguish "bait-less catches skew common" from "bait-
-less catches are just normal catches that happened to be common, like most catches are
-anyway." Also connects to something already in the data model: the original (now-cleared,
-2026-08-22) source-table claim that Whitefish becomes bait-free "at fishing skill 50" —
-Distracted is well past that, so this could be the first real evidence that specific claim
-was right, independent of the rarity-reversal question. To actually test the rarity idea:
-deliberately fish with zero bait for a stretch and compare the species mix against a normal
-baited stack at the same skill — if Grouper never shows up bait-less while showing up
-normally with bait, that would support it. Not enough data yet either way.
+**Rarity-reversal idea (user's own, explicitly labeled as pure speculation) — still
+untested.** If higher skill biases toward rarer fish, does bait-less fishing specifically
+skew back toward common ones? Still can't test this from 2 data points (1 success, a
+Whitefish, which is already the most common fish regardless of bait; 1 failure with no
+species info at all). Now that bait-less fishing is confirmed as a deliberate, repeatable
+choice rather than an accident, it's genuinely testable if the user wants to: deliberately
+cast without bait for a stretch and compare the resulting species mix (and success rate)
+against a normal baited stack at the same skill. Also worth tracking bait-less success rate
+on its own — "unlikely to succeed" is a real in-game claim now worth quantifying if enough
+attempts accumulate. Separately, this may be the first real evidence for the original
+(now-cleared, 2026-08-22) source-table claim that Whitefish becomes bait-free "at fishing
+skill 50" — Distracted is well past that — though that's about bait becoming *unnecessary*
+at a skill threshold, a different claim from "bait-less fishing is always possible, just
+low-odds," which is what's actually confirmed so far.
+
+**50-attempt bait-less test (2026-08-24) — clean, larger sample.** User ran a dedicated
+bait-less test via a third-party tracking overlay: **0 catches logged, 0 unique fish, 50
+total attempts, ending skill 132** (up from 118 before this test started). Zero catches
+across 50 attempts strongly reinforces "unlikely to succeed" — with 0/50, the true success
+rate is very likely under ~6% (rough 95%-confidence upper bound for a 0-success sample this
+size), consistent with genuinely low odds rather than a fluke run of bad luck. Meanwhile
+skill climbed substantially (118→132, +14) with *zero* successful catches — the strongest
+confirmation yet that skill-ups are fully independent of catch outcome, matching the multi-
+step-minigame mechanic already established. This also means bait-less fishing is a
+genuinely viable (if slow-feeling, since nothing gets "caught") way to grind skill without
+spending bait at all.
+
+Doesn't resolve the rarity-reversal idea (still 0 successful bait-less catches beyond the
+original 1, so no species mix to compare), but does answer "how rare is a bait-less catch" —
+rare enough that even 50 attempts can plausibly whiff entirely.
+
+**New species for Night Harbor: Raw Bay Crab, caught by Distracted around skill 136-140**
+(normal baited cast — "You cast your line," not the bait-less message). Genuinely new
+addition to Night Harbor's Fishing roster, not previously confirmed there (Bay Crab already
+existed on the live site for Night Harbor/Evershade Weald/Shallow Shoals, but only as an
+unconfirmed carryover from the old source table — this is the first real catch confirming
+it). **Also resolved a real data error**: the item card explicitly reads "RAW BAY CRAB,"
+meaning this species keeps its "Raw " prefix, unlike the four other species that lost theirs
+in the 2026-08-21 site-wide strip. Corrected `name`/`slug`/`results` back to "Raw Bay Crab"
+in gathering-nodes.json, filled in its items.json card (previously a bare needsInfo stub —
+"A large crab fished from the Twilight Bay," weight 1.5/Small), and fixed the Crab Cakes
+recipe's component to match. This is exactly the risk CLAUDE.md's original strip already
+flagged (a species could turn out to genuinely have "Raw " in its name) — worth remembering
+for any future species that turns up a real card.

@@ -6280,7 +6280,7 @@
     "slug": "crab-cakes",
     "tradeskill": "Cooking",
     "components": [
-      { "item": "Bay Crab", "quantity": 2 },
+      { "item": "Raw Bay Crab", "quantity": 2 },
       { "item": "Lemon", "quantity": 1 },
       { "item": "Parsley", "quantity": 1 }
     ]
