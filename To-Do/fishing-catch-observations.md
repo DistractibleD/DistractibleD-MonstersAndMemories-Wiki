@@ -420,3 +420,20 @@ in gathering-nodes.json, filled in its items.json card (previously a bare needsI
 recipe's component to match. This is exactly the risk CLAUDE.md's original strip already
 flagged (a species could turn out to genuinely have "Raw " in its name) — worth remembering
 for any future species that turns up a real card.
+
+Distracted — Cap-test Stack 2, skill 132 → 145 (fresh — bags cleared, inferred from the
+numbers, not explicitly stated)
+--------------------------------------------------------------------------------------------
+Starts from 132, where the 50-attempt bait-less test left off, not from 118 — this stack
+includes the Raw Bay Crab catch (137-140) logged just above, so it's the same session.
+Row order: Basa, Whitefish, Grouper, Thorn Sturgeon, same as before. Totals all below the
+previous stack's 7/11/4, so fresh, not cumulative. Also includes Raw Bay Crab this time (its
+own reddish-steak icon, confirmed by the user, distinct from the fish icons).
+- Basa: 4
+- Whitefish: 6
+- Grouper: 8
+- Thorn Sturgeon: 1
+- Raw Bay Crab: 1
+
+**Skill moved to 145 — still no plateau.** Keeps climbing well past both Shaded Dunes (45)
+and Sungreet Strand (70)'s caps. No sign of a Night Harbor ceiling yet.
