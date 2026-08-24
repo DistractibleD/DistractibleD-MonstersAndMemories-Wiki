@@ -6,6 +6,18 @@ dataset), plus **Fishdata** (4th character overall, see below). Raw per-stack ha
 the user's own fishing sessions, all in Night Harbor (at the harbor), all using 20x Grub
 bait per stack, same fishing rod throughout. Tracked here rather than as `note` text on
 gathering-nodes.json entries — those notes render live on the public Gathering page, and
+
+**2026-08-24 — back to Distracted, testing for a Night Harbor skill cap:** after Fishdata
+reached 100 bait (5 stacks) and confirmed the old Grouper minSkill: 70 was wrong (real floor
+≤50, exact value still unknown), the user is resuming fishing on **Distracted** specifically
+to test whether Night Harbor has a skill cap at all — neither character has found one yet
+(Distracted was already at 114, Fishdata still climbing at 74), unlike Shaded Dunes (45) and
+Sungreet Strand (70). Distracted has the most room to climb before hitting any plausible cap,
+so is the more efficient character for this specific question. Watch for skill plateauing;
+if it does, note the value (check whether it's a multiple of 5, same as the other two zones).
+Pinning Night Harbor's exact Grouper floor is a separate, lower-priority open question that
+would need a fresh low-skill character watching closely through skill 30-50 specifically —
+not what this round of testing is for.
 running research tallies like this aren't visitor-facing info (see CLAUDE.md's "note is
 visitor-facing content" rule). This file is not loaded by the site.
 
@@ -167,6 +179,22 @@ again per the last message). Consistent with Thorn Sturgeon's "Very Rare" tag an
 existing note (first encountered at skill 77 for Distracted) — a skill-73 first catch is in
 the same ballpark, not a contradiction like Grouper's old "70" was. No live-site change
 needed from this alone.
+
+Fishdata — Stack 5 complete, skill 70 → 74 (fresh, bags cleared)
+---------------------------------------------------------------------
+Four rows this time — Thorn Sturgeon joins the row order as a 4th row, same convention as
+Distracted's. Final totals:
+- Basa: 6
+- Whitefish: 10
+- Grouper: 3
+- Thorn Sturgeon: 1 (the skill-73 catch already logged above)
+
+Running totals (Fishdata, 5 stacks, 100 bait, skill 1→74)
+----------------------------------------------------------------
+- Basa: 29
+- Whitefish: 51
+- Grouper: 15
+- Thorn Sturgeon: 1
 
 Purpose: watch for patterns in relative catch rarity / effective skill gates that the
 fan-wiki source table's numbers (`minSkill`, `rarity`, `baitRequired`) may have gotten wrong,
