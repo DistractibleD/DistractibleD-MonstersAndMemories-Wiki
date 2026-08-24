@@ -437,3 +437,9 @@ own reddish-steak icon, confirmed by the user, distinct from the fish icons).
 
 **Skill moved to 145 — still no plateau.** Keeps climbing well past both Shaded Dunes (45)
 and Sungreet Strand (70)'s caps. No sign of a Night Harbor ceiling yet.
+
+**Skill check, 2026-08-24: 171/300, still climbing, no catch data this update.** Confirms
+the skill bar's own max is 300 (matches the cap seen on crafting-window skill bars
+elsewhere, e.g. "Carpentry 22/300"). Night Harbor is now well past both other zones' caps
+with no plateau in sight — over 2/3 of the way to the theoretical maximum with no sign of
+stopping.
