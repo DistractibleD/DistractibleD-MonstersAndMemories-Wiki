@@ -85,6 +85,13 @@ let pendingSubmitContext = null;
 // — consumed (and cleared) by renderMapsPage, same consume-once pattern as
 // pendingItemQuery.
 let pendingMapOpen = null;
+// Set by goToFactionMonster (a monster card's "View on Faction page" link)
+// so the Faction page's own search box opens pre-filled with that monster's
+// name — same consume-once pattern as pendingItemQuery/pendingMonsterQuery,
+// reusing the page's normal text search rather than a separate slug-based
+// path, so a manually typed search behaves identically to arriving via this
+// link.
+let pendingFactionQuery = null;
 
 // Each ensure*Data function below is called both from init()'s prefetch and
 // from whatever page actually renders that data — often within the same
@@ -1161,6 +1168,19 @@ function goToMonster(monster) {
   const alreadyThere = location.hash.replace('#', '') === targetHash;
   location.hash = targetHash;
   if (alreadyThere) loadPage(targetHash);
+}
+
+// Jumps to the Faction page pre-searched for one monster's name (see
+// pendingFactionQuery) — with 60+ factions on file, scanning collapsed cards
+// by hand for the one entry that mentions this monster isn't realistic, so
+// this lands directly on it instead. Only meaningful for a monster that
+// actually has factionEffects; callers gate the link on that themselves
+// (same as relatedMonsters/coinDrops-driven sections elsewhere on a card).
+function goToFactionMonster(monster) {
+  pendingFactionQuery = monster.name;
+  const alreadyThere = location.hash.replace('#', '') === 'faction';
+  location.hash = 'faction';
+  if (alreadyThere) loadPage('faction');
 }
 
 function goToCompanion(companion) {
@@ -4850,6 +4870,14 @@ function setupMonsterTooltip(container) {
         goToItemSearch(familyLink.dataset.family);
         return;
       }
+      const factionLink = e.target.closest('.monster-faction-link');
+      if (factionLink) {
+        e.preventDefault();
+        const monster = findMonsterBySlug(factionLink.dataset.slug);
+        hideTooltip();
+        if (monster) goToFactionMonster(monster);
+        return;
+      }
       // Anywhere else on the card — the "click for more info" affordance.
       const monster = tooltip._monster;
       hideTooltip();
@@ -4946,6 +4974,14 @@ function setupMonsterViewer() {
       e.preventDefault();
       closeMonsterViewer();
       goToItemSearch(familyLink.dataset.family);
+      return;
+    }
+    const factionLink = e.target.closest('.monster-faction-link');
+    if (factionLink) {
+      e.preventDefault();
+      const monster = findMonsterBySlug(factionLink.dataset.slug);
+      closeMonsterViewer();
+      if (monster) goToFactionMonster(monster);
     }
   });
 
@@ -5243,6 +5279,11 @@ function renderMonsterCardHTML(monster, opts = {}) {
               ? `<a href="#" class="monster-related-link" data-slug="${escapeAttr(m.slug)}">${escapeAttr(r.label)}</a>`
               : escapeAttr(r.label);
           }).join(', ')}</span>
+        </div>` : ''}
+        ${(monster.factionEffects && monster.factionEffects.length) ? `
+        <div class="monster-card-field">
+          <span class="item-card-field-label">Faction</span>
+          <span><a href="#" class="monster-faction-link" data-slug="${escapeAttr(monster.slug)}">View on Faction page</a></span>
         </div>` : ''}
         <div class="item-card-section">
           Drops:
@@ -5869,13 +5910,29 @@ async function renderSpellsPage(container) {
 // monster's own `maps` list so a zone still shows for the common case of an
 // unambiguous single- or multi-zone monster. No zone at all (neither the
 // effect nor the monster has one recorded) renders nothing extra.
-function renderFactionMonsterLiHTML(entry) {
+//
+// `query`/`matchState` (2026-08-25, user's own request — search by monster
+// name and land directly on it instead of scrolling every collapsed faction
+// card by hand) mark up whichever <li>s match a monster-name search:
+// `.faction-monster-match` on every match (persistent, not animated — there
+// can be more than one, e.g. a shared-name monster listed under two
+// factions), plus a one-time `#faction-monster-match-first` id on the very
+// first one so renderFactionPage's update() can scroll/flash straight to
+// it. `matchState` is one plain `{ assigned }` object shared across every
+// card rendered in the same update() pass, so "first" means first across
+// the whole filtered list, not first-per-card.
+function renderFactionMonsterLiHTML(entry, query, matchState) {
   const { monster: m, zone } = entry;
   const zoneHTML = zone ? ` <span class="faction-monster-zone">(${escapeAttr(zone)})</span>` : '';
-  return `<li><a href="#" class="item-name-hover faction-monster-link" data-slug="${escapeAttr(m.slug)}">${escapeAttr(m.name)}</a>${zoneHTML}</li>`;
+  const isMatch = !!query && m.name.toLowerCase().includes(query);
+  const isFirstMatch = isMatch && !matchState.assigned;
+  if (isFirstMatch) matchState.assigned = true;
+  const liId = isFirstMatch ? ' id="faction-monster-match-first"' : '';
+  const liClass = isMatch ? ' class="faction-monster-match"' : '';
+  return `<li${liId}${liClass}><a href="#" class="item-name-hover faction-monster-link" data-slug="${escapeAttr(m.slug)}">${escapeAttr(m.name)}</a>${zoneHTML}</li>`;
 }
 
-function renderFactionCardHTML(name, group, isCollapsed) {
+function renderFactionCardHTML(name, group, isCollapsed, query, matchState) {
   return `
     <div class="gem-reference faction-card">
       <h2 class="faction-card-heading">
@@ -5888,13 +5945,13 @@ function renderFactionCardHTML(name, group, isCollapsed) {
         <div class="faction-card-column">
           <h3 class="faction-positive">Increases this faction</h3>
           <ul>
-            ${group.positive.length ? group.positive.map(renderFactionMonsterLiHTML).join('') : '<li class="item-card-muted">None known yet</li>'}
+            ${group.positive.length ? group.positive.map(e => renderFactionMonsterLiHTML(e, query, matchState)).join('') : '<li class="item-card-muted">None known yet</li>'}
           </ul>
         </div>
         <div class="faction-card-column">
           <h3 class="faction-negative">Decreases this faction</h3>
           <ul>
-            ${group.negative.length ? group.negative.map(renderFactionMonsterLiHTML).join('') : '<li class="item-card-muted">None known yet</li>'}
+            ${group.negative.length ? group.negative.map(e => renderFactionMonsterLiHTML(e, query, matchState)).join('') : '<li class="item-card-muted">None known yet</li>'}
           </ul>
         </div>
       </div>
@@ -6053,9 +6110,12 @@ async function renderFactionPage(container) {
       // `fe.zone` (set only when the same monster name gives different
       // factions in different zones) wins; otherwise fall back to the
       // monster's own `maps` so an unambiguous monster still shows where
-      // it's found.
-      const zone = fe.zone || (m.maps && m.maps.length ? m.maps.join(', ') : null);
-      (fe.effect === 'negative' ? group.negative : group.positive).push({ monster: m, zone });
+      // it's found. `zones` keeps that same information as a real array
+      // (never the joined "Zone A, Zone B" display string), so the Zone
+      // filter below can match one individual zone at a time.
+      const zones = fe.zone ? [fe.zone] : (m.maps && m.maps.length ? m.maps : []);
+      const zone = zones.length ? zones.join(', ') : null;
+      (fe.effect === 'negative' ? group.negative : group.positive).push({ monster: m, zone, zones });
     });
   });
 
@@ -6069,10 +6129,26 @@ async function renderFactionPage(container) {
     return;
   }
 
+  // Every zone that shows up on at least one factionEffects entry (2026-08-25,
+  // user's own request) — powers the "browse by zone" dropdown below, so a
+  // visitor can find every monster that changes a faction in one specific
+  // zone without having to already know which faction(s) to look under.
+  const allZones = new Set();
+  factions.forEach(group => {
+    [...group.positive, ...group.negative].forEach(e => e.zones.forEach(z => allZones.add(z)));
+  });
+  const zoneOptions = [...allZones].sort((a, b) => a.localeCompare(b));
+
   container.innerHTML = `
     <h1>Faction</h1>
+    <p>Search by faction or monster name, or pick a zone to see every monster there that
+    changes a faction.</p>
     <div class="items-toolbar">
-      <input type="search" id="faction-search" class="items-search" placeholder="Search factions..." autocomplete="off">
+      <input type="search" id="faction-search" class="items-search" placeholder="Search factions or monsters..." autocomplete="off">
+      <select id="faction-filter-zone" class="items-select">
+        <option value="">All Zones</option>
+        ${zoneOptions.map(z => `<option value="${escapeAttr(z)}">${escapeAttr(z)}</option>`).join('')}
+      </select>
       <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="faction-search">Clear</button>
     </div>
     <p class="items-count" id="faction-count"></p>
@@ -6080,6 +6156,7 @@ async function renderFactionPage(container) {
   `;
 
   const searchBox = container.querySelector('#faction-search');
+  const zoneFilterEl = container.querySelector('#faction-filter-zone');
   const countEl = container.querySelector('#faction-count');
   const listEl = container.querySelector('#faction-list');
 
@@ -6088,17 +6165,59 @@ async function renderFactionPage(container) {
   // always-expanded list (2026-08-11, user's own request). State lives in
   // this render's own closure, same pattern as renderTradeskillSection's
   // collapsedStations — survives re-render while searching, resets fresh
-  // next time this page opens.
+  // next time this page opens. A search or zone filter always force-expands
+  // its own results regardless of this Set (see forceExpand below) — same
+  // "actively searching force-shows every match" precedent as the Vendors &
+  // Trainers page's zone groups, so a visitor who searched for a monster
+  // doesn't also have to click to expand the card it turned up under.
   const collapsedFactions = new Set(names);
+
+  // Landing here from a monster card's "View on Faction page" link
+  // (goToFactionMonster) pre-fills the search box with that monster's name,
+  // same consume-once pattern as pendingItemQuery/pendingMonsterQuery —
+  // update() below then does the rest (expand + scroll + flash) exactly as
+  // if the visitor had typed it themselves.
+  if (pendingFactionQuery) {
+    searchBox.value = pendingFactionQuery;
+    pendingFactionQuery = null;
+  }
 
   function update() {
     const query = searchBox.value.toLowerCase().trim();
-    const filtered = query ? names.filter(n => n.toLowerCase().includes(query)) : names;
+    const zoneFilterValue = zoneFilterEl.value;
+    const matchState = { assigned: false };
 
-    countEl.textContent = query ? `Showing ${filtered.length} of ${names.length} factions` : '';
-    listEl.innerHTML = filtered.length
-      ? filtered.map(name => renderFactionCardHTML(name, factions.get(name), collapsedFactions.has(name))).join('')
-      : '<p class="items-empty">No factions match your search.</p>';
+    const cards = [];
+    names.forEach(name => {
+      const group = factions.get(name);
+      const filterByZone = list => zoneFilterValue ? list.filter(e => e.zones.includes(zoneFilterValue)) : list;
+      const positive = filterByZone(group.positive);
+      const negative = filterByZone(group.negative);
+      if (zoneFilterValue && !positive.length && !negative.length) return;
+
+      const nameMatches = !query || name.toLowerCase().includes(query);
+      const monsterMatches = !!query && [...positive, ...negative].some(e => e.monster.name.toLowerCase().includes(query));
+      if (query && !nameMatches && !monsterMatches) return;
+
+      // Any active filter has already narrowed this down to what's actually
+      // relevant, so force it open instead of also making the visitor click
+      // to expand it.
+      const forceExpand = !!query || !!zoneFilterValue;
+      const isCollapsed = forceExpand ? false : collapsedFactions.has(name);
+      cards.push(renderFactionCardHTML(name, { positive, negative }, isCollapsed, query, matchState));
+    });
+
+    if (zoneFilterValue && query) {
+      countEl.textContent = `Showing ${cards.length} factions matching "${searchBox.value.trim()}" in ${zoneFilterValue}`;
+    } else if (zoneFilterValue) {
+      countEl.textContent = `Showing ${cards.length} of ${names.length} factions with monsters in ${zoneFilterValue}`;
+    } else if (query) {
+      countEl.textContent = `Showing ${cards.length} of ${names.length} factions`;
+    } else {
+      countEl.textContent = '';
+    }
+
+    listEl.innerHTML = cards.length ? cards.join('') : '<p class="items-empty">No factions match your search.</p>';
 
     listEl.querySelectorAll('.faction-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -6115,9 +6234,22 @@ async function renderFactionPage(container) {
         if (monster) goToMonster(monster);
       });
     });
+
+    // A monster-name search can land its match deep inside a long list of
+    // factions — scroll/flash straight to the first one instead of leaving
+    // the visitor to scan for it, same idea as pendingHighlightMonster's
+    // row-flash elsewhere on the site.
+    const matchTarget = listEl.querySelector('#faction-monster-match-first');
+    if (matchTarget) {
+      suppressScrollReset = true;
+      matchTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      matchTarget.classList.add('row-flash');
+      matchTarget.addEventListener('animationend', () => matchTarget.classList.remove('row-flash'), { once: true });
+    }
   }
 
   searchBox.addEventListener('input', update);
+  zoneFilterEl.addEventListener('change', update);
   update();
 }
 

@@ -1520,6 +1520,29 @@ The page renders an empty state ("No faction data recorded yet") until the first
 "structurally ready, fills in over time" precedent as `conObservations` when that system was
 first added.
 
+**Search and zone filter (2026-08-25, user's own request)** — with 60+ factions on file, a
+visitor previously had to scroll every collapsed card by hand to find one monster. The single
+search box (`#faction-search`) now matches **both** faction names and monster names within
+every faction's positive/negative lists at once — a monster-name match force-expands the
+faction(s) it's under (bypassing the normal collapsed-by-default state) and scrolls/flashes
+straight to that specific `<li>` (`#faction-monster-match-first`/`.row-flash`, same
+scroll+flash convention as `pendingHighlightMonster` elsewhere; any *other* matching entries
+get a persistent, non-animated `.faction-monster-match` left-border so a shared-name monster
+listed under more than one faction/zone isn't just silently skipped). A second control, the
+Zone `<select>` (`#faction-filter-zone`, options built from every `factionEffects` entry's own
+zone or `maps` fallback — the *individual* zone names, not the joined display string), narrows
+every faction's lists down to just that zone's monsters, answering "what changes faction
+around here" without knowing which faction to check first. Zone filtering and the search box
+combine (zone narrows the candidate list, search then matches within it). Either filter alone
+force-expands its own results, same reasoning as the Vendors & Trainers page's zone
+groups — a visitor who already narrowed the list shouldn't also have to click to open it.
+
+**A monster with `factionEffects` shows a "Faction" field on its own card** (`renderMonster
+CardHTML`, both the hover tooltip and the full `#monster-viewer` modal) linking to "View on
+Faction page" — `goToFactionMonster`/`pendingFactionQuery` pre-fill the Faction page's search
+box with that monster's own name (same consume-once pattern as `pendingItemQuery`), so landing
+there reuses the exact same search/expand/scroll/flash path a manually typed search would.
+
 **Bulk-imported from the fan wiki's own per-faction pages** (2026-08-11, at the user's
 request — `monstersandmemories.miraheze.org/wiki/<Faction Name>`, one page per faction,
 each listing "Mobs you can kill to raise/lower the faction"). Same weaker-than-a-screenshot

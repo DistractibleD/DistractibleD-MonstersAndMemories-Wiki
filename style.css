@@ -3220,6 +3220,16 @@ body {
 }
 .faction-positive { color: #b6f2b6; }
 .faction-negative { color: #ffb3b3; }
+/* Marks every <li> a monster-name search matched (2026-08-25) — persistent,
+   not animated, since there can be more than one (a shared-name monster
+   listed under two factions/zones). The very first match also gets
+   .row-flash (see the animated keyframes above) for its one-time
+   scroll-into-view flash; this is the "still here after that fades" marker. */
+.faction-monster-match {
+  border-left: 2px solid var(--accent-dim);
+  padding-left: 6px;
+  margin-left: -8px;
+}
 
 /* ---------- Submit a Screenshot ---------- */
 .submit-form-notice {
