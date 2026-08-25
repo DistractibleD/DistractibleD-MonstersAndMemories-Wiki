@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-25T15:28", "summary": "Filled in Cloak of the Chiropteran's full class list and race" },
   { "timestamp": "2026-08-25T15:23", "summary": "Faction page: search now also matches monster names and jumps straight to them, plus a new Zone filter to see every faction change in one zone; monster cards with faction info now link straight there" },
   { "timestamp": "2026-08-24T22:46", "summary": "Added Raw Bay Crab to Night Harbor's Fishing catches (it does have a \"Raw\" prefix after all) and marked non-fish fishing catches as junk" },
   { "timestamp": "2026-08-24T19:32", "summary": "Latest Changes on the Home page now shows the first 5 updates right away instead of needing a click to expand" },

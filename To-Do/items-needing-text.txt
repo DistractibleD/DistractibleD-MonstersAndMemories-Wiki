@@ -314,8 +314,10 @@ absent) -- `race` left unset on Brood Dagger (Chaim The Herald), Obsidian Crysta
 Scholar Myrddin), Cursed Radiant Blade and Guillome's Cracked Skull (both Guillome The
 Accursed), Fell Trident (Horvarth Ezzadel), Vest of the Glass Viper (Malik The Glass Viper),
 Savage Club (Master Tracker Lark, text barely legible at the very bottom edge), Rod of
-Consumption (Mistress Nephidna), and Cloak of the Chiropteran / Shattershriek Spike / Wings
-of the Flittermouse (all three from Shattershriek). Guillome's Cracked Skull is missing
+Consumption (Mistress Nephidna), and Shattershriek Spike / Wings of the Flittermouse (both
+from Shattershriek) -- Cloak of the Chiropteran (also Shattershriek) had its Race/full Class
+list filled in from a later screenshot, 2026-08-25 (Race: ALL; Class list also gained SHD/
+SHM/SPB, which the original crop had cut off after ROG). Guillome's Cracked Skull is missing
 Slot/Class/Race entirely (card shows only Effect + Weight/Size) despite the site's own alt
 text calling it a BAG/BACKPACK-slot container -- the card itself gives no capacity/maxSize
 data to confirm that, so it's recorded as `needsInfo: true` with no slot at all rather than

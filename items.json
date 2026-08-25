@@ -16764,7 +16764,7 @@
   {
     "name": "Cloak of the Chiropteran",
     "slug": "cloak-of-the-chiropteran",
-    "lastUpdated": "2026-07-24",
+    "lastUpdated": "2026-08-25",
     "image": "images/items/cloak-of-the-chiropteran.jpg",
     "type": "Armor",
     "tags": ["MAGIC"],
@@ -16775,7 +16775,8 @@
     "description": "An azure bat-skin cloak that settles around the body like a shadow ready to take flight.",
     "weight": 0.25,
     "size": "Medium",
-    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG"]
+    "classes": ["ARC", "BRD", "BST", "CLR", "DRU", "FTR", "INQ", "MNK", "PAL", "RNG", "ROG", "SHD", "SHM", "SPB"],
+    "race": ["ALL"]
   },
   {
     "name": "Dusktower Helm",
