@@ -32,11 +32,43 @@ it too; caught and reverted before this was logged).
 - Whitefish: 6
 - Grouper: 9
 
-Running totals (1 stack, 20 bait)
+Distracted — Stack 2 (skill already deep past cap from Night Harbor grinding — zero skill
+gain in Shaded Dunes, fresh stack)
+------------------------------------------------------------------------------------------------
+Long gap since stack 1 — this stack happened somewhere in Distracted's ongoing Night Harbor
+cap-test climb (skill in the 171-177 range around this point; exact number the instant this
+Shaded Dunes stack was fished isn't pinned down, but every skill number reported this whole
+session is far past Shaded Dunes' confirmed 45 cap either way, so the exact figure doesn't
+change the conclusion). All skill gained this session is credited to Night Harbor fishing,
+not this stack. Row order confirmed by the user: Basa, Whitefish, Grouper. Totals don't fit
+cumulative with stack 1 (Grouper 9 → 1 would mean a decrease, impossible), so this is a
+fresh stack.
+- Basa: 6
+- Whitefish: 13
+- Grouper: 1
+
+**Zero skill-ups from this Shaded Dunes stack — exactly as predicted**, and consistent with
+the user's own report that their Night Harbor skill (177) is unaffected by this session.
+Second independent confirmation (after Distracted's original 1-stack visit here at skill
+114, which also gained nothing) that a character already past Shaded Dunes' cap gains no
+further skill from fishing there. Also confirms fishing skill is a single, shared/global
+stat across zones, not tracked separately per zone — Distracted's Night Harbor skill carried
+over directly and immediately hit Shaded Dunes' independent cap, rather than Shaded Dunes
+having its own separate skill counter starting fresh.
+
+Distracted — Stack 3 (skill 177, still unchanged — zero skill gain, fresh stack, 1 stack)
+------------------------------------------------------------------------------------------------
+Same row order confirmed by the user (Basa, Whitefish, Grouper). Skill still 177 — third
+straight confirmation this character gains nothing from fishing in Shaded Dunes anymore.
+- Basa: 4
+- Whitefish: 10
+- Grouper: 6
+
+Running totals (3 stacks, 60 bait)
 ------------------------------------
-- Basa: 5
-- Whitefish: 6
-- Grouper: 9
+- Basa: 15
+- Whitefish: 29
+- Grouper: 16
 
 Observations so far
 --------------------
