@@ -21,6 +21,7 @@
   { "name": "Shallow Shoals", "slug": "shallow-shoals", "image": "images/Maps/shallow-shoals.png", "thumbnail": "images/Maps/thumbs/shallow-shoals.jpg" },
   { "name": "Sungreet Strand", "slug": "sungreet-strand", "image": "images/Maps/sungreet-strand.jpg", "thumbnail": "images/Maps/thumbs/sungreet-strand.jpg" },
   { "name": "Tel Ekir", "slug": "tel-ekir", "image": "images/Maps/tel-ekir.jpg", "thumbnail": "images/Maps/thumbs/tel-ekir.jpg" },
+  { "name": "The Grain Cellar (Isometric)", "slug": "the-grain-cellar-isometric", "image": "images/Maps/the-grain-cellar-isometric.jpg", "thumbnail": "images/Maps/thumbs/the-grain-cellar-isometric.jpg" },
   { "name": "The Grain Cellar", "slug": "the-grain-cellar", "image": "images/Maps/the-grain-cellar.png", "thumbnail": "images/Maps/thumbs/the-grain-cellar.jpg" },
   { "name": "Tomb of the Last Wyrmsbane (Isometric)", "slug": "tomb-of-the-last-wyrmsbane-isometric", "image": "images/Maps/tomb-of-the-last-wyrmsbane-isometric.jpg", "thumbnail": "images/Maps/thumbs/tomb-of-the-last-wyrmsbane-isometric.jpg" },
   { "name": "Tomb of the Last Wyrmsbane (Top-Down)", "slug": "tomb-of-the-last-wyrmsbane", "image": "images/Maps/tomb-of-the-last-wyrmsbane.png", "thumbnail": "images/Maps/thumbs/tomb-of-the-last-wyrmsbane.jpg" },
