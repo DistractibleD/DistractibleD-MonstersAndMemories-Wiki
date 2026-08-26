@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-26T18:12", "summary": "Renamed the fan wiki link on Useful Links to \"Monsters and Memories Wiki @ miraheze.org\"" },
   { "timestamp": "2026-08-26T17:49", "summary": "Latest Changes on the Home page always shows the first 5 updates, and now has a collapse/expand toggle again for loading more" },
   { "timestamp": "2026-08-26T07:29", "summary": "Added an isometric version of The Grain Cellar map as the featured view, alongside the existing top-down one" },
   { "timestamp": "2026-08-25T15:28", "summary": "Filled in Cloak of the Chiropteran's full class list and race" },
