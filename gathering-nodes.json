@@ -67,7 +67,8 @@
     "minSkill": 110,
     "trivialSkill": 150,
     "results": ["Silver Ore", "Jagged Stone", "Glinting Crystallized Magic", { "family": "Flawed", "label": "Flawed Gems" }],
-    "locations": ["Sungreet Strand", "Vale of Zintar", "Scarwood"]
+    "locations": ["Sungreet Strand", "Vale of Zintar", "Scarwood"],
+    "note": "The minimum skill might have been lowered to around 107 — needs testing to confirm."
   },
   {
     "name": "Rich Silver Vein",
