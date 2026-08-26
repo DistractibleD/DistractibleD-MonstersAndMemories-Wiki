@@ -1271,9 +1271,12 @@ body {
 .home-nav-card:hover .home-nav-card-name {
   color: var(--accent);
 }
-/* "Latest Changes" sits underneath the nav grid above, expanded by default
-   (2026-08-24) — clickable heading + rotating chevron still lets a visitor
-   collapse it, same expand/collapse language as .sidebar-group-chevron. */
+/* "Latest Changes" sits underneath the nav grid above (2026-08-26) — the
+   first chunk (5 newest) always renders, collapsed or not; the clickable
+   heading + rotating chevron only toggle whether *more* than that loads,
+   same expand/collapse language as .sidebar-group-chevron. No CSS
+   show/hide here — script.js's renderHomePage controls how many <li>s
+   exist at all, same bounded-DOM approach as the Item Database's table. */
 .home-changelog-heading {
   display: inline-flex;
   align-items: center;
@@ -1296,9 +1299,6 @@ body {
   font-size: 0.7rem;
   font-weight: 400;
   color: var(--text-dim);
-}
-.home-changelog-body.home-changelog-collapsed {
-  display: none;
 }
 /* Home page's "Latest Changes" list (2026-08-13) — see renderHomePage in
    script.js. Each entry is a timestamp + plain-language summary; the

@@ -5979,12 +5979,14 @@ function renderFactionCardHTML(name, group, isCollapsed, query, matchState) {
 // time, but it grows by one entry every push forever, and the Item
 // Database's freeze already proved that "dump everything into the DOM,
 // just hide most of it" doesn't scale even when the extra nodes are
-// invisible). Starts showing 5 newest; expanding the section reveals the
-// list, and scrolling near the bottom of what's shown loads another chunk
-// via IntersectionObserver, exactly like `renderItemsList`'s
-// `visibleCount`/`ITEMS_CHUNK_SIZE` pattern — DOM node count stays
-// proportional to how far someone has scrolled, never to how large
-// changelog.json has grown.
+// invisible). The first chunk (5 newest) always renders, collapsed or not
+// (2026-08-26 follow-up — an expanded-by-default version showed 5 with no
+// click needed, but the user still wanted a collapse/expand toggle back;
+// this keeps the "no click needed to see the first 5" part while restoring
+// the toggle for going beyond that). Expanding loads one more chunk right
+// away and arms the "scroll for more" IntersectionObserver for further
+// chunks, exactly like `renderItemsList`'s `visibleCount`/`ITEMS_CHUNK_SIZE`
+// pattern — collapsing again drops back to just the first chunk.
 const HOME_CHANGELOG_CHUNK = 5;
 
 function formatChangelogTimestamp(ts) {
@@ -6038,10 +6040,10 @@ async function renderHomePage(container) {
     <div class="home-nav-grid">
       ${navPages.map(navCardHTML).join('')}
     </div>
-    <h2 class="home-changelog-heading expanded" id="home-changelog-toggle">
+    <h2 class="home-changelog-heading" id="home-changelog-toggle">
       <svg viewBox="0 0 24 24" class="home-changelog-chevron"><path d="M8 5 L16 12 L8 19 Z"/></svg>
       Latest Changes
-      <span class="home-changelog-hint" id="home-changelog-hint">(click to collapse)</span>
+      <span class="home-changelog-hint" id="home-changelog-hint">(click to show more)</span>
     </h2>
     <div id="home-changelog-body" class="home-changelog-body">
       ${changelog.length ? `
@@ -6056,47 +6058,59 @@ async function renderHomePage(container) {
     card.addEventListener('click', () => loadPage(card.dataset.file));
   });
 
-  // Starts expanded (2026-08-24 follow-up — collapsed-by-default was tried
-  // first but the user wanted the first chunk visible immediately, no click
-  // needed) — the collapse toggle itself stays, for anyone who wants to
-  // hide the section after seeing it. Plain class toggle, no stored
-  // preference — resets to expanded next time Home loads fresh.
+  if (!changelog.length) return;
+
+  // The first chunk always renders (see HOME_CHANGELOG_CHUNK's comment
+  // above) — `expanded` only gates whether going *past* that first chunk is
+  // possible, via a chunk loaded immediately on expand plus the "scroll for
+  // more" IntersectionObserver below. Collapsing again drops straight back
+  // to the first chunk, no stored preference — resets fresh next time Home
+  // loads.
   const changelogToggle = container.querySelector('#home-changelog-toggle');
-  const changelogBody = container.querySelector('#home-changelog-body');
   const changelogHint = container.querySelector('#home-changelog-hint');
+  const listEl = container.querySelector('#changelog-list');
+  const countEl = container.querySelector('#changelog-count');
+  let expanded = false;
+  let visibleCount = HOME_CHANGELOG_CHUNK;
+
+  function updateChangelogList() {
+    const shown = Math.min(visibleCount, changelog.length);
+    listEl.innerHTML = changelog.slice(0, shown).map(entryHTML).join('');
+    countEl.textContent = expanded
+      ? `Showing ${shown} of ${changelog.length} updates` + (shown < changelog.length ? ' — scroll for more' : '')
+      : '';
+  }
+  updateChangelogList();
+
   changelogToggle.addEventListener('click', () => {
-    const collapsed = changelogBody.classList.toggle('home-changelog-collapsed');
-    changelogToggle.classList.toggle('expanded', !collapsed);
-    changelogHint.textContent = collapsed ? '(click to expand)' : '(click to collapse)';
+    expanded = !expanded;
+    changelogToggle.classList.toggle('expanded', expanded);
+    changelogHint.textContent = expanded ? '(click to show less)' : '(click to show more)';
+    // Expanding doubles as "load the next chunk right now" — the visitor
+    // asked to see more, no reason to make them also scroll first if the
+    // sentinel isn't yet in view. Collapsing drops back to just the first
+    // chunk.
+    visibleCount = expanded
+      ? Math.min(visibleCount + HOME_CHANGELOG_CHUNK, changelog.length)
+      : HOME_CHANGELOG_CHUNK;
+    updateChangelogList();
   });
 
   // Bounded-DOM-via-scroll, same pattern as the Item Database's
-  // visibleCount/ITEMS_CHUNK_SIZE (see HOME_CHANGELOG_CHUNK's comment
-  // above) — only ever renders as many <li>s as the user has actually
-  // scrolled to, growing by one chunk whenever the sentinel just past the
-  // list scrolls into view. The section is visible by default now, but the
-  // sentinel still only fires once it's actually scrolled into view, so
-  // this stays just as cheap on first load as it was while collapsed.
-  if (changelog.length) {
-    const listEl = container.querySelector('#changelog-list');
-    const countEl = container.querySelector('#changelog-count');
-    let visibleCount = HOME_CHANGELOG_CHUNK;
-
-    function updateChangelogList() {
-      const shown = Math.min(visibleCount, changelog.length);
-      listEl.innerHTML = changelog.slice(0, shown).map(entryHTML).join('');
-      countEl.textContent = `Showing ${shown} of ${changelog.length} updates` + (shown < changelog.length ? ' — scroll for more' : '');
-    }
+  // visibleCount/ITEMS_CHUNK_SIZE — only ever renders as many <li>s as the
+  // visitor has actually scrolled to, growing by one chunk whenever the
+  // sentinel just past the list scrolls into view. Only does anything once
+  // expanded (the guard below) — while collapsed the sentinel sits right
+  // after a short 5-item list and could otherwise trigger a load the
+  // visitor never asked to see.
+  const changelogLoadObserver = new IntersectionObserver(entries => {
+    if (!expanded) return;
+    if (!entries.some(e => e.isIntersecting)) return;
+    if (visibleCount >= changelog.length) return;
+    visibleCount += HOME_CHANGELOG_CHUNK;
     updateChangelogList();
-
-    const changelogLoadObserver = new IntersectionObserver(entries => {
-      if (!entries.some(e => e.isIntersecting)) return;
-      if (visibleCount >= changelog.length) return;
-      visibleCount += HOME_CHANGELOG_CHUNK;
-      updateChangelogList();
-    }, { rootMargin: '400px' });
-    changelogLoadObserver.observe(container.querySelector('#changelog-load-sentinel'));
-  }
+  }, { rootMargin: '400px' });
+  changelogLoadObserver.observe(container.querySelector('#changelog-load-sentinel'));
 }
 
 async function renderFactionPage(container) {
