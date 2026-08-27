@@ -2238,3 +2238,73 @@ account needed.**
   `gathering-nodes.json`'s filename convention). Sample images are *copies* of real
   screenshots, not references in place, so `images/samples/` stays self-contained. Add
   another example the same way (drop a `.jpg`, add a `SUBMIT_EXAMPLES` entry).
+
+## Session exports & pooled Fishing rarity
+
+**MnM Field Notes** is a separate companion desktop app (PowerShell + WebView2, its own repo,
+`D:\Claude files\MnM Loot Tracker\` locally) guild members use to manually log play sessions
+(Combat/Fishing/Gathering/Crafting) while playing. At session end it can submit a plain-text
+export through the same Cloudflare Worker as the wiki's own "Submit a Screenshot" form
+(`cloudflare-worker/submit-worker.js`, `handleSessionExport` — a second `sessionExport` form
+field alongside the existing screenshot/notes path, both ending in the same
+branch+commit+PR flow). The Worker commits the export text verbatim as one new file into
+`session-exports/` (filename `session-export-<timestamp>.txt`, not the app's own local
+filename) and opens a PR — same "nothing is live until merged" review gate as any other
+submission. **This repo never edits MnM Field Notes' own code** — the relationship is
+one-directional the other way too: that app reads this wiki's JSON data read-only (item/
+monster lookups), this repo only ever receives its session-export text files.
+
+**Why this exists:** the app computes a per-zone Fishing catch-rate estimate from its own
+local log alone (`Get-FishRarity` in `MnMFieldNotes.ps1` — attempts vs. catches per fish,
+recomputed from `Data/AllTimeLog.jsonl`). A single player's install only ever sees their own
+attempts, a small sample. Pooling every guild member's merged session exports into one
+combined statistic and publishing it here (same way `items.json`/`monsters.json`/etc. are
+already published on this repo's GitHub Pages site) lets the app fetch a much larger shared
+sample back down read-only and merge it with its own local data.
+
+- **`session-exports/*.txt`** — one file per merged session export, never hand-edited. Each
+  file's own header states type/logger/timestamps/entry count; a `--- harvesting ---` block
+  (shared by Fishing and Gathering) groups entries as `== <name> (<tradeskill>) ==`, each line
+  `- Zone: X | [Area: Y | ][Skill: Z | ]Result: <fish name>|No catch/result | Attempts: N`. For
+  Fishing, `<name>` is the zone, not a fish — read the per-line `Zone:` field instead of the
+  group header, since that's guaranteed accurate regardless of what the header groups on.
+  Newer exports (2026-08-27 on) also carry a precomputed `--- Fishing rarity data ---` block
+  (this session's own counts, plus an "All-time on this install" tier) — **not used by the
+  aggregator**, which reads the raw per-attempt lines instead so one parser works uniformly
+  across every export regardless of age. This file format is a guide the app's own exporter
+  can change over time, not a spec other files are held to — read a few real files for ground
+  truth before trusting this description if the shape seems to have drifted.
+- **`scripts/build-fishing-rarity.js`** — plain Node (no dependencies), reads every
+  `session-exports/*.txt`, extracts every Fishing harvesting line (tracks the tradeskill named
+  in the most recently seen `== Name (Tradeskill) ==` header — works the same whether or not a
+  `--- harvesting ---` marker is present, and Combat/Crafting headers' own parenthesized text
+  never happens to match "Fishing"), and sums `attempts` into that zone's `totalAttempts` and
+  each successful catch into `fish[<name>]`. **Sums raw counts, never averages percentages** —
+  a 3-attempt session and a 300-attempt session both just add their numbers into the same
+  pool, so a small session naturally ends up with proportionally less influence on the
+  combined percentage than a large one; no separate sample-size weighting was needed. No
+  "conflicting data" arbitration either (unlike the Guild data trust model for manually
+  submitted screenshots) — every source file is structured, machine-written data from a real
+  session, and the merged PR already was the human review step, so every merged file is summed
+  unconditionally. A file that fails to parse is skipped with a console warning rather than
+  failing the whole build. **Only ever reads `attempts`/success/resultItem/zone off the raw
+  lines — never the file's own "All-time on this install" rarity block**, which already
+  includes that one submitter's other sessions; summing it across files from the same person
+  would double-count them.
+- **`fishing-rarity.json`** (repo root) — the script's output, published on GitHub Pages same
+  as any other data file. Shape matches `Get-FishRarity`'s own output exactly, deliberately, so
+  the app can merge this in with no format translation: `{ "<zone>": { "totalAttempts": N,
+  "fish": { "<fishName>": N } } }` — a plain object, no wrapper/metadata keys, so the app can
+  treat every top-level key as a real zone name. Zone and fish keys are written pre-sorted
+  alphabetically for a stable, minimal diff across regenerations.
+- **`.github/workflows/fishing-rarity.yml`** — runs `scripts/build-fishing-rarity.js` and
+  commits `fishing-rarity.json` if it changed, triggered by any push to `main` touching
+  `session-exports/**` (i.e. every merged session-export PR) plus `workflow_dispatch` for an
+  on-demand manual rebuild from the Actions tab. The bot commit only ever touches
+  `fishing-rarity.json`, never `session-exports/**`, so it can never re-trigger itself.
+- **Scope, deliberately Fishing-only for now** — Fishing is the only stat the app currently
+  computes client-side, so it's the only one pooled. The line-parsing step
+  (`extractFishingLines`) is generic to any tradeskill using the same harvesting-line shape
+  (Gathering already does), so a future stat (e.g. Gathering yield rates) would reuse that
+  parser rather than needing a rewrite — but no second aggregator exists yet, don't build one
+  speculatively ahead of an actual second stat being needed.

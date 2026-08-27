@@ -1,0 +1,40 @@
+name: Rebuild pooled Fishing rarity data
+
+# Regenerates fishing-rarity.json from every file in session-exports/ (guild
+# members' MnM Field Notes session exports, merged in via PR) and commits it
+# back to main if it changed. Runs on every merge that touches
+# session-exports/**, and on demand via the Actions tab for a manual rebuild.
+#
+# The commit this workflow makes only ever touches fishing-rarity.json, never
+# session-exports/**, so it can never re-trigger itself.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'session-exports/**'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build fishing-rarity.json
+        run: node scripts/build-fishing-rarity.js
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- fishing-rarity.json; then
+            echo "No change to fishing-rarity.json — nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add fishing-rarity.json
+          git commit -m "Rebuild pooled Fishing rarity data"
+          git push
