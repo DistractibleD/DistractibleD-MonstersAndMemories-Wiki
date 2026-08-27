@@ -75,8 +75,12 @@ function checkLowSkillHighTierCatches(records, fishRef) {
     const refNote = g.ref.minSkill !== null
       ? `known min skill ~${g.ref.minSkill}`
       : `rarity: ${g.ref.rarity}`;
+    const min = Math.min(...g.skills);
+    const max = Math.max(...g.skills);
     const skillsNote = g.skills.length > 1
-      ? `skill ${Math.min(...g.skills)}-${Math.max(...g.skills)} across ${g.skills.length} catches`
+      ? (min === max
+        ? `skill ${min} across ${g.skills.length} catches`
+        : `skill ${min}-${max} across ${g.skills.length} catches`)
       : `skill ${g.skills[0]}`;
     return `**${g.fish}** caught in **${g.zone}** at ${skillsNote} (${refNote})`;
   });
