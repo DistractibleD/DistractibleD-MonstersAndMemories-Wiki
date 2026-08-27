@@ -1,1 +1,10 @@
-{}
+{
+  "Shallow Shoals": {
+    "totalAttempts": 30,
+    "fish": {
+      "Deep Sea Devourer": 7,
+      "Raw Bay Crab": 5,
+      "Sunscale Skimmer": 8
+    }
+  }
+}
