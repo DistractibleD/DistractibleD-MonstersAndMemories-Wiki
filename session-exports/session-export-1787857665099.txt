@@ -1,0 +1,35 @@
+Session export - fishing
+Logged by: AutoTestUser
+Started: 2026-08-27 20:49:23
+Ended: 2026-08-27 21:07:40
+Entries: 10
+Fishing skill at session start: 215
+Fishing skill at session end: 216
+
+--- harvesting ---
+
+== Shallow Shoals (Fishing) ==
+- Zone: Shallow Shoals | Skill: 215 | Result: Raw Bay Crab | Attempts: 2
+- Zone: Shallow Shoals | Skill: 216 | Result: Deep Sea Devourer | Attempts: 2
+- Zone: Shallow Shoals | Skill: 216 | Result: Raw Bay Crab | Attempts: 1
+- Zone: Shallow Shoals | Skill: 216 | Result: Raw Bay Crab | Attempts: 1
+- Zone: Shallow Shoals | Skill: 216 | Result: Deep Sea Devourer | Attempts: 1
+- Zone: Shallow Shoals | Skill: 216 | Result: Raw Bay Crab | Attempts: 1
+- Zone: Shallow Shoals | Skill: 216 | Result: Deep Sea Devourer | Attempts: 2
+- Zone: Shallow Shoals | Skill: 216 | Result: Raw Bay Crab | Attempts: 1
+- Zone: Shallow Shoals | Skill: 216 | Result: Raw Bay Crab | Attempts: 1
+- Zone: Shallow Shoals | Skill: 216 | Result: Deep Sea Devourer | Attempts: 3
+
+--- Fishing rarity data (this app's own logged data, not the wiki's rarity label) ---
+
+== Shallow Shoals ==
+This session - 15 attempts:
+  - Deep Sea Devourer: 4 / 15 (26.7%)
+  - Raw Bay Crab: 6 / 15 (40%)
+All-time on this install, includes this session - 45 attempts:
+  - Basa: 2 / 45 (4.4%)
+  - Deep Sea Devourer: 12 / 45 (26.7%)
+  - Raw Bay Crab: 11 / 45 (24.4%)
+  - Sunscale Skimmer: 8 / 45 (17.8%)
+
+
