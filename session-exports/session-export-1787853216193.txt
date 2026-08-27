@@ -1,0 +1,34 @@
+Session export - fishing
+Logged by: Distracted
+Started: 2026-08-27 18:45:55
+Ended: 2026-08-27 19:53:27
+Entries: 21
+Fishing skill at session start: 214
+Fishing skill at session end: 215
+
+--- harvesting ---
+
+== Shallow Shoals (Fishing) ==
+- Zone: Shallow Shoals | Skill: 214 | Result: Sunscale Skimmer | Attempts: 2
+- Zone: Shallow Shoals | Skill: 214 | Result: Raw Bay Crab | Attempts: 1
+- Zone: Shallow Shoals | Skill: 215 | Result: Deep Sea Devourer | Attempts: 2
+- Zone: Shallow Shoals | Skill: 215 | Result: Sunscale Skimmer | Attempts: 4
+- Zone: Shallow Shoals | Skill: 215 | Result: Sunscale Skimmer | Attempts: 1
+- Zone: Shallow Shoals | Skill: 215 | Result: Raw Bay Crab | Attempts: 0
+- Zone: Shallow Shoals | Skill: 215 | Result: Raw Bay Crab | Attempts: 0
+- Zone: Shallow Shoals | Skill: 215 | Result: Deep Sea Devourer | Attempts: 1
+- Zone: Shallow Shoals | Skill: 215 | Result: Deep Sea Devourer | Attempts: 1
+- Zone: Shallow Shoals | Skill: 215 | Result: Raw Bay Crab | Attempts: 2
+- Zone: Shallow Shoals | Skill: 215 | Result: Raw Bay Crab | Attempts: 3
+- Zone: Shallow Shoals | Skill: 215 | Result: Deep Sea Devourer | Attempts: 1
+- Zone: Shallow Shoals | Skill: 215 | Result: Sunscale Skimmer | Attempts: 2
+- Zone: Shallow Shoals | Skill: 215 | Result: Sunscale Skimmer | Attempts: 1
+- Zone: Shallow Shoals | Skill: 215 | Result: Deep Sea Devourer | Attempts: 2
+- Zone: Shallow Shoals | Skill: 215 | Result: Deep Sea Devourer | Attempts: 1
+- Zone: Shallow Shoals | Skill: 215 | Result: Sunscale Skimmer | Attempts: 3
+- Zone: Shallow Shoals | Skill: 215 | Result: Sunscale Skimmer | Attempts: 0
+- Zone: Shallow Shoals | Skill: 215 | Result: Sunscale Skimmer | Attempts: 1
+- Zone: Shallow Shoals | Skill: 215 | Result: Deep Sea Devourer | Attempts: 1
+- Zone: Shallow Shoals | Skill: 215 | No catch/result | Attempts: 1
+
+
