@@ -17,6 +17,7 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  issues: write
 
 jobs:
   check:
@@ -36,11 +37,24 @@ jobs:
         if: steps.changed.outputs.files != ''
         run: node scripts/check-fishing-anomalies.js ${{ steps.changed.outputs.files }} > findings.md
 
-      - name: Comment if anything was flagged
+      # A PR comment alone relies on GitHub's own notification settings, which
+      # aren't something this workflow can see or control. A label + title
+      # marker makes a flagged PR visually obvious in the PR list itself
+      # (gh pr list, the GitHub UI) regardless of whether any notification
+      # ever reaches anyone — the fallback that always works.
+      - name: Mark PR as flagged
         if: steps.changed.outputs.files != ''
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ -s findings.md ]; then
             gh pr comment ${{ github.event.pull_request.number }} --body-file findings.md
+            gh label create "flagged for review" --color FF6B00 \
+              --description "Possible data anomaly - see PR comment before merging" --force
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "flagged for review"
+            title="${{ github.event.pull_request.title }}"
+            case "$title" in
+              "🚩"*) ;; # already marked, e.g. a re-run on a later push to the same PR
+              *) gh pr edit ${{ github.event.pull_request.number }} --title "🚩 $title" ;;
+            esac
           fi

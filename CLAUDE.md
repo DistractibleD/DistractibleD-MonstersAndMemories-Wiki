@@ -2354,10 +2354,22 @@ button. A clean submission gets no comment at all — no noise on the common cas
      this) and the new submission itself having at least 10 attempts (so a tiny sample isn't
      flagged as "spiking" off pure noise). This is the literal "use my submissions to set a
      standard" mechanism — it strengthens automatically as more sessions get merged.
-- **`.github/workflows/fishing-anomaly-check.yml`** — `pull-requests: write` permission (the
-  default `GITHUB_TOKEN` is sufficient, no new secret) to post the comment via `gh pr
-  comment`. Runs independently of `fishing-rarity.yml` (that one only fires on push-to-`main`,
-  i.e. after merge) — this one fires on the PR itself, before any merge decision.
+- **`.github/workflows/fishing-anomaly-check.yml`** — `pull-requests: write` + `issues: write`
+  permission (the default `GITHUB_TOKEN` is sufficient, no new secret) to post the comment via
+  `gh pr comment` and mark the PR (below). Runs independently of `fishing-rarity.yml` (that one
+  only fires on push-to-`main`, i.e. after merge) — this one fires on the PR itself, before any
+  merge decision.
+- **A PR comment alone isn't a reliable way for the site owner to actually notice a flag** —
+  whether it reaches them depends on their own GitHub notification settings, which this
+  workflow has no visibility into and the site owner doesn't check GitHub directly day to day
+  (see CLAUDE.md's own "Git workflow" section — Claude handles all commits/pushes for them).
+  So a flagged PR also gets a `🚩` prefix added to its title and a `flagged for review` label
+  (auto-created if missing, orange) — both visible in a plain `gh pr list`/the GitHub PR list
+  UI regardless of whether any notification ever fires. This is the fallback that always
+  works; treat GitHub's own notifications as a bonus, not the mechanism to rely on. If the
+  site owner wants something more actively pushed to them (e.g. a message in the guild's
+  Discord), that's a deliberate follow-up requiring a new webhook/secret — don't build it
+  unprompted.
 - **Not retroactive** — only ever checks the file(s) a PR is adding, never re-audits already-
   merged files. If a bad file is ever suspected after the fact, that's a manual data
   correction (edit/remove the file in `session-exports/`, re-run `fishing-rarity.yml` via
