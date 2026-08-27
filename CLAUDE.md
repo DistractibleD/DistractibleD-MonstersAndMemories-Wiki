@@ -2302,9 +2302,68 @@ sample back down read-only and merge it with its own local data.
   `session-exports/**` (i.e. every merged session-export PR) plus `workflow_dispatch` for an
   on-demand manual rebuild from the Actions tab. The bot commit only ever touches
   `fishing-rarity.json`, never `session-exports/**`, so it can never re-trigger itself.
+- **`scripts/lib/session-export.js`** — the actual line/header parser (`extractFishingLines`,
+  `parseSessionHeader`), factored out so `build-fishing-rarity.js` and
+  `check-fishing-anomalies.js` (below) can never silently drift on what counts as a valid
+  line. Neither script defines its own copy.
 - **Scope, deliberately Fishing-only for now** — Fishing is the only stat the app currently
-  computes client-side, so it's the only one pooled. The line-parsing step
-  (`extractFishingLines`) is generic to any tradeskill using the same harvesting-line shape
-  (Gathering already does), so a future stat (e.g. Gathering yield rates) would reuse that
-  parser rather than needing a rewrite — but no second aggregator exists yet, don't build one
-  speculatively ahead of an actual second stat being needed.
+  computes client-side, so it's the only one pooled/checked. The shared parser is generic to
+  any tradeskill using the same harvesting-line shape (Gathering already does), so a future
+  stat (e.g. Gathering yield rates) would reuse it rather than needing a rewrite — but no
+  second aggregator exists yet, don't build one speculatively ahead of an actual second stat
+  being needed.
+
+### Flagging anomalous session exports before merge
+
+Merging a session-export PR was always the human review gate, but nothing was actually
+*checking* the data before that decision — the aggregator trusted every merged file
+unconditionally (see above). Added 2026-08-27 at the user's own request, after specifically
+asking for protection against a session export that's wrong because the app was used
+incorrectly, or a "troll" submission (e.g. someone hand-editing a submitted file, or the app
+misbehaving) — using the user's own genuine submissions as the standard of what normal data
+looks like, and flagging things that deviate from it. Deliberately advisory, not a hard gate
+("we don't have to be too strict... flag info that seems straight up wrong" — the user's own
+framing): every check is a heuristic that real gameplay variance could also produce, so it
+only ever posts a PR comment for a human to weigh, never fails a check or blocks the merge
+button. A clean submission gets no comment at all — no noise on the common case.
+
+- **`scripts/check-fishing-anomalies.js <file...>`** — run by
+  `.github/workflows/fishing-anomaly-check.yml` on every session-export PR (`opened`/
+  `synchronize`), against just the file(s) that PR actually adds (diffed against the PR's own
+  base SHA, not the whole `session-exports/` folder). Three independent checks, each against
+  a different "standard":
+  1. **Fish landed well below their known skill requirement** — cross-references each catch's
+     own `Skill:` value against that species' `minSkill`/`rarity` in `gathering-nodes.json`.
+     Flags a skill-0 catch of anything with `minSkill >= 20` or Rare/Very Rare rarity outright,
+     or a catch below half its recorded `minSkill` otherwise. **Deliberately generous** — real
+     confirmed per-zone variance is already 30-40 skill points (Grouper: `minSkill` 70 in
+     Night Harbor vs. ~30 in Shaded Dunes, both directly confirmed, see
+     `To-Do/fishing-catch-observations*.md`), so a tight threshold here would flag legitimate
+     data constantly.
+  2. **High catch volume with no skill gain** — compares the header's `Fishing skill at
+     session start/end`. Only flags 40+ successful catches with zero net skill change AND a
+     starting skill under 30 — kept well below the lowest *confirmed* real per-zone skill cap
+     (45, Shaded Dunes) specifically so a real capped-out high-skill session (the common,
+     expected case — see Distracted's own first submission: skill 214→215 across 21 entries,
+     almost flat) never trips this.
+  3. **Catch rate unusually different from established data** — this submission's own
+     per-fish catch rate for a zone vs. the rate `fishing-rarity.json` already has on record
+     for that zone, flagged only past 4x the established rate. Gated on the *existing*
+     baseline having at least 50 pooled attempts for that zone (otherwise there's no real
+     standard yet to compare against — a lone first submission for a zone can never trigger
+     this) and the new submission itself having at least 10 attempts (so a tiny sample isn't
+     flagged as "spiking" off pure noise). This is the literal "use my submissions to set a
+     standard" mechanism — it strengthens automatically as more sessions get merged.
+- **`.github/workflows/fishing-anomaly-check.yml`** — `pull-requests: write` permission (the
+  default `GITHUB_TOKEN` is sufficient, no new secret) to post the comment via `gh pr
+  comment`. Runs independently of `fishing-rarity.yml` (that one only fires on push-to-`main`,
+  i.e. after merge) — this one fires on the PR itself, before any merge decision.
+- **Not retroactive** — only ever checks the file(s) a PR is adding, never re-audits already-
+  merged files. If a bad file is ever suspected after the fact, that's a manual data
+  correction (edit/remove the file in `session-exports/`, re-run `fishing-rarity.yml` via
+  `workflow_dispatch`) — same as correcting any other merged data on this site, not something
+  this pipeline automates.
+- **Thresholds are a first pass, not tuned against real abuse** — there's only ever been one
+  real submission so far. Revisit the numbers above once more real (and, ideally, some
+  deliberately bad) submissions have actually gone through this — don't assume they're
+  perfectly calibrated.

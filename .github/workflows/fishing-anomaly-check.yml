@@ -1,0 +1,46 @@
+name: Check new session export for anomalies
+
+# Runs when MnM Field Notes' Cloudflare Worker opens a PR adding a file to
+# session-exports/ (see CLAUDE.md "Session exports & pooled Fishing
+# rarity"). Flags anything that looks like misuse or fabricated data — e.g.
+# a high-skill-requirement fish caught at 0 skill, or a big batch of
+# catches with no skill gain — so a human can take a look before deciding
+# whether to merge. Advisory only: never fails the check, never blocks the
+# merge button. A clean submission gets no comment at all.
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - 'session-exports/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Find new/changed session export files
+        id: changed
+        run: |
+          files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} -- session-exports/ | tr '\n' ' ')
+          echo "files=$files" >> "$GITHUB_OUTPUT"
+
+      - name: Run anomaly check
+        if: steps.changed.outputs.files != ''
+        run: node scripts/check-fishing-anomalies.js ${{ steps.changed.outputs.files }} > findings.md
+
+      - name: Comment if anything was flagged
+        if: steps.changed.outputs.files != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -s findings.md ]; then
+            gh pr comment ${{ github.event.pull_request.number }} --body-file findings.md
+          fi

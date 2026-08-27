@@ -29,67 +29,11 @@
 
 const fs = require('fs');
 const path = require('path');
+const { extractFishingLines } = require('./lib/session-export');
 
 const REPO_ROOT = path.join(__dirname, '..');
 const SESSION_EXPORTS_DIR = path.join(REPO_ROOT, 'session-exports');
 const OUTPUT_PATH = path.join(REPO_ROOT, 'fishing-rarity.json');
-
-// Parses one "- Zone: X | Area: Y | Skill: Z | Result: W | Attempts: N" (or
-// "...| No catch/result | Attempts: N") harvesting line into its fields.
-// Split-on-" | " rather than one rigid regex so field order/presence can
-// drift (Area and Skill are already optional today) without breaking this.
-function parseHarvestingLine(line) {
-  const body = line.replace(/^-\s*/, '');
-  const segments = body.split(' | ');
-  const rec = { zone: null, attempts: 0, success: false, resultItem: null };
-  for (const seg of segments) {
-    if (seg === 'No catch/result') {
-      rec.success = false;
-      continue;
-    }
-    const idx = seg.indexOf(': ');
-    if (idx === -1) continue;
-    const key = seg.slice(0, idx).trim();
-    const value = seg.slice(idx + 2).trim();
-    if (key === 'Zone') {
-      rec.zone = value;
-    } else if (key === 'Attempts') {
-      const n = parseInt(value, 10);
-      rec.attempts = Number.isFinite(n) ? n : 0;
-    } else if (key === 'Result') {
-      rec.success = true;
-      // A generic "Result: success" (no specific item) never appears for
-      // Fishing in practice, but Get-FishRarity guards on resultItem being
-      // set too — mirror that here rather than assuming.
-      rec.resultItem = value === 'success' ? null : value;
-    }
-    // Area/Skill: not needed for this stat, ignored.
-  }
-  return rec;
-}
-
-// Walks one session export's full text and yields every Fishing harvesting
-// line found, regardless of whether it sits under a "--- harvesting ---"
-// section marker (only printed when a session mixes multiple entry types) —
-// tracking the tradeskill named on the most recent "== Name (Tradeskill) =="
-// header is enough on its own, and works the same for Combat/Crafting
-// headers (their own parenthesized text just never matches "Fishing").
-function extractFishingLines(text) {
-  const lines = text.split(/\r?\n/);
-  const out = [];
-  let currentTradeskill = null;
-  for (const line of lines) {
-    const headerMatch = line.match(/^==\s*.+?\s*\((.+?)\)\s*==$/);
-    if (headerMatch) {
-      currentTradeskill = headerMatch[1].trim();
-      continue;
-    }
-    if (currentTradeskill === 'Fishing' && line.startsWith('- Zone:')) {
-      out.push(parseHarvestingLine(line));
-    }
-  }
-  return out;
-}
 
 function buildFishingRarity(sessionExportDir) {
   const result = {};
@@ -142,4 +86,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { parseHarvestingLine, extractFishingLines, buildFishingRarity };
+module.exports = { buildFishingRarity };
