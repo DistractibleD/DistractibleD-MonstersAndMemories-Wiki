@@ -1,0 +1,55 @@
+Session export - fishing
+Logged by: TestAnomalyBot
+Started: 2026-08-27 21:00:00
+Ended: 2026-08-27 21:10:00
+Entries: 45
+Fishing skill at session start: 0
+Fishing skill at session end: 0
+
+== Night Harbor (Fishing) ==
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+- Zone: Night Harbor | Skill: 0 | Result: Grouper | Attempts: 1
+
