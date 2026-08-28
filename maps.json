@@ -9,7 +9,6 @@
   { "name": "Faelindral", "slug": "faelindral", "image": "images/Maps/faelindral.jpg", "thumbnail": "images/Maps/thumbs/faelindral.jpg" },
   { "name": "Fallen Pass", "slug": "fallen-pass", "image": "images/Maps/fallen-pass.jpg", "thumbnail": "images/Maps/thumbs/fallen-pass.jpg" },
   { "name": "Glass Flats", "slug": "glass-flats", "image": "images/Maps/glass-flats.png", "thumbnail": "images/Maps/thumbs/glass-flats.jpg" },
-  { "name": "Glass Flats (Mob Levels)", "slug": "glass-flats-mob-levels", "image": "images/Maps/glass-flats-mob-levels.jpg", "thumbnail": "images/Maps/thumbs/glass-flats-mob-levels.jpg" },
   { "name": "Grimtide Sanctum", "slug": "grimtide-sanctum", "image": "images/Maps/grimtide-sanctum.png", "thumbnail": "images/Maps/thumbs/grimtide-sanctum.jpg" },
   { "name": "Infested Crypt", "slug": "infested-crypt", "image": "images/Maps/infested-crypt.png", "thumbnail": "images/Maps/thumbs/infested-crypt.jpg" },
   { "name": "Infested Crypt (Isometric)", "slug": "infested-crypt-isometric", "image": "images/Maps/infested-crypt-isometric.jpg", "thumbnail": "images/Maps/thumbs/infested-crypt-isometric.jpg" },
