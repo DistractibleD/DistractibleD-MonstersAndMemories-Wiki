@@ -1,0 +1,21 @@
+Session export - fishing
+Logged by: AutoTestUser
+Started: 2026-08-28 19:52:29
+Ended: 2026-08-28 19:55:10
+Entries: 1
+Fishing skill at session start: 40
+Fishing skill at session end: 40
+
+== Shaded Dunes (Fishing) ==
+- Zone: Shaded Dunes | Skill: 40 | Result: Whitefish | Attempts: 1
+
+--- Fishing rarity data (this app's own logged data, not the wiki's rarity label) ---
+
+== Shaded Dunes ==
+This session - 1 attempt:
+  - Whitefish: 1 / 1 (100.0%)
+All-time on this install, includes this session - 22 attempts:
+  - Basa: 2 / 22 (9.1%)
+  - Grouper: 2 / 22 (9.1%)
+  - Whitefish: 6 / 22 (27.3%)
+
