@@ -2370,6 +2370,21 @@ combined statistic and publishing it here (same way `items.json`/`monsters.json`
 already published on this repo's GitHub Pages site) lets the app fetch a much larger shared
 sample back down read-only and merge it with its own local data.
 
+**Coming soon (as of 2026-08-29, not shipped yet on the app side): a "Camps" section inside
+Combat session exports**, feeding the Camps page (see "Adventuring Camps" above) — a "Log a
+camp" action in the app (name/zone/area/monsters/minLevel/maxLevel/raid/note, matching
+`camps.json`'s own schema) prints a new labeled block into the export text, the same way
+Fishing rarity stats already do. **Deliberately not auto-parsed into `camps.json`** — unlike
+the Fishing pipeline (pure numeric aggregation, safe to fully automate), a camp claim is a
+semantic judgment call (is this really a new camp, or an addition to one already on file?)
+that needs a human/Claude actually reading it, same trust model as `images/inbox/`/
+`community-notes/`. When processing a session export that has a Camps section, read it and
+apply it to `camps.json` by hand (new entry, or fold into an existing one by matching
+name/zone) — don't write an automated extraction script for this section the way
+`build-fishing-rarity.js` exists for Fishing. Exact section format not confirmed yet — check
+a real export for the actual shape once one exists, this description may not match it
+precisely.
+
 - **`session-exports/*.txt`** — one file per merged session export, never hand-edited. Each
   file's own header states type/logger/timestamps/entry count; a `--- harvesting ---` block
   (shared by Fishing and Gathering) groups entries as `== <name> (<tradeskill>) ==`, each line
