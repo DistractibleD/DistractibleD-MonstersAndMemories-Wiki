@@ -365,11 +365,19 @@ Recipe schema grows as real cards come in — extend the same way for new fields
 ### The sidebar can nest pages under a group
 
 `pages.json` entries can carry an optional `"group"` field (e.g. `"Tradeskilling"`) — pages
-sharing the same `group` render nested under one plain, non-clickable sidebar heading
-(`buildSidebar`). Currently Gathering + Crafting share "Tradeskilling". Add to an existing
-group by matching the string; start a new group with a new string — no other code changes,
-`buildSidebar` handles any group generically. Consecutive same-`group` pages share one
-heading; no-`group` pages render as before.
+sharing the same `group` render nested under one collapsible sidebar heading (`buildSidebar`,
+collapsed by default, click to expand). Currently Gathering + Crafting share "Tradeskilling";
+Named Monsters + Regular Monsters + Camps + Leveling Suggestions share "Adventuring" (merged
+2026-08-29, previously Named/Regular Monsters had their own "Monsters" group and Leveling
+Suggestions was ungrouped — same rename-and-reorder approach applies to any future regroup;
+Camps was added new the same day, straight into the group).
+Add to an existing group by matching the string; start a new group with a new string — no
+other code changes, `buildSidebar` handles any group generically. **Grouping requires the
+pages to be consecutive in `pages.json`** — a new heading starts the instant `page.group`
+changes from the previous entry, so a page joining an existing group has to be moved next to
+it, not just given the matching string. An optional icon for the heading itself goes in
+`SIDEBAR_GROUP_ICON` (script.js), keyed by the group string — falls back to no icon if
+omitted, but every group so far has one. No-`group` pages render as before.
 
 **Enchanting and Disenchanting are ordinary tradeskills in `crafting.json`/
 `tradeskills.json`** — nothing schema-wise sets them apart from Blacksmithing/Alchemy, each
@@ -926,7 +934,8 @@ genuinely ambiguous which item it names.
 
 **Named and Regular monsters are two separate top-level pages** (`pages.json`
 `"Named Monsters"`/`"Regular Monsters"`, both `"type": "monsters"`, sharing `"group":
-"Monsters"`). Each: category grid of zones (`renderMonstersCategories(container, named)`,
+"Adventuring"` alongside Leveling Suggestions — see "The sidebar can nest pages under a
+group"). Each: category grid of zones (`renderMonstersCategories(container, named)`,
 scoped to that page's subset, own quick search) drilling into a sortable/searchable table
 (`renderMonstersList`) scoped to one zone. Zone drill-down uses a hash sub-route
 (`#monsters-named/<zone>` or `#monsters-regular/<zone>`, not a pending variable) so Back pops
@@ -1569,9 +1578,108 @@ user's own direction, not a standing policy change. Added as minimal stubs (`nam
 Priest Of Muurtu" under different punctuation (slugified to the same string); merged into
 the existing entry instead of creating a duplicate.
 
+## Adventuring Camps
+
+Own top-level page (`pages.json` `"type": "camps"`, nested in the "Adventuring" sidebar
+group with Named/Regular Monsters and Leveling Suggestions — added 2026-08-29 at the site
+owner's own request, "to clean up the sidebar a bit"). A flat, sortable/searchable/filterable
+table of known monster spawn camps — `camps.json`, empty array to start (`[]`), fills in over
+time the same way every other data file does.
+
+**Combat camps only** (explicit site-owner scoping, same day) — a spot where a group of
+monsters spawns to fight, not a fishing hole or gathering node. Fishing/Gathering already
+have their own dedicated page and data file (`gathering-nodes.json`, see "Gathering
+tradeskills are a separate area, not recipes") — don't add a fishing/gathering spawn point
+here even though "camp" could loosely describe one too. The page's own intro copy says
+"combat camps" explicitly and points to Gathering for the other kind.
+
+**Deliberately a separate dataset from Leveling Suggestions' own informal camp names**
+(`leveling-locations.json`) — that page is a single community-spreadsheet import treated as a
+wholesale replacement whenever a revised version comes in, not something built up
+incrementally from individual confirmations. Camps here follow the normal screenshot/chat
+confirmation model instead, same as `monsters.json`/`gathering-nodes.json`. The two data sets
+aren't merged or cross-derived — a camp name can legitimately appear in both without one
+needing to reference the other.
+
+**Why this exists, and where the data comes from:** the site owner's own framing — "we will
+add the known adventuring camps here" via the normal inbox/chat workflow, **and** MnM Field
+Notes (the sister companion app — see "Session exports & pooled Fishing rarity" above) is
+expected to eventually push camp data here too, the same PR-review pattern already used for
+`session-exports/`. **No submission pipeline for camps has actually been built yet** — this
+section only covers the wiki-side page/data file. When that integration is requested, follow
+the same shape as the session-export Worker path (a new form field or endpoint, committed as
+a new file via PR, human merges to accept) rather than inventing a different mechanism.
+
+**`camps.json` schema** — flat array, one object per camp, only `name`/`slug`/`zone` assumed
+required:
+
+- `name`/`slug` — the camp's own name.
+- `zone` — single string, not an array (a camp is one fixed spot, same reasoning as a
+  vendor's `location` — unlike a monster's `maps`, which can list several zones a species
+  spawns across). Optional `area` for a more specific in-zone description, same
+  `location`/`area` split as `vendors.json`/`trainers.json`.
+- `monsters` — array of exact monster names, same dynamic-linking convention as a recipe's
+  `components` or a monster's own `drops`: matched against `monsters.json` by exact
+  case-insensitive name (`monstersData.find(m => m.name.toLowerCase() === name.toLowerCase())`,
+  the same lookup Leveling Suggestions' own camp/monster matching already uses) — clickable
+  link to that monster's page if a match exists, plain text otherwise.
+- `minLevel`/`maxLevel` — both optional plain numbers, independent of each other (a camp with
+  only a floor or only a ceiling confirmed is valid). **Deliberately numeric, not a free-text
+  range string like a monster's own `levelRange`** — that field is free text specifically
+  because every value there is a guess (see "Adding a monster"), but Camps needs real sortable/
+  filterable numbers to do what was actually asked for, so state an actual number (or leave
+  both unset) rather than writing something like `"5-ish"` into either field.
+- `raid` — optional boolean, same meaning/badge as a Leveling Suggestions camp's `raid` flag.
+- `needsInfo` — optional boolean, same site-wide meaning: confirmed to exist, not fully
+  detailed yet. Renders the same red badge + Submit-a-screenshot note row as items/monsters/
+  gathering nodes.
+- `note` — optional, visitor-facing free text (same rule as everywhere else on this site —
+  see "Notes are visitor-facing" — never internal correction history).
+- `lastUpdated` — optional `"YYYY-MM-DD"`, rendered inline in the Name cell
+  (`formatLastUpdatedInline`, same as Gathering/Vendors rows) — **not** wired into the
+  sidebar's "Recently Updated Items" box, which stays scoped to items/monsters/crafting/
+  companions only (same narrower-than-you'd-guess precedent gathering-nodes/vendors already
+  set when they got inline `lastUpdated` support).
+
+**Rendering (`renderCampsPage`)** — modeled closely on `renderGatheringNodes` (sortable table,
+note/needsInfo sub-rows) crossed with `renderVendorsTrainersPage` (Zone dropdown derived from
+the data itself, not the full `maps.json` list, so the dropdown never shows a zone with zero
+camps in it). Columns: Name, Zone, Monsters, Level — Monsters and Zone aren't sortable
+(list/compound values, same reasoning as Gathering's Results/Location columns), Name and
+Level are.
+
+- **Level filtering is overlap-based, not exact-match** — a Min/Max Level pair of number
+  inputs (`.items-number`, a narrow non-growing variant of `.items-select` added for this)
+  excludes a camp only when its own recorded number actually conflicts with the chosen bound
+  (`camp.maxLevel < min` or `camp.minLevel > max`). **A camp with no level recorded at all is
+  never excluded by this filter** — there's no evidence it's outside the range, so silently
+  hiding it would be worse than showing an unproven "?" row. Same "don't flag/exclude what
+  can't actually be compared" reasoning as the fishing anomaly checker's gating.
+- **Level sorting** (`campSortLevel`) uses whichever bound is actually set (floor preferred
+  over ceiling) — same "use what's confirmed, don't guess a gap" precedent as
+  `estimateMonsterLevel`'s one-sided-bound handling. A camp with neither bound sorts last
+  regardless of direction, same null-handling convention as every other sortable table here.
+- **Search matches name, zone, area, and every monster name** in one haystack
+  (`campSearchHaystack`) — exactly the three things asked for, no header-search-box
+  integration was added (the on-page search/filter/sort toolbar was the actual ask; wiring
+  Camps into the global header search bar the way Items/Monsters/Crafting are is a cheap,
+  separate follow-up if wanted later, not built here).
+- Small dataset expected for a long while (a handful to a few dozen camps, nothing like
+  Item Database's ~1900+ rows) — rendered as one plain unvirtualized table, same as
+  Gathering/Monsters tables, not the Item Database's bounded-DOM-via-scroll approach (that
+  fix exists for a very different scale of data — see "Item Database browsing" above).
+
+**Icon:** `campicon` (a simple pup-tent silhouette — outer triangle with a smaller inner
+triangle cut via `fill-rule="evenodd"` for the doorway, same flat-silhouette style as
+boss/paw) — the Camps page's own `NAV_ICON` entry only. The "Adventuring" group heading
+itself kept `boss` for `SIDEBAR_GROUP_ICON` (Monsters are still the dominant content in that
+group) rather than switching to `campicon`.
+
 ## Leveling Suggestions page
 
-A curated leveling guide (`pages.json` `"type": "leveling"`, own top-level sidebar entry) —
+A curated leveling guide (`pages.json` `"type": "leveling"`, nested under the "Adventuring"
+sidebar group alongside Named/Regular Monsters as of 2026-08-29 — previously its own
+top-level entry) —
 **not derived from monster/map data**, it's a standalone community-submitted guide living in
 `leveling-locations.json`. Credit line ("Guide compiled by **Flourishing** (Monsters and
 Memories Discord)") is hard-coded in `renderLevelingPage` — update the name there if a
@@ -2049,8 +2157,8 @@ portrait version of the site, the landscape version has more than enough room") 
 any of this CSS outside that media query.
 
 - Collapsing hides text labels (`.sidebar-link-text`) and group headings, but never hides a
-  *destination* — every page (including ones nested under Tradeskilling/Monsters) already has
-  its own `NAV_ICON`, so nested groups are forced open (`.sidebar-group.sidebar-group-collapsed
+  *destination* — every page (including ones nested under Tradeskilling/Adventuring) already
+  has its own `NAV_ICON`, so nested groups are forced open (`.sidebar-group.sidebar-group-collapsed
   { display: block }`, 3-class specificity beats the base 2-class rule with no `!important`
   needed) rather than adding a second collapse layer inside an already-collapsed rail.
 - Hovering a collapsed link shows its title via the same instant `::before` + `data-tooltip`

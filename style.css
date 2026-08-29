@@ -546,6 +546,13 @@ body {
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent);
 }
+/* Narrow numeric filter inputs (Camps' Min/Max level) — same look as
+   .items-select but without its flex-grow, so a pair of them doesn't eat
+   the toolbar's width the way the free-text search box is meant to. */
+.items-number {
+  width: 100px;
+  flex: 0 0 auto;
+}
 /* "Search by stat/buff" control (see buffDropdownHTML/setupBuffDropdown in
    script.js) — a toggle button + an absolutely-positioned checkbox-grid
    panel, rather than plain <select>s, so someone can tick any number of
@@ -792,6 +799,10 @@ body {
 .col-gathering-rarity { width: 12%; }
 .col-gathering-bait { width: 16%; }
 .col-gathering-location { width: 35%; }
+.col-camp-name { width: 25%; }
+.col-camp-zone { width: 20%; }
+.col-camp-monsters { width: 40%; }
+.col-camp-level { width: 15%; }
 .gathering-note-row td {
   color: var(--text-dim);
   font-size: 0.85rem;

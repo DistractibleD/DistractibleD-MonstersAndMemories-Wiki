@@ -12,6 +12,7 @@ let tradeskillsData = null; // cached contents of tradeskills.json
 let gatheringData = null; // cached contents of gathering-nodes.json
 let gemstonesData = null; // cached contents of gemstones.json
 let monstersData = null; // cached contents of monsters.json
+let campsData = null; // cached contents of camps.json
 let vendorsData = null; // cached contents of vendors.json
 let trainersData = null; // cached contents of trainers.json
 let companionsData = null; // cached contents of companions.json
@@ -166,6 +167,18 @@ async function ensureMonstersData() {
     }).then(data => { monstersData = data; return monstersData; });
   }
   return monstersDataPromise;
+}
+
+let campsDataPromise = null;
+async function ensureCampsData() {
+  if (campsData) return campsData;
+  if (!campsDataPromise) {
+    campsDataPromise = fetch('camps.json').then(res => {
+      if (!res.ok) throw new Error('Could not load camps.json');
+      return res.json();
+    }).then(data => { campsData = data; return campsData; });
+  }
+  return campsDataPromise;
 }
 
 let vendorsDataPromise = null;
@@ -755,7 +768,7 @@ async function loadPage(file) {
 
   // Data-driven pages (Item Database, Maps, Crafting, Monsters) use the full
   // content width instead of the narrower reading width used for prose pages.
-  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'gathering' || page.type === 'crafting' || page.type === 'monsters' || page.type === 'companions' || page.type === 'leveling' || page.type === 'spells' || page.type === 'faction' || page.type === 'vendorstrainers')));
+  contentInner.classList.toggle('content-wide', !!(page && (page.type === 'items' || page.type === 'maps' || page.type === 'gathering' || page.type === 'crafting' || page.type === 'monsters' || page.type === 'companions' || page.type === 'leveling' || page.type === 'spells' || page.type === 'faction' || page.type === 'vendorstrainers' || page.type === 'camps')));
 
   try {
     if (page && page.type === 'items') {
@@ -782,6 +795,8 @@ async function loadPage(file) {
       await renderHomePage(contentInner);
     } else if (page && page.type === 'vendorstrainers') {
       await renderVendorsTrainersPage(contentInner);
+    } else if (page && page.type === 'camps') {
+      await renderCampsPage(contentInner);
     } else {
       const res = await fetch('pages/' + file);
       if (!res.ok) throw new Error('Page not found');
@@ -1583,12 +1598,16 @@ const ICON_DEFS = {
   // see NAV_ICON. Several destinations reuse an icon already defined above
   // (navigation for Maps, enchanting/disenchanting/blacksmithing for their
   // matching tradeskill pages, boss/paw for Named/Regular Monsters, wolf for
-  // Companions) rather than needing a new glyph; these four are the ones
-  // with no existing equivalent.
+  // Companions) rather than needing a new glyph; these are the ones with no
+  // existing equivalent.
   links: `<path fill-rule="evenodd" d="M4 12 A4 4 0 0 1 8 8 L11 8 L11 10 L8 10 A2 2 0 1 0 8 14 L11 14 L11 16 L8 16 A4 4 0 0 1 4 12 Z M20 12 A4 4 0 0 0 16 8 L13 8 L13 10 L16 10 A2 2 0 1 1 16 14 L13 14 L13 16 L16 16 A4 4 0 0 0 20 12 Z"/>`,
   itemdb: `<path d="M4 9 L20 9 L20 19 C20 20.1 19.1 21 18 21 L6 21 C4.9 21 4 20.1 4 19 Z"/><path fill-rule="evenodd" d="M4 9 C4 6 6.5 4 12 4 C17.5 4 20 6 20 9 Z M7 9 C7 7.2 8.5 6.3 12 6.3 C15.5 6.3 17 7.2 17 9 Z"/><rect x="10.7" y="12" width="2.6" height="2.6" rx="0.6"/>`,
   gatheringicon: `<path d="M5 10 L19 10 L17 20 C16.9 20.6 16.3 21 15.6 21 L8.4 21 C7.7 21 7.1 20.6 7 20 Z"/><path fill-rule="evenodd" d="M8.3 10 C8.3 6.5 9.9 4.3 12 4.3 C14.1 4.3 15.7 6.5 15.7 10 L14.3 10 C14.3 7.3 13.2 5.7 12 5.7 C10.8 5.7 9.7 7.3 9.7 10 Z"/><rect x="7.6" y="13" width="8.8" height="1" rx="0.4"/><rect x="7.9" y="16" width="8.2" height="1" rx="0.4"/>`,
   submiticon: `<path fill-rule="evenodd" d="M3 8 C3 6.9 3.9 6 5 6 L8 6 L9 4 L15 4 L16 6 L19 6 C20.1 6 21 6.9 21 8 L21 18 C21 19.1 20.1 20 19 20 L5 20 C3.9 20 3 19.1 3 18 Z M12 8.5 A5 5 0 1 0 12.01 8.5 Z M12 10.3 A3.2 3.2 0 1 1 11.99 10.3 Z"/><circle cx="18" cy="8.5" r="0.7"/>`,
+  // Camps (2026-08-29) — a simple pup-tent silhouette (outer triangle cut
+  // with an inner triangle via fill-rule evenodd for the doorway), same
+  // flat-silhouette style as boss/paw rather than a literal campfire.
+  campicon: `<path fill-rule="evenodd" d="M12 3 L21 20 L3 20 Z M12 9 L16 20 L8 20 Z"/>`,
   // New Player Guide nav icon (2026-08-10) — an open book, flat-silhouette
   // style matching everything else (two splayed "pages" plus a center spine).
   guideicon: `<path d="M12 6.5 C9.5 5 6 4.3 3.3 4.8 L3.3 17.3 C6 16.8 9.5 17.5 12 19 Z"/><path d="M12 6.5 C14.5 5 18 4.3 20.7 4.8 L20.7 17.3 C18 16.8 14.5 17.5 12 19 Z"/><rect x="11.3" y="6" width="1.4" height="12.5"/>`,
@@ -1649,6 +1668,7 @@ const ICON_BG = {
   factionicon: '#5a4a2e',
   homeicon: '#4a5568',
   vendoricon: '#6a5228',
+  campicon: '#6b4423',
 };
 
 // Maps a tradeskill name (tradeskills.json) to one of the icons above — used
@@ -1726,6 +1746,7 @@ const NAV_ICON = {
   crafting: 'blacksmithing',
   'monsters-named': 'boss',
   'monsters-regular': 'paw',
+  camps: 'campicon',
   companions: 'wolf',
   spells: 'spellsicon',
   faction: 'factionicon',
@@ -1738,7 +1759,7 @@ const NAV_ICON = {
 // group heading isn't a page of its own.
 const SIDEBAR_GROUP_ICON = {
   Tradeskilling: 'tradeskillgroupicon',
-  Monsters: 'boss',
+  Adventuring: 'boss',
 };
 
 function svgIcon(key) {
@@ -3543,6 +3564,219 @@ async function renderLevelingPage(container) {
   });
 }
 
+// Adventuring Camps (2026-08-29) — known monster spawn camps, searchable by
+// name/zone/monster and filterable/sortable by zone and level. A deliberately
+// separate, more structured dataset from Leveling Suggestions' own informal
+// camp names (leveling-locations.json, a single community-spreadsheet
+// import that gets wholesale-replaced rather than edited field-by-field) —
+// this one grows incrementally from confirmed screenshots/chat, same as
+// monsters.json/gathering-nodes.json, plus (per the site owner's own plan)
+// camp data MnM Field Notes may push here directly in the future, the same
+// PR-review pattern already used for session-exports/ Fishing data — no
+// submission pipeline built for that yet, just a schema simple enough to
+// support it later. Monster names use the same exact-case-insensitive-match
+// dynamic-linking convention as Leveling Suggestions' own camp/monster
+// matching (monstersData.find by lowercased name).
+function campSearchHaystack(camp) {
+  return [camp.name, camp.zone, camp.area || '', ...(camp.monsters || [])].join(' ').toLowerCase();
+}
+
+function campLevelLabel(camp) {
+  if (camp.minLevel == null && camp.maxLevel == null) return '?';
+  if (camp.minLevel != null && camp.maxLevel != null) {
+    return camp.minLevel === camp.maxLevel ? `${camp.minLevel}` : `${camp.minLevel}-${camp.maxLevel}`;
+  }
+  return camp.minLevel != null ? `${camp.minLevel}+` : `up to ${camp.maxLevel}`;
+}
+
+// Sorts on whichever bound is actually recorded (floor preferred) — same
+// "use what's confirmed, don't guess a gap" reasoning as
+// estimateMonsterLevel's one-sided-bound handling elsewhere on this site.
+function campSortLevel(camp) {
+  if (camp.minLevel != null) return camp.minLevel;
+  if (camp.maxLevel != null) return camp.maxLevel;
+  return null;
+}
+
+async function renderCampsPage(container) {
+  await ensureCampsData();
+  await ensureMonstersData();
+
+  const allCamps = campsData || [];
+  const zones = [...new Set(allCamps.map(c => c.zone).filter(Boolean))].sort();
+
+  container.innerHTML = `
+    <h1 class="monsters-section-heading">${svgIcon('campicon')} Camps</h1>
+    <p>Known combat camps — places where groups of monsters spawn together to fight. (For
+    fishing spots and gathering nodes, see the Gathering page instead.) Search by name, zone,
+    or a monster found there, or filter by zone/level below.</p>
+    ${allCamps.length ? `
+      <div class="items-toolbar">
+        <input type="search" id="camps-search" class="items-search" placeholder="Search camps, zones, monsters..." autocomplete="off">
+        <select id="camps-filter-zone" class="items-select">
+          <option value="">All Zones</option>
+          ${zones.map(z => `<option value="${escapeAttr(z)}">${escapeAttr(z)}</option>`).join('')}
+        </select>
+        <input type="number" id="camps-filter-minlevel" class="items-select items-number" placeholder="Min level" min="0">
+        <input type="number" id="camps-filter-maxlevel" class="items-select items-number" placeholder="Max level" min="0">
+        <button type="button" class="items-clear-btn" id="camps-clear-btn">Clear all filters</button>
+      </div>
+      <p class="items-count" id="camps-count"></p>
+      <div class="items-table-wrap">
+        <table class="items-table">
+          <colgroup>
+            <col class="col-camp-name">
+            <col class="col-camp-zone">
+            <col class="col-camp-monsters">
+            <col class="col-camp-level">
+          </colgroup>
+          <thead>
+            <tr>
+              <th data-sort-key="name" class="sortable">Name</th>
+              <th data-sort-key="zone" class="sortable">Zone</th>
+              <th>Monsters</th>
+              <th data-sort-key="level" class="sortable">Level</th>
+            </tr>
+          </thead>
+          <tbody id="camps-tbody"></tbody>
+        </table>
+      </div>
+    ` : '<p>No camps recorded yet — check back soon.</p>'}
+  `;
+
+  if (!allCamps.length) return;
+
+  const searchBox = container.querySelector('#camps-search');
+  const zoneFilter = container.querySelector('#camps-filter-zone');
+  const minLevelFilter = container.querySelector('#camps-filter-minlevel');
+  const maxLevelFilter = container.querySelector('#camps-filter-maxlevel');
+  const clearBtn = container.querySelector('#camps-clear-btn');
+  const tbody = container.querySelector('#camps-tbody');
+  const countEl = container.querySelector('#camps-count');
+  const sortHeaders = [...container.querySelectorAll('th[data-sort-key]')];
+  const columnCount = 4;
+
+  let sortKey = 'name';
+  let sortDir = 'asc';
+
+  function updateSortIndicators() {
+    sortHeaders.forEach(th => {
+      th.classList.toggle('sorted-asc', th.dataset.sortKey === sortKey && sortDir === 'asc');
+      th.classList.toggle('sorted-desc', th.dataset.sortKey === sortKey && sortDir === 'desc');
+    });
+  }
+
+  sortHeaders.forEach(th => {
+    th.addEventListener('click', () => {
+      const key = th.dataset.sortKey;
+      if (key === sortKey) {
+        sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortKey = key;
+        sortDir = 'asc';
+      }
+      update();
+    });
+  });
+
+  function campSortValue(camp, key) {
+    if (key === 'name') return camp.name.toLowerCase();
+    if (key === 'zone') return (camp.zone || '').toLowerCase();
+    if (key === 'level') return campSortLevel(camp);
+    return null;
+  }
+
+  function monsterLinksHTML(camp) {
+    if (!camp.monsters || !camp.monsters.length) return '—';
+    return camp.monsters.map(name => {
+      const monster = monstersData.find(m => m.name.toLowerCase() === name.toLowerCase());
+      return monster
+        ? `<a href="#" class="camp-monster-link" data-slug="${escapeAttr(monster.slug)}">${escapeAttr(name)}</a>`
+        : escapeAttr(name);
+    }).join(', ');
+  }
+
+  function renderRows(camps) {
+    if (!camps.length) {
+      tbody.innerHTML = `<tr><td colspan="${columnCount}" class="items-empty">No camps match your search.</td></tr>`;
+      return;
+    }
+    tbody.innerHTML = camps.map(camp => {
+      const lastUpdated = formatLastUpdatedInline(camp.lastUpdated);
+      const levelValue = campSortLevel(camp);
+      return `
+        <tr>
+          <td data-label="Name">${escapeAttr(camp.name)}${camp.raid ? ' <span class="leveling-raid-badge">Raid</span>' : ''}${camp.needsInfo ? ' <span class="badge-tag badge-needs-info">NEEDS INFO</span>' : ''}${lastUpdated ? `<br>${lastUpdated}` : ''}</td>
+          <td data-label="Zone">${escapeAttr(camp.zone || '')}${camp.area ? ` &middot; ${escapeAttr(camp.area)}` : ''}</td>
+          <td data-label="Monsters">${monsterLinksHTML(camp)}</td>
+          <td data-label="Level"${levelValue == null ? ' class="cell-empty"' : ''}>${escapeAttr(campLevelLabel(camp))}</td>
+        </tr>
+        ${camp.note ? `<tr class="gathering-note-row"><td colspan="${columnCount}"><em>${escapeAttr(camp.note)}</em></td></tr>` : ''}
+        ${camp.needsInfo ? `<tr class="gathering-note-row"><td colspan="${columnCount}"><div class="item-card-needs-info">This camp needs more info &middot; confirmed to exist, but not fully detailed yet. <a href="#submit">Submit a screenshot</a> to help fill it in!</div></td></tr>` : ''}
+      `;
+    }).join('');
+
+    tbody.querySelectorAll('.camp-monster-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const monster = findMonsterBySlug(link.dataset.slug);
+        if (monster) goToMonster(monster);
+      });
+    });
+  }
+
+  // A camp's own min/max level only ever excludes it when it actually
+  // conflicts with the chosen bound — a camp with no recorded level at all
+  // is never excluded by this filter, since there's no evidence it's
+  // outside the range; only a confirmed number that's genuinely out of
+  // bounds does. Same reasoning as the fishing anomaly checker's "don't
+  // flag what we can't actually compare" gating.
+  function matchesLevelFilter(camp) {
+    const min = minLevelFilter.value === '' ? null : Number(minLevelFilter.value);
+    const max = maxLevelFilter.value === '' ? null : Number(maxLevelFilter.value);
+    if (min != null && camp.maxLevel != null && camp.maxLevel < min) return false;
+    if (max != null && camp.minLevel != null && camp.minLevel > max) return false;
+    return true;
+  }
+
+  function update() {
+    const query = searchBox.value.toLowerCase().trim();
+    const zone = zoneFilter.value;
+    let filtered = allCamps
+      .filter(c => !zone || c.zone === zone)
+      .filter(matchesLevelFilter)
+      .filter(c => !query || campSearchHaystack(c).includes(query));
+
+    filtered = [...filtered].sort((a, b) => {
+      const av = campSortValue(a, sortKey);
+      const bv = campSortValue(b, sortKey);
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      const cmp = typeof av === 'string' ? av.localeCompare(bv) : av - bv;
+      return sortDir === 'asc' ? cmp : -cmp;
+    });
+
+    updateSortIndicators();
+    renderRows(filtered);
+    countEl.textContent = `Showing ${filtered.length} of ${allCamps.length} camps`;
+  }
+
+  searchBox.addEventListener('input', update);
+  zoneFilter.addEventListener('change', update);
+  minLevelFilter.addEventListener('input', update);
+  maxLevelFilter.addEventListener('input', update);
+  clearBtn.addEventListener('click', () => {
+    searchBox.value = '';
+    zoneFilter.value = '';
+    minLevelFilter.value = '';
+    maxLevelFilter.value = '';
+    update();
+  });
+
+  update();
+}
+
 async function renderGatheringPage(container) {
   await ensureCraftingData();
 
@@ -4517,8 +4751,8 @@ function monsterZone(monster) {
 }
 
 // Named and Regular monsters are two separate top-level pages (pages.json,
-// both "monsters"-typed, grouped under "Monsters" in the sidebar) — split the
-// same way Gathering/Crafting are split under "Tradeskilling" (2026-07-17,
+// both "monsters"-typed, grouped under "Adventuring" in the sidebar) — split
+// the same way Gathering/Crafting are split under "Tradeskilling" (2026-07-17,
 // user's own call), rather than one shared page with both sections stacked
 // on it. `file` is "monsters-named" or "monsters-regular", telling
 // renderMonstersPage which one it's rendering.
