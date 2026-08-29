@@ -1,4 +1,5 @@
 [
+  { "timestamp": "2026-08-29T14:09", "summary": "Zones and Camps with no stated level now show an estimated level range derived from their monsters' own con checks" },
   { "timestamp": "2026-08-29T09:29", "summary": "Added a Camps page under Adventuring — known combat camps, searchable/filterable by name, zone, monster, and level" },
   { "timestamp": "2026-08-28T21:24", "summary": "Removed the duplicate \"Glass Flats (Mob Levels)\" map" },
   { "timestamp": "2026-08-27T20:26", "summary": "New MnM Field Notes session submissions now get an automatic sanity check for unusual data (e.g. a rare fish caught at 0 skill) before being merged into the pooled Fishing data" },

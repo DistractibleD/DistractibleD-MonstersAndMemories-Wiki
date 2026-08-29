@@ -1217,6 +1217,20 @@ body {
   border-radius: 8px;
   margin: 14px 0;
 }
+/* Estimated zone level range (renderMonstersList) — derived from every
+   monster's own con-based estimateMonsterLevel, same "~N (estimated)"
+   framing as a recipe's estimated skill requirement. Accent color on the
+   number itself, dim note for the "how we know" caveat. */
+.monster-zone-level-estimate {
+  color: var(--accent);
+  font-weight: 600;
+  margin: 6px 0;
+}
+.monster-zone-level-estimate-note {
+  color: var(--text-dim);
+  font-weight: 400;
+  font-size: 0.85em;
+}
 .monster-zone-switcher-link {
   font-size: 0.8rem;
   color: var(--accent);

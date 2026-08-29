@@ -1057,6 +1057,20 @@ drill-down. `goToMonster` picks `monsters-named`/`monsters-regular` from the mon
     assumes a gap size). If/when enough data accumulates to see a real pattern (e.g. Dark
     Blue consistently ~2 levels below White), that's a future refinement to
     `estimateMonsterLevel` — don't hardcode a gap from a single data point.
+  - **`estimateGroupLevelBounds(monsters)`** (2026-08-29) — aggregates `estimateMonsterLevel`
+    across a *list* of real monster objects into one widest min/max, by parsing whatever
+    display string the per-monster function already returns (`"X-Y"` or `"~X"`) rather than
+    re-deriving the estimation math. Two call sites so far, both purely render-time, nothing
+    stored back: **Camps' `campLevelBounds`** (falls back to this when a camp has no stated
+    `minLevel`/`maxLevel` — see "Adventuring Camps"), and **a zone's own scoped Monsters list**
+    (`renderMonstersList` shows an "Estimated level range here: ~X-Y (estimated from con
+    checks)" line above the grid, computed once from the full scoped set, hidden entirely if
+    no monster in that zone has any `conObservations` yet). Built anticipating a real volume
+    increase — MnM Field Notes is expected to start sending con observations at scale via
+    session exports, the same way Fishing data already does, which will make both of these
+    numbers far less sparse than they are today. Extend to a third grouping (e.g. per-faction,
+    per-tradeskill-zone) the same way if one comes up — the helper takes a plain array, no
+    Camps/Monsters-specific assumptions baked in.
 - `drops` — array of `{ "item": "Name As Shown" }`, same shape/dynamic-linking as a recipe's
   `components` (`findItemByName`/`goToItem`, clickable if a match exists). Sourced from a
   loot-window screenshot + item card per icon.
@@ -1652,7 +1666,17 @@ required:
   range string like a monster's own `levelRange`** — that field is free text specifically
   because every value there is a guess (see "Adding a monster"), but Camps needs real sortable/
   filterable numbers to do what was actually asked for, so state an actual number (or leave
-  both unset) rather than writing something like `"5-ish"` into either field.
+  both unset) rather than writing something like `"5-ish"` into either field. **When both are
+  left unset, `campLevelBounds()` derives a fallback estimate from the camp's own `monsters`
+  list** — calls `estimateMonsterLevel()` (the same con-based per-monster level estimate
+  already live on monster cards, see "Adding a monster" → `conObservations`) on each linked
+  monster and takes the widest min/max across all of them, parsed from whatever display string
+  that function returns (`"X-Y"` or `"~X"`). Rendered with a `~`/"(estimated)" marker so it's
+  never confused with a directly-stated level — same never-store-a-computed-value precedent as
+  `estimateMonsterLevel`/`estimateRecipeSkill` themselves, computed fresh at render time,
+  nothing written back to `camps.json`. A camp's own stated `minLevel`/`maxLevel` always wins
+  over this fallback when either is set — real data beats a derived guess, same hierarchy as
+  everywhere else on this site.
 - `raid` — optional boolean, same meaning/badge as a Leveling Suggestions camp's `raid` flag.
 - `needsInfo` — optional boolean, same site-wide meaning: confirmed to exist, not fully
   detailed yet. Renders the same red badge + Submit-a-screenshot note row as items/monsters/
@@ -1672,17 +1696,19 @@ camps in it). Columns: Name, Zone, Monsters, Level — Monsters and Zone aren't 
 (list/compound values, same reasoning as Gathering's Results/Location columns), Name and
 Level are.
 
-- **Level filtering is overlap-based, not exact-match** — a Min/Max Level pair of number
-  inputs (`.items-number`, a narrow non-growing variant of `.items-select` added for this)
-  excludes a camp only when its own recorded number actually conflicts with the chosen bound
-  (`camp.maxLevel < min` or `camp.minLevel > max`). **A camp with no level recorded at all is
-  never excluded by this filter** — there's no evidence it's outside the range, so silently
-  hiding it would be worse than showing an unproven "?" row. Same "don't flag/exclude what
-  can't actually be compared" reasoning as the fishing anomaly checker's gating.
-- **Level sorting** (`campSortLevel`) uses whichever bound is actually set (floor preferred
-  over ceiling) — same "use what's confirmed, don't guess a gap" precedent as
-  `estimateMonsterLevel`'s one-sided-bound handling. A camp with neither bound sorts last
-  regardless of direction, same null-handling convention as every other sortable table here.
+- **Level filtering is overlap-based, not exact-match**, against `campLevelBounds()` (stated
+  `minLevel`/`maxLevel`, or the monster-derived fallback above) — a Min/Max Level pair of
+  number inputs (`.items-number`, a narrow non-growing variant of `.items-select` added for
+  this) excludes a camp only when its bounds actually conflict with the chosen filter value.
+  **A camp with no level recorded or derivable at all is never excluded by this filter** —
+  there's no evidence it's outside the range, so silently hiding it would be worse than
+  showing an unproven "?" row. Same "don't flag/exclude what can't actually be compared"
+  reasoning as the fishing anomaly checker's gating.
+- **Level sorting** (`campSortLevel`) also goes through `campLevelBounds()`, using whichever
+  bound is actually available (floor preferred over ceiling) — same "use what's confirmed,
+  don't guess a gap" precedent as `estimateMonsterLevel`'s one-sided-bound handling. A camp
+  with nothing to sort on sorts last regardless of direction, same null-handling convention as
+  every other sortable table here.
 - **Search matches name, zone, area, and every monster name** in one haystack
   (`campSearchHaystack`) — exactly the three things asked for, no header-search-box
   integration was added (the on-page search/filter/sort toolbar was the actual ask; wiring

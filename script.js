@@ -3581,21 +3581,45 @@ function campSearchHaystack(camp) {
   return [camp.name, camp.zone, camp.area || '', ...(camp.monsters || [])].join(' ').toLowerCase();
 }
 
-function campLevelLabel(camp) {
-  if (camp.minLevel == null && camp.maxLevel == null) return '?';
-  if (camp.minLevel != null && camp.maxLevel != null) {
-    return camp.minLevel === camp.maxLevel ? `${camp.minLevel}` : `${camp.minLevel}-${camp.maxLevel}`;
+// A camp's own stated minLevel/maxLevel (real, directly confirmed) always
+// wins when set. Only falls back to deriving a level from its monsters' own
+// con-based estimates (estimateMonsterLevel, see monsters.json's
+// conObservations) when the camp itself has nothing stated — computed fresh
+// at render time, never written back to camps.json, same
+// never-store-a-computed-value precedent as estimateMonsterLevel/
+// estimateRecipeSkill themselves. Returns null when neither source has
+// anything to go on.
+function campLevelBounds(camp) {
+  if (camp.minLevel != null || camp.maxLevel != null) {
+    return { min: camp.minLevel, max: camp.maxLevel, estimated: false };
   }
-  return camp.minLevel != null ? `${camp.minLevel}+` : `up to ${camp.maxLevel}`;
+  const monsters = (camp.monsters || [])
+    .map(name => monstersData.find(m => m.name.toLowerCase() === name.toLowerCase()))
+    .filter(Boolean);
+  const bounds = estimateGroupLevelBounds(monsters);
+  return bounds ? { ...bounds, estimated: true } : null;
 }
 
-// Sorts on whichever bound is actually recorded (floor preferred) — same
-// "use what's confirmed, don't guess a gap" reasoning as
+function campLevelLabel(camp) {
+  const bounds = campLevelBounds(camp);
+  if (!bounds) return '?';
+  const { min, max, estimated } = bounds;
+  let text;
+  if (min != null && max != null) {
+    text = min === max ? `${min}` : `${min}-${max}`;
+  } else {
+    text = min != null ? `${min}+` : `up to ${max}`;
+  }
+  return estimated ? `~${text} (estimated)` : text;
+}
+
+// Sorts on whichever bound is actually recorded/derivable (floor preferred)
+// — same "use what's confirmed, don't guess a gap" reasoning as
 // estimateMonsterLevel's one-sided-bound handling elsewhere on this site.
 function campSortLevel(camp) {
-  if (camp.minLevel != null) return camp.minLevel;
-  if (camp.maxLevel != null) return camp.maxLevel;
-  return null;
+  const bounds = campLevelBounds(camp);
+  if (!bounds) return null;
+  return bounds.min != null ? bounds.min : bounds.max;
 }
 
 async function renderCampsPage(container) {
@@ -3725,17 +3749,21 @@ async function renderCampsPage(container) {
     });
   }
 
-  // A camp's own min/max level only ever excludes it when it actually
-  // conflicts with the chosen bound — a camp with no recorded level at all
-  // is never excluded by this filter, since there's no evidence it's
-  // outside the range; only a confirmed number that's genuinely out of
-  // bounds does. Same reasoning as the fishing anomaly checker's "don't
-  // flag what we can't actually compare" gating.
+  // A camp's own recorded/derivable level (see campLevelBounds — stated
+  // minLevel/maxLevel, or a fallback estimate from its monsters' cons) only
+  // ever excludes it when it actually conflicts with the chosen bound — a
+  // camp with nothing to go on either way is never excluded by this filter,
+  // since there's no evidence it's outside the range. Same reasoning as the
+  // fishing anomaly checker's "don't flag what we can't actually compare"
+  // gating.
   function matchesLevelFilter(camp) {
     const min = minLevelFilter.value === '' ? null : Number(minLevelFilter.value);
     const max = maxLevelFilter.value === '' ? null : Number(maxLevelFilter.value);
-    if (min != null && camp.maxLevel != null && camp.maxLevel < min) return false;
-    if (max != null && camp.minLevel != null && camp.minLevel > max) return false;
+    if (min == null && max == null) return true;
+    const bounds = campLevelBounds(camp);
+    if (!bounds) return true;
+    if (min != null && bounds.max != null && bounds.max < min) return false;
+    if (max != null && bounds.min != null && bounds.min > max) return false;
     return true;
   }
 
@@ -4911,6 +4939,16 @@ function renderMonstersList(container, scope) {
   // of going back to a category grid that no longer exists.
   const switcherZones = [...new Set(monstersData.filter(m => !!m.named === scope.named).map(monsterZone))].sort();
 
+  // Estimated zone level range — same con-based aggregation as Camps'
+  // campLevelBounds, applied to every monster of this scope actually shown
+  // in this zone rather than one camp's roster. Computed once from the full
+  // scoped set (not the search-filtered subset — the zone's own level range
+  // doesn't change just because someone typed a search), so it lives outside
+  // update() below. Hidden entirely when no monster here has any
+  // conObservations yet, same "nothing to show, don't show a bare '?'"
+  // precedent as Camps.
+  const zoneLevelBounds = estimateGroupLevelBounds(scopedMonsters);
+
   // Both pages render as a card grid (2026-08-06, mockup approved by the
   // site owner — the old single-column name list/table wasted the
   // content-wide page's own space). Only one sort dimension exists (name),
@@ -4919,6 +4957,9 @@ function renderMonstersList(container, scope) {
     <h1>${escapeAttr(scope.map)} — ${escapeAttr(sectionLabel)}</h1>
     <p>Browse, search, and filter ${escapeAttr(scope.named ? 'named (boss)' : 'regular')} monsters in
     ${escapeAttr(scope.map)}. Click a monster to see its picture and drop table.</p>
+    ${zoneLevelBounds ? `<p class="monster-zone-level-estimate">Estimated level range here: ~${
+      zoneLevelBounds.min === zoneLevelBounds.max ? zoneLevelBounds.min : `${zoneLevelBounds.min}-${zoneLevelBounds.max}`
+    } <span class="monster-zone-level-estimate-note">(estimated from con checks)</span></p>` : ''}
     <div class="items-toolbar">
       <input type="search" id="monsters-search" class="items-search" placeholder="Search name, drop..." autocomplete="off">
       <button type="button" class="items-clear-btn search-clear-btn" data-clear-target="monsters-search">Clear</button>
@@ -5470,6 +5511,31 @@ function estimateMonsterLevel(monster) {
   if (lowerBound != null) return { display: `~${lowerBound + 1}`, confirmed: false };
   if (upperBound != null) return { display: `~${upperBound - 1}`, confirmed: false };
   return null;
+}
+
+// Aggregates estimateMonsterLevel() across a list of real monster objects
+// into one widest min/max — the shared "roughly what level is this group of
+// monsters" answer, reused anywhere a level needs to be inferred for a
+// collection rather than one monster (Camps' campLevelBounds below, and a
+// zone's own scoped Monsters list). Parses whatever display string
+// estimateMonsterLevel already produces ("X-Y" or "~X") rather than
+// re-deriving the estimation logic. Returns null when nothing in the list
+// has any usable estimate.
+function estimateGroupLevelBounds(monsters) {
+  let lo = null;
+  let hi = null;
+  for (const m of monsters) {
+    const est = estimateMonsterLevel(m);
+    if (!est) continue;
+    const match = est.display.match(/(\d+)(?:-(\d+))?/);
+    if (!match) continue;
+    const a = Number(match[1]);
+    const b = match[2] != null ? Number(match[2]) : a;
+    lo = lo == null ? a : Math.min(lo, a);
+    hi = hi == null ? b : Math.max(hi, b);
+  }
+  if (lo == null) return null;
+  return { min: lo, max: hi };
 }
 
 // Shared "no screenshot yet" artwork (2026-08-06, site owner's own sketches)
