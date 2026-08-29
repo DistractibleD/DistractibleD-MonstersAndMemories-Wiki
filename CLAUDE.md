@@ -830,8 +830,12 @@ most common resulting hex.
 
 Sampled from **crafting recipe cards** specifically — monster con-check colors (see "Con color
 reference" below, a similar but not identical 7-tier system: no Orange, has a separate
-"Trivial" distinct from Green) haven't been confirmed to use the exact same hex values, so
-don't assume this table also covers con colors without checking.
+"Trivial" distinct from Green) **do share this palette for the 5 tiers that map 1:1**
+(Light Blue/Dark Blue/White/Yellow/Red — user-confirmed 2026-08-29), but **not** for
+Trivial/Green — this table collapses those two into one combined "Green (Trivial)" row, which
+is why it doesn't match either of con's separately-colored Trivial (`#82FF6E`, pixel-sampled)
+or Green (`#009C00`, pixel-sampled) individually. Use this table directly for the 5 shared
+tiers; use the real sampled values above for Trivial/Green specifically.
 
 **When to actually use this** (2026-08-22, user's own scope — don't reach for it by default):
 only when (a) genuinely unsure from just looking at the image, (b) no confirming text is
@@ -973,6 +977,24 @@ drill-down. `goToMonster` picks `monsters-named`/`monsters-regular` from the mon
   bit), **White** (even match, could win or lose, within your level range — pins an exact
   level), **Yellow** (tough fight, hard to win), **Red** (higher level, you will most likely
   lose). Exactly 7 tiers, no more — there is no "Orange."
+  **Confirmed hex values, user-stated 2026-08-29 (con reuses the crafting difficulty palette
+  below, minus Orange) with Trivial/Green corrected the same day by direct pixel-sampling of
+  two real chat-text screenshots** — the crafting table collapses Trivial and Green into one
+  combined "Green (Trivial)" row (`#45FC00`), which is exactly why that single value didn't
+  match either of con's two *separately*-colored tiers once tested (MnM Field Notes' con
+  button grid rendered them identically, which read as a bug and prompted the real-screenshot
+  check) — the other five tiers aren't collapsed like that in crafting, so their 1:1 values
+  stand as originally stated:
+  - **Trivial**: `#82FF6E` (pixel-sampled from a real screenshot, 2026-08-29 — "a giant fire
+    beetle seems indifferent to your presence -- You would almost certainly emerge victorious
+    in battle.", supersedes the crafting-derived guess)
+  - **Green**: `#009C00` (pixel-sampled, 2026-08-29 — "a ghoul seethes at you, ready to strike
+    -- You would likely emerge victorious in battle.", supersedes the crafting-derived guess)
+  - **Light Blue**: `#00FCDF`
+  - **Dark Blue**: `#326EFF`
+  - **White**: `#FFFFFF`
+  - **Yellow**: `#FCE800`
+  - **Red**: `#FF1C1C`
   **Combat-prediction chat text is the same con system, just read as colored sentences
   instead of a nameplate color** (confirmed 2026-08-10) — e.g. considering a monster prints
   `"<mob> seethes at you, ready to strike -- <outcome phrase>."` (or `"seems indifferent to
@@ -984,16 +1006,18 @@ drill-down. `goToMonster` picks `monsters-named`/`monsters-regular` from the mon
   text alone, don't bother eyeballing the rendered color at all; a screenshot's exact shade is
   irrelevant once the phrase is known. Confirmed outcome-phrase → color mapping (user-confirmed
   test cases in parentheses), low→high:
-  - **Trivial**: "You would almost certainly emerge victorious in battle." (a desert bat, a
-    giant fire beetle)
-  - **Green**: "You would likely emerge victorious in battle." (a hired sword)
-  - **Light Blue**: "It might prove to be a difficult battle." (Blooper)
-  - **Dark Blue**: "You would stand a fair chance in battle." (a river pirate, 2026-08-10 — the
-    slot this phrase fills was unconfirmed before; by elimination, once every other tier already
-    had its own distinct phrase, this had to be Dark Blue's)
-  - **White**: "Battle would be quite risky." (Henryhaha)
-  - **Yellow**: "You would likely be defeated in battle." (a bodyguard)
-  - **Red**: "Would you like to die? You would almost certainly be defeated in battle." (Iniu)
+  - **Trivial** (`#82FF6E`, pixel-confirmed): "You would almost certainly emerge victorious in
+    battle." (a desert bat, a giant fire beetle)
+  - **Green** (`#009C00`, pixel-confirmed): "You would likely emerge victorious in battle." (a
+    hired sword)
+  - **Light Blue** (`#00FCDF`): "It might prove to be a difficult battle." (Blooper)
+  - **Dark Blue** (`#326EFF`): "You would stand a fair chance in battle." (a river pirate,
+    2026-08-10 — the slot this phrase fills was unconfirmed before; by elimination, once every
+    other tier already had its own distinct phrase, this had to be Dark Blue's)
+  - **White** (`#FFFFFF`): "Battle would be quite risky." (Henryhaha)
+  - **Yellow** (`#FCE800`): "You would likely be defeated in battle." (a bodyguard)
+  - **Red** (`#FF1C1C`): "Would you like to die? You would almost certainly be defeated in
+    battle." (Iniu)
   Player's own level always comes from the same screenshot batch (e.g. filenames stating
   "I am level 24") — same source-of-truth authority as a stated level in chat.
 - **`conObservations`** (2026-08-10) — raw data feeding a real level-estimation system, same
@@ -2370,20 +2394,50 @@ combined statistic and publishing it here (same way `items.json`/`monsters.json`
 already published on this repo's GitHub Pages site) lets the app fetch a much larger shared
 sample back down read-only and merge it with its own local data.
 
-**Coming soon (as of 2026-08-29, not shipped yet on the app side): a "Camps" section inside
-Combat session exports**, feeding the Camps page (see "Adventuring Camps" above) — a "Log a
-camp" action in the app (name/zone/area/monsters/minLevel/maxLevel/raid/note, matching
-`camps.json`'s own schema) prints a new labeled block into the export text, the same way
-Fishing rarity stats already do. **Deliberately not auto-parsed into `camps.json`** — unlike
-the Fishing pipeline (pure numeric aggregation, safe to fully automate), a camp claim is a
-semantic judgment call (is this really a new camp, or an addition to one already on file?)
-that needs a human/Claude actually reading it, same trust model as `images/inbox/`/
-`community-notes/`. When processing a session export that has a Camps section, read it and
-apply it to `camps.json` by hand (new entry, or fold into an existing one by matching
-name/zone) — don't write an automated extraction script for this section the way
-`build-fishing-rarity.js` exists for Fishing. Exact section format not confirmed yet — check
-a real export for the actual shape once one exists, this description may not match it
-precisely.
+**Coming soon: a "Camps" section inside Combat session exports** (built on the app side
+2026-08-29, format confirmed against its actual `SessionExportWriter.Write` output — not
+shipped to real users yet, no real submission exists), feeding the Camps page (see
+"Adventuring Camps" above) via a "Log a camp" action in the app
+(name/zone/area/monsters/minLevel/maxLevel/raid/note, matching `camps.json`'s own schema).
+Confirmed real shape:
+
+```
+--- camp ---
+
+== Corrupted Ashira Camp ==
+Zone: Shaded Dunes | Area: Sunken Ruins
+Level range: 10-14
+Monsters: Onis the Elder, a corrupted outrider
+Note: Watch for adds from the south tunnel
+
+== Ridgeback Warband ==
+Zone: Vale of Zintar
+Raid camp
+Monsters: none listed
+```
+
+- `--- camp ---` divider only appears when a session mixes camp entries with other types
+  (Combat kills, etc.) — a camp-only session is one unbroken block with no divider, same
+  convention as `--- harvesting ---`.
+- Camp headers are always plain `== <name> ==` — **never** `== <name> (<something>) ==`, so
+  they can never collide with `extractFishingLines`' tradeskill-tracking regex (which requires
+  a parenthesized group to match anything at all). Independently verified by tracing the parser
+  against the real sample above line by line, not just taken on the app side's word — every
+  line in a camp block either fails the `==...==` header match (no parens) or fails the
+  `- Zone:` line-start check (camp lines have no leading `-`), so the whole section is inert to
+  both `build-fishing-rarity.js` and `check-fishing-anomalies.js` with zero changes needed.
+- Only fields actually filled in get printed — `Level range:`/`Note:` lines are absent rather
+  than blank when unset, `Monsters:` prints the literal `none listed` rather than being
+  omitted, `Raid camp` is a bare presence/absence line (not a `Raid: yes/no` field).
+- `Area` folds into the `Zone:` line (`Zone: X | Area: Y`) when set, omitted otherwise.
+
+**Deliberately not auto-parsed into `camps.json`** — unlike the Fishing pipeline (pure numeric
+aggregation, safe to fully automate), a camp claim is a semantic judgment call (is this really
+a new camp, or an addition to one already on file?) that needs a human/Claude actually reading
+it, same trust model as `images/inbox/`/`community-notes/`. When processing a session export
+that has a Camps section, read it and apply it to `camps.json` by hand (new entry, or fold
+into an existing one by matching name/zone) — don't write an automated extraction script for
+this section the way `build-fishing-rarity.js` exists for Fishing.
 
 - **`session-exports/*.txt`** — one file per merged session export, never hand-edited. Each
   file's own header states type/logger/timestamps/entry count; a `--- harvesting ---` block
