@@ -1,9 +1,15 @@
 {
-  "Shallow Shoals": {
-    "totalAttempts": 30,
+  "Shaded Dunes": {
+    "totalAttempts": 1,
     "fish": {
-      "Deep Sea Devourer": 7,
-      "Raw Bay Crab": 5,
+      "Whitefish": 1
+    }
+  },
+  "Shallow Shoals": {
+    "totalAttempts": 45,
+    "fish": {
+      "Deep Sea Devourer": 11,
+      "Raw Bay Crab": 11,
       "Sunscale Skimmer": 8
     }
   }
