@@ -2302,6 +2302,19 @@ sample back down read-only and merge it with its own local data.
   `session-exports/**` (i.e. every merged session-export PR) plus `workflow_dispatch` for an
   on-demand manual rebuild from the Actions tab. The bot commit only ever touches
   `fishing-rarity.json`, never `session-exports/**`, so it can never re-trigger itself.
+  **Queued, not parallel** (confirmed 2026-08-29 — merging PRs #8/#9 four seconds apart
+  triggered two of these runs, and the one triggered by the earlier merge lost the push race
+  once the later run's commit landed first; no data was actually lost that time, but relying
+  on that being true doesn't scale to a real batch of merges) — a `concurrency: group:
+  fishing-rarity-rebuild` block makes GitHub Actions run these one at a time regardless of how
+  many merges land at once, so there's never more than one `git push` against
+  `fishing-rarity.json` in flight. Each attempt re-syncs to `origin/main` before rebuilding
+  (not just after a failed push — `actions/checkout` pins to the triggering commit, which can
+  already be stale by the time a queued run's turn comes up), so most runs in a batch end up
+  as fast no-ops once an earlier one in the same queue has already published the current data.
+  A retry loop (5 attempts, jittered backoff) remains as a defensive fallback for a rejected
+  push outside the queue (e.g. a manual push landing at the same instant), not the primary
+  mechanism anymore.
 - **`scripts/lib/session-export.js`** — the actual line/header parser (`extractFishingLines`,
   `parseSessionHeader`), factored out so `build-fishing-rarity.js` and
   `check-fishing-anomalies.js` (below) can never silently drift on what counts as a valid

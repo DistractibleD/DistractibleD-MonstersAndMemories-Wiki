@@ -7,6 +7,28 @@ name: Rebuild pooled Fishing rarity data
 #
 # The commit this workflow makes only ever touches fishing-rarity.json, never
 # session-exports/**, so it can never re-trigger itself.
+#
+# Two submission PRs merged within a few seconds of each other can trigger
+# two of these runs almost simultaneously — confirmed 2026-08-29 (PRs #8/#9).
+# Whichever run's checkout happened first builds from a slightly older
+# commit, then loses the push race once the other run's commit lands first.
+# No data was lost that time (the surviving commit already reflected every
+# merged file), but relying on that being true doesn't scale to a real burst
+# (e.g. 20 submissions merged in a batch) — with enough runs racing to push
+# at once, more of them could exhaust their retries before catching up.
+#
+# The `concurrency` group below is the actual fix: it makes GitHub Actions
+# queue runs of this workflow one at a time instead of letting them execute
+# in parallel, so there's never more than one `git push` in flight against
+# fishing-rarity.json — no amount of simultaneous merges can race each
+# other. `cancel-in-progress: false` lets every queued run finish rather
+# than killing one mid-push; most of them end up as fast no-ops anyway,
+# since by the time a queued run's turn comes, an earlier run in the same
+# batch has usually already published the up-to-date data and this one
+# finds nothing left to commit. The commit step still re-fetches and
+# retries on a rejected push as a defensive fallback (e.g. a manual push to
+# main landing in the same instant), but with queuing in place that path
+# should be rare rather than the normal case.
 
 on:
   push:
@@ -14,6 +36,10 @@ on:
     paths:
       - 'session-exports/**'
   workflow_dispatch: {}
+
+concurrency:
+  group: fishing-rarity-rebuild
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -24,17 +50,40 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build fishing-rarity.json
-        run: node scripts/build-fishing-rarity.js
-
-      - name: Commit if changed
+      - name: Build, commit, and push (retrying on a rejected push)
         run: |
-          if git diff --quiet -- fishing-rarity.json; then
-            echo "No change to fishing-rarity.json — nothing to commit."
-            exit 0
-          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add fishing-rarity.json
-          git commit -m "Rebuild pooled Fishing rarity data"
-          git push
+
+          # actions/checkout pins to the commit that triggered this specific
+          # run, not "whatever main is right now" — with concurrency queuing,
+          # an earlier run in the same batch may have already published a
+          # newer commit by the time this run actually starts. Resync before
+          # building, every attempt, not just after a rejected push.
+          max_attempts=5
+          attempt=1
+          while [ "$attempt" -le "$max_attempts" ]; do
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/build-fishing-rarity.js
+
+            if git diff --quiet -- fishing-rarity.json; then
+              echo "No change to fishing-rarity.json — nothing to commit."
+              exit 0
+            fi
+
+            git add fishing-rarity.json
+            git commit -m "Rebuild pooled Fishing rarity data"
+
+            if git push; then
+              echo "Pushed successfully."
+              exit 0
+            fi
+
+            echo "Push rejected — retrying ($attempt/$max_attempts)..."
+            sleep $((RANDOM % 5 + 1))
+            attempt=$((attempt + 1))
+          done
+
+          echo "Failed to push after $max_attempts attempts."
+          exit 1
